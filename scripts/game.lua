@@ -1,4 +1,4 @@
-local Map = require("map")
+local Map = require("scripts/map")
 
 local Game = {}
 

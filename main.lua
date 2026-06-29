@@ -1,4 +1,4 @@
-local Game = require("game")
+local Game = require("scripts/game")
 
 function love.load()
     love.graphics.setBackgroundColor(0.1, 0.1, 0.12)
