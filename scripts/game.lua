@@ -1,5 +1,6 @@
 local Map = require("scripts/map")
 
+---@class Game
 local Game = {}
 
 function Game:load()
