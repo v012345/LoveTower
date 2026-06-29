@@ -27,7 +27,7 @@ function Map:load()
     self.pathCells = {}
     for i = 1, #self.waypoints - 1 do
         local a, b = self.waypoints[i], self.waypoints[i + 1]
-        local dc, dr = sign(b[1] - a[1]), sign(b[2] - a[2])
+        local dc, dr = sign(b[1] - a[1]), sign(b[2] - a[2]) -- 必是一个是 0 , 一个是 +/-1
         local c, r = a[1], a[2]
         self.pathCells[key(c, r)] = true
         while c ~= b[1] or r ~= b[2] do
@@ -43,7 +43,7 @@ function Map:cellCenter(c, r)
     return (c + 0.5) * ts, (r + 0.5) * ts
 end
 
--- 给路径系统用：返回 waypoints 对应的像素坐标列表
+-- 给路径系统用：返回 waypoints 对应的像素坐标列表 ( cell 的中心点坐标 )
 function Map:getPathPixels()
     local pts = {}
     for _, wp in ipairs(self.waypoints) do

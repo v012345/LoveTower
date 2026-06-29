@@ -59,3 +59,6 @@ function love.keypressed(key)
 end
 
 ```
+
+先 load Game 
+再 load Map

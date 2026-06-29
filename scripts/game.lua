@@ -4,7 +4,7 @@ local Map = require("scripts/map")
 local Game = {}
 
 function Game:load()
-    Map:load()
+    Map:load() -- 生成路
     self.path = Map:getPathPixels()
 
     -- 测试敌人：用来验证路径系统，第三步会替换成真正的敌人模块
@@ -12,7 +12,7 @@ function Game:load()
         x = self.path[1].x,
         y = self.path[1].y,
         speed = 140, -- 像素/秒
-        nextNode = 2, -- 正在前往的路径点索引
+        nextNode = 2 -- 正在前往的路径点索引
     }
 end
 
@@ -35,8 +35,8 @@ function Game:update(dt)
             e.nextNode = 2
         end
     else
-        e.x = e.x + dx / dist * step
-        e.y = e.y + dy / dist * step
+        e.x = e.x + dx / dist * step -- dx / dist 算的是方向, 可能为 +/-1 或 0
+        e.y = e.y + dy / dist * step -- dy / dist 算的是方向, 可能为 +/-1 或 0
     end
 end
 
@@ -49,7 +49,9 @@ function Game:draw()
     love.graphics.circle("fill", e.x, e.y, 14)
 
     love.graphics.setColor(1, 1, 1)
-    love.graphics.print("FPS: " .. love.timer.getFPS() .. "   红球沿蓝线移动 = 路径系统OK | ESC 退出", 10, 10)
+    love.graphics.print(
+        "FPS: " .. love.timer.getFPS() .. "   红球沿蓝线移动 = 路径系统OK | ESC 退出", 10, 10
+    )
 end
 
 return Game
