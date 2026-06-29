@@ -96,3 +96,24 @@ end
 ---@param x2 number
 ---@param y2 number
 function love.graphics.line(x1, y1, x2, y2, ...) end
+
+---@param mode    string "fill" | "line"
+---@param x       number
+---@param y       number
+---@param radius  number
+function love.graphics.circle(mode, x, y, radius) end
+
+---@param mode   string "fill" | "line"
+---@param x      number
+---@param y      number
+---@param width  number
+---@param height number
+function love.graphics.rectangle(mode, x, y, width, height) end
+
+---@class love.event
+love.event = love.event or {}
+
+function love.event.quit() end
+
+---@class love.timer
+love.timer = love.timer or {}
