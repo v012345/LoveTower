@@ -33,7 +33,7 @@ function Enemy:update(dt)
     local dist = math.sqrt(dx * dx + dy * dy)
     local step = self.speed * dt
 
-    if step >= dist then
+    if step >= dist then -- 移动大于距离, 直接吸上去
         self.x, self.y = node.x, node.y
         self.nextNode = self.nextNode + 1
         if self.nextNode > #self.path then
