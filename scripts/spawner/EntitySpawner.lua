@@ -61,7 +61,7 @@ function EntitySpawner:update(dt)
     if self.timer <= 0 then
         self.timer = wave.interval
         self.spawnedCount = self.spawnedCount + 1
-        self.onSpawn(Enemy.new(self.path, wave))
+        EntityManager:addEntity(EntityFactory:create(Enemy))
 
         if self.spawnedCount >= wave.count then
             self.spawning = false -- 本波出完

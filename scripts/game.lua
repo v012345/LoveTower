@@ -25,10 +25,7 @@ function Game:load()
     self.lives = 20          -- 漏一只 -1
     self.money = START_MONEY -- 金币
 
-    -- 波次管理器：每生成一只就塞进 enemies
-    self.wave = WaveManager.new(self.path, function(enemy)
-        self.enemies[#self.enemies + 1] = enemy
-    end)
+
 
     InputManager:on(Game, "keypressed", "space", function()
         self:startNextWave()
