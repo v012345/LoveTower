@@ -7,33 +7,34 @@ love.graphics = love.graphics or {}
 ---@class Image
 Image = {}
 
----@return number, number
+---@return number? width
+---@return number? height
 function Image:getDimensions()
 end
 
----@return number
+---@return number? width
 function Image:getWidth()
 end
 
----@return number
+---@return number? height
 function Image:getHeight()
 end
 
 ---@class Font
 Font = {}
 
----@return number
+---@return number?
 function Font:getHeight()
 end
 
 ---@param filename string
----@return Image
+---@return Image?
 function love.graphics.newImage(filename)
 end
 
 ---@param filename string
 ---@param size     number
----@return Font
+---@return Font?
 function love.graphics.newFont(filename, size)
 end
 
@@ -81,12 +82,12 @@ end
 function love.graphics.setBackgroundColor(r, g, b, a)
 end
 
----@return number width
----@return number height
+---@return number? width
+---@return number? height
 function love.graphics.getDimensions()
 end
 
----@return number
+---@return number? FPS
 function love.timer.getFPS()
 end
 
