@@ -16,10 +16,6 @@ local Game = {}
 function Game:load()
     ScenceManager:loadMap("map_1") -- 生成路
     EntitySpawner:loadConfig("config_1")
-
-    -- self.enemies = {}        -- 场上所有敌人
-    -- self.towers = {}         -- 所有塔
-    -- self.bullets = {}        -- 所有子弹
     -- self.towerCells = {}     -- 已被塔占用的格子（"c,r" -> true）
     -- self.lives = 20          -- 漏一只 -1
     -- self.money = START_MONEY -- 金币
@@ -29,10 +25,10 @@ function Game:load()
     InputManager:on(Game, "keypressed", "space", function()
         self:startNextWave()
     end)
-    -- -- 左键放塔
-    -- InputManager:on(Game, "mousepressed", 1, function(_, x, y)
-    --     self:tryPlaceTower(x, y)
-    -- end)
+    -- 左键放塔
+    InputManager:on(Game, "mousepressed", 1, function(_, x, y)
+        self:tryPlaceTower(x, y)
+    end)
 end
 
 -- 开下一波：要求场上清空 且 还有波次
