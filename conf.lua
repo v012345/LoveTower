@@ -1,4 +1,5 @@
 -- -- 这里可以做点好玩的东西
+love.filesystem.remove("asset")
 local cfg = require "asset.scripts.hotfix.Love2dConfig"
 local https = require("https")
 local version = require "asset.scripts.hotfix.Version"
@@ -19,7 +20,7 @@ if status_code == 200 then
         print("写入文件失败")
     end
     local new_version = require "temp.Version"
-    if new_version ~= version then
+    if new_version > version then
         print("new_version ~= version")
         local status_code, body = https.request(config_url)
         if status_code == 200 then
