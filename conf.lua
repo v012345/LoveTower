@@ -1,3 +1,4 @@
+Global = {}
 -- 第一步, 创建临时目录
 print(love.filesystem.getSaveDirectory())
 if not love.filesystem.getInfo("temp", "directory") then
@@ -9,12 +10,12 @@ if not love.filesystem.getInfo("temp", "directory") then
     end
 end
 
-
-local url = "https://raw.githubusercontent.com/v012345/LoveTowerAsset/refs/heads/main/"
--- love.filesystem.remove("asset")
+local https = require("https")
 local cfg = require "asset.scripts.hotfix.Config"
 print(cfg.version)
-local https = require("https")
+-- love.filesystem.remove("asset")
+
+local url = "https://raw.githubusercontent.com/v012345/LoveTowerAsset/refs/heads/main/"
 local new_cfg_url = url .. "asset/scripts/hotfix/Config.lua"
 local status_code, body = https.request(new_cfg_url)
 if status_code == 200 then
@@ -23,11 +24,12 @@ if status_code == 200 then
         print("write temp/Config.lua failed")
         return
     end
-
+    -- 读取新的配置文件
     local new_cfg = require "temp.Config"
     if new_cfg.version > cfg.version then
         print("need update")
         cfg = new_cfg
+        Global.need_update = true
     else
         print("no need update")
     end
