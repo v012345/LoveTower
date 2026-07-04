@@ -1,7 +1,7 @@
 require "scripts.managers.ScenceManager"
 local WaveManager = require "scripts.spawner.EntitySpawner"
-local Tower = require "scripts.tower"
-local Bullet = require "scripts.bullet"
+-- local Tower = require "scripts.tower"
+-- local Bullet = require "scripts.bullet"
 require "scripts.managers.EntityManager"
 
 -- 经济/塔的配置
