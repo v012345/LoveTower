@@ -1,4 +1,7 @@
-EntityFactory = {}
+EntityFactory = EntityFactory or {}
+
+function EntityFactory:load()
+end
 
 ---@param entityType IEntity
 ---@param ... any

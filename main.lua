@@ -4,6 +4,7 @@ require "scripts.managers.InputManager"
 require "scripts.managers.ScenceManager"
 require "scripts.spawner.EntitySpawner"
 require "scripts.managers.EntityManager"
+require "scripts.factory.EntityFactory"
 
 function love.load()
     love.graphics.setBackgroundColor(0.1, 0.1, 0.12)
@@ -12,6 +13,7 @@ function love.load()
     ScenceManager:load()
     EntitySpawner:load()
     EntityManager:load()
+    EntityFactory:load()
     Game:load()
 end
 

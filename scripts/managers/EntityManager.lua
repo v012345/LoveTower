@@ -8,6 +8,9 @@ function EntityManager:update(dt)
 end
 
 function EntityManager:draw()
+    for _, enemy in ipairs(self.enemies) do
+        enemy:draw()
+    end
 end
 
 function EntityManager:destroy()
