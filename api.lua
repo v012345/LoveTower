@@ -90,6 +90,13 @@ end
 ---@return number FPS
 function love.timer.getFPS() end
 
+---@class love.mouse
+love.mouse = love.mouse or {}
+
+---@return number x
+---@return number y
+function love.mouse.getPosition() end
+
 --- You can continue passing point positions to draw a polyline.
 ---@param x1 number
 ---@param y1 number

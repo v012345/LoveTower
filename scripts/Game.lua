@@ -3,11 +3,10 @@ require "scripts.entity.Tower"
 require "scripts.managers.EntityManager"
 require "scripts.spawner.EntitySpawner"
 require "scripts.managers.StateManager"
+require "scripts.managers.UIManager"
 
--- 经济/塔的配置
+-- 经济配置（塔的属性/价格现在由 UIManager 的塔目录管理）
 local START_MONEY = 150
-local TOWER_COST = 50
-local TOWER_DEF = { range = 150, damage = 25, fireRate = 1.5, color = { 0.4, 0.8, 1.0 } }
 
 ---@class Game
 Game = Game or {}
@@ -24,7 +23,11 @@ function Game:load()
     -- 输入只注册一次
     InputManager:on(Game, "keypressed", "space", function() self:onSpace() end)
     InputManager:on(Game, "keypressed", "r", function() self:restart() end)
-    InputManager:on(Game, "mousepressed", 1, function(_, x, y) self:tryPlaceTower(x, y) end)
+    InputManager:on(Game, "mousepressed", 1, function(_, x, y)
+        if UIManager:handleClick(x, y) then return end -- 点在工具栏上
+        self:tryPlaceTower(x, y)
+    end)
+    InputManager:on(Game, "mousepressed", 2, function() UIManager:deselect() end) -- 右键取消选中
 
     StateManager:set(StateManager.MENU)
 end
@@ -61,21 +64,24 @@ function Game:startNextWave()
     end
 end
 
--- 尝试在鼠标位置放塔
+-- 尝试在鼠标位置放塔（用 UI 里当前选中的塔类型）
 function Game:tryPlaceTower(px, py)
     if not StateManager:is(StateManager.PLAYING) then return end
+
+    local sel = UIManager:getSelected()
+    if not sel then return end -- 没在工具栏选塔
 
     local c, r = ScenceManager:pixelToCell(px, py)
     if not ScenceManager:inBounds(c, r) then return end
     if ScenceManager:isPath(c, r) then return end         -- 路上不能放
     local cellKey = c .. "," .. r
     if ScenceManager:isTowerCell(cellKey) then return end -- 已有塔
-    if self.money < TOWER_COST then return end            -- 钱不够
+    if self.money < sel.cost then return end              -- 钱不够
 
     local x, y = ScenceManager:cellCenter(c, r)
-    EntityManager:addEntity(EntityFactory:create(Tower, x, y, TOWER_DEF))
+    EntityManager:addEntity(EntityFactory:create(Tower, x, y, sel.def))
     ScenceManager:setTowerCell(cellKey, true)
-    self.money = self.money - TOWER_COST
+    self.money = self.money - sel.cost
 end
 
 function Game:update(dt)
@@ -95,23 +101,26 @@ end
 function Game:draw()
     ScenceManager:draw()
     EntityManager:draw()
+    UIManager:drawGhost() -- 放置预览（地图之上、工具栏之下）
 
-    -- 常驻 HUD
+    -- 顶部简要信息
     love.graphics.setColor(1, 1, 1)
     love.graphics.print(
-        ("生命: %d    金币: %d    波次: %d/%d    敌人: %d    FPS: %d"):format(
-            self.lives, self.money, EntitySpawner.waveIndex, EntitySpawner:totalWaves(),
+        ("波次: %d/%d    敌人: %d    FPS: %d"):format(
+            EntitySpawner.waveIndex, EntitySpawner:totalWaves(),
             EntityManager:getEnemyCount(), love.timer.getFPS()
         ), 10, 10)
+
+    if StateManager:is(StateManager.PLAYING)
+        and EntityManager:getEnemyCount() == 0 and EntitySpawner:canStart() then
+        love.graphics.print("按 [空格] 开始第 " .. (EntitySpawner.waveIndex + 1) .. " 波", 10, 36)
+    end
+
+    UIManager:draw() -- 底部工具栏
 
     local state = StateManager.current
     if state == StateManager.MENU then
         self:drawOverlay("塔防 LoveTower", "按 [空格] 开始游戏")
-    elseif state == StateManager.PLAYING then
-        love.graphics.print("左键在空地放塔 (费用 " .. TOWER_COST .. ")", 10, 36)
-        if EntityManager:getEnemyCount() == 0 and EntitySpawner:canStart() then
-            love.graphics.print("按 [空格] 开始第 " .. (EntitySpawner.waveIndex + 1) .. " 波", 10, 62)
-        end
     elseif state == StateManager.WIN then
         self:drawOverlay("胜  利 !", "成功守住了！按 [R] 再玩一局")
     elseif state == StateManager.LOSE then
