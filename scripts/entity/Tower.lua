@@ -8,7 +8,7 @@
 ---@field radius number
 ---@field color number[]
 ---@field target Enemy|nil 当前锁定目标
-local Tower = {}
+Tower = Tower or {}
 Tower.__index = Tower
 
 -- x, y: 塔所在格子的像素中心
@@ -44,13 +44,13 @@ end
 
 -- spawnBullet: function(x, y, target, damage) 由 Game 提供，用来生成子弹
 function Tower:update(dt, enemies, spawnBullet)
-    self.cooldown = self.cooldown - dt
-    self.target = self:findTarget(enemies)
+    -- self.cooldown = self.cooldown - dt
+    -- self.target = self:findTarget(enemies)
 
-    if self.target and self.cooldown <= 0 then
-        self.cooldown = 1 / self.fireRate
-        spawnBullet(self.x, self.y, self.target, self.damage)
-    end
+    -- if self.target and self.cooldown <= 0 then
+    --     self.cooldown = 1 / self.fireRate
+    --     spawnBullet(self.x, self.y, self.target, self.damage)
+    -- end
 end
 
 function Tower:draw()

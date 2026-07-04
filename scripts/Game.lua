@@ -1,6 +1,6 @@
 require "scripts.managers.ScenceManager"
 local WaveManager = require "scripts.spawner.EntitySpawner"
--- local Tower = require "scripts.tower"
+require "scripts.entity.Tower"
 -- local Bullet = require "scripts.bullet"
 require "scripts.managers.EntityManager"
 
@@ -45,12 +45,12 @@ function Game:tryPlaceTower(px, py)
     if ScenceManager:isPath(c, r) then return end -- 路上不能放
     local cellKey = c .. "," .. r
     if ScenceManager:isTowerCell(cellKey) then return end   -- 已有塔
-    if self.money < TOWER_COST then return end    -- 钱不够
+    -- if self.money < TOWER_COST then return end    -- 钱不够
 
     local x, y = ScenceManager:cellCenter(c, r)
-    EntityManager:addEntity(Tower.new(x, y, TOWER_DEF))
-    self.towerCells[cellKey] = true
-    self.money = self.money - TOWER_COST
+    EntityManager:addEntity(EntityFactory:create(Tower, x, y, TOWER_DEF))
+    ScenceManager:setTowerCell(cellKey, true)
+    -- self.money = self.money - TOWER_COST
 end
 
 function Game:update(dt)

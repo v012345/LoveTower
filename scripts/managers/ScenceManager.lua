@@ -32,6 +32,10 @@ function ScenceManager:isTowerCell(cellKey)
     return self.towerCells[cellKey]
 end
 
+function ScenceManager:setTowerCell(cellKey, value)
+    self.towerCells[cellKey] = value
+end
+
 ---@param mapId string 地图ID
 function ScenceManager:loadMap(mapId)
     self.images = {
