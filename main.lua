@@ -2,7 +2,9 @@ local https = require("https")
 function love.load()
     -- print("love.load")
     print(https)
-    -- local url = "https://raw.githubusercontent.com/v012345/NightOwlToolsV2/refs/heads/main/README.md"
+    code, body = https.request( "https://raw.githubusercontent.com/v012345/NightOwlToolsV2/refs/heads/main/README.md" )
+    print(code, body)
+    -- local url = ""
 
     -- local body, statusCode, headers, statusText = http.request(url)
 
