@@ -68,7 +68,10 @@ function App:start_up()
 end
 
 function App:init_window()
-    
+
+end
+
+function App:save_settings()
 end
 
 function App:splash_screen()
@@ -78,7 +81,6 @@ end
 function App:main_menu()
     self:prep_stage(self.STAGES.MAIN_MENU, self.STATES.MENU, true)
 end
-
 
 -- print("game load")
 -- -- function love.load()
