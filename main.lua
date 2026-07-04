@@ -6,7 +6,7 @@ local old_cfg = require "asset.scripts.hotfix.Config"
 if new_cfg and new_cfg.version > old_cfg.version then
     -- 先下载 Hotfix.lua 文件
     local status_code, body = https.request(
-        "https://raw.githubusercontent.com/v012345/LoveTowerAsset/refs/heads/main/asset/scripts/hotfix/Hotfix.lua")
+    "https://raw.githubusercontent.com/v012345/LoveTowerAsset/refs/heads/main/asset/scripts/hotfix/Hotfix.lua")
     if status_code == 200 then
         love.filesystem.createDirectory("asset/scripts/hotfix")
         love.filesystem.write("asset/scripts/hotfix/Hotfix.lua", body)
