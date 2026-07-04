@@ -1,5 +1,5 @@
 ---@type Game
-local Game = require("scripts/game")
+local Game = require "scripts.game"
 require "scripts.managers.InputManager"
 
 function love.load()
