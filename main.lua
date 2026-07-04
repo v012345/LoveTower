@@ -7,6 +7,56 @@ require "asset.scripts.engine.object"
 require "asset.scripts.functions.misc_functions"
 require "asset.scripts.main.app"
 
+function love.run()
+    if love.load then love.load(love.arg.parseGameArguments(arg), arg) end
+    -- We don't want the first frame's dt to include time taken by love.load.
+    love.timer.step()
+    local dt = 0
+    local dt_smooth = 1 / 100
+    local run_time = 0
+    -- Main loop time.
+    return function()
+        run_time = love.timer.getTime()
+        -- Process events.
+        if love.event then
+            love.event.pump()
+            local _n, _a, _b, _c, _d, _e, _f, touched
+            for name, a, b, c, d, e, f in love.event.poll() do
+                if name == "quit" then
+                    if not love.quit or not love.quit() then
+                        return a or 0
+                    end
+                end
+                if name == 'touchpressed' then
+                    touched = true
+                elseif name == 'mousepressed' then
+                    _n, _a, _b, _c, _d, _e, _f = name, a, b, c, d, e, f
+                else
+                    love.handlers[name](a, b, c, d, e, f)
+                end
+            end
+            if _n then
+                love.handlers.mousepressed(_a, _b, _c, touched)
+            end
+        end
+
+        -- Update dt, as we'll be passing it to update
+        if love.timer then dt = love.timer.step() end
+        dt_smooth = math.min(0.8 * dt_smooth + 0.2 * dt, 0.1)
+        -- Call update and draw
+        if love.update then love.update(dt_smooth) end -- will pass 0 if love.timer is disabled
+
+        if love.graphics and love.graphics.isActive() then
+            if love.draw then love.draw() end
+            love.graphics.present()
+        end
+
+        run_time = math.min(love.timer.getTime() - run_time, 0.1)
+
+        if run_time < 0.002 then love.timer.sleep(0.002 - run_time) end
+    end
+end
+
 function love.load()
     App.instance:start_up()
 end

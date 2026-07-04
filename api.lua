@@ -159,3 +159,11 @@ function love.event.quit() end
 
 ---@class love.timer
 love.timer = love.timer or {}
+
+--- Measures the time between two frames.
+---@return number dt
+function love.timer.step() end
+
+--- Returns the precise amount of time since some time in the past.
+---@return number time
+function love.timer.getTime() end

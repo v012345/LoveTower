@@ -8,7 +8,9 @@ function App:init()
     print("game load")
 end
 
-function App:update(dt) end
+function App:update(dt)
+    print("game update", dt)
+end
 
 function App:draw() end
 
