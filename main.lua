@@ -1,6 +1,7 @@
 ---@type Game
 local Game = require "scripts.game"
 require "scripts.managers.InputManager"
+require "scripts.managers.ScenceManager"
 
 function love.load()
     love.graphics.setBackgroundColor(0.1, 0.1, 0.12)
