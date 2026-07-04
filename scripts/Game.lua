@@ -42,10 +42,10 @@ end
 function Game:tryPlaceTower(px, py)
     local c, r = ScenceManager:pixelToCell(px, py)
     if not ScenceManager:inBounds(c, r) then return end
-    if ScenceManager:isPath(c, r) then return end -- 路上不能放
+    if ScenceManager:isPath(c, r) then return end         -- 路上不能放
     local cellKey = c .. "," .. r
-    if ScenceManager:isTowerCell(cellKey) then return end   -- 已有塔
-    if self.money < TOWER_COST then return end    -- 钱不够
+    if ScenceManager:isTowerCell(cellKey) then return end -- 已有塔
+    if self.money < TOWER_COST then return end            -- 钱不够
 
     local x, y = ScenceManager:cellCenter(c, r)
     EntityManager:addEntity(EntityFactory:create(Tower, x, y, TOWER_DEF))
@@ -91,7 +91,7 @@ function Game:draw()
 
     -- HUD
     love.graphics.setColor(1, 1, 1)
-    love.graphics.print(("FPS: %s"):format(love.timer.getFPS()), 10, 10)
+    love.graphics.print((" 金币: %s ,FPS: %s"):format(self.money, love.timer.getFPS()), 10, 10)
     -- love.graphics.print(
     --     ("生命: %d    金币: %d    波次: %d/%d    敌人: %d   FPS: %d"):format(
     --         self.lives, self.money, self.wave.waveIndex, self.wave:totalWaves(),
