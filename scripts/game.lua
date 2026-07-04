@@ -98,8 +98,9 @@ function Game:draw()
     -- for _, e in ipairs(self.enemies) do e:draw() end
     -- for _, b in ipairs(self.bullets) do b:draw() end
 
-    -- -- HUD
-    -- love.graphics.setColor(1, 1, 1)
+    -- HUD
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.print(("FPS: %s"):format(love.timer.getFPS()), 10, 10)
     -- love.graphics.print(
     --     ("生命: %d    金币: %d    波次: %d/%d    敌人: %d   FPS: %d"):format(
     --         self.lives, self.money, self.wave.waveIndex, self.wave:totalWaves(),
