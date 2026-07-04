@@ -5,6 +5,7 @@
 App = Object:extend()
 
 function App:init()
+    self.ID = 0 -- ID 生成器
     print("game load")
 end
 
@@ -16,12 +17,36 @@ function App:draw() end
 
 function App:start_up()
     boot_timer('start', 'settings', 0.1)
+    love.timer.sleep(0.3)
+    boot_timer('settings', 'window', 0.2)
+    love.timer.sleep(0.5)
+    boot_timer('window', 'init_window', 0.3)
+    love.timer.sleep(0.5)
+    boot_timer('init_window', 'load_settings', 0.4)
+    love.timer.sleep(0.5)
+    boot_timer('load_settings', 'load_window', 0.5)
+    love.timer.sleep(0.5)
+    boot_timer('load_window', 'init_game', 0.6)
+    love.timer.sleep(0.5)
+    boot_timer('init_game', 'load_game', 0.7)
+    love.timer.sleep(0.5)
+    boot_timer('load_game', 'load_game', 0.8)
+    love.timer.sleep(0.5)
+    boot_timer('load_game', 'load_game', 0.9)
+    love.timer.sleep(0.5)
+    boot_timer('load_game', 'load_game', 1.0)
+    self:splash_screen()
+end
+
+function App:splash_screen()
+    self:main_menu()
+end
+
+function App:main_menu()
+
 end
 
 function App:init_window() end
-
----@type App
-App.instance = App()
 
 -- print("game load")
 -- -- function love.load()
@@ -205,5 +230,13 @@ end
 function love.draw()
     App:draw()
 end
+
+function App:generate_id()
+    self.ID = self.ID + 1
+    return self.ID
+end
+
+---@type App
+App.instance = App()
 
 return App
