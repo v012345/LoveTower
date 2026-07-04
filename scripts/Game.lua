@@ -18,7 +18,7 @@ function Game:load()
     EntitySpawner:loadConfig("config_1")
     -- self.towerCells = {}     -- 已被塔占用的格子（"c,r" -> true）
     -- self.lives = 20          -- 漏一只 -1
-    -- self.money = START_MONEY -- 金币
+    self.money = START_MONEY -- 金币
 
 
 
@@ -45,12 +45,12 @@ function Game:tryPlaceTower(px, py)
     if ScenceManager:isPath(c, r) then return end -- 路上不能放
     local cellKey = c .. "," .. r
     if ScenceManager:isTowerCell(cellKey) then return end   -- 已有塔
-    -- if self.money < TOWER_COST then return end    -- 钱不够
+    if self.money < TOWER_COST then return end    -- 钱不够
 
     local x, y = ScenceManager:cellCenter(c, r)
     EntityManager:addEntity(EntityFactory:create(Tower, x, y, TOWER_DEF))
     ScenceManager:setTowerCell(cellKey, true)
-    -- self.money = self.money - TOWER_COST
+    self.money = self.money - TOWER_COST
 end
 
 function Game:update(dt)
