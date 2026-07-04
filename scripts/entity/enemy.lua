@@ -1,4 +1,4 @@
----@class Enemy
+---@class Enemy : IEntity
 ---@field path table 路径点像素列表
 ---@field x number
 ---@field y number

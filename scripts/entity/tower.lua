@@ -1,9 +1,9 @@
----@class Tower
+---@class Tower : IEntity
 ---@field x number
 ---@field y number
 ---@field range number 射程（像素）
 ---@field damage number
----@field fireRate number 每秒射速
+---@field fireRate number 每秒射速x
 ---@field cooldown number 距离下次开火的倒计时
 ---@field radius number
 ---@field color number[]

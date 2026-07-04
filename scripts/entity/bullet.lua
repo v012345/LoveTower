@@ -1,4 +1,4 @@
----@class Bullet
+---@class Bullet : IEntity
 ---@field x number
 ---@field y number
 ---@field target Enemy 追踪的目标敌人
