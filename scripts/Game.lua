@@ -44,11 +44,11 @@ function Game:tryPlaceTower(px, py)
     if not ScenceManager:inBounds(c, r) then return end
     if ScenceManager:isPath(c, r) then return end -- 路上不能放
     local cellKey = c .. "," .. r
-    if self.towerCells[cellKey] then return end   -- 已有塔
+    if ScenceManager:isTowerCell(cellKey) then return end   -- 已有塔
     if self.money < TOWER_COST then return end    -- 钱不够
 
     local x, y = ScenceManager:cellCenter(c, r)
-    self.towers[#self.towers + 1] = Tower.new(x, y, TOWER_DEF)
+    EntityManager:addEntity(Tower.new(x, y, TOWER_DEF))
     self.towerCells[cellKey] = true
     self.money = self.money - TOWER_COST
 end

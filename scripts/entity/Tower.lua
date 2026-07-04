@@ -72,4 +72,8 @@ function Tower:draw()
     love.graphics.setColor(1, 1, 1)
 end
 
+function Tower:isTower()
+    return true
+end
+
 return Tower

@@ -37,8 +37,15 @@ function EntityManager:getEnemyCount()
     return #self.enemies
 end
 
+---@param entity IEntity
 function EntityManager:addEntity(entity)
-    self.enemies[#self.enemies + 1] = entity
+    if entity.isEnemy then
+        self.enemies[#self.enemies + 1] = entity
+    elseif entity.isTower then
+        self.towers[#self.towers + 1] = entity
+    elseif entity.isBullet then
+        self.bullets[#self.bullets + 1] = entity
+    end
 end
 
 return EntityManager

@@ -25,6 +25,11 @@ function ScenceManager:load()
     self.waypoints = {
         { 0, 1 }, { 4, 1 }, { 4, 5 }, { 9, 5 }, { 9, 2 }, { 14, 2 }, { 14, 9 }, { 19, 9 },
     }
+    self.towerCells = {}
+end
+
+function ScenceManager:isTowerCell(cellKey)
+    return self.towerCells[cellKey]
 end
 
 ---@param mapId string 地图ID

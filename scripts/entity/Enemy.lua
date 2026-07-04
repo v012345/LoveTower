@@ -71,4 +71,8 @@ function Enemy:draw()
     love.graphics.setColor(1, 1, 1)
 end
 
+function Enemy:isEnemy()
+    return true
+end
+
 return Enemy
