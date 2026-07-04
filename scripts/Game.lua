@@ -89,10 +89,6 @@ function Game:draw()
     ScenceManager:drawDebug()
     EntityManager:draw()
 
-    -- for _, t in ipairs(self.towers) do t:draw() end
-    -- for _, e in ipairs(self.enemies) do e:draw() end
-    -- for _, b in ipairs(self.bullets) do b:draw() end
-
     -- HUD
     love.graphics.setColor(1, 1, 1)
     love.graphics.print(("FPS: %s"):format(love.timer.getFPS()), 10, 10)
