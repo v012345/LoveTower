@@ -22,10 +22,8 @@ function love.run()
     local dt_smooth = 1 / 100
     local run_time = 0
     -- Main loop time.
-    return function ()
+    return function()
         run_time = love.timer.getTime()
-        -- Process events.
-
         love.event.pump()
         local _n, _a, _b, _c, _d, _e, _f, touched
         for name, a, b, c, d, e, f in love.event.poll() do

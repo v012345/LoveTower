@@ -6,7 +6,9 @@ love = love or {}
 ---@class love.graphics
 love.graphics = love.graphics or {}
 
+love.handlers = love.handlers or {}
 
+function love.quit() end
 
 ---@class love.filesystem
 love.filesystem = love.filesystem or {}
@@ -171,6 +173,10 @@ function love.graphics.isActive() end
 
 ---@class love.event
 love.event = love.event or {}
+
+--- Returns an iterator for messages in the event queue.
+---@return function iterator
+function love.event.poll() end
 
 function love.event.quit() end
 
