@@ -124,4 +124,21 @@ function Hotfix:draw()
     love.graphics.print(text, (w - tw) / 2, y - 30)
 end
 
+
+function love.load()
+    local cfg = require "asset.scripts.hotfix.Config"
+    print(cfg.version)
+    hotfix:load()
+end
+
+function love.update(dt)
+    hotfix:update(dt)
+    t = t + dt * 0.1
+    hotfix:setProgress(t)
+end
+
+function love.draw()
+    hotfix:draw()
+end
+
 return Hotfix
