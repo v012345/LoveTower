@@ -1,4 +1,4 @@
-local Enemy = require("scripts/enemy")
+local Enemy = require "scripts.entity.Enemy"
 
 ---@class EntitySpawner : ISpawner
 EntitySpawner = EntitySpawner or {}

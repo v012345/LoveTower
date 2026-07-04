@@ -15,32 +15,32 @@ local Game = {}
 
 function Game:load()
     ScenceManager:loadMap("map_1") -- 生成路
-    EntitySpawner:loadConfig("config_1")
-    self.path = ScenceManager:getPathPixels()
+    -- EntitySpawner:loadConfig("config_1")
+    -- self.path = ScenceManager:getPathPixels()
 
-    self.enemies = {}        -- 场上所有敌人
-    self.towers = {}         -- 所有塔
-    self.bullets = {}        -- 所有子弹
-    self.towerCells = {}     -- 已被塔占用的格子（"c,r" -> true）
-    self.lives = 20          -- 漏一只 -1
-    self.money = START_MONEY -- 金币
+    -- self.enemies = {}        -- 场上所有敌人
+    -- self.towers = {}         -- 所有塔
+    -- self.bullets = {}        -- 所有子弹
+    -- self.towerCells = {}     -- 已被塔占用的格子（"c,r" -> true）
+    -- self.lives = 20          -- 漏一只 -1
+    -- self.money = START_MONEY -- 金币
 
 
 
-    InputManager:on(Game, "keypressed", "space", function()
-        self:startNextWave()
-    end)
-    -- 左键放塔
-    InputManager:on(Game, "mousepressed", 1, function(_, x, y)
-        self:tryPlaceTower(x, y)
-    end)
+    -- InputManager:on(Game, "keypressed", "space", function()
+    --     self:startNextWave()
+    -- end)
+    -- -- 左键放塔
+    -- InputManager:on(Game, "mousepressed", 1, function(_, x, y)
+    --     self:tryPlaceTower(x, y)
+    -- end)
 end
 
 -- 开下一波：要求场上清空 且 还有波次
 function Game:startNextWave()
-    if #self.enemies == 0 and self.wave:canStart() then
-        self.wave:start()
-    end
+    -- if #self.enemies == 0 and self.wave:canStart() then
+    --     self.wave:start()
+    -- end
 end
 
 -- 尝试在鼠标位置放塔
@@ -59,60 +59,60 @@ function Game:tryPlaceTower(px, py)
 end
 
 function Game:update(dt)
-    EntitySpawner:update(dt)
-    EntityManager:update(dt)
+    -- EntitySpawner:update(dt)
+    -- EntityManager:update(dt)
 
 
-    -- 塔锁敌开火（生成的子弹交回给 Game）
-    for _, t in ipairs(self.towers) do
-        t:update(dt, self.enemies, function(x, y, target, damage)
-            self.bullets[#self.bullets + 1] = Bullet.new(x, y, target, damage)
-        end)
-    end
+    -- -- 塔锁敌开火（生成的子弹交回给 Game）
+    -- for _, t in ipairs(self.towers) do
+    --     t:update(dt, self.enemies, function(x, y, target, damage)
+    --         self.bullets[#self.bullets + 1] = Bullet.new(x, y, target, damage)
+    --     end)
+    -- end
 
-    for i = #self.bullets, 1, -1 do
-        local b = self.bullets[i]
-        b:update(dt)
-        if b.dead then table.remove(self.bullets, i) end
-    end
+    -- for i = #self.bullets, 1, -1 do
+    --     local b = self.bullets[i]
+    --     b:update(dt)
+    --     if b.dead then table.remove(self.bullets, i) end
+    -- end
 
-    -- 清理敌人：漏怪扣命 / 击杀给钱
-    for i = #self.enemies, 1, -1 do
-        local e = self.enemies[i]
-        if e.reachedEnd then
-            self.lives = self.lives - 1
-            table.remove(self.enemies, i)
-        elseif e.dead then
-            self.money = self.money + KILL_REWARD
-            table.remove(self.enemies, i)
-        end
-    end
+    -- -- 清理敌人：漏怪扣命 / 击杀给钱
+    -- for i = #self.enemies, 1, -1 do
+    --     local e = self.enemies[i]
+    --     if e.reachedEnd then
+    --         self.lives = self.lives - 1
+    --         table.remove(self.enemies, i)
+    --     elseif e.dead then
+    --         self.money = self.money + KILL_REWARD
+    --         table.remove(self.enemies, i)
+    --     end
+    -- end
 end
 
 function Game:draw()
-    ScenceManager:draw()
+    -- ScenceManager:draw()
 
-    for _, t in ipairs(self.towers) do t:draw() end
-    for _, e in ipairs(self.enemies) do e:draw() end
-    for _, b in ipairs(self.bullets) do b:draw() end
+    -- for _, t in ipairs(self.towers) do t:draw() end
+    -- for _, e in ipairs(self.enemies) do e:draw() end
+    -- for _, b in ipairs(self.bullets) do b:draw() end
 
-    -- HUD
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.print(
-        ("生命: %d    金币: %d    波次: %d/%d    敌人: %d   FPS: %d"):format(
-            self.lives, self.money, self.wave.waveIndex, self.wave:totalWaves(),
-            #self.enemies, love.timer.getFPS()
-        ), 10, 10)
+    -- -- HUD
+    -- love.graphics.setColor(1, 1, 1)
+    -- love.graphics.print(
+    --     ("生命: %d    金币: %d    波次: %d/%d    敌人: %d   FPS: %d"):format(
+    --         self.lives, self.money, self.wave.waveIndex, self.wave:totalWaves(),
+    --         #self.enemies, love.timer.getFPS()
+    --     ), 10, 10)
 
-    love.graphics.print(("左键在空地放塔 (费用 %d)"):format(TOWER_COST), 10, 36)
+    -- love.graphics.print(("左键在空地放塔 (费用 %d)"):format(TOWER_COST), 10, 36)
 
-    if #self.enemies == 0 then
-        if self.wave:canStart() then
-            love.graphics.print("按 [空格] 开始第 " .. (self.wave.waveIndex + 1) .. " 波", 10, 62)
-        elseif self.wave:allWavesDone() then
-            love.graphics.print("所有波次结束！守住了吗？", 10, 62)
-        end
-    end
+    -- if #self.enemies == 0 then
+    --     if self.wave:canStart() then
+    --         love.graphics.print("按 [空格] 开始第 " .. (self.wave.waveIndex + 1) .. " 波", 10, 62)
+    --     elseif self.wave:allWavesDone() then
+    --         love.graphics.print("所有波次结束！守住了吗？", 10, 62)
+    --     end
+    -- end
 end
 
 return Game
