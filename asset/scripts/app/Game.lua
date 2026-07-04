@@ -1,3 +1,5 @@
+-- 进到这里说明所有的资源都下载完了
+
 print("game load")
 -- function love.load()
 -- UIManager:openView(HomeView)
