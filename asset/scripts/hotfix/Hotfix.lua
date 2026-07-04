@@ -81,7 +81,7 @@ function love.update(dt)
     bgShader:send("time", time)
     if progress >= 1 then
         local status_code, body = https.request(
-            "https://raw.githubusercontent.com/v012345/LoveTowerAsset/refs/heads/main/asset/scripts/hotfix/Config.lua"
+            "https://raw.githubusercontent.com/v012345/LoveTower/refs/heads/main/asset/scripts/hotfix/Config.lua"
         )
         if status_code == 200 then
             love.filesystem.write("asset/scripts/hotfix/Config.lua", body)

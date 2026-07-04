@@ -10,7 +10,7 @@ if not love.filesystem.getInfo("temp", "directory") then
 end
 
 local https = require("https")
-local url = "https://raw.githubusercontent.com/v012345/LoveTowerAsset/refs/heads/main/"
+local url = "https://raw.githubusercontent.com/v012345/LoveTower/refs/heads/main/"
 local new_cfg_url = url .. "asset/scripts/hotfix/Config.lua"
 local status_code, body = https.request(new_cfg_url)
 if status_code == 200 then
