@@ -1,5 +1,5 @@
 ---@type Game
-local Game = require "scripts.game"
+local Game = require "scripts.Game"
 require "scripts.managers.InputManager"
 require "scripts.managers.ScenceManager"
 require "scripts.spawner.EntitySpawner"
