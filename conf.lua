@@ -28,11 +28,15 @@ end
 
 function love.conf(t)
     t.window.title = cfg.window.title
-    t.window.width = cfg.window.width
-    t.window.height = cfg.window.height
-    t.window.vsync = cfg.window.vsync
+    -- t.window.width = cfg.window.width
+    -- t.window.height = cfg.window.height
+    -- t.window.vsync = cfg.window.vsync
     t.console = cfg.console
 
-    t.modules.joystick = cfg.modules.joystick
-    t.modules.physics = cfg.modules.physics
+    -- t.modules.joystick = cfg.modules.joystick
+    -- t.modules.physics = cfg.modules.physics
+    t.window.width = 0
+    t.window.height = 0
+    t.window.minwidth = 100
+    t.window.minheight = 100
 end
