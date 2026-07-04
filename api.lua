@@ -1,3 +1,5 @@
+---@meta
+
 ---@class love
 love = love or {}
 
@@ -7,35 +9,34 @@ love.graphics = love.graphics or {}
 ---@class Image
 Image = {}
 
----@return number? width
----@return number? height
+---@return number width
+---@return number height
 function Image:getDimensions() end
 
----@return number? width
+---@return number width
 function Image:getWidth()
 end
 
----@return number? height
+---@return number height
 function Image:getHeight()
 end
 
 ---@class Font
 Font = {}
 
----@return number?
+---@return number
 function Font:getHeight()
 end
 
 ---@param filename string
----@return Image?
+---@return Image
 function love.graphics.newImage(filename)
 end
 
 ---@param filename string
 ---@param size     number
----@return Font?
-function love.graphics.newFont(filename, size)
-end
+---@return Font
+function love.graphics.newFont(filename, size) end
 
 ---@param font Font
 function love.graphics.setFont(font)
@@ -86,9 +87,8 @@ end
 function love.graphics.getDimensions()
 end
 
----@return number? FPS
-function love.timer.getFPS()
-end
+---@return number FPS
+function love.timer.getFPS() end
 
 --- You can continue passing point positions to draw a polyline.
 ---@param x1 number
