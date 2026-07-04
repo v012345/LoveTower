@@ -60,7 +60,7 @@ end
 
 function Game:update(dt)
     EntitySpawner:update(dt)
-    -- EntityManager:update(dt)
+    EntityManager:update(dt)
 
 
     -- -- 塔锁敌开火（生成的子弹交回给 Game）

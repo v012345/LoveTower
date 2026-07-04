@@ -5,6 +5,9 @@ function EntityManager:load()
 end
 
 function EntityManager:update(dt)
+    for _, enemy in ipairs(self.enemies) do
+        enemy:update(dt)
+    end
 end
 
 function EntityManager:draw()

@@ -1,4 +1,4 @@
-local Enemy = require "scripts.entity.Enemy"
+require "scripts.entity.Enemy"
 
 ---@class EntitySpawner : ISpawner
 EntitySpawner = EntitySpawner or {}
@@ -52,7 +52,7 @@ function EntitySpawner:update(dt)
     if self.timer <= 0 then
         self.timer = wave.interval
         self.spawnedCount = self.spawnedCount + 1
-        EntityManager:addEntity(EntityFactory:create(Enemy))
+        EntityManager:addEntity(EntityFactory:create(Enemy, ScenceManager:getPathPixels(), wave))
 
         if self.spawnedCount >= wave.count then
             self.spawning = false -- 本波出完
