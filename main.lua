@@ -6,6 +6,11 @@ print("old_cfg.version:", old_cfg.version)
 require "asset.scripts.engine.object"
 require "asset.scripts.functions.misc_functions"
 require "asset.scripts.main.app"
+
+function love.load()
+    App.instance:start_up()
+end
+
 function love.update(dt)
     App.instance:update(dt)
 end
