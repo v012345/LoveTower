@@ -6,6 +6,12 @@ love = love or {}
 ---@class love.graphics
 love.graphics = love.graphics or {}
 
+---@class love.filesystem
+love.filesystem = love.filesystem or {}
+
+---@return string path
+function love.filesystem.getSaveDirectory() end
+
 ---@class Image
 Image = {}
 

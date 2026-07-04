@@ -1,3 +1,5 @@
+-- 这里可以做点好玩的东西
+
 function love.conf(t)
     t.window.title = "LoveTower"
     t.window.width = 1200

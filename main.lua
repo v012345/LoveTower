@@ -1,9 +1,13 @@
-local https = require("https")
-function love.load()
+-- local hotfix = require("hotfix")
+-- print(love.filesystem.getSaveDirectory())
+-- love.filesystem.write("mod/test.lua", "print('hello mod')")
+-- local data = love.filesystem.read("mod/test.lua")
+-- print(data)
+-- function love.load()
     -- print("love.load")
-    print(https)
-    code, body = https.request( "https://raw.githubusercontent.com/v012345/NightOwlToolsV2/refs/heads/main/README.md" )
-    print(code, body)
+    -- print(https)
+    -- code, body = https.request( "https://raw.githubusercontent.com/v012345/NightOwlToolsV2/refs/heads/main/README.md" )
+    -- print(code, body)
     -- local url = ""
 
     -- local body, statusCode, headers, statusText = http.request(url)
@@ -14,7 +18,7 @@ function love.load()
     -- else
     --     print("Failed to download: " .. tostring(statusCode))
     -- end
-end
+-- end
 
 -- function love.update(dt)
 --     Game:update(dt)
