@@ -1,8 +1,8 @@
 local Enemy = require("scripts/enemy")
 
----@class WaveManager
-local WaveManager = {}
-WaveManager.__index = WaveManager
+---@class EntitySpawner
+local EntitySpawner = {}
+EntitySpawner.__index = EntitySpawner
 
 -- 波次配置：每波 = { count 数量, interval 出怪间隔(秒), hp, speed, color }
 -- 想加难度/改节奏，只动这张表
@@ -14,7 +14,7 @@ local WAVES = {
 
 -- path:    路径点像素列表
 -- onSpawn: function(enemy) 生成一只敌人时回调给 Game，由 Game 收进列表
-function WaveManager.new(path, onSpawn)
+function EntitySpawner.new(path, onSpawn)
     return setmetatable({
         path = path,
         onSpawn = onSpawn,
@@ -22,23 +22,23 @@ function WaveManager.new(path, onSpawn)
         spawning = false,    -- 是否正在出怪
         spawnedCount = 0,    -- 本波已出怪数
         timer = 0,           -- 距离下一只的倒计时
-    }, WaveManager)
+    }, EntitySpawner)
 end
 
-function WaveManager:totalWaves()
+function EntitySpawner:totalWaves()
     return #WAVES
 end
 
 -- 是否允许开下一波（没在出怪 且 还有波次）
-function WaveManager:canStart()
+function EntitySpawner:canStart()
     return not self.spawning and self.waveIndex < #WAVES
 end
 
-function WaveManager:allWavesDone()
+function EntitySpawner:allWavesDone()
     return self.waveIndex >= #WAVES and not self.spawning
 end
 
-function WaveManager:start()
+function EntitySpawner:start()
     if not self:canStart() then return end
     self.waveIndex = self.waveIndex + 1
     self.spawnedCount = 0
@@ -46,7 +46,7 @@ function WaveManager:start()
     self.spawning = true
 end
 
-function WaveManager:update(dt)
+function EntitySpawner:update(dt)
     if not self.spawning then return end
 
     local wave = WAVES[self.waveIndex]
@@ -62,4 +62,4 @@ function WaveManager:update(dt)
     end
 end
 
-return WaveManager
+return EntitySpawner

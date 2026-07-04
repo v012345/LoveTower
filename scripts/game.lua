@@ -1,5 +1,5 @@
 require "scripts.managers.ScenceManager"
-local WaveManager = require "scripts.managers.EntitySpawner"
+local WaveManager = require "scripts.spawner.EntitySpawner"
 local Tower = require "scripts.tower"
 local Bullet = require "scripts.bullet"
 
