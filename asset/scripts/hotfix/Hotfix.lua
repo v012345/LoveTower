@@ -1,4 +1,3 @@
-
 -- ===== Shader：动态背景 =====
 local bgShader = love.graphics.newShader(
     [[
@@ -66,22 +65,29 @@ vec4 effect(vec4 color, Image tex, vec2 uv, vec2 screen_uv)
 }
 ]]
 )
-
-
-
+local https = require("https")
 local progress = 0
 local time = 0
 
 -- 更新进度
 
 function love.load()
-   print("hotfix load")
+    print("hotfix load")
 end
 
 function love.update(dt)
     time = time + dt
     progress = math.max(0, math.min(1, time))
     bgShader:send("time", time)
+    if progress >= 1 then
+        local status_code, body = https.request(
+            "https://raw.githubusercontent.com/v012345/LoveTowerAsset/refs/heads/main/asset/scripts/hotfix/Config.lua"
+        )
+        if status_code == 200 then
+            love.filesystem.write("asset/scripts/hotfix/Config.lua", body)
+        end
+        require "asset.scripts.app.Game"
+    end
 end
 
 function love.draw()
@@ -119,4 +125,3 @@ function love.draw()
 
     love.graphics.print(text, (w - tw) / 2, y - 30)
 end
-
