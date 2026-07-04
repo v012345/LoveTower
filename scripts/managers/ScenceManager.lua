@@ -1,13 +1,13 @@
+---@class ScenceManager : IManager
+---@field tileSize number
+---@field cols number
+---@field rows number
+---@field waypoints table
+---@field pathCells table<string, boolean>
+---@field images table<string, Image>
+---@field loadMap fun(self:ScenceManager, mapId:string)
+---@field draw fun(self:ScenceManager)
 ScenceManager = ScenceManager or {}
-
-ScenceManager.tileSize = 60
-ScenceManager.cols = 20
-ScenceManager.rows = 12
-
--- 敌人行走路线：每个点是网格坐标 {列, 行}，相邻两点必须同行或同列（直角折线）
-ScenceManager.waypoints = {
-    { 0, 1 }, { 4, 1 }, { 4, 5 }, { 9, 5 }, { 9, 2 }, { 14, 2 }, { 14, 9 }, { 19, 9 },
-}
 
 local function sign(n)
     if n > 0 then return 1 elseif n < 0 then return -1 else return 0 end
@@ -17,8 +17,20 @@ local function key(c, r)
     return c .. "," .. r
 end
 
+
+function ScenceManager:load()
+    self.tileSize = 60
+    self.cols = 20
+    self.rows = 12
+
+    -- 敌人行走路线：每个点是网格坐标 {列, 行}，相邻两点必须同行或同列（直角折线）
+    self.waypoints = {
+        { 0, 1 }, { 4, 1 }, { 4, 5 }, { 9, 5 }, { 9, 2 }, { 14, 2 }, { 14, 9 }, { 19, 9 },
+    }
+end
+
 ---@param mapId string 地图ID
-function ScenceManager:load(mapId)
+function ScenceManager:loadMap(mapId)
     self.images = {
         ground = love.graphics.newImage("resource/image/terrain_1_cell_1.png"),
         path   = love.graphics.newImage("resource/image/terrain_1_cell_3.png"),

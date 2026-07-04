@@ -13,7 +13,7 @@ local TOWER_DEF = { range = 150, damage = 25, fireRate = 1.5, color = { 0.4, 0.8
 local Game = {}
 
 function Game:load()
-    ScenceManager:load("map_1") -- 生成路
+    ScenceManager:loadMap("map_1") -- 生成路
     self.path = ScenceManager:getPathPixels()
 
     self.enemies = {}          -- 场上所有敌人
