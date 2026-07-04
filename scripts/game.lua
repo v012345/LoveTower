@@ -16,12 +16,12 @@ function Game:load()
     ScenceManager:loadMap("map_1") -- 生成路
     self.path = ScenceManager:getPathPixels()
 
-    self.enemies = {}          -- 场上所有敌人
-    self.towers = {}           -- 所有塔
-    self.bullets = {}          -- 所有子弹
-    self.towerCells = {}       -- 已被塔占用的格子（"c,r" -> true）
-    self.lives = 20            -- 漏一只 -1
-    self.money = START_MONEY   -- 金币
+    self.enemies = {}        -- 场上所有敌人
+    self.towers = {}         -- 所有塔
+    self.bullets = {}        -- 所有子弹
+    self.towerCells = {}     -- 已被塔占用的格子（"c,r" -> true）
+    self.lives = 20          -- 漏一只 -1
+    self.money = START_MONEY -- 金币
 
     -- 波次管理器：每生成一只就塞进 enemies
     self.wave = WaveManager.new(self.path, function(enemy)
@@ -50,8 +50,8 @@ function Game:tryPlaceTower(px, py)
     if not ScenceManager:inBounds(c, r) then return end
     if ScenceManager:isPath(c, r) then return end -- 路上不能放
     local cellKey = c .. "," .. r
-    if self.towerCells[cellKey] then return end -- 已有塔
-    if self.money < TOWER_COST then return end  -- 钱不够
+    if self.towerCells[cellKey] then return end   -- 已有塔
+    if self.money < TOWER_COST then return end    -- 钱不够
 
     local x, y = ScenceManager:cellCenter(c, r)
     self.towers[#self.towers + 1] = Tower.new(x, y, TOWER_DEF)
