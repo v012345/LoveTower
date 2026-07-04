@@ -6,3 +6,6 @@ Controller = Object:extend()
 function Controller:init()
     self.locks = {}
 end
+
+Controller.instance = Controller()
+return Controller

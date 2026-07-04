@@ -41,9 +41,14 @@ end
 ---@param new_state number
 ---@param new_game_obj boolean
 function App:prep_stage(new_stage, new_state, new_game_obj)
-    local locks = Controller.instance:get_locks()
-    for k, v in pairs(self.STAGES) do
+    local locks = Controller.instance.locks
+    for k, _ in pairs(locks) do
+        locks[k] = nil
     end
+    if new_game_obj then self.GAME = self:init_game_object() end
+    self.STAGE = new_stage
+    self.STATE = new_state
+    self.STATE_COMPLETE = false
 end
 
 ---@return table
@@ -58,26 +63,12 @@ end
 function App:draw() end
 
 function App:start_up()
-    boot_timer('start', 'settings', 0.1)
-    love.timer.sleep(0.3)
-    boot_timer('settings', 'window', 0.2)
-    love.timer.sleep(0.5)
-    boot_timer('window', 'init_window', 0.3)
-    love.timer.sleep(0.5)
-    boot_timer('init_window', 'load_settings', 0.4)
-    love.timer.sleep(0.5)
-    boot_timer('load_settings', 'load_window', 0.5)
-    love.timer.sleep(0.5)
-    boot_timer('load_window', 'init_game', 0.6)
-    love.timer.sleep(0.5)
-    boot_timer('init_game', 'load_game', 0.7)
-    love.timer.sleep(0.5)
-    boot_timer('load_game', 'load_game', 0.8)
-    love.timer.sleep(0.5)
-    boot_timer('load_game', 'load_game', 0.9)
-    love.timer.sleep(0.5)
-    boot_timer('load_game', 'load_game', 1.0)
+    self:init_window()
     self:splash_screen()
+end
+
+function App:init_window()
+    
 end
 
 function App:splash_screen()
@@ -88,7 +79,6 @@ function App:main_menu()
     self:prep_stage(self.STAGES.MAIN_MENU, self.STATES.MENU, true)
 end
 
-function App:init_window() end
 
 -- print("game load")
 -- -- function love.load()
