@@ -1,3 +1,4 @@
+---@class HomeView : IView
 HomeView = HomeView or {}
 HomeView.__index = HomeView
 function HomeView.new()

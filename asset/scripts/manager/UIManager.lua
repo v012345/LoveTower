@@ -2,6 +2,7 @@ UIManager = UIManager or {}
 ---@type IView[]
 UIManager.ViewStack = {}
 
+---@param view IView
 function UIManager:openView(view)
     local viewInstance = view.new()
     table.insert(UIManager.ViewStack, viewInstance)
