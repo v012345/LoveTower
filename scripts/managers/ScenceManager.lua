@@ -17,7 +17,8 @@ local function key(c, r)
     return c .. "," .. r
 end
 
-function Map:load()
+---@param mapId string 地图ID
+function Map:load(mapId)
     self.images = {
         ground = love.graphics.newImage("resource/image/terrain_1_cell_1.png"),
         path   = love.graphics.newImage("resource/image/terrain_1_cell_3.png"),

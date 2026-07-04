@@ -1,11 +1,11 @@
-local Map = require("scripts/map")
+local Map = require "scripts.managers.ScenceManager"
 local WaveManager = require "scripts.managers.EntitySpawner"
 
 ---@class Game
 local Game = {}
 
 function Game:load()
-    Map:load() -- 生成路
+    Map:load("map_1") -- 生成路
     self.path = Map:getPathPixels()
 
     self.enemies = {} -- 场上所有敌人
@@ -14,6 +14,9 @@ function Game:load()
     -- 波次管理器：每生成一只就塞进 enemies
     self.wave = WaveManager.new(self.path, function(enemy)
         self.enemies[#self.enemies + 1] = enemy
+    end)
+    InputManager:on(Game, "keypressed", "space", function()
+        self:startNextWave()
     end)
 end
 
@@ -40,11 +43,6 @@ function Game:update(dt)
     end
 end
 
-function Game:keypressed(key)
-    if key == "space" then
-        self:startNextWave()
-    end
-end
 
 function Game:draw()
     Map:draw()
