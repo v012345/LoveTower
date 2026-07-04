@@ -3,3 +3,4 @@
 ---@field update fun(self:IView, dt:number)
 ---@field draw fun(self:IView)
 ---@field isFullScreen fun(self:IView) -> boolean
+---@field destroy fun(self:IView)

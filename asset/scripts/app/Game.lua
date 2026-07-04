@@ -1,13 +1,14 @@
 function love.load() 
     print("game load")
+    -- UIManager:openView(HomeView)
 end
 
 function love.update(dt)
-    print("game update", dt)
+    -- UIManager:update(dt)
 end
 
 function love.draw()
-    print("game draw")
+    -- UIManager:draw()
 end
 
 
