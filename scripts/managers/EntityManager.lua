@@ -2,6 +2,8 @@ EntityManager = EntityManager or {}
 
 function EntityManager:load()
     self.enemies = {}
+    self.towers = {}  -- 所有塔
+    self.bullets = {} -- 所有子弹
 end
 
 function EntityManager:update(dt)

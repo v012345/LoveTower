@@ -16,7 +16,6 @@ local Game = {}
 function Game:load()
     ScenceManager:loadMap("map_1") -- 生成路
     EntitySpawner:loadConfig("config_1")
-    -- self.path = ScenceManager:getPathPixels()
 
     -- self.enemies = {}        -- 场上所有敌人
     -- self.towers = {}         -- 所有塔
