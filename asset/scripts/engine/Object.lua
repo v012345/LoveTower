@@ -1,9 +1,10 @@
 -- Copy from Balatro
 -- This Object implementation was taken from SNKRX (MIT license)
 
+---@class Object
 Object = {}
 Object.__index = Object
-function Object:init()
+function Object:init(...)
 end
 
 function Object:extend()
