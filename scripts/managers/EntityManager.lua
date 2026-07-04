@@ -1,3 +1,7 @@
+---@class EntityManager
+---@field enemies Enemy[]
+---@field towers Tower[]
+---@field bullets Bullet[]
 EntityManager = EntityManager or {}
 
 function EntityManager:load()
@@ -20,7 +24,7 @@ function EntityManager:update(dt)
     end
 
     for _, tower in ipairs(self.towers) do
-        tower:update(dt)
+        tower:update(dt, self.enemies)
     end
 
     for i = #self.bullets, 1, -1 do
