@@ -1,11 +1,11 @@
-local Map = {}
+ScenceManager = ScenceManager or {}
 
-Map.tileSize = 60
-Map.cols = 20
-Map.rows = 12
+ScenceManager.tileSize = 60
+ScenceManager.cols = 20
+ScenceManager.rows = 12
 
 -- 敌人行走路线：每个点是网格坐标 {列, 行}，相邻两点必须同行或同列（直角折线）
-Map.waypoints = {
+ScenceManager.waypoints = {
     { 0, 1 }, { 4, 1 }, { 4, 5 }, { 9, 5 }, { 9, 2 }, { 14, 2 }, { 14, 9 }, { 19, 9 },
 }
 
@@ -18,7 +18,7 @@ local function key(c, r)
 end
 
 ---@param mapId string 地图ID
-function Map:load(mapId)
+function ScenceManager:load(mapId)
     self.images = {
         ground = love.graphics.newImage("resource/image/terrain_1_cell_1.png"),
         path   = love.graphics.newImage("resource/image/terrain_1_cell_3.png"),
@@ -39,13 +39,13 @@ function Map:load(mapId)
 end
 
 -- 网格坐标 -> 该格中心的像素坐标
-function Map:cellCenter(c, r)
+function ScenceManager:cellCenter(c, r)
     local ts = self.tileSize
     return (c + 0.5) * ts, (r + 0.5) * ts
 end
 
 -- 给路径系统用：返回 waypoints 对应的像素坐标列表 ( cell 的中心点坐标 )
-function Map:getPathPixels()
+function ScenceManager:getPathPixels()
     local pts = {}
     for _, wp in ipairs(self.waypoints) do
         local x, y = self:cellCenter(wp[1], wp[2])
@@ -55,21 +55,21 @@ function Map:getPathPixels()
 end
 
 -- 判断某格是不是路（放塔时要用：路上不能放塔）
-function Map:isPath(c, r)
+function ScenceManager:isPath(c, r)
     return self.pathCells[key(c, r)] == true
 end
 
 -- 像素坐标 -> 网格坐标
-function Map:pixelToCell(px, py)
+function ScenceManager:pixelToCell(px, py)
     return math.floor(px / self.tileSize), math.floor(py / self.tileSize)
 end
 
 -- 网格坐标是否在地图范围内
-function Map:inBounds(c, r)
+function ScenceManager:inBounds(c, r)
     return c >= 0 and c < self.cols and r >= 0 and r < self.rows
 end
 
-function Map:draw()
+function ScenceManager:draw()
     local ts = self.tileSize
     love.graphics.setColor(1, 1, 1)
     for r = 0, self.rows - 1 do
@@ -93,7 +93,7 @@ function Map:draw()
 end
 
 -- 调试用：把路径折线和路径点画出来
-function Map:drawDebug()
+function ScenceManager:drawDebug()
     local pts = self:getPathPixels()
     love.graphics.setColor(0.3, 0.8, 1.0)
     for i = 1, #pts - 1 do
@@ -105,4 +105,4 @@ function Map:drawDebug()
     love.graphics.setColor(1, 1, 1)
 end
 
-return Map
+return ScenceManager

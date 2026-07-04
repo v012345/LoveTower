@@ -1,4 +1,4 @@
-InputManager = {}
+InputManager = InputManager or {}
 
 InputManager._event = {}
 

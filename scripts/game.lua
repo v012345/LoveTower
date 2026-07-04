@@ -1,4 +1,4 @@
-local Map = require "scripts.managers.ScenceManager"
+require "scripts.managers.ScenceManager"
 local WaveManager = require "scripts.managers.EntitySpawner"
 local Tower = require "scripts.tower"
 local Bullet = require "scripts.bullet"
@@ -13,8 +13,8 @@ local TOWER_DEF = { range = 150, damage = 25, fireRate = 1.5, color = { 0.4, 0.8
 local Game = {}
 
 function Game:load()
-    Map:load("map_1") -- 生成路
-    self.path = Map:getPathPixels()
+    ScenceManager:load("map_1") -- 生成路
+    self.path = ScenceManager:getPathPixels()
 
     self.enemies = {}          -- 场上所有敌人
     self.towers = {}           -- 所有塔
@@ -46,14 +46,14 @@ end
 
 -- 尝试在鼠标位置放塔
 function Game:tryPlaceTower(px, py)
-    local c, r = Map:pixelToCell(px, py)
-    if not Map:inBounds(c, r) then return end
-    if Map:isPath(c, r) then return end -- 路上不能放
+    local c, r = ScenceManager:pixelToCell(px, py)
+    if not ScenceManager:inBounds(c, r) then return end
+    if ScenceManager:isPath(c, r) then return end -- 路上不能放
     local cellKey = c .. "," .. r
     if self.towerCells[cellKey] then return end -- 已有塔
     if self.money < TOWER_COST then return end  -- 钱不够
 
-    local x, y = Map:cellCenter(c, r)
+    local x, y = ScenceManager:cellCenter(c, r)
     self.towers[#self.towers + 1] = Tower.new(x, y, TOWER_DEF)
     self.towerCells[cellKey] = true
     self.money = self.money - TOWER_COST
@@ -93,7 +93,7 @@ function Game:update(dt)
 end
 
 function Game:draw()
-    Map:draw()
+    ScenceManager:draw()
 
     for _, t in ipairs(self.towers) do t:draw() end
     for _, e in ipairs(self.enemies) do e:draw() end

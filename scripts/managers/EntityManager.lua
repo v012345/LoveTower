@@ -1,1 +1,1 @@
-EntityManager = {}
+EntityManager = EntityManager or {}
