@@ -1,4 +1,3 @@
-Global = {}
 -- 第一步, 创建临时目录
 print(love.filesystem.getSaveDirectory())
 if not love.filesystem.getInfo("temp", "directory") then
@@ -11,30 +10,21 @@ if not love.filesystem.getInfo("temp", "directory") then
 end
 
 local https = require("https")
-local cfg = require "asset.scripts.hotfix.Config"
-print(cfg.version)
--- love.filesystem.remove("asset")
-
 local url = "https://raw.githubusercontent.com/v012345/LoveTowerAsset/refs/heads/main/"
 local new_cfg_url = url .. "asset/scripts/hotfix/Config.lua"
 local status_code, body = https.request(new_cfg_url)
 if status_code == 200 then
-    -- loadstring 与 load 有版本问题, 这个不使用了, 使用 require 代替
-    if not love.filesystem.write("temp/Config.lua", body) then
-        print("write temp/Config.lua failed")
-        return
-    end
-    -- 读取新的配置文件
-    local new_cfg = require "temp.Config"
-    if new_cfg.version > cfg.version then
-        print("need update")
-        cfg = new_cfg
-        Global.need_update = true
-    else
-        print("no need update")
-    end
+    love.filesystem.write("temp/Config.lua", body)
+end
+local cfg = require "temp.Config"
+
+-- 如果temp/Config.lua不存在, 则使用asset.scripts.hotfix.Config.lua
+if not cfg then
+    cfg = require "asset.scripts.hotfix.Config"
 end
 
+-- 这里还有一个, 如果这里有一些用户自己的配置, 那么需要合并到temp/Config.lua中
+-- 目前先不管, 之后再说
 
 function love.conf(t)
     t.window.title = cfg.window.title
