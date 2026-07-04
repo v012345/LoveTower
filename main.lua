@@ -16,3 +16,7 @@ function love.draw() Game:draw() end
 function love.keypressed(key)
     InputManager:keypressed(key)
 end
+
+function love.mousepressed(x, y, button)
+    InputManager:mousepressed(x, y, button)
+end

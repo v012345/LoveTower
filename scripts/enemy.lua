@@ -1,4 +1,15 @@
 ---@class Enemy
+---@field path table 路径点像素列表
+---@field x number
+---@field y number
+---@field nextNode number 正在前往的路径点索引
+---@field speed number
+---@field maxHp number
+---@field hp number
+---@field radius number
+---@field color number[]
+---@field dead boolean 被打死
+---@field reachedEnd boolean 走到终点（漏怪）
 local Enemy = {}
 Enemy.__index = Enemy
 

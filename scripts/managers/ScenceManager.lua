@@ -54,9 +54,19 @@ function Map:getPathPixels()
     return pts
 end
 
--- 判断某格是不是路（以后放塔时要用：路上不能放塔）
+-- 判断某格是不是路（放塔时要用：路上不能放塔）
 function Map:isPath(c, r)
     return self.pathCells[key(c, r)] == true
+end
+
+-- 像素坐标 -> 网格坐标
+function Map:pixelToCell(px, py)
+    return math.floor(px / self.tileSize), math.floor(py / self.tileSize)
+end
+
+-- 网格坐标是否在地图范围内
+function Map:inBounds(c, r)
+    return c >= 0 and c < self.cols and r >= 0 and r < self.rows
 end
 
 function Map:draw()
