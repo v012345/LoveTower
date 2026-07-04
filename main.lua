@@ -3,7 +3,18 @@ local new_cfg = require "temp.Config"
 local old_cfg = require "asset.scripts.hotfix.Config"
 print("new_cfg.version:", new_cfg.version)
 print("old_cfg.version:", old_cfg.version)
-require "asset.scripts.hotfix.Hotfix"
+require "asset.scripts.engine.object"
+require "asset.scripts.functions.misc_functions"
+require "asset.scripts.main.app"
+function love.update(dt)
+    App.instance:update(dt)
+end
+
+function love.draw()
+    App.instance:draw()
+end
+
+-- require "asset.scripts.hotfix.Hotfix"
 -- conf.lua 中下载失败了 或 版本号小于旧的版本号, 这里也不做处理了, 直接进入游戏
 -- if new_cfg and new_cfg.version > old_cfg.version then
 --     -- 先下载 Hotfix.lua 文件

@@ -1,31 +1,49 @@
 -- 进到这里说明所有的资源都下载完了
 
-print("game load")
--- function love.load()
+
+---@class App:Object
+App = Object:extend()
+
+function App:init()
+    print("game load")
+end
+
+function App:update(dt) end
+
+function App:draw() end
+
+function App:start_up() end
+
+function App:init_window() end
+
+App.instance = App()
+
+-- print("game load")
+-- -- function love.load()
+-- -- UIManager:openView(HomeView)
+-- -- end
+-- require "asset.scripts.manager.UIManager"
+-- require "asset.scripts.view.HomeView"
 -- UIManager:openView(HomeView)
+-- App = App or {}
+-- App.needUpdate = {
+--     UIManager
+-- }
+-- App.needDraw = {
+--     UIManager
+-- }
+
+-- function App:update(dt)
+--     for _, system in ipairs(App.needUpdate) do
+--         system:update(dt)
+--     end
 -- end
-require "asset.scripts.manager.UIManager"
-require "asset.scripts.view.HomeView"
-UIManager:openView(HomeView)
-App = App or {}
-App.needUpdate = {
-    UIManager
-}
-App.needDraw = {
-    UIManager
-}
 
-function App:update(dt)
-    for _, system in ipairs(App.needUpdate) do
-        system:update(dt)
-    end
-end
-
-function App:draw()
-    for _, system in ipairs(App.needDraw) do
-        system:draw()
-    end
-end
+-- function App:draw()
+--     for _, system in ipairs(App.needDraw) do
+--         system:draw()
+--     end
+-- end
 
 -- require "scripts.managers.ScenceManager"
 -- require "scripts.entity.Tower"
