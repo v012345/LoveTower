@@ -2,6 +2,7 @@ require "scripts.managers.ScenceManager"
 local WaveManager = require "scripts.spawner.EntitySpawner"
 local Tower = require "scripts.tower"
 local Bullet = require "scripts.bullet"
+require "scripts.managers.EntityManager"
 
 -- 经济/塔的配置
 local START_MONEY = 150
@@ -14,6 +15,7 @@ local Game = {}
 
 function Game:load()
     ScenceManager:loadMap("map_1") -- 生成路
+    EntitySpawner:loadConfig("config_1")
     self.path = ScenceManager:getPathPixels()
 
     self.enemies = {}        -- 场上所有敌人
@@ -60,11 +62,9 @@ function Game:tryPlaceTower(px, py)
 end
 
 function Game:update(dt)
-    self.wave:update(dt)
+    EntitySpawner:update(dt)
+    EntityManager:update(dt)
 
-    for _, e in ipairs(self.enemies) do
-        e:update(dt)
-    end
 
     -- 塔锁敌开火（生成的子弹交回给 Game）
     for _, t in ipairs(self.towers) do
