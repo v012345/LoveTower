@@ -6,6 +6,16 @@ love = love or {}
 ---@class love.graphics
 love.graphics = love.graphics or {}
 
+---Copies and pushes the current coordinate transformation to the transformation stack.
+---This function is always used to prepare for a corresponding pop operation later. It stores the current coordinate transformation state into the transformation stack and keeps it active. Later changes to the transformation can be undone by using the pop operation, which returns the coordinate transform to the state it was in before calling push.
+---@return nil
+function love.graphics.push() end
+
+--- Pops the current coordinate transformation from the transformation stack.
+--- This function is always used to reverse a previous push operation. It returns the current transformation state to what it was before the last preceding push.--@return nil
+---@return nil
+function love.graphics.pop() end
+
 love.handlers = love.handlers or {}
 
 function love.quit() end

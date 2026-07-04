@@ -9,15 +9,18 @@ function App:init()
 end
 
 function App:update(dt)
-    print("game update", dt)
+    -- print("game update", dt)
 end
 
 function App:draw() end
 
-function App:start_up() end
+function App:start_up()
+    boot_timer('start', 'settings', 0.1)
+end
 
 function App:init_window() end
 
+---@type App
 App.instance = App()
 
 -- print("game load")
