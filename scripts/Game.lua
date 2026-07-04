@@ -64,7 +64,7 @@ function Game:draw()
 
     -- HUD
     love.graphics.setColor(1, 1, 1)
-    love.graphics.print((" 金币: %s ,FPS: %s"):format(self.money, love.timer.getFPS()), 10, 10)
+    love.graphics.print((" 生命: %s ,金币: %s ,FPS: %s"):format(self.lives, self.money, love.timer.getFPS()), 10, 10)
     -- love.graphics.print(
     --     ("生命: %d    金币: %d    波次: %d/%d    敌人: %d   FPS: %d"):format(
     --         self.lives, self.money, self.wave.waveIndex, self.wave:totalWaves(),

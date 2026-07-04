@@ -15,7 +15,7 @@ function EntityManager:update(dt)
         local e = self.enemies[i]
         e:update(dt)
         if e.reachedEnd then
-            self.lives = self.lives - 1
+            Game.lives = Game.lives - 1
             table.remove(self.enemies, i)
         elseif e.dead then
             Game.money = Game.money + Game.KILL_REWARD

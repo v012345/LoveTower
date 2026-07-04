@@ -45,7 +45,6 @@ end
 
 function EntitySpawner:update(dt)
     if not self.spawning then return end
-    print("spawner update")
 
     local wave = self.WAVES[self.waveIndex]
     self.timer = self.timer - dt
