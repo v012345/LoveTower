@@ -9,12 +9,15 @@ end
 
 function Object:extend()
     local cls = {}
+    -- 复制当前类的 __字段
     for k, v in pairs(self) do
         if k:find("__") == 1 then
             cls[k] = v
         end
     end
+    -- 重写当前类的 __index 字段
     cls.__index = cls
+    -- 设置当前类的父类
     cls.super = self
     setmetatable(cls, self)
     return cls
