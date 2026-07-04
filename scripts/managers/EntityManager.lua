@@ -7,14 +7,28 @@ function EntityManager:load()
 end
 
 function EntityManager:update(dt)
-    for _, enemy in ipairs(self.enemies) do
-        enemy:update(dt)
+    for i = #self.enemies, 1, -1 do
+        local e = self.enemies[i]
+        e:update(dt)
+        if e.reachedEnd then
+            self.lives = self.lives - 1
+            table.remove(self.enemies, i)
+        elseif e.dead then
+            Game.money = Game.money + Game.KILL_REWARD
+            table.remove(self.enemies, i)
+        end
     end
+
     for _, tower in ipairs(self.towers) do
         tower:update(dt)
     end
-    for _, bullet in ipairs(self.bullets) do
+
+    for i = #self.bullets, 1, -1 do
+        local bullet = self.bullets[i]
         bullet:update(dt)
+        if bullet.dead then
+            table.remove(self.bullets, i)
+        end
     end
 end
 

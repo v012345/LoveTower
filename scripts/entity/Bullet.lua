@@ -6,7 +6,7 @@
 ---@field speed number
 ---@field radius number
 ---@field dead boolean
-local Bullet = {}
+Bullet = Bullet or {}
 Bullet.__index = Bullet
 
 -- 追踪型子弹：锁定一个敌人一直飞过去

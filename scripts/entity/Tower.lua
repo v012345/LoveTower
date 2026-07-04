@@ -1,3 +1,5 @@
+require "scripts.entity.Bullet"
+
 ---@class Tower : IEntity
 ---@field x number
 ---@field y number
@@ -42,15 +44,15 @@ function Tower:findTarget(enemies)
     return best
 end
 
--- spawnBullet: function(x, y, target, damage) 由 Game 提供，用来生成子弹
-function Tower:update(dt, enemies, spawnBullet)
-    -- self.cooldown = self.cooldown - dt
-    -- self.target = self:findTarget(enemies)
 
-    -- if self.target and self.cooldown <= 0 then
-    --     self.cooldown = 1 / self.fireRate
-    --     spawnBullet(self.x, self.y, self.target, self.damage)
-    -- end
+function Tower:update(dt, enemies)
+    self.cooldown = self.cooldown - dt
+    self.target = self:findTarget(enemies)
+
+    if self.target and self.cooldown <= 0 then
+        self.cooldown = 1 / self.fireRate
+        EntityManager:addEntity(EntityFactory:create(Bullet, self.x, self.y, self.target, self.damage))
+    end
 end
 
 function Tower:draw()

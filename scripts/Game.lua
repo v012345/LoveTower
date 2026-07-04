@@ -6,14 +6,14 @@ require "scripts.managers.EntityManager"
 
 -- 经济/塔的配置
 local START_MONEY = 150
-local KILL_REWARD = 15
 local TOWER_COST = 50
 local TOWER_DEF = { range = 150, damage = 25, fireRate = 1.5, color = { 0.4, 0.8, 1.0 } }
 
 ---@class Game
-local Game = {}
+Game = Game or {}
 
 function Game:load()
+    Game.KILL_REWARD = 15
     ScenceManager:loadMap("map_1") -- 生成路
     EntitySpawner:loadConfig("config_1")
     -- self.towerCells = {}     -- 已被塔占用的格子（"c,r" -> true）
@@ -56,32 +56,6 @@ end
 function Game:update(dt)
     EntitySpawner:update(dt)
     EntityManager:update(dt)
-
-
-    -- -- 塔锁敌开火（生成的子弹交回给 Game）
-    -- for _, t in ipairs(self.towers) do
-    --     t:update(dt, self.enemies, function(x, y, target, damage)
-    --         self.bullets[#self.bullets + 1] = Bullet.new(x, y, target, damage)
-    --     end)
-    -- end
-
-    -- for i = #self.bullets, 1, -1 do
-    --     local b = self.bullets[i]
-    --     b:update(dt)
-    --     if b.dead then table.remove(self.bullets, i) end
-    -- end
-
-    -- -- 清理敌人：漏怪扣命 / 击杀给钱
-    -- for i = #self.enemies, 1, -1 do
-    --     local e = self.enemies[i]
-    --     if e.reachedEnd then
-    --         self.lives = self.lives - 1
-    --         table.remove(self.enemies, i)
-    --     elseif e.dead then
-    --         self.money = self.money + KILL_REWARD
-    --         table.remove(self.enemies, i)
-    --     end
-    -- end
 end
 
 function Game:draw()
