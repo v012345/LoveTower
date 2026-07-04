@@ -6,6 +6,8 @@ love = love or {}
 ---@class love.graphics
 love.graphics = love.graphics or {}
 
+
+
 ---@class love.filesystem
 love.filesystem = love.filesystem or {}
 
@@ -60,6 +62,11 @@ end
 ---@return Image
 function love.graphics.newImage(filename)
 end
+
+--- Displays the results of drawing operations on the screen.
+--- This function is used when writing your own love.run function. It presents all the results of your drawing operations on the screen. See the example in love.run for a typical use of this function.
+---@return nil
+function love.graphics.present() end
 
 ---@param filename string
 ---@param size     number
@@ -118,6 +125,11 @@ end
 ---@return number FPS
 function love.timer.getFPS() end
 
+--- Pauses the current thread for the specified amount of time.
+---@param time number
+---@return nil
+function love.timer.sleep(time) end
+
 ---@class love.mouse
 love.mouse = love.mouse or {}
 
@@ -152,6 +164,11 @@ function love.graphics.rectangle(mode, x, y, width, height) end
 ---@param align? string "left" | "center" | "right"
 function love.graphics.printf(text, x, y, limit, align) end
 
+--- Gets whether the graphics module is able to be used. If it is not active, love.graphics function and method calls will not work correctly and may cause the program to crash.
+--- The graphics module is inactive if a window is not open, or if the app is in the background on iOS. Typically the app's execution will be automatically paused by the system, in the latter case.
+---@return boolean isActive
+function love.graphics.isActive() end
+
 ---@class love.event
 love.event = love.event or {}
 
@@ -167,3 +184,12 @@ function love.timer.step() end
 --- Returns the precise amount of time since some time in the past.
 ---@return number time
 function love.timer.getTime() end
+
+---@class love.event
+love.event = {}
+
+--- Pump events into the event queue.
+--- This is a low-level function, and is usually not called by the user, but by `love.run`.
+--- Note that this does need to be called for any OS to think your program is still running, and if you want to handle OS-generated events at all (think callbacks).
+---@return nil
+function love.event.pump() end

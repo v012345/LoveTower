@@ -18,36 +18,31 @@ function love.run()
     return function()
         run_time = love.timer.getTime()
         -- Process events.
-        if love.event then
-            love.event.pump()
-            local _n, _a, _b, _c, _d, _e, _f, touched
-            for name, a, b, c, d, e, f in love.event.poll() do
-                if name == "quit" then
-                    if not love.quit or not love.quit() then
-                        return a or 0
-                    end
-                end
-                if name == 'touchpressed' then
-                    touched = true
-                elseif name == 'mousepressed' then
-                    _n, _a, _b, _c, _d, _e, _f = name, a, b, c, d, e, f
-                else
-                    love.handlers[name](a, b, c, d, e, f)
+
+        love.event.pump()
+        local _n, _a, _b, _c, _d, _e, _f, touched
+        for name, a, b, c, d, e, f in love.event.poll() do
+            if name == "quit" then
+                if not love.quit or not love.quit() then
+                    return a or 0
                 end
             end
-            if _n then
-                love.handlers.mousepressed(_a, _b, _c, touched)
+            if name == 'touchpressed' then
+                touched = true
+            elseif name == 'mousepressed' then
+                _n, _a, _b, _c, _d, _e, _f = name, a, b, c, d, e, f
+            else
+                love.handlers[name](a, b, c, d, e, f)
             end
         end
-
-        -- Update dt, as we'll be passing it to update
-        if love.timer then dt = love.timer.step() end
+        if _n then
+            love.handlers.mousepressed(_a, _b, _c, touched)
+        end
+        dt = love.timer.step()
         dt_smooth = math.min(0.8 * dt_smooth + 0.2 * dt, 0.1)
-        -- Call update and draw
-        if love.update then love.update(dt_smooth) end -- will pass 0 if love.timer is disabled
-
-        if love.graphics and love.graphics.isActive() then
-            if love.draw then love.draw() end
+        love.update(dt_smooth)
+        if love.graphics.isActive() then
+            love.draw()
             love.graphics.present()
         end
 
