@@ -3,6 +3,7 @@ local Game = require "scripts.game"
 require "scripts.managers.InputManager"
 require "scripts.managers.ScenceManager"
 require "scripts.spawner.EntitySpawner"
+require "scripts.managers.EntityManager"
 
 function love.load()
     love.graphics.setBackgroundColor(0.1, 0.1, 0.12)
@@ -10,6 +11,7 @@ function love.load()
     love.graphics.setFont(font)
     ScenceManager:load()
     EntitySpawner:load()
+    EntityManager:load()
     Game:load()
 end
 

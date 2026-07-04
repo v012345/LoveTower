@@ -15,7 +15,7 @@ local Game = {}
 
 function Game:load()
     ScenceManager:loadMap("map_1") -- 生成路
-    -- EntitySpawner:loadConfig("config_1")
+    EntitySpawner:loadConfig("config_1")
     -- self.path = ScenceManager:getPathPixels()
 
     -- self.enemies = {}        -- 场上所有敌人
@@ -27,9 +27,9 @@ function Game:load()
 
 
 
-    -- InputManager:on(Game, "keypressed", "space", function()
-    --     self:startNextWave()
-    -- end)
+    InputManager:on(Game, "keypressed", "space", function()
+        self:startNextWave()
+    end)
     -- -- 左键放塔
     -- InputManager:on(Game, "mousepressed", 1, function(_, x, y)
     --     self:tryPlaceTower(x, y)
@@ -38,9 +38,9 @@ end
 
 -- 开下一波：要求场上清空 且 还有波次
 function Game:startNextWave()
-    -- if #self.enemies == 0 and self.wave:canStart() then
-    --     self.wave:start()
-    -- end
+    if EntityManager:getEnemyCount() == 0 and EntitySpawner:canStart() then
+        EntitySpawner:start()
+    end
 end
 
 -- 尝试在鼠标位置放塔
@@ -59,7 +59,7 @@ function Game:tryPlaceTower(px, py)
 end
 
 function Game:update(dt)
-    -- EntitySpawner:update(dt)
+    EntitySpawner:update(dt)
     -- EntityManager:update(dt)
 
 

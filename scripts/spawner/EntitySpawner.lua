@@ -38,7 +38,9 @@ end
 
 -- 是否允许开下一波（没在出怪 且 还有波次）
 function EntitySpawner:canStart()
-    return not self.spawning and self.waveIndex < #self.WAVES
+    -- return not self.spawning 
+    -- and self.waveIndex < #self.WAVES
+    return true
 end
 
 function EntitySpawner:allWavesDone()
