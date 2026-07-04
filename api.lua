@@ -9,6 +9,19 @@ love.graphics = love.graphics or {}
 ---@class love.filesystem
 love.filesystem = love.filesystem or {}
 
+---@param path string
+---@param data string
+---@return boolean success
+function love.filesystem.write(path, data) end
+
+---@param path string
+---@return boolean isDirectory
+function love.filesystem.isDirectory(path) end
+
+---@param path string
+---@return boolean success
+function love.filesystem.createDirectory(path) end
+
 ---@return string path
 function love.filesystem.getSaveDirectory() end
 
