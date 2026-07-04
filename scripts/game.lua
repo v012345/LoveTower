@@ -1,5 +1,5 @@
 local Map = require("scripts/map")
-local WaveManager = require("scripts/wave")
+local WaveManager = require "scripts.managers.EntitySpawner"
 
 ---@class Game
 local Game = {}
