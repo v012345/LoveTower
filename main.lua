@@ -1,39 +1,16 @@
+local hotfix = require "asset.scripts.hotfix.Hotfix"
+local t = 0
 
+function love.load()
+    hotfix:load()
+end
 
--- local hotfix = require("hotfix")
--- print(love.filesystem.getSaveDirectory())
--- love.filesystem.write("mod/test.lua", "print('hello mod')")
--- local data = love.filesystem.read("mod/test.lua")
--- print(data)
--- function love.load()
-    -- print("love.load")
-    -- print(https)
-    -- code, body = https.request( "https://raw.githubusercontent.com/v012345/NightOwlToolsV2/refs/heads/main/README.md" )
-    -- print(code, body)
-    -- local url = ""
+function love.update(dt)
+    hotfix:update(dt)
+    t = t + dt * 0.1
+    hotfix:setProgress(t)
+end
 
-    -- local body, statusCode, headers, statusText = http.request(url)
-
-    -- if statusCode == 200 then
-    --     love.filesystem.write("file.txt", body)
-    --     print("File downloaded successfully.")
-    -- else
-    --     print("Failed to download: " .. tostring(statusCode))
-    -- end
--- end
-
--- function love.update(dt)
---     Game:update(dt)
--- end
-
--- function love.draw()
---     Game:draw()
--- end
-
--- function love.keypressed(key)
---     InputManager:keypressed(key)
--- end
-
--- function love.mousepressed(x, y, button)
---     InputManager:mousepressed(x, y, button)
--- end
+function love.draw()
+    hotfix:draw()
+end
