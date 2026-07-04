@@ -9,8 +9,7 @@ Image = {}
 
 ---@return number? width
 ---@return number? height
-function Image:getDimensions()
-end
+function Image:getDimensions() end
 
 ---@return number? width
 function Image:getWidth()
