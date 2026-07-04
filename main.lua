@@ -1,3 +1,10 @@
+package.cpath = package.cpath
+    .. ";c:/Users/NightOwl/.vscode/extensions/tangzx.emmylua-0.9.39-win32-x64/debugger/emmy/windows/x64/?.dll"
+local dbg = require("emmy_core")
+-- print("EmmyLua Debugger: game listens on 9966, press F5 in VS Code to attach", dbg)
+dbg.tcpListen("localhost", 9965)
+-- dbg.tcpListen('localhost', 9966)
+
 local https = require "https"
 local new_cfg = require "temp.Config"
 local old_cfg = require "asset.scripts.hotfix.Config"
@@ -15,7 +22,7 @@ function love.run()
     local dt_smooth = 1 / 100
     local run_time = 0
     -- Main loop time.
-    return function()
+    return function ()
         run_time = love.timer.getTime()
         -- Process events.
 
