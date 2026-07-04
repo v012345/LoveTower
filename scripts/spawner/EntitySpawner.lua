@@ -49,10 +49,10 @@ end
 
 function EntitySpawner:start()
     if not self:canStart() then return end
-    self.waveIndex = self.waveIndex + 1
-    self.spawnedCount = 0
-    self.timer = 0 -- 立刻出第一只
-    self.spawning = true
+    -- self.waveIndex = self.waveIndex + 1
+    -- self.spawnedCount = 0
+    -- self.timer = 0 -- 立刻出第一只
+    -- self.spawning = true
 end
 
 function EntitySpawner:update(dt)
