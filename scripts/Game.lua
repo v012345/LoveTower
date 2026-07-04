@@ -16,8 +16,7 @@ function Game:load()
     Game.KILL_REWARD = 15
     ScenceManager:loadMap("map_1") -- 生成路
     EntitySpawner:loadConfig("config_1")
-    -- self.towerCells = {}     -- 已被塔占用的格子（"c,r" -> true）
-    -- self.lives = 20          -- 漏一只 -1
+    self.lives = 20          -- 漏一只 -1
     self.money = START_MONEY -- 金币
 
 
