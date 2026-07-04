@@ -5,7 +5,6 @@
 ---@field waypoints table
 ---@field pathCells table<string, boolean>
 ---@field images table<string, Image>
----@field loadMap fun(self:ScenceManager, mapId:string)
 ---@field draw fun(self:ScenceManager)
 ScenceManager = ScenceManager or {}
 

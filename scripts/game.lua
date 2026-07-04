@@ -90,7 +90,8 @@ function Game:update(dt)
 end
 
 function Game:draw()
-    -- ScenceManager:draw()
+    ScenceManager:draw()
+    ScenceManager:drawDebug()
 
     -- for _, t in ipairs(self.towers) do t:draw() end
     -- for _, e in ipairs(self.enemies) do e:draw() end
