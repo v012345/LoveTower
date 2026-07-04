@@ -3,8 +3,9 @@ UIManager = UIManager or {}
 UIManager.ViewStack = {}
 
 function UIManager:openView(view)
-    table.insert(UIManager.ViewStack, view)
-    view:load()
+    local viewInstance = view.new()
+    table.insert(UIManager.ViewStack, viewInstance)
+    viewInstance:load()
 end
 
 function UIManager:closeView()

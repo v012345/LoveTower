@@ -1,25 +1,29 @@
-function love.load() 
-    print("game load")
-    -- UIManager:openView(HomeView)
+print("game load")
+-- function love.load()
+-- UIManager:openView(HomeView)
+-- end
+require "asset.scripts.manager.UIManager"
+require "asset.scripts.view.HomeView"
+UIManager:openView(HomeView)
+Game = Game or {}
+Game.needUpdate = {
+    UIManager
+}
+Game.needDraw = {
+    UIManager
+}
+
+function Game:update(dt)
+    for _, system in ipairs(Game.needUpdate) do
+        system:update(dt)
+    end
 end
 
-function love.update(dt)
-    -- UIManager:update(dt)
+function Game:draw()
+    for _, system in ipairs(Game.needDraw) do
+        system:draw()
+    end
 end
-
-function love.draw()
-    -- UIManager:draw()
-end
-
-
-
-
-
-
-
-
-
-
 
 -- require "scripts.managers.ScenceManager"
 -- require "scripts.entity.Tower"
@@ -164,4 +168,17 @@ end
 --     love.graphics.printf(subtitle, 0, h / 2 + 20, w, "center")
 -- end
 
--- return Game
+--
+
+
+---@diagnostic disable-next-line: duplicate-set-field
+function love.update(dt)
+    Game:update(dt)
+end
+
+---@diagnostic disable-next-line: duplicate-set-field
+function love.draw()
+    Game:draw()
+end
+
+return Game
