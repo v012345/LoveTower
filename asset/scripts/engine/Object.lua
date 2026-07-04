@@ -4,8 +4,7 @@
 ---@class Object
 Object = {}
 Object.__index = Object
-function Object:init(...)
-end
+function Object:init(...) end
 
 function Object:extend()
     local cls = {}
