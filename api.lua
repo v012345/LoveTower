@@ -10,6 +10,15 @@ love.graphics = love.graphics or {}
 love.filesystem = love.filesystem or {}
 
 ---@param path string
+---@return boolean success
+function love.filesystem.remove(path) end
+
+---@param path string
+---@param type? "file" | "directory"
+---@return table|nil info
+function love.filesystem.getInfo(path, type) end
+
+---@param path string
 ---@param data string
 ---@return boolean success
 function love.filesystem.write(path, data) end
