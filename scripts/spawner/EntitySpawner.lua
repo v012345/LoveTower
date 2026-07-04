@@ -52,23 +52,24 @@ function EntitySpawner:start()
     -- self.waveIndex = self.waveIndex + 1
     -- self.spawnedCount = 0
     -- self.timer = 0 -- 立刻出第一只
-    -- self.spawning = true
+    self.spawning = true
 end
 
 function EntitySpawner:update(dt)
     if not self.spawning then return end
+    print("spawner update")
 
-    local wave = self.WAVES[self.waveIndex]
-    self.timer = self.timer - dt
-    if self.timer <= 0 then
-        self.timer = wave.interval
-        self.spawnedCount = self.spawnedCount + 1
-        EntityManager:addEntity(EntityFactory:create(Enemy))
+    -- local wave = self.WAVES[self.waveIndex]
+    -- self.timer = self.timer - dt
+    -- if self.timer <= 0 then
+    --     self.timer = wave.interval
+    --     self.spawnedCount = self.spawnedCount + 1
+    --     EntityManager:addEntity(EntityFactory:create(Enemy))
 
-        if self.spawnedCount >= wave.count then
-            self.spawning = false -- 本波出完
-        end
-    end
+    --     if self.spawnedCount >= wave.count then
+    --         self.spawning = false -- 本波出完
+    --     end
+    -- end
 end
 
 return EntitySpawner
