@@ -72,8 +72,7 @@ local time = 0
 -- 更新进度
 
 print("hotfix load")
--- function love.load()
--- end
+
 
 function love.update(dt)
     time = time + dt
