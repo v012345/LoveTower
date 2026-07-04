@@ -1,4 +1,5 @@
 -- 第一步, 创建临时目录
+print(love.filesystem.getSaveDirectory())
 if not love.filesystem.getInfo("temp", "directory") then
     if love.filesystem.getInfo("temp") then
         love.filesystem.remove("temp")
@@ -12,6 +13,7 @@ end
 local url = "https://raw.githubusercontent.com/v012345/LoveTowerAsset/refs/heads/main/"
 -- love.filesystem.remove("asset")
 local cfg = require "asset.scripts.hotfix.Config"
+print(cfg.version)
 local https = require("https")
 local new_cfg_url = url .. "asset/scripts/hotfix/Config.lua"
 local status_code, body = https.request(new_cfg_url)
@@ -26,6 +28,8 @@ if status_code == 200 then
     if new_cfg.version > cfg.version then
         print("need update")
         cfg = new_cfg
+    else
+        print("no need update")
     end
 end
 

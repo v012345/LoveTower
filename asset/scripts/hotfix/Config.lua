@@ -1,5 +1,5 @@
 return {
-    version = 2,
+    version = 1,
     window = {
         title = "LoveTower",
         width = 1200,
