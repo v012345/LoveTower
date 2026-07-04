@@ -36,6 +36,11 @@ function ScenceManager:setTowerCell(cellKey, value)
     self.towerCells[cellKey] = value
 end
 
+-- 重开时清空所有塔占用的格子
+function ScenceManager:clearTowers()
+    self.towerCells = {}
+end
+
 ---@param mapId string 地图ID
 function ScenceManager:loadMap(mapId)
     self.images = {

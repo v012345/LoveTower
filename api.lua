@@ -82,8 +82,8 @@ end
 function love.graphics.setBackgroundColor(r, g, b, a)
 end
 
----@return number? width
----@return number? height
+---@return number width
+---@return number height
 function love.graphics.getDimensions()
 end
 
@@ -109,6 +109,13 @@ function love.graphics.circle(mode, x, y, radius) end
 ---@param width  number
 ---@param height number
 function love.graphics.rectangle(mode, x, y, width, height) end
+
+---@param text   string
+---@param x      number
+---@param y      number
+---@param limit  number 换行宽度
+---@param align? string "left" | "center" | "right"
+function love.graphics.printf(text, x, y, limit, align) end
 
 ---@class love.event
 love.event = love.event or {}
