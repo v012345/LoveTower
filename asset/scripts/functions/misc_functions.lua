@@ -22,6 +22,12 @@ function HEX(hex)
     return color
 end
 
+function add_to_drawhash(obj)
+    if obj then
+        App.instance.DRAW_HASH[#App.instance.DRAW_HASH + 1] = obj
+    end
+end
+
 function copy_table(O)
     local O_type = type(O)
     local copy

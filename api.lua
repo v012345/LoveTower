@@ -222,3 +222,16 @@ love.system = love.system or {}
 
 ---@return string os
 function love.system.getOS() end
+
+function love.graphics.newCanvas(width, height, options) end
+
+---@param canvas Canvas
+---@return nil
+function love.graphics.setCanvas(canvas) end
+
+---@class Canvas
+Canvas = {}
+---@param filter string "nearest" | "linear"
+---@param filtermag string "nearest" | "linear"
+---@return nil
+function Canvas:setFilter(filter, filtermag) end

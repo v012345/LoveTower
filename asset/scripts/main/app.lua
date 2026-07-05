@@ -2,6 +2,7 @@
 
 
 ---@class App:Object
+---@field CANVAS Canvas
 App = Object:extend()
 
 function App:init()
@@ -565,6 +566,21 @@ function App:draw()
     self.FRAMES.DRAW = self.FRAMES.DRAW + 1
     self.DRAW_HASH = EMPTY(self.DRAW_HASH)
     if self.OVERLAY_TUTORIAL and not self.OVERLAY_MENU then self.under_overlay = true end
+    love.graphics.setCanvas({ self.CANVAS })
+    love.graphics.push()
+    love.graphics.scale(self.CANV_SCALE)
+    love.graphics.setShader()
+    love.graphics.clear(0, 0, 0, 1)
+    love.graphics.pop()
+    for k, v in pairs(self.I.NODE) do
+        if not v.parent then
+            love.graphics.push()
+            v:translate_container()
+            v:draw()
+            love.graphics.pop()
+        end
+    end
+    love.graphics.setCanvas()
 end
 
 function App:start_up()
@@ -848,7 +864,7 @@ function App:generate_id()
     return self.ID
 end
 
----@type App
+---@class App
 App.instance = App()
 
 return App
