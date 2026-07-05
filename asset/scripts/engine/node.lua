@@ -1,4 +1,4 @@
----@class Node
+---@class Node: Object
 Node = Object:extend()
 
 ---Node represent any game object that needs to have some transform available in the game itself.\
@@ -82,4 +82,13 @@ function Node:init(args)
     -- if not G.STAGE_OBJECT_INTERRUPT then
     --     table.insert(G.STAGE_OBJECTS[G.STAGE], self)
     -- end
+end
+
+function Node:set_container(container)
+    if self.children then
+        for _, v in pairs(self.children) do
+            v:set_container(container)
+        end
+    end
+    self.container = container
 end
