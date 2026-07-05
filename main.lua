@@ -10,6 +10,7 @@ local new_cfg = require "temp.Config"
 local old_cfg = require "asset.scripts.hotfix.Config"
 print("new_cfg.version:", new_cfg.version)
 print("old_cfg.version:", old_cfg.version)
+require "asset.scripts.Enum"
 require "bit"
 require "asset.scripts.engine.object"
 require "asset.scripts.engine.controller"
