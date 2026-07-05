@@ -101,12 +101,11 @@ function Node:draw()
     end
 end
 
---Determines if this node collides with some point. Applies any container translations and rotations, then\
---applies translations and rotations specific to this node. This means the collision detection effectively\
---determines if some point intersects this node regargless of rotation.
---
+---Determines if this node collides with some point. Applies any container translations and rotations, then\
+---applies translations and rotations specific to this node. This means the collision detection effectively\
+---determines if some point intersects this node regargless of rotation.
+---**x and y** The coordinates of the cursor transformed into game units
 ---@param point {x: number, y: number}
---**x and y** The coordinates of the cursor transformed into game units
 function Node:collides_with_point(point)
     --First reset the collision state to false
     if self.container then
