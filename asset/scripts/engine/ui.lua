@@ -117,6 +117,7 @@ function UIBox:get_UIE_by_ID(id, node)
 end
 
 function UIBox:calculate_xywh(node, _T, recalculate, _scale)
+    do return end
     node.ARGS.xywh_node_trans = node.ARGS.xywh_node_trans or {}
     local _nt = node.ARGS.xywh_node_trans
     local _ct = {}
