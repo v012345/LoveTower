@@ -88,39 +88,6 @@ end
 --Draw a bounding rectangle representing the transform of this node. Used in debugging.
 function Node:draw_boundingrect()
     self.under_overlay = App.instance.under_overlay
-
-    if App.instance.DEBUG then
-        local transform = self.VT or self.T
-        love.graphics.push()
-        love.graphics.scale(App.instance.TILESCALE, App.instance.TILESCALE)
-        love.graphics.translate(transform.x * App.instance.TILESIZE + transform.w * App.instance.TILESIZE * 0.5,
-            transform.y * App.instance.TILESIZE + transform.h * App.instance.TILESIZE * 0.5)
-        love.graphics.rotate(transform.r)
-        love.graphics.translate(-transform.w * App.instance.TILESIZE * 0.5,
-            -transform.h * App.instance.TILESIZE * 0.5)
-        if self.DEBUG_VALUE then
-            love.graphics.setColor(1, 1, 0, 1)
-            love.graphics.print((self.DEBUG_VALUE or ''), transform.w * App.instance.TILESIZE,
-                transform.h * App.instance.TILESIZE, nil,
-                1 / App.instance.TILESCALE)
-        end
-        love.graphics.setLineWidth(1 + (self.states.focus.is and 1 or 0))
-        if self.states.collide.is then
-            love.graphics.setColor(0, 1, 0, 0.3)
-        else
-            love.graphics.setColor(1, 0, 0, 0.3)
-        end
-        if self.states.focus.can then
-            love.graphics.setColor(App.instance.C.GOLD)
-            love.graphics.setLineWidth(1)
-        end
-        if self.CALCING then
-            love.graphics.setColor({ 0, 0, 1, 1 })
-            love.graphics.setLineWidth(3)
-        end
-        love.graphics.rectangle('line', 0, 0, transform.w * App.instance.TILESIZE, transform.h * App.instance.TILESIZE, 3)
-        love.graphics.pop()
-    end
 end
 
 --Draws self, then adds self the the draw hash, then draws all children
