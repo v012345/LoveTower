@@ -1,1 +1,1 @@
-require "asset.scripts.Enum.UI"
+require "asset.scripts.enum.ui"
