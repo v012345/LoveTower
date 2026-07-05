@@ -434,7 +434,7 @@ function UIElement:set_values(_T, recalculate)
 
     if self.UIT == G.UIT.O and not self.config.no_role then
         self.config.object:set_role(self.config.role or
-        { role_type = 'Minor', major = self, xy_bond = 'Strong', wh_bond = 'Weak', scale_bond = 'Weak' })
+            { role_type = 'Minor', major = self, xy_bond = 'Strong', wh_bond = 'Weak', scale_bond = 'Weak' })
     end
 
     if self.config and self.config.ref_value and self.config.ref_table then
@@ -504,7 +504,8 @@ function UIElement:set_values(_T, recalculate)
     self.layered_parallax = self.layered_parallax or { x = 0, y = 0 }
 
     if self.config and self.config.func and (((self.config.button_UIE or self.config.button) and self.config.func ~= 'set_button_pip') or self.config.insta_func) then
-        G.FUNCS[self.config.func](self) end
+        G.FUNCS[self.config.func](self)
+    end
 end
 
 function UIElement:print_topology(indent)
@@ -513,7 +514,7 @@ function UIElement:print_topology(indent)
         if v == self.UIT then UIT = '' .. k end
     end
     local box_str = '\n' .. (string.rep("  ", indent)) ..
-    '| ' .. UIT .. ' | - ID:' .. self.ID .. ' w/h:' .. self.T.w .. '/' .. self.T.h
+        '| ' .. UIT .. ' | - ID:' .. self.ID .. ' w/h:' .. self.T.w .. '/' .. self.T.h
     if UIT == 'O' then
         box_str = box_str .. ' OBJ:' .. (
             getmetatable(self.config.object) == CardArea and 'CardArea' or
@@ -669,7 +670,8 @@ function UIElement:update_text()
         self.config.text = tostring(self.config.ref_table[self.config.ref_value])
         self.config.text_drawable:set(self.config.text)
         if not self.config.no_recalc and self.config.prev_value and string.len(self.config.prev_value) ~= string.len(self.config.text) then
-            self.UIBox:recalculate() end
+            self.UIBox:recalculate()
+        end
         self.config.prev_value = self.config.ref_table[self.config.ref_value]
     end
 end
@@ -708,6 +710,7 @@ function UIElement:update_object()
 end
 
 function UIElement:draw_self()
+    print('draw_self')
     if not self.states.visible then
         if self.config.force_focus then add_to_drawhash(self) end
         return
@@ -721,142 +724,142 @@ function UIElement:draw_self()
     local parallax_dist = 1.5
     local button_being_pressed = false
 
-    if (self.config.button or self.config.button_UIE) then
-        self.layered_parallax.x = ((self.parent and self.parent ~= self.UIBox and self.parent.layered_parallax.x or 0) + (self.config.shadow and 0.4 * self.shadow_parrallax.x or 0) / G.TILESIZE)
-        self.layered_parallax.y = ((self.parent and self.parent ~= self.UIBox and self.parent.layered_parallax.y or 0) + (self.config.shadow and 0.4 * self.shadow_parrallax.y or 0) / G.TILESIZE)
+    -- if (self.config.button or self.config.button_UIE) then
+    --     self.layered_parallax.x = ((self.parent and self.parent ~= self.UIBox and self.parent.layered_parallax.x or 0) + (self.config.shadow and 0.4 * self.shadow_parrallax.x or 0) / G.TILESIZE)
+    --     self.layered_parallax.y = ((self.parent and self.parent ~= self.UIBox and self.parent.layered_parallax.y or 0) + (self.config.shadow and 0.4 * self.shadow_parrallax.y or 0) / G.TILESIZE)
 
-        if self.config.button and ((self.last_clicked and self.last_clicked > G.TIMERS.REAL - 0.1) or ((self.config.button and (self.states.hover.is or self.states.drag.is))
-                and G.CONTROLLER.is_cursor_down)) then
-            self.layered_parallax.x = self.layered_parallax.x -
-            parallax_dist * self.shadow_parrallax.x / G.TILESIZE * (self.config.button_dist or 1)
-            self.layered_parallax.y = self.layered_parallax.y -
-            parallax_dist * self.shadow_parrallax.y / G.TILESIZE * (self.config.button_dist or 1)
-            parallax_dist = 0
-            button_being_pressed = true
-        end
+    --     if self.config.button and ((self.last_clicked and self.last_clicked > G.TIMERS.REAL - 0.1) or ((self.config.button and (self.states.hover.is or self.states.drag.is))
+    --             and G.CONTROLLER.is_cursor_down)) then
+    --         self.layered_parallax.x = self.layered_parallax.x -
+    --             parallax_dist * self.shadow_parrallax.x / G.TILESIZE * (self.config.button_dist or 1)
+    --         self.layered_parallax.y = self.layered_parallax.y -
+    --             parallax_dist * self.shadow_parrallax.y / G.TILESIZE * (self.config.button_dist or 1)
+    --         parallax_dist = 0
+    --         button_being_pressed = true
+    --     end
 
-        if self.config.button_UIE and not self.config.button_UIE.config.button then button_active = false end
-    end
-    if self.config.colour[4] > 0.01 then
-        if self.UIT == G.UIT.T and self.config.scale then
-            self.ARGS.text_parallax = self.ARGS.text_parallax or {}
-            self.ARGS.text_parallax.sx = -self.shadow_parrallax.x * 0.5 /
-            (self.config.scale * self.config.lang.font.FONTSCALE)
-            self.ARGS.text_parallax.sy = -self.shadow_parrallax.y * 0.5 /
-            (self.config.scale * self.config.lang.font.FONTSCALE)
+    --     if self.config.button_UIE and not self.config.button_UIE.config.button then button_active = false end
+    -- end
+    -- if self.config.colour[4] > 0.01 then
+    --     if self.UIT == G.UIT.T and self.config.scale then
+    --         self.ARGS.text_parallax = self.ARGS.text_parallax or {}
+    --         self.ARGS.text_parallax.sx = -self.shadow_parrallax.x * 0.5 /
+    --         (self.config.scale * self.config.lang.font.FONTSCALE)
+    --         self.ARGS.text_parallax.sy = -self.shadow_parrallax.y * 0.5 /
+    --         (self.config.scale * self.config.lang.font.FONTSCALE)
 
-            if (self.config.button_UIE and button_active) or (not self.config.button_UIE and self.config.shadow and G.SETTINGS.GRAPHICS.shadows == 'On') then
-                prep_draw(self, 0.97)
-                if self.config.vert then
-                    love.graphics.translate(0, self.VT.h); love.graphics.rotate(-math.pi / 2)
-                end
-                if (self.config.shadow or (self.config.button_UIE and button_active)) and G.SETTINGS.GRAPHICS.shadows == 'On' then
-                    love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour[4])
-                    love.graphics.draw(
-                        self.config.text_drawable,
-                        (self.config.lang.font.TEXT_OFFSET.x + (self.config.vert and -self.ARGS.text_parallax.sy or self.ARGS.text_parallax.sx)) *
-                        (self.config.scale or 1) * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                        (self.config.lang.font.TEXT_OFFSET.y + (self.config.vert and self.ARGS.text_parallax.sx or self.ARGS.text_parallax.sy)) *
-                        (self.config.scale or 1) * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                        0,
-                        (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / G
-                        .TILESIZE,
-                        (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE
-                    )
-                end
-                love.graphics.pop()
-            end
+    --         if (self.config.button_UIE and button_active) or (not self.config.button_UIE and self.config.shadow and G.SETTINGS.GRAPHICS.shadows == 'On') then
+    --             prep_draw(self, 0.97)
+    --             if self.config.vert then
+    --                 love.graphics.translate(0, self.VT.h); love.graphics.rotate(-math.pi / 2)
+    --             end
+    --             if (self.config.shadow or (self.config.button_UIE and button_active)) and G.SETTINGS.GRAPHICS.shadows == 'On' then
+    --                 love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour[4])
+    --                 love.graphics.draw(
+    --                     self.config.text_drawable,
+    --                     (self.config.lang.font.TEXT_OFFSET.x + (self.config.vert and -self.ARGS.text_parallax.sy or self.ARGS.text_parallax.sx)) *
+    --                     (self.config.scale or 1) * self.config.lang.font.FONTSCALE / G.TILESIZE,
+    --                     (self.config.lang.font.TEXT_OFFSET.y + (self.config.vert and self.ARGS.text_parallax.sx or self.ARGS.text_parallax.sy)) *
+    --                     (self.config.scale or 1) * self.config.lang.font.FONTSCALE / G.TILESIZE,
+    --                     0,
+    --                     (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / G
+    --                     .TILESIZE,
+    --                     (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE
+    --                 )
+    --             end
+    --             love.graphics.pop()
+    --         end
 
-            prep_draw(self, 1)
-            if self.config.vert then
-                love.graphics.translate(0, self.VT.h); love.graphics.rotate(-math.pi / 2)
-            end
-            if not button_active then
-                love.graphics.setColor(G.C.UI.TEXT_INACTIVE)
-            else
-                love.graphics.setColor(self.config.colour)
-            end
-            love.graphics.draw(
-                self.config.text_drawable,
-                self.config.lang.font.TEXT_OFFSET.x * (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                self.config.lang.font.TEXT_OFFSET.y * (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                0,
-                (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE
-            )
-            love.graphics.pop()
-        elseif self.UIT == G.UIT.B or self.UIT == G.UIT.C or self.UIT == G.UIT.R or self.UIT == G.UIT.ROOT then
-            prep_draw(self, 1)
-            love.graphics.scale(1 / (G.TILESIZE))
-            if self.config.shadow and G.SETTINGS.GRAPHICS.shadows == 'On' then
-                love.graphics.scale(0.98)
-                if self.config.shadow_colour then
-                    love.graphics.setColor(self.config.shadow_colour)
-                else
-                    love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour[4])
-                end
-                if self.config.r and self.VT.w > 0.01 then
-                    self:draw_pixellated_rect('shadow', parallax_dist)
-                else
-                    love.graphics.rectangle('fill', -self.shadow_parrallax.x * parallax_dist,
-                        -self.shadow_parrallax.y * parallax_dist, self.VT.w * G.TILESIZE, self.VT.h * G.TILESIZE)
-                end
-                love.graphics.scale(1 / 0.98)
-            end
+    --         prep_draw(self, 1)
+    --         if self.config.vert then
+    --             love.graphics.translate(0, self.VT.h); love.graphics.rotate(-math.pi / 2)
+    --         end
+    --         if not button_active then
+    --             love.graphics.setColor(G.C.UI.TEXT_INACTIVE)
+    --         else
+    --             love.graphics.setColor(self.config.colour)
+    --         end
+    --         love.graphics.draw(
+    --             self.config.text_drawable,
+    --             self.config.lang.font.TEXT_OFFSET.x * (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE,
+    --             self.config.lang.font.TEXT_OFFSET.y * (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE,
+    --             0,
+    --             (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / G.TILESIZE,
+    --             (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE
+    --         )
+    --         love.graphics.pop()
+    --     elseif self.UIT == G.UIT.B or self.UIT == G.UIT.C or self.UIT == G.UIT.R or self.UIT == G.UIT.ROOT then
+    --         prep_draw(self, 1)
+    --         love.graphics.scale(1 / (G.TILESIZE))
+    --         if self.config.shadow and G.SETTINGS.GRAPHICS.shadows == 'On' then
+    --             love.graphics.scale(0.98)
+    --             if self.config.shadow_colour then
+    --                 love.graphics.setColor(self.config.shadow_colour)
+    --             else
+    --                 love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour[4])
+    --             end
+    --             if self.config.r and self.VT.w > 0.01 then
+    --                 self:draw_pixellated_rect('shadow', parallax_dist)
+    --             else
+    --                 love.graphics.rectangle('fill', -self.shadow_parrallax.x * parallax_dist,
+    --                     -self.shadow_parrallax.y * parallax_dist, self.VT.w * G.TILESIZE, self.VT.h * G.TILESIZE)
+    --             end
+    --             love.graphics.scale(1 / 0.98)
+    --         end
 
-            love.graphics.scale(button_being_pressed and 0.985 or 1)
-            if self.config.emboss then
-                love.graphics.setColor(darken(self.config.colour, self.states.hover.is and 0.5 or 0.3, true))
-                self:draw_pixellated_rect('emboss', parallax_dist, self.config.emboss)
-            end
-            local collided_button = self.config.button_UIE or self
-            self.ARGS.button_colours = self.ARGS.button_colours or {}
-            self.ARGS.button_colours[1] = self.config.button_delay and mix_colours(self.config.colour, G.C.L_BLACK, 0.5) or
-            self.config.colour
-            self.ARGS.button_colours[2] = (((collided_button.config.hover and collided_button.states.hover.is) or (collided_button.last_clicked and collided_button.last_clicked > G.TIMERS.REAL - 0.1)) and G.C.UI.HOVER or nil)
-            for k, v in ipairs(self.ARGS.button_colours) do
-                love.graphics.setColor(v)
-                if self.config.r and self.VT.w > 0.01 then
-                    if self.config.button_delay then
-                        love.graphics.setColor(G.C.GREY)
-                        self:draw_pixellated_rect('fill', parallax_dist)
-                        love.graphics.setColor(v)
-                        self:draw_pixellated_rect('fill', parallax_dist, nil, self.config.button_delay_progress)
-                    elseif self.config.progress_bar then
-                        love.graphics.setColor(self.config.progress_bar.empty_col or G.C.GREY)
-                        self:draw_pixellated_rect('fill', parallax_dist)
-                        love.graphics.setColor(self.config.progress_bar.filled_col or G.C.BLUE)
-                        self:draw_pixellated_rect('fill', parallax_dist, nil,
-                            self.config.progress_bar.ref_table[self.config.progress_bar.ref_value] /
-                            self.config.progress_bar.max)
-                    else
-                        self:draw_pixellated_rect('fill', parallax_dist)
-                    end
-                else
-                    love.graphics.rectangle('fill', 0, 0, self.VT.w * G.TILESIZE, self.VT.h * G.TILESIZE)
-                end
-            end
-            love.graphics.pop()
-        elseif self.UIT == G.UIT.O and self.config.object then
-            --Draw the outline for highlighted objext
-            if self.config.focus_with_object and self.config.object.states.focus.is then
-                self.object_focus_timer = self.object_focus_timer or G.TIMERS.REAL
-                local lw = 50 * math.max(0, self.object_focus_timer - G.TIMERS.REAL + 0.3) ^ 2
-                prep_draw(self, 1)
-                love.graphics.scale((1) / (G.TILESIZE))
-                love.graphics.setLineWidth(lw + 1.5)
-                love.graphics.setColor(adjust_alpha(G.C.WHITE, 0.2 * lw, true))
-                self:draw_pixellated_rect('fill', parallax_dist)
-                love.graphics.setColor(self.config.colour[4] > 0 and mix_colours(G.C.WHITE, self.config.colour, 0.8) or
-                G.C.WHITE)
-                self:draw_pixellated_rect('line', parallax_dist)
-                love.graphics.pop()
-            else
-                self.object_focus_timer = nil
-            end
-            self.config.object:draw()
-        end
-    end
+    --         love.graphics.scale(button_being_pressed and 0.985 or 1)
+    --         if self.config.emboss then
+    --             love.graphics.setColor(darken(self.config.colour, self.states.hover.is and 0.5 or 0.3, true))
+    --             self:draw_pixellated_rect('emboss', parallax_dist, self.config.emboss)
+    --         end
+    --         local collided_button = self.config.button_UIE or self
+    --         self.ARGS.button_colours = self.ARGS.button_colours or {}
+    --         self.ARGS.button_colours[1] = self.config.button_delay and mix_colours(self.config.colour, G.C.L_BLACK, 0.5) or
+    --         self.config.colour
+    --         self.ARGS.button_colours[2] = (((collided_button.config.hover and collided_button.states.hover.is) or (collided_button.last_clicked and collided_button.last_clicked > G.TIMERS.REAL - 0.1)) and G.C.UI.HOVER or nil)
+    --         for k, v in ipairs(self.ARGS.button_colours) do
+    --             love.graphics.setColor(v)
+    --             if self.config.r and self.VT.w > 0.01 then
+    --                 if self.config.button_delay then
+    --                     love.graphics.setColor(G.C.GREY)
+    --                     self:draw_pixellated_rect('fill', parallax_dist)
+    --                     love.graphics.setColor(v)
+    --                     self:draw_pixellated_rect('fill', parallax_dist, nil, self.config.button_delay_progress)
+    --                 elseif self.config.progress_bar then
+    --                     love.graphics.setColor(self.config.progress_bar.empty_col or G.C.GREY)
+    --                     self:draw_pixellated_rect('fill', parallax_dist)
+    --                     love.graphics.setColor(self.config.progress_bar.filled_col or G.C.BLUE)
+    --                     self:draw_pixellated_rect('fill', parallax_dist, nil,
+    --                         self.config.progress_bar.ref_table[self.config.progress_bar.ref_value] /
+    --                         self.config.progress_bar.max)
+    --                 else
+    --                     self:draw_pixellated_rect('fill', parallax_dist)
+    --                 end
+    --             else
+    --                 love.graphics.rectangle('fill', 0, 0, self.VT.w * G.TILESIZE, self.VT.h * G.TILESIZE)
+    --             end
+    --         end
+    --         love.graphics.pop()
+    --     elseif self.UIT == G.UIT.O and self.config.object then
+    --         --Draw the outline for highlighted objext
+    --         if self.config.focus_with_object and self.config.object.states.focus.is then
+    --             self.object_focus_timer = self.object_focus_timer or G.TIMERS.REAL
+    --             local lw = 50 * math.max(0, self.object_focus_timer - G.TIMERS.REAL + 0.3) ^ 2
+    --             prep_draw(self, 1)
+    --             love.graphics.scale((1) / (G.TILESIZE))
+    --             love.graphics.setLineWidth(lw + 1.5)
+    --             love.graphics.setColor(adjust_alpha(G.C.WHITE, 0.2 * lw, true))
+    --             self:draw_pixellated_rect('fill', parallax_dist)
+    --             love.graphics.setColor(self.config.colour[4] > 0 and mix_colours(G.C.WHITE, self.config.colour, 0.8) or
+    --             G.C.WHITE)
+    --             self:draw_pixellated_rect('line', parallax_dist)
+    --             love.graphics.pop()
+    --         else
+    --             self.object_focus_timer = nil
+    --         end
+    --         self.config.object:draw()
+    --     end
+    -- end
 
     --Draw the outline of the object
     if self.config.outline and self.config.outline_colour[4] > 0.01 then
@@ -879,43 +882,43 @@ function UIElement:draw_self()
     end
 
     --Draw the outline for highlighted buttons
-    if self.states.focus.is then
-        self.focus_timer = self.focus_timer or G.TIMERS.REAL
-        local lw = 50 * math.max(0, self.focus_timer - G.TIMERS.REAL + 0.3) ^ 2
-        prep_draw(self, 1)
-        love.graphics.scale((1) / (G.TILESIZE))
-        love.graphics.setLineWidth(lw + 1.5)
-        love.graphics.setColor(adjust_alpha(G.C.WHITE, 0.2 * lw, true))
-        self:draw_pixellated_rect('fill', parallax_dist)
-        love.graphics.setColor(self.config.colour[4] > 0 and mix_colours(G.C.WHITE, self.config.colour, 0.8) or G.C
-        .WHITE)
-        self:draw_pixellated_rect('line', parallax_dist)
-        love.graphics.pop()
-    else
-        self.focus_timer = nil
-    end
+    -- if self.states.focus.is then
+    --     self.focus_timer = self.focus_timer or G.TIMERS.REAL
+    --     local lw = 50 * math.max(0, self.focus_timer - G.TIMERS.REAL + 0.3) ^ 2
+    --     prep_draw(self, 1)
+    --     love.graphics.scale((1) / (G.TILESIZE))
+    --     love.graphics.setLineWidth(lw + 1.5)
+    --     love.graphics.setColor(adjust_alpha(G.C.WHITE, 0.2 * lw, true))
+    --     self:draw_pixellated_rect('fill', parallax_dist)
+    --     love.graphics.setColor(self.config.colour[4] > 0 and mix_colours(G.C.WHITE, self.config.colour, 0.8) or G.C
+    --     .WHITE)
+    --     self:draw_pixellated_rect('line', parallax_dist)
+    --     love.graphics.pop()
+    -- else
+    --     self.focus_timer = nil
+    -- end
 
     --Draw the 'chosen triangle'
-    if self.config.chosen then
-        prep_draw(self, 0.98)
-        love.graphics.scale(1 / (G.TILESIZE))
-        if self.config.shadow and G.SETTINGS.GRAPHICS.shadows == 'On' then
-            love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour[4])
-            love.graphics.polygon("fill",
-                get_chosen_triangle_from_rect(self.layered_parallax.x - self.shadow_parrallax.x * parallax_dist * 0.5,
-                    self.layered_parallax.y - self.shadow_parrallax.y * parallax_dist * 0.5, self.VT.w * G.TILESIZE,
-                    self.VT.h * G.TILESIZE, self.config.chosen == 'vert'))
-        end
-        love.graphics.pop()
+    -- if self.config.chosen then
+    --     prep_draw(self, 0.98)
+    --     love.graphics.scale(1 / (G.TILESIZE))
+    --     if self.config.shadow and G.SETTINGS.GRAPHICS.shadows == 'On' then
+    --         love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour[4])
+    --         love.graphics.polygon("fill",
+    --             get_chosen_triangle_from_rect(self.layered_parallax.x - self.shadow_parrallax.x * parallax_dist * 0.5,
+    --                 self.layered_parallax.y - self.shadow_parrallax.y * parallax_dist * 0.5, self.VT.w * G.TILESIZE,
+    --                 self.VT.h * G.TILESIZE, self.config.chosen == 'vert'))
+    --     end
+    --     love.graphics.pop()
 
-        prep_draw(self, 1)
-        love.graphics.scale(1 / (G.TILESIZE))
-        love.graphics.setColor(G.C.RED)
-        love.graphics.polygon("fill",
-            get_chosen_triangle_from_rect(self.layered_parallax.x, self.layered_parallax.y, self.VT.w * G.TILESIZE,
-                self.VT.h * G.TILESIZE, self.config.chosen == 'vert'))
-        love.graphics.pop()
-    end
+    --     prep_draw(self, 1)
+    --     love.graphics.scale(1 / (G.TILESIZE))
+    --     love.graphics.setColor(G.C.RED)
+    --     love.graphics.polygon("fill",
+    --         get_chosen_triangle_from_rect(self.layered_parallax.x, self.layered_parallax.y, self.VT.w * G.TILESIZE,
+    --             self.VT.h * G.TILESIZE, self.config.chosen == 'vert'))
+    --     love.graphics.pop()
+    -- end
 end
 
 function UIElement:draw_pixellated_rect(_type, _parallax, _emboss, _progress)
@@ -943,7 +946,7 @@ function UIElement:draw_pixellated_rect(_type, _parallax, _emboss, _progress)
         }
         local ext_up = self.config.ext_up and self.config.ext_up * G.TILESIZE or 0
         local res = self.config.res or math.min(self.VT.w, self.VT.h + math.abs(ext_up) / G.TILESIZE) > 3.5 and 0.8 or
-        math.min(self.VT.w, self.VT.h + math.abs(ext_up) / G.TILESIZE) > 0.3 and 0.6 or 0.15
+            math.min(self.VT.w, self.VT.h + math.abs(ext_up) / G.TILESIZE) > 0.3 and 0.6 or 0.15
         local totw, toth, subw, subh = self.VT.w * G.TILESIZE, (self.VT.h + math.abs(ext_up) / G.TILESIZE) * G.TILESIZE,
             self.VT.w * G.TILESIZE - 4 * res, (self.VT.h + math.abs(ext_up) / G.TILESIZE) * G.TILESIZE - 4 * res
 
@@ -986,7 +989,7 @@ function UIElement:draw_pixellated_rect(_type, _parallax, _emboss, _progress)
                 self.pixellated_rect.line.vertices[k - 4] = v
                 if _emboss then
                     self.pixellated_rect.line_emboss.vertices[k - 4] = v +
-                    (k % 2 == 0 and -_emboss * self.shadow_parrallax.y or -0.7 * _emboss * self.shadow_parrallax.x)
+                        (k % 2 == 0 and -_emboss * self.shadow_parrallax.y or -0.7 * _emboss * self.shadow_parrallax.x)
                 end
             end
             if k % 2 == 0 then
@@ -1094,8 +1097,12 @@ end
 function UIElement:hover()
     if self.config and self.config.on_demand_tooltip then
         self.config.h_popup = create_popup_UIBox_tooltip(self.config.on_demand_tooltip)
-        self.config.h_popup_config = { align = self.T.y > G.ROOM.T.h / 2 and 'tm' or 'bm', offset = { x = 0, y = self.T.y > G.ROOM.T.h / 2 and -0.1 or 0.1 }, parent =
-        self }
+        self.config.h_popup_config = {
+            align = self.T.y > G.ROOM.T.h / 2 and 'tm' or 'bm',
+            offset = { x = 0, y = self.T.y > G.ROOM.T.h / 2 and -0.1 or 0.1 },
+            parent =
+                self
+        }
     end
     if self.config.tooltip then
         self.config.h_popup = create_popup_UIBox_tooltip(self.config.tooltip)
