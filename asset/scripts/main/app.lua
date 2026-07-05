@@ -561,7 +561,11 @@ function App:update(dt)
     -- print("game update", dt)
 end
 
-function App:draw() end
+function App:draw()
+    self.FRAMES.DRAW = self.FRAMES.DRAW + 1
+    self.DRAW_HASH = EMPTY(self.DRAW_HASH)
+    if self.OVERLAY_TUTORIAL and not self.OVERLAY_MENU then self.under_overlay = true end
+end
 
 function App:start_up()
     self.SETTINGS.version = self.VERSION
@@ -575,8 +579,8 @@ function App:start_up()
     boot_timer('settings', 'window init', 0.2)
 
     self:init_window()
-    self.STAGE_OBJECT_INTERRUPT =true
-    self.STAGE_OBJECT_INTERRUPT =false
+    self.STAGE_OBJECT_INTERRUPT = true
+    self.STAGE_OBJECT_INTERRUPT = false
 
     self:splash_screen()
 end

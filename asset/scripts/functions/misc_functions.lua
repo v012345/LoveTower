@@ -36,3 +36,11 @@ function copy_table(O)
     end
     return copy
 end
+
+function EMPTY(t)
+    if not t then return {} end
+    for k, v in pairs(t) do
+        t[k] = nil
+    end
+    return t
+end
