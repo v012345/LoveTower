@@ -3,15 +3,11 @@ package.cpath = package.cpath ..
 local dbg = require("emmy_core")
 dbg.tcpListen("localhost", 9966)
 require "asset.scripts.enum"
+require "asset.scripts.engine"
 require "bit"
-require "asset.scripts.engine.object"
-require "asset.scripts.engine.controller"
 require "asset.scripts.functions.misc_functions"
 require "asset.scripts.functions.UI_definitions"
 require "asset.scripts.main.app"
-require "asset.scripts.engine.node"
-require "asset.scripts.engine.moveable"
-require "asset.scripts.engine.ui"
 
 function love.run()
     if love.load then love.load(love.arg.parseGameArguments(arg), arg) end
