@@ -317,8 +317,8 @@ function UIBox:remove()
 end
 
 function UIBox:draw()
-    if self.FRAME.DRAW >= G.FRAMES.DRAW and not G.OVERLAY_TUTORIAL then return end
-    self.FRAME.DRAW = G.FRAMES.DRAW
+    if self.FRAME.DRAW >= App.instance.FRAMES.DRAW and not App.instance.OVERLAY_TUTORIAL then return end
+    self.FRAME.DRAW = App.instance.FRAMES.DRAW
 
     for k, v in pairs(self.children) do
         if k ~= 'h_popup' and k ~= 'alert' then v:draw() end
@@ -380,7 +380,7 @@ function UIBox:print_topology(indent)
     return box_str
 end
 
---Class
+---@class UIElement : Moveable
 UIElement = Moveable:extend()
 --Class Methods
 function UIElement:init(parent, new_UIBox, new_UIT, config)
