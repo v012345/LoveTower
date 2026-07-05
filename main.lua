@@ -19,6 +19,7 @@ require "asset.scripts.functions.UI_definitions"
 require "asset.scripts.main.app"
 require "asset.scripts.engine.node"
 require "asset.scripts.engine.moveable"
+require "asset.scripts.engine.ui"
 
 function love.run()
     if love.load then love.load(love.arg.parseGameArguments(arg), arg) end

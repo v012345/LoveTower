@@ -433,6 +433,25 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.ROOM_ATTACH.states.drag.can = false
     self.ROOM_ATTACH:set_container(self.ROOM)
     love.resize(love.graphics.getWidth(), love.graphics.getHeight())
+
+
+
+
+    UIBox({
+        definition = UIBox_button({
+            label = { 'Click Me' },     -- 按钮文字
+            button = 'my_button_click', -- ★ 回调函数名（对应 G.FUNCS.my_button_click）
+            colour = Enum.Color.RED,    -- 按钮颜色
+            minw = 3,                   -- 最小宽度 (in game units)
+            minh = 1,                   -- 最小高度
+            scale = 0.5,                -- 文字缩放
+        }),
+        config = {
+            align = 'cm',              -- 居中对齐
+            offset = { x = 0, y = 2 }, -- 偏移
+            major = self.ROOM_ATTACH,  -- 附着对象（相对于谁定位）
+        }
+    })
 end
 
 ---@return table
@@ -468,11 +487,11 @@ end
 function App:start_up()
     self.SETTINGS.version = self.VERSION
     self.SETTINGS.paused = nil
-    local new_colour_proto = self.C["SO_" .. (self.SETTINGS.colourblind_option and 2 or 1)]
-    self.C.SUITS.Hearts = new_colour_proto.Hearts
-    self.C.SUITS.Diamonds = new_colour_proto.Diamonds
-    self.C.SUITS.Spades = new_colour_proto.Spades
-    self.C.SUITS.Clubs = new_colour_proto.Clubs
+    local new_colour_proto = Enum.Color["SO_" .. (self.SETTINGS.colourblind_option and 2 or 1)]
+    Enum.Color.SUITS.Hearts = new_colour_proto.Hearts
+    Enum.Color.SUITS.Diamonds = new_colour_proto.Diamonds
+    Enum.Color.SUITS.Spades = new_colour_proto.Spades
+    Enum.Color.SUITS.Clubs = new_colour_proto.Clubs
     boot_timer('start', 'settings', 0.1)
     boot_timer('settings', 'window init', 0.2)
 

@@ -37,7 +37,7 @@ function Moveable:init(X, Y, W, H)
     --For finer control over what parts of T and VT are inherited, xy_bond, wh_bond, and r_bond can be set to one of
     --'Strong' or 'Weak'. Strong simply copies the values, Weak allows the 'Minor' moveable to calculate their own.
     self.role = {
-        role_type = 'Major',     --Major dictates movement, Minor is welded to some major
+        role_type = 'Major',       --Major dictates movement, Minor is welded to some major
         offset = { x = 0, y = 0 }, --Offset from Minor to Major
         major = nil,
         draw_major = self,
@@ -74,9 +74,9 @@ function Moveable:init(X, Y, W, H)
 
     self:calculate_parrallax()
 
-    table.insert(G.MOVEABLES, self)
+    table.insert(App.instance.MOVEABLES, self)
     if getmetatable(self) == Moveable then
-        table.insert(G.I.MOVEABLE, self)
+        table.insert(App.instance.I.MOVEABLE, self)
     end
 end
 
@@ -142,12 +142,12 @@ function Moveable:align_to_major()
 
     if self.alignment.type_list.m then
         self.role.offset.x = 0.5 * self.role.major.T.w - (self.Mid.T.w) / 2 + self.alignment.offset.x - self.Mid.T.x +
-        self.T.x
+            self.T.x
     end
 
     if self.alignment.type_list.c then
         self.role.offset.y = 0.5 * self.role.major.T.h - (self.Mid.T.h) / 2 + self.alignment.offset.y - self.Mid.T.y +
-        self.T.y
+            self.T.y
     end
 
     if self.alignment.type_list.b then
@@ -275,9 +275,9 @@ function Moveable:move_juice(dt)
             self.juice = nil
         else
             self.juice.scale = self.juice.scale_amt * math.sin(50.8 * (G.TIMERS.REAL - self.juice.start_time)) *
-            math.max(0, ((self.juice.end_time - G.TIMERS.REAL) / (self.juice.end_time - self.juice.start_time)) ^ 3)
+                math.max(0, ((self.juice.end_time - G.TIMERS.REAL) / (self.juice.end_time - self.juice.start_time)) ^ 3)
             self.juice.r = self.juice.r_amt * math.sin(40.8 * (G.TIMERS.REAL - self.juice.start_time)) *
-            math.max(0, ((self.juice.end_time - G.TIMERS.REAL) / (self.juice.end_time - self.juice.start_time)) ^ 2)
+                math.max(0, ((self.juice.end_time - G.TIMERS.REAL) / (self.juice.end_time - self.juice.start_time)) ^ 2)
         end
     end
 end
@@ -396,7 +396,7 @@ function Moveable:move_with_major(dt)
 
     if self.role.scale_bond == 'Strong' then
         self.VT.scale = self.T.scale * (major_tab.major.VT.scale / major_tab.major.T.scale) +
-        (self.juice and self.juice.scale or 0)
+            (self.juice and self.juice.scale or 0)
     elseif self.role.scale_bond == 'Weak' then
         self:move_scale(dt)
     end
@@ -436,14 +436,14 @@ end
 
 function Moveable:move_scale(dt)
     local des_scale = self.T.scale +
-    (self.zoom and ((self.states.drag.is and 0.1 or 0) + (self.states.hover.is and 0.05 or 0)) or 0) +
-    (self.juice and self.juice.scale or 0)
+        (self.zoom and ((self.states.drag.is and 0.1 or 0) + (self.states.hover.is and 0.05 or 0)) or 0) +
+        (self.juice and self.juice.scale or 0)
 
     if des_scale ~= self.VT.scale or
         math.abs(self.velocity.scale) > 0.001 then
         self.STATIONARY = false
         self.velocity.scale = G.exp_times.scale * self.velocity.scale + (1 - G.exp_times.scale) *
-        (des_scale - self.VT.scale)
+            (des_scale - self.VT.scale)
         self.VT.scale = self.VT.scale + self.velocity.scale
     end
 end
@@ -476,8 +476,8 @@ function Moveable:move_r(dt, vel)
 end
 
 function Moveable:calculate_parrallax()
-    if not G.ROOM then return end
-    self.shadow_parrallax.x = (self.T.x + self.T.w / 2 - G.ROOM.T.w / 2) / (G.ROOM.T.w / 2) * 1.5
+    if not App.instance.ROOM then return end
+    self.shadow_parrallax.x = (self.T.x + self.T.w / 2 - App.instance.ROOM.T.w / 2) / (App.instance.ROOM.T.w / 2) * 1.5
 end
 
 function Moveable:set_role(args)
@@ -508,7 +508,7 @@ function Moveable:get_major()
             self.FRAME.MAJOR.major = major.major
             self.FRAME.MAJOR.offset = self.FRAME.MAJOR.offset or self.temp_offs
             self.FRAME.MAJOR.offset.x, self.FRAME.MAJOR.offset.y =
-            major.offset.x + self.role.offset.x + self.layered_parallax.x,
+                major.offset.x + self.role.offset.x + self.layered_parallax.x,
                 major.offset.y + self.role.offset.y + self.layered_parallax.y
         end
         return self.FRAME.MAJOR
