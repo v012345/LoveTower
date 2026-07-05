@@ -1,4 +1,5 @@
 ---@class UIBox: Moveable
+---@field UIRoot UIElement
 UIBox = Moveable:extend()
 
 --The base level and container of a graph of 1 or more UIElements. These UIEs are\
@@ -915,7 +916,6 @@ function UIElement:draw_self()
                 self.VT.h * G.TILESIZE, self.config.chosen == 'vert'))
         love.graphics.pop()
     end
-    self:draw_boundingrect()
 end
 
 function UIElement:draw_pixellated_rect(_type, _parallax, _emboss, _progress)
