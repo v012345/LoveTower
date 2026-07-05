@@ -50,3 +50,6 @@ function EMPTY(t)
     end
     return t
 end
+
+function is_UI_containter(node)
+end
