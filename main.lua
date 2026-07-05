@@ -1,8 +1,7 @@
-package.cpath = package.cpath
-    .. ";c:/Users/NightOwl/.vscode/extensions/tangzx.emmylua-0.9.39-win32-x64/debugger/emmy/windows/x64/?.dll"
+package.cpath = package.cpath ..
+";c:/Users/NightOwl/.vscode/extensions/tangzx.emmylua-0.9.39-win32-x64/debugger/emmy/windows/x64/?.dll"
 local dbg = require("emmy_core")
--- print("EmmyLua Debugger: game listens on 9966, press F5 in VS Code to attach", dbg)
-dbg.tcpListen("localhost", 9965)
+dbg.tcpListen("localhost", 9966)
 require "asset.scripts.enum"
 require "bit"
 require "asset.scripts.engine.object"
