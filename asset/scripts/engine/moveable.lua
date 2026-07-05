@@ -80,11 +80,6 @@ function Moveable:init(X, Y, W, H)
     end
 end
 
-function Moveable:draw()
-    Node.draw(self)
-    self:draw_boundingrect()
-end
-
 --Sets the alignment of moveable using roles
 --
 ---@param args {major: Moveable, bond: string, offset: table, type: string}
