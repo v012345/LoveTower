@@ -59,6 +59,7 @@ function love.run()
     end
 end
 
+
 function love.load()
     App.instance:start_up()
 end

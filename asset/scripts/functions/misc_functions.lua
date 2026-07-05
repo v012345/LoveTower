@@ -14,3 +14,25 @@ function boot_timer(_label, _next, progress)
     love.graphics.pop()
     love.graphics.present()
 end
+
+function HEX(hex)
+    if #hex <= 6 then hex = hex .. "FF" end
+    local _, _, r, g, b, a = hex:find('(%x%x)(%x%x)(%x%x)(%x%x)')
+    local color = { tonumber(r, 16) / 255, tonumber(g, 16) / 255, tonumber(b, 16) / 255, tonumber(a, 16) / 255 or 255 }
+    return color
+end
+
+function copy_table(O)
+    local O_type = type(O)
+    local copy
+    if O_type == 'table' then
+        copy = {}
+        for k, v in next, O, nil do
+            copy[copy_table(k)] = copy_table(v)
+        end
+        setmetatable(copy, copy_table(getmetatable(O)))
+    else
+        copy = O
+    end
+    return copy
+end

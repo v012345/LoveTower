@@ -216,3 +216,9 @@ love.data = love.data or {}
 function love.data.compress(container, format, rawstring, level) end
 
 function love.data.decompress(container, format, data) end
+
+---@class love.system
+love.system = love.system or {}
+
+---@return string os
+function love.system.getOS() end
