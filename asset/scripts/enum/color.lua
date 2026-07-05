@@ -1,4 +1,5 @@
 require "asset.scripts.functions.misc_functions"
+
 Enum = Enum or {}
 Enum.Color = {
     MULT = HEX('FE5F55'),

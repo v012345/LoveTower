@@ -498,8 +498,12 @@ function App:start_up()
     self:init_window()
     self.STAGE_OBJECT_INTERRUPT = true
     self.STAGE_OBJECT_INTERRUPT = false
-
+    self:set_language()
     self:splash_screen()
+end
+
+function App:set_language()
+    self.LANG = { font = 1, label = "English", key = 'en-us', button = "Language Feedback", warning = { 'This language is still in Beta. To help us', 'improve it, please click on the feedback button.', 'Click again to confirm' } }
 end
 
 function App:init_window()

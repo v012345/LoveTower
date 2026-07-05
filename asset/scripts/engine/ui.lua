@@ -123,27 +123,28 @@ function UIBox:calculate_xywh(node, _T, recalculate, _scale)
 
     _ct.x, _ct.y, _ct.w, _ct.h = 0, 0, 0, 0
 
-    local padding = node.config.padding or G.UIT.padding
+    local padding = node.config.padding or Enum.UI.padding
     --current node does not contain anything
-    if node.UIT == G.UIT.B or node.UIT == G.UIT.T or node.UIT == G.UIT.O then
+    if node.UIT == Enum.UI.B or node.UIT == Enum.UI.T or node.UIT == Enum.UI.O then
         _nt.x, _nt.y, _nt.w, _nt.h =
             _T.x,
             _T.y,
             node.config.w or (node.config.object and node.config.object.T.w),
             node.config.h or (node.config.object and node.config.object.T.h)
 
-        if node.UIT == G.UIT.T then
+        if node.UIT == Enum.UI.T then
             node.config.text_drawable = nil
             local scale = node.config.scale or 1
             if node.config.ref_table and node.config.ref_value then
                 node.config.text = tostring(node.config.ref_table[node.config.ref_value])
-                if node.config.func and not recalculate then G.FUNCS[node.config.func](node) end
+                if node.config.func and not recalculate then App.instance.FUNCS[node.config.func](node) end
             end
             if not node.config.text then node.config.text = '[UI ERROR]' end
-            node.config.lang = node.config.lang or G.LANG
+            node.config.lang = node.config.lang or App.instance.LANG
             local tx = node.config.lang.font.FONT:getWidth(node.config.text) * node.config.lang.font.squish * scale *
-                G.TILESCALE * node.config.lang.font.FONTSCALE
-            local ty = node.config.lang.font.FONT:getHeight() * scale * G.TILESCALE * node.config.lang.font.FONTSCALE *
+                App.instance.TILESCALE * node.config.lang.font.FONTSCALE
+            local ty = node.config.lang.font.FONT:getHeight() * scale * App.instance.TILESCALE *
+                node.config.lang.font.FONTSCALE *
                 node.config.lang.font.TEXT_HEIGHT_SCALE
             if node.config.vert then
                 local thunk = tx; tx = ty; ty = thunk
@@ -151,14 +152,14 @@ function UIBox:calculate_xywh(node, _T, recalculate, _scale)
             _nt.x, _nt.y, _nt.w, _nt.h =
                 _T.x,
                 _T.y,
-                tx / (G.TILESIZE * G.TILESCALE),
-                ty / (G.TILESIZE * G.TILESCALE)
+                tx / (App.instance.TILESIZE * App.instance.TILESCALE),
+                ty / (App.instance.TILESIZE * App.instance.TILESCALE)
 
             node.content_dimensions = node.content_dimensions or {}
             node.content_dimensions.w = _T.w
             node.content_dimensions.h = _T.h
             node:set_values(_nt, recalculate)
-        elseif node.UIT == G.UIT.B or node.UIT == G.UIT.O then
+        elseif node.UIT == Enum.UI.B or node.UIT == Enum.UI.O then
             node.content_dimensions = node.content_dimensions or {}
             node.content_dimensions.w = _nt.w
             node.content_dimensions.h = _nt.h
@@ -179,7 +180,7 @@ function UIBox:calculate_xywh(node, _T, recalculate, _scale)
                     node.config.minw or 0,
                     node.config.minh or 0
 
-                if node.UIT == G.UIT.ROOT then
+                if node.UIT == Enum.UI.ROOT then
                     _nt.x, _nt.y, _nt.w, _nt.h = 0, 0, node.config.minw or 0, node.config.minh or 0
                 end
                 _ct.x, _ct.y, _ct.w, _ct.h = _nt.x + padding, _nt.y + padding, 0, 0
@@ -189,7 +190,7 @@ function UIBox:calculate_xywh(node, _T, recalculate, _scale)
                         if v.config and v.config.scale then v.config.scale = v.config.scale * fac end
                         _tw, _th = self:calculate_xywh(v, _ct, recalculate, fac)
                         if _th and _tw then
-                            if v.UIT == G.UIT.R then
+                            if v.UIT == Enum.UI.R then
                                 _ct.h = _ct.h + _th + padding
                                 _ct.y = _ct.y + _th + padding
                                 if _tw + padding > _ct.w then _ct.w = _tw + padding end
