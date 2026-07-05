@@ -37,10 +37,9 @@ function Node:init(args)
     self.hover_offset = { x = 0, y = 0 }
 
     --To keep track of all nodes created on pause. If true, this node moves normally even when the G.TIMERS.TOTAL doesn't increment
-    self.created_on_pause = G.SETTINGS.paused
+    self.created_on_pause = App.instance.SETTINGS.paused
 
     --ID tracker, every Node has a unique ID
-
     self.ID = App.instance:generate_id()
 
 

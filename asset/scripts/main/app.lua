@@ -476,20 +476,7 @@ function App:init()
     self.C.HAND_LEVELS[0] = self.C.RED
     self.C.UI_CHIPS = copy_table(self.C.BLUE)
     self.C.UI_MULT = copy_table(self.C.RED)
-    --||||||||||||||||||||||||||||||
-    --        ENUMS
-    --||||||||||||||||||||||||||||||
-    self.UIT = {
-        T = 1,       --text
-        B = 2,       --box (can be rounded)
-        C = 3,       --column
-        R = 4,       --row
-        O = 5,       --object - must be a Node
-        ROOT = 7,
-        S = 8,       --slider
-        I = 9,       --input text box
-        padding = 0, --default padding
-    }
+
     self.handlist = {
         "Flush Five",
         "Flush House",
@@ -588,6 +575,9 @@ function App:start_up()
     boot_timer('settings', 'window init', 0.2)
 
     self:init_window()
+    self.STAGE_OBJECT_INTERRUPT =true
+    self.STAGE_OBJECT_INTERRUPT =false
+
     self:splash_screen()
 end
 
