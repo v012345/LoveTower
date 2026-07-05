@@ -209,3 +209,10 @@ love.event = {}
 --- Note that this does need to be called for any OS to think your program is still running, and if you want to handle OS-generated events at all (think callbacks).
 ---@return nil
 function love.event.pump() end
+
+---@class love.data
+love.data = love.data or {}
+
+function love.data.compress(container, format, rawstring, level) end
+
+function love.data.decompress(container, format, data) end
