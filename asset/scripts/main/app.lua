@@ -848,6 +848,7 @@ function love.draw()
     App:draw()
 end
 
+---@return number
 function App:generate_id()
     self.ID = self.ID + 1
     return self.ID
