@@ -3,13 +3,6 @@ package.cpath = package.cpath
 local dbg = require("emmy_core")
 -- print("EmmyLua Debugger: game listens on 9966, press F5 in VS Code to attach", dbg)
 dbg.tcpListen("localhost", 9965)
--- dbg.tcpListen('localhost', 9966)
-
-local https = require "https"
-local new_cfg = require "temp.Config"
-local old_cfg = require "asset.scripts.hotfix.Config"
-print("new_cfg.version:", new_cfg.version)
-print("old_cfg.version:", old_cfg.version)
 require "asset.scripts.enum"
 require "bit"
 require "asset.scripts.engine.object"
