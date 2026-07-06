@@ -27,8 +27,6 @@ end
 
 ---@param node UIDdefinition
 function UIBox:set_parent_child(node, parent)
-    print(debug.traceback())
-    print(parent)
     ---@type UIElement
     local UIE = UIElement(parent, self, node.n, node.config)
 
@@ -86,7 +84,6 @@ function UIBox:remove()
 end
 
 function UIBox:draw()
-    print(self.ID)
     for k, v in pairs(self.children) do
         if k ~= 'h_popup' and k ~= 'alert' then v:draw() end
     end
