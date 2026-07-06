@@ -4,6 +4,9 @@ UIBox = Moveable:extend()
 ---@param args {T: table, definition: table, config: table}
 function UIBox:init(args)
     Moveable.init(self, args)
+    if getmetatable(self) == UIBox then
+        table.insert(App.instance.I.UIBOX, self)
+    end
 end
 
 function UIBox:get_UIE_by_ID(id, node)
@@ -26,6 +29,9 @@ end
 
 function UIBox:draw()
     print('UIBox:draw')
+    love.graphics.setColor(1, 1, 0.5)
+    love.graphics.circle("fill", 0, 0, 100)
+    love.graphics.setColor(1, 1, 1)
 end
 
 function UIBox:recalculate()

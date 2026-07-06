@@ -474,7 +474,16 @@ function App:draw()
     love.graphics.setShader()
     love.graphics.clear(0, 0, 0, 1)
     love.graphics.pop()
+
     for k, v in pairs(self.I.NODE) do
+        if not v.parent then
+            love.graphics.push()
+            v:translate_container()
+            v:draw()
+            love.graphics.pop()
+        end
+    end
+    for k, v in pairs(self.I.UIBOX) do
         if not v.parent then
             love.graphics.push()
             v:translate_container()
