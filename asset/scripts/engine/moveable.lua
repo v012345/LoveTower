@@ -7,11 +7,17 @@ Moveable = Node:extend()
 --we only need to set T.x, T.y, etc. to their final position and the engine will ensure the Moveable\
 --VT eases to that final location, regargless of any events or timing.
 --
----@param args {T: table, container: Node}
 --**T** The transform ititializer, with keys of x|1, y|2, w|3, h|4, r|5\
 --**container** optional container for this Node, defaults to G.ROOM
+
+
+---@param X Transform|number[]|number
+---@param Y? number
+---@param W? number
+---@param H? number
 function Moveable:init(X, Y, W, H)
     local args = (type(X) == 'table') and X or { T = { X or 0, Y or 0, W or 0, H or 0 } }
+    -- self.super:init(args)
     Node.init(self, args)
 
     --The Visible transform is initally set to the same values as the transform T.
