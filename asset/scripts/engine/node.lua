@@ -322,29 +322,29 @@ function Node:remove()
             v:remove()
         end
     end
-    if App.instance.CONTROLLER.clicked.target == self then
-        G.CONTROLLER.clicked.target = nil
+    if Controller.instance.clicked.target == self then
+        Controller.instance.clicked.target = nil
     end
-    if App.instance.CONTROLLER.focused.target == self then
-        G.CONTROLLER.focused.target = nil
+    if Controller.instance.focused.target == self then
+        Controller.instance.focused.target = nil
     end
-    if App.instance.CONTROLLER.dragging.target == self then
-        App.instance.CONTROLLER.dragging.target = nil
+    if Controller.instance.dragging.target == self then
+        Controller.instance.dragging.target = nil
     end
-    if G.CONTROLLER.hovering.target == self then
-        App.instance.CONTROLLER.hovering.target = nil
+    if Controller.instance.hovering.target == self then
+        Controller.instance.hovering.target = nil
     end
-    if G.CONTROLLER.released_on.target == self then
-        App.instance.CONTROLLER.released_on.target = nil
+    if Controller.instance.released_on.target == self then
+        Controller.instance.released_on.target = nil
     end
-    if App.instance.CONTROLLER.cursor_down.target == self then
-        App.instance.CONTROLLER.cursor_down.target = nil
+    if Controller.instance.cursor_down.target == self then
+        Controller.instance.cursor_down.target = nil
     end
-    if App.instance.CONTROLLER.cursor_up.target == self then
-        App.instance.CONTROLLER.cursor_up.target = nil
+    if Controller.instance.cursor_up.target == self then
+        Controller.instance.cursor_up.target = nil
     end
-    if G.CONTROLLER.cursor_hover.target == self then
-        App.instance.CONTROLLER.cursor_hover.target = nil
+    if Controller.instance.cursor_hover.target == self then
+        Controller.instance.cursor_hover.target = nil 
     end
 
     self.REMOVED = true
