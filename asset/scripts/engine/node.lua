@@ -8,7 +8,7 @@
 ---@field states NodeStates 节点状态
 ---@field FRAME table 不知道是什么鬼, 看起来像是帧计数器
 ---@field children any 不知道是什么鬼, 看起来像是子节点
----@field container Node 容器, 这里的容器的概念是什么意思?
+---@field container Node 就是父节点, 子节点会被父节点影响
 ---@field ARGS any 不知道是什么鬼, 看起来像是参数
 ---@field config table 当前节点的元数据
 ---@field under_overlay boolean 是否在覆盖层?
@@ -73,10 +73,7 @@ function Node:init(args)
         release_on = { can = true, is = false }
     }
 
-    --If we provide a container, all nodes within that container are translated with that container as the reference frame.
-    --For example, if G.ROOM is set at x = 5 and y = 5, and we create a new game object at 0, 0, it will actually be drawn at
-    --5, 5. This allows us to control things like screen shake, room positioning, rotation, padding, etc. without needing to modify
-    --every game object that we need to draw
+    -- If we provide a container, all nodes within that container are translated with that container as the reference frame.For example, if G.ROOM is set at x = 5 and y = 5, and we create a new game object at 0, 0, it will actually be drawn at 5, 5. This allows us to control things like screen shake, room positioning, rotation, padding, etc. without needing to modify every game object that we need to draw
     self.container = args.container or App.instance.ROOM
 
     --The list of children give Node a treelike structure. This can be used for things like drawing, deterministice movement and parallax
@@ -344,7 +341,7 @@ function Node:remove()
         Controller.instance.cursor_up.target = nil
     end
     if Controller.instance.cursor_hover.target == self then
-        Controller.instance.cursor_hover.target = nil 
+        Controller.instance.cursor_hover.target = nil
     end
 
     self.REMOVED = true
