@@ -236,7 +236,6 @@ Canvas = {}
 ---@return nil
 function Canvas:setFilter(filter, filtermag) end
 
-
 ---@class Transform
 ---@field x number
 ---@field y number
@@ -256,3 +255,17 @@ Transform = {}
 ---@field drag { can: boolean, is: boolean }
 ---@field release_on { can: boolean, is: boolean }
 NodeStates = {}
+
+
+---@param dx number
+---@param dy number
+---@return nil
+function love.graphics.translate(dx, dy) end
+
+---@param angle number
+---@return nil
+function love.graphics.rotate(angle) end
+
+---@param scale number
+---@return nil
+function love.graphics.scale(scale) end

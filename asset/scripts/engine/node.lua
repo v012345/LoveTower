@@ -6,9 +6,12 @@
 ---@field created_on_pause boolean 不知道
 ---@field ID number 唯一ID
 ---@field states NodeStates 节点状态
+---@field FRAME table 不知道是什么鬼, 看起来像是帧计数器
 ---@field children any 不知道是什么鬼, 看起来像是子节点
+---@field container Node 容器, 这里的容器的概念是什么意思?
 ---@field ARGS any 不知道是什么鬼, 看起来像是参数
 ---@field config table 当前节点的元数据
+---@field under_overlay boolean 是否在覆盖层?
 Node = Object:extend()
 
 ---Node represent any game object that needs to have some transform available in the game itself.\
