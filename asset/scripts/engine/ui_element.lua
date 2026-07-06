@@ -21,7 +21,8 @@ function UIElement:init(parent, new_UIBox, new_UIT, config)
     self.content_dimensions = { w = 0, h = 0 }
 end
 
-function UIElement:set_values(_T, recalculate)
+function UIElement:set_values(T, recalculate)
+    Moveable.init(self, T)
 end
 
 function UIElement:print_topology(indent)
@@ -73,11 +74,12 @@ end
 
 function UIElement:draw_self()
     if not self.states then return end
+    print(self.ID, 'draw_self')
     if not self.states.visible then
         if self.config.force_focus then add_to_drawhash(self) end
         return
     end
-    print(self.ID, 'draw_self')
+
 
     if self.config.force_focus or self.config.force_collision or self.config.button_UIE or self.config.button or self.states.collide.can then
         add_to_drawhash(self)
@@ -102,7 +104,7 @@ function UIElement:draw_self()
         if self.config.button_UIE and not self.config.button_UIE.config.button then button_active = false end
     end
     if self.config.colour[4] > 0.01 then
-        if self.UIT == G.UIT.T and self.config.scale then
+        if self.UIT == UIT.T and self.config.scale then
             self.ARGS.text_parallax = self.ARGS.text_parallax or {}
             self.ARGS.text_parallax.sx = -self.shadow_parrallax.x * 0.5 / (self.config.scale * self.config.lang.font.FONTSCALE)
             self.ARGS.text_parallax.sy = -self.shadow_parrallax.y * 0.5 / (self.config.scale * self.config.lang.font.FONTSCALE)
@@ -144,7 +146,7 @@ function UIElement:draw_self()
                 (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE
             )
             love.graphics.pop()
-        elseif self.UIT == G.UIT.B or self.UIT == G.UIT.C or self.UIT == G.UIT.R or self.UIT == G.UIT.ROOT then
+        elseif self.UIT == UIT.B or self.UIT == UIT.C or self.UIT == UIT.R or self.UIT == UIT.ROOT then
             prep_draw(self, 1)
             love.graphics.scale(1 / (G.TILESIZE))
             if self.config.shadow and G.SETTINGS.GRAPHICS.shadows == 'On' then
@@ -192,7 +194,7 @@ function UIElement:draw_self()
                 end
             end
             love.graphics.pop()
-        elseif self.UIT == G.UIT.O and self.config.object then
+        elseif self.UIT == UIT.O and self.config.object then
             --Draw the outline for highlighted objext
             if self.config.focus_with_object and self.config.object.states.focus.is then
                 self.object_focus_timer = self.object_focus_timer or G.TIMERS.REAL

@@ -7,6 +7,7 @@ function UIBox:init(args)
     self.draw_layers = {} --if we need to explicitly change the draw order of the UIEs
     self.definition = args.definition
     self:set_parent_child(self.definition, nil)
+    self:calculate_xywh(self.UIRoot, self.T)
 
     if getmetatable(self) == UIBox then
         table.insert(App.instance.I.UIBOX, self)
@@ -17,6 +18,7 @@ function UIBox:get_UIE_by_ID(id, node)
 end
 
 function UIBox:calculate_xywh(node, _T, recalculate, _scale)
+    self.UIRoot:set_values(self.T)
 end
 
 function UIBox:remove_group(node, group)
