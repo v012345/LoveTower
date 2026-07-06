@@ -279,3 +279,10 @@ function love.graphics.rotate(angle) end
 ---@param scale number
 ---@return nil
 function love.graphics.scale(scale) end
+
+
+--- 包括 `悬浮弹窗h_popup` `123`
+---@class Children
+---@field h_popup UIBox 悬浮弹窗
+---@field d_popup UIBox 拖拽弹窗
+Children = {}

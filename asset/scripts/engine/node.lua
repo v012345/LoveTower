@@ -7,7 +7,7 @@
 ---@field ID number 唯一ID
 ---@field states NodeStates 节点状态
 ---@field FRAME table 不知道是什么鬼, 看起来像是帧计数器
----@field children any 不知道是什么鬼, 看起来像是子节点
+---@field children Children 子节点
 ---@field container Node 就是父节点, 子节点会被父节点影响
 ---@field ARGS any 不知道是什么鬼, 看起来像是参数
 ---@field config table 当前节点的元数据
@@ -254,7 +254,8 @@ function Node:hover()
     end
 end
 
---Called by the CONTROLLER when this node is no longer being hovered, removes any h_popups
+--- Called by the CONTROLLER when this node is no longer being hovered, removes any h_popups
+---@return nil
 function Node:stop_hover()
     if self.children.h_popup then
         self.children.h_popup:remove()
