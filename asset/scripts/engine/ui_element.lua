@@ -11,6 +11,7 @@ UIElement = Moveable:extend()
 ---@param new_UIT UIT
 ---@param config UIConfig
 function UIElement:init(parent, new_UIBox, new_UIT, config)
+    Moveable.init(self, Transform(0, 0, 0, 0))
     self.parent = parent
     self.UIT = new_UIT
     self.UIBox = new_UIBox
@@ -22,7 +23,7 @@ function UIElement:init(parent, new_UIBox, new_UIT, config)
 end
 
 function UIElement:set_values(T, recalculate)
-    Moveable.init(self, T)
+
 end
 
 function UIElement:print_topology(indent)
