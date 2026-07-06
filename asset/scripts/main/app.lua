@@ -437,21 +437,22 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
 
 
 
-    UIBox({
-        definition = UIBox_button({
-            label = { 'Click Me' },     -- 按钮文字
-            button = 'my_button_click', -- ★ 回调函数名（对应 G.FUNCS.my_button_click）
-            colour = Enum.Color.RED,    -- 按钮颜色
-            minw = 3,                   -- 最小宽度 (in game units)
-            minh = 1,                   -- 最小高度
-            scale = 0.5,                -- 文字缩放
-        }),
-        config = {
-            align = 'cm',              -- 居中对齐
-            offset = { x = 0, y = 2 }, -- 偏移
-            major = self.ROOM_ATTACH,  -- 附着对象（相对于谁定位）
-        }
-    })
+    -- UIBox({
+    --     definition = UIBox_button({
+    --         label = { 'Click Me' },     -- 按钮文字
+    --         button = 'my_button_click', -- ★ 回调函数名（对应 G.FUNCS.my_button_click）
+    --         colour = Enum.Color.RED,    -- 按钮颜色
+    --         minw = 3,                   -- 最小宽度 (in game units)
+    --         minh = 1,                   -- 最小高度
+    --         scale = 0.5,                -- 文字缩放
+    --     }),
+    --     config = {
+    --         align = 'cm',              -- 居中对齐
+    --         offset = { x = 0, y = 2 }, -- 偏移
+    --         major = self.ROOM_ATTACH,  -- 附着对象（相对于谁定位）
+    --     }
+    -- })
+    UIBox()
 end
 
 ---@return table
@@ -529,44 +530,44 @@ function App:init_window()
 end
 
 function App:apply_window_changes()
-    --Set the screenmode setting from Windowed, Fullscreen or Borderless
-    self.SETTINGS.WINDOW.screenmode = (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.screenmode) or
-        self.SETTINGS.WINDOW.screenmode or 'Windowed'
+    -- --Set the screenmode setting from Windowed, Fullscreen or Borderless
+    -- self.SETTINGS.WINDOW.screenmode = (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.screenmode) or
+    --     self.SETTINGS.WINDOW.screenmode or 'Windowed'
 
-    --Set the monitor the window should be rendered to
-    self.SETTINGS.WINDOW.selected_display = (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.selected_display) or
-        self.SETTINGS.WINDOW.selected_display or 1
+    -- --Set the monitor the window should be rendered to
+    -- self.SETTINGS.WINDOW.selected_display = (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.selected_display) or
+    --     self.SETTINGS.WINDOW.selected_display or 1
 
-    --Set the screen resolution
-    self.SETTINGS.WINDOW.DISPLAYS[self.SETTINGS.WINDOW.selected_display].screen_res = {
-        w = (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.screenres and self.SETTINGS.QUEUED_CHANGE.screenres.w) or
-            (self.SETTINGS.screen_res and self.SETTINGS.screen_res.w) or love.graphics.getWidth(),
-        h = (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.screenres and self.SETTINGS.QUEUED_CHANGE.screenres.h) or
-            (self.SETTINGS.screen_res and self.SETTINGS.screen_res.h) or love.graphics.getHeight()
-    }
+    -- --Set the screen resolution
+    -- self.SETTINGS.WINDOW.DISPLAYS[self.SETTINGS.WINDOW.selected_display].screen_res = {
+    --     w = (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.screenres and self.SETTINGS.QUEUED_CHANGE.screenres.w) or
+    --         (self.SETTINGS.screen_res and self.SETTINGS.screen_res.w) or love.graphics.getWidth(),
+    --     h = (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.screenres and self.SETTINGS.QUEUED_CHANGE.screenres.h) or
+    --         (self.SETTINGS.screen_res and self.SETTINGS.screen_res.h) or love.graphics.getHeight()
+    -- }
 
-    --Set the vsync value, 0 is off 1 is on
-    self.SETTINGS.WINDOW.vsync = (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.vsync) or
-        self.SETTINGS.WINDOW.vsync or
-        1
+    -- --Set the vsync value, 0 is off 1 is on
+    -- self.SETTINGS.WINDOW.vsync = (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.vsync) or
+    --     self.SETTINGS.WINDOW.vsync or
+    --     1
 
-    love.window.updateMode(
-        (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.screenmode == 'Windowed') and
-        love.graphics.getWidth() *
-        0.8 or self.SETTINGS.WINDOW.DISPLAYS[self.SETTINGS.WINDOW.selected_display].screen_res.w,
-        (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.screenmode == 'Windowed') and
-        love.graphics.getHeight() * 0.8 or
-        self.SETTINGS.WINDOW.DISPLAYS[self.SETTINGS.WINDOW.selected_display].screen_res.h,
-        {
-            fullscreen = self.SETTINGS.WINDOW.screenmode ~= 'Windowed',
-            fullscreentype = (self.SETTINGS.WINDOW.screenmode == 'Borderless' and 'desktop') or
-                (self.SETTINGS.WINDOW.screenmode == 'Fullscreen' and 'exclusive') or nil,
-            vsync = self.SETTINGS.WINDOW.vsync,
-            resizable = true,
-            display = self.SETTINGS.WINDOW.selected_display,
-            highdpi = (love.system.getOS() == 'OS X')
-        })
-    self.SETTINGS.QUEUED_CHANGE = {}
+    -- love.window.updateMode(
+    --     (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.screenmode == 'Windowed') and
+    --     love.graphics.getWidth() *
+    --     0.8 or self.SETTINGS.WINDOW.DISPLAYS[self.SETTINGS.WINDOW.selected_display].screen_res.w,
+    --     (self.SETTINGS.QUEUED_CHANGE and self.SETTINGS.QUEUED_CHANGE.screenmode == 'Windowed') and
+    --     love.graphics.getHeight() * 0.8 or
+    --     self.SETTINGS.WINDOW.DISPLAYS[self.SETTINGS.WINDOW.selected_display].screen_res.h,
+    --     {
+    --         fullscreen = self.SETTINGS.WINDOW.screenmode ~= 'Windowed',
+    --         fullscreentype = (self.SETTINGS.WINDOW.screenmode == 'Borderless' and 'desktop') or
+    --             (self.SETTINGS.WINDOW.screenmode == 'Fullscreen' and 'exclusive') or nil,
+    --         vsync = self.SETTINGS.WINDOW.vsync,
+    --         resizable = true,
+    --         display = self.SETTINGS.WINDOW.selected_display,
+    --         highdpi = (love.system.getOS() == 'OS X')
+    --     })
+    -- self.SETTINGS.QUEUED_CHANGE = {}
 end
 
 function App:save_settings()

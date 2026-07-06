@@ -3,6 +3,7 @@
 UIBox = Moveable:extend()
 ---@param args {T: table, definition: table, config: table}
 function UIBox:init(args)
+    Moveable.init(self, args)
 end
 
 function UIBox:get_UIE_by_ID(id, node)
@@ -24,6 +25,7 @@ function UIBox:remove()
 end
 
 function UIBox:draw()
+    print('UIBox:draw')
 end
 
 function UIBox:recalculate()
