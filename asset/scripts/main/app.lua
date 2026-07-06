@@ -3,9 +3,12 @@
 
 ---@class App:Object
 ---@field CANVAS Canvas
+---@field ROOM Node 房间, 就是游戏的主场景, 一切节点的根节点
+---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
 App = Object:extend()
 
 function App:init()
+    self.jiggle = 0
     self.ID = 0 -- ID 生成器
     self.VERSION = "0.0.1"
 
@@ -417,7 +420,6 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
             h = self.TILE_H
         }
     })
-    self.ROOM.jiggle = 0
     self.ROOM.states.drag.can = false
     self.ROOM:set_container(self.ROOM)
 
