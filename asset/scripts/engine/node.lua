@@ -1,5 +1,14 @@
 ---@class Node: Object
----@field T table The transform of the node | Transform: 位置/大小/旋转 {x, y, w, h, r, scale}  (逻辑坐标)
+---@field T Transform The transform of the node | Transform: 位置/大小/旋转 {x, y, w, h, r, scale}  (逻辑坐标)
+---@field CT Transform 碰撞检测的transform
+---@field click_offset {x: number, y: number} 点击偏移
+---@field hover_offset {x: number, y: number} 悬停偏移
+---@field created_on_pause boolean 不知道
+---@field ID number 唯一ID
+---@field states NodeStates 节点状态
+---@field children any 不知道是什么鬼, 看起来像是子节点
+---@field ARGS any 不知道是什么鬼, 看起来像是参数
+---@field config table 当前节点的元数据
 Node = Object:extend()
 
 ---Node represent any game object that needs to have some transform available in the game itself.\
@@ -260,7 +269,6 @@ function Node:put_focused_cursor()
 end
 
 --Sets the container of this node and all child nodes to be a new container node
---
 ---@param container Node The new node that will behave as this nodes container
 function Node:set_container(container)
     if self.children then
