@@ -71,7 +71,7 @@ function UIElement:update_object()
 end
 
 function UIElement:draw_self()
-    do return end
+    print('UIElement:draw_self')
     if not self.states.visible then
         if self.config.force_focus then add_to_drawhash(self) end
         return
@@ -91,45 +91,24 @@ function UIElement:draw_self()
     if self.config.colour[4] > 0.01 then
         if self.UIT == UIT.B or self.UIT == UIT.C or self.UIT == UIT.R or self.UIT == UIT.ROOT then
             prep_draw(self, 1)
-            love.graphics.scale(1 / (G.TILESIZE))
-            if self.config.shadow and G.SETTINGS.GRAPHICS.shadows == 'On' then
-                love.graphics.scale(0.98)
-                if self.config.shadow_colour then
-                    love.graphics.setColor(self.config.shadow_colour)
-                else
-                    love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour[4])
-                end
-                if self.config.r and self.VT.w > 0.01 then
-                    self:draw_pixellated_rect('shadow', parallax_dist)
-                else
-                    love.graphics.rectangle('fill', -self.shadow_parrallax.x * parallax_dist,
-                        -self.shadow_parrallax.y * parallax_dist, self.VT.w * G.TILESIZE, self.VT.h * G.TILESIZE)
-                end
-                love.graphics.scale(1 / 0.98)
-            end
-
             love.graphics.scale(button_being_pressed and 0.985 or 1)
-            if self.config.emboss then
-                love.graphics.setColor(darken(self.config.colour, self.states.hover.is and 0.5 or 0.3, true))
-                self:draw_pixellated_rect('emboss', parallax_dist, self.config.emboss)
-            end
             local collided_button = self.config.button_UIE or self
             self.ARGS.button_colours = self.ARGS.button_colours or {}
-            self.ARGS.button_colours[1] = self.config.button_delay and mix_colours(self.config.colour, G.C.L_BLACK, 0.5) or
-                self.config.colour
+            self.ARGS.button_colours[1] = self.config.button_delay and
+                mix_colours(self.config.colour, Color.L_BLACK, 0.5) or self.config.colour
             self.ARGS.button_colours[2] = (((collided_button.config.hover and collided_button.states.hover.is) or (collided_button.last_clicked and collided_button.last_clicked > G.TIMERS.REAL - 0.1)) and G.C.UI.HOVER or nil)
             for k, v in ipairs(self.ARGS.button_colours) do
                 love.graphics.setColor(v)
                 if self.config.r and self.VT.w > 0.01 then
                     if self.config.button_delay then
-                        love.graphics.setColor(G.C.GREY)
+                        love.graphics.setColor(Color.GREY)
                         self:draw_pixellated_rect('fill', parallax_dist)
                         love.graphics.setColor(v)
                         self:draw_pixellated_rect('fill', parallax_dist, nil, self.config.button_delay_progress)
                     elseif self.config.progress_bar then
-                        love.graphics.setColor(self.config.progress_bar.empty_col or G.C.GREY)
+                        love.graphics.setColor(self.config.progress_bar.empty_col or Color.GREY)
                         self:draw_pixellated_rect('fill', parallax_dist)
-                        love.graphics.setColor(self.config.progress_bar.filled_col or G.C.BLUE)
+                        love.graphics.setColor(self.config.progress_bar.filled_col or Color.BLUE)
                         self:draw_pixellated_rect('fill', parallax_dist, nil,
                             self.config.progress_bar.ref_table[self.config.progress_bar.ref_value] /
                             self.config.progress_bar.max)

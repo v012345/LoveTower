@@ -5,6 +5,9 @@ UIBox = Moveable:extend()
 function UIBox:init(args)
     Moveable.init(self, args.T)
     self.draw_layers = {} --if we need to explicitly change the draw order of the UIEs
+    self.definition = args.definition
+    self:set_parent_child(self.definition, nil)
+
     if getmetatable(self) == UIBox then
         table.insert(App.instance.I.UIBOX, self)
     end
@@ -23,12 +26,60 @@ function UIBox:get_group(node, group, ingroup)
 end
 
 function UIBox:set_parent_child(node, parent)
+    local UIE = UIElement(parent, self, node.n, node.config)
+
+    --set the group of the element
+    if parent and parent.config and parent.config.group then
+        if UIE.config then
+            UIE.config.group = parent.config.group
+        else
+            UIE.config = { group = parent.config.group }
+        end
+    end
+
+    --set the button for the element
+    if parent and parent.config and parent.config.button then
+        if UIE.config then
+            UIE.config.button_UIE = parent
+        else
+            UIE.config = { button_UIE = parent }
+        end
+    end
+    if parent and parent.config and parent.config.button_UIE then
+        if UIE.config then
+            UIE.config.button_UIE = parent.config.button_UIE
+        else
+            UIE.config = { button = parent.config.button }
+        end
+    end
+
+    if node.n and node.n == UIT.O and UIE.config.button then
+        UIE.config.object.states.click.can = false
+    end
+
+    --current node is a container
+    if (node.n and node.n == UIT.C or node.n == UIT.R or node.n == UIT.ROOT) and node.nodes then
+        for k, v in pairs(node.nodes) do
+            self:set_parent_child(v, UIE)
+        end
+    end
+    print(parent)
+    if not parent then
+        self.UIRoot = UIE
+        self.UIRoot.parent = self
+    else
+        table.insert(parent.children, UIE)
+    end
+    if node.config and node.config.mid then
+        self.Mid = UIE
+    end
 end
 
 function UIBox:remove()
 end
 
 function UIBox:draw()
+    print(self.ID)
     for k, v in pairs(self.children) do
         if k ~= 'h_popup' and k ~= 'alert' then v:draw() end
     end

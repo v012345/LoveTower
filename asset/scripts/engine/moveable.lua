@@ -537,3 +537,7 @@ function Moveable:remove()
     end
     Node.remove(self)
 end
+
+function Moveable:__tostring()
+    return "Moveable" .. (self.ID or '')
+end

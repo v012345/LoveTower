@@ -1,9 +1,8 @@
 -- 进到这里说明所有的资源都下载完了
 
-
----@class App:Object
+---@class App: Object
 ---@field CANVAS Canvas
----@field ROOM Node 房间, 就是游戏的主场景, 一切节点的根节点
+---@field ROOM   Node   房间, 就是游戏的主场景, 一切节点的根节点
 ---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
 App = Object:extend()
 
@@ -12,45 +11,43 @@ function App:init()
     self.ID = 0 -- ID 生成器
     self.VERSION = "0.0.1"
 
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     --         Feature Flags
-    --||||||||||||||||||||||||||||||
-    self.F_QUIT_BUTTON = true             --Include the main menu 'Quit' button
-    self.F_SKIP_TUTORIAL = false          --Completely skip the tutorial on fresh save
-    self.F_BASIC_CREDITS = false          --Remove references to Daniel Linssens itch.io
-    self.F_EXTERNAL_LINKS = true          --Remove all references to any external links (mainly for console)
-    self.F_ENABLE_PERF_OVERLAY = false    --Disable debugging tool for performance of each frame
-    self.F_NO_SAVING = false              --Disables all 'run' saving
-    self.F_MUTE = false                   --Force mute all sounds
-    self.F_SOUND_THREAD = true            --Have sound in a separate thread entirely - if not sounds will run on main thread
-    self.F_VIDEO_SETTINGS = true          --Let the player change their video settings
-    self.F_CTA = false                    --Call to Action video for the Demo - keep this as false
-    self.F_VERBOSE = true                 --Extra debug information on screen and in the console
-    self.F_HTTP_SCORES = false            --Include HTTP scores to fetch/set high scores
-    self.F_RUMBLE = nil                   --Add rumble to the primary controller - adjust this for amount of rumble
-    self.F_CRASH_REPORTS = false          --Send Crash reports over the internet
-    self.F_NO_ERROR_HAND = false          --Hard crash without error message screen
-    self.F_SWAP_AB_PIPS = false           --Swapping button pips for A and B buttons (mainly for switch)
-    self.F_SWAP_AB_BUTTONS = false        --Swapping button function for A and B buttons (mainly for switch)
-    self.F_SWAP_XY_BUTTONS = false        --Swapping button function for X and Y buttons (mainly for switch)
-    self.F_NO_ACHIEVEMENTS = false        --Disable achievements
-    self.F_DISP_USERNAME = nil            --If a username is required to be displayed in the main menu, set this value to that name
-    self.F_ENGLISH_ONLY = nil             --Disable language selection - only in english
-    self.F_GUIDE = false                  --Replace back/select button with 'guide' button
-    self.F_JAN_CTA = false                --Call to action for Jan demo
-    self.F_HIDE_BG = false                --Hiding the game objects when paused
-    self.F_TROPHIES = false               --use 'trophy' terminology instead of 'achievemnt'
-    self.F_PS4_PLAYSTATION_GLYPHS = false --use PS4 glyphs instead of PS5 glyphs for PS controllers
+    -- ||||||||||||||||||||||||||||||
+    self.F_QUIT_BUTTON = true             -- Include the main menu 'Quit' button
+    self.F_SKIP_TUTORIAL = false          -- Completely skip the tutorial on fresh save
+    self.F_BASIC_CREDITS = false          -- Remove references to Daniel Linssens itch.io
+    self.F_EXTERNAL_LINKS = true          -- Remove all references to any external links (mainly for console)
+    self.F_ENABLE_PERF_OVERLAY = false    -- Disable debugging tool for performance of each frame
+    self.F_NO_SAVING = false              -- Disables all 'run' saving
+    self.F_MUTE = false                   -- Force mute all sounds
+    self.F_SOUND_THREAD = true            -- Have sound in a separate thread entirely - if not sounds will run on main thread
+    self.F_VIDEO_SETTINGS = true          -- Let the player change their video settings
+    self.F_CTA = false                    -- Call to Action video for the Demo - keep this as false
+    self.F_VERBOSE = true                 -- Extra debug information on screen and in the console
+    self.F_HTTP_SCORES = false            -- Include HTTP scores to fetch/set high scores
+    self.F_RUMBLE = nil                   -- Add rumble to the primary controller - adjust this for amount of rumble
+    self.F_CRASH_REPORTS = false          -- Send Crash reports over the internet
+    self.F_NO_ERROR_HAND = false          -- Hard crash without error message screen
+    self.F_SWAP_AB_PIPS = false           -- Swapping button pips for A and B buttons (mainly for switch)
+    self.F_SWAP_AB_BUTTONS = false        -- Swapping button function for A and B buttons (mainly for switch)
+    self.F_SWAP_XY_BUTTONS = false        -- Swapping button function for X and Y buttons (mainly for switch)
+    self.F_NO_ACHIEVEMENTS = false        -- Disable achievements
+    self.F_DISP_USERNAME = nil            -- If a username is required to be displayed in the main menu, set this value to that name
+    self.F_ENGLISH_ONLY = nil             -- Disable language selection - only in english
+    self.F_GUIDE = false                  -- Replace back/select button with 'guide' button
+    self.F_JAN_CTA = false                -- Call to action for Jan demo
+    self.F_HIDE_BG = false                -- Hiding the game objects when paused
+    self.F_TROPHIES = false               -- use 'trophy' terminology instead of 'achievemnt'
+    self.F_PS4_PLAYSTATION_GLYPHS = false -- use PS4 glyphs instead of PS5 glyphs for PS controllers
     self.F_LOCAL_CLIPBOARD = false
     self.F_SAVE_TIMER = 30
     self.F_MOBILE_UI = false
     self.F_HIDE_BETA_LANGS = nil
 
-
     -- if love.system.getOS() == 'iOS' or love.system.getOS() == 'Android' then
     --     love.event.quit()
     -- end
-
 
     if love.system.getOS() == 'Windows' then
         self.F_DISCORD = true
@@ -90,7 +87,7 @@ function App:init()
         self.F_HIDE_BG = true
     end
 
-    if love.system.getOS() == 'ps4' or love.system.getOS() == 'ps5' then --PLAYSTATION this is for console stuff, modify as needed
+    if love.system.getOS() == 'ps4' or love.system.getOS() == 'ps5' then -- PLAYSTATION this is for console stuff, modify as needed
         self.F_HIDE_BETA_LANGS = true
         self.F_NO_ERROR_HAND = true
         self.F_QUIT_BUTTON = false
@@ -109,13 +106,13 @@ function App:init()
 
         self.F_EXTERNAL_LINKS = false
         self.F_HIDE_BG = true
-        --self.F_LOCAL_CLIPBOARD = true
+        -- self.F_LOCAL_CLIPBOARD = true
     end
 
     if love.system.getOS() == 'xbox' then
         self.F_HIDE_BETA_LANGS = true
         self.F_NO_ERROR_HAND = true
-        self.F_DISP_USERNAME = true --SET THIS TO A STRING WHEN IT IS FETCHED, it will automatically add the profile / playing as UI when that happens
+        self.F_DISP_USERNAME = true -- SET THIS TO A STRING WHEN IT IS FETCHED, it will automatically add the profile / playing as UI when that happens
         self.F_SKIP_TUTORIAL = false
         self.F_ENABLE_PERF_OVERLAY = false
         self.F_NO_SAVING = false
@@ -129,31 +126,22 @@ function App:init()
         self.F_HIDE_BG = true
     end
 
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     --             Time
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     self.SEED = os.time()
-    self.TIMERS = {
-        TOTAL = 0,
-        REAL = 0,
-        REAL_SHADER = 0,
-        UPTIME = 0,
-        BACKGROUND = 0
-    }
-    self.FRAMES = {
-        DRAW = 0,
-        MOVE = 0
-    }
+    self.TIMERS = { TOTAL = 0, REAL = 0, REAL_SHADER = 0, UPTIME = 0, BACKGROUND = 0 }
+    self.FRAMES = { DRAW = 0, MOVE = 0 }
     self.exp_times = { xy = 0, scale = 0, r = 0 }
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     --           SETTINGS
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     self.SETTINGS = {
         COMP = {
             name = '',
             prev_name = '',
             submission_name = nil,
-            score = 0,
+            score = 0
         },
         DEMO = {
             total_uptime = 0,
@@ -174,7 +162,7 @@ function App:init()
         SOUND = {
             volume = 50,
             music_volume = 100,
-            game_sounds_volume = 100,
+            game_sounds_volume = 100
         },
         WINDOW = {
             screenmode = 'Borderless',
@@ -184,16 +172,16 @@ function App:init()
             DISPLAYS = {
                 {
                     name = '[NONE]',
-                    screen_res = { w = 1000, h = 650 },
+                    screen_res = { w = 1000, h = 650 }
                 }
-            },
+            }
         },
         CUSTOM_DECK = {
             Collabs = {
                 Spades = 'default',
                 Hearts = 'default',
                 Clubs = 'default',
-                Diamonds = 'default',
+                Diamonds = 'default'
             }
         },
         GRAPHICS = {
@@ -201,7 +189,7 @@ function App:init()
             shadows = 'On',
             crt = 70,
             bloom = 1
-        },
+        }
     }
 
     self.COLLABS = {
@@ -214,7 +202,7 @@ function App:init()
                 'collab_SK',
                 'collab_DS',
                 'collab_AC',
-                'collab_STP',
+                'collab_STP'
             },
             Hearts = {
                 'default',
@@ -223,7 +211,7 @@ function App:init()
                 'collab_CL',
                 'collab_D2',
                 'collab_CR',
-                'collab_BUG',
+                'collab_BUG'
             },
             Clubs = {
                 'default',
@@ -243,14 +231,14 @@ function App:init()
                 'collab_C7',
                 'collab_R'
             }
-        },
+        }
     }
 
     self.METRICS = {
         cards = {
             used = {},
             bought = {},
-            appeared = {},
+            appeared = {}
         },
         decks = {
             chosen = {},
@@ -260,22 +248,18 @@ function App:init()
         bosses = {
             faced = {},
             win = {},
-            lose = {},
+            lose = {}
         }
     }
 
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     --           PROFILES
-    --||||||||||||||||||||||||||||||
-    self.PROFILES = {
-        {},
-        {},
-        {},
-    }
+    -- ||||||||||||||||||||||||||||||
+    self.PROFILES = { {}, {}, {} }
 
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     --        RENDER SCALE
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     self.TILESIZE = 20
     self.TILESCALE = 3.65
     self.TILE_W = 20
@@ -288,9 +272,9 @@ function App:init()
 
     self.PITCH_MOD = 1
 
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     --        GAMESTATES
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     self.STATES = {
         SELECTING_HAND = 1,
         HAND_PLAYED = 2,
@@ -304,52 +288,37 @@ function App:init()
         PLANET_PACK = 10,
         MENU = 11,
         TUTORIAL = 12,
-        SPLASH = 13, --DO NOT CHANGE, this has a dependency in the SOUND_MANAGER
+        SPLASH = 13, -- DO NOT CHANGE, this has a dependency in the SOUND_MANAGER
         SANDBOX = 14,
         SPECTRAL_PACK = 15,
         DEMO_CTA = 16,
         STANDARD_PACK = 17,
         BUFFOON_PACK = 18,
-        NEW_ROUND = 19,
+        NEW_ROUND = 19
     }
 
-    self.STAGES = {
-        MAIN_MENU = 1,
-        RUN = 2,
-        SANDBOX = 3
-    }
-    self.STAGE_OBJECTS = {
-        {}, {}, {}
-    }
+    self.STAGES = { MAIN_MENU = 1, RUN = 2, SANDBOX = 3 }
+    self.STAGE_OBJECTS = { {}, {}, {} }
     self.STAGE = self.STAGES.MAIN_MENU
     self.STATE = self.STATES.SPLASH
     self.TAROT_INTERRUPT = nil
     self.STATE_COMPLETE = false
 
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     --          INSTANCES
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     self.ARGS = {}
     self.FUNCS = {}
-    self.I = {
-        NODE = {},
-        MOVEABLE = {},
-        SPRITE = {},
-        UIBOX = {},
-        POPUP = {},
-        CARD = {},
-        CARDAREA = {},
-        ALERT = {}
-    }
+    self.I = { NODE = {}, MOVEABLE = {}, SPRITE = {}, UIBOX = {}, POPUP = {}, CARD = {}, CARDAREA = {}, ALERT = {} }
     self.ANIMATION_ATLAS = {}
     self.ASSET_ATLAS = {}
     self.MOVEABLES = {}
     self.ANIMATIONS = {}
     self.DRAW_HASH = {}
 
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     --        CONSTANTS
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     self.MIN_CLICK_DIST = 0.9
     self.MIN_HOVER_TIME = 0.1
     self.DEBUG = false
@@ -357,49 +326,39 @@ function App:init()
     self.VIBRATION = 0
     self.CHALLENGE_WINS = 5
 
-    --||||||||||||||||||||||||||||||
+    -- ||||||||||||||||||||||||||||||
     --        COLOURS
-    --||||||||||||||||||||||||||||||
-
-
+    -- ||||||||||||||||||||||||||||||
 
     self.handlist = {
-        "Flush Five",
-        "Flush House",
-        "Five of a Kind",
-        "Straight Flush",
-        "Four of a Kind",
-        "Full House",
-        "Flush",
-        "Straight",
-        "Three of a Kind",
-        "Two Pair",
-        "Pair",
-        "High Card",
+        "Flush Five", "Flush House", "Five of a Kind", "Straight Flush", "Four of a Kind", "Full House", "Flush",
+        "Straight", "Three of a Kind", "Two Pair", "Pair", "High Card"
     }
     self.button_mapping = {
         a = self.F_SWAP_AB_BUTTONS and 'b' or nil,
         b = self.F_SWAP_AB_BUTTONS and 'a' or nil,
         y = self.F_SWAP_XY_BUTTONS and 'x' or nil,
-        x = self.F_SWAP_XY_BUTTONS and 'y' or nil,
+        x = self.F_SWAP_XY_BUTTONS and 'y' or nil
     }
-    self.keybind_mapping = { {
-        a = 'dpleft',
-        d = 'dpright',
-        w = 'dpup',
-        s = 'dpdown',
-        x = 'x',
-        c = 'y',
-        space = 'a',
-        shift = 'b',
-        esc = 'start',
-        q = 'triggerleft',
-        e = 'triggerright',
-    } }
+    self.keybind_mapping = {
+        {
+            a = 'dpleft',
+            d = 'dpright',
+            w = 'dpup',
+            s = 'dpdown',
+            x = 'x',
+            c = 'y',
+            space = 'a',
+            shift = 'b',
+            esc = 'start',
+            q = 'triggerleft',
+            e = 'triggerright'
+        }
+    }
 end
 
----@param new_stage number
----@param new_state number
+---@param new_stage    number
+---@param new_state    number
 ---@param new_game_obj boolean
 function App:prep_stage(new_stage, new_state, new_game_obj)
     local locks = Controller.instance.locks
@@ -423,7 +382,6 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.ROOM.states.drag.can = false
     self.ROOM:set_container(self.ROOM)
 
-
     self.ROOM_ATTACH = Moveable({
         T = {
             x = 0,
@@ -435,26 +393,6 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.ROOM_ATTACH.states.drag.can = false
     self.ROOM_ATTACH:set_container(self.ROOM)
     love.resize(love.graphics.getWidth(), love.graphics.getHeight())
-
-
-
-
-    -- UIBox({
-    --     definition = UIBox_button({
-    --         label = { 'Click Me' },     -- 按钮文字
-    --         button = 'my_button_click', -- ★ 回调函数名（对应 G.FUNCS.my_button_click）
-    --         colour = Color.RED,    -- 按钮颜色
-    --         minw = 3,                   -- 最小宽度 (in game units)
-    --         minh = 1,                   -- 最小高度
-    --         scale = 0.5,                -- 文字缩放
-    --     }),
-    --     config = {
-    --         align = 'cm',              -- 居中对齐
-    --         offset = { x = 0, y = 2 }, -- 偏移
-    --         major = self.ROOM_ATTACH,  -- 附着对象（相对于谁定位）
-    --     }
-    -- })
-    UIBox()
 end
 
 ---@return table
@@ -477,7 +415,6 @@ function App:draw()
             love.graphics.scale(self.CANV_SCALE)
             love.graphics.setShader()
             love.graphics.clear(0, 0, 0, 1)
-
 
             for k, v in pairs(self.I.NODE) do
                 if not v.parent then
@@ -520,7 +457,17 @@ function App:start_up()
 end
 
 function App:set_language()
-    self.LANG = { font = 1, label = "English", key = 'en-us', button = "Language Feedback", warning = { 'This language is still in Beta. To help us', 'improve it, please click on the feedback button.', 'Click again to confirm' } }
+    self.LANG = {
+        font = 1,
+        label = "English",
+        key = 'en-us',
+        button = "Language Feedback",
+        warning = {
+            'This language is still in Beta. To help us',
+            'improve it, please click on the feedback button.',
+            'Click again to confirm'
+        }
+    }
 end
 
 function App:init_window()
@@ -537,8 +484,7 @@ function App:init_window()
         w = self.WINDOWTRANS.w * self.TILESIZE * self.TILESCALE,
         h = self.WINDOWTRANS.h * self.TILESIZE * self.TILESCALE,
         orig_ratio = self.WINDOWTRANS.w * self.TILESIZE * self.TILESCALE
-            / (self.WINDOWTRANS.h * self.TILESIZE
-                * self.TILESCALE)
+            / (self.WINDOWTRANS.h * self.TILESIZE * self.TILESCALE)
     }
     self.SETTINGS.QUEUED_CHANGE = self.SETTINGS.QUEUED_CHANGE or {}
     self.SETTINGS.QUEUED_CHANGE.screenmode = self.SETTINGS.WINDOW.screenmode
@@ -595,6 +541,14 @@ end
 
 function App:main_menu()
     self:prep_stage(self.STAGES.MAIN_MENU, self.STATES.MENU, true)
+    --VERSION
+    UIBox {
+        definition =
+        { n = UIT.ROOT, config = { align = "cm", colour = Color.UI.TRANSPARENT_DARK }, nodes = {
+            { n = UIT.T, config = { text = self.VERSION, scale = 0.3, colour = Color.UI.TEXT_LIGHT } }
+        } },
+        config = { align = "tri", offset = { x = 0, y = 0 }, major = self.ROOM_ATTACH, bond = 'Weak' }
+    }
 end
 
 -- print("game load")
@@ -644,7 +598,7 @@ end
 --     self.font = love.graphics.newFont("resource/fonts/chinese.ttf", 18)
 --     self.bigFont = love.graphics.newFont("resource/fonts/chinese.ttf", 52)
 
---     self:resetRound() -- 初始化本局数据
+-- self:resetRound() -- 初始化本局数据
 
 --     -- 输入只注册一次
 --     InputManager:on(App, "keypressed", "space", function() self:onSpace() end)
@@ -742,7 +696,7 @@ end
 --         love.graphics.print("按 [空格] 开始第 " .. (EntitySpawner.waveIndex + 1) .. " 波", 10, 36)
 --     end
 
---     UIManager:draw() -- 底部工具栏
+-- UIManager:draw() -- 底部工具栏
 
 --     local state = StateManager.current
 --     if state == StateManager.MENU then
@@ -768,7 +722,6 @@ end
 -- end
 
 --
-
 
 ---@diagnostic disable-next-line: duplicate-set-field
 function love.update(dt)

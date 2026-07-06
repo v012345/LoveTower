@@ -22,6 +22,21 @@ function HEX(hex)
     return color
 end
 
+function mix_colours(C1, C2, proportionC1)
+    return {
+        (C1[1] or 0.5) * proportionC1 + (C2[1] or 0.5) * (1 - proportionC1),
+        (C1[2] or 0.5) * proportionC1 + (C2[2] or 0.5) * (1 - proportionC1),
+        (C1[3] or 0.5) * proportionC1 + (C2[3] or 0.5) * (1 - proportionC1),
+        (C1[4] or 1) * proportionC1 + (C2[4] or 1) * (1 - proportionC1),
+    }
+end
+
+---为什么没有 end_draw 函数?
+function prep_draw(moveable, scale, rotate, offset)
+    love.graphics.push()
+    love.graphics.scale(moveable.VT.scale * scale)
+end
+
 function add_to_drawhash(obj)
     if obj then
         App.instance.DRAW_HASH[#App.instance.DRAW_HASH + 1] = obj

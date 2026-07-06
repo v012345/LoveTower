@@ -99,9 +99,9 @@ function love.graphics.newFont(filename, size) end
 function love.graphics.setFont(font)
 end
 
----@param r  number
----@param g  number
----@param b  number
+---@param r  number|table
+---@param g?  number
+---@param b?  number
 ---@param a? number
 function love.graphics.setColor(r, g, b, a)
 end

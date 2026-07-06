@@ -366,3 +366,7 @@ function Node:animate() end
 
 --Prototype update function for any object specific logic that needs to occur every frame
 function Node:update(dt) end
+
+function Node:__tostring()
+    return "Node" .. self.ID
+end

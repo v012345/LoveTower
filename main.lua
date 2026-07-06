@@ -1,5 +1,4 @@
-package.cpath = package.cpath ..
-";c:/Users/NightOwl/.vscode/extensions/tangzx.emmylua-0.9.39-win32-x64/debugger/emmy/windows/x64/?.dll"
+package.cpath = package.cpath .. ";c:/Users/NightOwl/.vscode/extensions/tangzx.emmylua-0.9.39-win32-x64/debugger/emmy/windows/x64/?.dll"
 local dbg = require("emmy_core")
 dbg.tcpListen("localhost", 9966)
 require "asset.scripts.enum"
@@ -84,12 +83,16 @@ function love.resize(w, h)
 
         if w / h < App.instance.window_prev.orig_ratio then
             App.instance.ROOM.T.x = App.instance.ROOM_PADDING_W
-            App.instance.ROOM.T.y = (h / (App.instance.TILESIZE * App.instance.TILESCALE) - (App.instance.ROOM.T.h + App.instance.ROOM_PADDING_H)) /
-                2 + App.instance.ROOM_PADDING_H / 2
+            App.instance.ROOM.T.y = (h / (App.instance.TILESIZE * App.instance.TILESCALE)
+                    - (App.instance.ROOM.T.h + App.instance.ROOM_PADDING_H))
+                / 2
+                + App.instance.ROOM_PADDING_H / 2
         else
             App.instance.ROOM.T.y = App.instance.ROOM_PADDING_H
-            App.instance.ROOM.T.x = (w / (App.instance.TILESIZE * App.instance.TILESCALE) - (App.instance.ROOM.T.w + App.instance.ROOM_PADDING_W)) /
-                2 + App.instance.ROOM_PADDING_W / 2
+            App.instance.ROOM.T.x = (w / (App.instance.TILESIZE * App.instance.TILESCALE)
+                    - (App.instance.ROOM.T.w + App.instance.ROOM_PADDING_W))
+                / 2
+                + App.instance.ROOM_PADDING_W / 2
         end
 
         App.instance.ROOM_ORIG = { x = App.instance.ROOM.T.x, y = App.instance.ROOM.T.y, r = App.instance.ROOM.T.r }
@@ -121,8 +124,9 @@ function love.resize(w, h)
         if DPI_scale > 1.1 then
             App.instance.CANV_SCALE = 1.5
 
-            App.instance.AA_CANVAS = love.graphics.newCanvas(
-                App.instance.WINDOWTRANS.real_window_w * App.instance.CANV_SCALE, App.instance.WINDOWTRANS
+            App.instance.AA_CANVAS = love.graphics.newCanvas(App.instance.WINDOWTRANS.real_window_w
+                * App.instance.CANV_SCALE, App.instance
+                .WINDOWTRANS
                 .real_window_h
                 * App.instance.CANV_SCALE, {
                     type = '2d',
@@ -134,7 +138,8 @@ function love.resize(w, h)
         end
     end
 
-    App.instance.CANVAS = love.graphics.newCanvas(w * App.instance.CANV_SCALE, h * App.instance.CANV_SCALE,
-        { type = '2d', readable = true })
+    App.instance.CANVAS = love.graphics.newCanvas(
+        w * App.instance.CANV_SCALE, h * App.instance.CANV_SCALE, { type = '2d', readable = true }
+    )
     App.instance.CANVAS:setFilter('linear', 'linear')
 end
