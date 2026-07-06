@@ -1,6 +1,6 @@
 ---@class UIElement : Moveable
 ---@field parent Node 父元素
----@field UIT number
+---@field UIT UIT
 ---@field UIBox UIBox
 ---@field ARGS table
 ---@field content_dimensions Size
@@ -9,7 +9,7 @@ UIElement = Moveable:extend()
 ---comment
 ---@param parent Node
 ---@param new_UIBox UIBox
----@param new_UIT number
+---@param new_UIT UIT
 ---@param config table
 function UIElement:init(parent, new_UIBox, new_UIT, config)
     self.parent = parent
@@ -89,54 +89,7 @@ function UIElement:draw_self()
 
     -- 透明度大于0.01时，绘制
     if self.config.colour[4] > 0.01 then
-        if self.UIT == Enum.UIT.T and self.config.scale then
-            self.ARGS.text_parallax = self.ARGS.text_parallax or {}
-            self.ARGS.text_parallax.sx = -self.shadow_parrallax.x * 0.5 /
-                (self.config.scale * self.config.lang.font.FONTSCALE)
-            self.ARGS.text_parallax.sy = -self.shadow_parrallax.y * 0.5 /
-                (self.config.scale * self.config.lang.font.FONTSCALE)
-
-            if (self.config.button_UIE and button_active) or (not self.config.button_UIE and self.config.shadow and G.SETTINGS.GRAPHICS.shadows == 'On') then
-                prep_draw(self, 0.97)
-                if self.config.vert then
-                    love.graphics.translate(0, self.VT.h); love.graphics.rotate(-math.pi / 2)
-                end
-                if (self.config.shadow or (self.config.button_UIE and button_active)) and G.SETTINGS.GRAPHICS.shadows == 'On' then
-                    love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour[4])
-                    love.graphics.draw(
-                        self.config.text_drawable,
-                        (self.config.lang.font.TEXT_OFFSET.x + (self.config.vert and -self.ARGS.text_parallax.sy or self.ARGS.text_parallax.sx)) *
-                        (self.config.scale or 1) * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                        (self.config.lang.font.TEXT_OFFSET.y + (self.config.vert and self.ARGS.text_parallax.sx or self.ARGS.text_parallax.sy)) *
-                        (self.config.scale or 1) * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                        0,
-                        (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / G
-                        .TILESIZE,
-                        (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE
-                    )
-                end
-                love.graphics.pop()
-            end
-
-            prep_draw(self, 1)
-            if self.config.vert then
-                love.graphics.translate(0, self.VT.h); love.graphics.rotate(-math.pi / 2)
-            end
-            if not button_active then
-                love.graphics.setColor(G.C.UI.TEXT_INACTIVE)
-            else
-                love.graphics.setColor(self.config.colour)
-            end
-            love.graphics.draw(
-                self.config.text_drawable,
-                self.config.lang.font.TEXT_OFFSET.x * (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                self.config.lang.font.TEXT_OFFSET.y * (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                0,
-                (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE
-            )
-            love.graphics.pop()
-        elseif self.UIT == G.UIT.B or self.UIT == G.UIT.C or self.UIT == G.UIT.R or self.UIT == G.UIT.ROOT then
+        if self.UIT == UIT.B or self.UIT == UIT.C or self.UIT == UIT.R or self.UIT == UIT.ROOT then
             prep_draw(self, 1)
             love.graphics.scale(1 / (G.TILESIZE))
             if self.config.shadow and G.SETTINGS.GRAPHICS.shadows == 'On' then
@@ -188,24 +141,6 @@ function UIElement:draw_self()
                 end
             end
             love.graphics.pop()
-        elseif self.UIT == G.UIT.O and self.config.object then
-            --Draw the outline for highlighted objext
-            if self.config.focus_with_object and self.config.object.states.focus.is then
-                self.object_focus_timer = self.object_focus_timer or G.TIMERS.REAL
-                local lw = 50 * math.max(0, self.object_focus_timer - G.TIMERS.REAL + 0.3) ^ 2
-                prep_draw(self, 1)
-                love.graphics.scale((1) / (G.TILESIZE))
-                love.graphics.setLineWidth(lw + 1.5)
-                love.graphics.setColor(adjust_alpha(G.C.WHITE, 0.2 * lw, true))
-                self:draw_pixellated_rect('fill', parallax_dist)
-                love.graphics.setColor(self.config.colour[4] > 0 and mix_colours(G.C.WHITE, self.config.colour, 0.8) or
-                    G.C.WHITE)
-                self:draw_pixellated_rect('line', parallax_dist)
-                love.graphics.pop()
-            else
-                self.object_focus_timer = nil
-            end
-            self.config.object:draw()
         end
     end
 

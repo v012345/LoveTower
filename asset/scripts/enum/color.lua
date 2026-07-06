@@ -1,7 +1,7 @@
 require "asset.scripts.functions.misc_functions"
 
-Enum = Enum or {}
-Enum.Color = {
+---@class Color
+Color = {
     MULT = HEX('FE5F55'),
     CHIPS = HEX("009dff"),
     MONEY = HEX('f3b958'),
@@ -119,6 +119,6 @@ Enum.Color = {
     }
 }
 
-Enum.Color.HAND_LEVELS[0] = Enum.Color.RED
-Enum.Color.UI_CHIPS = copy_table(Enum.Color.BLUE)
-Enum.Color.UI_MULT = copy_table(Enum.Color.RED)
+Color.HAND_LEVELS[0] = Color.RED
+Color.UI_CHIPS = copy_table(Color.BLUE)
+Color.UI_MULT = copy_table(Color.RED)

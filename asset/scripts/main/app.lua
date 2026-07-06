@@ -443,7 +443,7 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     --     definition = UIBox_button({
     --         label = { 'Click Me' },     -- 按钮文字
     --         button = 'my_button_click', -- ★ 回调函数名（对应 G.FUNCS.my_button_click）
-    --         colour = Enum.Color.RED,    -- 按钮颜色
+    --         colour = Color.RED,    -- 按钮颜色
     --         minw = 3,                   -- 最小宽度 (in game units)
     --         minh = 1,                   -- 最小高度
     --         scale = 0.5,                -- 文字缩放
@@ -504,11 +504,11 @@ end
 function App:start_up()
     self.SETTINGS.version = self.VERSION
     self.SETTINGS.paused = nil
-    local new_colour_proto = Enum.Color["SO_" .. (self.SETTINGS.colourblind_option and 2 or 1)]
-    Enum.Color.SUITS.Hearts = new_colour_proto.Hearts
-    Enum.Color.SUITS.Diamonds = new_colour_proto.Diamonds
-    Enum.Color.SUITS.Spades = new_colour_proto.Spades
-    Enum.Color.SUITS.Clubs = new_colour_proto.Clubs
+    local new_colour_proto = Color["SO_" .. (self.SETTINGS.colourblind_option and 2 or 1)]
+    Color.SUITS.Hearts = new_colour_proto.Hearts
+    Color.SUITS.Diamonds = new_colour_proto.Diamonds
+    Color.SUITS.Spades = new_colour_proto.Spades
+    Color.SUITS.Clubs = new_colour_proto.Clubs
     boot_timer('start', 'settings', 0.1)
     boot_timer('settings', 'window init', 0.2)
 

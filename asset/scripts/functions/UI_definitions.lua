@@ -5,7 +5,7 @@ function UIBox_button(args)
     args = args or {}
     args.button = args.button or "exit_overlay_menu"
     args.func = args.func or nil
-    args.colour = args.colour or Enum.Color.RED
+    args.colour = args.colour or Color.RED
     args.choice = args.choice or nil
     args.chosen = args.chosen or nil
     args.label = args.label or { 'LABEL' }
@@ -15,8 +15,8 @@ function UIBox_button(args)
     args.minh = args.minh or 0.9
     args.scale = args.scale or 0.5
     args.focus_args = args.focus_args or nil
-    args.text_colour = args.text_colour or Enum.Color.UI.TEXT_LIGHT
-    local but_UIT = args.col == true and Enum.UIT.C or Enum.UIT.R
+    args.text_colour = args.text_colour or Color.UI.TEXT_LIGHT
+    local but_UIT = args.col == true and UIT.C or UIT.R
 
     local but_UI_label = {}
 
@@ -27,10 +27,10 @@ function UIBox_button(args)
         end
         table.insert(but_UI_label,
             {
-                n = Enum.UIT.R,
+                n = UIT.R,
                 config = { align = "cm", padding = 0, minw = args.minw, maxw = args.maxw },
                 nodes = {
-                    { n = Enum.UIT.T, config = { text = v, scale = args.scale, colour = args.text_colour, shadow = args.shadow, focus_args = button_pip and args.focus_args or nil, func = button_pip, ref_table = args.ref_table } }
+                    { n = UIT.T, config = { text = v, scale = args.scale, colour = args.text_colour, shadow = args.shadow, focus_args = button_pip and args.focus_args or nil, func = button_pip, ref_table = args.ref_table } }
                 }
             })
     end
@@ -38,10 +38,10 @@ function UIBox_button(args)
     if args.count then
         table.insert(but_UI_label,
             {
-                n = Enum.UIT.R,
+                n = UIT.R,
                 config = { align = "cm", minh = 0.4 },
                 nodes = {
-                    { n = Enum.UIT.T, config = { scale = 0.35, text = args.count.tally .. ' / ' .. args.count.of, colour = { 1, 1, 1, 0.9 } } }
+                    { n = UIT.T, config = { scale = 0.35, text = args.count.tally .. ' / ' .. args.count.of, colour = { 1, 1, 1, 0.9 } } }
                 }
             }
         )
@@ -52,7 +52,7 @@ function UIBox_button(args)
         n = but_UIT,
         config = { align = 'cm' },
         nodes = { {
-            n = Enum.UIT.C,
+            n = UIT.C,
             config = {
                 align = "cm",
                 padding = args.padding or 0,
