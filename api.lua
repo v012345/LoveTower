@@ -257,7 +257,7 @@ Transform = {}
 
 
 ---@class NodeStates
----@field visible boolean
+---@field visible boolean 节点是否可见
 ---@field collide { can: boolean, is: boolean }
 ---@field focus { can: boolean, is: boolean }
 ---@field hover { can: boolean, is: boolean }
