@@ -3,6 +3,8 @@
 ---@class love
 love = love or {}
 
+
+
 ---@class love.graphics
 love.graphics = love.graphics or {}
 
@@ -139,6 +141,10 @@ end
 function love.graphics.setBackgroundColor(r, g, b, a)
 end
 
+---@class love.arg
+love.arg = love.arg or {}
+function love.arg.parseGameArguments(arg) end
+
 ---@return number width
 ---@return number height
 function love.graphics.getDimensions()
@@ -245,9 +251,6 @@ Canvas = {}
 ---@param filtermag string "nearest" | "linear"
 ---@return nil
 function Canvas:setFilter(filter, filtermag) end
-
-
-
 
 ---@class NodeStates
 ---@field visible boolean 节点是否可见

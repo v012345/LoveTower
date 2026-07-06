@@ -8,15 +8,10 @@ App = Object:extend()
 
 function App:init()
     self.ID = 0 -- ID 生成器
-    UIBox({
+    ---@type UIBox
+    self.version = UIBox({
         T = Transform(0, 0, 0, 0),
-        definition = {
-            n = UIT.ROOT,
-            config = { align = "cm", colour = Color.UI.TRANSPARENT_DARK },
-            nodes = {
-                { n = UIT.T, config = { text = "1.0.1", scale = 0.3, colour = Color.UI.TEXT_LIGHT } }
-            }
-        },
+        definition = { n = UIT.T, config = { text = "1.0.1", scale = 0.3, colour = Color.UI.TEXT_LIGHT } },
         config = { align = "tri", offset = { x = 0, y = 0 }, major = nil, bond = 'Weak' }
     })
 end
@@ -37,7 +32,7 @@ function App:update(dt)
 end
 
 function App:draw()
-
+    self.version:draw()
 end
 
 function App:start_up()

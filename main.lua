@@ -51,7 +51,8 @@ function love.run()
     end
 end
 
-function love.load()
+---@param ... any
+function love.load(...)
     App.instance:start_up()
 end
 
