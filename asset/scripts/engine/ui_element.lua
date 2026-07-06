@@ -21,6 +21,7 @@ end
 function UIElement:draw()
 end
 
+---画子元素
 ---@return nil
 function UIElement:draw_children()
     if self.states.visible then
