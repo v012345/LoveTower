@@ -286,3 +286,13 @@ function love.graphics.scale(scale) end
 ---@field d_popup UIBox 拖拽弹窗
 ---@field alert UIBox 警告弹窗
 Children = {}
+
+
+---@class UIConfig
+---@field object any
+UIConfig = {}
+
+---@class Size
+---@field w number
+---@field h number
+Size = {}

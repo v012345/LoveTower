@@ -1,5 +1,5 @@
 Enum = Enum or {}
-Enum.UI = {
+Enum.UIT = {
     T = 1,       --text
     B = 2,       --box (can be rounded)
     C = 3,       --column
