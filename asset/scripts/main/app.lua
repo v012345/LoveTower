@@ -28,7 +28,6 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
 
 end
 
----@return table
 function App:init_game_object()
 
 end
@@ -67,7 +66,6 @@ end
 function App:main_menu()
 
 end
-
 
 ---@return number
 function App:generate_id()
