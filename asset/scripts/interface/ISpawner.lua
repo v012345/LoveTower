@@ -1,2 +1,0 @@
----@class ISpawner
----@field load fun(self:ISpawner)
