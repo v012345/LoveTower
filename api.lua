@@ -16,6 +16,16 @@ function love.graphics.push() end
 ---@return nil
 function love.graphics.pop() end
 
+---@return nil
+function love.graphics.setShader() end
+
+--- Clears the screen or active Canvas to the specified color.
+---@param r number
+---@param g number
+---@param b number
+---@param a? number
+function love.graphics.clear(r, g, b, a) end
+
 love.handlers = love.handlers or {}
 
 function love.quit() end
@@ -225,7 +235,7 @@ function love.system.getOS() end
 
 function love.graphics.newCanvas(width, height, options) end
 
----@param canvas Canvas
+---@param canvas Canvas|table|nil
 ---@return nil
 function love.graphics.setCanvas(canvas) end
 

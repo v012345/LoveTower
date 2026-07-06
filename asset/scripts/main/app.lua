@@ -468,28 +468,33 @@ function App:draw()
     self.FRAMES.DRAW = self.FRAMES.DRAW + 1
     self.DRAW_HASH = EMPTY(self.DRAW_HASH)
     if self.OVERLAY_TUTORIAL and not self.OVERLAY_MENU then self.under_overlay = true end
-    love.graphics.setCanvas({ self.CANVAS })
-    love.graphics.push()
-    love.graphics.scale(self.CANV_SCALE)
-    love.graphics.setShader()
-    love.graphics.clear(0, 0, 0, 1)
-    love.graphics.pop()
+    love.graphics.setCanvas(self.CANVAS)
+    do
+        love.graphics.push()
+        do
+            love.graphics.scale(self.CANV_SCALE)
+            love.graphics.setShader()
+            love.graphics.clear(0, 0, 0, 1)
 
-    for k, v in pairs(self.I.NODE) do
-        if not v.parent then
-            love.graphics.push()
-            v:translate_container()
-            v:draw()
-            love.graphics.pop()
+
+            for k, v in pairs(self.I.NODE) do
+                if not v.parent then
+                    love.graphics.push()
+                    v:translate_container()
+                    v:draw()
+                    love.graphics.pop()
+                end
+            end
+            for k, v in pairs(self.I.UIBOX) do
+                if not v.parent then
+                    love.graphics.push()
+                    v:translate_container()
+                    v:draw()
+                    love.graphics.pop()
+                end
+            end
         end
-    end
-    for k, v in pairs(self.I.UIBOX) do
-        if not v.parent then
-            love.graphics.push()
-            v:translate_container()
-            v:draw()
-            love.graphics.pop()
-        end
+        love.graphics.pop()
     end
     love.graphics.setCanvas()
 end
