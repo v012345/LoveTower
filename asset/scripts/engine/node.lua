@@ -7,7 +7,7 @@ Node = Object:extend()
 ---represented here.
 ---**T** The transform ititializer, with keys of x|1, y|2, w|3, h|4, r|5
 ---**container** optional container for this Node, defaults to G.ROOM
----@param args {T: table, container: Node}
+---@param args {T: Transform|number[], container: Node}
 function Node:init(args)
     --From args, set the values of self transform
     args = args or {}
@@ -121,7 +121,8 @@ function Node:collides_with_point(point)
 
         _p.x, _p.y = point.x, point.y
 
-        if self.container ~= self then --if there is some valid container, we need to apply all translations and rotations for the container first
+        --if there is some valid container, we need to apply all translations and rotations for the container first
+        if self.container ~= self then
             if math.abs(self.container.T.r) < 0.1 then
                 --Translate to normalize this Node to the center of the container
                 _t.x, _t.y = -self.container.T.w / 2, -self.container.T.h / 2

@@ -235,3 +235,15 @@ Canvas = {}
 ---@param filtermag string "nearest" | "linear"
 ---@return nil
 function Canvas:setFilter(filter, filtermag) end
+
+
+---@class Transform
+---@field x number
+---@field y number
+---@field w number
+---@field h number
+---@field r number
+---@field scale number
+Transform = {}
+
+
