@@ -6,11 +6,10 @@
 ---@field content_dimensions Size
 UIElement = Moveable:extend()
 
----comment
 ---@param parent Node
 ---@param new_UIBox UIBox
 ---@param new_UIT UIT
----@param config table
+---@param config UIConfig
 function UIElement:init(parent, new_UIBox, new_UIT, config)
     self.parent = parent
     self.UIT = new_UIT

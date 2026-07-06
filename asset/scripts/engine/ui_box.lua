@@ -25,35 +25,40 @@ end
 function UIBox:get_group(node, group, ingroup)
 end
 
+---@param node UIDdefinition
 function UIBox:set_parent_child(node, parent)
     print(debug.traceback())
     print(parent)
+    ---@type UIElement
     local UIE = UIElement(parent, self, node.n, node.config)
 
     --set the group of the element
-    if parent and parent.config and parent.config.group then
-        if UIE.config then
-            UIE.config.group = parent.config.group
-        else
-            UIE.config = { group = parent.config.group }
+    if parent and parent.config then
+        if parent.config.group then
+            if UIE.config then
+                UIE.config.group = parent.config.group
+            else
+                UIE.config = { group = parent.config.group }
+            end
+        end
+
+        --set the button for the element
+        if parent.config.button then
+            if UIE.config then
+                UIE.config.button_UIE = parent
+            else
+                UIE.config = { button_UIE = parent }
+            end
+        end
+        if parent.config.button_UIE then
+            if UIE.config then
+                UIE.config.button_UIE = parent.config.button_UIE
+            else
+                UIE.config = { button = parent.config.button }
+            end
         end
     end
 
-    --set the button for the element
-    if parent and parent.config and parent.config.button then
-        if UIE.config then
-            UIE.config.button_UIE = parent
-        else
-            UIE.config = { button_UIE = parent }
-        end
-    end
-    if parent and parent.config and parent.config.button_UIE then
-        if UIE.config then
-            UIE.config.button_UIE = parent.config.button_UIE
-        else
-            UIE.config = { button = parent.config.button }
-        end
-    end
 
     if node.n and node.n == UIT.O and UIE.config.button then
         UIE.config.object.states.click.can = false
