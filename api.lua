@@ -246,14 +246,7 @@ Canvas = {}
 ---@return nil
 function Canvas:setFilter(filter, filtermag) end
 
----@class Transform
----@field x number
----@field y number
----@field w number
----@field h number
----@field r number
----@field scale number
-Transform = {}
+
 
 
 ---@class NodeStates
@@ -290,9 +283,24 @@ Children = {}
 
 ---@class UIConfig
 ---@field object any
+---@field text? string
+---@field scale? number
+---@field colour? table
+---@field align? string
+---@field offset? { x: number, y: number }
+---@field major? Node
+---@field bond? string
 UIConfig = {}
 
 ---@class Size
 ---@field w number
 ---@field h number
 Size = {}
+
+
+
+---@class UIDdefinition
+---@field n UIT
+---@field config UIConfig
+---@field nodes? UIDdefinition[]
+UIDdefinition = {}

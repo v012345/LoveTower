@@ -19,11 +19,14 @@ Node = Object:extend()
 ---represented here.
 ---**T** The transform ititializer, with keys of x|1, y|2, w|3, h|4, r|5
 ---**container** optional container for this Node, defaults to G.ROOM
----@param args {T: Transform|number[], container: Node}
-function Node:init(args)
+---@param T Transform,
+---@param container? Node
+function Node:init(T, container)
     --From args, set the values of self transform
-    args = args or {}
-    args.T = args.T or {}
+    assert(T:is(Transform), "T must be a Transform")
+    self.T = T:clone()
+    -- If we provide a container, all nodes within that container are translated with that container as the reference frame.For example, if G.ROOM is set at x = 5 and y = 5, and we create a new game object at 0, 0, it will actually be drawn at 5, 5. This allows us to control things like screen shake, room positioning, rotation, padding, etc. without needing to modify every game object that we need to draw
+    self.container = container or App.instance.ROOM
 
     --Store all argument and return tables here for reuse, because Lua likes to generate garbage
     self.ARGS = self.ARGS or {}
@@ -33,14 +36,6 @@ function Node:init(args)
     self.config = self.config or {}
 
     --For transform init, accept params in the form x|1, y|2, w|3, h|4, r|5
-    self.T = {
-        x = args.T.x or args.T[1] or 0,
-        y = args.T.y or args.T[2] or 0,
-        w = args.T.w or args.T[3] or 1,
-        h = args.T.h or args.T[4] or 1,
-        r = args.T.r or args.T[5] or 0,
-        scale = args.T.scale or args.T[6] or 1,
-    }
     --Transform to use for collision detection
     self.CT = self.T
 
@@ -72,9 +67,6 @@ function Node:init(args)
         drag = { can = true, is = false },
         release_on = { can = true, is = false }
     }
-
-    -- If we provide a container, all nodes within that container are translated with that container as the reference frame.For example, if G.ROOM is set at x = 5 and y = 5, and we create a new game object at 0, 0, it will actually be drawn at 5, 5. This allows us to control things like screen shake, room positioning, rotation, padding, etc. without needing to modify every game object that we need to draw
-    self.container = args.container or App.instance.ROOM
 
     --The list of children give Node a treelike structure. This can be used for things like drawing, deterministice movement and parallax
     --calculations when child nodes rely on updated information from parents, and inherited attributes like button click functions

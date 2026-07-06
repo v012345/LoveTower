@@ -1,4 +1,5 @@
 require "asset.scripts.engine.object"
+require "asset.scripts.engine.transform"
 require "asset.scripts.engine.node"
 require "asset.scripts.engine.moveable"
 require "asset.scripts.engine.ui_element"

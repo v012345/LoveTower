@@ -1,7 +1,7 @@
 ---@class UIBox: Moveable
 ---@field UIRoot UIElement
 UIBox = Moveable:extend()
----@param args {T: Transform|number[], definition: table, config: table}
+---@param args {T: Transform, definition: UIDdefinition, config: UIConfig}
 function UIBox:init(args)
     Moveable.init(self, args.T)
     self.draw_layers = {} --if we need to explicitly change the draw order of the UIEs
@@ -26,6 +26,8 @@ function UIBox:get_group(node, group, ingroup)
 end
 
 function UIBox:set_parent_child(node, parent)
+    print(debug.traceback())
+    print(parent)
     local UIE = UIElement(parent, self, node.n, node.config)
 
     --set the group of the element
@@ -63,7 +65,7 @@ function UIBox:set_parent_child(node, parent)
             self:set_parent_child(v, UIE)
         end
     end
-    print(parent)
+
     if not parent then
         self.UIRoot = UIE
         self.UIRoot.parent = self

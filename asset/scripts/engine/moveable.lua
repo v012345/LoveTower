@@ -1,4 +1,5 @@
 ---@class Moveable: Node
+---@field VT Transform
 Moveable = Node:extend()
 
 --Moveable represents any game object that has the ability to move about the gamespace.\
@@ -11,26 +12,14 @@ Moveable = Node:extend()
 --**container** optional container for this Node, defaults to G.ROOM
 
 
----@param X Transform|number[]|number
----@param Y? number
----@param W? number
----@param H? number
-function Moveable:init(X, Y, W, H)
-    local args = (type(X) == 'table') and X or { T = { X or 0, Y or 0, W or 0, H or 0 } }
-    -- self.super:init(args)
-    Node.init(self, args)
+---@param T Transform
+function Moveable:init(T)
+    Node.init(self, T)
 
     --The Visible transform is initally set to the same values as the transform T.
     --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
     --scale of any objects that need to be drawn larger or smaller
-    self.VT = {
-        x = self.T.x,
-        y = self.T.y,
-        w = self.T.w,
-        h = self.T.h,
-        r = self.T.r,
-        scale = self.T.scale
-    }
+    self.VT = self.T:clone()
 
     --To determine location of VT, we need to keep track of the velocity of VT as it approaches T for the next frame
     self.velocity = { x = 0, y = 0, r = 0, scale = 0, mag = 0 }

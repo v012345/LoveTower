@@ -371,25 +371,12 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.STATE_COMPLETE = false
     self.SETTINGS.paused = false
     ---@type Node
-    self.ROOM = Node({
-        T = {
-            x = self.ROOM_PADDING_W,
-            y = self.ROOM_PADDING_H,
-            w = self.TILE_W,
-            h = self.TILE_H
-        }
-    })
+    self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
     self.ROOM.states.drag.can = false
     self.ROOM:set_container(self.ROOM)
 
-    self.ROOM_ATTACH = Moveable({
-        T = {
-            x = 0,
-            y = 0,
-            w = self.TILE_W,
-            h = self.TILE_H
-        }
-    })
+    self.ROOM_ATTACH = Moveable(Transform(0, 0, self.TILE_W, self.TILE_H))
+
     self.ROOM_ATTACH.states.drag.can = false
     self.ROOM_ATTACH:set_container(self.ROOM)
     love.resize(love.graphics.getWidth(), love.graphics.getHeight())
@@ -542,13 +529,17 @@ end
 function App:main_menu()
     self:prep_stage(self.STAGES.MAIN_MENU, self.STATES.MENU, true)
     --VERSION
-    UIBox {
-        definition =
-        { n = UIT.ROOT, config = { align = "cm", colour = Color.UI.TRANSPARENT_DARK }, nodes = {
-            { n = UIT.T, config = { text = self.VERSION, scale = 0.3, colour = Color.UI.TEXT_LIGHT } }
-        } },
+    UIBox({
+        T = Transform(0, 0, 0, 0),
+        definition = {
+            n = UIT.ROOT,
+            config = { align = "cm", colour = Color.UI.TRANSPARENT_DARK },
+            nodes = {
+                { n = UIT.T, config = { text = self.VERSION, scale = 0.3, colour = Color.UI.TEXT_LIGHT } }
+            }
+        },
         config = { align = "tri", offset = { x = 0, y = 0 }, major = self.ROOM_ATTACH, bond = 'Weak' }
-    }
+    })
 end
 
 -- print("game load")
