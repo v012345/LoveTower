@@ -307,3 +307,19 @@ Size = {}
 ---@field config UIConfig
 ---@field nodes? UIDdefinition[]
 UIDdefinition = {}
+
+
+---@class EventConfig
+---@field trigger Event_trigger
+---@field delay number
+---@field blockable boolean
+---@field func function
+---@field blocking boolean
+---@field no_delete boolean
+---@field start_timer boolean
+---@field timer string
+---@field ref_table table
+---@field ref_value string
+---@field ease_to any
+---@field stop_val any
+EventConfig = {}
