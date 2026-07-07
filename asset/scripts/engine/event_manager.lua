@@ -36,7 +36,7 @@ function EventManager:clear_queue(queue, exception)
             local i = 1
             while i <= #v do
                 if not v[i].no_delete then
-                    table.remove(v, i)
+                    table.remove(v, i) -- remove 可以避免索引错乱
                 else
                     i = i + 1
                 end
