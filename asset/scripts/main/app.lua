@@ -28,11 +28,11 @@ function App:init_game_object()
 end
 
 function App:update(dt)
-
+    Timer.instance:update(dt)
 end
 
 function App:draw()
-    self.version:draw()
+    -- self.version:draw()
 end
 
 function App:start_up()
