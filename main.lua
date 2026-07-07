@@ -53,15 +53,15 @@ end
 
 ---@param ... any
 function love.load(...)
-    -- App.instance:start_up()
+    App.instance:start_up()
 end
 
 function love.update(dt)
-    -- App.instance:update(dt)
+    App.instance:update(dt)
 end
 
 function love.draw()
-    -- App.instance:draw()
+    App.instance:draw()
 end
 
 function love.keypressed(key)
