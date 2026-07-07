@@ -53,15 +53,35 @@ end
 
 ---@param ... any
 function love.load(...)
-    App.instance:start_up()
+    -- App.instance:start_up()
 end
 
 function love.update(dt)
-    App.instance:update(dt)
+    -- App.instance:update(dt)
 end
 
 function love.draw()
-    App.instance:draw()
+    -- App.instance:draw()
+end
+
+function love.keypressed(key)
+    print(key)
+end
+
+function love.keyreleased(key)
+    print(key)
+end
+
+function love.mousepressed(x, y, button, touch)
+    print(x, y, button, touch)
+end
+
+function love.mousereleased(x, y, button)
+    print(x, y, button)
+end
+
+function love.mousemoved(x, y, dx, dy, istouch)
+    print(x, y, dx, dy, istouch)
 end
 
 function love.resize(w, h)

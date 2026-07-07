@@ -9,11 +9,11 @@ App = Object:extend()
 function App:init()
     self.ID = 0 -- ID 生成器
     ---@type UIBox
-    self.version = UIBox({
-        T = Transform(0, 0, 0, 0),
-        definition = { n = UIT.T, config = { text = "1.0.1", scale = 0.3, colour = Color.UI.TEXT_LIGHT } },
-        config = { align = "tri", offset = { x = 0, y = 0 }, major = nil, bond = 'Weak' }
-    })
+    -- self.version = UIBox({
+    --     T = Transform(0, 0, 0, 0),
+    --     definition = { n = UIT.T, config = { text = "1.0.1", scale = 0.3, colour = Color.UI.TEXT_LIGHT } },
+    --     config = { align = "tri", offset = { x = 0, y = 0 }, major = nil, bond = 'Weak' }
+    -- })
 end
 
 ---@param new_stage    number
