@@ -86,14 +86,9 @@ function Node:init(T, container)
     -- end
 end
 
---Draw a bounding rectangle representing the transform of this node. Used in debugging.
-function Node:draw_boundingrect()
-    self.under_overlay = App.instance.under_overlay
-end
 
 --Draws self, then adds self the the draw hash, then draws all children
 function Node:draw()
-    self:draw_boundingrect()
     if self.states.visible then
         add_to_drawhash(self)
         for _, v in pairs(self.children) do
@@ -274,70 +269,13 @@ end
 
 --Translation function used before any draw calls, translates this node according to the transform of the container node
 function Node:translate_container()
-    if self.container and self.container ~= self then
-        love.graphics.translate(self.container.T.w * App.instance.TILESCALE * App.instance.TILESIZE * 0.5,
-            self.container.T.h * App.instance.TILESCALE * App.instance.TILESIZE * 0.5)
-        love.graphics.rotate(self.container.T.r)
-        love.graphics.translate(
-            -self.container.T.w * App.instance.TILESCALE * App.instance.TILESIZE * 0.5 +
-            self.container.T.x * App.instance.TILESCALE * App.instance.TILESIZE,
-            -self.container.T.h * App.instance.TILESCALE * App.instance.TILESIZE * 0.5 +
-            self.container.T.y * App.instance.TILESCALE * App.instance.TILESIZE)
-    end
+  
 end
 
 --When this Node needs to be deleted, removes self from any tables it may have been added to to destroy any weak references\
 --Also calls the remove method of all children to have them do the same
 function Node:remove()
-    for k, v in pairs(App.instance.I.POPUP) do
-        if v == self then
-            table.remove(App.instance.I.POPUP, k)
-            break;
-        end
-    end
-    for k, v in pairs(App.instance.I.NODE) do
-        if v == self then
-            table.remove(App.instance.I.NODE, k)
-            break;
-        end
-    end
-    for k, v in pairs(App.instance.STAGE_OBJECTS[App.instance.STAGE]) do
-        if v == self then
-            table.remove(App.instance.STAGE_OBJECTS[App.instance.STAGE], k)
-            break;
-        end
-    end
-    if self.children then
-        for k, v in pairs(self.children) do
-            v:remove()
-        end
-    end
-    if Controller.instance.clicked.target == self then
-        Controller.instance.clicked.target = nil
-    end
-    if Controller.instance.focused.target == self then
-        Controller.instance.focused.target = nil
-    end
-    if Controller.instance.dragging.target == self then
-        Controller.instance.dragging.target = nil
-    end
-    if Controller.instance.hovering.target == self then
-        Controller.instance.hovering.target = nil
-    end
-    if Controller.instance.released_on.target == self then
-        Controller.instance.released_on.target = nil
-    end
-    if Controller.instance.cursor_down.target == self then
-        Controller.instance.cursor_down.target = nil
-    end
-    if Controller.instance.cursor_up.target == self then
-        Controller.instance.cursor_up.target = nil
-    end
-    if Controller.instance.cursor_hover.target == self then
-        Controller.instance.cursor_hover.target = nil
-    end
-
-    self.REMOVED = true
+   
 end
 
 ---returns the squared(fast) distance in game units from the center of this node to the center of another node
