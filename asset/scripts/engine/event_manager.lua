@@ -10,13 +10,16 @@ function EventManager:init()
         achievement = {},
         other = {}
     }
-    self.queue_timer = G.TIMERS.REAL
+    self.queue_timer = Timer.instance.REAL
     self.queue_dt = 1 / 60
-    self.queue_last_processed = G.TIMERS.REAL
+    self.queue_last_processed = Timer.instance.REAL
 end
 
+---comment
+---@param event Event
+---@param queue "unlock" | "base" | "tutorial" | "achievement" | "other"
+---@param front boolean
 function EventManager:add_event(event, queue, front)
-    queue = queue or 'base'
     if event:is(Event) then
         if front then
             table.insert(self.queues[queue], 1, event)
