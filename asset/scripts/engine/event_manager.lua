@@ -1,4 +1,9 @@
+--- 说明:
+
+
+
 ---@class EventManager : Object
+---@field queues table<string, Event[]>
 EventManager = Object:extend()
 
 ---@private
