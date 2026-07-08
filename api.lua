@@ -333,6 +333,6 @@ EventConfig = {}
 EventStatus = {}
 
 ---comment
----@param config EventConfig
+---@param config EventConfig|nil
 ---@return Event
 function Event(config) end

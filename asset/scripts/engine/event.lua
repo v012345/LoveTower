@@ -1,13 +1,14 @@
 ---@class Event : Object
 Event = Object:extend()
 
----@param config EventConfig
+---@param config EventConfig|nil
 ---@return nil
 function Event:init(config)
-    self.trigger = config.trigger
-    self.timer = config.timer
+    config = config or {}
+    self.trigger = config.trigger or Event.immediate
+    self.func = config.func or function() return true end
+    self.timer = config.timer or Timer.instance:getTotalTimer()
     self.time = self:timer()
-    self.func = config.func
     self.blocking = config.blocking or true
     self.blockable = config.blockable or true
     self.complete = false
@@ -36,7 +37,15 @@ end
 function Event:handle(status)
     status.blocking, status.completed = self.blocking, self.complete
     self:trigger(status)
-    if status.completed then self.complete = true end
+    self.complete = status.completed
+end
+
+---@private
+---@param status EventStatus
+---@return nil
+function Event:immediate(status)
+    status.completed = self.func()
+    status.time_done = true
 end
 
 ---@private
@@ -98,12 +107,4 @@ function Event:before(status)
     if self.time + self.delay <= self:timer() then
         status.time_done = true
     end
-end
-
----@private
----@param status EventStatus
----@return nil
-function Event:immediate(status)
-    status.completed = self.func()
-    status.time_done = true
 end
