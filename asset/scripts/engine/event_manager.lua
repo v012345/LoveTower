@@ -59,6 +59,43 @@ function EventManager:add_event(event, queue, front)
     end
 end
 
+---不要手动调用, 由 App 调用
+---@public
+---@param dt number
+---@return nil
+function EventManager:update(dt)
+    self.queue_timer = self.queue_timer + dt
+    local next_process_time = self.queue_last_processed + self.queue_dt
+    if self.queue_timer >= next_process_time then
+        self.queue_last_processed = next_process_time
+        self:process_queue()
+    end
+end
+
+---可以手动调用, 来强制处理队列
+---@public
+---@return nil
+function EventManager:process_queue()
+    for _, queue in pairs(self.queues) do
+        local blocked = false
+        local i = 1
+        while i <= #queue do
+            local results = self:reset_status()
+            if (not blocked or not queue[i].blockable) then
+                queue[i]:handle(results)
+            end
+            if not blocked and results.blocking then
+                blocked = true
+            end
+            if results.completed and results.time_done then
+                table.remove(queue, i)
+            else
+                i = i + 1
+            end
+        end
+    end
+end
+
 function EventManager:clear_queue(queue, exception)
     if not queue then
         --clear all queues
@@ -90,43 +127,6 @@ function EventManager:clear_queue(queue, exception)
         while i <= #self.queues[queue] do
             if not self.queues[queue][i].no_delete then
                 table.remove(self.queues[queue], i)
-            else
-                i = i + 1
-            end
-        end
-    end
-end
-
----不要手动调用, 由 App 调用
----@public
----@param dt number
----@return nil
-function EventManager:update(dt)
-    self.queue_timer = self.queue_timer + dt
-    local next_process_time = self.queue_last_processed + self.queue_dt
-    if self.queue_timer >= next_process_time then
-        self.queue_last_processed = next_process_time
-        self:process_queue()
-    end
-end
-
----可以手动调用, 来强制处理队列
----@public
----@return nil
-function EventManager:process_queue()
-    for _, queue in pairs(self.queues) do
-        local blocked = false
-        local i = 1
-        while i <= #queue do
-            local results = self:reset_status()
-            if (not blocked or not queue[i].blockable) then
-                queue[i]:handle(results)
-            end
-            if not blocked and results.blocking then
-                blocked = true
-            end
-            if results.completed and results.time_done then
-                table.remove(queue, i)
             else
                 i = i + 1
             end
