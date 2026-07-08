@@ -59,39 +59,10 @@ function Event:handle(_results)
         self.start_timer = true
     end
     if self.trigger == 'after' then
-        if self.time + self.delay <= G.TIMERS[self.timer] then
-            _results.time_done = true
-            _results.completed = self.func()
-        end
+        self:after(_results)
     end
     if self.trigger == 'ease' then
-        if not self.ease.start_time then
-            self.ease.start_time = G.TIMERS[self.timer]
-            self.ease.end_time = G.TIMERS[self.timer] + self.delay
-            self.ease.start_val = self.ease.ref_table[self.ease.ref_value]
-        end
-        if not self.complete then
-            if self.ease.end_time >= G.TIMERS[self.timer] then
-                local percent_done = ((self.ease.end_time - G.TIMERS[self.timer]) / (self.ease.end_time - self.ease.start_time))
-
-                if self.ease.type == 'lerp' then
-                    self.ease.ref_table[self.ease.ref_value] = self.func(percent_done * self.ease.start_val + (1 - percent_done) * self.ease.end_val)
-                end
-                if self.ease.type == 'elastic' then
-                    percent_done = -math.pow(2, 10 * percent_done - 10) * math.sin((percent_done * 10 - 10.75) * 2 * math.pi / 3);
-                    self.ease.ref_table[self.ease.ref_value] = self.func(percent_done * self.ease.start_val + (1 - percent_done) * self.ease.end_val)
-                end
-                if self.ease.type == 'quad' then
-                    percent_done = percent_done * percent_done;
-                    self.ease.ref_table[self.ease.ref_value] = self.func(percent_done * self.ease.start_val + (1 - percent_done) * self.ease.end_val)
-                end
-            else
-                self.ease.ref_table[self.ease.ref_value] = self.func(self.ease.end_val)
-                self.complete = true
-                _results.completed = true
-                _results.time_done = true
-            end
-        end
+        self:ease(_results)
     end
     if self.trigger == 'condition' then
         if not self.complete then _results.completed = self.func() end
@@ -108,4 +79,45 @@ function Event:handle(_results)
         _results.time_done = true
     end
     if _results.completed then self.complete = true end
+end
+
+---@private
+---@return nil
+function Event:after(status)
+    if self.time + self.delay <= G.TIMERS[self.timer] then
+        status.time_done = true
+        status.completed = self.func()
+    end
+end
+
+---@private
+---@return nil
+function Event:ease(status)
+    if not self.ease.start_time then
+        self.ease.start_time = G.TIMERS[self.timer]
+        self.ease.end_time = G.TIMERS[self.timer] + self.delay
+        self.ease.start_val = self.ease.ref_table[self.ease.ref_value]
+    end
+    if not self.complete then
+        if self.ease.end_time >= G.TIMERS[self.timer] then
+            local percent_done = ((self.ease.end_time - G.TIMERS[self.timer]) / (self.ease.end_time - self.ease.start_time))
+
+            if self.ease.type == 'lerp' then
+                self.ease.ref_table[self.ease.ref_value] = self.func(percent_done * self.ease.start_val + (1 - percent_done) * self.ease.end_val)
+            end
+            if self.ease.type == 'elastic' then
+                percent_done = -math.pow(2, 10 * percent_done - 10) * math.sin((percent_done * 10 - 10.75) * 2 * math.pi / 3);
+                self.ease.ref_table[self.ease.ref_value] = self.func(percent_done * self.ease.start_val + (1 - percent_done) * self.ease.end_val)
+            end
+            if self.ease.type == 'quad' then
+                percent_done = percent_done * percent_done;
+                self.ease.ref_table[self.ease.ref_value] = self.func(percent_done * self.ease.start_val + (1 - percent_done) * self.ease.end_val)
+            end
+        else
+            self.ease.ref_table[self.ease.ref_value] = self.func(self.ease.end_val)
+            self.complete = true
+            status.completed = true
+            status.time_done = true
+        end
+    end
 end
