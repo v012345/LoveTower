@@ -310,7 +310,7 @@ UIDdefinition = {}
 
 
 ---@class EventConfig
----@field trigger EventTrigger
+---@field trigger function
 ---@field delay number
 ---@field blockable boolean
 ---@field func function

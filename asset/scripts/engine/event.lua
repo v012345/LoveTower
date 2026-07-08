@@ -4,7 +4,7 @@ Event = Object:extend()
 ---@param config EventConfig
 ---@return nil
 function Event:init(config)
-    self.trigger = config.trigger or EventTrigger.immediate
+    self.trigger = config.trigger
     if config.blocking ~= nil then
         self.blocking = config.blocking
     else
@@ -23,8 +23,8 @@ function Event:init(config)
     self.created_on_pause = config.pause_force or G.SETTINGS.paused
     self.timer = config.timer or (self.created_on_pause and 'REAL') or 'TOTAL'
 
-    if self.trigger == EventTrigger.ease then
-        self.ease = {
+    if self.trigger == self.ease then
+        self.ease_params = {
             type = config.ease or 'lerp',
             ref_table = config.ref_table,
             ref_value = config.ref_value,
@@ -35,13 +35,13 @@ function Event:init(config)
         }
         self.func = config.func or function(t) return t end
     end
-    if self.trigger == EventTrigger.condition then
-        self.condition = {
+    if self.trigger == self.condition then
+        self.condition_params = {
             ref_table = config.ref_table,
             ref_value = config.ref_value,
             stop_val = config.stop_val,
         }
-        self.func = config.func or function() return self.condition.ref_table[self.condition.ref_value] == self.condition.stop_val end
+        self.func = config.func or function() return self.condition_params.ref_table[self.condition_params.ref_value] == self.condition_params.stop_val end
     end
     self.time = G.TIMERS[self.timer]
 end
@@ -58,21 +58,7 @@ function Event:handle(_results)
         self.time = G.TIMERS[self.timer]
         self.start_timer = true
     end
-    if self.trigger == EventTrigger.after then
-        self:after(_results)
-    end
-    if self.trigger == EventTrigger.ease then
-        self:ease(_results)
-    end
-    if self.trigger == EventTrigger.condition then
-        self:condition(_results)
-    end
-    if self.trigger == EventTrigger.before then
-        self:before(_results)
-    end
-    if self.trigger == EventTrigger.immediate then
-        self:immediate(_results)
-    end
+    self:trigger(_results)
     if _results.completed then self.complete = true end
 end
 
