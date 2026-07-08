@@ -4,6 +4,7 @@
 
 ---@class EventManager : Object
 ---@field queues table<string, Event[]>
+---@field status EventStatus
 EventManager = Object:extend()
 
 ---@private

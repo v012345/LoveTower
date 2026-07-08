@@ -325,3 +325,9 @@ UIDdefinition = {}
 EventConfig = {}
 
 
+---@class EventStatus
+---@field blocking boolean
+---@field completed boolean
+---@field time_done boolean
+---@field pause_skip boolean
+EventStatus = {}

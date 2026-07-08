@@ -1,6 +1,8 @@
 ---@class Event : Object
 Event = Object:extend()
 
+---@param config EventConfig
+---@return nil
 function Event:init(config)
     self.trigger = config.trigger or 'immediate'
     if config.blocking ~= nil then
@@ -44,6 +46,8 @@ function Event:init(config)
     self.time = G.TIMERS[self.timer]
 end
 
+---@param _results EventStatus
+---@return nil
 function Event:handle(_results)
     _results.blocking, _results.completed = self.blocking, self.complete
     if self.created_on_pause == false and G.SETTINGS.paused then
