@@ -336,3 +336,18 @@ EventStatus = {}
 ---@param config EventConfig|nil
 ---@return Event
 function Event(config) end
+
+---Creates and sets a new Font.
+---@param filename string
+---@param size number
+---@return Font
+function love.graphics.setNewFont(filename, size) end
+
+---@class love.window
+love.window = love.window or {}
+
+---Gets the display mode and properties of the window.
+---@return number width
+---@return number height
+---@return table  flags
+function love.window.getMode() end
