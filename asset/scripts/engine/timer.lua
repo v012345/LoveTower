@@ -23,28 +23,28 @@ function Timer:update(dt)
 end
 
 ---@return function
-function Timer:getTotalTimer()
+function Timer:get_total_timer()
     return function()
         return self.TOTAL
     end
 end
 
 ---@return function
-function Timer:getRealTimer()
+function Timer:get_real_timer()
     return function()
         return self.REAL
     end
 end
 
 ---@return function
-function Timer:getRealShaderTimer()
+function Timer:get_real_shader_timer()
     return function()
         return self.REAL_SHADER
     end
 end
 
 ---@return function
-function Timer:getUpdateTimer()
+function Timer:get_update_timer()
     return function()
         return self.UPTIME
     end

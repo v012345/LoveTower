@@ -9,7 +9,7 @@ function Event:init(config)
     config = config or {}
     self.trigger = config.trigger or Event.immediate
     self.func = config.func or function() return true end
-    self.timer = config.timer or Timer.instance:getTotalTimer()
+    self.timer = config.timer or Timer.instance:get_total_timer()
     self.time = self:timer()
     self.blocking = config.blocking or true
     self.blockable = config.blockable or true
