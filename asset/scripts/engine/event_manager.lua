@@ -93,22 +93,26 @@ function EventManager:update(dt, forced)
     self.queue_timer = self.queue_timer + dt
     if self.queue_timer >= self.queue_last_processed + self.queue_dt or forced then
         self.queue_last_processed = self.queue_last_processed + (forced and 0 or self.queue_dt)
-        for k, v in pairs(self.queues) do
-            local blocked = false
-            local i = 1
-            while i <= #v do
-                self:reset_status()
-                local results = self.status
-                if (not blocked or not v[i].blockable) then v[i]:handle(results) end
-                if results.pause_skip then
-                    i = i + 1
+        self:processQueue()
+    end
+end
+
+function EventManager:processQueue()
+    for k, v in pairs(self.queues) do
+        local blocked = false
+        local i = 1
+        while i <= #v do
+            self:reset_status()
+            local results = self.status
+            if (not blocked or not v[i].blockable) then v[i]:handle(results) end
+            if results.pause_skip then
+                i = i + 1
+            else
+                if not blocked and results.blocking then blocked = true end
+                if results.completed and results.time_done then
+                    table.remove(v, i)
                 else
-                    if not blocked and results.blocking then blocked = true end
-                    if results.completed and results.time_done then
-                        table.remove(v, i)
-                    else
-                        i = i + 1
-                    end
+                    i = i + 1
                 end
             end
         end
