@@ -40,6 +40,8 @@ function Object:is(T)
     return false
 end
 
+---@generic T
+---@return T
 function Object:__call(...)
     local obj = setmetatable({}, self)
     obj:init(...)

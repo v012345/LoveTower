@@ -331,3 +331,8 @@ EventConfig = {}
 ---@field time_done boolean
 ---@field pause_skip boolean
 EventStatus = {}
+
+---comment
+---@param config EventConfig
+---@return Event
+function Event(config) end

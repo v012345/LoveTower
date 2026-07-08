@@ -2,11 +2,8 @@
 Event = Object:extend()
 
 ---@param config EventConfig
----@return Event
+---@return nil
 function Event:init(config)
-    -- assert(config.trigger, "Event trigger is required")
-    -- assert(config.timer, "timer is required")
-    -- assert(config.func, "func is required")
     self.trigger = config.trigger
     self.timer = config.timer
     self.time = self:timer()
@@ -17,28 +14,21 @@ function Event:init(config)
     self.start_timer = config.start_timer or false
     self.delay = config.delay or 0
     self.no_delete = config.no_delete
-    -- self.created_on_pause = config.pause_force or G.SETTINGS.paused
-    if self.trigger == self.ease then
-        self.ease_params = {
-            type = config.ease or 'lerp',
-            ref_table = config.ref_table,
-            ref_value = config.ref_value,
-            start_val = config.ref_table[config.ref_value],
-            end_val = config.ease_to,
-            start_time = nil,
-            end_time = nil,
-        }
-        self.func = config.func or function(t) return t end
-    end
-    if self.trigger == self.condition then
-        self.condition_params = {
-            ref_table = config.ref_table,
-            ref_value = config.ref_value,
-            stop_val = config.stop_val,
-        }
-        self.func = config.func or function() return self.condition_params.ref_table[self.condition_params.ref_value] == self.condition_params.stop_val end
-    end
-    return self
+    self.created_on_pause = config.pause_force or G.SETTINGS.paused
+    self.ease_params = {
+        type = config.ease or 'lerp',
+        ref_table = config.ref_table,
+        ref_value = config.ref_value,
+        start_val = config.start_val,
+        end_val = config.ease_to,
+        start_time = nil,
+        end_time = nil,
+    }
+    self.condition_params = {
+        ref_table = config.ref_table,
+        ref_value = config.ref_value,
+        stop_val = config.stop_val,
+    }
 end
 
 ---@param status EventStatus
