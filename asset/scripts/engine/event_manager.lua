@@ -1,7 +1,8 @@
 ---@class EventManager : Object
 EventManager = Object:extend()
 
---Class Methods
+---@private
+---@return nil
 function EventManager:init()
     self.queues = {
         unlock = {},
@@ -10,9 +11,24 @@ function EventManager:init()
         achievement = {},
         other = {}
     }
+    self.status = {
+        blocking = false,
+        completed = false,
+        time_done = false,
+        pause_skip = false
+    }
     self.queue_timer = Timer.instance.REAL
     self.queue_dt = 1 / 60
     self.queue_last_processed = Timer.instance.REAL
+end
+
+---@private
+---@return nil
+function EventManager:reset_status()
+    self.status.blocking = false
+    self.status.completed = false
+    self.status.time_done = false
+    self.status.pause_skip = false
 end
 
 ---comment
@@ -75,9 +91,8 @@ function EventManager:update(dt, forced)
             local blocked = false
             local i = 1
             while i <= #v do
-                G.ARGS.event_manager_update = G.ARGS.event_manager_update or {}
-                local results = G.ARGS.event_manager_update
-                results.blocking, results.completed, results.time_done, results.pause_skip = false, false, false, false
+                self:reset_status()
+                local results = self.status
                 if (not blocked or not v[i].blockable) then v[i]:handle(results) end
                 if results.pause_skip then
                     i = i + 1
