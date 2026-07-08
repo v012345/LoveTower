@@ -12,9 +12,10 @@
 ---@field public clear_queue function
 ---@field public update function
 ---@field public process_queue function
+---@field public init function
 EventManager = Object:extend()
 
----@private
+
 ---@return nil
 function EventManager:init()
     self.queues = {
