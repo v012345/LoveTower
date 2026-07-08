@@ -2,31 +2,22 @@
 Event = Object:extend()
 
 ---@param config EventConfig
----@return nil
+---@return Event
 function Event:init(config)
-    assert(config.trigger, "Event trigger is required")
-    assert(config.timer, "timer is required")
+    -- assert(config.trigger, "Event trigger is required")
+    -- assert(config.timer, "timer is required")
+    -- assert(config.func, "func is required")
     self.trigger = config.trigger
     self.timer = config.timer
     self.time = self:timer()
-    if config.blocking ~= nil then
-        self.blocking = config.blocking
-    else
-        self.blocking = true
-    end
-    if config.blockable ~= nil then
-        self.blockable = config.blockable
-    else
-        self.blockable = true
-    end
+    self.func = config.func
+    self.blocking = config.blocking or true
+    self.blockable = config.blockable or true
     self.complete = false
     self.start_timer = config.start_timer or false
-    self.func = config.func or function() return true end
     self.delay = config.delay or 0
     self.no_delete = config.no_delete
-    self.created_on_pause = config.pause_force or G.SETTINGS.paused
-
-
+    -- self.created_on_pause = config.pause_force or G.SETTINGS.paused
     if self.trigger == self.ease then
         self.ease_params = {
             type = config.ease or 'lerp',
@@ -47,6 +38,7 @@ function Event:init(config)
         }
         self.func = config.func or function() return self.condition_params.ref_table[self.condition_params.ref_value] == self.condition_params.stop_val end
     end
+    return self
 end
 
 ---@param status EventStatus
