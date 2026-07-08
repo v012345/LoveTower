@@ -22,20 +22,32 @@ function Timer:update(dt)
     self.BACKGROUND = self.BACKGROUND + dt
 end
 
-function Timer:getTotalTime()
-    return self.TOTAL
+---@return function
+function Timer:getTotalTimer()
+    return function()
+        return self.TOTAL
+    end
 end
 
-function Timer:getRealTime()
-    return self.REAL
+---@return function
+function Timer:getRealTimer()
+    return function()
+        return self.REAL
+    end
 end
 
-function Timer:getRealShaderTime()
-    return self.REAL_SHADER
+---@return function
+function Timer:getRealShaderTimer()
+    return function()
+        return self.REAL_SHADER
+    end
 end
 
-function Timer:getUptime()
-    return self.UPTIME
+---@return function
+function Timer:getUpdateTimer()
+    return function()
+        return self.UPTIME
+    end
 end
 
 ---@type Timer

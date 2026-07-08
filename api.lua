@@ -317,7 +317,7 @@ UIDdefinition = {}
 ---@field blocking boolean
 ---@field no_delete boolean
 ---@field start_timer boolean
----@field timer string
+---@field timer function
 ---@field ref_table table
 ---@field ref_value string
 ---@field ease_to any

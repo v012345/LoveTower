@@ -7,6 +7,8 @@ function Event:init(config)
     assert(config.trigger, "Event trigger is required")
     assert(config.timer, "timer is required")
     self.trigger = config.trigger
+    self.timer = config.timer
+    self.time = self:timer()
     if config.blocking ~= nil then
         self.blocking = config.blocking
     else
@@ -23,7 +25,7 @@ function Event:init(config)
     self.delay = config.delay or 0
     self.no_delete = config.no_delete
     self.created_on_pause = config.pause_force or G.SETTINGS.paused
-    self.timer = config.timer or (self.created_on_pause and 'REAL') or 'TOTAL'
+
 
     if self.trigger == self.ease then
         self.ease_params = {
@@ -45,7 +47,6 @@ function Event:init(config)
         }
         self.func = config.func or function() return self.condition_params.ref_table[self.condition_params.ref_value] == self.condition_params.stop_val end
     end
-    self.time = G.TIMERS[self.timer]
 end
 
 ---@param status EventStatus

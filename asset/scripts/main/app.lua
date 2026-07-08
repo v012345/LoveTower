@@ -14,6 +14,7 @@ function App:init()
     --     definition = { n = UIT.T, config = { text = "1.0.1", scale = 0.3, colour = Color.UI.TEXT_LIGHT } },
     --     config = { align = "tri", offset = { x = 0, y = 0 }, major = nil, bond = 'Weak' }
     -- })
+  
 end
 
 ---@param new_stage    number
@@ -32,7 +33,7 @@ function App:update(dt)
 end
 
 function App:draw()
-    -- self.version:draw()
+
 end
 
 function App:start_up()
