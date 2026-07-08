@@ -4,6 +4,8 @@ Event = Object:extend()
 ---@param config EventConfig
 ---@return nil
 function Event:init(config)
+    assert(config.trigger, "Event trigger is required")
+    assert(config.timer, "timer is required")
     self.trigger = config.trigger
     if config.blocking ~= nil then
         self.blocking = config.blocking
@@ -46,20 +48,20 @@ function Event:init(config)
     self.time = G.TIMERS[self.timer]
 end
 
----@param _results EventStatus
+---@param status EventStatus
 ---@return nil
-function Event:handle(_results)
-    _results.blocking, _results.completed = self.blocking, self.complete
+function Event:handle(status)
+    status.blocking, status.completed = self.blocking, self.complete
     if self.created_on_pause == false and G.SETTINGS.paused then
-        _results.pause_skip = true
+        status.pause_skip = true
         return
     end
     if not self.start_timer then
         self.time = G.TIMERS[self.timer]
         self.start_timer = true
     end
-    self:trigger(_results)
-    if _results.completed then self.complete = true end
+    self:trigger(status)
+    if status.completed then self.complete = true end
 end
 
 ---@private
