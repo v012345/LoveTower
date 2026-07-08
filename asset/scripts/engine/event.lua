@@ -50,7 +50,7 @@ function Event:handle(status)
         return
     end
     if not self.start_timer then
-        self.time = G.TIMERS[self.timer]
+        self.time = self:timer()
         self.start_timer = true
     end
     self:trigger(status)
@@ -61,7 +61,7 @@ end
 ---@param status EventStatus
 ---@return nil
 function Event:after(status)
-    if self.time + self.delay <= G.TIMERS[self.timer] then
+    if self.time + self.delay <= self:timer() then
         status.time_done = true
         status.completed = self.func()
     end
@@ -72,13 +72,13 @@ end
 ---@return nil
 function Event:ease(status)
     if not self.ease.start_time then
-        self.ease.start_time = G.TIMERS[self.timer]
-        self.ease.end_time = G.TIMERS[self.timer] + self.delay
+        self.ease.start_time = self:timer()
+        self.ease.end_time = self:timer() + self.delay
         self.ease.start_val = self.ease.ref_table[self.ease.ref_value]
     end
     if not self.complete then
-        if self.ease.end_time >= G.TIMERS[self.timer] then
-            local percent_done = ((self.ease.end_time - G.TIMERS[self.timer]) / (self.ease.end_time - self.ease.start_time))
+        if self.ease.end_time >= self:timer() then
+            local percent_done = ((self.ease.end_time - self:timer()) / (self.ease.end_time - self.ease.start_time))
 
             if self.ease.type == 'lerp' then
                 self.ease.ref_table[self.ease.ref_value] = self.func(percent_done * self.ease.start_val + (1 - percent_done) * self.ease.end_val)
@@ -113,7 +113,7 @@ end
 ---@return nil
 function Event:before(status)
     if not self.complete then status.completed = self.func() end
-    if self.time + self.delay <= G.TIMERS[self.timer] then
+    if self.time + self.delay <= self:timer() then
         status.time_done = true
     end
 end
