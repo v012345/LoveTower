@@ -8,6 +8,8 @@ App = Object:extend()
 
 function App:init()
     self.ID = 0 -- ID 生成器
+    self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
+    self.CANVAS:setFilter('linear', 'linear')
 end
 
 ---@param new_stage    number
@@ -26,28 +28,43 @@ function App:update(dt)
 end
 
 function App:draw()
+    love.graphics.setCanvas { self.CANVAS }
+    love.graphics.push()
+    love.graphics.scale(1)
 
+    love.graphics.setShader()
+    love.graphics.clear(0, 0, 0, 1)
+    love.graphics.pop()
+
+    love.graphics.setCanvas(self.AA_CANVAS)
+    love.graphics.push()
+    love.graphics.setColor(Color.WHITE)
+    love.graphics.draw(self.CANVAS, 0, 0)
+    love.graphics.pop()
+
+    love.graphics.setCanvas()
+    love.graphics.setShader()
 end
 
 function App:start_up()
     boot_timer("start", "settings", 0.1)
-    love.timer.sleep(0.3)
+
     boot_timer('settings', 'window init', 0.2)
-    love.timer.sleep(0.3)
-    boot_timer('window init', 'savemanager')
-    love.timer.sleep(0.3)
+
+    boot_timer('window init', 'savemanager', 0.3)
+
     boot_timer('savemanager', 'shaders', 0.4)
-    love.timer.sleep(0.3)
+
     boot_timer('shaders', 'controllers', 0.7)
-    love.timer.sleep(0.3)
+
     boot_timer('controllers', 'localization', 0.8)
-    love.timer.sleep(0.3)
+
     boot_timer('protos', 'shared sprites', 0.9)
-    love.timer.sleep(0.3)
+
     boot_timer('shared sprites', 'prep stage', 0.95)
-    love.timer.sleep(0.3)
+
     boot_timer('prep stage', 'splash prep', 1)
-    love.timer.sleep(0.3)
+
     boot_timer('splash prep', 'end')
 end
 
