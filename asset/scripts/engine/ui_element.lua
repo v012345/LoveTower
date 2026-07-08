@@ -66,7 +66,6 @@ end
 function UIElement:draw_self()
     local button_active = true
     if self.UIT == UIT.T then
-        print('T')
         do
             return
         end

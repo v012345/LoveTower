@@ -74,6 +74,7 @@ end
 
 function love.mousepressed(x, y, button, touch)
     print(x, y, button, touch)
+    -- print(Timer.instance.TOTAL)
 end
 
 function love.mousereleased(x, y, button)
@@ -81,7 +82,7 @@ function love.mousereleased(x, y, button)
 end
 
 function love.mousemoved(x, y, dx, dy, istouch)
-    print(x, y, dx, dy, istouch)
+    -- print(x, y, dx, dy, istouch)
 end
 
 function love.resize(w, h)
