@@ -51,10 +51,12 @@ end
 function Event:handle(_results)
     _results.blocking, _results.completed = self.blocking, self.complete
     if self.created_on_pause == false and G.SETTINGS.paused then
-        _results.pause_skip = true; return
+        _results.pause_skip = true
+        return
     end
     if not self.start_timer then
-        self.time = G.TIMERS[self.timer]; self.start_timer = true
+        self.time = G.TIMERS[self.timer]
+        self.start_timer = true
     end
     if self.trigger == 'after' then
         if self.time + self.delay <= G.TIMERS[self.timer] then
