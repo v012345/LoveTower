@@ -4,7 +4,7 @@ Event = Object:extend()
 ---@param config EventConfig
 ---@return nil
 function Event:init(config)
-    self.trigger = config.trigger or 'immediate'
+    self.trigger = config.trigger or EventTrigger.immediate
     if config.blocking ~= nil then
         self.blocking = config.blocking
     else
@@ -23,7 +23,7 @@ function Event:init(config)
     self.created_on_pause = config.pause_force or G.SETTINGS.paused
     self.timer = config.timer or (self.created_on_pause and 'REAL') or 'TOTAL'
 
-    if self.trigger == 'ease' then
+    if self.trigger == EventTrigger.ease then
         self.ease = {
             type = config.ease or 'lerp',
             ref_table = config.ref_table,
@@ -35,7 +35,7 @@ function Event:init(config)
         }
         self.func = config.func or function(t) return t end
     end
-    if self.trigger == 'condition' then
+    if self.trigger == EventTrigger.condition then
         self.condition = {
             ref_table = config.ref_table,
             ref_value = config.ref_value,
@@ -58,25 +58,26 @@ function Event:handle(_results)
         self.time = G.TIMERS[self.timer]
         self.start_timer = true
     end
-    if self.trigger == 'after' then
+    if self.trigger == EventTrigger.after then
         self:after(_results)
     end
-    if self.trigger == 'ease' then
+    if self.trigger == EventTrigger.ease then
         self:ease(_results)
     end
-    if self.trigger == 'condition' then
+    if self.trigger == EventTrigger.condition then
         self:condition(_results)
     end
-    if self.trigger == 'before' then
+    if self.trigger == EventTrigger.before then
         self:before(_results)
     end
-    if self.trigger == 'immediate' then
+    if self.trigger == EventTrigger.immediate then
         self:immediate(_results)
     end
     if _results.completed then self.complete = true end
 end
 
 ---@private
+---@param status EventStatus
 ---@return nil
 function Event:after(status)
     if self.time + self.delay <= G.TIMERS[self.timer] then
@@ -86,6 +87,7 @@ function Event:after(status)
 end
 
 ---@private
+---@param status EventStatus
 ---@return nil
 function Event:ease(status)
     if not self.ease.start_time then
@@ -118,6 +120,7 @@ function Event:ease(status)
 end
 
 ---@private
+---@param status EventStatus
 ---@return nil
 function Event:condition(status)
     if not self.complete then status.completed = self.func() end
@@ -125,6 +128,7 @@ function Event:condition(status)
 end
 
 ---@private
+---@param status EventStatus
 ---@return nil
 function Event:before(status)
     if not self.complete then status.completed = self.func() end
@@ -134,6 +138,7 @@ function Event:before(status)
 end
 
 ---@private
+---@param status EventStatus
 ---@return nil
 function Event:immediate(status)
     status.completed = self.func()

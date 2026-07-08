@@ -1,10 +1,10 @@
----@enum Event_trigger
-Event_trigger = {
-    immediate = 1, -- 轴
-    before = 2,    -- 按钮
-    condition = 3, -- 鼠标
-    ease = 4,      -- 触摸
-    after = 5,     -- 鼠标轴
+---@enum EventTrigger
+EventTrigger = {
+    immediate = 1, -- 
+    before = 2,    -- 
+    condition = 3, -- 
+    ease = 4,      -- 
+    after = 5,     -- 
 }
 
 Ease_type = {
