@@ -35,14 +35,6 @@ end
 ---@return nil
 function Event:handle(status)
     status.blocking, status.completed = self.blocking, self.complete
-    if self.created_on_pause == false and G.SETTINGS.paused then
-        status.pause_skip = true
-        return
-    end
-    if not self.start_timer then
-        self.time = self:timer()
-        self.start_timer = true
-    end
     self:trigger(status)
     if status.completed then self.complete = true end
 end
