@@ -103,8 +103,9 @@ end
 ---@return nil
 function EventManager:update(dt)
     self.queue_timer = self.queue_timer + dt
-    if self.queue_timer >= self.queue_last_processed + self.queue_dt then
-        self.queue_last_processed = self.queue_last_processed + self.queue_dt
+    local next_process_time = self.queue_last_processed + self.queue_dt
+    if self.queue_timer >= next_process_time then
+        self.queue_last_processed = next_process_time
         self:process_queue()
     end
 end
