@@ -89,10 +89,10 @@ function EventManager:clear_queue(queue, exception)
     end
 end
 
-function EventManager:update(dt, forced)
+function EventManager:update(dt)
     self.queue_timer = self.queue_timer + dt
-    if self.queue_timer >= self.queue_last_processed + self.queue_dt or forced then
-        self.queue_last_processed = self.queue_last_processed + (forced and 0 or self.queue_dt)
+    if self.queue_timer >= self.queue_last_processed + self.queue_dt then
+        self.queue_last_processed = self.queue_last_processed + self.queue_dt
         self:process_queue()
     end
 end
