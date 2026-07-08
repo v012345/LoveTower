@@ -8,11 +8,6 @@ App = Object:extend()
 
 function App:init()
     self.ID = 0 -- ID 生成器
-
-    
-    
-
-
 end
 
 ---@param new_stage    number
@@ -35,7 +30,25 @@ function App:draw()
 end
 
 function App:start_up()
-
+    boot_timer("start", "settings", 0.1)
+    love.timer.sleep(0.3)
+    boot_timer('settings', 'window init', 0.2)
+    love.timer.sleep(0.3)
+    boot_timer('window init', 'savemanager')
+    love.timer.sleep(0.3)
+    boot_timer('savemanager', 'shaders', 0.4)
+    love.timer.sleep(0.3)
+    boot_timer('shaders', 'controllers', 0.7)
+    love.timer.sleep(0.3)
+    boot_timer('controllers', 'localization', 0.8)
+    love.timer.sleep(0.3)
+    boot_timer('protos', 'shared sprites', 0.9)
+    love.timer.sleep(0.3)
+    boot_timer('shared sprites', 'prep stage', 0.95)
+    love.timer.sleep(0.3)
+    boot_timer('prep stage', 'splash prep', 1)
+    love.timer.sleep(0.3)
+    boot_timer('splash prep', 'end')
 end
 
 function App:set_language()

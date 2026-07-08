@@ -183,7 +183,10 @@ function love.graphics.circle(mode, x, y, radius) end
 ---@param y      number
 ---@param width  number
 ---@param height number
-function love.graphics.rectangle(mode, x, y, width, height) end
+---@param rx? number The x-axis radius of each round corner. Cannot be greater than half the rectangle's width.
+---@param ry? number The y-axis radius of each round corner. Cannot be greater than half the rectangle's height.
+---@param segments? number The number of segments used for drawing the round corners. A default amount will be chosen if no number is given.
+function love.graphics.rectangle(mode, x, y, width, height, rx, ry, segments) end
 
 ---@param text   string
 ---@param x      number
@@ -351,3 +354,8 @@ love.window = love.window or {}
 ---@return number height
 ---@return table  flags
 function love.window.getMode() end
+
+---Sets the width of lines.
+---@param width number
+---@return nil
+function love.graphics.setLineWidth(width) end

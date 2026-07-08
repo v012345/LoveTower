@@ -1,4 +1,4 @@
-function boot_timer(_label, _next, progress)
+function boot_timer(cur_step, next_step, progress)
     progress = progress or 0
     love.graphics.setNewFont("asset/resources/fonts/YQ_FH.ttf", 20)
     local realw, realh = love.window.getMode()
@@ -11,12 +11,9 @@ function boot_timer(_label, _next, progress)
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.setLineWidth(3)
     love.graphics.rectangle('line', realw / 2 - 150, realh / 2 - 15, 300, 30, 5)
-    if G.F_VERBOSE and not _RELEASE_MODE then love.graphics.print("LOADING: " .. _next, realw / 2 - 150, realh / 2 + 40) end
+    love.graphics.print("LOADING: " .. cur_step .. " -> " .. next_step, realw / 2 - 150, realh / 2 + 40)
     love.graphics.pop()
     love.graphics.present()
-
-    G.ARGS.bt = G.ARGS.bt or love.timer.getTime()
-    G.ARGS.bt = love.timer.getTime()
 end
 
 function HEX(hex)
