@@ -12,7 +12,7 @@ function Event:init(config)
     self.timer = config.timer or Timer.instance:get_total_timer()
     self.time = self:timer()
     self.blocking = config.blocking or true
-    self.blockable = config.blockable or true
+    self.blockable = config.blockable
     self.complete = false
     self.start_timer = config.start_timer or false
     self.delay = config.delay or 0
@@ -34,6 +34,7 @@ function Event:init(config)
     }
 end
 
+---如果 time_done 和 completed 都为 true，则认为事件已经完成, 会从队列中移除
 ---@param status EventStatus
 ---@return nil
 function Event:handle(status)

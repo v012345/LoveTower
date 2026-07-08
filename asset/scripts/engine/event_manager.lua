@@ -3,8 +3,15 @@
 
 
 ---@class EventManager : Object
----@field queues table<string, Event[]>
----@field status EventStatus
+---@field private queues table<string, Event[]>
+---@field private status EventStatus
+---@field private queue_dt number
+---@field private queue_last_processed number
+---@field private queue_timer number
+---@field private reset_status function
+---@field public clear_queue function
+---@field public update function
+---@field public process_queue function
 EventManager = Object:extend()
 
 ---@private
@@ -28,13 +35,13 @@ function EventManager:init()
     self.queue_last_processed = Timer.instance.REAL
 end
 
----@private
----@return nil
+---@return EventStatus
 function EventManager:reset_status()
     self.status.blocking = false
     self.status.completed = false
     self.status.time_done = false
     self.status.pause_skip = false
+    return self.status
 end
 
 ---comment
@@ -89,6 +96,10 @@ function EventManager:clear_queue(queue, exception)
     end
 end
 
+---不要手动调用, 由 App 调用
+---@public
+---@param dt number
+---@return nil
 function EventManager:update(dt)
     self.queue_timer = self.queue_timer + dt
     if self.queue_timer >= self.queue_last_processed + self.queue_dt then
@@ -97,23 +108,25 @@ function EventManager:update(dt)
     end
 end
 
+---可以手动调用, 来强制处理队列
+---@public
+---@return nil
 function EventManager:process_queue()
-    for k, v in pairs(self.queues) do
+    for _, queue in pairs(self.queues) do
         local blocked = false
         local i = 1
-        while i <= #v do
-            self:reset_status()
-            local results = self.status
-            if (not blocked or not v[i].blockable) then v[i]:handle(results) end
-            if results.pause_skip then
-                i = i + 1
+        while i <= #queue do
+            local results = self:reset_status()
+            if (not blocked or not queue[i].blockable) then
+                queue[i]:handle(results)
+            end
+            if not blocked and results.blocking then
+                blocked = true
+            end
+            if results.completed and results.time_done then
+                table.remove(queue, i)
             else
-                if not blocked and results.blocking then blocked = true end
-                if results.completed and results.time_done then
-                    table.remove(v, i)
-                else
-                    i = i + 1
-                end
+                i = i + 1
             end
         end
     end
