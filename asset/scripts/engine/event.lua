@@ -1,3 +1,5 @@
+require "asset.scripts.engine.timer"
+
 ---@class Event : Object
 Event = Object:extend()
 
@@ -48,11 +50,21 @@ function Event:immediate(status)
     status.time_done = true
 end
 
+---条件触发器不关心时间，只要条件没有达成，就会每帧触发。
+---@private
+---@param status EventStatus
+---@return nil
+function Event:condition(status)
+    if not self.complete then status.completed = self.func() end
+    status.time_done = true
+end
+
+--- After event will trigger after the delay time.
 ---@private
 ---@param status EventStatus
 ---@return nil
 function Event:after(status)
-    if self.time + self.delay <= self:timer() then
+    if self.time + self.delay <= self.timer() then
         status.time_done = true
         status.completed = self.func()
     end
@@ -63,8 +75,8 @@ end
 ---@return nil
 function Event:ease(status)
     if not self.ease.start_time then
-        self.ease.start_time = self:timer()
-        self.ease.end_time = self:timer() + self.delay
+        self.ease.start_time = self.timer()
+        self.ease.end_time = self.timer() + self.delay
         self.ease.start_val = self.ease.ref_table[self.ease.ref_value]
     end
     if not self.complete then
@@ -91,14 +103,7 @@ function Event:ease(status)
     end
 end
 
----@private
----@param status EventStatus
----@return nil
-function Event:condition(status)
-    if not self.complete then status.completed = self.func() end
-    status.time_done = true
-end
-
+---立即执行 func，等 delay 后才移除（可阻塞后续事件）
 ---@private
 ---@param status EventStatus
 ---@return nil
