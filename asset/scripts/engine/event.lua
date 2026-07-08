@@ -65,18 +65,13 @@ function Event:handle(_results)
         self:ease(_results)
     end
     if self.trigger == 'condition' then
-        if not self.complete then _results.completed = self.func() end
-        _results.time_done = true
+        self:condition(_results)
     end
     if self.trigger == 'before' then
-        if not self.complete then _results.completed = self.func() end
-        if self.time + self.delay <= G.TIMERS[self.timer] then
-            _results.time_done = true
-        end
+        self:before(_results)
     end
     if self.trigger == 'immediate' then
-        _results.completed = self.func()
-        _results.time_done = true
+        self:immediate(_results)
     end
     if _results.completed then self.complete = true end
 end
@@ -120,4 +115,27 @@ function Event:ease(status)
             status.time_done = true
         end
     end
+end
+
+---@private
+---@return nil
+function Event:condition(status)
+    if not self.complete then status.completed = self.func() end
+    status.time_done = true
+end
+
+---@private
+---@return nil
+function Event:before(status)
+    if not self.complete then status.completed = self.func() end
+    if self.time + self.delay <= G.TIMERS[self.timer] then
+        status.time_done = true
+    end
+end
+
+---@private
+---@return nil
+function Event:immediate(status)
+    status.completed = self.func()
+    status.time_done = true
 end
