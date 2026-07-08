@@ -71,6 +71,17 @@ function Event:after(status)
     end
 end
 
+---立即执行 func，等 delay 后才移除（可阻塞后续事件）
+---@private
+---@param status EventStatus
+---@return nil
+function Event:before(status)
+    if not self.complete then status.completed = self.func() end
+    if self.time + self.delay <= self:timer() then
+        status.time_done = true
+    end
+end
+
 ---@private
 ---@param status EventStatus
 ---@return nil
@@ -101,16 +112,5 @@ function Event:ease(status)
             status.completed = true
             status.time_done = true
         end
-    end
-end
-
----立即执行 func，等 delay 后才移除（可阻塞后续事件）
----@private
----@param status EventStatus
----@return nil
-function Event:before(status)
-    if not self.complete then status.completed = self.func() end
-    if self.time + self.delay <= self:timer() then
-        status.time_done = true
     end
 end
