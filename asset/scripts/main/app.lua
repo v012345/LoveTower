@@ -11,7 +11,7 @@ function App:init()
     self.ID = 0 -- ID 生成器
     self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
     self.CANVAS:setFilter('linear', 'linear')
-    self.ROOM = Node(Transform())
+
     self.I = {
         NODE = {},
         MOVEABLE = {},
@@ -90,6 +90,7 @@ function App:draw()
 end
 
 function App:start_up()
+    self.ROOM = Node(Transform())
     boot_timer("start", "settings", 0.1)
 
     boot_timer('settings', 'window init', 0.2)

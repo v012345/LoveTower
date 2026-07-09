@@ -1,12 +1,12 @@
 package.cpath = package.cpath .. ";c:/Users/NightOwl/.vscode/extensions/tangzx.emmylua-0.9.39-win32-x64/debugger/emmy/windows/x64/?.dll"
 local dbg = require("emmy_core")
 dbg.tcpListen("localhost", 9966)
+require "bit"
 require "asset.scripts.enum"
 require "asset.scripts.engine"
-require "bit"
 require "asset.scripts.functions.misc_functions"
 require "asset.scripts.functions.UI_definitions"
-require "asset.scripts.main.app"
+require "asset.scripts.main"
 
 function love.run()
     if love.load then love.load(love.arg.parseGameArguments(arg), arg) end
