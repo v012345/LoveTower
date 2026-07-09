@@ -1,3 +1,5 @@
+---目前看来直接实例化 Node 的只有一个, 就是 App.instance.ROOM
+
 ---@class Node: Object
 ---@field T Transform The transform of the node | Transform: 位置/大小/旋转 {x, y, w, h, r, scale}  (逻辑坐标)
 ---@field VT Transform 可见的transform, 用于绘制
