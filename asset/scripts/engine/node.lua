@@ -173,10 +173,16 @@ function Node:put_focused_cursor()
 
 end
 
---Sets the container of this node and all child nodes to be a new container node
+---Sets the container of this node and all child nodes to be a new container node
+---不理解为什么 children 也要一同重新设置 container
 ---@param container Node The new node that will behave as this nodes container
 function Node:set_container(container)
-
+    if self.children then
+        for _, v in pairs(self.children) do
+            v:set_container(container)
+        end
+    end
+    self.container = container
 end
 
 --Translation function used before any draw calls, translates this node according to the transform of the container node
