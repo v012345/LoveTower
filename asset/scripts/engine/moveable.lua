@@ -1,5 +1,6 @@
 ---@class Moveable: Node
 ---@field velocity { x: number, y: number, r: number, scale: number, mag: number } 速度
+---@field shadow_parrallax Coordinate 阴影的偏移
 Moveable = Node:extend()
 
 --Moveable represents any game object that has the ability to move about the gamespace.\
@@ -61,11 +62,11 @@ function Moveable:init(T, container)
     -- self.offset = { x = 0, y = 0 }
     -- self.Mid = self
 
-    -- self.shadow_parrallax = { x = 0, y = -1.5 }
+    self.shadow_parrallax = { x = 0, y = -1.5 }
     -- self.layered_parallax = { x = 0, y = 0 }
     -- self.shadow_height = 0.2
 
-    -- self:calculate_parrallax()
+    self:calculate_parrallax()
 
     table.insert(App.instance.MOVEABLES, self)
     if getmetatable(self) == Moveable then
@@ -464,8 +465,10 @@ function Moveable:move_r(dt, vel)
 end
 
 function Moveable:calculate_parrallax()
-    if not App.instance.ROOM then return end
-    self.shadow_parrallax.x = (self.T.x + self.T.w / 2 - App.instance.ROOM.T.w / 2) / (App.instance.ROOM.T.w / 2) * 1.5
+    local room = App.instance.ROOM
+    if room then
+        self.shadow_parrallax.x = (self.T.x + self.T.w / 2 - room.T.w / 2) / (room.T.w / 2) * 1.5
+    end
 end
 
 function Moveable:set_role(args)
