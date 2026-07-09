@@ -1,5 +1,5 @@
 ---@class Moveable: Node
----@field VT Transform
+---@field velocity { x: number, y: number, r: number, scale: number, mag: number } 速度
 Moveable = Node:extend()
 
 --Moveable represents any game object that has the ability to move about the gamespace.\
@@ -13,16 +13,14 @@ Moveable = Node:extend()
 
 
 ---@param T Transform
-function Moveable:init(T)
-    Node.init(self, T)
+---@param container? Node
+function Moveable:init(T, container)
+    Node.init(self, T, container)
 
-    --The Visible transform is initally set to the same values as the transform T.
-    --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
-    --scale of any objects that need to be drawn larger or smaller
-    -- self.VT = self.T:clone()
 
-    -- --To determine location of VT, we need to keep track of the velocity of VT as it approaches T for the next frame
-    -- self.velocity = { x = 0, y = 0, r = 0, scale = 0, mag = 0 }
+
+    --To determine location of VT, we need to keep track of the velocity of VT as it approaches T for the next frame
+    self.velocity = { x = 0, y = 0, r = 0, scale = 0, mag = 0 }
 
     -- --For more robust drawing, attaching, movement and fewer redundant movement calculations, Moveables each have a 'role'
     -- --that describes a heirarchy of move() calls. Any Moveables with 'Major' role type behave normally, essentially recalculating their
@@ -69,7 +67,7 @@ function Moveable:init(T)
 
     -- self:calculate_parrallax()
 
-    -- table.insert(App.instance.MOVEABLES, self)
+    table.insert(App.instance.MOVEABLES, self)
     if getmetatable(self) == Moveable then
         table.insert(App.instance.I.MOVEABLE, self)
     end

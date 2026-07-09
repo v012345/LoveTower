@@ -32,6 +32,9 @@ function Node:init(T, container)
     self.ID = App.instance:generate_id()
     self.T = T and T:clone() or Transform()
     self.CT = self.T
+    --The Visible transform is initally set to the same values as the transform T.
+    --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
+    --scale of any objects that need to be drawn larger or smaller
     self.VT = self.T:clone()
     self.click_offset = Coordinate()
     self.hover_offset = Coordinate()

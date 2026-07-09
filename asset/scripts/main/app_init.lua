@@ -30,6 +30,9 @@ function App:init()
     self.STAGE = self.STAGES.MAIN_MENU
 
     self.DRAW_HASH = {}
+    self.MOVEABLES = {} -- 所有 Moveable 的列表, 包括 Moveable 的子类
+
+    --- 就是当前类的实例
     self.I = {
         NODE = {},
         MOVEABLE = {},
