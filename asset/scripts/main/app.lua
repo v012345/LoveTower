@@ -14,6 +14,10 @@ end
 
 function App:update(dt)
     Timer.instance:update(dt)
+    if not self.fbf or self.new_frame then
+        self.new_frame = false
+    end
+    Controller.instance:update(dt)
 end
 
 function App:draw()

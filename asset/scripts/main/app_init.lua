@@ -7,6 +7,8 @@
 ---@field TILESCALE number 地图缩放比例
 ---@field STAGE_OBJECT_INTERRUPT boolean 不知道具体作用是什么
 ---@field STAGE_OBJECTS Node[][] 场景中使用到的所有 Node , 当 STAGE 改变时, 可以通过这里删除所有 Node
+---@field fbf boolean frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧, 和 new_frame 配合使用
+---@field new_frame boolean 是否是新的一帧, 如果为 true, 则渲染新的一帧, 否则渲染旧的一帧, 和 fbf 配合使用
 App = Object:extend()
 
 function App:init()
@@ -46,4 +48,8 @@ function App:init()
     self.TILE_W = 20
     self.TILE_H = 11.5
     self.TILESCALE = 3.65
+
+
+    self.fbf = false       -- frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧
+    self.new_frame = false -- 是否是新的一帧, 如果为 true, 则渲染新的一帧, 否则渲染旧的一帧
 end

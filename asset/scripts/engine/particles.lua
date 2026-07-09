@@ -65,6 +65,7 @@ function Particles:init(T, container, config)
 end
 
 function Particles:update(dt)
+    do return end
     if G.SETTINGS.paused and not self.created_on_pause then
         self.last_real_time = G.TIMERS[self.timer_type]; return
     end

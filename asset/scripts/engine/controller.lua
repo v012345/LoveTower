@@ -18,5 +18,9 @@ function Controller:init()
     }
 end
 
+function Controller:update(dt)
+end
+
+---@type Controller
 Controller.instance = Controller()
 return Controller
