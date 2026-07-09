@@ -359,3 +359,21 @@ function love.window.getMode() end
 ---@param width number
 ---@return nil
 function love.graphics.setLineWidth(width) end
+
+---@param x? number
+---@param y? number
+---@param w? number
+---@param h? number
+---@param r? number
+---@param scale? number
+---@return Transform
+function Transform(x, y, w, h, r, scale) end
+
+---@class NodeList
+---@field NODE Node[]
+---@field MOVEABLE Moveable[]
+---@field UIBOX UIBox[]
+---@field SPRITE Sprite[]
+---@field CARD Card[]
+---@field CARDAREA CardArea[]
+NodeList = {}

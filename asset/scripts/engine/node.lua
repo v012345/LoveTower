@@ -39,6 +39,11 @@ function Node:init(T, container)
         drag = { can = true, is = false },
         release_on = { can = true, is = false }
     }
+
+    --Add this object to the appropriate instance table only if the metatable matches with NODE
+    if getmetatable(self) == Node then
+        table.insert(App.instance.I.NODE, self)
+    end
 end
 
 --Draws self, then adds self the the draw hash, then draws all children
