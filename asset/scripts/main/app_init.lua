@@ -29,7 +29,7 @@ function App:init()
     self.STAGE_OBJECTS = { {}, {}, {} }
     self.STAGE = self.STAGES.MAIN_MENU
 
-
+    self.DRAW_HASH = {}
     self.I = {
         NODE = {},
         MOVEABLE = {},

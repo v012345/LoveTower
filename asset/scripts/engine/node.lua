@@ -72,7 +72,13 @@ end
 
 --Draws self, then adds self the the draw hash, then draws all children
 function Node:draw()
-
+    self:draw_boundingrect()
+    if self.states.visible then
+        add_to_drawhash(self)
+        for _, v in pairs(self.children) do
+            v:draw()
+        end
+    end
 end
 
 --Draw a bounding rectangle representing the transform of this node. Used in debugging.
