@@ -69,7 +69,6 @@ function App:draw()
 end
 
 function App:start_up()
-    self.ROOM = Node(Transform())
     boot_timer("start", "settings", 0.1)
 
     boot_timer('settings', 'window init', 0.2)
@@ -89,6 +88,7 @@ function App:start_up()
     boot_timer('prep stage', 'splash prep', 1)
 
     boot_timer('splash prep', 'end', 1)
+    self.ROOM = Node(Transform())
 end
 
 function App:set_language()
