@@ -9,6 +9,7 @@
 ---@field STAGE_OBJECTS Node[][] 场景中使用到的所有 Node , 当 STAGE 改变时, 可以通过这里删除所有 Node
 ---@field fbf boolean frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧, 和 new_frame 配合使用
 ---@field new_frame boolean 是否是新的一帧, 如果为 true, 则渲染新的一帧, 否则渲染旧的一帧, 和 fbf 配合使用
+---@field MOVEABLES Moveable[] 所有 Moveable 的列表, 包括 Moveable 的子类
 App = Object:extend()
 
 function App:init()
@@ -22,6 +23,11 @@ function App:init()
         paused = false,
     }
 
+    self.FRAMES = {
+        DRAW = 0,
+        MOVE = 0
+    }
+
     self.STAGE_OBJECT_INTERRUPT = false
     self.STAGES = {
         MAIN_MENU = 1,
@@ -32,7 +38,7 @@ function App:init()
     self.STAGE = self.STAGES.MAIN_MENU
 
     self.DRAW_HASH = {}
-    self.MOVEABLES = {} -- 所有 Moveable 的列表, 包括 Moveable 的子类
+    self.MOVEABLES = {}
 
     --- 就是当前类的实例
     self.I = {

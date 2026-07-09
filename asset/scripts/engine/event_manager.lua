@@ -133,3 +133,7 @@ function EventManager:clear_queue(queue, exception)
         end
     end
 end
+
+---@type EventManager
+EventManager.instance = EventManager()
+

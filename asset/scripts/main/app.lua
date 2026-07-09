@@ -13,11 +13,24 @@ function App:init_game_object()
 end
 
 function App:update(dt)
-    Timer.instance:update(dt)
+    self.FRAMES.MOVE = self.FRAMES.MOVE + 1
+    Timer.instance:update_real_time(dt)
     if not self.fbf or self.new_frame then
         self.new_frame = false
+        Timer.instance:update_game_time(dt)
+        EventManager.instance:update(Timer.instance.real_dt)
+        local move_dt = math.min(1 / 20, Timer.instance.real_dt)
+        for k, v in pairs(self.I.MOVEABLE) do
+            if v.FRAME.MOVE < self.FRAMES.MOVE then
+                v:update(move_dt)
+            end
+        end
+        for k, v in pairs(self.MOVEABLES) do
+            v:update(dt * Timer.instance.SPEEDFACTOR)
+            v.states.collide.is = false
+        end
     end
-    Controller.instance:update(dt)
+    Controller.instance:update(Timer.instance.real_dt)
 end
 
 function App:draw()
