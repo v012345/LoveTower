@@ -5,6 +5,9 @@ UIBox = Moveable:extend()
 function UIBox:init(args)
     Moveable.init(self, args.T)
     self.UIRoot = UIElement(nil, self, UIT.T, args.definition.config)
+    if getmetatable(self) == UIBox then
+        table.insert(App.instance.I.UIBOX, self)
+    end
 end
 
 function UIBox:get_UIE_by_ID(id, node)

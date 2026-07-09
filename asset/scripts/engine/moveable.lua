@@ -70,9 +70,9 @@ function Moveable:init(T)
     -- self:calculate_parrallax()
 
     -- table.insert(App.instance.MOVEABLES, self)
-    -- if getmetatable(self) == Moveable then
-    --     table.insert(App.instance.I.MOVEABLE, self)
-    -- end
+    if getmetatable(self) == Moveable then
+        table.insert(App.instance.I.MOVEABLE, self)
+    end
 end
 
 --Sets the alignment of moveable using roles
