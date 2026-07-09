@@ -1,26 +1,5 @@
 -- 进到这里说明所有的资源都下载完了
-
----@class App: Object
----@field CANVAS Canvas
----@field ROOM   Node   房间, 就是游戏的主场景, 一切节点的根节点
----@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
----@field I NodeList
-App = Object:extend()
-
-function App:init()
-    self.ID = 0 -- ID 生成器
-    self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
-    self.CANVAS:setFilter('linear', 'linear')
-
-    self.I = {
-        NODE = {},
-        MOVEABLE = {},
-        UIBOX = {},
-        SPRITE = {},
-        CARD = {},
-        CARDAREA = {},
-    }
-end
+require "asset.scripts.main.app_init"
 
 ---@param new_stage    number
 ---@param new_state    number

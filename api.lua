@@ -275,9 +275,10 @@ function love.graphics.translate(dx, dy) end
 ---@return nil
 function love.graphics.rotate(angle) end
 
----@param scale number
+---@param sx number The scaling in the direction of the x-axis
+---@param sy? number The scaling in the direction of the y-axis. If omitted, it defaults to same as parameter sx.
 ---@return nil
-function love.graphics.scale(scale) end
+function love.graphics.scale(sx, sy) end
 
 --- 包括 `悬浮弹窗` `拖拽弹窗` `警告弹窗`
 ---@class Children

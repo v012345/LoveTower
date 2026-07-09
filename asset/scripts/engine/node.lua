@@ -1,5 +1,6 @@
 ---@class Node: Object
 ---@field T Transform The transform of the node | Transform: 位置/大小/旋转 {x, y, w, h, r, scale}  (逻辑坐标)
+---@field VT Transform 可见的transform, 用于绘制
 ---@field CT Transform 碰撞检测的transform
 ---@field click_offset {x: number, y: number} 点击偏移
 ---@field hover_offset {x: number, y: number} 悬停偏移
@@ -24,6 +25,7 @@ function Node:init(T, container)
     --From args, set the values of self transform
     assert(T:is(Transform), "T must be a Transform")
     self.T = T:clone()
+    self.VT = T:clone()
     self.config = self.config or {}
 
     self.ID = App.instance:generate_id()
@@ -49,6 +51,43 @@ end
 --Draws self, then adds self the the draw hash, then draws all children
 function Node:draw()
 
+end
+
+--Draw a bounding rectangle representing the transform of this node. Used in debugging.
+function Node:draw_boundingrect()
+    self.under_overlay = App.instance.under_overlay
+
+    if App.instance.DEBUG then
+        local tile_scale = App.instance.TILESCALE
+        local transform = self.VT
+        love.graphics.push()
+        love.graphics.scale(tile_scale)
+        love.graphics.translate(transform.x * tile_scale + transform.w * tile_scale * 0.5,
+            transform.y * tile_scale + transform.h * tile_scale * 0.5)
+        love.graphics.rotate(transform.r)
+        love.graphics.translate(-transform.w * tile_scale * 0.5,
+            -transform.h * tile_scale * 0.5)
+        if self.DEBUG_VALUE then
+            love.graphics.setColor(1, 1, 0, 1)
+            love.graphics.print((self.DEBUG_VALUE or ''), transform.w * tile_scale, transform.h * tile_scale, nil, 1 / G.TILESCALE)
+        end
+        love.graphics.setLineWidth(1 + (self.states.focus.is and 1 or 0))
+        if self.states.collide.is then
+            love.graphics.setColor(0, 1, 0, 0.3)
+        else
+            love.graphics.setColor(1, 0, 0, 0.3)
+        end
+        if self.states.focus.can then
+            love.graphics.setColor(G.C.GOLD)
+            love.graphics.setLineWidth(1)
+        end
+        if self.CALCING then
+            love.graphics.setColor({ 0, 0, 1, 1 })
+            love.graphics.setLineWidth(3)
+        end
+        love.graphics.rectangle('line', 0, 0, transform.w * tile_scale, transform.h * tile_scale, 3)
+        love.graphics.pop()
+    end
 end
 
 ---Determines if this node collides with some point. Applies any container translations and rotations, then\
