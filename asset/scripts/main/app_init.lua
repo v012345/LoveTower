@@ -14,7 +14,9 @@ function App:init()
     self.TILESCALE = 3.65
     self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
     self.CANVAS:setFilter('linear', 'linear')
-
+    self.SETTINGS = {
+        paused = false,
+    }
     self.I = {
         NODE = {},
         MOVEABLE = {},

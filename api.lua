@@ -378,3 +378,8 @@ function Transform(x, y, w, h, r, scale) end
 ---@field CARD Card[]
 ---@field CARDAREA CardArea[]
 NodeList = {}
+
+---@param x? number
+---@param y? number
+---@return Coordinate
+function Coordinate(x, y) end

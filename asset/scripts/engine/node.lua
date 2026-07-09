@@ -1,17 +1,18 @@
 ---@class Node: Object
 ---@field T Transform The transform of the node | Transform: 位置/大小/旋转 {x, y, w, h, r, scale}  (逻辑坐标)
 ---@field VT Transform 可见的transform, 用于绘制
----@field CT Transform 碰撞检测的transform
----@field click_offset {x: number, y: number} 点击偏移
----@field hover_offset {x: number, y: number} 悬停偏移
+---@field CT Transform 碰撞检测的transform, 与 T 相同
 ---@field ID number 唯一ID
 ---@field states NodeStates 节点状态
----@field FRAME table 不知道是什么鬼, 看起来像是帧计数器
+---@field FRAME { DRAW: number, MOVE: number } 帧计数器, 用于记录绘制和移动的帧数
 ---@field children Children 子节点
 ---@field container Node 就是父节点, 子节点会被父节点影响
 ---@field ARGS any 不知道是什么鬼, 看起来像是参数
 ---@field config table 当前节点的元数据
 ---@field under_overlay boolean 是否在覆盖层?
+---@field click_offset Coordinate Create the offset tables, used to determine things like drag offset and 3d shader effects
+---@field hover_offset Coordinate Create the offset tables, used to determine things like drag offset and 3d shader effects
+---@field created_on_pause boolean To keep track of all nodes created on pause. If true, this node moves normally even when the G.TIMERS.TOTAL doesn't increment
 Node = Object:extend()
 
 ---Node represent any game object that needs to have some transform available in the game itself.\
@@ -24,11 +25,22 @@ Node = Object:extend()
 function Node:init(T, container)
     --From args, set the values of self transform
     assert(T:is(Transform), "T must be a Transform")
-    self.T = T:clone()
-    self.VT = T:clone()
-    self.config = self.config or {}
-
     self.ID = App.instance:generate_id()
+    self.T = T:clone()
+    self.CT = self.T
+    self.VT = T:clone()
+    self.click_offset = Coordinate()
+    self.hover_offset = Coordinate()
+    self.created_on_pause = App.instance.SETTINGS.paused
+    self.FRAME = {
+        DRAW = -1,
+        MOVE = -1
+    }
+    self.config = self.config or {}
+    self.container = container or App.instance.ROOM
+    if not self.children then
+        self.children = {}
+    end
 
     --The states for this Node and all derived nodes. This is how we control the visibility and interactibility of any object
     --All nodes do not collide by default. This reduces the size of n for the O(n^2) collision detection
