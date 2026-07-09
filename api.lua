@@ -242,6 +242,10 @@ love.system = love.system or {}
 ---@return string os
 function love.system.getOS() end
 
+---@param width number
+---@param height number
+---@param options table|nil
+---@return Canvas
 function love.graphics.newCanvas(width, height, options) end
 
 ---@param canvas Canvas|table|nil

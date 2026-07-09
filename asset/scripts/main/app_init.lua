@@ -5,6 +5,7 @@
 ---@field I NodeList
 ---@field under_overlay boolean 是否显示底层覆盖?????? 不知道是什么东西
 ---@field TILESCALE number 地图缩放比例
+---@field STAGE_OBJECT_INTERRUPT boolean 不知道具体作用是什么
 App = Object:extend()
 
 function App:init()
@@ -17,6 +18,17 @@ function App:init()
     self.SETTINGS = {
         paused = false,
     }
+
+    self.STAGE_OBJECT_INTERRUPT = false
+    self.STAGES = {
+        MAIN_MENU = 1,
+        RUN = 2,
+        SANDBOX = 3
+    }
+    self.STAGE_OBJECTS = { {}, {}, {} }
+    self.STAGE = self.STAGES.MAIN_MENU
+
+
     self.I = {
         NODE = {},
         MOVEABLE = {},
