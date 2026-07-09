@@ -16,6 +16,8 @@
 ---@field created_on_pause boolean To keep track of all nodes created on pause. If true, this node moves normally even when the G.TIMERS.TOTAL doesn't increment
 ---@field ARGS table Store all argument tables here for reuse, because Lua likes to generate garbage
 ---@field RETS table Store all return tables here for reuse, because Lua likes to generate garbage
+---@field DEBUG_VALUE string|nil Text which want to print when debugging
+---@field CALCING boolean 是否正在计算, Moveable 的 move 方法会设置这个为 true
 Node = Object:extend()
 
 ---Node represent any game object that needs to have some transform available in the game itself.\
@@ -57,6 +59,8 @@ function Node:init(T, container)
         drag = { can = true, is = false },
         release_on = { can = true, is = false }
     }
+    self.DEBUG_VALUE = "Node"
+    self.CALCING = false
 
     --Add this object to the appropriate instance table only if the metatable matches with NODE
     if getmetatable(self) == Node then
@@ -86,34 +90,34 @@ function Node:draw_boundingrect()
     self.under_overlay = App.instance.under_overlay
 
     if App.instance.DEBUG then
-        local tile_scale = App.instance.TILESCALE
-        local transform = self.VT
         love.graphics.push()
-        love.graphics.scale(tile_scale)
-        love.graphics.translate(transform.x * tile_scale + transform.w * tile_scale * 0.5,
-            transform.y * tile_scale + transform.h * tile_scale * 0.5)
-        love.graphics.rotate(transform.r)
-        love.graphics.translate(-transform.w * tile_scale * 0.5,
-            -transform.h * tile_scale * 0.5)
-        if self.DEBUG_VALUE then
-            love.graphics.setColor(1, 1, 0, 1)
-            love.graphics.print((self.DEBUG_VALUE or ''), transform.w * tile_scale, transform.h * tile_scale, nil, 1 / G.TILESCALE)
+        do
+            local s = App.instance.TILESCALE
+            local x, y, w, h, r = self.VT.x * s, self.VT.y * s, self.VT.w * s, self.VT.h * s, self.VT.r
+            love.graphics.scale(s)
+            love.graphics.translate(x + w * 0.5, y + h * 0.5)
+            love.graphics.rotate(r)
+            love.graphics.translate(-w * 0.5, -h * 0.5)
+            if self.DEBUG_VALUE then
+                love.graphics.setColor(1, 1, 0, 1)
+                love.graphics.print(self.DEBUG_VALUE, w, h, nil, 1 / App.instance.TILESCALE)
+            end
+            love.graphics.setLineWidth(1 + (self.states.focus.is and 1 or 0))
+            if self.states.collide.is then
+                love.graphics.setColor(0, 1, 0, 0.3)
+            else
+                love.graphics.setColor(1, 0, 0, 0.3)
+            end
+            if self.states.focus.can then
+                love.graphics.setColor(Color.GOLD)
+                love.graphics.setLineWidth(1)
+            end
+            if self.CALCING then
+                love.graphics.setColor({ 0, 0, 1, 1 })
+                love.graphics.setLineWidth(3)
+            end
+            love.graphics.rectangle('line', 0, 0, w, h, 3)
         end
-        love.graphics.setLineWidth(1 + (self.states.focus.is and 1 or 0))
-        if self.states.collide.is then
-            love.graphics.setColor(0, 1, 0, 0.3)
-        else
-            love.graphics.setColor(1, 0, 0, 0.3)
-        end
-        if self.states.focus.can then
-            love.graphics.setColor(G.C.GOLD)
-            love.graphics.setLineWidth(1)
-        end
-        if self.CALCING then
-            love.graphics.setColor({ 0, 0, 1, 1 })
-            love.graphics.setLineWidth(3)
-        end
-        love.graphics.rectangle('line', 0, 0, transform.w * tile_scale, transform.h * tile_scale, 3)
         love.graphics.pop()
     end
 end

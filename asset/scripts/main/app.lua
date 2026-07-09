@@ -88,7 +88,7 @@ function App:start_up()
     boot_timer('prep stage', 'splash prep', 1)
 
     boot_timer('splash prep', 'end', 1)
-    self.ROOM = Node()
+    self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
 end
 
 function App:set_language()

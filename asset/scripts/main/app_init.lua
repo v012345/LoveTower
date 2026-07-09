@@ -13,7 +13,7 @@ function App:init()
     self.ID = 0 -- ID 生成器
     self.DEBUG = true
     self.under_overlay = false
-    self.TILESCALE = 3.65
+
     self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
     self.CANVAS:setFilter('linear', 'linear')
     self.SETTINGS = {
@@ -38,4 +38,9 @@ function App:init()
         CARD = {},
         CARDAREA = {},
     }
+    self.ROOM_PADDING_H = 0.7
+    self.ROOM_PADDING_W = 1
+    self.TILE_W = 20
+    self.TILE_H = 11.5
+    self.TILESCALE = 3.65
 end

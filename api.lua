@@ -270,6 +270,7 @@ function Canvas:setFilter(filter, filtermag) end
 NodeStates = {}
 
 
+---移动当前坐标系
 ---@param dx number
 ---@param dy number
 ---@return nil
