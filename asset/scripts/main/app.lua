@@ -38,12 +38,45 @@ function App:update(dt)
 end
 
 function App:draw()
-    love.graphics.setCanvas { self.CANVAS }
+    love.graphics.setCanvas({ self.CANVAS })
     love.graphics.push()
     love.graphics.scale(1)
 
     love.graphics.setShader()
     love.graphics.clear(0, 0, 0, 1)
+
+
+    do -- Draw the room
+        for k, v in pairs(self.I.NODE) do
+            if not v.parent then
+                love.graphics.push()
+                v:translate_container()
+                v:draw()
+                love.graphics.pop()
+            end
+        end
+        for k, v in pairs(self.I.MOVEABLE) do
+            if not v.parent then
+                love.graphics.push()
+                v:translate_container()
+                v:draw()
+                love.graphics.pop()
+            end
+        end
+        for k, v in pairs(self.I.UIBOX) do
+            if not v.parent then
+                love.graphics.push()
+                v:translate_container()
+                v:draw()
+                love.graphics.pop()
+            end
+        end
+    end
+
+
+
+
+
     love.graphics.pop()
 
     love.graphics.setCanvas(self.AA_CANVAS)
