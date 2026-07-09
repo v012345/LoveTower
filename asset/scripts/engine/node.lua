@@ -9,12 +9,13 @@
 ---@field FRAME { DRAW: number, MOVE: number } 帧计数器, 用于记录绘制和移动的帧数
 ---@field children Children 子节点
 ---@field container Node 就是父节点, 子节点会被父节点影响
----@field ARGS any 不知道是什么鬼, 看起来像是参数
 ---@field config table 当前节点的元数据
 ---@field under_overlay boolean 是否在覆盖层?
 ---@field click_offset Coordinate Create the offset tables, used to determine things like drag offset and 3d shader effects
 ---@field hover_offset Coordinate Create the offset tables, used to determine things like drag offset and 3d shader effects
 ---@field created_on_pause boolean To keep track of all nodes created on pause. If true, this node moves normally even when the G.TIMERS.TOTAL doesn't increment
+---@field ARGS table Store all argument tables here for reuse, because Lua likes to generate garbage
+---@field RETS table Store all return tables here for reuse, because Lua likes to generate garbage
 Node = Object:extend()
 
 ---Node represent any game object that needs to have some transform available in the game itself.\
@@ -37,6 +38,8 @@ function Node:init(T, container)
         DRAW = -1,
         MOVE = -1
     }
+    self.ARGS = self.ARGS or {}
+    self.RETS = {}
     self.config = self.config or {}
     self.container = container or App.instance.ROOM
     if not self.children then
