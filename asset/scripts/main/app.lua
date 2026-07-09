@@ -22,7 +22,7 @@ function App:update(dt)
         local move_dt = math.min(1 / 20, Timer.instance.real_dt)
         for k, v in pairs(self.I.MOVEABLE) do
             if v.FRAME.MOVE < self.FRAMES.MOVE then
-                v:update(move_dt)
+                v:move(move_dt)
             end
         end
         for k, v in pairs(self.MOVEABLES) do
