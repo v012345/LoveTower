@@ -62,6 +62,12 @@ function Node:init(T, container)
     if getmetatable(self) == Node then
         table.insert(App.instance.I.NODE, self)
     end
+
+    --Unless node was created during a stage transition (when G.STAGE_OBJECT_INTERRUPT is true), add all nodes to their appropriate
+    --stage object table so they can be easily deleted on stage transition
+    if not App.instance.STAGE_OBJECT_INTERRUPT then
+        table.insert(App.instance.STAGE_OBJECTS[App.instance.STAGE], self)
+    end
 end
 
 --Draws self, then adds self the the draw hash, then draws all children

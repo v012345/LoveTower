@@ -6,6 +6,7 @@
 ---@field under_overlay boolean 是否显示底层覆盖?????? 不知道是什么东西
 ---@field TILESCALE number 地图缩放比例
 ---@field STAGE_OBJECT_INTERRUPT boolean 不知道具体作用是什么
+---@field STAGE_OBJECTS Node[][] 场景中使用到的所有 Node , 当 STAGE 改变时, 可以通过这里删除所有 Node
 App = Object:extend()
 
 function App:init()
