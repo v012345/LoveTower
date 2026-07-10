@@ -263,20 +263,18 @@ function Moveable:move_juice(dt)
         if self.juice.end_time < G.TIMERS.REAL then
             self.juice = nil
         else
-            self.juice.scale = self.juice.scale_amt * math.sin(50.8 * (G.TIMERS.REAL - self.juice.start_time)) *
-                math.max(0, ((self.juice.end_time - G.TIMERS.REAL) / (self.juice.end_time - self.juice.start_time)) ^ 3)
-            self.juice.r = self.juice.r_amt * math.sin(40.8 * (G.TIMERS.REAL - self.juice.start_time)) *
-                math.max(0, ((self.juice.end_time - G.TIMERS.REAL) / (self.juice.end_time - self.juice.start_time)) ^ 2)
+            self.juice.scale = self.juice.scale_amt * math.sin(50.8 * (G.TIMERS.REAL - self.juice.start_time)) * math.max(0, ((self.juice.end_time - G.TIMERS.REAL) / (self.juice.end_time - self.juice.start_time)) ^ 3)
+            self.juice.r = self.juice.r_amt * math.sin(40.8 * (G.TIMERS.REAL - self.juice.start_time)) * math.max(0, ((self.juice.end_time - G.TIMERS.REAL) / (self.juice.end_time - self.juice.start_time)) ^ 2)
         end
     end
 end
 
 function Moveable:move(dt)
-    if self.FRAME.MOVE >= G.FRAMES.MOVE then return end
+    if self.FRAME.MOVE >= App.instance.FRAMES.MOVE then return end
     self.FRAME.OLD_MAJOR = self.FRAME.MAJOR
     self.FRAME.MAJOR = nil
-    self.FRAME.MOVE = G.FRAMES.MOVE
-    if not self.created_on_pause and G.SETTINGS.paused then return end
+    self.FRAME.MOVE = App.instance.FRAMES.MOVE
+    if not self.created_on_pause and App.instance.SETTINGS.paused then return end
 
     --WHY ON EARTH DOES THIS LINE MAKE IT RUN 2X AS FAST???
     -------------------------------------------------------
@@ -285,7 +283,7 @@ function Moveable:move(dt)
 
     self:align_to_major()
 
-    self.CALCING = nil
+    self.CALCING = false
     if self.role.role_type == 'Glued' then
         if self.role.major then self:glue_to_major(self.role.major) end
     elseif self.role.role_type == 'Minor' and self.role.major then
