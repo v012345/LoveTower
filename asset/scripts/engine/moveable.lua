@@ -3,6 +3,7 @@
 ---@field shadow_parrallax Coordinate 阴影的偏移
 ---@field role MoveableRole
 ---@field alignment Alignment
+---@field pinch { x: boolean, y: boolean } 快速完成过渡
 Moveable = Node:extend()
 
 --Moveable represents any game object that has the ability to move about the gamespace.\
@@ -50,9 +51,9 @@ function Moveable:init(T, container)
         prev_offset = Coordinate(0, 0),
     }
 
-    -- --the pinch table is used to modify the VT.w and VT.h compared to T.w and T.h. If either x or y pinch is
-    -- --set to true, the VT width and or height will ease to 0. If pinch is false, they ease to T.w or T.h
-    -- self.pinch = { x = false, y = false }
+    --the pinch table is used to modify the VT.w and VT.h compared to T.w and T.h. If either x or y pinch is
+    --set to true, the VT width and or height will ease to 0. If pinch is false, they ease to T.w or T.h
+    self.pinch = { x = false, y = false }
 
     -- --Keep track of the last time this Moveable was moved via :move(dt). When it is successfully moved, set to equal
     -- --the current G.TIMERS.REAL, and if it is called again this frame, doesn't recalculate move(dt)
