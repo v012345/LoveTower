@@ -1,6 +1,8 @@
 ---@class Moveable: Node
 ---@field velocity { x: number, y: number, r: number, scale: number, mag: number } 速度
 ---@field shadow_parrallax Coordinate 阴影的偏移
+---@field role MoveableRole
+---@field alignment Alignment
 Moveable = Node:extend()
 
 --Moveable represents any game object that has the ability to move about the gamespace.\
@@ -23,30 +25,30 @@ function Moveable:init(T, container)
     --To determine location of VT, we need to keep track of the velocity of VT as it approaches T for the next frame
     self.velocity = { x = 0, y = 0, r = 0, scale = 0, mag = 0 }
 
-    -- --For more robust drawing, attaching, movement and fewer redundant movement calculations, Moveables each have a 'role'
-    -- --that describes a heirarchy of move() calls. Any Moveables with 'Major' role type behave normally, essentially recalculating their
-    -- --VT every frame to ensure smooth movement. Moveables can be set to 'Minor' role and attached to some 'Major' moveable
-    -- --to weld the Minor moveable to the Major moveable. This makes the dependent moveable set their T and VT to be equal to
-    -- --the corresponding 'Major' T and VT, plus some defined offset.
-    -- --For finer control over what parts of T and VT are inherited, xy_bond, wh_bond, and r_bond can be set to one of
-    -- --'Strong' or 'Weak'. Strong simply copies the values, Weak allows the 'Minor' moveable to calculate their own.
-    -- self.role = {
-    --     role_type = 'Major',       --Major dictates movement, Minor is welded to some major
-    --     offset = { x = 0, y = 0 }, --Offset from Minor to Major
-    --     major = nil,
-    --     draw_major = self,
-    --     xy_bond = 'Strong',
-    --     wh_bond = 'Strong',
-    --     r_bond = 'Strong',
-    --     scale_bond = 'Strong'
-    -- }
+    --For more robust drawing, attaching, movement and fewer redundant movement calculations, Moveables each have a 'role'
+    --that describes a heirarchy of move() calls. Any Moveables with 'Major' role type behave normally, essentially recalculating their
+    --VT every frame to ensure smooth movement. Moveables can be set to 'Minor' role and attached to some 'Major' moveable
+    --to weld the Minor moveable to the Major moveable. This makes the dependent moveable set their T and VT to be equal to
+    --the corresponding 'Major' T and VT, plus some defined offset.
+    --For finer control over what parts of T and VT are inherited, xy_bond, wh_bond, and r_bond can be set to one of
+    --'Strong' or 'Weak'. Strong simply copies the values, Weak allows the 'Minor' moveable to calculate their own.
+    self.role = {
+        role_type = RoleType.Major, --Major dictates movement, Minor is welded to some major
+        offset = Coordinate(0, 0),  --Offset from Minor to Major
+        major = nil,
+        draw_major = self,
+        xy_bond = BondType.Strong,
+        wh_bond = BondType.Strong,
+        r_bond = BondType.Strong,
+        scale_bond = BondType.Strong
+    }
 
-    -- self.alignment = {
-    --     type = 'a',
-    --     offset = { x = 0, y = 0 },
-    --     prev_type = '',
-    --     prev_offset = { x = 0, y = 0 },
-    -- }
+    self.alignment = {
+        type = 'a',
+        offset = Coordinate(0, 0),
+        prev_type = '',
+        prev_offset = Coordinate(0, 0),
+    }
 
     -- --the pinch table is used to modify the VT.w and VT.h compared to T.w and T.h. If either x or y pinch is
     -- --set to true, the VT width and or height will ease to 0. If pinch is false, they ease to T.w or T.h

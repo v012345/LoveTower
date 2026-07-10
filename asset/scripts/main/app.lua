@@ -106,7 +106,9 @@ function App:start_up()
 
     boot_timer('splash prep', 'end', 1)
     self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
-
+    for k, v in pairs(AlignmentType) do
+        print(k, v)
+    end
     Particles()
 end
 

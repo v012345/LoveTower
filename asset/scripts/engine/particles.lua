@@ -4,7 +4,6 @@ Particles = Moveable:extend()
 ---@param T Transform
 ---@param container? Node
 ---@param config? table
----@return Particles
 function Particles:init(T, container, config)
     config = config or {}
 
@@ -61,7 +60,6 @@ function Particles:init(T, container, config)
     if getmetatable(self) == Particles then
         table.insert(App.instance.I.MOVEABLE, self)
     end
-    return self
 end
 
 function Particles:update(dt)
@@ -105,6 +103,7 @@ function Particles:update(dt)
 end
 
 function Particles:move(dt)
+    do return end
     if G.SETTINGS.paused and not self.created_on_pause then return end
 
     Moveable.move(self, dt)

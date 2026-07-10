@@ -388,3 +388,35 @@ NodeList = {}
 ---@param y? number
 ---@return Coordinate
 function Coordinate(x, y) end
+
+---@class MoveableRole
+---@field role_type RoleType
+---@field offset Coordinate
+---@field major Moveable|nil
+---@field xy_bond BondType
+---@field wh_bond BondType
+---@field r_bond BondType
+---@field scale_bond BondType
+---@field draw_major Moveable
+MoveableRole = {}
+
+---@class Alignment
+---@field type string
+---@field offset Coordinate
+---@field prev_type string
+---@field prev_offset Coordinate
+Alignment = {}
+
+
+---@class bit
+bit = {}
+---@param a number
+---@param b number
+---@return number
+function bit.lshift(a, b) end
+
+---@param a number
+---@param b number
+---@param ... number
+---@return number
+function bit.bor(a, b, ...) end
