@@ -4,6 +4,13 @@
 ---@field role MoveableRole
 ---@field alignment Alignment
 ---@field pinch { x: boolean, y: boolean } 快速完成过渡
+---@field last_moved number 上次移动时间
+---@field last_aligned number 上次对齐时间
+---@field static_rotation boolean 是否静态旋转?
+---@field offset Coordinate 偏移
+---@field Mid Moveable 对齐参考点, 用于在 align_to_major() 中确定"用对象的哪个部分去对齐"
+---@field layered_parrallax Coordinate 分层偏移????
+---@field shadow_height number 阴影高度??
 Moveable = Node:extend()
 
 --Moveable represents any game object that has the ability to move about the gamespace.\
@@ -55,19 +62,19 @@ function Moveable:init(T, container)
     --set to true, the VT width and or height will ease to 0. If pinch is false, they ease to T.w or T.h
     self.pinch = { x = false, y = false }
 
-    -- --Keep track of the last time this Moveable was moved via :move(dt). When it is successfully moved, set to equal
-    -- --the current G.TIMERS.REAL, and if it is called again this frame, doesn't recalculate move(dt)
-    -- self.last_moved = -1
-    -- self.last_aligned = -1
+    --Keep track of the last time this Moveable was moved via :move(dt). When it is successfully moved, set to equal
+    --the current G.TIMERS.REAL, and if it is called again this frame, doesn't recalculate move(dt)
+    self.last_moved = -1
+    self.last_aligned = -1
 
-    -- self.static_rotation = false
+    self.static_rotation = false
 
-    -- self.offset = { x = 0, y = 0 }
-    -- self.Mid = self
+    self.offset = Coordinate(0, 0)
+    self.Mid = self -- 对齐参考点默认是自己
 
-    self.shadow_parrallax = { x = 0, y = -1.5 }
-    -- self.layered_parallax = { x = 0, y = 0 }
-    -- self.shadow_height = 0.2
+    self.shadow_parrallax = Coordinate(0, -1.5)
+    self.layered_parrallax = Coordinate(0, 0)
+    self.shadow_height = 0.2
 
     self:calculate_parrallax()
 
