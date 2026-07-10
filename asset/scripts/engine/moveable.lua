@@ -44,9 +44,9 @@ function Moveable:init(T, container)
     }
 
     self.alignment = {
-        type = 'a',
+        type = AlignmentType.a,
         offset = Coordinate(0, 0),
-        prev_type = '',
+        prev_type = AlignmentType.none,
         prev_offset = Coordinate(0, 0),
     }
 

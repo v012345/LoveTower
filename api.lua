@@ -401,9 +401,9 @@ function Coordinate(x, y) end
 MoveableRole = {}
 
 ---@class Alignment
----@field type string
+---@field type AlignmentType
 ---@field offset Coordinate
----@field prev_type string
+---@field prev_type AlignmentType
 ---@field prev_offset Coordinate
 Alignment = {}
 
