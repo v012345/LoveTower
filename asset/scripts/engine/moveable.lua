@@ -540,7 +540,6 @@ end
 ---@param rotate? number
 ---@param offset? table
 function Moveable:prep_draw(scale, rotate, offset)
-    love.graphics.push()
     love.graphics.scale(App.instance.TILESCALE * App.instance.TILESIZE)
     local VT = self.VT
     local layered_parallax = self.layered_parallax

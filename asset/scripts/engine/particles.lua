@@ -140,8 +140,9 @@ end
 
 function Particles:draw(alpha)
     alpha = alpha or 1
-    self:prep_draw(1)
+    love.graphics.push()
     do
+        self:prep_draw(1)
         love.graphics.translate(self.T.w / 2, self.T.h / 2)
         for k, v in pairs(self.particles) do
             if v.draw then
