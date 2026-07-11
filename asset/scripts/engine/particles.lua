@@ -1,4 +1,6 @@
 ---@class Particles: Moveable
+---@field particles Particle[] 粒子
+---@field private scale number 粒子的参数缩放, 不是 Transform 的缩放
 Particles = Moveable:extend()
 
 ---@param T Transform
@@ -118,7 +120,7 @@ function Particles:move(dt)
         p.e_vel = p.e_vel or dt * self.scale
         p.e_prev = p.e_curr
         p.age = p.age + dt
-        p.e_curr = math.min(2 * math.min((p.age / self.lifespan) * self.scale, self.scale * ((self.lifespan - p.age) / self.lifespan)), self.scale)
+        p.e_curr = math.min(2 * math.min((p.age / self.lifespan), ((self.lifespan - p.age) / self.lifespan)), 1) * self.scale
         p.e_vel = (p.e_curr - p.e_prev) * self.scale * dt + (1 - self.scale * dt) * p.e_vel
         p.scale = p.scale + p.e_vel
         p.scale = math.min(2 * math.min((p.age / self.lifespan) * self.scale, self.scale * ((self.lifespan - p.age) / self.lifespan)), self.scale)
