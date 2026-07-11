@@ -33,6 +33,23 @@ function mix_colours(C1, C2, proportionC1)
     }
 end
 
+function pseudorandom_element(_t, seed)
+    if seed then math.randomseed(seed) end
+    local keys = {}
+    for k, v in pairs(_t) do
+        keys[#keys + 1] = { k = k, v = v }
+    end
+
+    if keys[1] and keys[1].v and type(keys[1].v) == 'table' and keys[1].v.sort_id then
+        table.sort(keys, function(a, b) return a.v.sort_id < b.v.sort_id end)
+    else
+        table.sort(keys, function(a, b) return a.k < b.k end)
+    end
+
+    local key = keys[math.random(#keys)].k
+    return _t[key], key
+end
+
 ---为什么没有 end_draw 函数?
 function prep_draw(moveable, scale, rotate, offset)
     love.graphics.push()
