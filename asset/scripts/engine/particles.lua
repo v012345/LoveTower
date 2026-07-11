@@ -35,8 +35,8 @@ function Particles:init(T, container, config)
     self.states.release_on.can = false
 
     self.timer = config.timer or 0.5
-    self.timer_type = (self.created_on_pause and 'REAL') or config.timer_type or 'REAL'
-    self.last_real_time = Timer.instance[self.timer_type] - self.timer
+    self.timer_type = (self.created_on_pause and Timer.instance:get_real_timer()) or config.timer_type or Timer.instance:get_real_timer()
+    self.last_real_time = self.timer_type() - self.timer
     self.last_drawn = 0
     self.lifespan = config.lifespan or 1
     self.fade_alpha = 0
@@ -63,12 +63,15 @@ function Particles:init(T, container, config)
 end
 
 function Particles:update(dt)
-    do return end
-    if G.SETTINGS.paused and not self.created_on_pause then
-        self.last_real_time = G.TIMERS[self.timer_type]; return
+    if App.instance.SETTINGS.paused and not self.created_on_pause then
+        self.last_real_time = self.timer_type()
+        return
     end
+    -- 每帧最多添加 20 个粒子
     local added_this_frame = 0
-    while G.TIMERS[self.timer_type] > self.last_real_time + self.timer and (#self.particles < self.max or self.pulsed < self.pulse_max) and added_this_frame < 20 do
+
+    --
+    while self.timer_type() > self.last_real_time + self.timer and (#self.particles < self.max or self.pulsed < self.pulse_max) and added_this_frame < 20 do
         self.last_real_time = self.last_real_time + self.timer
         local new_offset = {
             x = self.fill and (0.5 - math.random()) * self.T.w or 0,
@@ -93,7 +96,7 @@ function Particles:update(dt)
             e_curr = 0,
             scale = 0,
             visible_scale = 0,
-            time = G.TIMERS[self.timer_type],
+            time = self.timer_type(),
             colour = pseudorandom_element(self.colours),
             offset = new_offset
         })

@@ -1,7 +1,7 @@
 ---@class Moveable: Node
 ---@field velocity { x: number, y: number, r: number, scale: number, mag: number } 速度
 ---@field shadow_parrallax Coordinate 阴影的偏移
----@field role MoveableRole
+---@field role MoveableRole 在 Moveable 中初始化
 ---@field alignment Alignment
 ---@field pinch { x: boolean, y: boolean } 快速完成过渡
 ---@field last_moved number 上次移动时间

@@ -28,28 +28,28 @@ function Timer:update_game_time(dt)
     self.TOTAL = self.TOTAL + dt * self.SPEEDFACTOR
 end
 
----@return function
+---@return fun(): number
 function Timer:get_total_timer()
     return function()
         return self.TOTAL
     end
 end
 
----@return function
+---@return fun(): number
 function Timer:get_real_timer()
     return function()
         return self.REAL
     end
 end
 
----@return function
+---@return fun(): number
 function Timer:get_real_shader_timer()
     return function()
         return self.REAL_SHADER
     end
 end
 
----@return function
+---@return fun(): number
 function Timer:get_update_timer()
     return function()
         return self.UPTIME
