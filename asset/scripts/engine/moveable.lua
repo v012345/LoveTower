@@ -9,7 +9,6 @@
 ---@field static_rotation boolean 是否静态旋转?
 ---@field offset Coordinate 偏移
 ---@field Mid Moveable 对齐参考点, 用于在 align_to_major() 中确定"用对象的哪个部分去对齐"
----@field layered_parrallax Coordinate 分层偏移????
 ---@field shadow_height number 阴影高度??
 Moveable = Node:extend()
 
@@ -73,7 +72,6 @@ function Moveable:init(T, container)
     self.Mid = self -- 对齐参考点默认是自己
 
     self.shadow_parrallax = Coordinate(0, -1.5)
-    self.layered_parrallax = Coordinate(0, 0)
     self.shadow_height = 0.2
 
     self:calculate_parrallax()
@@ -540,7 +538,9 @@ end
 ---@param rotate? number
 ---@param offset? table
 function Moveable:prep_draw(scale, rotate, offset)
-    love.graphics.scale(App.instance.TILESCALE * App.instance.TILESIZE)
+    -- love.graphics.scale(App.instance.TILESCALE * App.instance.TILESIZE)
+    love.graphics.setColor(Color.RED)
+    love.graphics.rectangle('fill', 0, 0, 20, 20)
     local VT = self.VT
     local layered_parallax = self.layered_parallax
     local parent = self.parent

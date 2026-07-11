@@ -5,6 +5,7 @@
 ---@field I NodeList
 ---@field under_overlay boolean 是否显示底层覆盖?????? 不知道是什么东西
 ---@field TILESCALE number 地图缩放比例
+---@field TILESIZE number 地图单元格大小
 ---@field STAGE_OBJECT_INTERRUPT boolean 不知道具体作用是什么
 ---@field STAGE_OBJECTS Node[][] 场景中使用到的所有 Node , 当 STAGE 改变时, 可以通过这里删除所有 Node
 ---@field fbf boolean frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧, 和 new_frame 配合使用

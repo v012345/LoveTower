@@ -18,6 +18,8 @@
 ---@field RETS table Store all return tables here for reuse, because Lua likes to generate garbage
 ---@field DEBUG_VALUE string|nil Text which want to print when debugging
 ---@field CALCING boolean 是否正在计算, Moveable 的 move 方法会设置这个为 true
+---@field parent Node 父节点
+---@field layered_parallax Coordinate 分层偏移????
 Node = Object:extend()
 
 ---Node represent any game object that needs to have some transform available in the game itself.\
@@ -32,6 +34,8 @@ function Node:init(T, container)
     self.ID = App.instance:generate_id()
     self.T = T and T:clone() or Transform()
     self.CT = self.T
+    self.parent = nil
+    self.layered_parallax = Coordinate(0, 0)
     --The Visible transform is initally set to the same values as the transform T.
     --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
     --scale of any objects that need to be drawn larger or smaller
