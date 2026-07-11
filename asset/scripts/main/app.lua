@@ -114,11 +114,11 @@ function App:set_language()
 
 end
 
+--- 目前默认是Windowed模式，1000x650分辨率, 使用第一个显示器, 之后要读用户设置文件中的设置
 function App:init_window()
     local T = Transform(0, 0, self.TILE_W + 2 * self.ROOM_PADDING_W, self.TILE_H + 2 * self.ROOM_PADDING_H)
     self.WINDOWTRANS = T
     local t = self.TILESIZE * self.TILESCALE
-
     self.window_prev = { w = T.w * t, h = T.h * t, orig_scale = self.TILESCALE, orig_ratio = T.w / T.h }
     love.window.updateMode(1000, 650, { fullscreen = false, fullscreentype = nil, vsync = 1, resizable = true, display = 1, highdpi = false })
 end

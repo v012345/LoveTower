@@ -82,6 +82,10 @@ function love.mousemoved(x, y, dx, dy, istouch)
     -- print(x, y, dx, dy, istouch)
 end
 
+---Called when the window is resized, for example if the user resizes the window, or if love.window.setMode is called with an unsupported width or height in fullscreen and the window chooses the closest appropriate size.
+---[api reference](https://love2d.org/wiki/love.resize)
+---@param w any
+---@param h any
 function love.resize(w, h)
     print(w, h)
     -- 不允许窗口变成竖屏, 因为会出现上下弹出
