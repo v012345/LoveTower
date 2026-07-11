@@ -536,6 +536,9 @@ function Moveable:remove()
     Node.remove(self)
 end
 
+---@param scale number
+---@param rotate? number
+---@param offset? table
 function Moveable:prep_draw(scale, rotate, offset)
     love.graphics.push()
     love.graphics.scale(App.instance.TILESCALE * App.instance.TILESIZE)
