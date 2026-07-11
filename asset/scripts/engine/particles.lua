@@ -105,6 +105,7 @@ function Particles:update(dt)
     end
 end
 
+---对于 Moveable 实例来说, 游戏的主循环会先调用 move(dt) 方法, 然后调用 update(dt) 方法
 function Particles:move(dt)
     if App.instance.SETTINGS.paused and not self.created_on_pause then return end
 
