@@ -150,7 +150,8 @@ function Particles:draw(alpha)
                     love.graphics.setColor(v.colour[1], v.colour[2], v.colour[3], v.colour[4] * alpha * (1 - self.fade_alpha))
                     love.graphics.translate(v.offset.x, v.offset.y)
                     love.graphics.rotate(v.facing)
-                    love.graphics.rectangle('fill', -v.scale / 2, -v.scale / 2, v.scale, v.scale) -- origin in the middle
+                    local size = v.scale * 0.5
+                    love.graphics.rectangle('fill', -size, -size, size, size) -- origin in the middle
                 end
                 love.graphics.pop()
             end
