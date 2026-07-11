@@ -539,14 +539,15 @@ end
 ---@param offset? table
 function Moveable:prep_draw(scale, rotate, offset)
     -- love.graphics.scale(App.instance.TILESCALE * App.instance.TILESIZE)
+    offset = offset or Coordinate(0, 0)
     love.graphics.setColor(Color.RED)
     love.graphics.rectangle('fill', 0, 0, 20, 20)
     local VT = self.VT
     local layered_parallax = self.layered_parallax
-    local parent = self.parent
     love.graphics.translate(
-        VT.x + VT.w / 2 + (offset and offset.x or 0) + ((layered_parallax and layered_parallax.x) or ((parent and parent.layered_parallax and parent.layered_parallax.x)) or 0),
-        VT.y + VT.h / 2 + (offset and offset.y or 0) + ((layered_parallax and layered_parallax.y) or ((parent and parent.layered_parallax and parent.layered_parallax.y)) or 0))
+        VT.x + VT.w / 2 + offset.x + layered_parallax.x,
+        VT.y + VT.h / 2 + offset.y + layered_parallax.y
+    )
     if VT.r ~= 0 or self.juice or rotate then love.graphics.rotate(VT.r + (rotate or 0)) end
     love.graphics.translate(-scale * VT.w * (VT.scale) / 2, -scale * VT.h * (VT.scale) / 2)
     love.graphics.scale(self.VT.scale * scale)
