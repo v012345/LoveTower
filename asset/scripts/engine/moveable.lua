@@ -1,6 +1,6 @@
 ---@class Moveable: Node
 ---@field velocity { x: number, y: number, r: number, scale: number, mag: number } 速度
----@field shadow_parrallax Coordinate 阴影的偏移
+---@field shadow_parrallax Coordinate 阴影的偏移, 受主场景就是 ROOM 影响
 ---@field role MoveableRole 在 Moveable 中初始化
 ---@field alignment Alignment
 ---@field pinch { x: boolean, y: boolean } 快速完成过渡
@@ -80,6 +80,11 @@ function Moveable:init(T, container)
     if getmetatable(self) == Moveable then
         table.insert(App.instance.I.MOVEABLE, self)
     end
+end
+
+function Moveable:draw()
+    Node.draw(self)
+    self:draw_boundingrect()
 end
 
 --Sets the alignment of moveable using roles
