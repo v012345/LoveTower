@@ -440,3 +440,13 @@ function bit.bor(a, b, ...) end
 ---@field offset Coordinate 偏移
 ---@field colour table 颜色
 Particle = {}
+
+---Sets the display mode and properties of the window, without modifying unspecified properties.
+---If width or height is 0, updateMode will use the width and height of the desktop.
+---Changing the display mode may have side effects: for example, canvases will be cleared. Make sure to save the contents of canvases beforehand or re-draw to them afterward if you need to.
+---[api reference](https://love2d.org/wiki/love.window.updateMode)
+---@param width number
+---@param height number
+---@param settings table
+---@return boolean success
+function love.window.updateMode(width, height, settings) end

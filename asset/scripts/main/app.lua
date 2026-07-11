@@ -118,26 +118,9 @@ function App:init_window()
     local T = Transform(0, 0, self.TILE_W + 2 * self.ROOM_PADDING_W, self.TILE_H + 2 * self.ROOM_PADDING_H)
     self.WINDOWTRANS = T
     local t = self.TILESIZE * self.TILESCALE
-    print(T.w * t, T.h * t)
 
     self.window_prev = { w = T.w * t, h = T.h * t, orig_scale = self.TILESCALE, orig_ratio = T.w / T.h }
-    local settings = self.SETTINGS.WINDOW
-
-    -- -- Set the monitor the window should be rendered to
-    -- -- 之后要读用户设置文件中的设置
-    -- settings.selected_display = 1
-    -- settings.vsync = 1
-    -- settings.DISPLAYS[settings.selected_display].screen_res = { w = 0, h = 0 }
-    local screen_res = settings.DISPLAYS[settings.selected_display].screen_res
-
-    love.window.updateMode(screen_res.w, screen_res.h, {
-        fullscreen = false,
-        fullscreentype = nil,
-        vsync = 1,
-        resizable = true,
-        display = settings.selected_display,
-        highdpi = false
-    })
+    love.window.updateMode(1000, 650, { fullscreen = false, fullscreentype = nil, vsync = 1, resizable = true, display = 1, highdpi = false })
 end
 
 function App:apply_window_changes()
