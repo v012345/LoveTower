@@ -109,7 +109,7 @@ function App:start_up()
     for k, v in pairs(AlignmentType) do
         print(k, v)
     end
-    Particles(Transform(20, 20, 0, 0))
+    Particles(Transform(20, 20, 0, 0), nil, { timer = 0.003 })
 end
 
 function App:set_language()

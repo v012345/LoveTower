@@ -112,32 +112,30 @@ function Particles:move(dt)
     if self.timer_type ~= Timer.real_timer then dt = dt * App.instance.SETTINGS.speed_factor end
 
     for i = #self.particles, 1, -1 do
-        self.particles[i].draw = true
-        self.particles[i].e_vel = self.particles[i].e_vel or dt * self.scale
-        self.particles[i].e_prev = self.particles[i].e_curr
-        self.particles[i].age = self.particles[i].age + dt
+        local p = self.particles[i]
+        p.draw = true
+        p.e_vel = p.e_vel or dt * self.scale
+        p.e_prev = p.e_curr
+        p.age = p.age + dt
+        p.e_curr = math.min(2 * math.min((p.age / self.lifespan) * self.scale, self.scale * ((self.lifespan - p.age) / self.lifespan)), self.scale)
+        p.e_vel = (p.e_curr - p.e_prev) * self.scale * dt + (1 - self.scale * dt) * p.e_vel
+        p.scale = p.scale + p.e_vel
+        p.scale = math.min(2 * math.min((p.age / self.lifespan) * self.scale, self.scale * ((self.lifespan - p.age) / self.lifespan)), self.scale)
 
-        self.particles[i].e_curr = math.min(2 * math.min((self.particles[i].age / self.lifespan) * self.scale, self.scale * ((self.lifespan - self.particles[i].age) / self.lifespan)), self.scale)
-
-        self.particles[i].e_vel = (self.particles[i].e_curr - self.particles[i].e_prev) * self.scale * dt + (1 - self.scale * dt) * self.particles[i].e_vel
-
-        self.particles[i].scale = self.particles[i].scale + self.particles[i].e_vel
-        self.particles[i].scale = math.min(2 * math.min((self.particles[i].age / self.lifespan) * self.scale, self.scale * ((self.lifespan - self.particles[i].age) / self.lifespan)), self.scale)
-
-        if self.particles[i].scale < 0 then
+        if p.scale < 0 then
             table.remove(self.particles, i)
         else
-            self.particles[i].offset.x = self.particles[i].offset.x + self.particles[i].velocity * math.sin(self.particles[i].dir) * dt
-            self.particles[i].offset.y = self.particles[i].offset.y + self.particles[i].velocity * math.cos(self.particles[i].dir) * dt
-            self.particles[i].facing = self.particles[i].facing + self.particles[i].r_vel * dt
-            self.particles[i].velocity = math.max(0, self.particles[i].velocity - self.particles[i].velocity * 0.07 * dt)
+            p.offset.x = p.offset.x + p.velocity * math.sin(p.dir) * dt
+            p.offset.y = p.offset.y + p.velocity * math.cos(p.dir) * dt
+            p.facing = p.facing + p.r_vel * dt
+            p.velocity = math.max(0, p.velocity - p.velocity * 0.07 * dt)
         end
     end
 end
 
 function Particles:fade(delay, to)
-    G.E_MANAGER:add_event(Event({
-        trigger = 'ease',
+    EventManager.instance:add_event(Event({
+        trigger = Event.ease,
         timer = self.timer_type,
         blockable = false,
         blocking = false,

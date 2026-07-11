@@ -47,9 +47,10 @@ end
 
 ---comment
 ---@param event Event
----@param queue "unlock" | "base" | "tutorial" | "achievement" | "other"
----@param front boolean
+---@param queue? "unlock" | "base" | "tutorial" | "achievement" | "other"
+---@param front? boolean
 function EventManager:add_event(event, queue, front)
+    queue = queue or 'base'
     if event:is(Event) then
         if front then
             table.insert(self.queues[queue], 1, event)
@@ -136,4 +137,3 @@ end
 
 ---@type EventManager
 EventManager.instance = EventManager()
-
