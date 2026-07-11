@@ -54,6 +54,7 @@ function App:init()
     self.TILE_W = 20
     self.TILE_H = 11.5
     self.TILESCALE = 3.65
+    self.TILESIZE = 20
 
 
     self.fbf = false       -- frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧
