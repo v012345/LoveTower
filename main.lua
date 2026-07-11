@@ -83,5 +83,9 @@ function love.mousemoved(x, y, dx, dy, istouch)
 end
 
 function love.resize(w, h)
-
+    print(w, h)
+    -- 不允许窗口变成竖屏, 因为会出现上下弹出
+    if w / h < 1 then --Dont allow the screen to be too square, since pop in occurs above and below screen
+        h = w
+    end
 end

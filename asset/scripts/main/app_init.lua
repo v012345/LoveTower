@@ -22,7 +22,21 @@ function App:init()
     self.CANVAS:setFilter('linear', 'linear')
     self.SETTINGS = {
         paused = false,
+        QUEUED_CHANGE = {},
+        WINDOW = {
+            screenmode = 'Windowed',
+            vsync = 1,
+            selected_display = 1,
+            display_names = { '[NONE]' },
+            DISPLAYS = {
+                {
+                    name = '[NONE]',
+                    screen_res = { w = 1000, h = 650 },
+                }
+            },
+        }
     }
+
 
     self.FRAMES = {
         DRAW = 0,

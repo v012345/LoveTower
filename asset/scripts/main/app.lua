@@ -87,7 +87,7 @@ end
 
 function App:start_up()
     boot_timer("start", "settings", 0.1)
-
+    self:init_window()
     boot_timer('settings', 'window init', 0.2)
 
     boot_timer('window init', 'savemanager', 0.3)
@@ -106,10 +106,8 @@ function App:start_up()
 
     boot_timer('splash prep', 'end', 1)
     self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
-    for k, v in pairs(AlignmentType) do
-        print(k, v)
-    end
     Particles(Transform(20, 20, 0, 0), nil, { timer = 0.003 })
+    love.resize(love.graphics.getWidth(), love.graphics.getHeight())
 end
 
 function App:set_language()
@@ -117,7 +115,29 @@ function App:set_language()
 end
 
 function App:init_window()
+    local T = Transform(0, 0, self.TILE_W + 2 * self.ROOM_PADDING_W, self.TILE_H + 2 * self.ROOM_PADDING_H)
+    self.WINDOWTRANS = T
+    local t = self.TILESIZE * self.TILESCALE
+    print(T.w * t, T.h * t)
 
+    self.window_prev = { w = T.w * t, h = T.h * t, orig_scale = self.TILESCALE, orig_ratio = T.w / T.h }
+    local settings = self.SETTINGS.WINDOW
+
+    -- -- Set the monitor the window should be rendered to
+    -- -- 之后要读用户设置文件中的设置
+    -- settings.selected_display = 1
+    -- settings.vsync = 1
+    -- settings.DISPLAYS[settings.selected_display].screen_res = { w = 0, h = 0 }
+    local screen_res = settings.DISPLAYS[settings.selected_display].screen_res
+
+    love.window.updateMode(screen_res.w, screen_res.h, {
+        fullscreen = false,
+        fullscreentype = nil,
+        vsync = 1,
+        resizable = true,
+        display = settings.selected_display,
+        highdpi = false
+    })
 end
 
 function App:apply_window_changes()

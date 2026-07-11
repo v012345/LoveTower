@@ -134,6 +134,14 @@ end
 function love.graphics.print(text, x, y, rotation, scaleX, scaleY, offsetX, offsetY, shearX, shearY)
 end
 
+---Gets the width in pixels of the window.
+---@return number width
+function love.graphics.getWidth() end
+
+---Gets the height in pixels of the window.
+---@return number height
+function love.graphics.getHeight() end
+
 ---@param r  number
 ---@param g  number
 ---@param b  number
