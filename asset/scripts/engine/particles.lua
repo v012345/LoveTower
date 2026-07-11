@@ -184,3 +184,7 @@ function Particles:remove()
 
     Moveable.remove(self)
 end
+
+function Particles:__tostring()
+    return "Particles" .. self.ID
+end

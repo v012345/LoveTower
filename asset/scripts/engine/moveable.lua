@@ -537,5 +537,5 @@ function Moveable:remove()
 end
 
 function Moveable:__tostring()
-    return "Moveable" .. (self.ID or '')
+    return "Moveable" .. (self.ID)
 end

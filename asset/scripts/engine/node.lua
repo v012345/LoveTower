@@ -103,7 +103,7 @@ function Node:draw_boundingrect()
             love.graphics.translate(-w * 0.5, -h * 0.5)
             if self.DEBUG_VALUE then
                 love.graphics.setColor(1, 1, 0, 1)
-                love.graphics.print(self.DEBUG_VALUE, w, h, nil, 1 / App.instance.TILESCALE)
+                love.graphics.print(tostring(self), w, h, nil, 1 / App.instance.TILESCALE)
             end
             love.graphics.setLineWidth(1 + (self.states.focus.is and 1 or 0))
             if self.states.collide.is then
