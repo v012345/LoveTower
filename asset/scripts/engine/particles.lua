@@ -1,6 +1,7 @@
----@class Particles: Moveable
+---@class Particles: Moveable 粒子发射器
 ---@field particles Particle[] 粒子
 ---@field private scale number 粒子的参数缩放, 不是 Transform 的缩放
+---@field private lifespan number 产生的粒子的寿命
 Particles = Moveable:extend()
 
 ---@param T Transform
@@ -88,18 +89,13 @@ function Particles:update(dt)
         end
         table.insert(self.particles, {
             draw = false,
-            dir = math.random() * 2 * math.pi,
             facing = math.random() * 2 * math.pi,
-            size = math.random() * 0.5 + 0.1,
             age = 0,
-            velocity = self.speed * (self.vel_variation * math.random() + (1 - self.vel_variation)) * 0.7,
             r_vel = 0.2 * (0.5 - math.random()),
-            e_prev = 0,
-            e_curr = 0,
             scale = 0,
-            visible_scale = 0,
-            time = self.timer_type(),
+            dir = math.random() * 2 * math.pi,
             colour = pseudorandom_element(self.colours),
+            velocity = self.speed * (self.vel_variation * math.random() + (1 - self.vel_variation)) * 0.7,
             offset = new_offset
         })
         added_this_frame = added_this_frame + 1
@@ -113,18 +109,11 @@ function Particles:move(dt)
 
     Moveable.move(self, dt)
     if self.timer_type ~= Timer.real_timer then dt = dt * App.instance.SETTINGS.speed_factor end
-
     for i = #self.particles, 1, -1 do
         local p = self.particles[i]
         p.draw = true
-        p.e_vel = p.e_vel or dt * self.scale
-        p.e_prev = p.e_curr
         p.age = p.age + dt
-        p.e_curr = math.min(2 * math.min((p.age / self.lifespan), ((self.lifespan - p.age) / self.lifespan)), 1) * self.scale
-        p.e_vel = (p.e_curr - p.e_prev) * self.scale * dt + (1 - self.scale * dt) * p.e_vel
-        p.scale = p.scale + p.e_vel
-        p.scale = math.min(2 * math.min((p.age / self.lifespan) * self.scale, self.scale * ((self.lifespan - p.age) / self.lifespan)), self.scale)
-
+        p.scale = 2 * math.min(p.age, self.lifespan - p.age) / self.lifespan * self.scale
         if p.scale < 0 then
             table.remove(self.particles, i)
         else

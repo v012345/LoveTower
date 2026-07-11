@@ -423,10 +423,7 @@ function bit.bor(a, b, ...) end
 
 ---@class Particle
 ---@field draw boolean 是否绘制
----@field e_vel number 速度
----@field e_prev number 上一次速度
 ---@field age number 已存活时间
----@field e_curr number 当前速度
 ---@field scale number 缩放
 ---@field facing number 朝向
 ---@field r_vel number 旋转速度
@@ -434,5 +431,4 @@ function bit.bor(a, b, ...) end
 ---@field dir number 方向
 ---@field offset Coordinate 偏移
 ---@field colour table 颜色
----@field scale number 缩放
 Particle = {}
