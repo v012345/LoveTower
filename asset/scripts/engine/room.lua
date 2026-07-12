@@ -24,6 +24,7 @@ end
 ---@param node Node 根节点
 function Room:set_root_node(node)
     self.root_node = node
+    self.root_node:set_container(node)
 end
 
 ---@return Node

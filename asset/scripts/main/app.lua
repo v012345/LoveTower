@@ -19,7 +19,7 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     -- self.ROOM_ATTACH = Moveable(Transform(0, 0, self.TILE_W, self.TILE_H))
     -- self.ROOM_ATTACH:set_container(self.ROOM)
     love.resize(love.graphics.getWidth(), love.graphics.getHeight())
-    -- Particles(Transform(20, 20, 0, 0), nil, { timer = 0.003 })
+    -- Particles(Transform(1, 1, 0, 0), nil, { timer = 0.003 })
 end
 
 function App:init_game_object()
