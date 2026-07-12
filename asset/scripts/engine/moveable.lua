@@ -476,7 +476,7 @@ function Moveable:move_r(dt, vel)
 end
 
 function Moveable:calculate_parrallax()
-    local room = App.instance.ROOM
+    local room = Room.instance:get_root_node()
     if room then
         self.shadow_parrallax.x = (self.T.x + self.T.w / 2 - room.T.w / 2) / (room.T.w / 2) * 1.5
     end
