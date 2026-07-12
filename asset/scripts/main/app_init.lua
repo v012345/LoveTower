@@ -72,6 +72,9 @@ function App:init()
         CARD = {},
         CARDAREA = {},
     }
+    --- 设计大小
+    --- 窗口大小为 1606*942, 设计大小为 1460*840
+    --- 宽高比为 1.74
     self.ROOM_PADDING_H = 0.7
     self.ROOM_PADDING_W = 1
     self.TILE_W = 20
