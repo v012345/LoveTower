@@ -9,4 +9,10 @@ function Room:init()
     self.ROOM_PADDING_W = 1
 end
 
+---包含 padding 的实际大小, 以 Tile 为单位
+---@return Size
+function Room:get_real_size()
+    return Size(self.TILE_W + 2 * self.ROOM_PADDING_W, self.TILE_H + 2 * self.ROOM_PADDING_H)
+end
+
 Room.instance = Room()
