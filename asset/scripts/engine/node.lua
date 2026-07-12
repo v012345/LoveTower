@@ -26,7 +26,7 @@ Node = Object:extend()
 ---represented here.
 ---**T** The transform ititializer, with keys of x|1, y|2, w|3, h|4, r|5
 ---**container** optional container for this Node, defaults to G.ROOM
----@param T? Transform,
+---@param T Transform,
 ---@param container Node
 function Node:init(T, container)
     --From args, set the values of self transform
