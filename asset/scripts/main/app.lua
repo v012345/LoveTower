@@ -107,7 +107,7 @@ function App:start_up()
     boot_timer('splash prep', 'end', 1)
     self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
     Particles(Transform(20, 20, 0, 0), nil, { timer = 0.003 })
-    love.resize(love.graphics.getWidth(), love.graphics.getHeight())
+    -- love.resize(love.graphics.getWidth(), love.graphics.getHeight())
 end
 
 function App:set_language()
@@ -119,7 +119,7 @@ function App:init_window()
     local T = Transform(0, 0, self.TILE_W + 2 * self.ROOM_PADDING_W, self.TILE_H + 2 * self.ROOM_PADDING_H)
     self.WINDOWTRANS = T
     local t = self.TILESIZE * self.TILESCALE
-    self.window_prev = { w = T.w * t, h = T.h * t, orig_scale = self.TILESCALE, orig_ratio = T.w / T.h }
+    self.window_prev = { w = T.w * t, h = T.h * t, orig_scale = self.TILESCALE }
     love.window.updateMode(1000, 650, { fullscreen = false, fullscreentype = nil, vsync = 1, resizable = true, display = 1, highdpi = false })
 end
 

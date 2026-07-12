@@ -87,9 +87,19 @@ end
 ---@param w any
 ---@param h any
 function love.resize(w, h)
-    print(w, h)
     -- 不允许窗口变成竖屏, 因为会出现上下弹出
-    if w / h < 1 then --Dont allow the screen to be too square, since pop in occurs above and below screen
+    local curr_ratio = w / h
+    if curr_ratio < 1 then --Dont allow the screen to be too square, since pop in occurs above and below screen
         h = w
+        curr_ratio = 1
     end
+    local orig_ratio = App.instance.window_prev.w / App.instance.window_prev.h
+    -- 变窄了
+    if curr_ratio < orig_ratio then
+        App.instance.TILESCALE = App.instance.window_prev.h / h
+    else -- 变宽了
+        App.instance.TILESCALE = App.instance.window_prev.w / w
+    end
+
+    print(w / h)
 end

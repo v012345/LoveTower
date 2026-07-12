@@ -11,6 +11,8 @@
 ---@field fbf boolean frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧, 和 new_frame 配合使用
 ---@field new_frame boolean 是否是新的一帧, 如果为 true, 则渲染新的一帧, 否则渲染旧的一帧, 和 fbf 配合使用
 ---@field MOVEABLES Moveable[] 所有 Moveable 的列表, 包括 Moveable 的子类
+---@field STAGE STAGES 当前场景
+---@field STATE STATES 当前状态
 App = Object:extend()
 
 function App:init()
@@ -44,13 +46,12 @@ function App:init()
     }
 
     self.STAGE_OBJECT_INTERRUPT = false
-    self.STAGES = {
-        MAIN_MENU = 1,
-        RUN = 2,
-        SANDBOX = 3
-    }
+
+
     self.STAGE_OBJECTS = { {}, {}, {} }
-    self.STAGE = self.STAGES.MAIN_MENU
+    -- 0: 主菜单; 1: 游戏进行中; 2: 沙盒模式
+    self.STAGE = STAGES.MAIN_MENU
+    self.STATE = STATES.SPLASH
 
     self.DRAW_HASH = {}
     self.MOVEABLES = {}
