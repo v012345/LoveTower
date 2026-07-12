@@ -109,13 +109,13 @@ function love.resize(w, h)
     local room = App.instance.ROOM
     if room then
         local pixels_per_tile = App.instance.TILESCALE * App.instance.TILESIZE
-        if curr_ratio < orig_ratio then
-            room.T.x = App.instance.ROOM_PADDING_W
-            room.T.y = (h / (pixels_per_tile) - (room.T.h + App.instance.ROOM_PADDING_H)) / 2 + App.instance.ROOM_PADDING_H / 2
-        else
-            room.T.y = App.instance.ROOM_PADDING_H
-            room.T.x = (w / (pixels_per_tile) - (room.T.w + App.instance.ROOM_PADDING_W)) / 2 + App.instance.ROOM_PADDING_W / 2
-        end
+        -- if curr_ratio < orig_ratio then
+        --     room.T.x = App.instance.ROOM_PADDING_W
+        --     room.T.y = (h / (pixels_per_tile) - (room.T.h + App.instance.ROOM_PADDING_H)) / 2 + App.instance.ROOM_PADDING_H / 2
+        -- else
+        --     room.T.y = App.instance.ROOM_PADDING_H
+        --     room.T.x = (w / (pixels_per_tile) - (room.T.w + App.instance.ROOM_PADDING_W)) / 2 + App.instance.ROOM_PADDING_W / 2
+        -- end
 
         -- G.ROOM_ORIG = {
         --     x = G.ROOM.T.x,
