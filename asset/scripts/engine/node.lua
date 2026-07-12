@@ -2,7 +2,6 @@
 
 ---@class Node: Object
 ---@field T Transform The transform of the node | Transform: 位置/大小/旋转 {x, y, w, h, r, scale}  (逻辑坐标)
----@field VT Transform 缓动变换成使用, 引擎会自动计算到 T
 ---@field CT Transform 碰撞检测的transform, 与 T 相同
 ---@field ID number 唯一ID
 ---@field states NodeStates 节点状态
@@ -36,10 +35,7 @@ function Node:init(T, container)
     self.CT = self.T
     self.parent = nil
     self.layered_parallax = Coordinate(0, 0)
-    --The Visible transform is initally set to the same values as the transform T.
-    --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
-    --scale of any objects that need to be drawn larger or smaller
-    self.VT = self.T:clone()
+
     self.click_offset = Coordinate()
     self.hover_offset = Coordinate()
     self.created_on_pause = App.instance.SETTINGS.paused
@@ -91,6 +87,11 @@ function Node:draw()
     end
 end
 
+---@private
+function Node:get_bounding_transform()
+    return self.T
+end
+
 --Draw a bounding rectangle representing the transform of this node. Used in debugging.
 function Node:draw_boundingrect()
     self.under_overlay = App.instance.under_overlay
@@ -99,7 +100,8 @@ function Node:draw_boundingrect()
         love.graphics.push()
         do
             local s = Tile.instance:get_scale()
-            local x, y, w, h, r = self.VT.x * s, self.VT.y * s, self.VT.w * s, self.VT.h * s, self.VT.r
+            local T = self:get_bounding_transform()
+            local x, y, w, h, r = T.x * s, T.y * s, T.w * s, T.h * s, T.r
             love.graphics.scale(s)
             love.graphics.translate(x + w * 0.5, y + h * 0.5)
             love.graphics.rotate(r)

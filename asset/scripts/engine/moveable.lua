@@ -10,6 +10,7 @@
 ---@field offset Coordinate 偏移
 ---@field Mid Moveable 对齐参考点, 用于在 align_to_major() 中确定"用对象的哪个部分去对齐"
 ---@field shadow_height number 阴影高度??
+---@field VT Transform 缓动变换成使用, 引擎会自动计算到 T
 Moveable = Node:extend()
 
 --Moveable represents any game object that has the ability to move about the gamespace.\
@@ -27,7 +28,10 @@ Moveable = Node:extend()
 function Moveable:init(T, container)
     Node.init(self, T, container)
 
-
+    --The Visible transform is initally set to the same values as the transform T.
+    --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
+    --scale of any objects that need to be drawn larger or smaller
+    self.VT = self.T:clone()
 
     --To determine location of VT, we need to keep track of the velocity of VT as it approaches T for the next frame
     self.velocity = { x = 0, y = 0, r = 0, scale = 0, mag = 0 }
@@ -80,6 +84,11 @@ function Moveable:init(T, container)
     if getmetatable(self) == Moveable then
         table.insert(App.instance.I.MOVEABLE, self)
     end
+end
+
+---@private
+function Moveable:get_bounding_transform()
+    return self.VT
 end
 
 function Moveable:draw()
