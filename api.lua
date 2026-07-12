@@ -411,7 +411,7 @@ function bit.lshift(a, b) end
 
 ---@param a number
 ---@param b number
----@param   number
+---@param ... number
 ---@return number
 function bit.bor(a, b, ...) end
 
