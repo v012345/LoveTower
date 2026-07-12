@@ -131,9 +131,12 @@ function App:init_window()
     local T = Transform(0, 0, self.TILE_W + 2 * self.ROOM_PADDING_W, self.TILE_H + 2 * self.ROOM_PADDING_H)
     self.WINDOW.TRANS = T
     local pixels_per_tile = self.TILESIZE * self.TILESCALE
-    self.WINDOW.orig_size:set(T.w * pixels_per_tile, T.h * pixels_per_tile)
+    local w = T.w * pixels_per_tile
+    local h = T.h * pixels_per_tile
+    self.WINDOW.orig_size:set(w, h)
+    self.WINDOW.orig_scale = self.TILESCALE
     --- 设置窗口大小, 会影响 love.graphics.getWidth(), love.graphics.getHeight()
-    love.window.updateMode(1920 / 2, 1080 / 2, { fullscreen = false, fullscreentype = nil, vsync = 1, resizable = true, display = 1, highdpi = false })
+    love.window.updateMode(w, h, { fullscreen = false, fullscreentype = nil, vsync = 1, resizable = true, display = 1, highdpi = false })
 end
 
 function App:apply_window_changes()

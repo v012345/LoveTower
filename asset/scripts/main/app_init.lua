@@ -73,7 +73,7 @@ function App:init()
         CARDAREA = {},
     }
     --- 设计大小
-    --- 窗口大小为 1606*942, 设计大小为 1460*840
+    --- 窗口大小为 1606*941, 设计大小为 1460*840
     --- 宽高比为 1.74
     self.ROOM_PADDING_H = 0.7
     self.ROOM_PADDING_W = 1
