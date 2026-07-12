@@ -3,7 +3,7 @@
 UIBox = Moveable:extend()
 ---@param args {T: Transform, definition: UIDdefinition, config: UIConfig}
 function UIBox:init(args)
-    Moveable.init(self, args.T)
+    Moveable.init(self, args.T, Room.instance:get_root_node())
     self.UIRoot = UIElement(nil, self, UIT.T, args.definition.config)
     if getmetatable(self) == UIBox then
         table.insert(App.instance.I.UIBOX, self)
