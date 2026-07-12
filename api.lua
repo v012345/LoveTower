@@ -416,18 +416,6 @@ function bit.lshift(a, b) end
 ---@return number
 function bit.bor(a, b, ...) end
 
----@class Particle
----@field draw     boolean    是否绘制
----@field age      number     已存活时间
----@field scale    number     缩放
----@field facing   number     朝向
----@field r_vel    number     旋转速度
----@field velocity number     速度
----@field dir      number     方向
----@field offset   Coordinate 偏移
----@field colour   table      颜色
-Particle = {}
-
 --- Sets the display mode and properties of the window, without modifying unspecified properties.
 --- If width or height is 0, updateMode will use the width and height of the desktop.
 --- Changing the display mode may have side effects: for example, canvases will be cleared. Make sure to save the contents of canvases beforehand or re-draw to them afterward if you need to.
@@ -443,3 +431,20 @@ function love.window.updateMode(width, height, settings) end
 ---@field real_size  Size      窗口真实大小
 ---@field orig_size  Size      窗口原始大小
 ---@field orig_scale number    窗口原始缩放
+
+---@class SpriteAtlas
+---@field name string
+---@field image Image
+---@field px number
+---@field py number
+
+---@class Particle
+---@field draw     boolean    是否绘制
+---@field age      number     已存活时间
+---@field scale    number     缩放
+---@field facing   number     朝向
+---@field r_vel    number     旋转速度
+---@field velocity number     速度
+---@field dir      number     方向
+---@field offset   Coordinate 偏移
+---@field colour   table      颜色

@@ -155,7 +155,7 @@ function App:main_menu()
 
     --- 创建主菜单场景
     local room = Room.instance:get_root_node()
-    local img = Sprite(Transform(-30, -13, room.T.w + 60, room.T.h + 22), {}, { x = 2, y = 0 })
+    local img = Sprite(Transform(0, 0, room.T.w + 60, room.T.h + 22), {}, { x = 2, y = 0 })
     --- 创建主菜单场景
 end
 
