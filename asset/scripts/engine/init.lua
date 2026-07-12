@@ -7,8 +7,9 @@ require "asset.scripts.engine.size"
 require "asset.scripts.engine.coordinate"
 
 -- 依赖其他模块的模块
-require "asset.scripts.engine.config"
 require "asset.scripts.engine.utils"
+require "asset.scripts.engine.config"
+require "asset.scripts.engine.settings"
 require "asset.scripts.engine.tile"
 require "asset.scripts.engine.window"
 require "asset.scripts.engine.room"

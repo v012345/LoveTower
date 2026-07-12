@@ -38,7 +38,7 @@ function Node:init(T, container)
 
     self.click_offset = Coordinate()
     self.hover_offset = Coordinate()
-    self.created_on_pause = App.instance.SETTINGS.paused
+
     self.FRAME = {
         DRAW = -1,
         MOVE = -1
@@ -76,6 +76,8 @@ function Node:init(T, container)
     if not App.instance.STAGE_OBJECT_INTERRUPT then
         table.insert(App.instance.STAGE_OBJECTS[App.instance.STAGE], self)
     end
+
+    self.created_on_pause = Settings.instance.paused
 end
 
 --Draws self, then adds self the the draw hash, then draws all children
