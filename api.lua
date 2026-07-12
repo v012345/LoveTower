@@ -81,8 +81,9 @@ function Font:getHeight()
 end
 
 ---@param filename string
+---@param settings? { mipmaps: boolean, dpiscale: number }
 ---@return Image
-function love.graphics.newImage(filename)
+function love.graphics.newImage(filename, settings)
 end
 
 --- Displays the results of drawing operations on the screen.
