@@ -95,7 +95,7 @@ function love.resize(w, h)
 
     -- 宽高比
     local curr_ratio = w / h
-    local orig_size = App.instance.WINDOW.orig_size
+    local orig_size = Window.instance.orig_size
     local orig_ratio = orig_size.w / orig_size.h
     local orig_scale = App.instance.WINDOW.orig_scale
 
@@ -123,7 +123,7 @@ function love.resize(w, h)
         --     r = G.ROOM.T.r
         -- }
     end
-    App.instance.WINDOW.real_size:set(w, h)
+    Window.instance.real_size:set(w, h)
     App.instance.CANVAS = love.graphics.newCanvas(w * App.instance.CANV_SCALE, h * App.instance.CANV_SCALE, { type = '2d', readable = true })
     App.instance.CANVAS:setFilter('linear', 'linear')
 end
