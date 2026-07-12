@@ -48,10 +48,7 @@ function App:init()
     --- 宽高比为 1.74
     self.ROOM_PADDING_H = 0.7
     self.ROOM_PADDING_W = 1
-    self.TILE_W = 20
-    self.TILE_H = 11.5
-    self.TILESCALE = 3.65
-    self.TILESIZE = 20
+   
 
     self.WINDOW = {
         TRANS = Transform(0, 0, 0, 0),
