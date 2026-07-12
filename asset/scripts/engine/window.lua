@@ -42,6 +42,10 @@ function Window:get_real_size()
     return self.real_size
 end
 
+function Window:set_real_size(w, h)
+    self.real_size:set(w, h)
+end
+
 ---@param w number 窗口宽度
 ---@param h number 窗口高度
 function Window:set_transform_wh(w, h)

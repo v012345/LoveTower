@@ -114,10 +114,10 @@ function love.resize(w, h)
         local room_transform = Room.instance:get_transform()
         if curr_ratio < orig_ratio then
             room.T.x = room_transform.x
-            room.T.y = (h / (pixels_per_tile) - (room_transform.h + room_transform.y)) / 2 + room_transform.y / 2
+            room.T.y = (h / (pixels_per_tile) - room_transform.h) / 2
         else
             room.T.y = room_transform.y
-            room.T.x = (w / (pixels_per_tile) - (room_transform.w + room_transform.x)) / 2 + room_transform.x / 2
+            room.T.x = (w / (pixels_per_tile) - room_transform.w) / 2
         end
 
         -- G.ROOM_ORIG = {
@@ -126,7 +126,8 @@ function love.resize(w, h)
         --     r = G.ROOM.T.r
         -- }
     end
-    Window.instance.real_size:set(w, h)
+
+    Window.instance:set_real_size(w, h)
     App.instance.CANVAS = love.graphics.newCanvas(w * App.instance.CANV_SCALE, h * App.instance.CANV_SCALE, { type = '2d', readable = true })
     App.instance.CANVAS:setFilter('linear', 'linear')
 end
