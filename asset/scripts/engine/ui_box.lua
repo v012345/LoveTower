@@ -34,8 +34,6 @@ function UIBox:remove()
 end
 
 function UIBox:draw()
-    -- print("draw UIBox")
-    print(self)
     --- 先画子元素
     -- for _, v in pairs(self.children) do
     --     v:draw()
@@ -48,6 +46,7 @@ function UIBox:draw()
     --         if v.draw_children then v:draw_children() end
     --     end
     -- end
+    self:draw_boundingrect()
 end
 
 function UIBox:recalculate()
