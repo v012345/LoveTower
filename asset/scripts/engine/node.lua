@@ -203,7 +203,48 @@ end
 --When this Node needs to be deleted, removes self from any tables it may have been added to to destroy any weak references\
 --Also calls the remove method of all children to have them do the same
 function Node:remove()
+    local I = App.instance.I
+    for k, v in pairs(I.POPUP) do
+        if v == self then
+            table.remove(I.POPUP, k)
+            break;
+        end
+    end
+    for k, v in pairs(I.NODE) do
+        if v == self then
+            table.remove(I.NODE, k)
+            break;
+        end
+    end
+    for k, v in pairs(G.STAGE_OBJECTS[G.STAGE]) do
+        if v == self then
+            table.remove(G.STAGE_OBJECTS[G.STAGE], k)
+            break;
+        end
+    end
+    if self.children then
+        for k, v in pairs(self.children) do
+            v:remove()
+        end
+    end
+    local controller = Controller.instance
+    if controller.clicked.target == self then
+        controller.clicked.target = nil
+    end
+    if controller.focused.target == self then
+        controller.focused.target = nil
+    end
+    if controller.cursor_down.target == self then
+        controller.cursor_down.target = nil
+    end
+    if controller.cursor_up.target == self then
+        controller.cursor_up.target = nil
+    end
+    if controller.cursor_hover.target == self then
+        controller.cursor_hover.target = nil
+    end
 
+    self.REMOVED = true
 end
 
 ---返回两个节点中心点之间的距离的平方(快速计算)
