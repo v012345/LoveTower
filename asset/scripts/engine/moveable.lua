@@ -23,7 +23,7 @@ Moveable = Node:extend()
 
 
 ---@param T Transform
----@param container? Node
+---@param container Node
 function Moveable:init(T, container)
     Node.init(self, T, container)
 

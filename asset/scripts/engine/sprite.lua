@@ -1,7 +1,12 @@
 ---@class Sprite: Moveable
 Sprite = Moveable:extend()
-function Sprite:init(X, Y, W, H, new_sprite_atlas, sprite_pos)
-    Moveable.init(self, X, Y, W, H)
+
+---comment
+---@param T Transform
+---@param new_sprite_atlas any
+---@param sprite_pos any
+function Sprite:init(T, new_sprite_atlas, sprite_pos)
+    Moveable.init(self, T, Room.instance:get_root_node())
     self.CT = self.VT
     self.atlas = new_sprite_atlas
     self.scale = { x = self.atlas.px, y = self.atlas.py }

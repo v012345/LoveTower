@@ -27,8 +27,7 @@ end
 function Room:set_root_node(node)
     self.root_node = node
     self.root_node:set_container(node)
-    self.root_attach = Moveable(Transform(0, 0, node.T.w, node.T.h))
-    self.root_attach:set_container(node)
+    self.root_attach = Moveable(Transform(0, 0, node.T.w, node.T.h), node)
 end
 
 ---@return Node
