@@ -16,6 +16,11 @@ function Controller:init()
         mouse = true,
         axis_cursor = false,
     }
+    self.clicked = { target = nil }
+    self.focused = { target = nil }
+    self.cursor_down = { target = nil }
+    self.cursor_up = { target = nil }
+    self.cursor_hover = { target = nil }
 end
 
 function Controller:update(dt)

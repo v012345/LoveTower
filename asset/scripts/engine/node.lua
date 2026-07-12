@@ -216,9 +216,9 @@ function Node:remove()
             break;
         end
     end
-    for k, v in pairs(G.STAGE_OBJECTS[G.STAGE]) do
+    for k, v in pairs(App.instance.STAGE_OBJECTS[App.instance.STAGE]) do
         if v == self then
-            table.remove(G.STAGE_OBJECTS[G.STAGE], k)
+            table.remove(App.instance.STAGE_OBJECTS[App.instance.STAGE], k)
             break;
         end
     end
