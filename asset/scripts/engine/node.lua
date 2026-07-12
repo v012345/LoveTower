@@ -98,14 +98,14 @@ function Node:draw_boundingrect()
     if App.instance.DEBUG then
         love.graphics.push()
         do
-            local s = App.instance.TILESCALE
+            local s = Tile.instance:get_scale()
             local x, y, w, h, r = self.VT.x * s, self.VT.y * s, self.VT.w * s, self.VT.h * s, self.VT.r
             love.graphics.scale(s)
             love.graphics.translate(x + w * 0.5, y + h * 0.5)
             love.graphics.rotate(r)
             love.graphics.translate(-w * 0.5, -h * 0.5)
             love.graphics.setColor(1, 1, 0, 1)
-            love.graphics.print(tostring(self), w, h, nil, 1 / App.instance.TILESCALE)
+            love.graphics.print(tostring(self), w, h, nil, 1 / s)
             love.graphics.setLineWidth(1 + (self.states.focus.is and 1 or 0))
             if self.states.collide.is then
                 love.graphics.setColor(0, 1, 0, 0.3)

@@ -17,6 +17,11 @@ function Tile:get_init_scale()
     return self.init_scale
 end
 
+---@return number
+function Tile:get_scale()
+    return self.TILESCALE
+end
+
 function Tile:set_scale(scale)
     self.TILESCALE = scale
 end
@@ -27,5 +32,5 @@ function Tile:get_pixels_per_tile()
     return self.TILESCALE * self.TILESIZE
 end
 
----@return Tile
+---@type Tile
 Tile.instance = Tile()
