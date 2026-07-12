@@ -312,12 +312,6 @@ Children = {}
 ---@field bond? string
 UIConfig = {}
 
----@class Size
----@field w number
----@field h number
-Size = {}
-
-
 
 ---@class UIDdefinition
 ---@field n UIT

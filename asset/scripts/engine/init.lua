@@ -1,5 +1,6 @@
 require "asset.scripts.engine.config"
 require "asset.scripts.engine.object"
+require "asset.scripts.engine.size"
 require "asset.scripts.engine.coordinate"
 require "asset.scripts.engine.transform"
 require "asset.scripts.engine.node"

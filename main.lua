@@ -100,6 +100,7 @@ function love.resize(w, h)
     else -- 变宽了
         App.instance.TILESCALE = App.instance.window_prev.w / w
     end
+    App.instance.WINDOW.real_size:set(w, h)
 
     print(w / h)
 end

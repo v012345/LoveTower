@@ -13,6 +13,11 @@
 ---@field MOVEABLES Moveable[] 所有 Moveable 的列表, 包括 Moveable 的子类
 ---@field STAGE STAGES 当前场景
 ---@field STATE STATES 当前状态
+---@field ROOM_PADDING_W number 房间左右边距, 以地图单元格为单位
+---@field ROOM_PADDING_H number 房间上下边距, 以地图单元格为单位
+---@field TILE_W number 地图单元格宽度, 以像素为单位
+---@field TILE_H number 地图单元格高度, 以像素为单位
+---@field WINDOW {TRANS: Transform, real_size: Size} 窗口变换和真实大小
 App = Object:extend()
 
 function App:init()
@@ -37,6 +42,11 @@ function App:init()
                 }
             },
         }
+    }
+
+    self.WINDOW = {
+        TRANS = Transform(0, 0, 0, 0),
+        real_size = Size(0, 0),
     }
 
 
