@@ -11,7 +11,7 @@ UIElement = Moveable:extend()
 ---@param new_UIT UIT
 ---@param config UIConfig
 function UIElement:init(parent, new_UIBox, new_UIT, config)
-    Moveable.init(self, Transform(0, 0, 0, 0))
+    Moveable.init(self, Transform(0, 0, 0, 0), Room.instance:get_root_node())
     self.parent = parent
     self.UIT = new_UIT
     self.UIBox = new_UIBox
@@ -69,7 +69,7 @@ function UIElement:draw_self()
         do
             return
         end
-      
+
 
         if (self.config.button_UIE and button_active) or (not self.config.button_UIE and self.config.shadow and G.SETTINGS.GRAPHICS.shadows == 'On') then
             prep_draw(self, 0.97)
