@@ -95,27 +95,30 @@ function love.resize(w, h)
 
     -- 宽高比
     local curr_ratio = w / h
-    local orig_size = Window.instance.orig_size
-    local orig_ratio = orig_size.w / orig_size.h
-    local orig_scale = App.instance.WINDOW.orig_scale
+    local orig_size = Window.instance:get_orig_size()
+    local orig_ratio = Window.instance:get_orig_ratio()
+    local orig_tile_scale = Tile.instance:get_init_scale()
 
     if curr_ratio < orig_ratio then -- 相对变窄了
-        App.instance.TILESCALE = orig_scale * w / orig_size.w
+        Tile.instance:set_scale(orig_tile_scale * w / orig_size.w)
     else                            -- 相对变宽了
-        App.instance.TILESCALE = orig_scale * h / orig_size.h
+        Tile.instance:set_scale(orig_tile_scale * h / orig_size.h)
     end
+
+
     App.instance.CANV_SCALE = 1
 
-    local room = App.instance.ROOM
+    local room = Room.instance:get_root_node()
     if room then
-        local pixels_per_tile = App.instance.TILESCALE * App.instance.TILESIZE
-        -- if curr_ratio < orig_ratio then
-        --     room.T.x = App.instance.ROOM_PADDING_W
-        --     room.T.y = (h / (pixels_per_tile) - (room.T.h + App.instance.ROOM_PADDING_H)) / 2 + App.instance.ROOM_PADDING_H / 2
-        -- else
-        --     room.T.y = App.instance.ROOM_PADDING_H
-        --     room.T.x = (w / (pixels_per_tile) - (room.T.w + App.instance.ROOM_PADDING_W)) / 2 + App.instance.ROOM_PADDING_W / 2
-        -- end
+        local pixels_per_tile = Tile.instance:get_pixels_per_tile()
+        local room_transform = Room.instance:get_transform()
+        if curr_ratio < orig_ratio then
+            room.T.x = room_transform.x
+            room.T.y = (h / (pixels_per_tile) - (room_transform.h + room_transform.y)) / 2 + room_transform.y / 2
+        else
+            room.T.y = room_transform.y
+            room.T.x = (w / (pixels_per_tile) - (room_transform.w + room_transform.x)) / 2 + room_transform.x / 2
+        end
 
         -- G.ROOM_ORIG = {
         --     x = G.ROOM.T.x,

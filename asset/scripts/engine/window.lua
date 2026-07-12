@@ -24,6 +24,18 @@ function Window:init_size(w, h)
     self.orig_ratio = w / h
 end
 
+---初始宽高比例
+---@return number
+function Window:get_orig_ratio()
+    return self.orig_ratio
+end
+
+---初始大小
+---@return Size
+function Window:get_orig_size()
+    return self.orig_size
+end
+
 ---comment
 ---@return Size
 function Window:get_real_size()
