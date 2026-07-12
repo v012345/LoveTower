@@ -89,6 +89,7 @@ function App:init()
         SPRITE = {},
         CARD = {},
         CARDAREA = {},
+        POPUP = {},
     }
 
 
