@@ -128,15 +128,14 @@ end
 
 --- 目前默认是Windowed模式，1000x650分辨率, 使用第一个显示器, 之后要读用户设置文件中的设置
 function App:init_window()
-    local T = Transform(0, 0, self.TILE_W + 2 * self.ROOM_PADDING_W, self.TILE_H + 2 * self.ROOM_PADDING_H)
-    self.WINDOW.TRANS = T
-    local pixels_per_tile = self.TILESIZE * self.TILESCALE
-    local w = T.w * pixels_per_tile
-    local h = T.h * pixels_per_tile
-    self.WINDOW.orig_size:set(w, h)
-    self.WINDOW.orig_scale = self.TILESCALE
+    local room_size = Room.instance:get_real_size()
+    local tile_size = Tile.instance:get_pixels_per_tile()
+
+    Window.instance:init_size(room_size.w * tile_size, room_size.h * tile_size)
+    Window.instance:set_transform_wh(room_size.w, room_size.h)
+    local real_size = Window.instance:get_real_size()
     --- 设置窗口大小, 会影响 love.graphics.getWidth(), love.graphics.getHeight()
-    love.window.updateMode(w, h, { fullscreen = false, fullscreentype = nil, vsync = 1, resizable = true, display = 1, highdpi = false })
+    love.window.updateMode(real_size.w, real_size.h, { fullscreen = false, fullscreentype = nil, vsync = 1, resizable = true, display = 1, highdpi = false })
 end
 
 function App:apply_window_changes()

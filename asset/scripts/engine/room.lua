@@ -15,4 +15,5 @@ function Room:get_real_size()
     return Size(self.TILE_W + 2 * self.ROOM_PADDING_W, self.TILE_H + 2 * self.ROOM_PADDING_H)
 end
 
+---@type Room
 Room.instance = Room()
