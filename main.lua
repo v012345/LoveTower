@@ -82,6 +82,7 @@ function love.mousemoved(x, y, dx, dy, istouch)
     -- print(x, y, dx, dy, istouch)
 end
 
+---也可以手动调用 love.resize(w, h) 来调整窗口大小
 ---Called when the window is resized, for example if the user resizes the window, or if love.window.setMode is called with an unsupported width or height in fullscreen and the window chooses the closest appropriate size.
 ---[api reference](https://love2d.org/wiki/love.resize)
 ---@param w any
@@ -93,12 +94,14 @@ function love.resize(w, h)
         h = w
         curr_ratio = 1
     end
-    local orig_ratio = App.instance.WINDOW.orig_size.w / App.instance.WINDOW.orig_size.h
-    -- 变窄了
-    if curr_ratio < orig_ratio then
-        App.instance.TILESCALE = App.instance.window_prev.h / h
-    else -- 变宽了
-        App.instance.TILESCALE = App.instance.window_prev.w / w
+    local orig_size = App.instance.WINDOW.orig_size
+    local orig_ratio = orig_size.w / orig_size.h
+    local orig_scale = App.instance.WINDOW.orig_scale
+
+    if curr_ratio < orig_ratio then -- 相对变窄了
+        App.instance.TILESCALE = orig_scale * w / orig_size.w
+    else                            -- 相对变宽了
+        App.instance.TILESCALE = orig_scale * h / orig_size.h
     end
     if App.instance.ROOM then
         if w / h < orig_ratio then
