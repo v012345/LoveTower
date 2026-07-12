@@ -1,4 +1,5 @@
 ---@class Sprite: Moveable
+---@field atlas SpriteAtlas
 Sprite = Moveable:extend()
 
 ---comment
@@ -10,7 +11,7 @@ function Sprite:init(T, new_sprite_atlas, sprite_pos)
     self.CT = self.VT
     self.atlas = new_sprite_atlas
     self.scale = { x = self.atlas.px, y = self.atlas.py }
-    self.scale_mag = math.min(self.scale.x / W, self.scale.y / H)
+    self.scale_mag = math.min(self.scale.x / T.w, self.scale.y / T.h)
     self.zoom = true
 
     self:set_sprite_pos(sprite_pos)
