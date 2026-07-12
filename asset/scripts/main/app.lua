@@ -157,6 +157,7 @@ function App:main_menu()
     local room = Room.instance:get_root_node()
     local asset_atli = Config.instance:get_asset_atli()
     local img = Sprite(Transform(-30, -13, room.T.w + 60, room.T.h + 22), asset_atli["ui_1"], { x = 2, y = 0 })
+    UIBox_button { label = { "Background" }, button = "DT_toggle_background", minw = 1.7, minh = 0.4, scale = 0.35 }
     --- 创建主菜单场景
 end
 
