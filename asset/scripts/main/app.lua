@@ -154,6 +154,7 @@ function App:main_menu()
     self:prep_stage(STAGES.MAIN_MENU, STATES.MENU, true)
 
     --- 创建主菜单场景
+    local img = Sprite(-30, -13, G.ROOM.T.w + 60, G.ROOM.T.h + 22, G.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
     --- 创建主菜单场景
 end
 
