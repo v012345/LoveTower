@@ -378,6 +378,7 @@ function Transform(x, y, w, h, r, scale) end
 ---@field SPRITE   Sprite[]
 ---@field CARD     Card[]
 ---@field CARDAREA CardArea[]
+---@field POPUP    Node[]
 NodeList = {}
 
 ---@param x? number
