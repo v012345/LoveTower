@@ -141,3 +141,7 @@ end
 function UIElement:release(other)
 
 end
+
+function UIElement:__tostring()
+    return "UIElement(" .. self.ID .. ")"
+end
