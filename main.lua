@@ -85,9 +85,10 @@ end
 ---也可以手动调用 love.resize(w, h) 来调整窗口大小
 ---Called when the window is resized, for example if the user resizes the window, or if love.window.setMode is called with an unsupported width or height in fullscreen and the window chooses the closest appropriate size.
 ---[api reference](https://love2d.org/wiki/love.resize)
----@param w any
----@param h any
+---@param w number
+---@param h number
 function love.resize(w, h)
+    assert(h > 0 and w > 0, "Window size must be greater than 0, but got " .. w .. "x" .. h)
     -- 不允许窗口变成竖屏, 因为会出现上下弹出
     local curr_ratio = w / h
     if curr_ratio < 1 then --Dont allow the screen to be too square, since pop in occurs above and below screen
