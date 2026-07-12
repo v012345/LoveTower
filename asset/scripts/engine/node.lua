@@ -206,9 +206,14 @@ function Node:remove()
 
 end
 
+---返回两个节点中心点之间的距离的平方(快速计算)
 ---returns the squared(fast) distance in game units from the center of this node to the center of another node
 ---@param other_node Node to measure the distance from
+---@return number
 function Node:fast_mid_dist(other_node)
+    local dx = (other_node.T.x + 0.5 * other_node.T.w) - (self.T.x + 0.5 * self.T.w)
+    local dy = (other_node.T.y + 0.5 * other_node.T.h) - (self.T.y + 0.5 * self.T.h)
+    return dx * dx + dy * dy
 end
 
 --Prototype for a click release function, when the cursor is released on this node
