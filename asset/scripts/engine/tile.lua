@@ -7,15 +7,13 @@ function Tile:init()
     self.orig_size = Size(0, 0)
     self.orig_scale = 0
 
-    self.TILE_W = 20
-    self.TILE_H = 11.5
     self.TILESCALE = 3.65
     self.TILESIZE = 20
     self.init_scale = self.TILESCALE
 end
 
 function Tile:get_init_scale()
-    return Size(self.TILE_W, self.TILE_H)
+    return self.init_scale
 end
 
 function Tile:set_scale(scale)
