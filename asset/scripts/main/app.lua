@@ -119,8 +119,8 @@ end
 function App:init_window()
     local T = Transform(0, 0, self.TILE_W + 2 * self.ROOM_PADDING_W, self.TILE_H + 2 * self.ROOM_PADDING_H)
     self.WINDOW.TRANS = T
-    local t = self.TILESIZE * self.TILESCALE
-    self.window_prev = { w = T.w * t, h = T.h * t, orig_scale = self.TILESCALE }
+    local pixels_per_tile = self.TILESIZE * self.TILESCALE
+    self.window_prev = { w = T.w * pixels_per_tile, h = T.h * pixels_per_tile, orig_scale = self.TILESCALE }
     love.window.updateMode(1000, 650, { fullscreen = false, fullscreentype = nil, vsync = 1, resizable = true, display = 1, highdpi = false })
 end
 
