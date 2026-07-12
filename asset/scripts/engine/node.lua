@@ -31,7 +31,7 @@ Node = Object:extend()
 function Node:init(T, container)
     --From args, set the values of self transform
     self.ID = generate_id()
-    self.T = T and T:clone() or Transform()
+    self.T = T:clone()
     self.CT = self.T
     self.parent = nil
     self.layered_parallax = Coordinate(0, 0)
@@ -43,8 +43,10 @@ function Node:init(T, container)
         DRAW = -1,
         MOVE = -1
     }
+    --Store all argument and return tables here for reuse, because Lua likes to generate garbage
     self.ARGS = self.ARGS or {}
     self.RETS = {}
+
     self.config = self.config or {}
     self.container = container
     if not self.children then
