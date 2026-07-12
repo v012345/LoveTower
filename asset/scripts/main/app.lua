@@ -11,10 +11,10 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.SETTINGS.paused = false
     -- 窗口大小是 self.TILE_W + 2 * self.ROOM_PADDING_W 和 self.TILE_H + 2 * self.ROOM_PADDING_H
     -- ROOM 大小是 self.TILE_W 和 self.TILE_H, 正好嵌入 Padding 矩形里
-    self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
-    self.ROOM:set_container(self.ROOM)
-    self.ROOM_ATTACH = Moveable(Transform(0, 0, self.TILE_W, self.TILE_H))
-    self.ROOM_ATTACH:set_container(self.ROOM)
+    -- self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
+    -- self.ROOM:set_container(self.ROOM)
+    -- self.ROOM_ATTACH = Moveable(Transform(0, 0, self.TILE_W, self.TILE_H))
+    -- self.ROOM_ATTACH:set_container(self.ROOM)
     love.resize(love.graphics.getWidth(), love.graphics.getHeight())
     -- Particles(Transform(20, 20, 0, 0), nil, { timer = 0.003 })
 end

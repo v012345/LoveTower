@@ -1,6 +1,6 @@
 ---@class App: Object
 ---@field CANVAS Canvas
----@field ROOM   Node   房间, 就是游戏的主场景, 一切节点的根节点
+---@field ROOM {Node: Node, ORIG: {x: number, y: number, r: number}}   房间, 就是游戏的主场景, 一切节点的根节点
 ---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
 ---@field I NodeList
 ---@field under_overlay boolean 是否显示底层覆盖?????? 不知道是什么东西
@@ -43,6 +43,27 @@ function App:init()
             },
         }
     }
+    --- 设计大小
+    --- 窗口大小为 1606*941, 设计大小为 1460*840
+    --- 宽高比为 1.74
+    self.ROOM_PADDING_H = 0.7
+    self.ROOM_PADDING_W = 1
+    self.TILE_W = 20
+    self.TILE_H = 11.5
+    self.TILESCALE = 3.65
+    self.TILESIZE = 20
+
+    self.WINDOW = {
+        TRANS = Transform(0, 0, 0, 0),
+        real_size = Size(0, 0),
+        orig_size = Size(0, 0),
+        orig_scale = self.TILESCALE,
+    }
+
+    self.ROOM = {
+        Node = nil,
+        ORIG = Transform(),
+    }
 
 
 
@@ -71,22 +92,6 @@ function App:init()
         SPRITE = {},
         CARD = {},
         CARDAREA = {},
-    }
-    --- 设计大小
-    --- 窗口大小为 1606*941, 设计大小为 1460*840
-    --- 宽高比为 1.74
-    self.ROOM_PADDING_H = 0.7
-    self.ROOM_PADDING_W = 1
-    self.TILE_W = 20
-    self.TILE_H = 11.5
-    self.TILESCALE = 3.65
-    self.TILESIZE = 20
-
-    self.WINDOW = {
-        TRANS = Transform(0, 0, 0, 0),
-        real_size = Size(0, 0),
-        orig_size = Size(0, 0),
-        orig_scale = self.TILESCALE,
     }
 
 

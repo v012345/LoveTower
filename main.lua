@@ -90,11 +90,11 @@ end
 function love.resize(w, h)
     assert(h > 0 and w > 0, "Window size must be greater than 0, but got " .. w .. "x" .. h)
     -- 不允许窗口变成竖屏, 因为会出现上下弹出
+    --Dont allow the screen to be too square, since pop in occurs above and below screen
+    if w < h then h = w end
+
+    -- 宽高比
     local curr_ratio = w / h
-    if curr_ratio < 1 then --Dont allow the screen to be too square, since pop in occurs above and below screen
-        h = w
-        curr_ratio = 1
-    end
     local orig_size = App.instance.WINDOW.orig_size
     local orig_ratio = orig_size.w / orig_size.h
     local orig_scale = App.instance.WINDOW.orig_scale
