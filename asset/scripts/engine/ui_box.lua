@@ -32,18 +32,20 @@ function UIBox:remove()
 end
 
 function UIBox:draw()
+    -- print("draw UIBox")
+    print(self)
     --- 先画子元素
-    for _, v in pairs(self.children) do
-        v:draw()
-    end
-    if self.states.visible then
-        self.UIRoot:draw_self()
-        self.UIRoot:draw_children()
-        for k, v in ipairs(self.draw_layers) do
-            if v.draw_self then v:draw_self() else v:draw() end
-            if v.draw_children then v:draw_children() end
-        end
-    end
+    -- for _, v in pairs(self.children) do
+    --     v:draw()
+    -- end
+    -- if self.states.visible then
+    --     self.UIRoot:draw_self()
+    --     self.UIRoot:draw_children()
+    --     for k, v in ipairs(self.draw_layers) do
+    --         if v.draw_self then v:draw_self() else v:draw() end
+    --         if v.draw_children then v:draw_children() end
+    --     end
+    -- end
 end
 
 function UIBox:recalculate()
@@ -62,4 +64,8 @@ function UIBox:set_container(container)
 end
 
 function UIBox:print_topology(indent)
+end
+
+function UIBox:__tostring()
+    return "UIBox(" .. self.ID .. ")"
 end
