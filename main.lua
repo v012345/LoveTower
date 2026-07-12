@@ -103,25 +103,26 @@ function love.resize(w, h)
     else                            -- 相对变宽了
         App.instance.TILESCALE = orig_scale * h / orig_size.h
     end
-    if App.instance.ROOM then
-        if w / h < orig_ratio then
-            App.instance.ROOM.T.x = App.instance.ROOM_PADDING_W
-            G.ROOM.T.y = (h / (G.TILESIZE * G.TILESCALE) - (G.ROOM.T.h + G.ROOM_PADDING_H)) / 2 + G.ROOM_PADDING_H / 2
+    App.instance.CANV_SCALE = 1
+
+    local room = App.instance.ROOM
+    if room then
+        local pixels_per_tile = App.instance.TILESCALE * App.instance.TILESIZE
+        if curr_ratio < orig_ratio then
+            room.T.x = App.instance.ROOM_PADDING_W
+            room.T.y = (h / (pixels_per_tile) - (room.T.h + App.instance.ROOM_PADDING_H)) / 2 + App.instance.ROOM_PADDING_H / 2
         else
-            App.instance.ROOM.T.y = App.instance.ROOM_PADDING_H
-            G.ROOM.T.x = (w / (G.TILESIZE * G.TILESCALE) - (G.ROOM.T.w + G.ROOM_PADDING_W)) / 2 + G.ROOM_PADDING_W / 2
+            room.T.y = App.instance.ROOM_PADDING_H
+            room.T.x = (w / (pixels_per_tile) - (room.T.w + App.instance.ROOM_PADDING_W)) / 2 + App.instance.ROOM_PADDING_W / 2
         end
 
-        G.ROOM_ORIG = {
-            x = G.ROOM.T.x,
-            y = G.ROOM.T.y,
-            r = G.ROOM.T.r
-        }
-
-        if G.buttons then G.buttons:recalculate() end
-        if G.HUD then G.HUD:recalculate() end
+        -- G.ROOM_ORIG = {
+        --     x = G.ROOM.T.x,
+        --     y = G.ROOM.T.y,
+        --     r = G.ROOM.T.r
+        -- }
     end
     App.instance.WINDOW.real_size:set(w, h)
-    G.CANVAS = love.graphics.newCanvas(w * G.CANV_SCALE, h * G.CANV_SCALE, { type = '2d', readable = true })
-    G.CANVAS:setFilter('linear', 'linear')
+    App.instance.CANVAS = love.graphics.newCanvas(w * App.instance.CANV_SCALE, h * App.instance.CANV_SCALE, { type = '2d', readable = true })
+    App.instance.CANVAS:setFilter('linear', 'linear')
 end
