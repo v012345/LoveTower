@@ -1,3 +1,4 @@
+require "asset.scripts.engine.utils"
 require "asset.scripts.engine.config"
 require "asset.scripts.engine.object"
 require "asset.scripts.engine.size"

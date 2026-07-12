@@ -16,11 +16,11 @@
 ---@field created_on_pause boolean To keep track of all nodes created on pause. If true, this node moves normally even when the G.TIMERS.TOTAL doesn't increment
 ---@field ARGS table Store all argument tables here for reuse, because Lua likes to generate garbage
 ---@field RETS table Store all return tables here for reuse, because Lua likes to generate garbage
----@field DEBUG_VALUE string|nil Text which want to print when debugging
 ---@field CALCING boolean 是否正在计算, Moveable 的 move 方法会设置这个为 true
 ---@field parent Node 父节点
 ---@field layered_parallax Coordinate 分层偏移????
 Node = Object:extend()
+
 
 ---Node represent any game object that needs to have some transform available in the game itself.\
 ---Everything that you see in the game is a Node, and some invisible things like the G.ROOM are also\
@@ -28,10 +28,10 @@ Node = Object:extend()
 ---**T** The transform ititializer, with keys of x|1, y|2, w|3, h|4, r|5
 ---**container** optional container for this Node, defaults to G.ROOM
 ---@param T? Transform,
----@param container? Node
+---@param container Node
 function Node:init(T, container)
     --From args, set the values of self transform
-    self.ID = App.instance:generate_id()
+    self.ID = generate_id()
     self.T = T and T:clone() or Transform()
     self.CT = self.T
     self.parent = nil
@@ -50,7 +50,7 @@ function Node:init(T, container)
     self.ARGS = self.ARGS or {}
     self.RETS = {}
     self.config = self.config or {}
-    self.container = container or App.instance.ROOM
+    self.container = container
     if not self.children then
         self.children = {}
     end
@@ -66,7 +66,6 @@ function Node:init(T, container)
         drag = { can = true, is = false },
         release_on = { can = true, is = false }
     }
-    self.DEBUG_VALUE = "Node"
     self.CALCING = false
 
     --Add this object to the appropriate instance table only if the metatable matches with NODE
