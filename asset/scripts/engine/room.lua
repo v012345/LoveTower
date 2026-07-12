@@ -2,6 +2,7 @@
 ---@field TILE_W number 宽度为多少个 Tile
 ---@field TILE_H number 高度为多少个 Tile
 ---@field root_node Node 根节点
+---@field root_attach Moveable 根节点附件
 Room = Object:extend()
 function Room:init()
     self.TILE_W = 20
@@ -9,6 +10,7 @@ function Room:init()
     self.ROOM_PADDING_H = 0.7
     self.ROOM_PADDING_W = 1
     self.root_node = nil
+    self.root_attach = nil
 end
 
 function Room:get_transform()
@@ -25,6 +27,8 @@ end
 function Room:set_root_node(node)
     self.root_node = node
     self.root_node:set_container(node)
+    self.root_attach = Moveable(Transform(0, 0, node.T.w, node.T.h))
+    self.root_attach:set_container(node)
 end
 
 ---@return Node
