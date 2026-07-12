@@ -1,11 +1,22 @@
 -- 进到这里说明所有的资源都下载完了
 require "asset.scripts.main.app_init"
 
----@param new_stage    number
----@param new_state    number
+---@param new_stage    STAGES
+---@param new_state    STATES
 ---@param new_game_obj boolean
 function App:prep_stage(new_stage, new_state, new_game_obj)
-
+    self.STAGE = new_stage
+    self.STATE = new_state
+    self.STATE_COMPLETE = false
+    self.SETTINGS.paused = false
+    -- 窗口大小是 self.TILE_W + 2 * self.ROOM_PADDING_W 和 self.TILE_H + 2 * self.ROOM_PADDING_H
+    -- ROOM 大小是 self.TILE_W 和 self.TILE_H, 正好嵌入 Padding 矩形里
+    self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
+    self.ROOM:set_container(self.ROOM)
+    self.ROOM_ATTACH = Moveable(Transform(0, 0, self.TILE_W, self.TILE_H))
+    self.ROOM_ATTACH:set_container(self.ROOM)
+    love.resize(love.graphics.getWidth(), love.graphics.getHeight())
+    -- Particles(Transform(20, 20, 0, 0), nil, { timer = 0.003 })
 end
 
 function App:init_game_object()
@@ -106,8 +117,8 @@ function App:start_up()
     boot_timer('prep stage', 'splash prep', 1)
 
     boot_timer('splash prep', 'end', 1)
-    self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
-    Particles(Transform(20, 20, 0, 0), nil, { timer = 0.003 })
+    self:splash_screen()
+
     -- love.resize(love.graphics.getWidth(), love.graphics.getHeight())
 end
 
@@ -120,7 +131,8 @@ function App:init_window()
     local T = Transform(0, 0, self.TILE_W + 2 * self.ROOM_PADDING_W, self.TILE_H + 2 * self.ROOM_PADDING_H)
     self.WINDOW.TRANS = T
     local pixels_per_tile = self.TILESIZE * self.TILESCALE
-    self.window_prev = { w = T.w * pixels_per_tile, h = T.h * pixels_per_tile, orig_scale = self.TILESCALE }
+    self.WINDOW.orig_size:set(T.w * pixels_per_tile, T.h * pixels_per_tile)
+    --- 设置窗口大小, 会影响 love.graphics.getWidth(), love.graphics.getHeight()
     love.window.updateMode(1000, 650, { fullscreen = false, fullscreentype = nil, vsync = 1, resizable = true, display = 1, highdpi = false })
 end
 
@@ -132,11 +144,15 @@ function App:save_settings()
 end
 
 function App:splash_screen()
-
+    -- 直接跳转到主菜单
+    self:main_menu()
 end
 
 function App:main_menu()
+    self:prep_stage(STAGES.MAIN_MENU, STATES.MENU, true)
 
+    --- 创建主菜单场景
+    --- 创建主菜单场景
 end
 
 ---@return number

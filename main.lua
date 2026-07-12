@@ -93,14 +93,32 @@ function love.resize(w, h)
         h = w
         curr_ratio = 1
     end
-    local orig_ratio = App.instance.window_prev.w / App.instance.window_prev.h
+    local orig_ratio = App.instance.WINDOW.orig_size.w / App.instance.WINDOW.orig_size.h
     -- 变窄了
     if curr_ratio < orig_ratio then
         App.instance.TILESCALE = App.instance.window_prev.h / h
     else -- 变宽了
         App.instance.TILESCALE = App.instance.window_prev.w / w
     end
-    App.instance.WINDOW.real_size:set(w, h)
+    if App.instance.ROOM then
+        if w / h < orig_ratio then
+            App.instance.ROOM.T.x = App.instance.ROOM_PADDING_W
+            G.ROOM.T.y = (h / (G.TILESIZE * G.TILESCALE) - (G.ROOM.T.h + G.ROOM_PADDING_H)) / 2 + G.ROOM_PADDING_H / 2
+        else
+            App.instance.ROOM.T.y = App.instance.ROOM_PADDING_H
+            G.ROOM.T.x = (w / (G.TILESIZE * G.TILESCALE) - (G.ROOM.T.w + G.ROOM_PADDING_W)) / 2 + G.ROOM_PADDING_W / 2
+        end
 
-    print(w / h)
+        G.ROOM_ORIG = {
+            x = G.ROOM.T.x,
+            y = G.ROOM.T.y,
+            r = G.ROOM.T.r
+        }
+
+        if G.buttons then G.buttons:recalculate() end
+        if G.HUD then G.HUD:recalculate() end
+    end
+    App.instance.WINDOW.real_size:set(w, h)
+    G.CANVAS = love.graphics.newCanvas(w * G.CANV_SCALE, h * G.CANV_SCALE, { type = '2d', readable = true })
+    G.CANVAS:setFilter('linear', 'linear')
 end
