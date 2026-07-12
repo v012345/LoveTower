@@ -1,9 +1,15 @@
-require "asset.scripts.engine.utils"
-require "asset.scripts.engine.config"
+-- 基础模块
 require "asset.scripts.engine.object"
+
+-- 不依赖其他模块的模块
+require "asset.scripts.engine.transform"
 require "asset.scripts.engine.size"
 require "asset.scripts.engine.coordinate"
-require "asset.scripts.engine.transform"
+
+-- 依赖其他模块的模块
+require "asset.scripts.engine.config"
+require "asset.scripts.engine.utils"
+require "asset.scripts.engine.window"
 require "asset.scripts.engine.node"
 require "asset.scripts.engine.moveable"
 require "asset.scripts.engine.particles"
