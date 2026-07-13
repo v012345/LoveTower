@@ -178,9 +178,13 @@ function Node:stop_hover()
 
 end
 
---Called by the CONTROLLER to determine the position the cursor should be set to for this node
+---得到这个节点的中心, 好把光标聚焦在这个节点上
+---Called by the CONTROLLER to determine the position the cursor should be set to for this node
+---@return number
+---@return number
 function Node:put_focused_cursor()
-
+    local unit_tile = Tile.instance:get_pixels_per_tile()
+    return (self.T.x + self.T.w / 2 + self.container.T.x) * unit_tile, (self.T.y + self.T.h / 2 + self.container.T.y) * unit_tile
 end
 
 ---Sets the container of this node and all child nodes to be a new container node
