@@ -197,7 +197,16 @@ end
 
 --Translation function used before any draw calls, translates this node according to the transform of the container node
 function Node:translate_container()
-
+    if self.container and self.container ~= self then
+        local unit_tile = Tile.instance:get_pixels_per_tile()
+        local t = self.container.T
+        local center_x, center_y = t.w * unit_tile * 0.5, t.h * unit_tile * 0.5
+        love.graphics.translate(center_x, center_y)
+        love.graphics.rotate(t.r)
+        love.graphics.translate(-center_x, -center_y)
+        local offset_x, offset_y = t.x * unit_tile, t.y * unit_tile
+        love.graphics.translate(offset_x, offset_y)
+    end
 end
 
 --When this Node needs to be deleted, removes self from any tables it may have been added to to destroy any weak references\
