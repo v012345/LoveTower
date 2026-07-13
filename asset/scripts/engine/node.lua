@@ -148,7 +148,7 @@ function Node:collides_with_point(point)
         local _t = self.ARGS.collides_with_point_translation
         local _r = self.ARGS.collides_with_point_rotation
 
-        local _b = self.states.hover.is and G.COLLISION_BUFFER or 0
+        local _b = self.states.hover.is and App.instance.COLLISION_BUFFER or 0
 
         _p.x, _p.y = point.x, point.y
 

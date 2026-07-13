@@ -88,17 +88,15 @@ end
 function is_UI_containter(node)
 end
 
---- 我怀疑这里是错的, 应该是
---- _T.x = _T.x + delta.x or 0
---- _T.y = _T.y + delta.y or 0
+---平移一个点
 --- @param _T Transform
 --- @param delta {x: number, y: number}
 function point_translate(_T, delta)
-    _T.x = (_T.x + delta.x) or 0
-    _T.y = (_T.y + delta.y) or 0
+    _T.x = _T.x + delta.x
+    _T.y = _T.y + delta.y
 end
 
---- 旋转一个点
+---旋转一个点
 ---@param _T Transform
 ---@param angle number
 function point_rotate(_T, angle)

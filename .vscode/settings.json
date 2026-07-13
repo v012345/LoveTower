@@ -1,5 +1,7 @@
 {
     "Lua.diagnostics.globals": [
-        "generate_id"
+        "generate_id",
+        "point_translate",
+        "point_rotate"
     ]
 }

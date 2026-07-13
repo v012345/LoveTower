@@ -61,6 +61,8 @@ function App:init()
         Node = nil,
         ORIG = Transform(),
     }
+    --- 碰撞缓冲区, 在缓冲什么?
+    self.COLLISION_BUFFER = 0.05
 
 
 
