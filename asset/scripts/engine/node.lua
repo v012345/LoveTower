@@ -17,7 +17,6 @@
 ---@field RETS table Store all return tables here for reuse, because Lua likes to generate garbage
 ---@field CALCING boolean 是否正在计算, Moveable 的 move 方法会设置这个为 true
 ---@field parent Node 父节点
----@field layered_parallax Coordinate 分层偏移????
 Node = Object:extend()
 
 
@@ -34,7 +33,7 @@ function Node:init(T, container)
     self.T = T:clone()
     self.CT = self.T
     self.parent = nil
-    self.layered_parallax = Coordinate(0, 0)
+
 
     self.click_offset = Coordinate()
     self.hover_offset = Coordinate()

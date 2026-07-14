@@ -11,6 +11,7 @@
 ---@field Mid Moveable 对齐参考点, 用于在 align_to_major() 中确定"用对象的哪个部分去对齐"
 ---@field shadow_height number 阴影高度??
 ---@field VT Transform 缓动变换成使用, 引擎会自动计算到 T
+---@field layered_parallax Coordinate 分层偏移????
 Moveable = Node:extend()
 
 --Moveable represents any game object that has the ability to move about the gamespace.\
@@ -27,7 +28,7 @@ Moveable = Node:extend()
 ---@param container Node
 function Moveable:init(T, container)
     Node.init(self, T, container)
-
+    self.layered_parallax = Coordinate(0, 0)
     --The Visible transform is initally set to the same values as the transform T.
     --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
     --scale of any objects that need to be drawn larger or smaller
@@ -532,22 +533,6 @@ function Moveable:get_major()
     end
 end
 
-function Moveable:remove()
-    for k, v in pairs(G.MOVEABLES) do
-        if v == self then
-            table.remove(G.MOVEABLES, k)
-            break;
-        end
-    end
-    for k, v in pairs(G.I.MOVEABLE) do
-        if v == self then
-            table.remove(G.I.MOVEABLE, k)
-            break;
-        end
-    end
-    Node.remove(self)
-end
-
 ---@param scale number
 ---@param rotate? number
 ---@param offset? table
@@ -565,6 +550,22 @@ function Moveable:prep_draw(scale, rotate, offset)
     if VT.r ~= 0 or self.juice or rotate then love.graphics.rotate(VT.r + (rotate or 0)) end
     love.graphics.translate(-scale * VT.w * (VT.scale) / 2, -scale * VT.h * (VT.scale) / 2)
     love.graphics.scale(self.VT.scale * scale)
+end
+
+function Moveable:remove()
+    for k, v in pairs(G.MOVEABLES) do
+        if v == self then
+            table.remove(G.MOVEABLES, k)
+            break;
+        end
+    end
+    for k, v in pairs(G.I.MOVEABLE) do
+        if v == self then
+            table.remove(G.I.MOVEABLE, k)
+            break;
+        end
+    end
+    Node.remove(self)
 end
 
 function Moveable:__tostring()
