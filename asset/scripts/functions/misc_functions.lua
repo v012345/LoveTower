@@ -100,7 +100,7 @@ end
 ---@param _T Transform
 ---@param angle number
 function point_rotate(_T, angle)
-    local _cos, _sin, _ox, _oy = math.cos(angle + math.pi / 2), math.sin(angle + math.pi / 2), _T.x, _T.y
-    _T.x = -_oy * _cos + _ox * _sin
-    _T.y = _oy * _sin + _ox * _cos
+    local _cos, _sin, _ox, _oy = math.cos(angle), math.sin(angle), _T.x, _T.y
+    _T.x = _ox * _cos - _oy * _sin
+    _T.y = _ox * _sin + _oy * _cos
 end
