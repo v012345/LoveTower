@@ -386,6 +386,10 @@ NodeList = {}
 ---@return Coordinate
 function Coordinate(x, y) end
 
+---@class Point
+---@field x number
+---@field y number
+
 ---@class MoveableRole
 ---@field role_type  RoleType
 ---@field offset     Coordinate
