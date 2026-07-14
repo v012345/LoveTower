@@ -552,16 +552,18 @@ function Moveable:prep_draw(scale, rotate, offset)
     love.graphics.scale(self.VT.scale * scale)
 end
 
+---从App.instance.MOVEABLES和App.instance.I.MOVEABLE中移除self
+--然后调用Node的remove方法
 function Moveable:remove()
-    for k, v in pairs(G.MOVEABLES) do
+    for k, v in pairs(App.instance.MOVEABLES) do
         if v == self then
-            table.remove(G.MOVEABLES, k)
+            table.remove(App.instance.MOVEABLES, k)
             break;
         end
     end
-    for k, v in pairs(G.I.MOVEABLE) do
+    for k, v in pairs(App.instance.I.MOVEABLE) do
         if v == self then
-            table.remove(G.I.MOVEABLE, k)
+            table.remove(App.instance.I.MOVEABLE, k)
             break;
         end
     end
