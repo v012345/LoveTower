@@ -386,6 +386,7 @@ NodeList = {}
 ---@return Coordinate
 function Coordinate(x, y) end
 
+---游戏瓦片坐标
 ---@class Point
 ---@field x number
 ---@field y number
