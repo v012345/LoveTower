@@ -510,6 +510,25 @@ function Moveable:set_role(args)
     if self.role.role_type == 'Major' then self.role.major = nil end
 end
 
+---@param scale number
+---@param rotate? number
+---@param offset? table
+function Moveable:prep_draw(scale, rotate, offset)
+    -- love.graphics.scale(App.instance.TILESCALE * App.instance.TILESIZE)
+    offset = offset or Coordinate(0, 0)
+    love.graphics.setColor(Color.RED)
+    love.graphics.rectangle('fill', 0, 0, 20, 20)
+    local VT = self.VT
+    local layered_parallax = self.layered_parallax
+    love.graphics.translate(
+        VT.x + VT.w / 2 + offset.x + layered_parallax.x,
+        VT.y + VT.h / 2 + offset.y + layered_parallax.y
+    )
+    if VT.r ~= 0 or self.juice or rotate then love.graphics.rotate(VT.r + (rotate or 0)) end
+    love.graphics.translate(-scale * VT.w * (VT.scale) / 2, -scale * VT.h * (VT.scale) / 2)
+    love.graphics.scale(self.VT.scale * scale)
+end
+
 function Moveable:get_major()
     if (self.role.role_type ~= 'Major' and self.role.major ~= self) and (self.role.xy_bond ~= 'Weak' and self.role.r_bond ~= 'Weak') then
         --First, does the major already have their offset precalculated for this frame?
@@ -531,25 +550,6 @@ function Moveable:get_major()
         self.ARGS.get_major.offset.x, self.ARGS.get_major.offset.y = 0, 0
         return self.ARGS.get_major
     end
-end
-
----@param scale number
----@param rotate? number
----@param offset? table
-function Moveable:prep_draw(scale, rotate, offset)
-    -- love.graphics.scale(App.instance.TILESCALE * App.instance.TILESIZE)
-    offset = offset or Coordinate(0, 0)
-    love.graphics.setColor(Color.RED)
-    love.graphics.rectangle('fill', 0, 0, 20, 20)
-    local VT = self.VT
-    local layered_parallax = self.layered_parallax
-    love.graphics.translate(
-        VT.x + VT.w / 2 + offset.x + layered_parallax.x,
-        VT.y + VT.h / 2 + offset.y + layered_parallax.y
-    )
-    if VT.r ~= 0 or self.juice or rotate then love.graphics.rotate(VT.r + (rotate or 0)) end
-    love.graphics.translate(-scale * VT.w * (VT.scale) / 2, -scale * VT.h * (VT.scale) / 2)
-    love.graphics.scale(self.VT.scale * scale)
 end
 
 ---从App.instance.MOVEABLES和App.instance.I.MOVEABLE中移除self
