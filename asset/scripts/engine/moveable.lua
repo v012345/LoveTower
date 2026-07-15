@@ -237,14 +237,8 @@ function Moveable:juice_up(amount, rot_amt)
     local timer = Timer.instance:get_real_timer()
     local start_time = timer()
     local end_time = start_time + 0.4
-    self.juice = {
-        scale = 0,
-        scale_amt = amount,
-        r = 0,
-        r_amt = ((rot_amt or pseudorandom_element({ 0.6 * amount, -0.6 * amount })) or 0),
-        start_time = start_time,
-        end_time = end_time
-    }
+    rot_amt = rot_amt or pseudorandom_element({ 0.6 * amount, -0.6 * amount }) or 0
+    self.juice = Juice(0, amount, 0, rot_amt, start_time, end_time)
     self.VT.scale = 1 - 0.6 * amount
 end
 

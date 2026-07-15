@@ -4,7 +4,7 @@
 ---@field scale number
 ---@field scale_amt number
 ---@field r number rotation
----@field r_amt number rotation_amt
+---@field r_amt number | Vec2 rotation_amt
 ---@field start_time number
 ---@field end_time number
 ---@field handled_elsewhere boolean
