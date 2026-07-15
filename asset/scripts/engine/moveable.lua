@@ -108,10 +108,11 @@ function Moveable:align_to_major()
 
     if self.alignment:is_a() or self.role:is_major_nil() then return end
 
+    --- 左 和 上 都是 0
     local major_center_x = self.role:get_major().T.w / 2
     local major_center_y = self.role:get_major().T.h / 2
-
     local major_bottom_y = self.role:get_major().T.h
+    local major_right_x = self.role:get_major().T.w
     --- 首先我们要知道当前 Node 的中心点相对于当前 Node 的左上角的偏移量
     --- 这里 center_offset_x 和 center_offset_y 就是当前 Node 的中心点指向当前 Node 的左上角的向量
     local center_offset_x = self.T.x - (self.Mid.T.x + self.Mid.T.w / 2)
@@ -133,44 +134,42 @@ function Moveable:align_to_major()
     --- 底部对齐
     if self.alignment:is_b() then
         if self.alignment:is_i() then
-            self.role:set_offset_y(offset_y + major_bottom_y - self.T.h)
+            self.role:set_offset_y(major_bottom_y + offset_y - self.T.h)
         else
-            self.role:set_offset_y(offset_y + major_bottom_y)
+            self.role:set_offset_y(major_bottom_y + offset_y)
         end
     end
 
     if self.alignment:is_r() then
         if self.alignment:is_i() then
-            self.role.offset.x = self.alignment.offset.x + self.role.major.T.w - self.T.w
+            self.role:set_offset_x(major_right_x + offset_x - self.T.w)
         else
-            self.role.offset.x = self.alignment.offset.x + self.role.major.T.w
+            self.role:set_offset_x(major_right_x + offset_x)
         end
     end
 
     if self.alignment:is_t() then
         if self.alignment:is_i() then
-            self.role.offset.y = self.alignment.offset.y
+            self.role:set_offset_y(offset_y)
         else
-            self.role.offset.y = self.alignment.offset.y - self.T.h
+            self.role:set_offset_y(offset_y - self.T.h)
         end
     end
 
     if self.alignment:is_l() then
         if self.alignment:is_i() then
-            self.role.offset.x = self.alignment.offset.x
+            self.role:set_offset_x(offset_x)
         else
-            self.role.offset.x = self.alignment.offset.x - self.T.w
+            self.role:set_offset_x(offset_x - self.T.w)
         end
     end
 
-    self.role.offset.x = self.role.offset.x or 0
-    self.role.offset.y = self.role.offset.y or 0
 
-    self.T.x = self.role.major.T.x + self.role.offset.x
-    self.T.y = self.role.major.T.y + self.role.offset.y
+    self.T.x = self.role:get_final_x()
+    self.T.y = self.role:get_final_y()
 
-    self.alignment.prev_offset = self.alignment.prev_offset or {}
-    self.alignment.prev_offset.x, self.alignment.prev_offset.y = self.alignment.offset.x, self.alignment.offset.y
+
+   
 end
 
 function Moveable:hard_set_T(X, Y, W, H)

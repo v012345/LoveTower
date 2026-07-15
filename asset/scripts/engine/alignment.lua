@@ -86,6 +86,8 @@ function Alignment:refresh()
     self.type_list.r = bit.band(self.type, AlignmentType.r) ~= 0
     self.type_list.i = bit.band(self.type, AlignmentType.i) ~= 0
     self.prev_type = self.type
+    self.prev_offset.x = self.offset.x
+    self.prev_offset.y = self.offset.y
 end
 
 --- getters ----

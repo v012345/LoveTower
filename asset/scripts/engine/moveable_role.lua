@@ -82,6 +82,18 @@ function MoveableRole:get_offset()
     return self.offset
 end
 
+---当前 Node 的 x 的最终值
+---@return number
+function MoveableRole:get_final_x()
+    return self.major.T.x + self.offset.x
+end
+
+---当前 Node 的 y 的最终值
+---@return number
+function MoveableRole:get_final_y()
+    return self.major.T.y + self.offset.y
+end
+
 ---- update methods ----
 
 ---如果major为nil, 则不更新major
