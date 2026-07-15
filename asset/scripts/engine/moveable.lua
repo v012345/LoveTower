@@ -515,14 +515,8 @@ function Moveable:get_major()
     if condition_1 and condition_2 then
         --First, does the major already have their offset precalculated for this frame?
         if not self.FRAME.MAJOR or App.instance.REFRESH_FRAME_MAJOR_CACHE > 0 then
-            self.FRAME.MAJOR = self.FRAME.MAJOR or EMPTY(self.FRAME.OLD_MAJOR)
-            self.temp_offs = EMPTY(self.temp_offs)
-            local major = self.role.major:get_major()
-            self.FRAME.MAJOR.major = major.major
-            self.FRAME.MAJOR.offset = self.FRAME.MAJOR.offset or self.temp_offs
-            self.FRAME.MAJOR.offset.x, self.FRAME.MAJOR.offset.y =
-                major.offset.x + self.role.offset.x + self.layered_parallax.x,
-                major.offset.y + self.role.offset.y + self.layered_parallax.y
+            local major = self.role:get_major():get_major()
+            self.FRAME.MAJOR = MoveableRole(major:get_major(), nil, nil, Vec2(major.offset.x + self.role.offset.x + self.layered_parallax.x, major.offset.y + self.role.offset.y + self.layered_parallax.y))
         end
         return self.FRAME.MAJOR
     else
