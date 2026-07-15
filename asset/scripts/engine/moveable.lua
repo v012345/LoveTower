@@ -106,46 +106,44 @@ function Moveable:align_to_major()
 
     self.NEW_ALIGNMENT = true
 
-    if self.alignment:is_a() then return end
-    if not self.role:get_major() then return end
+    if self.alignment:is_a() or self.role:is_major_nil() then return end
 
-
-    if self.alignment.type_list.m then
+    if self.alignment:is_m() then
         self.role.offset.x = 0.5 * self.role.major.T.w - (self.Mid.T.w) / 2 + self.alignment.offset.x - self.Mid.T.x +
             self.T.x
     end
 
-    if self.alignment.type_list.c then
+    if self.alignment:is_c() then
         self.role.offset.y = 0.5 * self.role.major.T.h - (self.Mid.T.h) / 2 + self.alignment.offset.y - self.Mid.T.y +
             self.T.y
     end
 
-    if self.alignment.type_list.b then
-        if self.alignment.type_list.i then
+    if self.alignment:is_b() then
+        if self.alignment:is_i() then
             self.role.offset.y = self.alignment.offset.y + self.role.major.T.h - self.T.h
         else
             self.role.offset.y = self.alignment.offset.y + self.role.major.T.h
         end
     end
 
-    if self.alignment.type_list.r then
-        if self.alignment.type_list.i then
+    if self.alignment:is_r() then
+        if self.alignment:is_i() then
             self.role.offset.x = self.alignment.offset.x + self.role.major.T.w - self.T.w
         else
             self.role.offset.x = self.alignment.offset.x + self.role.major.T.w
         end
     end
 
-    if self.alignment.type_list.t then
-        if self.alignment.type_list.i then
+    if self.alignment:is_t() then
+        if self.alignment:is_i() then
             self.role.offset.y = self.alignment.offset.y
         else
             self.role.offset.y = self.alignment.offset.y - self.T.h
         end
     end
 
-    if self.alignment.type_list.l then
-        if self.alignment.type_list.i then
+    if self.alignment:is_l() then
+        if self.alignment:is_i() then
             self.role.offset.x = self.alignment.offset.x
         else
             self.role.offset.x = self.alignment.offset.x - self.T.w

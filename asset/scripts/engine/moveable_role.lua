@@ -19,6 +19,11 @@ function MoveableRole:is_major()
     return self.role_type == RoleType.Major
 end
 
+---@return boolean
+function MoveableRole:is_major_nil()
+    return self.major == nil
+end
+
 --- setters ----
 
 ---强制设置major
