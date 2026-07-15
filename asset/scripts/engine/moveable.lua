@@ -31,7 +31,7 @@ function Moveable:init(T, container)
     --the corresponding 'Major' T and VT, plus some defined offset.
     --For finer control over what parts of T and VT are inherited, xy_bond, wh_bond, and r_bond can be set to one of
     --'Strong' or 'Weak'. Strong simply copies the values, Weak allows the 'Minor' moveable to calculate their own.
-    self.role = MoveableRole(RoleType.Major, nil, self, Vec2(0, 0), BondType.Strong, BondType.Strong, BondType.Strong, BondType.Strong)
+    self.role = MoveableRole(nil, RoleType.Major, self, Vec2(0, 0), BondType.Strong, BondType.Strong, BondType.Strong, BondType.Strong)
 
 
     self.alignment = {
@@ -526,11 +526,7 @@ function Moveable:get_major()
         end
         return self.FRAME.MAJOR
     else
-        
-        self.ARGS.get_major = self.ARGS.get_major or {}
-        self.ARGS.get_major.major = self
-        self.ARGS.get_major.offset = self.ARGS.get_major.offset or {}
-        self.ARGS.get_major.offset.x, self.ARGS.get_major.offset.y = 0, 0
+        self.ARGS.get_major = self.ARGS.get_major or MoveableRole(self)
         return self.ARGS.get_major
     end
 end
