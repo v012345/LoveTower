@@ -313,10 +313,11 @@ function Moveable:lr_clamp()
     if (self.VT.x + self.VT.w) > G.ROOM.T.w then self.VT.x = G.ROOM.T.w - self.VT.w end
 end
 
+---@param major_tab Moveable
 function Moveable:glue_to_major(major_tab)
     self.T = major_tab.T
 
-    self.VT.x = major_tab.VT.x + (0.5 * (1 - major_tab.VT.w / (major_tab.T.w)) * self.T.w)
+    self.VT.x = major_tab.VT.x + ((1 - major_tab.VT.w / major_tab.T.w) * (self.T.w / 2))
     self.VT.y = major_tab.VT.y
     self.VT.w = major_tab.VT.w
     self.VT.h = major_tab.VT.h
