@@ -13,7 +13,7 @@
 ---@param scale number
 ---@param scale_amt number
 ---@param rotation number
----@param rotation_amt number
+---@param rotation_amt number | Vec2
 ---@param start_time number
 ---@param end_time number
 ---@param handled_elsewhere? boolean
