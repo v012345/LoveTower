@@ -510,9 +510,11 @@ function Moveable:prep_draw(scale, rotate, offset)
 end
 
 function Moveable:get_major()
-    if (self.role.role_type ~= 'Major' and self.role.major ~= self) and (self.role.xy_bond ~= 'Weak' and self.role.r_bond ~= 'Weak') then
+    local condition_1 = not self.role:is_major() and self.role:get_major() ~= self
+    local condition_2 = self.role:get_xy_bond() ~= BondType.Weak and self.role:get_r_bond() ~= BondType.Weak
+    if condition_1 and condition_2 then
         --First, does the major already have their offset precalculated for this frame?
-        if not self.FRAME.MAJOR or (G.REFRESH_FRAME_MAJOR_CACHE) then
+        if not self.FRAME.MAJOR or App.instance.REFRESH_FRAME_MAJOR_CACHE > 0 then
             self.FRAME.MAJOR = self.FRAME.MAJOR or EMPTY(self.FRAME.OLD_MAJOR)
             self.temp_offs = EMPTY(self.temp_offs)
             local major = self.role.major:get_major()

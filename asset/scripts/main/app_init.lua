@@ -64,8 +64,8 @@ function App:init()
     --- 碰撞缓冲区, 在缓冲什么?
     self.COLLISION_BUFFER = 0.05
 
-
-
+    --- 刷新 major 缓存, 用于优化 major 的渲染? 不知道具体作用是什么
+    self.REFRESH_FRAME_MAJOR_CACHE = 0
 
     self.FRAMES = {
         DRAW = 0,
