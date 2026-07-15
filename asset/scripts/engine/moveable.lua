@@ -250,11 +250,19 @@ end
 
 function Moveable:move_juice(dt)
     if self.juice and not self.juice.handled_elsewhere then
-        if self.juice.end_time < G.TIMERS.REAL then
+        local timer = Timer.instance:get_real_timer()
+        local end_time = self.juice.end_time
+        if end_time < timer() then
             self.juice = nil
         else
-            self.juice.scale = self.juice.scale_amt * math.sin(50.8 * (G.TIMERS.REAL - self.juice.start_time)) * math.max(0, ((self.juice.end_time - G.TIMERS.REAL) / (self.juice.end_time - self.juice.start_time)) ^ 3)
-            self.juice.r = self.juice.r_amt * math.sin(40.8 * (G.TIMERS.REAL - self.juice.start_time)) * math.max(0, ((self.juice.end_time - G.TIMERS.REAL) / (self.juice.end_time - self.juice.start_time)) ^ 2)
+            local start_time = self.juice.start_time
+            local life_time = end_time - start_time
+            self.juice.scale = self.juice.scale_amt *
+                math.sin(50.8 * (timer() - start_time)) *
+                math.max(0, ((end_time - timer()) / life_time) ^ 3)
+            self.juice.r = self.juice.r_amt *
+                math.sin(40.8 * (timer() - start_time)) *
+                math.max(0, ((end_time - timer()) / life_time) ^ 2)
         end
     end
 end
@@ -337,8 +345,8 @@ MWM = {
 }
 
 function Moveable:move_with_major(dt)
-    if self.role.role_type ~= 'Minor' then return end
-    local major_tab = self.role.major:get_major()
+    if not self.role:is_minor() then return end
+    local major_tab = self.role:get_major():get_major()
 
     self:move_juice(dt)
 

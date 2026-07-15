@@ -1,0 +1,8 @@
+---@class Juice:Object
+---@field scale number
+---@field scale_amt number
+---@field r number
+---@field r_amt number
+---@field start_time number
+---@field end_time number
+---@field handled_elsewhere boolean
