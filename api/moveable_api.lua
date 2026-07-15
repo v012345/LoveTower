@@ -27,7 +27,7 @@
 ---@field scale_bond BondType
 
 ---@param role_type RoleType
----@param major Moveable | nil
+---@param major Moveable
 ---@param draw_major Moveable
 ---@param offset Vec2
 ---@param xy_bond BondType
