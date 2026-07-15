@@ -86,8 +86,6 @@ function Alignment:refresh()
     self.type_list.r = bit.band(self.type, AlignmentType.r) ~= 0
     self.type_list.i = bit.band(self.type, AlignmentType.i) ~= 0
     self.prev_type = self.type
-    self.prev_offset.x = self.offset.x
-    self.prev_offset.y = self.offset.y
 end
 
 --- getters ----
@@ -126,7 +124,7 @@ end
 
 ---@param offset Vec2
 function Alignment:set_offset(offset)
-    self.offset = offset
+    self.offset = offset:clone()
 end
 
 function Alignment:set_prev_type(prev_type)
@@ -135,7 +133,7 @@ end
 
 ---@param prev_offset Vec2
 function Alignment:set_prev_offset(prev_offset)
-    self.prev_offset = prev_offset
+    self.prev_offset = prev_offset:clone()
 end
 
 ---@param lr_clamp boolean

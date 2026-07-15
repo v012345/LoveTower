@@ -168,8 +168,7 @@ function Moveable:align_to_major()
     self.T.x = self.role:get_final_x()
     self.T.y = self.role:get_final_y()
 
-
-   
+    self.alignment:set_prev_offset(self.alignment:get_offset())
 end
 
 function Moveable:hard_set_T(X, Y, W, H)
