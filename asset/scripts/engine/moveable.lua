@@ -313,6 +313,7 @@ function Moveable:lr_clamp()
     if (self.VT.x + self.VT.w) > G.ROOM.T.w then self.VT.x = G.ROOM.T.w - self.VT.w end
 end
 
+---感觉没有必要, 真的有效果吗?
 ---@param major_tab Moveable
 function Moveable:glue_to_major(major_tab)
     self.T = major_tab.T
