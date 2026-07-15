@@ -464,6 +464,7 @@ function Moveable:move_r(dt, vel)
     end
 end
 
+--- 离房间中心越远，阴影偏移越大
 function Moveable:calculate_parrallax()
     local room = Room.instance:get_root_node()
     if room then
