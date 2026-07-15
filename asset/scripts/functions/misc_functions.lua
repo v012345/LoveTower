@@ -33,6 +33,12 @@ function mix_colours(C1, C2, proportionC1)
     }
 end
 
+---随机返回一个元素
+---@generic K
+---@generic V
+---@param _t table<K, V>
+---@param seed? number
+---@return V, K
 function pseudorandom_element(_t, seed)
     if seed then math.randomseed(seed) end
     local keys = {}
