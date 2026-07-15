@@ -19,6 +19,13 @@ function Alignment:init(type, offset, prev_type, prev_offset, lr_clamp)
     }
 end
 
+--- is methods ----
+
+---@return boolean
+function Alignment:is_changed()
+    return not self.prev_offset:is_equal(self.offset) or self.prev_type ~= self.type
+end
+
 --- refresh methods ----
 
 function Alignment:refresh_type_list()
@@ -33,7 +40,7 @@ function Alignment:refresh_type_list()
 end
 
 function Alignment:refresh_type()
-    self.type = self.prev_type
+    self.prev_type = self.type
 end
 
 --- getters ----

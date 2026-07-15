@@ -106,7 +106,7 @@ function Moveable:align_to_major()
 
     if self.alignment:get_type() ~= self.alignment:get_prev_type() then
         self.alignment:refresh_type_list()
-        self.alignment.prev_type = self.alignment.type
+        self.alignment:refresh_type()
     end
 
     self.NEW_ALIGNMENT = true
