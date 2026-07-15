@@ -404,6 +404,12 @@ function bit.lshift(a, b) end
 ---@return number
 function bit.bor(a, b, ...) end
 
+---@param a number
+---@param b number
+---@param ... number
+---@return number
+function bit.band(a, b, ...) end
+
 --- Sets the display mode and properties of the window, without modifying unspecified properties.
 --- If width or height is 0, updateMode will use the width and height of the desktop.
 --- Changing the display mode may have side effects: for example, canvases will be cleared. Make sure to save the contents of canvases beforehand or re-draw to them afterward if you need to.

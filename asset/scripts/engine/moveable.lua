@@ -105,16 +105,7 @@ function Moveable:align_to_major()
     end
 
     if self.alignment:get_type() ~= self.alignment:get_prev_type() then
-        self.alignment.type_list = {
-            a = self.alignment.type == 'a',
-            m = string.find(self.alignment.type, "m"),
-            c = string.find(self.alignment.type, "c"),
-            b = string.find(self.alignment.type, "b"),
-            t = string.find(self.alignment.type, "t"),
-            l = string.find(self.alignment.type, "l"),
-            r = string.find(self.alignment.type, "r"),
-            i = string.find(self.alignment.type, "i"),
-        }
+        self.alignment:refresh_type_list()
         self.alignment.prev_type = self.alignment.type
     end
 
