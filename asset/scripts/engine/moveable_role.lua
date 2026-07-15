@@ -1,15 +1,15 @@
 ---@class MoveableRole
 MoveableRole = Object:extend()
 
-function MoveableRole:init(role_type, major, draw_major, offset, xy_bond, wh_bond, r_bond, scale_bond)
-    self.role_type = role_type   --Major dictates movement, Minor is welded to some major
-    self.offset = offset:clone() --Offset from Minor to Major
+function MoveableRole:init(major, role_type, draw_major, offset, xy_bond, wh_bond, r_bond, scale_bond)
     self.major = major
+    self.role_type = role_type or RoleType.Minor          --Major dictates movement, Minor is welded to some major
+    self.offset = offset and offset:clone() or Vec2(0, 0) --Offset from Minor to Major
     self.draw_major = draw_major
-    self.xy_bond = xy_bond
-    self.wh_bond = wh_bond
-    self.r_bond = r_bond
-    self.scale_bond = scale_bond
+    self.xy_bond = xy_bond or BondType.Weak
+    self.wh_bond = wh_bond or BondType.Weak
+    self.r_bond = r_bond or BondType.Weak
+    self.scale_bond = scale_bond or BondType.Weak
 end
 
 ---@return boolean

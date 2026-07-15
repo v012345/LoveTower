@@ -526,6 +526,7 @@ function Moveable:get_major()
         end
         return self.FRAME.MAJOR
     else
+        
         self.ARGS.get_major = self.ARGS.get_major or {}
         self.ARGS.get_major.major = self
         self.ARGS.get_major.offset = self.ARGS.get_major.offset or {}
