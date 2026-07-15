@@ -1,0 +1,9 @@
+---@class MoveableRole
+---@field role_type  RoleType
+---@field offset     Coordinate
+---@field major      Moveable | nil
+---@field xy_bond    BondType
+---@field wh_bond    BondType
+---@field r_bond     BondType
+---@field scale_bond BondType
+---@field draw_major Moveable
