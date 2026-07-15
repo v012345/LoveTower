@@ -3,11 +3,12 @@
 ---@class Juice
 Juice = Object:extend()
 
-function Juice:init(amount, rot_amt)
-    self.scale = 0
-    self.scale_amt = amount
-    self.r = 0
-    self.r_amt = rot_amt
-    self.start_time = 0
-    self.end_time = self.start_time + 0.4
+function Juice:init(scale, scale_amt, rotation, rotation_amt, start_time, end_time, handled_elsewhere)
+    self.scale = scale
+    self.scale_amt = scale_amt
+    self.r = rotation
+    self.r_amt = rotation_amt
+    self.start_time = start_time
+    self.end_time = end_time
+    self.handled_elsewhere = handled_elsewhere
 end
