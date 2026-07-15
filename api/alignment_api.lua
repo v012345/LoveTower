@@ -1,11 +1,11 @@
 ---@meta
 
 ---@class Alignment: Object
----@field type AlignmentType
----@field offset Vec2
----@field prev_type AlignmentType
----@field prev_offset Vec2
----@field lr_clamp boolean
+---@field private type AlignmentType
+---@field private offset Vec2
+---@field private prev_type AlignmentType
+---@field private prev_offset Vec2
+---@field private lr_clamp boolean
 
 ---@param type AlignmentType
 ---@param offset Vec2

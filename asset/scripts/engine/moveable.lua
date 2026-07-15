@@ -98,7 +98,7 @@ function Moveable:set_alignment(args)
 end
 
 function Moveable:align_to_major()
-    if self.alignment.type ~= self.alignment.prev_type then
+    if self.alignment:get_type() ~= self.alignment:get_prev_type() then
         self.alignment.type_list = {
             a = self.alignment.type == 'a',
             m = string.find(self.alignment.type, "m"),
