@@ -32,9 +32,9 @@ function Moveable:init(T, container)
     --'Strong' or 'Weak'. Strong simply copies the values, Weak allows the 'Minor' moveable to calculate their own.
     self.role = {
         role_type = RoleType.Major, --Major dictates movement, Minor is welded to some major
-        offset = Coordinate(0, 0),  --Offset from Minor to Major
         major = nil,
         draw_major = self,
+        offset = Coordinate(0, 0), --Offset from Minor to Major
         xy_bond = BondType.Strong,
         wh_bond = BondType.Strong,
         r_bond = BondType.Strong,
