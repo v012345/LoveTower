@@ -391,13 +391,6 @@ function Coordinate(x, y) end
 ---@field x number
 ---@field y number
 
----@class Alignment
----@field type        AlignmentType
----@field offset      Coordinate
----@field prev_type   AlignmentType
----@field prev_offset Coordinate
-Alignment = {}
-
 ---@class bit
 bit = {}
 ---@param a number

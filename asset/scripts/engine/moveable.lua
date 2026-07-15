@@ -32,14 +32,8 @@ function Moveable:init(T, container)
     --For finer control over what parts of T and VT are inherited, xy_bond, wh_bond, and r_bond can be set to one of
     --'Strong' or 'Weak'. Strong simply copies the values, Weak allows the 'Minor' moveable to calculate their own.
     self.role = MoveableRole(nil, RoleType.Major, self, Vec2(0, 0), BondType.Strong, BondType.Strong, BondType.Strong, BondType.Strong)
+    self.alignment = Alignment(AlignmentType.a, Vec2(0, 0), AlignmentType.none, Vec2(0, 0), false)
 
-
-    self.alignment = {
-        type = AlignmentType.a,
-        offset = Coordinate(0, 0),
-        prev_type = AlignmentType.none,
-        prev_offset = Coordinate(0, 0),
-    }
 
     --the pinch table is used to modify the VT.w and VT.h compared to T.w and T.h. If either x or y pinch is
     --set to true, the VT width and or height will ease to 0. If pinch is false, they ease to T.w or T.h
