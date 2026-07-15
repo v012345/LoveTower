@@ -477,16 +477,15 @@ function Moveable:set_role(args)
     if args.offset and (type(args.offset) == 'table' and not (args.offset.y and args.offset.x)) or type(args.offset) ~= 'table' then
         args.offset = nil
     end
-    self.role = {
-        role_type = args.role_type or self.role.role_type,
-        offset = args.offset or self.role.offset,
-        major = args.major or self.role.major,
-        xy_bond = args.xy_bond or self.role.xy_bond,
-        wh_bond = args.wh_bond or self.role.wh_bond,
-        r_bond = args.r_bond or self.role.r_bond,
-        scale_bond = args.scale_bond or self.role.scale_bond,
-        draw_major = args.draw_major or self.role.draw_major,
-    }
+    self.role:update_role_type(args.role_type)
+    self.role:update_offset(args.offset)
+    self.role:update_major(args.major)
+    self.role:update_xy_bond(args.xy_bond)
+    self.role:update_wh_bond(args.wh_bond)
+    self.role:update_r_bond(args.r_bond)
+    self.role:update_scale_bond(args.scale_bond)
+    self.role:update_draw_major(args.draw_major)
+
     if self.role:is_major() then self.role:set_major(nil) end
 end
 
