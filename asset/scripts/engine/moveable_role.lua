@@ -44,6 +44,31 @@ function MoveableRole:get_r_bond()
     return self.r_bond
 end
 
+---@return BondType
+function MoveableRole:get_wh_bond()
+    return self.wh_bond
+end
+
+---@return BondType
+function MoveableRole:get_scale_bond()
+    return self.scale_bond
+end
+
+---@return Moveable
+function MoveableRole:get_draw_major()
+    return self.draw_major
+end
+
+---@return RoleType
+function MoveableRole:get_role_type()
+    return self.role_type
+end
+
+---@return Vec2
+function MoveableRole:get_offset()
+    return self.offset
+end
+
 ---- update methods ----
 
 ---如果major为nil, 则不更新major

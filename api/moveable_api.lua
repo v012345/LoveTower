@@ -17,14 +17,14 @@
 
 
 ---@class MoveableRole: Object
----@field role_type  RoleType
----@field offset     Vec2
+---@field private role_type  RoleType
+---@field private offset     Vec2
 ---@field private major      Moveable | nil
----@field draw_major Moveable
----@field xy_bond    BondType
----@field wh_bond    BondType
----@field r_bond     BondType
----@field scale_bond BondType
+---@field private draw_major Moveable
+---@field private xy_bond    BondType
+---@field private wh_bond    BondType
+---@field private r_bond     BondType
+---@field private scale_bond BondType
 
 ---@param role_type? RoleType
 ---@param major? Moveable | nil

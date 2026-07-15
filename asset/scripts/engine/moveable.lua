@@ -81,12 +81,12 @@ function Moveable:set_alignment(args)
     args = args or {}
     if args.major then
         self:set_role({
-            role_type = 'Minor',
+            role_type = RoleType.Minor,
             major = args.major,
-            xy_bond = args.bond or args.xy_bond or 'Weak',
-            wh_bond = args.wh_bond or self.role.wh_bond,
-            r_bond = args.r_bond or self.role.r_bond,
-            scale_bond = args.scale_bond or self.role.scale_bond,
+            xy_bond = args.bond or args.xy_bond or BondType.Weak,
+            wh_bond = args.wh_bond or self.role:get_wh_bond(),
+            r_bond = args.r_bond or self.role:get_r_bond(),
+            scale_bond = args.scale_bond or self.role:get_scale_bond(),
         })
     end
     self.alignment.type = args.type or self.alignment.type
