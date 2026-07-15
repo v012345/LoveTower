@@ -108,9 +108,16 @@ function Moveable:align_to_major()
 
     if self.alignment:is_a() or self.role:is_major_nil() then return end
 
+    local role_offset = self.role:get_offset()
+    local major_width = self.role:get_major().T.w
+    local major_height = self.role:get_major().T.h
+
+
+
+    --- 水平居中对齐
     if self.alignment:is_m() then
-        self.role.offset.x = 0.5 * self.role.major.T.w - (self.Mid.T.w) / 2 + self.alignment.offset.x - self.Mid.T.x +
-            self.T.x
+        self.role.offset.x =
+            0.5 * self.role.major.T.w - (self.Mid.T.w) / 2 + self.alignment.offset.x - self.Mid.T.x + self.T.x
     end
 
     if self.alignment:is_c() then

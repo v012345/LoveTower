@@ -10,7 +10,7 @@
 ---@field last_aligned number 上次对齐时间
 ---@field static_rotation boolean 是否静态旋转?
 ---@field offset Coordinate 偏移
----@field Mid Moveable 对齐参考点, 用于在 align_to_major() 中确定"用对象的哪个部分去对齐"
+---@field Mid Moveable 对齐中心坐标时的参考点, 默认为自己
 ---@field shadow_height number 阴影高度??
 ---@field VT Transform 缓动变换成使用, 引擎会自动计算到 T
 ---@field layered_parallax Coordinate 分层偏移????
