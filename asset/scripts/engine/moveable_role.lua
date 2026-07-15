@@ -3,7 +3,7 @@ MoveableRole = Object:extend()
 
 function MoveableRole:init(role_type, offset, major, xy_bond, wh_bond, r_bond, scale_bond, draw_major)
     self.role_type = role_type     --Major dictates movement, Minor is welded to some major
-    self.offset = Coordinate(0, 0) --Offset from Minor to Major
+    self.offset = Vec2(0, 0) --Offset from Minor to Major
     self.major = nil
     self.draw_major = draw_major
     self.xy_bond = BondType.Strong

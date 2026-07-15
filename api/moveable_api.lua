@@ -18,7 +18,7 @@
 
 ---@class MoveableRole: Object
 ---@field role_type  RoleType
----@field offset     Coordinate
+---@field offset     Vec2
 ---@field major      Moveable | nil
 ---@field draw_major Moveable
 ---@field xy_bond    BondType
@@ -27,7 +27,7 @@
 ---@field scale_bond BondType
 
 ---@param role_type RoleType
----@param offset Coordinate
+---@param offset Vec2
 ---@param major Moveable | nil
 ---@param xy_bond BondType
 ---@param wh_bond BondType
