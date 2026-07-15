@@ -89,12 +89,12 @@ function Moveable:set_alignment(args)
             scale_bond = args.scale_bond or self.role:get_scale_bond(),
         })
     end
-    self.alignment.type = args.type or self.alignment.type
+    self.alignment:update_type(args.type)
     if args.offset and (type(args.offset) == 'table' and not (args.offset.y and args.offset.x)) or type(args.offset) ~= 'table' then
         args.offset = nil
     end
-    self.alignment.offset = args.offset or self.alignment.offset
-    self.alignment.lr_clamp = args.lr_clamp
+    self.alignment:update_offset(args.offset)
+    self.alignment:set_lr_clamp(args.lr_clamp)
 end
 
 function Moveable:align_to_major()
