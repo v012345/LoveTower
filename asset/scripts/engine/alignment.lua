@@ -68,7 +68,7 @@ function Alignment:is_r()
     return self.type_list.r
 end
 
----内边距对齐
+---当非中心对齐时, 是不是在对齐对象的内部
 ---@return boolean
 function Alignment:is_i()
     return self.type_list.i

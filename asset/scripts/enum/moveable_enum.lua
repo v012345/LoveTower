@@ -31,7 +31,7 @@ AlignmentType = {
     t    = b_5,                    -- 顶部对齐 内部: offset.y = 0，外部: offset.y = -self.h
     l    = b_6,                    -- 左对齐 默认，或内部: offset.x = 0，外部: offset.x = -self.w
     r    = b_7,                    -- 右对齐 内部: offset.x = major.w - self.w，外部: offset.x = major.w
-    i    = b_8,                    -- 内边距 修饰符，让 t/b/l/r 的对齐点在 major 内部而非外部
+    i    = b_8,                    -- 当非中心对齐时, 是不是在对齐对象的内部
     cm   = bit.bor(b_2, b_3),      --水平和垂直都居中（centered middle）
     tmi  = bit.bor(b_5, b_2, b_8), --顶部 + 水平居中 + 内侧（top middle inner）
     bmi  = bit.bor(b_4, b_2, b_8), --底部 + 水平居中 + 内侧

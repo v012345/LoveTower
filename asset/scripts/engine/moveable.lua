@@ -110,6 +110,8 @@ function Moveable:align_to_major()
 
     local major_center_x = self.role:get_major().T.w / 2
     local major_center_y = self.role:get_major().T.h / 2
+
+    local major_bottom_y = self.role:get_major().T.h
     --- 首先我们要知道当前 Node 的中心点相对于当前 Node 的左上角的偏移量
     --- 这里 center_offset_x 和 center_offset_y 就是当前 Node 的中心点指向当前 Node 的左上角的向量
     local center_offset_x = self.T.x - (self.Mid.T.x + self.Mid.T.w / 2)
@@ -123,15 +125,17 @@ function Moveable:align_to_major()
         self.role:set_offset_x(major_center_x + center_offset_x + offset_x)
     end
 
+    --- 垂直居中对齐
     if self.alignment:is_c() then
         self.role:set_offset_y(major_center_y + center_offset_y + offset_y)
     end
 
+    --- 底部对齐
     if self.alignment:is_b() then
         if self.alignment:is_i() then
-            self.role.offset.y = self.alignment.offset.y + self.role.major.T.h - self.T.h
+            self.role:set_offset_y(offset_y + major_bottom_y - self.T.h)
         else
-            self.role.offset.y = self.alignment.offset.y + self.role.major.T.h
+            self.role:set_offset_y(offset_y + major_bottom_y)
         end
     end
 
