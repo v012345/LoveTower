@@ -108,24 +108,23 @@ function Moveable:align_to_major()
 
     if self.alignment:is_a() or self.role:is_major_nil() then return end
 
-    local role_offset = self.role:get_offset()
     local major_center_x = self.role:get_major().T.w / 2
     local major_center_y = self.role:get_major().T.h / 2
     --- 首先我们要知道当前 Node 的中心点相对于当前 Node 的左上角的偏移量
-    --- 这里 pivot_x 和 pivot_y 就是当前 Node 的中心点指向当前 Node 的左上角的向量
-    local pivot_x = self.T.x - (self.Mid.T.x + self.Mid.T.w / 2)
-    local pivot_y = self.T.y - (self.Mid.T.y + self.Mid.T.h / 2)
+    --- 这里 center_offset_x 和 center_offset_y 就是当前 Node 的中心点指向当前 Node 的左上角的向量
+    local center_offset_x = self.T.x - (self.Mid.T.x + self.Mid.T.w / 2)
+    local center_offset_y = self.T.y - (self.Mid.T.y + self.Mid.T.h / 2)
 
     local offset_x = self.alignment:get_offset().x
     local offset_y = self.alignment:get_offset().y
 
     --- 水平居中对齐
     if self.alignment:is_m() then
-        self.role:set_offset_x(major_center_x + pivot_x + offset_x)
+        self.role:set_offset_x(major_center_x + center_offset_x + offset_x)
     end
 
     if self.alignment:is_c() then
-        self.role:set_offset_y(major_center_y + pivot_y + offset_y)
+        self.role:set_offset_y(major_center_y + center_offset_y + offset_y)
     end
 
     if self.alignment:is_b() then
