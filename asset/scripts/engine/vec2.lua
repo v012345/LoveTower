@@ -9,3 +9,7 @@ end
 function Vec2:clone()
     return Vec2(self.x, self.y)
 end
+
+function Vec2:__tostring()
+    return "Vec2(" .. self.x .. ", " .. self.y .. ")"
+end
