@@ -1,3 +1,4 @@
+---@class Moveable
 Moveable = Node:extend()
 
 --Moveable represents any game object that has the ability to move about the gamespace.\
