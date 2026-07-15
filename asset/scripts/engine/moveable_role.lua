@@ -32,6 +32,14 @@ function MoveableRole:set_major(major)
     self.major = major
 end
 
+function MoveableRole:set_offset_x(offset_x)
+    self.offset.x = offset_x
+end
+
+function MoveableRole:set_offset_y(offset_y)
+    self.offset.y = offset_y
+end
+
 --- getters ----
 
 ---@return Moveable
