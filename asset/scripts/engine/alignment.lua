@@ -26,40 +26,49 @@ function Alignment:is_changed()
     return not self.prev_offset:is_equal(self.offset) or self.prev_type ~= self.type
 end
 
+---不强制对齐
+---@return boolean
 function Alignment:is_a()
     return self.type_list.a
 end
 
+---水平居中对齐
 ---@return boolean
 function Alignment:is_m()
     return self.type_list.m
 end
 
+---垂直居中对齐
 ---@return boolean
 function Alignment:is_c()
     return self.type_list.c
 end
 
+---底部对齐
 ---@return boolean
 function Alignment:is_b()
     return self.type_list.b
 end
 
+---顶部对齐
 ---@return boolean
 function Alignment:is_t()
     return self.type_list.t
 end
 
+---左对齐
 ---@return boolean
 function Alignment:is_l()
     return self.type_list.l
 end
 
+---右对齐
 ---@return boolean
 function Alignment:is_r()
     return self.type_list.r
 end
 
+---内边距对齐
 ---@return boolean
 function Alignment:is_i()
     return self.type_list.i
