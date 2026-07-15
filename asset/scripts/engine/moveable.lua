@@ -344,7 +344,7 @@ function Moveable:move_with_major(dt)
 
     self:move_juice(dt)
 
-    if self.role.r_bond == 'Weak' then
+    if self.role:get_r_bond() == BondType.Weak then
         MWM.rotated_offset.x, MWM.rotated_offset.y = self.role.offset.x + major_tab.offset.x,
             self.role.offset.y + major_tab.offset.y
     else
@@ -365,31 +365,31 @@ function Moveable:move_with_major(dt)
     self.T.x = major_tab.major.T.x + MWM.rotated_offset.x
     self.T.y = major_tab.major.T.y + MWM.rotated_offset.y
 
-    if self.role.xy_bond == 'Strong' then
+    if self.role:get_xy_bond() == BondType.Strong then
         self.VT.x = major_tab.major.VT.x + MWM.rotated_offset.x
         self.VT.y = major_tab.major.VT.y + MWM.rotated_offset.y
-    elseif self.role.xy_bond == 'Weak' then
+    elseif self.role:get_xy_bond() == BondType.Weak then
         self:move_xy(dt)
     end
 
-    if self.role.r_bond == 'Strong' then
+    if self.role:get_r_bond() == BondType.Strong then
         self.VT.r = self.T.r + major_tab.major.VT.r + (self.juice and self.juice.r or 0)
-    elseif self.role.r_bond == 'Weak' then
+    elseif self.role:get_r_bond() == BondType.Weak then
         self:move_r(dt, self.velocity)
     end
 
-    if self.role.scale_bond == 'Strong' then
+    if self.role:get_scale_bond() == BondType.Strong then
         self.VT.scale = self.T.scale * (major_tab.major.VT.scale / major_tab.major.T.scale) +
             (self.juice and self.juice.scale or 0)
-    elseif self.role.scale_bond == 'Weak' then
+    elseif self.role:get_scale_bond() == BondType.Weak then
         self:move_scale(dt)
     end
 
-    if self.role.wh_bond == 'Strong' then
+    if self.role:get_wh_bond() == BondType.Strong then
         self.VT.x = self.VT.x + (0.5 * (1 - major_tab.major.VT.w / (major_tab.major.T.w)) * self.T.w)
         self.VT.w = (self.T.w) * (major_tab.major.VT.w / major_tab.major.T.w)
         self.VT.h = (self.T.h) * (major_tab.major.VT.h / major_tab.major.T.h)
-    elseif self.role.wh_bond == 'Weak' then
+    elseif self.role:get_wh_bond() == BondType.Weak then
         self:move_wh(dt)
     end
 
