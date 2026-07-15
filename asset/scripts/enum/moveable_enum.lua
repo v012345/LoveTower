@@ -1,4 +1,5 @@
 require "bit"
+
 ---@enum RoleType
 RoleType = {
     Minor = 1, -- 主角色

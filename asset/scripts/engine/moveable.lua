@@ -30,16 +30,8 @@ function Moveable:init(T, container)
     --the corresponding 'Major' T and VT, plus some defined offset.
     --For finer control over what parts of T and VT are inherited, xy_bond, wh_bond, and r_bond can be set to one of
     --'Strong' or 'Weak'. Strong simply copies the values, Weak allows the 'Minor' moveable to calculate their own.
-    self.role = {
-        role_type = RoleType.Major, --Major dictates movement, Minor is welded to some major
-        major = nil,
-        draw_major = self,
-        offset = Coordinate(0, 0), --Offset from Minor to Major
-        xy_bond = BondType.Strong,
-        wh_bond = BondType.Strong,
-        r_bond = BondType.Strong,
-        scale_bond = BondType.Strong
-    }
+    self.role = MoveableRole(RoleType.Major, nil, self, Vec2(0, 0), BondType.Strong, BondType.Strong, BondType.Strong, BondType.Strong)
+
 
     self.alignment = {
         type = AlignmentType.a,

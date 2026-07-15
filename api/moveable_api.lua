@@ -27,12 +27,12 @@
 ---@field scale_bond BondType
 
 ---@param role_type RoleType
----@param offset Vec2
 ---@param major Moveable | nil
+---@param draw_major Moveable
+---@param offset Vec2
 ---@param xy_bond BondType
 ---@param wh_bond BondType
 ---@param r_bond BondType
 ---@param scale_bond BondType
----@param draw_major Moveable
 ---@return MoveableRole
-function MoveableRole(role_type, offset, major, xy_bond, wh_bond, r_bond, scale_bond, draw_major) end
+function MoveableRole(role_type, major, draw_major, offset, xy_bond, wh_bond, r_bond, scale_bond) end
