@@ -26,9 +26,48 @@ function Alignment:is_changed()
     return not self.prev_offset:is_equal(self.offset) or self.prev_type ~= self.type
 end
 
+function Alignment:is_a()
+    return self.type_list.a
+end
+
+---@return boolean
+function Alignment:is_m()
+    return self.type_list.m
+end
+
+---@return boolean
+function Alignment:is_c()
+    return self.type_list.c
+end
+
+---@return boolean
+function Alignment:is_b()
+    return self.type_list.b
+end
+
+---@return boolean
+function Alignment:is_t()
+    return self.type_list.t
+end
+
+---@return boolean
+function Alignment:is_l()
+    return self.type_list.l
+end
+
+---@return boolean
+function Alignment:is_r()
+    return self.type_list.r
+end
+
+---@return boolean
+function Alignment:is_i()
+    return self.type_list.i
+end
+
 --- refresh methods ----
 
-function Alignment:refresh_type_list()
+function Alignment:refresh()
     self.type_list.a = bit.band(self.type, AlignmentType.a) ~= 0
     self.type_list.m = bit.band(self.type, AlignmentType.m) ~= 0
     self.type_list.c = bit.band(self.type, AlignmentType.c) ~= 0
@@ -37,9 +76,6 @@ function Alignment:refresh_type_list()
     self.type_list.l = bit.band(self.type, AlignmentType.l) ~= 0
     self.type_list.r = bit.band(self.type, AlignmentType.r) ~= 0
     self.type_list.i = bit.band(self.type, AlignmentType.i) ~= 0
-end
-
-function Alignment:refresh_type()
     self.prev_type = self.type
 end
 

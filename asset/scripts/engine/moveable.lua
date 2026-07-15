@@ -31,8 +31,8 @@ function Moveable:init(T, container)
     --the corresponding 'Major' T and VT, plus some defined offset.
     --For finer control over what parts of T and VT are inherited, xy_bond, wh_bond, and r_bond can be set to one of
     --'Strong' or 'Weak'. Strong simply copies the values, Weak allows the 'Minor' moveable to calculate their own.
-    self.role = MoveableRole(nil, RoleType.Major, self, Vec2(0, 0), BondType.Strong, BondType.Strong, BondType.Strong, BondType.Strong)
-    self.alignment = Alignment(AlignmentType.a, Vec2(0, 0), AlignmentType.none, Vec2(0, 0), false)
+    self.role = MoveableRole(nil, RoleType.Major, self, Vec2(), BondType.Strong, BondType.Strong, BondType.Strong, BondType.Strong)
+    self.alignment = Alignment(AlignmentType.a, Vec2(), AlignmentType.none, Vec2(), false)
 
 
     --the pinch table is used to modify the VT.w and VT.h compared to T.w and T.h. If either x or y pinch is
@@ -98,20 +98,17 @@ function Moveable:set_alignment(args)
 end
 
 function Moveable:align_to_major()
-    if self.alignment.prev_offset.x == self.alignment.offset.x and
-        self.alignment.prev_offset.y == self.alignment.offset.y and
-        self.alignment.prev_type == self.alignment.type then
+    if not self.alignment:is_changed() then
         return
     end
 
-    if self.alignment:get_type() ~= self.alignment:get_prev_type() then
-        self.alignment:refresh_type_list()
-        self.alignment:refresh_type()
-    end
+    self.alignment:refresh()
 
     self.NEW_ALIGNMENT = true
 
-    if self.alignment.type_list.a or not self.role.major then return end
+    if self.alignment:is_a() then return end
+    if not self.role:get_major() then return end
+
 
     if self.alignment.type_list.m then
         self.role.offset.x = 0.5 * self.role.major.T.w - (self.Mid.T.w) / 2 + self.alignment.offset.x - self.Mid.T.x +
