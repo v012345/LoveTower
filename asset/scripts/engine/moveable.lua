@@ -1,17 +1,3 @@
----@class Moveable: Node
----@field velocity { x: number, y: number, r: number, scale: number, mag: number } 速度
----@field shadow_parrallax Coordinate 阴影的偏移, 受主场景就是 ROOM 影响
----@field role MoveableRole 在 Moveable 中初始化
----@field alignment Alignment
----@field pinch { x: boolean, y: boolean } 快速完成过渡
----@field last_moved number 上次移动时间
----@field last_aligned number 上次对齐时间
----@field static_rotation boolean 是否静态旋转?
----@field offset Coordinate 偏移
----@field Mid Moveable 对齐参考点, 用于在 align_to_major() 中确定"用对象的哪个部分去对齐"
----@field shadow_height number 阴影高度??
----@field VT Transform 缓动变换成使用, 引擎会自动计算到 T
----@field layered_parallax Coordinate 分层偏移????
 Moveable = Node:extend()
 
 --Moveable represents any game object that has the ability to move about the gamespace.\
