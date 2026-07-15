@@ -509,6 +509,7 @@ function Moveable:prep_draw(scale, rotate, offset)
     love.graphics.scale(self.VT.scale * scale)
 end
 
+---@return MoveableRole
 function Moveable:get_major()
     local condition_1 = not self.role:is_major() and self.role:get_major() ~= self
     local condition_2 = self.role:get_xy_bond() ~= BondType.Weak and self.role:get_r_bond() ~= BondType.Weak
