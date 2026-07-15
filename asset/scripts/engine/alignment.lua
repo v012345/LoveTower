@@ -9,6 +9,12 @@ function Alignment:init(type, offset, prev_type, prev_offset, lr_clamp)
     self.lr_clamp = lr_clamp or false
 end
 
+--- refresh methods ----
+
+function Alignment:refresh_type_list()
+
+end
+
 --- getters ----
 
 ---@return AlignmentType

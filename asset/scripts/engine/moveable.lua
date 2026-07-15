@@ -98,6 +98,12 @@ function Moveable:set_alignment(args)
 end
 
 function Moveable:align_to_major()
+    if self.alignment.prev_offset.x == self.alignment.offset.x and
+        self.alignment.prev_offset.y == self.alignment.offset.y and
+        self.alignment.prev_type == self.alignment.type then
+        return
+    end
+
     if self.alignment:get_type() ~= self.alignment:get_prev_type() then
         self.alignment.type_list = {
             a = self.alignment.type == 'a',
@@ -109,19 +115,10 @@ function Moveable:align_to_major()
             r = string.find(self.alignment.type, "r"),
             i = string.find(self.alignment.type, "i"),
         }
-    end
-
-    if self.alignment.prev_offset.x == self.alignment.offset.x and
-        self.alignment.prev_offset.y == self.alignment.offset.y and
-        self.alignment.prev_type == self.alignment.type then
-        return
+        self.alignment.prev_type = self.alignment.type
     end
 
     self.NEW_ALIGNMENT = true
-
-    if self.alignment.type ~= self.alignment.prev_type then
-        self.alignment.prev_type = self.alignment.type
-    end
 
     if self.alignment.type_list.a or not self.role.major then return end
 
