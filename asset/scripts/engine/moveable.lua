@@ -232,11 +232,11 @@ function Moveable:drag(offset)
 end
 
 function Moveable:juice_up(amount, rot_amt)
-    if G.SETTINGS.reduced_motion then return end
-    local amount = amount or 0.4
-
-    local end_time = G.TIMERS.REAL + 0.4
-    local start_time = G.TIMERS.REAL
+    if App.instance.SETTINGS.reduced_motion then return end
+    amount = amount or 0.4
+    local timer = Timer.instance:get_real_timer()
+    local start_time = timer()
+    local end_time = start_time + 0.4
     self.juice = {
         scale = 0,
         scale_amt = amount,

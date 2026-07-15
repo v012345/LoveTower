@@ -28,6 +28,7 @@ function App:init()
     self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
     self.CANVAS:setFilter('linear', 'linear')
     self.SETTINGS = {
+        reduced_motion = false, --- 是否减少动画效果, 如果为 true, 则减少动画效果
         paused = false,
         QUEUED_CHANGE = {},
         WINDOW = {
@@ -48,7 +49,7 @@ function App:init()
     --- 宽高比为 1.74
     self.ROOM_PADDING_H = 0.7
     self.ROOM_PADDING_W = 1
-   
+
 
     self.WINDOW = {
         TRANS = Transform(0, 0, 0, 0),
