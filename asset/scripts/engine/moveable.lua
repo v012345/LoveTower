@@ -261,7 +261,6 @@ end
 
 function Moveable:move(dt)
     if self.FRAME.MOVE >= App.instance.FRAMES.MOVE then return end
-    self.FRAME.OLD_MAJOR = self.FRAME.MAJOR
     self.FRAME.MAJOR = nil
     self.FRAME.MOVE = App.instance.FRAMES.MOVE
     if not self.created_on_pause and App.instance.SETTINGS.paused then return end
@@ -274,20 +273,24 @@ function Moveable:move(dt)
     self:align_to_major()
 
     self.CALCING = false
-    if self.role.role_type == 'Glued' then
-        if self.role.major then self:glue_to_major(self.role.major) end
-    elseif self.role.role_type == 'Minor' and self.role.major then
-        if self.role.major.FRAME.MOVE < G.FRAMES.MOVE then self.role.major:move(dt) end
-        self.STATIONARY = self.role.major.STATIONARY
-        if (not self.STATIONARY) or self.NEW_ALIGNMENT or
+    local major = self.role:get_major()
+    if self.role:is_glued() then
+        if major then self:glue_to_major(major) end
+    elseif self.role:is_minor() and major then
+        if major.FRAME.MOVE < App.instance.FRAMES.MOVE then
+            major:move(dt)
+        end
+        self.STATIONARY = major.STATIONARY
+        if (not self.STATIONARY) or
+            self.NEW_ALIGNMENT or
             self.config.refresh_movement or
             self.juice or
-            self.role.xy_bond == 'Weak' or
-            self.role.r_bond == 'Weak' then
+            self.role:get_xy_bond() == BondType.Weak or
+            self.role:get_r_bond() == BondType.Weak then
             self.CALCING = true
             self:move_with_major(dt)
         end
-    elseif self.role.role_type == 'Major' then
+    elseif self.role:is_major() then
         self.STATIONARY = true
         self:move_juice(dt)
         self:move_xy(dt)
@@ -296,7 +299,7 @@ function Moveable:move(dt)
         self:move_wh(dt)
         self:calculate_parrallax()
     end
-    if self.alignment and self.alignment.lr_clamp then
+    if self.alignment:get_lr_clamp() then
         self:lr_clamp()
     end
 

@@ -24,6 +24,16 @@ function MoveableRole:is_major_nil()
     return self.major == nil
 end
 
+---@return boolean
+function MoveableRole:is_minor()
+    return self.role_type == RoleType.Minor
+end
+
+---@return boolean
+function MoveableRole:is_glued()
+    return self.role_type == RoleType.Glued
+end
+
 --- setters ----
 
 ---强制设置major
