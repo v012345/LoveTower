@@ -487,7 +487,7 @@ function Moveable:set_role(args)
         scale_bond = args.scale_bond or self.role.scale_bond,
         draw_major = args.draw_major or self.role.draw_major,
     }
-    if self.role.role_type == 'Major' then self.role.major = nil end
+    if self.role:is_major() then self.role:set_major(nil) end
 end
 
 ---@param scale number

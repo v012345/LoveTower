@@ -22,6 +22,11 @@ function MoveableRole:get_major()
     return self.major
 end
 
+---@param major Moveable|nil
+function MoveableRole:set_major(major)
+    self.major = major
+end
+
 ---@return BondType
 function MoveableRole:get_xy_bond()
     return self.xy_bond
