@@ -1,3 +1,6 @@
+--- NewX = a*OldX + (1-a)*NewX
+--- a = exp(-50 * dt)
+--- 多代入几次, 可以推导出, 现在就不写了, 有点麻烦
 ---@class Smooth: Object
 Smooth = Object:extend()
 
