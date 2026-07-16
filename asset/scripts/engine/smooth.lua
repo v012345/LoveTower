@@ -1,5 +1,6 @@
 --- NewX = a*OldX + (1-a)*NewX
 --- a = exp(-50 * dt)
+--- 就是 dy/dx = k(y-x), 其中 k 是常数, 的离散解
 --- 多代入几次, 可以推导出, 现在就不写了, 有点麻烦
 ---@class Smooth: Object
 Smooth = Object:extend()
