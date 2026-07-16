@@ -5,6 +5,9 @@ require "asset.scripts.engine.object"
 require "asset.scripts.engine.transform"
 require "asset.scripts.engine.size"
 require "asset.scripts.engine.coordinate"
+require "asset.scripts.engine.vec2"
+require "asset.scripts.engine.velocity"
+
 
 -- 依赖其他模块的模块
 require "asset.scripts.engine.utils"

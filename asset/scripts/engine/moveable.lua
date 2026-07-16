@@ -449,6 +449,9 @@ function Moveable:move_wh(dt)
     end
 end
 
+---是不是旋转呀?
+---@param dt any
+---@param vel any
 function Moveable:move_r(dt, vel)
     local des_r = self.T.r + 0.015 * vel.x / dt + (self.juice and self.juice.r * 2 or 0)
 
