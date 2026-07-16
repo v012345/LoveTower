@@ -1,10 +1,4 @@
----@class Transform:Object
----@field x number
----@field y number
----@field w number
----@field h number
----@field r number
----@field scale number
+---@class Transform
 Transform = Object:extend()
 
 ---@param x? number
