@@ -462,13 +462,14 @@ end
 function Moveable:move_r(dt, vel)
     local des_r = self.T.r + 0.015 * vel.x / dt + (self.juice and self.juice.r * 2 or 0)
 
-    if des_r ~= self.VT.r or math.abs(self.velocity.r) > 0.001 then
+    if des_r ~= self.VT.r or math.abs(self.velocity:get_r()) > 0.001 then
         self.STATIONARY = false
-        self.velocity.r = G.exp_times.r * self.velocity.r + (1 - G.exp_times.r) * (des_r - self.VT.r)
+        self.velocity:set_r(Smooth.instance:approach_r(self.velocity:get_r(), des_r - self.VT.r))
         self.VT.r = self.VT.r + self.velocity.r
     end
     if math.abs(self.VT.r - self.T.r) < 0.001 and math.abs(self.velocity.r) < 0.001 then
-        self.VT.r = self.T.r; self.velocity.r = 0
+        self.VT.r = self.T.r
+        self.velocity.r = 0
     end
 end
 

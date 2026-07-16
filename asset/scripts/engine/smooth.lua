@@ -22,5 +22,9 @@ function Smooth:update(dt)
     self.max_vel = 70 * self.move_dt
 end
 
+function Smooth:approach_r(cur_r, des_r)
+    return self.r * cur_r + (1 - self.r) * des_r
+end
+
 ---@type Smooth
 Smooth.instance = Smooth()

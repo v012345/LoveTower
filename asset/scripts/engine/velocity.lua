@@ -12,3 +12,19 @@ end
 function Velocity:get_x()
     return self.x
 end
+
+function Velocity:get_r()
+    return self.r
+end
+
+function Velocity:get_scale()
+    return self.scale
+end
+
+function Velocity:get_mag()
+    return self.mag
+end
+
+function Velocity:set_r(r)
+    self.r = r
+end
