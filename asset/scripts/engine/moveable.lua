@@ -344,6 +344,7 @@ function Moveable:move_with_major(dt)
 
     self:move_juice(dt)
 
+    --- 如果当前节点的旋转约束为弱，则计算旋转偏移
     if self.role:get_r_bond() == BondType.Weak then
         MWM.rotated_offset.x, MWM.rotated_offset.y = self.role.offset.x + major_tab.offset.x,
             self.role.offset.y + major_tab.offset.y
