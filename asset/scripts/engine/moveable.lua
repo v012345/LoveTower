@@ -22,7 +22,7 @@ function Moveable:init(T, container)
     self.VT = self.T:clone()
 
     --To determine location of VT, we need to keep track of the velocity of VT as it approaches T for the next frame
-    self.velocity = { x = 0, y = 0, r = 0, scale = 0, mag = 0 }
+    self.velocity = Velocity()
 
     --For more robust drawing, attaching, movement and fewer redundant movement calculations, Moveables each have a 'role'
     --that describes a heirarchy of move() calls. Any Moveables with 'Major' role type behave normally, essentially recalculating their
@@ -450,8 +450,8 @@ function Moveable:move_wh(dt)
 end
 
 ---是不是旋转呀?
----@param dt any
----@param vel any
+---@param dt number
+---@param vel Velocity
 function Moveable:move_r(dt, vel)
     local des_r = self.T.r + 0.015 * vel.x / dt + (self.juice and self.juice.r * 2 or 0)
 

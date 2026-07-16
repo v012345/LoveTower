@@ -1,7 +1,7 @@
 ---@meta
 
 ---@class Moveable: Node
----@field velocity { x: number, y: number, r: number, scale: number, mag: number } 速度
+---@field velocity Velocity 速度
 ---@field shadow_parrallax Coordinate 阴影的偏移, 受主场景就是 ROOM 影响
 ---@field role MoveableRole 在 Moveable 中初始化
 ---@field alignment Alignment
@@ -19,7 +19,7 @@
 ---@class MoveableRole: Object
 ---@field private role_type  RoleType
 ---@field private offset     Vec2
----@field private major      Moveable | nil
+---@field private major      Moveable
 ---@field private draw_major Moveable
 ---@field private xy_bond    BondType
 ---@field private wh_bond    BondType
@@ -27,7 +27,7 @@
 ---@field private scale_bond BondType
 
 ---@param role_type? RoleType
----@param major? Moveable | nil
+---@param major? Moveable
 ---@param draw_major? Moveable
 ---@param offset? Vec2
 ---@param xy_bond? BondType
