@@ -346,17 +346,20 @@ function Moveable:move_with_major(dt)
 
     --- 如果当前节点的旋转约束为弱，则计算旋转偏移
     if self.role:get_r_bond() == BondType.Weak then
-        MWM.rotated_offset.x, MWM.rotated_offset.y = self.role.offset.x + major_tab.offset.x,
-            self.role.offset.y + major_tab.offset.y
+        MWM.rotated_offset.x = self.role.offset.x + major_tab.offset.x
+        MWM.rotated_offset.y = self.role.offset.y + major_tab.offset.y
     else
         if major_tab.major.VT.r < 0.0001 and major_tab.major.VT.r > -0.0001 then
             MWM.rotated_offset.x = self.role.offset.x + major_tab.offset.x
             MWM.rotated_offset.y = self.role.offset.y + major_tab.offset.y
         else
-            MWM.angles.cos, MWM.angles.sin = math.cos(major_tab.major.VT.r), math.sin(major_tab.major.VT.r)
-            MWM.WH.w, MWM.WH.h = -self.T.w / 2 + major_tab.major.T.w / 2, -self.T.h / 2 + major_tab.major.T.h / 2
-            MWM.offs.x, MWM.offs.y = self.role.offset.x + major_tab.offset.x - MWM.WH.w,
-                self.role.offset.y + major_tab.offset.y - MWM.WH.h
+            MWM.angles.cos = math.cos(major_tab.major.VT.r)
+            MWM.angles.sin = math.sin(major_tab.major.VT.r)
+            MWM.WH.w = -self.T.w / 2 + major_tab.major.T.w / 2
+            MWM.WH.h = -self.T.h / 2 + major_tab.major.T.h / 2
+
+            MWM.offs.x = self.role.offset.x + major_tab.offset.x - MWM.WH.w
+            MWM.offs.y = self.role.offset.y + major_tab.offset.y - MWM.WH.h
 
             MWM.rotated_offset.x = MWM.offs.x * MWM.angles.cos - MWM.offs.y * MWM.angles.sin + MWM.WH.w
             MWM.rotated_offset.y = MWM.offs.x * MWM.angles.sin + MWM.offs.y * MWM.angles.cos + MWM.WH.h
