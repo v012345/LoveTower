@@ -318,7 +318,7 @@ end
 ---感觉没有必要, 真的有效果吗?
 ---@param major_tab Moveable
 function Moveable:glue_to_major(major_tab)
-    self.T = major_tab.T
+    self.T = major_tab.T --[[@as Transform]]
 
     self.VT.x = major_tab.VT.x + ((1 - major_tab.VT.w / major_tab.T.w) * (self.T.w / 2))
     self.VT.y = major_tab.VT.y
