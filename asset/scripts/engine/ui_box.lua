@@ -1,5 +1,5 @@
----@class UIBox: Moveable
----@field UIRoot UIElement
+---@class UIBox
+
 UIBox = Moveable:extend()
 ---@param T Transform
 ---@param definition UIDdefinition

@@ -1,9 +1,4 @@
----@class UIElement : Moveable
----@field parent Node 父元素
----@field UIT UIT
----@field UIBox UIBox
----@field ARGS table
----@field content_dimensions Size
+---@class UIElement
 UIElement = Moveable:extend()
 
 ---@param parent Node

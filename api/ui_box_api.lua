@@ -1,0 +1,2 @@
+---@class UIBox: Moveable
+---@field UIRoot UIElement
