@@ -1,6 +1,13 @@
 ---@class Moveable
 Moveable = Node:extend()
 
+Moveable.exp_times = {
+    xy = 0,
+    scale = 0,
+    r = 0,
+    max_vel = 0
+}
+
 --Moveable represents any game object that has the ability to move about the gamespace.\
 --All Moveables have a T (transform) that describes their desired transform in game units, as\
 --well as a VT (Visible Transform) that eases to T over time. This allows for simplified movement where\

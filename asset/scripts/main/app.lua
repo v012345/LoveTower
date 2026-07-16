@@ -30,10 +30,10 @@ function App:update(dt)
         self.new_frame = false
         Timer.instance:update_game_time(dt)
         EventManager.instance:update(Timer.instance.real_dt)
-        local move_dt = math.min(1 / 20, Timer.instance.real_dt)
-        for k, v in pairs(self.I.MOVEABLE) do
+        Smooth.instance:update(Timer.instance.real_dt)
+        for k, v in pairs(self.MOVEABLES) do
             if v.FRAME.MOVE < self.FRAMES.MOVE then
-                v:move(move_dt)
+                v:move(Smooth.instance.move_dt)
             end
         end
         for k, v in pairs(self.MOVEABLES) do
