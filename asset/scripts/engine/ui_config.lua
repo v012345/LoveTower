@@ -14,4 +14,5 @@ function UIConfig:init()
     self.button_UIE = false
     self.button = false
     self.force_collision = false
+    self.shadow = false
 end

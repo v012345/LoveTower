@@ -21,6 +21,7 @@ function Controller:init()
     self.cursor_down = { target = nil }
     self.cursor_up = { target = nil }
     self.cursor_hover = { target = nil }
+    self.is_cursor_down = false
 end
 
 function Controller:update(dt)

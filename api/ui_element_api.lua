@@ -4,3 +4,4 @@
 ---@field UIBox UIBox
 ---@field ARGS table
 ---@field content_dimensions Size
+---@field last_clicked number 上次点击时间
