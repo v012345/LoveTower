@@ -14,4 +14,9 @@ function UIConfig:init()
     self.button = false
     self.force_collision = false
     self.shadow = false
+    self.lang = {
+        font = {
+            FONTSCALE = 1
+        }
+    }
 end

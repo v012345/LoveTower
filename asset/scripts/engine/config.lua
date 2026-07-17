@@ -1,5 +1,4 @@
----@class Config: Object
----@field asset_atli table<string, SpriteAtlas>
+---@class Config
 Config = Object:extend()
 
 function Config:init()

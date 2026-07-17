@@ -89,7 +89,29 @@ function UIElement:draw_self()
 
     if self.config.colour:get_a() > 0.01 then
         if self.UIT == UIT.T and self.config.scale then
-
+            self.ARGS.text_parallax = self.ARGS.text_parallax or {}
+            self.ARGS.text_parallax.sx = -self.shadow_parrallax.x * 0.5 / (self.config.scale * self.config.lang.font.FONTSCALE)
+            self.ARGS.text_parallax.sy = -self.shadow_parrallax.y * 0.5 / (self.config.scale * self.config.lang.font.FONTSCALE)
+            if (self.config.button_UIE and button_active) or (not self.config.button_UIE and self.config.shadow and App.instance.SETTINGS.GRAPHICS.shadows == 'On') then
+                prep_draw(self, 0.97)
+                do
+                    if self.config.vert then
+                        love.graphics.translate(0, self.VT.h); love.graphics.rotate(-math.pi / 2)
+                    end
+                    if (self.config.shadow or (self.config.button_UIE and button_active)) and G.SETTINGS.GRAPHICS.shadows == 'On' then
+                        love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour[4])
+                        love.graphics.draw(
+                            self.config.text_drawable,
+                            (self.config.lang.font.TEXT_OFFSET.x + (self.config.vert and -self.ARGS.text_parallax.sy or self.ARGS.text_parallax.sx)) * (self.config.scale or 1) * self.config.lang.font.FONTSCALE / G.TILESIZE,
+                            (self.config.lang.font.TEXT_OFFSET.y + (self.config.vert and self.ARGS.text_parallax.sx or self.ARGS.text_parallax.sy)) * (self.config.scale or 1) * self.config.lang.font.FONTSCALE / G.TILESIZE,
+                            0,
+                            (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / G.TILESIZE,
+                            (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE
+                        )
+                    end
+                end
+                love.graphics.pop()
+            end
         end
     end
 end
