@@ -86,6 +86,10 @@ function UIElement:draw_self()
         if self.config.button_UIE and not self.config.button_UIE.config.button then button_active = false end
     end
 
+
+    if self.config.colour[4] > 0.01 then
+    end
+
     if self.UIT == UIT.T then
         do
             return
