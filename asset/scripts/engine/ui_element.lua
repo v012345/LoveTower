@@ -113,6 +113,26 @@ function UIElement:draw_self()
                 end
                 love.graphics.pop()
             end
+            prep_draw(self, 1)
+            do
+                if self.config.vert then
+                    love.graphics.translate(0, self.VT.h); love.graphics.rotate(-math.pi / 2)
+                end
+                if not button_active then
+                    love.graphics.setColor(Color.UI.TEXT_INACTIVE)
+                else
+                    love.graphics.setColor(self.config.colour)
+                end
+                love.graphics.draw(
+                    self.config.text_drawable,
+                    self.config.lang.font.TEXT_OFFSET.x * (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE,
+                    self.config.lang.font.TEXT_OFFSET.y * (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE,
+                    0,
+                    (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / G.TILESIZE,
+                    (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE
+                )
+            end
+            love.graphics.pop()
         end
     end
 end
