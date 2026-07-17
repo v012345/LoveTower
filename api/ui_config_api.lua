@@ -9,4 +9,6 @@
 ---@field bond?   string
 ---@field button_dist? number 按钮距离
 ---@field button_UIE UIElement
+---@field shadow_colour? Color
 ---@field vert boolean
+---@field r boolean 这到底是什么意思?

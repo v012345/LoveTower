@@ -132,6 +132,26 @@ function UIElement:draw_self()
                     (self.config.scale) * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE)
             end
             love.graphics.pop()
+        elseif self.UIT == UIT.B or self.UIT == UIT.C or self.UIT == UIT.R or self.UIT == UIT.ROOT then
+            prep_draw(self, 1)
+            do
+                love.graphics.scale(1 / (Tile.instance.TILESIZE))
+                if self.config.shadow and App.instance.SETTINGS.GRAPHICS.shadows == 'On' then
+                    love.graphics.scale(0.98)
+                    if self.config.shadow_colour then
+                        love.graphics.setColor(self.config.shadow_colour)
+                    else
+                        love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour:get_a())
+                    end
+                    if self.config.r and self.VT.w > 0.01 then
+                        self:draw_pixellated_rect('shadow', parallax_dist)
+                    else
+                        love.graphics.rectangle('fill', -self.shadow_parrallax.x * parallax_dist, -self.shadow_parrallax.y * parallax_dist, self.VT.w * Tile.instance.TILESIZE, self.VT.h * Tile.instance.TILESIZE)
+                    end
+                    love.graphics.scale(1 / 0.98)
+                end
+            end
+            love.graphics.pop()
         end
     end
 end
