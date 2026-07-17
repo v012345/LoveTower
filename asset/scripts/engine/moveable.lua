@@ -408,8 +408,7 @@ function Moveable:move_with_major(dt)
 end
 
 function Moveable:move_xy(dt)
-    if (self.T.x ~= self.VT.x or math.abs(self.velocity.x) > 0.01) or
-        (self.T.y ~= self.VT.y or math.abs(self.velocity.y) > 0.01) then
+    if (self.T.x ~= self.VT.x or math.abs(self.velocity.x) > 0.01) or (self.T.y ~= self.VT.y or math.abs(self.velocity.y) > 0.01) then
         self.velocity.x = G.exp_times.xy * self.velocity.x + (1 - G.exp_times.xy) * (self.T.x - self.VT.x) * 35 * dt
         self.velocity.y = G.exp_times.xy * self.velocity.y + (1 - G.exp_times.xy) * (self.T.y - self.VT.y) * 35 * dt
         if self.velocity.x * self.velocity.x + self.velocity.y * self.velocity.y > G.exp_times.max_vel * G.exp_times.max_vel then
