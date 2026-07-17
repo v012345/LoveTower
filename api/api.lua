@@ -298,17 +298,6 @@ function love.graphics.scale(sx, sy) end
 ---@field alert   UIBox 警告弹窗
 Children = {}
 
----@class UIConfig
----@field object  any
----@field text?   string
----@field scale?  number
----@field colour? table
----@field align?  string
----@field offset? { x: number, y: number }
----@field major?  Node
----@field bond?   string
-UIConfig = {}
-
 ---@class UIDdefinition
 ---@field n      UIT
 ---@field config UIConfig

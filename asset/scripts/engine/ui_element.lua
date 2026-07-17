@@ -59,6 +59,16 @@ function UIElement:update_object()
 end
 
 function UIElement:draw_self()
+
+    if not self.states.visible then
+        if self.config.force_focus then
+        
+        end else
+        return
+    end
+
+
+
     local button_active = true
     if self.UIT == UIT.T then
         do

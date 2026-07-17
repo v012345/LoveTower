@@ -1,0 +1,9 @@
+---@class UIConfig: Object
+---@field object  any
+---@field text?   string
+---@field scale?  number
+---@field colour? table
+---@field align?  string
+---@field offset? { x: number, y: number }
+---@field major?  Node
+---@field bond?   string
