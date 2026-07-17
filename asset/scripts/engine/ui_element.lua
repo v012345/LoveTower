@@ -59,11 +59,10 @@ function UIElement:update_object()
 end
 
 function UIElement:draw_self()
-
     if not self.states.visible then
         if self.config.force_focus then
-        
-        end else
+            add_to_drawhash(self)
+        end
         return
     end
 

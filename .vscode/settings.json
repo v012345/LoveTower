@@ -3,6 +3,7 @@
         "generate_id",
         "point_translate",
         "point_rotate",
-        "pseudorandom_element"
+        "pseudorandom_element",
+        "add_to_drawhash"
     ]
 }
