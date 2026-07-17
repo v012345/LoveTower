@@ -1,6 +1,10 @@
 ---@class Color
 Color = Color or Object:extend()
 
+---@param r number
+---@param g number
+---@param b number
+---@param a number
 function Color:init(r, g, b, a)
     self.r = r or 0
     self.g = g or 0
