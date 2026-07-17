@@ -7,3 +7,11 @@
 ---@field offset? { x: number, y: number }
 ---@field major?  Node
 ---@field bond?   string
+---@field button_dist? number 按钮距离
+---@field button_UIE UIElement
+
+
+
+
+
+

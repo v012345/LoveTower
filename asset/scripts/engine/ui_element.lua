@@ -73,15 +73,17 @@ function UIElement:draw_self()
     local parallax_dist = 1.5
     local button_being_pressed = false
 
+    --按钮效果
     if (self.config.button or self.config.button_UIE) then
         self.layered_parallax.x = ((self.parent and self.parent ~= self.UIBox and self.parent.layered_parallax.x or 0) + (self.config.shadow and 0.4 * self.shadow_parrallax.x or 0) / Tile.instance.TILESIZE)
         self.layered_parallax.y = ((self.parent and self.parent ~= self.UIBox and self.parent.layered_parallax.y or 0) + (self.config.shadow and 0.4 * self.shadow_parrallax.y or 0) / Tile.instance.TILESIZE)
         if self.config.button and ((self.last_clicked and self.last_clicked > Timer.instance.REAL - 0.1) or ((self.config.button and (self.states.hover.is or self.states.drag.is)) and Controller.instance.is_cursor_down)) then
-            self.layered_parallax.x = self.layered_parallax.x - parallax_dist * self.shadow_parrallax.x / G.TILESIZE * (self.config.button_dist or 1)
-            self.layered_parallax.y = self.layered_parallax.y - parallax_dist * self.shadow_parrallax.y / G.TILESIZE * (self.config.button_dist or 1)
+            self.layered_parallax.x = self.layered_parallax.x - parallax_dist * self.shadow_parrallax.x / Tile.instance.TILESIZE * (self.config.button_dist or 1)
+            self.layered_parallax.y = self.layered_parallax.y - parallax_dist * self.shadow_parrallax.y / Tile.instance.TILESIZE * (self.config.button_dist or 1)
             parallax_dist = 0
             button_being_pressed = true
         end
+        if self.config.button_UIE and not self.config.button_UIE.config.button then button_active = false end
     end
 
     if self.UIT == UIT.T then
