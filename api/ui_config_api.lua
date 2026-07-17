@@ -9,5 +9,4 @@
 ---@field bond?   string
 ---@field button_dist? number 按钮距离
 ---@field button_UIE UIElement
----@field asset_atli table<string, SpriteAtlas>
 ---@field vert boolean
