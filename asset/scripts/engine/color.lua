@@ -10,6 +10,7 @@ function Color:init(r, g, b, a)
     self.g = g or 0
     self.b = b or 0
     self.a = a or 1
+    self.color = { self.r, self.g, self.b, self.a }
 end
 
 function Color:get_r()

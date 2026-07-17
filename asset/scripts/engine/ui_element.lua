@@ -96,17 +96,18 @@ function UIElement:draw_self()
                 prep_draw(self, 0.97)
                 do
                     if self.config.vert then
-                        love.graphics.translate(0, self.VT.h); love.graphics.rotate(-math.pi / 2)
+                        love.graphics.translate(0, self.VT.h)
+                        love.graphics.rotate(-math.pi / 2)
                     end
-                    if (self.config.shadow or (self.config.button_UIE and button_active)) and G.SETTINGS.GRAPHICS.shadows == 'On' then
-                        love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour[4])
+                    if (self.config.shadow or (self.config.button_UIE and button_active)) and App.instance.SETTINGS.GRAPHICS.shadows == 'On' then
+                        love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour:get_a())
                         love.graphics.draw(
                             self.config.text_drawable,
-                            (self.config.lang.font.TEXT_OFFSET.x + (self.config.vert and -self.ARGS.text_parallax.sy or self.ARGS.text_parallax.sx)) * (self.config.scale or 1) * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                            (self.config.lang.font.TEXT_OFFSET.y + (self.config.vert and self.ARGS.text_parallax.sx or self.ARGS.text_parallax.sy)) * (self.config.scale or 1) * self.config.lang.font.FONTSCALE / G.TILESIZE,
+                            (self.config.lang.font.TEXT_OFFSET.x + (self.config.vert and -self.ARGS.text_parallax.sy or self.ARGS.text_parallax.sx)) * (self.config.scale or 1) * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE,
+                            (self.config.lang.font.TEXT_OFFSET.y + (self.config.vert and self.ARGS.text_parallax.sx or self.ARGS.text_parallax.sy)) * (self.config.scale or 1) * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE,
                             0,
-                            (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                            (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE
+                            (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE,
+                            (self.config.scale) * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE
                         )
                     end
                 end

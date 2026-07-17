@@ -19,4 +19,5 @@ function UIConfig:init()
             FONTSCALE = 1
         }
     }
+    self.text_drawable = nil
 end
