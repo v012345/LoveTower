@@ -8,6 +8,7 @@ require "asset.scripts.engine.coordinate"
 require "asset.scripts.engine.vec2"
 require "asset.scripts.engine.velocity"
 require "asset.scripts.engine.smooth"
+require "asset.scripts.engine.color"
 
 -- 依赖其他模块的模块
 require "asset.scripts.engine.utils"
