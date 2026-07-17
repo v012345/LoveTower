@@ -10,4 +10,8 @@ function UIConfig:init()
     self.offset = nil
     self.major = nil
     self.bond = nil
+    self.force_focus = false
+    self.button_UIE = false
+    self.button = false
+    self.force_collision = false
 end

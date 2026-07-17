@@ -1,7 +1,7 @@
 ---@class UIElement
 UIElement = Moveable:extend()
 
----@param parent Node
+---@param parent Moveable
 ---@param new_UIBox UIBox
 ---@param new_UIT UIT
 ---@param config UIConfig
@@ -65,10 +65,19 @@ function UIElement:draw_self()
         end
         return
     end
-
-
+    if self.config.force_focus or self.config.force_collision or self.config.button_UIE or self.config.button or self.states.collide.can then
+        add_to_drawhash(self)
+    end
 
     local button_active = true
+    local parallax_dist = 1.5
+    local button_being_pressed = false
+
+    if (self.config.button or self.config.button_UIE) then
+        self.layered_parallax.x = ((self.parent and self.parent ~= self.UIBox and self.parent.layered_parallax.x or 0) + (self.config.shadow and 0.4 * self.shadow_parrallax.x or 0) / G.TILESIZE)
+        self.layered_parallax.y = ((self.parent and self.parent ~= self.UIBox and self.parent.layered_parallax.y or 0) + (self.config.shadow and 0.4 * self.shadow_parrallax.y or 0) / G.TILESIZE)
+    end
+
     if self.UIT == UIT.T then
         do
             return
