@@ -129,8 +129,7 @@ function UIElement:draw_self()
                     self.config.lang.font.TEXT_OFFSET.y * (self.config.scale) * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE,
                     0,
                     (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE,
-                    (self.config.scale) * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE
-                )
+                    (self.config.scale) * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE)
             end
             love.graphics.pop()
         end
