@@ -125,11 +125,11 @@ function UIElement:draw_self()
                 end
                 love.graphics.draw(
                     self.config.text_drawable,
-                    self.config.lang.font.TEXT_OFFSET.x * (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                    self.config.lang.font.TEXT_OFFSET.y * (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE,
+                    self.config.lang.font.TEXT_OFFSET.x * (self.config.scale) * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE,
+                    self.config.lang.font.TEXT_OFFSET.y * (self.config.scale) * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE,
                     0,
-                    (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / G.TILESIZE,
-                    (self.config.scale) * self.config.lang.font.FONTSCALE / G.TILESIZE
+                    (self.config.scale) * self.config.lang.font.squish * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE,
+                    (self.config.scale) * self.config.lang.font.FONTSCALE / Tile.instance.TILESIZE
                 )
             end
             love.graphics.pop()
