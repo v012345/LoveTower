@@ -199,4 +199,4 @@ function Language:init()
 end
 
 ---@type Language
-Language.instances = Language()
+Language.instance = Language()
