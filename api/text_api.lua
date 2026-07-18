@@ -43,5 +43,5 @@
 ---@field squish number
 ---@field DESCSCALE number
 
----@param config DynaTextConfig
+---@param config? DynaTextConfig
 function DynaText(config) end
