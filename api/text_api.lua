@@ -6,6 +6,7 @@
 ---@field bump_rate number
 ---@field bump_amount number
 ---@field font FontConfig
+---@field colours Color[]
 
 ---@class DynaTextConfig
 ---@field scale number
