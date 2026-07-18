@@ -3,7 +3,7 @@ Font = Object:extend()
 ---注册字体
 function Font:init()
     self.FONTS = {
-        {
+        [1] = {
             file = "asset/resources/fonts/m6x11plus.ttf",
             render_scale = Tile.instance.TILESIZE * 10,
             TEXT_HEIGHT_SCALE = 0.83,
@@ -15,7 +15,7 @@ function Font:init()
             squish = 1,
             DESCSCALE = 1
         },
-        {
+        [2] = {
             file = "asset/resources/fonts/NotoSansSC-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 7,
             TEXT_HEIGHT_SCALE = 0.7,
@@ -27,7 +27,7 @@ function Font:init()
             squish = 1,
             DESCSCALE = 1.1
         },
-        {
+        [3] = {
             file = "asset/resources/fonts/NotoSansTC-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 7,
             TEXT_HEIGHT_SCALE = 0.7,
@@ -39,7 +39,7 @@ function Font:init()
             squish = 1,
             DESCSCALE = 1.1
         },
-        {
+        [4] = {
             file = "asset/resources/fonts/NotoSansKR-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 7,
             TEXT_HEIGHT_SCALE = 0.8,
@@ -51,7 +51,7 @@ function Font:init()
             squish = 1,
             DESCSCALE = 1
         },
-        {
+        [5] = {
             file = "asset/resources/fonts/NotoSansJP-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 7,
             TEXT_HEIGHT_SCALE = 0.8,
@@ -63,7 +63,7 @@ function Font:init()
             squish = 1,
             DESCSCALE = 1
         },
-        {
+        [6] = {
             file = "asset/resources/fonts/NotoSans-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 7,
             TEXT_HEIGHT_SCALE = 0.65,
@@ -75,7 +75,7 @@ function Font:init()
             squish = 1,
             DESCSCALE = 1
         },
-        {
+        [7] = {
             file = "asset/resources/fonts/m6x11plus.ttf",
             render_scale = Tile.instance.TILESIZE * 10,
             TEXT_HEIGHT_SCALE = 0.9,
@@ -87,7 +87,7 @@ function Font:init()
             squish = 1,
             DESCSCALE = 1
         },
-        {
+        [8] = {
             file = "asset/resources/fonts/GoNotoCurrent-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 10,
             TEXT_HEIGHT_SCALE = 0.8,
@@ -99,7 +99,7 @@ function Font:init()
             squish = 1,
             DESCSCALE = 1
         },
-        {
+        [9] = {
             file = "asset/resources/fonts/GoNotoCJKCore.ttf",
             render_scale = Tile.instance.TILESIZE * 10,
             TEXT_HEIGHT_SCALE = 0.8,
