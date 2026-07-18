@@ -7,7 +7,7 @@ Color = setmetatable({}, { __call = function(...) return RGBA(...) end })
 ---@class RGBA
 RGBA = Object:extend()
 
----@param r number|table|Color|string
+---@param r number|table|string
 ---@param g number|nil
 ---@param b number|nil
 ---@param a number|nil
@@ -24,11 +24,6 @@ function RGBA:init(r, g, b, a)
         self.g = tonumber(G, 16) / 255 or 0
         self.b = tonumber(B, 16) / 255 or 0
         self.a = tonumber(A, 16) / 255 or 255
-    elseif type(r) == "Color" then
-        self.r = r.r or 0
-        self.g = r.g or 0
-        self.b = r.b or 0
-        self.a = r.a or 255
     else
         self.r = r or 0
         self.g = g or 0
