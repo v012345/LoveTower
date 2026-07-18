@@ -10,6 +10,7 @@ require "asset.scripts.engine.velocity"
 require "asset.scripts.engine.smooth"
 require "asset.scripts.engine.color"
 require "asset.scripts.engine.settings"
+require "asset.scripts.engine.language"
 
 -- 依赖其他模块的模块
 require "asset.scripts.engine.utils"
