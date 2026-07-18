@@ -10,7 +10,7 @@ function DynaText:init(config)
     self.pop_in_rate = config.pop_in_rate or 3
     self.bump_rate = config.bump_rate or 2.666
     self.bump_amount = config.bump_amount or 1
-    self.font = config.font or G.LANG.font
+    self.font = config.font or App.instance.LANG.font
     if config.string and type(config.string) ~= 'table' then config.string = { config.string } end
     self.string = (config.string and type(config.string) == 'table' and config.string[1]) or { 'HELLO WORLD' }
     self.text_offset = {

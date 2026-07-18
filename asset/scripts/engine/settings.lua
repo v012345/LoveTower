@@ -6,6 +6,7 @@ Settings = Object:extend()
 
 function Settings:init()
     self.paused = false
+    self.language = 'en-us'
 end
 
 ---@type Settings

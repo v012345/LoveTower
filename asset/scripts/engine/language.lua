@@ -195,6 +195,7 @@ function Language:init()
             omit = true
         }
     }
+    self.LANG = self.LANGUAGES[Settings.instance.language] or self.LANGUAGES['en-us']
 end
 
 ---@type Language
