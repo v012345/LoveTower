@@ -1,6 +1,6 @@
 Font = Object:extend()
 
-
+---注册字体
 function Font:init(name)
     self.FONTS = {
         {
