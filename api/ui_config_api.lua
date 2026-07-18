@@ -12,3 +12,6 @@
 ---@field shadow_colour? Color
 ---@field vert boolean
 ---@field r boolean 这到底是什么意思?
+---@field button_delay number 按钮延迟?
+---@field hover boolean 是否悬停?
+---@field emboss number 凹凸程度?

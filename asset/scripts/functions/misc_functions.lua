@@ -17,6 +17,22 @@ function boot_timer(cur_step, next_step, progress)
     love.graphics.present()
 end
 
+function darken(colour, percent, no_tab)
+    if no_tab then
+        return
+            colour[1] * (1 - percent),
+            colour[2] * (1 - percent),
+            colour[3] * (1 - percent),
+            colour[4]
+    end
+    return {
+        colour[1] * (1 - percent),
+        colour[2] * (1 - percent),
+        colour[3] * (1 - percent),
+        colour[4]
+    }
+end
+
 function HEX(hex)
     if #hex <= 6 then hex = hex .. "FF" end
     local _, _, r, g, b, a = hex:find('(%x%x)(%x%x)(%x%x)(%x%x)')

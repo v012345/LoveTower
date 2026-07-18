@@ -5,6 +5,7 @@
         "point_rotate",
         "pseudorandom_element",
         "add_to_drawhash",
-        "prep_draw"
+        "prep_draw",
+        "darken"
     ]
 }

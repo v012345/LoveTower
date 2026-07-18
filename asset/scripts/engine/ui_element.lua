@@ -150,6 +150,35 @@ function UIElement:draw_self()
                     end
                     love.graphics.scale(1 / 0.98)
                 end
+                love.graphics.scale(button_being_pressed and 0.985 or 1)
+                if self.config.emboss then
+                    love.graphics.setColor(darken(self.config.colour, self.states.hover.is and 0.5 or 0.3, true))
+                    self:draw_pixellated_rect('emboss', parallax_dist, self.config.emboss)
+                end
+                local collided_button = self.config.button_UIE or self
+                self.ARGS.button_colours = self.ARGS.button_colours or {}
+                self.ARGS.button_colours[1] = self.config.button_delay and mix_colours(self.config.colour, Color.L_BLACK, 0.5) or self.config.colour
+                self.ARGS.button_colours[2] = (((collided_button.config.hover and collided_button.states.hover.is) or (collided_button.last_clicked and collided_button.last_clicked > Timer.instance.REAL - 0.1)) and Color.UI.HOVER or nil)
+                for k, v in ipairs(self.ARGS.button_colours) do
+                    love.graphics.setColor(v)
+                    if self.config.r and self.VT.w > 0.01 then
+                        if self.config.button_delay then
+                            love.graphics.setColor(G.C.GREY)
+                            self:draw_pixellated_rect('fill', parallax_dist)
+                            love.graphics.setColor(v)
+                            self:draw_pixellated_rect('fill', parallax_dist, nil, self.config.button_delay_progress)
+                        elseif self.config.progress_bar then
+                            love.graphics.setColor(self.config.progress_bar.empty_col or G.C.GREY)
+                            self:draw_pixellated_rect('fill', parallax_dist)
+                            love.graphics.setColor(self.config.progress_bar.filled_col or G.C.BLUE)
+                            self:draw_pixellated_rect('fill', parallax_dist, nil, self.config.progress_bar.ref_table[self.config.progress_bar.ref_value] / self.config.progress_bar.max)
+                        else
+                            self:draw_pixellated_rect('fill', parallax_dist)
+                        end
+                    else
+                        love.graphics.rectangle('fill', 0, 0, self.VT.w * G.TILESIZE, self.VT.h * G.TILESIZE)
+                    end
+                end
             end
             love.graphics.pop()
         end
