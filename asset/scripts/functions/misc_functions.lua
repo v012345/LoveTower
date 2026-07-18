@@ -56,6 +56,25 @@ function HEX(hex)
     return color
 end
 
+function get_chosen_triangle_from_rect(x, y, w, h, vert)
+    local scale = 2
+    if vert then
+        x = x + math.min(0.6 * math.sin(Timer.instance.REAL * 9) * scale + 0.2, 0)
+        return {
+            x - 3.5 * scale, y + h / 2 - 1.5 * scale,
+            x - 0.5 * scale, y + h / 2 + 0,
+            x - 3.5 * scale, y + h / 2 + 1.5 * scale
+        }
+    else
+        y = y + math.min(0.6 * math.sin(Timer.instance.REAL * 9) * scale + 0.2, 0)
+        return {
+            x + w / 2 - 1.5 * scale, y - 4 * scale,
+            x + w / 2 + 0, y - 1.1 * scale,
+            x + w / 2 + 1.5 * scale, y - 4 * scale
+        }
+    end
+end
+
 function mix_colours(C1, C2, proportionC1)
     return {
         (C1[1] or 0.5) * proportionC1 + (C2[1] or 0.5) * (1 - proportionC1),

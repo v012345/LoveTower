@@ -7,6 +7,7 @@
         "add_to_drawhash",
         "prep_draw",
         "darken",
-        "adjust_alpha"
+        "adjust_alpha",
+        "get_chosen_triangle_from_rect"
     ]
 }
