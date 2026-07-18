@@ -73,11 +73,11 @@ end
 function Image:getHeight()
 end
 
----@class Font
-Font = {}
+---@class LoveFont
+LoveFont = {}
 
 ---@return number
-function Font:getHeight()
+function LoveFont:getHeight()
 end
 
 ---@param filename string
@@ -93,10 +93,10 @@ function love.graphics.present() end
 
 ---@param filename string
 ---@param size     number
----@return Font
+---@return LoveFont
 function love.graphics.newFont(filename, size) end
 
----@param font Font
+---@param font LoveFont
 function love.graphics.setFont(font)
 end
 
@@ -338,10 +338,10 @@ EventStatus = {}
 ---@return Event
 function Event(config) end
 
---- Creates and sets a new Font.
+--- Creates and sets a new LoveFont.
 ---@param filename string
 ---@param size     number
----@return Font
+---@return LoveFont
 function love.graphics.setNewFont(filename, size) end
 
 ---@class love.window
