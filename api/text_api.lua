@@ -9,6 +9,10 @@
 ---@field colours Color[]
 
 ---@class DynaTextConfig
+---@field X number
+---@field Y number
+---@field W number
+---@field H number
 ---@field scale number
 ---@field string string|table
 ---@field maxw number
@@ -21,6 +25,9 @@
 ---@field bump_rate number
 ---@field bump_amount number
 ---@field font FontConfig
+---@field x_offset number
+---@field y_offset number
+---@field pop_delay number
 
 
 

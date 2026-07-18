@@ -17,14 +17,14 @@ function DynaText:init(config)
         x = self.font.TEXT_OFFSET.x * self.scale + (self.config.x_offset or 0),
         y = self.font.TEXT_OFFSET.y * self.scale + (self.config.y_offset or 0),
     }
-    self.colours = config.colours or { G.C.RED }
-    self.created_time = G.TIMERS.REAL
+    self.colours = config.colours or { Color.RED }
+    self.created_time = Timer.instance.REAL
     self.silent = (config.silent)
 
     self.start_pop_in = self.config.pop_in
 
-    config.W = 0
-    config.H = 0
+    self.config.W = 0
+    self.config.H = 0
 
     self.strings = {}
     self.focused_string = 1
@@ -41,7 +41,7 @@ function DynaText:init(config)
         self:pop_out(4)
     end
 
-    Moveable.init(self, config.X or 0, config.Y or 0, config.W, config.H)
+    Moveable.init(self, Transform(config.X or 0, config.Y or 0, config.W, config.H), App.instance.ROOM)
 
     self.T.r = self.config.text_rot or 0
 
@@ -57,7 +57,7 @@ function DynaText:init(config)
     }
 
     if getmetatable(self) == DynaText then
-        table.insert(G.I.MOVEABLE, self)
+        table.insert(App.instance.I.MOVEABLE, self)
     end
 end
 
