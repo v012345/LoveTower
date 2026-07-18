@@ -24,7 +24,7 @@ function App:init_game_object()
 end
 
 function App:update(dt)
-    do return end
+    -- do return end
     self.FRAMES.MOVE = self.FRAMES.MOVE + 1
     Timer.instance:update_real_time(dt)
     if not self.fbf or self.new_frame then
@@ -46,7 +46,7 @@ function App:update(dt)
 end
 
 function App:draw()
-    do return end
+    -- do return end
     love.graphics.setCanvas({ self.CANVAS })
     love.graphics.push()
     love.graphics.scale(1)
