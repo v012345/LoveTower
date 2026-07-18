@@ -66,6 +66,7 @@ function DynaText:update(dt)
 end
 
 function DynaText:update_text(first_pass)
+    do return end
     self.config.W = 0
     self.config.H = 0
 
