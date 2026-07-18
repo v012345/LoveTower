@@ -21,3 +21,5 @@
 ---@field outline number 轮廓?
 ---@field outline_colour Color 轮廓颜色?
 ---@field line_emboss number 线凹凸程度?
+---@field chosen string 选择三角形?
+---@field shadow boolean 阴影?

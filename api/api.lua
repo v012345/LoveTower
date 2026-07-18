@@ -291,6 +291,13 @@ function love.graphics.rotate(angle) end
 ---@return nil
 function love.graphics.scale(sx, sy) end
 
+---Draws a polygon.
+---Following the mode argument, this function can accept multiple numeric arguments or a single table of numeric arguments. In either case the arguments are interpreted as alternating x and y coordinates of the polygon's vertices.
+---@param mode "fill"|"line"
+---@param ... number
+---@return nil
+function love.graphics.polygon(mode, ...) end
+
 --- 包括 `悬浮弹窗` `拖拽弹窗` `警告弹窗`
 ---@class Children
 ---@field h_popup UIBox 悬浮弹窗

@@ -242,6 +242,24 @@ function UIElement:draw_self()
     else
         self.focus_timer = nil
     end
+
+    --Draw the 'chosen triangle'
+    if self.config.chosen then
+        prep_draw(self, 0.98)
+        love.graphics.scale(1 / (Tile.instance.TILESIZE))
+        if self.config.shadow and App.instance.SETTINGS.GRAPHICS.shadows == 'On' then
+            love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour:get_a())
+            love.graphics.polygon("fill", get_chosen_triangle_from_rect(self.layered_parallax.x - self.shadow_parrallax.x * parallax_dist * 0.5, self.layered_parallax.y - self.shadow_parrallax.y * parallax_dist * 0.5, self.VT.w * Tile.instance.TILESIZE, self.VT.h * Tile.instance.TILESIZE, self.config.chosen == 'vert'))
+        end
+        love.graphics.pop()
+
+        prep_draw(self, 1)
+        love.graphics.scale(1 / (Tile.instance.TILESIZE))
+        love.graphics.setColor(Color.RED)
+        love.graphics.polygon("fill", get_chosen_triangle_from_rect(self.layered_parallax.x, self.layered_parallax.y, self.VT.w * Tile.instance.TILESIZE, self.VT.h * Tile.instance.TILESIZE, self.config.chosen == 'vert'))
+        love.graphics.pop()
+    end
+    self:draw_boundingrect()
 end
 
 function UIElement:draw_pixellated_rect(_type, _parallax, _emboss, _progress)
