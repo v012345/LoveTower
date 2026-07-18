@@ -1,4 +1,5 @@
 require "bit"
+require "asset.scripts.libs"
 require "asset.scripts.enum"
 require "asset.scripts.engine"
 require "asset.scripts.functions.misc_functions"

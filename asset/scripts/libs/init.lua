@@ -1,0 +1,1 @@
+require "asset.scripts.libs.utf8"
