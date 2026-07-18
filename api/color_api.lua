@@ -1,6 +1,6 @@
 ---@meta
 
----@class Color: Object
+---@class Color
 
 
 ---@param r? number

@@ -1,22 +1,8 @@
 require "asset.scripts.functions.misc_functions"
 
 ---@class Color
-Color = Object:extend()
+Color = setmetatable({}, { __call = function(...) return RGBA(...) end })
 
----@param r number
----@param g number
----@param b number
----@param a number
-function Color:init(r, g, b, a)
-    self.r = r or 0
-    self.g = g or 0
-    self.b = b or 0
-    self.a = a or 255
-    self[1] = self.r
-    self[2] = self.g
-    self[3] = self.b
-    self[4] = self.a
-end
 
 ---@class RGBA
 RGBA = Object:extend()
