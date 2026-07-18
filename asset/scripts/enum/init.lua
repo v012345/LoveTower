@@ -1,4 +1,3 @@
-require "asset.scripts.enum.color"
 require "asset.scripts.enum.ui_type"
 require "asset.scripts.enum.enum_of_event"
 require "asset.scripts.enum.hid_type"

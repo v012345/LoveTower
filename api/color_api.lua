@@ -16,3 +16,4 @@ function Color(r, g, b, a) end
 ---@field b number
 ---@field a number
 ---@return RGBA
+function RGBA(r, g, b, a) end
