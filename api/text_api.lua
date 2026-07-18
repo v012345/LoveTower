@@ -32,3 +32,6 @@
 ---@field FONTSCALE number
 ---@field squish number
 ---@field DESCSCALE number
+
+---@param config DynaTextConfig
+function DynaText(config) end

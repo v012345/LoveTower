@@ -1,6 +1,7 @@
 ---@class DynaText
 DynaText = Moveable:extend()
 
+---@param config DynaTextConfig
 function DynaText:init(config)
     config = config or {}
     self.config = config
