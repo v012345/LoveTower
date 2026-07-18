@@ -33,6 +33,22 @@ function darken(colour, percent, no_tab)
     }
 end
 
+function adjust_alpha(colour, new_alpha, no_tab)
+    if no_tab then
+        return
+            colour[1],
+            colour[2],
+            colour[3],
+            new_alpha
+    end
+    return {
+        colour[1],
+        colour[2],
+        colour[3],
+        new_alpha
+    }
+end
+
 function HEX(hex)
     if #hex <= 6 then hex = hex .. "FF" end
     local _, _, r, g, b, a = hex:find('(%x%x)(%x%x)(%x%x)(%x%x)')

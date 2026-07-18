@@ -17,3 +17,4 @@
 ---@field emboss number 凹凸程度?
 ---@field button_delay_progress number 按钮延迟进度?
 ---@field progress_bar? table 进度条?
+---@field focus_with_object boolean 是否聚焦于对象?

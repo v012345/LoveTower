@@ -6,6 +6,7 @@
         "pseudorandom_element",
         "add_to_drawhash",
         "prep_draw",
-        "darken"
+        "darken",
+        "adjust_alpha"
     ]
 }
