@@ -266,6 +266,10 @@ function UIElement:draw_pixellated_rect(_type, _parallax, _emboss, _progress)
 end
 
 function UIElement:update(dt)
+    if self.UIT == UIT.T then self:update_text() end
+    if self.UIT == UIT.O then self:update_object() end
+    -- 很奇怪, Moveable 没有 update 方法
+    Node.update(self, dt)
 end
 
 function UIElement:collides_with_point(cursor_trans)
