@@ -207,17 +207,19 @@ function UIElement:draw_self()
     if self.config.outline and self.config.outline_colour[4] > 0.01 then
         if self.config.outline then
             prep_draw(self, 1)
-            love.graphics.scale(1 / (Tile.instance.TILESIZE))
-            love.graphics.setLineWidth(self.config.outline)
-            if self.config.line_emboss then
-                love.graphics.setColor(darken(self.config.outline_colour, self.states.hover.is and 0.5 or 0.3, true))
-                self:draw_pixellated_rect('line_emboss', parallax_dist, self.config.line_emboss)
-            end
-            love.graphics.setColor(self.config.outline_colour)
-            if self.config.r and self.VT.w > 0.01 then
-                self:draw_pixellated_rect('line', parallax_dist)
-            else
-                love.graphics.rectangle('line', 0, 0, self.VT.w * Tile.instance.TILESIZE, self.VT.h * Tile.instance.TILESIZE)
+            do
+                love.graphics.scale(1 / (Tile.instance.TILESIZE))
+                love.graphics.setLineWidth(self.config.outline)
+                if self.config.line_emboss then
+                    love.graphics.setColor(darken(self.config.outline_colour, self.states.hover.is and 0.5 or 0.3, true))
+                    self:draw_pixellated_rect('line_emboss', parallax_dist, self.config.line_emboss)
+                end
+                love.graphics.setColor(self.config.outline_colour)
+                if self.config.r and self.VT.w > 0.01 then
+                    self:draw_pixellated_rect('line', parallax_dist)
+                else
+                    love.graphics.rectangle('line', 0, 0, self.VT.w * Tile.instance.TILESIZE, self.VT.h * Tile.instance.TILESIZE)
+                end
             end
             love.graphics.pop()
         end
