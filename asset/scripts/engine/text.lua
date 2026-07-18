@@ -11,7 +11,8 @@ function DynaText:init(config)
     self.bump_rate = config.bump_rate or 2.666
     self.bump_amount = config.bump_amount or 1
     self.font = config.font or Language.instance.LANG.font
-    self.string = config.string or { 'HELLO WORLD' }
+    config.string = config.string or { 'HELLO WORLD' }
+    self.string = config.string
     self.text_offset = {
         x = self.font.TEXT_OFFSET.x * self.scale + (self.config.x_offset or 0),
         y = self.font.TEXT_OFFSET.y * self.scale + (self.config.y_offset or 0),
