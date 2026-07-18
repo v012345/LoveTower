@@ -181,8 +181,18 @@ function Language:init(name)
                 "再按一下即可確認"
             }
         },
-        ['all1'] = { font = 8, label = "English", key = 'all', omit = true },
-        ['all2'] = { font = 9, label = "English", key = 'all', omit = true }
+        ['all1'] = {
+            font = 8,
+            label = "English",
+            key = 'all',
+            omit = true
+        },
+        ['all2'] = {
+            font = 9,
+            label = "English",
+            key = 'all',
+            omit = true
+        }
     }
 end
 
