@@ -66,7 +66,6 @@ function DynaText:update(dt)
 end
 
 function DynaText:update_text(first_pass)
-    do return end
     self.config.W = 0
     self.config.H = 0
 
@@ -99,7 +98,7 @@ function DynaText:update_text(first_pass)
                     self.config.pop_in = nil
                 else
                     self.config.pop_in = self.config.pop_in or 0
-                    self.created_time = G.TIMERS.REAL
+                    self.created_time = Timer.instance.REAL
                 end
                 self.strings[k].string = v
                 local old_letters = self.strings[k].letters
@@ -159,14 +158,14 @@ end
 
 function DynaText:pop_out(pop_out_timer)
     self.config.pop_out = pop_out_timer or 1
-    self.pop_out_time = G.TIMERS.REAL + (self.pop_delay or 0)
+    self.pop_out_time = Timer.instance.REAL + (self.pop_delay or 0)
 end
 
 function DynaText:pop_in(pop_in_timer)
     self.reset_pop_in = true
     self.config.pop_out = nil
     self.config.pop_in = pop_in_timer or 0
-    self.created_time = G.TIMERS.REAL
+    self.created_time = Timer.instance.REAL
 
     for k, letter in ipairs(self.strings[self.focused_string].letters) do
         letter.pop_in = 0
