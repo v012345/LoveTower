@@ -294,7 +294,7 @@ function love.graphics.scale(sx, sy) end
 ---Draws a polygon.
 ---Following the mode argument, this function can accept multiple numeric arguments or a single table of numeric arguments. In either case the arguments are interpreted as alternating x and y coordinates of the polygon's vertices.
 ---@param mode "fill"|"line"
----@param ... number
+---@param ... any
 ---@return nil
 function love.graphics.polygon(mode, ...) end
 
