@@ -1,9 +1,15 @@
 ---@class DynaText : Moveable
-
+---@field config DynaTextConfig
+---@field shadow boolean
+---@field scale number
+---@field pop_in_rate number
+---@field bump_rate number
+---@field bump_amount number
+---@field font FontConfig
 
 ---@class DynaTextConfig
 ---@field scale number
----@field string string
+---@field string string|table
 ---@field maxw number
 ---@field colours Color[]
 ---@field float boolean
