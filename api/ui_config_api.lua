@@ -18,3 +18,6 @@
 ---@field button_delay_progress number 按钮延迟进度?
 ---@field progress_bar? table 进度条?
 ---@field focus_with_object boolean 是否聚焦于对象?
+---@field outline number 轮廓?
+---@field outline_colour Color 轮廓颜色?
+---@field line_emboss number 线凹凸程度?
