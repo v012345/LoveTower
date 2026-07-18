@@ -224,6 +224,24 @@ function UIElement:draw_self()
             love.graphics.pop()
         end
     end
+
+    --Draw the outline for highlighted buttons
+    if self.states.focus.is then
+        self.focus_timer = self.focus_timer or Timer.instance.REAL
+        local lw = 50 * math.max(0, self.focus_timer - Timer.instance.REAL + 0.3) ^ 2
+        prep_draw(self, 1)
+        do
+            love.graphics.scale((1) / (Tile.instance.TILESIZE))
+            love.graphics.setLineWidth(lw + 1.5)
+            love.graphics.setColor(adjust_alpha(Color.WHITE, 0.2 * lw, true))
+            self:draw_pixellated_rect('fill', parallax_dist)
+            love.graphics.setColor(self.config.colour:get_a() > 0 and mix_colours(Color.WHITE, self.config.colour, 0.8) or Color.WHITE)
+            self:draw_pixellated_rect('line', parallax_dist)
+        end
+        love.graphics.pop()
+    else
+        self.focus_timer = nil
+    end
 end
 
 function UIElement:draw_pixellated_rect(_type, _parallax, _emboss, _progress)
