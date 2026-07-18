@@ -117,7 +117,7 @@ function Font:init()
             v.FONT = love.graphics.newFont(v.file, v.render_scale)
         end
     end
-    for _, v in pairs(self.LANGUAGES) do
+    for _, v in pairs(Language.instances.LANGUAGES) do
         v.font = self.FONTS[v.font]
     end
 end

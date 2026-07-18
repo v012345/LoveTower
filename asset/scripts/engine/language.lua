@@ -1,6 +1,7 @@
+---@class Language
 Language = Object:extend()
 
-function Language:init(name)
+function Language:init()
     self.LANGUAGES = {
         ['en-us'] = {
             font = 1,
@@ -196,4 +197,5 @@ function Language:init(name)
     }
 end
 
+---@type Language
 Language.instances = Language()
