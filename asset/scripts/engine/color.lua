@@ -32,25 +32,21 @@ function RGBA:init(r, g, b, a)
     end
 end
 
-function Color:get_r()
+function RGBA:get_r()
     return self.r
 end
 
-function Color:get_g()
+function RGBA:get_g()
     return self.g
 end
 
-function Color:get_b()
+function RGBA:get_b()
     return self.b
 end
 
-function Color:get_a()
+function RGBA:get_a()
     return self.a
 end
-
----@class Color
-Color = Color or Object:extend()
-
 
 Color.MULT = HEX('FE5F55')
 Color.CHIPS = HEX("009dff")
