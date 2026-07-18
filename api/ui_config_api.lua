@@ -15,3 +15,5 @@
 ---@field button_delay number 按钮延迟?
 ---@field hover boolean 是否悬停?
 ---@field emboss number 凹凸程度?
+---@field button_delay_progress number 按钮延迟进度?
+---@field progress_bar? table 进度条?

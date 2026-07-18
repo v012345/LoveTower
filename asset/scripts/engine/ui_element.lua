@@ -163,20 +163,20 @@ function UIElement:draw_self()
                     love.graphics.setColor(v)
                     if self.config.r and self.VT.w > 0.01 then
                         if self.config.button_delay then
-                            love.graphics.setColor(G.C.GREY)
+                            love.graphics.setColor(Color.GREY)
                             self:draw_pixellated_rect('fill', parallax_dist)
                             love.graphics.setColor(v)
                             self:draw_pixellated_rect('fill', parallax_dist, nil, self.config.button_delay_progress)
                         elseif self.config.progress_bar then
-                            love.graphics.setColor(self.config.progress_bar.empty_col or G.C.GREY)
+                            love.graphics.setColor(self.config.progress_bar.empty_col or Color.GREY)
                             self:draw_pixellated_rect('fill', parallax_dist)
-                            love.graphics.setColor(self.config.progress_bar.filled_col or G.C.BLUE)
+                            love.graphics.setColor(self.config.progress_bar.filled_col or Color.BLUE)
                             self:draw_pixellated_rect('fill', parallax_dist, nil, self.config.progress_bar.ref_table[self.config.progress_bar.ref_value] / self.config.progress_bar.max)
                         else
                             self:draw_pixellated_rect('fill', parallax_dist)
                         end
                     else
-                        love.graphics.rectangle('fill', 0, 0, self.VT.w * G.TILESIZE, self.VT.h * G.TILESIZE)
+                        love.graphics.rectangle('fill', 0, 0, self.VT.w * Tile.instance.TILESIZE, self.VT.h * Tile.instance.TILESIZE)
                     end
                 end
             end
