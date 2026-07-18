@@ -112,17 +112,17 @@ function DynaText:update_text(first_pass)
                     local old_letter = old_letters and old_letters[current_letter] or nil
                     local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = old_letter and old_letter.scale or part_scale }
                     self.strings[k].letters[current_letter] = let_tab
-                    local tx = self.font.FONT:getWidth(c) * self.scale * part_scale * G.TILESCALE * self.font.FONTSCALE + 2.7 * (self.config.spacing or 0) * G.TILESCALE * self.font.FONTSCALE
-                    local ty = self.font.FONT:getHeight(c) * self.scale * part_scale * G.TILESCALE * self.font.FONTSCALE * self.font.TEXT_HEIGHT_SCALE
+                    local tx = self.font.FONT:getWidth(c) * self.scale * part_scale * Tile.instance.TILESCALE * self.font.FONTSCALE + 2.7 * (self.config.spacing or 0) * Tile.instance.TILESCALE * self.font.FONTSCALE
+                    local ty = self.font.FONT:getHeight(c) * self.scale * part_scale * Tile.instance.TILESCALE * self.font.FONTSCALE * self.font.TEXT_HEIGHT_SCALE
                     let_tab.offset = old_letter and old_letter.offset or { x = 0, y = 0 }
-                    let_tab.dims = { x = tx / (self.font.FONTSCALE * G.TILESCALE), y = ty / (self.font.FONTSCALE * G.TILESCALE) }
+                    let_tab.dims = { x = tx / (self.font.FONTSCALE * Tile.instance.TILESCALE), y = ty / (self.font.FONTSCALE * Tile.instance.TILESCALE) }
                     let_tab.pop_in = first_pass and (old_letter and old_letter.pop_in or (self.config.pop_in and 0 or 1)) or 1
                     let_tab.prefix = current_letter <= part_a and outer_colour or nil
                     let_tab.suffix = current_letter > part_b and outer_colour or nil
                     let_tab.colour = inner_colour or nil
                     if k > 1 then let_tab.pop_in = 0 end
-                    tempW = tempW + tx / (G.TILESIZE * G.TILESCALE)
-                    tempH = math.max(ty / (G.TILESIZE * G.TILESCALE), tempH)
+                    tempW = tempW + tx / (Tile.instance.TILESIZE * Tile.instance.TILESCALE)
+                    tempH = math.max(ty / (Tile.instance.TILESIZE * Tile.instance.TILESCALE), tempH)
                     current_letter = current_letter + 1
                 end
 
@@ -189,25 +189,25 @@ function DynaText:align_letters()
     self.string = self.strings[self.focused_string].string
     for k, letter in ipairs(self.strings[self.focused_string].letters) do
         if self.config.pop_out then
-            letter.pop_in = math.min(1, math.max((self.config.min_cycle_time or 1) - (G.TIMERS.REAL - self.pop_out_time) * self.config.pop_out / (self.config.min_cycle_time or 1), 0))
+            letter.pop_in = math.min(1, math.max((self.config.min_cycle_time or 1) - (Timer.instance.REAL - self.pop_out_time) * self.config.pop_out / (self.config.min_cycle_time or 1), 0))
             letter.pop_in = letter.pop_in * letter.pop_in
             if k == #self.strings[self.focused_string].letters and letter.pop_in <= 0 and #self.strings > 1 then self.pop_cycle = true end
         elseif self.config.pop_in then
             local prev_pop_in = letter.pop_in
-            letter.pop_in = math.min(1, math.max((G.TIMERS.REAL - self.config.pop_in - self.created_time) * #self.string * self.pop_in_rate - k + 1, self.config.min_cycle_time == 0 and 1 or 0))
+            letter.pop_in = math.min(1, math.max((Timer.instance.REAL - self.config.pop_in - self.created_time) * #self.string * self.pop_in_rate - k + 1, self.config.min_cycle_time == 0 and 1 or 0))
             letter.pop_in = letter.pop_in * letter.pop_in
             if prev_pop_in <= 0 and letter.pop_in > 0 and not self.silent and
                 (#self.string < 10 or k % 2 == 0) then
-                if self.T.x > G.ROOM.T.w + 2 or
-                    self.T.y > G.ROOM.T.h + 2 or
+                if self.T.x > App.instance.ROOM.T.w + 2 or
+                    self.T.y > App.instance.ROOM.T.h + 2 or
                     self.T.x < -2 or
                     self.T.y < -2 then else
-                    play_sound('paper1', 0.45 + 0.05 * math.random() + (0.3 / #self.string) * k + (self.config.pitch_shift or 0))
+                    -- play_sound('paper1', 0.45 + 0.05 * math.random() + (0.3 / #self.string) * k + (self.config.pitch_shift or 0))
                 end
             end
             if k == #self.strings[self.focused_string].letters and letter.pop_in >= 1 then
                 if #self.strings > 1 then
-                    self.pop_delay = (G.TIMERS.REAL - self.config.pop_in - self.created_time + (self.config.pop_delay or 1.5))
+                    self.pop_delay = (Timer.instance.REAL - self.config.pop_in - self.created_time + (self.config.pop_delay or 1.5))
                     self:pop_out(4)
                 else
                     self.config.pop_in = nil
@@ -235,8 +235,8 @@ function DynaText:align_letters()
                 math.cos(95.123 * G.TIMERS.REAL * self.config.quiver.speed + k * 1233.2) -
                 math.sin(30.133421 * G.TIMERS.REAL * self.config.quiver.speed + k * 123.2))
         end
-        if self.config.float then letter.offset.y = (G.SETTINGS.reduced_motion and 0 or 1) * math.sqrt(self.scale) * (2 + (self.font.FONTSCALE / G.TILESIZE) * 2000 * math.sin(2.666 * G.TIMERS.REAL + 200 * k)) + 60 * (letter.scale - 1) end
-        if self.config.bump then letter.offset.y = (G.SETTINGS.reduced_motion and 0 or 1) * self.bump_amount * math.sqrt(self.scale) * 7 * math.max(0, (5 + self.bump_rate) * math.sin(self.bump_rate * G.TIMERS.REAL + 200 * k) - 3 - self.bump_rate) end
+        if self.config.float then letter.offset.y = (Settings.instance.reduced_motion and 0 or 1) * math.sqrt(self.scale) * (2 + (self.font.FONTSCALE / G.TILESIZE) * 2000 * math.sin(2.666 * G.TIMERS.REAL + 200 * k)) + 60 * (letter.scale - 1) end
+        if self.config.bump then letter.offset.y = (Settings.instance.reduced_motion and 0 or 1) * self.bump_amount * math.sqrt(self.scale) * 7 * math.max(0, (5 + self.bump_rate) * math.sin(self.bump_rate * G.TIMERS.REAL + 200 * k) - 3 - self.bump_rate) end
     end
 end
 
@@ -252,7 +252,7 @@ function DynaText:pulse(amt)
     self.config.pulse = {
         speed = 40,
         width = 2.5,
-        start = G.TIMERS.REAL,
+        start = Timer.instance.REAL,
         amount = amt or 0.2,
         silent = false
     }
@@ -263,8 +263,8 @@ function DynaText:draw()
 
     if self.shadow then
         prep_draw(self, 1)
-        love.graphics.translate(self.strings[self.focused_string].W_offset + self.text_offset.x * self.font.FONTSCALE / G.TILESIZE, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / G.TILESIZE)
-        if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / G.TILESIZE, 0) end
+        love.graphics.translate(self.strings[self.focused_string].W_offset + self.text_offset.x * self.font.FONTSCALE / Tile.instance.TILESIZE, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / Tile.instance.TILESIZE)
+        if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / Tile.instance.TILESIZE, 0) end
         if self.config.shadow_colour then
             love.graphics.setColor(self.config.shadow_colour)
         else
@@ -274,27 +274,27 @@ function DynaText:draw()
             local real_pop_in = self.config.min_cycle_time == 0 and 1 or letter.pop_in
             love.graphics.draw(
                 letter.letter,
-                0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / G.TILESIZE - self.shadow_parrallax.x * self.scale / (G.TILESIZE),
-                0.5 * (letter.dims.y) * self.font.FONTSCALE / G.TILESIZE - self.shadow_parrallax.y * self.scale / (G.TILESIZE),
+                0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / Tile.instance.TILESIZE - self.shadow_parrallax.x * self.scale / (Tile.instance.TILESIZE),
+                0.5 * (letter.dims.y) * self.font.FONTSCALE / Tile.instance.TILESIZE - self.shadow_parrallax.y * self.scale / (Tile.instance.TILESIZE),
                 letter.r or 0,
-                real_pop_in * self.scale * self.font.FONTSCALE / G.TILESIZE,
-                real_pop_in * self.scale * self.font.FONTSCALE / G.TILESIZE,
+                real_pop_in * self.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
+                real_pop_in * self.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
                 0.5 * letter.dims.x / self.scale,
                 0.5 * letter.dims.y / self.scale
             )
-            love.graphics.translate(letter.dims.x * self.font.FONTSCALE / G.TILESIZE, 0)
+            love.graphics.translate(letter.dims.x * self.font.FONTSCALE / Tile.instance.TILESIZE, 0)
         end
         love.graphics.pop()
     end
 
     prep_draw(self, 1)
-    love.graphics.translate(self.strings[self.focused_string].W_offset + self.text_offset.x * self.font.FONTSCALE / G.TILESIZE, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / G.TILESIZE)
-    if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / G.TILESIZE, 0) end
+    love.graphics.translate(self.strings[self.focused_string].W_offset + self.text_offset.x * self.font.FONTSCALE / Tile.instance.TILESIZE, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / Tile.instance.TILESIZE)
+    if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / Tile.instance.TILESIZE, 0) end
     self.ARGS.draw_shadow_norm = self.ARGS.draw_shadow_norm or {}
     local _shadow_norm = self.ARGS.draw_shadow_norm
     _shadow_norm.x, _shadow_norm.y =
-        self.shadow_parrallax.x / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / G.TILESIZE,
-        self.shadow_parrallax.y / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / G.TILESIZE
+        self.shadow_parrallax.x / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / Tile.instance.TILESIZE,
+        self.shadow_parrallax.y / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / Tile.instance.TILESIZE
 
     for k, letter in ipairs(self.strings[self.focused_string].letters) do
         local real_pop_in = self.config.min_cycle_time == 0 and 1 or letter.pop_in
@@ -302,15 +302,15 @@ function DynaText:draw()
 
         love.graphics.draw(
             letter.letter,
-            0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / G.TILESIZE + _shadow_norm.x,
-            0.5 * (letter.dims.y - letter.offset.y) * self.font.FONTSCALE / G.TILESIZE + _shadow_norm.y,
+            0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / Tile.instance.TILESIZE + _shadow_norm.x,
+            0.5 * (letter.dims.y - letter.offset.y) * self.font.FONTSCALE / Tile.instance.TILESIZE + _shadow_norm.y,
             letter.r or 0,
-            real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / G.TILESIZE,
-            real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / G.TILESIZE,
+            real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
+            real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
             0.5 * letter.dims.x / (self.scale),
             0.5 * letter.dims.y / (self.scale)
         )
-        love.graphics.translate(letter.dims.x * self.font.FONTSCALE / G.TILESIZE, 0)
+        love.graphics.translate(letter.dims.x * self.font.FONTSCALE / Tile.instance.TILESIZE, 0)
     end
     love.graphics.pop()
 
