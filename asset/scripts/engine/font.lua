@@ -4,7 +4,7 @@ Font = Object:extend()
 function Font:init()
     self.FONTS = {
         {
-            file = "resources/fonts/m6x11plus.ttf",
+            file = "asset/resources/fonts/m6x11plus.ttf",
             render_scale = Tile.instance.TILESIZE * 10,
             TEXT_HEIGHT_SCALE = 0.83,
             TEXT_OFFSET = {
@@ -16,7 +16,7 @@ function Font:init()
             DESCSCALE = 1
         },
         {
-            file = "resources/fonts/NotoSansSC-Bold.ttf",
+            file = "asset/resources/fonts/NotoSansSC-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 7,
             TEXT_HEIGHT_SCALE = 0.7,
             TEXT_OFFSET = {
@@ -28,7 +28,7 @@ function Font:init()
             DESCSCALE = 1.1
         },
         {
-            file = "resources/fonts/NotoSansTC-Bold.ttf",
+            file = "asset/resources/fonts/NotoSansTC-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 7,
             TEXT_HEIGHT_SCALE = 0.7,
             TEXT_OFFSET = {
@@ -40,7 +40,7 @@ function Font:init()
             DESCSCALE = 1.1
         },
         {
-            file = "resources/fonts/NotoSansKR-Bold.ttf",
+            file = "asset/resources/fonts/NotoSansKR-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 7,
             TEXT_HEIGHT_SCALE = 0.8,
             TEXT_OFFSET = {
@@ -52,7 +52,7 @@ function Font:init()
             DESCSCALE = 1
         },
         {
-            file = "resources/fonts/NotoSansJP-Bold.ttf",
+            file = "asset/resources/fonts/NotoSansJP-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 7,
             TEXT_HEIGHT_SCALE = 0.8,
             TEXT_OFFSET = {
@@ -64,7 +64,7 @@ function Font:init()
             DESCSCALE = 1
         },
         {
-            file = "resources/fonts/NotoSans-Bold.ttf",
+            file = "asset/resources/fonts/NotoSans-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 7,
             TEXT_HEIGHT_SCALE = 0.65,
             TEXT_OFFSET = {
@@ -76,7 +76,7 @@ function Font:init()
             DESCSCALE = 1
         },
         {
-            file = "resources/fonts/m6x11plus.ttf",
+            file = "asset/resources/fonts/m6x11plus.ttf",
             render_scale = Tile.instance.TILESIZE * 10,
             TEXT_HEIGHT_SCALE = 0.9,
             TEXT_OFFSET = {
@@ -88,7 +88,7 @@ function Font:init()
             DESCSCALE = 1
         },
         {
-            file = "resources/fonts/GoNotoCurrent-Bold.ttf",
+            file = "asset/resources/fonts/GoNotoCurrent-Bold.ttf",
             render_scale = Tile.instance.TILESIZE * 10,
             TEXT_HEIGHT_SCALE = 0.8,
             TEXT_OFFSET = {
@@ -100,7 +100,7 @@ function Font:init()
             DESCSCALE = 1
         },
         {
-            file = "resources/fonts/GoNotoCJKCore.ttf",
+            file = "asset/resources/fonts/GoNotoCJKCore.ttf",
             render_scale = Tile.instance.TILESIZE * 10,
             TEXT_HEIGHT_SCALE = 0.8,
             TEXT_OFFSET = {
