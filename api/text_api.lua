@@ -14,7 +14,7 @@
 ---@field W number
 ---@field H number
 ---@field scale number
----@field string string|table
+---@field string string[]
 ---@field maxw number
 ---@field colours Color[]
 ---@field float boolean
@@ -28,6 +28,9 @@
 ---@field x_offset number
 ---@field y_offset number
 ---@field pop_delay number
+---@field text_rot number
+---@field reset_pop_in boolean
+
 
 
 
