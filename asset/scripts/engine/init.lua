@@ -13,6 +13,7 @@ require "asset.scripts.engine.settings"
 require "asset.scripts.engine.language"
 
 -- 依赖其他模块的模块
+require "asset.scripts.engine.font"
 require "asset.scripts.engine.utils"
 require "asset.scripts.engine.config"
 require "asset.scripts.engine.tile"
