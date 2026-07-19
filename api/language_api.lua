@@ -1,0 +1,12 @@
+---@class (partial) Language:Object
+---@field LANGUAGES table<string, LanguageCfg>
+
+---@class LanguageCfg
+---@field font_id number
+---@field label string
+---@field key string
+---@field beta? boolean
+---@field button? string
+---@field warning? string[]
+---@field font? love.Font
+---@field omit? boolean

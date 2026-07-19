@@ -1,4 +1,4 @@
----@class Language
+---@class (partial) Language:Object
 Language = Object:extend()
 
 function Language:init()
