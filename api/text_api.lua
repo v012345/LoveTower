@@ -62,6 +62,8 @@
 ---@field string string
 ---@field W_offset number
 ---@field H_offset number
+---@field W number
+---@field H number
 
 ---@class DynaTextLetter
 ---@field letter love.Text
