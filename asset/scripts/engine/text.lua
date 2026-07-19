@@ -202,7 +202,7 @@ function DynaText:align_letters()
                     self.T.y > App.instance.ROOM.T.h + 2 or
                     self.T.x < -2 or
                     self.T.y < -2 then else
-                    -- play_sound('paper1', 0.45 + 0.05 * math.random() + (0.3 / #self.string) * k + (self.config.pitch_shift or 0))
+                    play_sound('paper1', 0.45 + 0.05 * math.random() + (0.3 / #self.string) * k + (self.config.pitch_shift or 0))
                 end
             end
             if k == #self.strings[self.focused_string].letters and letter.pop_in >= 1 then

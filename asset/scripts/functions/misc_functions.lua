@@ -17,6 +17,9 @@ function boot_timer(cur_step, next_step, progress)
     love.graphics.present()
 end
 
+function play_sound(sound_code, per, vol)
+end
+
 function darken(colour, percent, no_tab)
     if no_tab then
         return
