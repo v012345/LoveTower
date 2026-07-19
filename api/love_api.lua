@@ -83,6 +83,10 @@ love.Font = {}
 function love.Font:getHeight()
 end
 
+---@return number
+function love.Font:getWidth()
+end
+
 ---@param filename string
 ---@param settings? { mipmaps: boolean, dpiscale: number }
 ---@return Image

@@ -54,6 +54,7 @@
 ---@field FONTSCALE number
 ---@field squish number
 ---@field DESCSCALE number
+---@field FONT love.Font
 
 
 ---@class DynaTextString
