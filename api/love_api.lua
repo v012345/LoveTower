@@ -83,6 +83,7 @@ love.Font = {}
 function love.Font:getHeight()
 end
 
+---@param text string
 ---@return number
 function love.Font:getWidth(text)
 end
