@@ -113,7 +113,7 @@ function DynaText:update_text(first_pass)
                     local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = old_letter and old_letter.scale or part_scale }
                     self.strings[k].letters[current_letter] = let_tab
                     local tx = self.font.FONT:getWidth(c) * self.scale * part_scale * Tile.instance.TILESCALE * self.font.FONTSCALE + 2.7 * (self.config.spacing or 0) * Tile.instance.TILESCALE * self.font.FONTSCALE
-                    local ty = self.font.FONT:getHeight(c) * self.scale * part_scale * Tile.instance.TILESCALE * self.font.FONTSCALE * self.font.TEXT_HEIGHT_SCALE
+                    local ty = self.font.FONT:getHeight() * self.scale * part_scale * Tile.instance.TILESCALE * self.font.FONTSCALE * self.font.TEXT_HEIGHT_SCALE
                     let_tab.offset = old_letter and old_letter.offset or { x = 0, y = 0 }
                     let_tab.dims = { x = tx / (self.font.FONTSCALE * Tile.instance.TILESCALE), y = ty / (self.font.FONTSCALE * Tile.instance.TILESCALE) }
                     let_tab.pop_in = first_pass and (old_letter and old_letter.pop_in or (self.config.pop_in and 0 or 1)) or 1
