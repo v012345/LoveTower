@@ -312,7 +312,6 @@ function DynaText:draw()
                 0.5 * letter.dims.x / (self.scale),
                 0.5 * letter.dims.y / (self.scale)
             )
-            love.graphics.print("fjaihgasljfoasij")
             love.graphics.translate(letter.dims.x * self.font.FONTSCALE / tile_size, 0)
         end
     end
