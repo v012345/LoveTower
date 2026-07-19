@@ -4,7 +4,7 @@ Language = Object:extend()
 function Language:init()
     self.LANGUAGES = {
         ['en-us'] = {
-            font = 1,
+            font_id = 1,
             label = "English",
             key = 'en-us',
             button = "Language Feedback",
@@ -15,7 +15,7 @@ function Language:init()
             }
         },
         ['de'] = {
-            font = 1,
+            font_id = 1,
             label = "Deutsch",
             key = 'de',
             beta = nil,
@@ -27,7 +27,7 @@ function Language:init()
             }
         },
         ['es_419'] = {
-            font = 1,
+            font_id = 1,
             label = "Español (México)",
             key = 'es_419',
             beta = nil,
@@ -39,7 +39,7 @@ function Language:init()
             }
         },
         ['es_ES'] = {
-            font = 1,
+            font_id = 1,
             label = "Español (España)",
             key = 'es_ES',
             beta = nil,
@@ -51,7 +51,7 @@ function Language:init()
             }
         },
         ['fr'] = {
-            font = 1,
+            font_id = 1,
             label = "Français",
             key = 'fr',
             beta = nil,
@@ -63,7 +63,7 @@ function Language:init()
             }
         },
         ['id'] = {
-            font = 1,
+            font_id = 1,
             label = "Bahasa Indonesia",
             key = 'id',
             beta = true,
@@ -75,7 +75,7 @@ function Language:init()
             }
         },
         ['it'] = {
-            font = 1,
+            font_id = 1,
             label = "Italiano",
             key = 'it',
             beta = nil,
@@ -87,7 +87,7 @@ function Language:init()
             }
         },
         ['ja'] = {
-            font = 5,
+            font_id = 5,
             label = "日本語",
             key = 'ja',
             beta = nil,
@@ -99,7 +99,7 @@ function Language:init()
             }
         },
         ['ko'] = {
-            font = 4,
+            font_id = 4,
             label = "한국어",
             key = 'ko',
             beta = nil,
@@ -111,7 +111,7 @@ function Language:init()
             }
         },
         ['nl'] = {
-            font = 1,
+            font_id = 1,
             label = "Nederlands",
             key = 'nl',
             beta = nil,
@@ -123,7 +123,7 @@ function Language:init()
             }
         },
         ['pl'] = {
-            font = 1,
+            font_id = 1,
             label = "Polski",
             key = 'pl',
             beta = nil,
@@ -135,7 +135,7 @@ function Language:init()
             }
         },
         ['pt_BR'] = {
-            font = 1,
+            font_id = 1,
             label = "Português",
             key = 'pt_BR',
             beta = nil,
@@ -147,7 +147,7 @@ function Language:init()
             }
         },
         ['ru'] = {
-            font = 6,
+            font_id = 6,
             label = "Русский",
             key = 'ru',
             beta = true,
@@ -159,7 +159,7 @@ function Language:init()
             }
         },
         ['zh_CN'] = {
-            font = 2,
+            font_id = 2,
             label = "简体中文",
             key = 'zh_CN',
             beta = nil,
@@ -171,7 +171,7 @@ function Language:init()
             }
         },
         ['zh_TW'] = {
-            font = 3,
+            font_id = 3,
             label = "繁體中文",
             key = 'zh_TW',
             beta = nil,
@@ -183,13 +183,13 @@ function Language:init()
             }
         },
         ['all1'] = {
-            font = 8,
+            font_id = 8,
             label = "English",
             key = 'all',
             omit = true
         },
         ['all2'] = {
-            font = 9,
+            font_id = 9,
             label = "English",
             key = 'all',
             omit = true

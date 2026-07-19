@@ -76,11 +76,11 @@ end
 function Image:getHeight()
 end
 
----@class LoveFont
-LoveFont = {}
+---@class love.Font
+love.Font = {}
 
 ---@return number
-function LoveFont:getHeight()
+function love.Font:getHeight()
 end
 
 ---@param filename string
@@ -96,10 +96,10 @@ function love.graphics.present() end
 
 ---@param filename string
 ---@param size     number
----@return LoveFont
+---@return love.Font
 function love.graphics.newFont(filename, size) end
 
----@param font LoveFont
+---@param font love.Font
 function love.graphics.setFont(font)
 end
 
