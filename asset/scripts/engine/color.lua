@@ -48,119 +48,123 @@ function RGBA:get_a()
     return self.a
 end
 
-Color.MULT = HEX('FE5F55')
-Color.CHIPS = HEX("009dff")
-Color.MONEY = HEX('f3b958')
-Color.XMULT = HEX('FE5F55')
-Color.FILTER = HEX('ff9a00')
-Color.BLUE = HEX("009dff")
-Color.RED = HEX('FE5F55')
-Color.GREEN = HEX("4BC292")
-Color.PALE_GREEN = HEX("56a887")
-Color.ORANGE = HEX("fda200")
-Color.IMPORTANT = HEX("ff9a00")
-Color.GOLD = HEX('eac058')
+function RGBA:__tostring()
+    return string.format("RGBA(%s, %s, %s, %s)", self.r, self.g, self.b, self.a)
+end
+
+Color.MULT = RGBA('FE5F55')
+Color.CHIPS = RGBA("009dff")
+Color.MONEY = RGBA('f3b958')
+Color.XMULT = RGBA('FE5F55')
+Color.FILTER = RGBA('ff9a00')
+Color.BLUE = RGBA("009dff")
+Color.RED = RGBA('FE5F55')
+Color.GREEN = RGBA("4BC292")
+Color.PALE_GREEN = RGBA("56a887")
+Color.ORANGE = RGBA("fda200")
+Color.IMPORTANT = RGBA("ff9a00")
+Color.GOLD = RGBA('eac058')
 Color.YELLOW = { 1, 1, 0, 1 }
 Color.CLEAR = { 0, 0, 0, 0 }
 Color.WHITE = { 1, 1, 1, 1 }
-Color.PURPLE = HEX('8867a5')
-Color.BLACK = HEX("374244") --4f6367"),
-Color.L_BLACK = HEX("4f6367")
-Color.GREY = HEX("5f7377")
-Color.CHANCE = HEX("4BC292")
-Color.JOKER_GREY = HEX('bfc7d5')
-Color.VOUCHER = HEX("cb724c")
-Color.BOOSTER = HEX("646eb7")
+Color.PURPLE = RGBA('8867a5')
+Color.BLACK = RGBA("374244") --4f6367"),
+Color.L_BLACK = RGBA("4f6367")
+Color.GREY = RGBA("5f7377")
+Color.CHANCE = RGBA("4BC292")
+Color.JOKER_GREY = RGBA('bfc7d5')
+Color.VOUCHER = RGBA("cb724c")
+Color.BOOSTER = RGBA("646eb7")
 Color.EDITION = { 1, 1, 1, 1 }
 Color.DARK_EDITION = { 0, 0, 0, 1 }
-Color.ETERNAL = HEX('c75985')
-Color.PERISHABLE = HEX('4f5da1')
-Color.RENTAL = HEX('b18f43')
+Color.ETERNAL = RGBA('c75985')
+Color.PERISHABLE = RGBA('4f5da1')
+Color.RENTAL = RGBA('b18f43')
 Color.DYN_UI = {
-    MAIN = HEX('374244'),
-    DARK = HEX('374244'),
-    BOSS_MAIN = HEX('374244'),
-    BOSS_DARK = HEX('374244'),
-    BOSS_PALE = HEX('374244')
+    MAIN = RGBA('374244'),
+    DARK = RGBA('374244'),
+    BOSS_MAIN = RGBA('374244'),
+    BOSS_DARK = RGBA('374244'),
+    BOSS_PALE = RGBA('374244')
 }
 --For other high contrast suit colours
 Color.SO_1 = {
-    Hearts = HEX('f03464'),
-    Diamonds = HEX('f06b3f'),
-    Spades = HEX("403995"),
-    Clubs = HEX("235955"),
+    Hearts = RGBA('f03464'),
+    Diamonds = RGBA('f06b3f'),
+    Spades = RGBA("403995"),
+    Clubs = RGBA("235955"),
 }
 Color.SO_2 = {
-    Hearts = HEX('f83b2f'),
-    Diamonds = HEX('e29000'),
-    Spades = HEX("4f31b9"),
-    Clubs = HEX("008ee6"),
+    Hearts = RGBA('f83b2f'),
+    Diamonds = RGBA('e29000'),
+    Spades = RGBA("4f31b9"),
+    Clubs = RGBA("008ee6"),
 }
 Color.SUITS = {
-    Hearts = HEX('FE5F55'),
-    Diamonds = HEX('FE5F55'),
-    Spades = HEX("374649"),
-    Clubs = HEX("424e54"),
+    Hearts = RGBA('FE5F55'),
+    Diamonds = RGBA('FE5F55'),
+    Spades = RGBA("374649"),
+    Clubs = RGBA("424e54"),
 }
 Color.UI = {
     TEXT_LIGHT = { 1, 1, 1, 1 },
-    TEXT_DARK = HEX("4F6367"),
-    TEXT_INACTIVE = HEX("88888899"),
-    BACKGROUND_LIGHT = HEX("B8D8D8"),
+    TEXT_DARK = RGBA("4F6367"),
+    TEXT_INACTIVE = RGBA("88888899"),
+    BACKGROUND_LIGHT = RGBA("B8D8D8"),
     BACKGROUND_WHITE = { 1, 1, 1, 1 },
-    BACKGROUND_DARK = HEX("7A9E9F"),
-    BACKGROUND_INACTIVE = HEX("666666FF"),
-    OUTLINE_LIGHT = HEX("D8D8D8"),
-    OUTLINE_LIGHT_TRANS = HEX("D8D8D866"),
-    OUTLINE_DARK = HEX("7A9E9F"),
-    TRANSPARENT_LIGHT = HEX("eeeeee22"),
-    TRANSPARENT_DARK = HEX("22222222"),
-    HOVER = HEX('00000055'),
+    BACKGROUND_DARK = RGBA("7A9E9F"),
+    BACKGROUND_INACTIVE = RGBA("666666FF"),
+    OUTLINE_LIGHT = RGBA("D8D8D8"),
+    OUTLINE_LIGHT_TRANS = RGBA("D8D8D866"),
+    OUTLINE_DARK = RGBA("7A9E9F"),
+    TRANSPARENT_LIGHT = RGBA("eeeeee22"),
+    TRANSPARENT_DARK = RGBA("22222222"),
+    HOVER = RGBA('00000055'),
 }
 Color.SET = {
-    Default = HEX("cdd9dc"),
-    Enhanced = HEX("cdd9dc"),
-    Joker = HEX('424e54'),
-    Tarot = HEX('424e54'), --HEX('29adff'),
-    Planet = HEX("424e54"),
-    Spectral = HEX('424e54'),
-    Voucher = HEX("424e54"),
+    Default = RGBA("cdd9dc"),
+    Enhanced = RGBA("cdd9dc"),
+    Joker = RGBA('424e54'),
+    Tarot = RGBA('424e54'), --RGBA('29adff'),
+    Planet = RGBA("424e54"),
+    Spectral = RGBA('424e54'),
+    Voucher = RGBA("424e54"),
 }
 Color.SECONDARY_SET = {
-    Default = HEX("9bb6bdFF"),
-    Enhanced = HEX("8389DDFF"),
-    Joker = HEX('708b91'),
-    Tarot = HEX('a782d1'), --HEX('29adff'),
-    Planet = HEX('13afce'),
-    Spectral = HEX('4584fa'),
-    Voucher = HEX("fd682b"),
-    Edition = HEX("4ca893"),
+    Default = RGBA("9bb6bdFF"),
+    Enhanced = RGBA("8389DDFF"),
+    Joker = RGBA('708b91'),
+    Tarot = RGBA('a782d1'), --RGBA('29adff'),
+    Planet = RGBA('13afce'),
+    Spectral = RGBA('4584fa'),
+    Voucher = RGBA("fd682b"),
+    Edition = RGBA("4ca893"),
 }
 Color.RARITY = {
-    HEX('009dff'), --HEX("708b91"),
-    HEX("4BC292"),
-    HEX('fe5f55'),
-    HEX("b26cbb")
+    RGBA('009dff'), --RGBA("708b91"),
+    RGBA("4BC292"),
+    RGBA('fe5f55'),
+    RGBA("b26cbb")
 }
 Color.BLIND = {
-    Small = HEX("50846e"),
-    Big = HEX("50846e"),
-    Boss = HEX("b44430"),
-    won = HEX("4f6367")
+    Small = RGBA("50846e"),
+    Big = RGBA("50846e"),
+    Boss = RGBA("b44430"),
+    won = RGBA("4f6367")
 }
 Color.HAND_LEVELS = {
-    HEX("efefef"),
-    HEX("95acff"),
-    HEX("65efaf"),
-    HEX('fae37e'),
-    HEX('ffc052'),
-    HEX('f87d75'),
-    HEX('caa0ef')
+    RGBA("efefef"),
+    RGBA("95acff"),
+    RGBA("65efaf"),
+    RGBA('fae37e'),
+    RGBA('ffc052'),
+    RGBA('f87d75'),
+    RGBA('caa0ef')
 }
 Color.BACKGROUND = {
     L = { 1, 1, 0, 1 },
-    D = HEX("374244"),
-    C = HEX("374244"),
+    D = RGBA("374244"),
+    C = RGBA("374244"),
     contrast = 1
 }
 
