@@ -100,8 +100,7 @@ end
 
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
 function App:start_up()
-    self.test = DynaText()
-    do return end
+    -- do return end
     boot_timer("start", "settings", 0.1)
     self:init_window()
     boot_timer('settings', 'window init', 0.2)
@@ -122,7 +121,7 @@ function App:start_up()
 
     boot_timer('splash prep', 'end', 1)
     self:splash_screen()
-
+    self.test = DynaText()
     -- love.resize(love.graphics.getWidth(), love.graphics.getHeight())
 end
 

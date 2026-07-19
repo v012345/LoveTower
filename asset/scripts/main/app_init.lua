@@ -58,10 +58,7 @@ function App:init()
         orig_scale = self.TILESCALE,
     }
 
-    self.ROOM = {
-        Node = nil,
-        ORIG = Transform(),
-    }
+
     --- 碰撞缓冲区, 在缓冲什么?
     self.COLLISION_BUFFER = 0.05
 
@@ -98,4 +95,9 @@ function App:init()
 
     self.fbf = false       -- frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧
     self.new_frame = false -- 是否是新的一帧, 如果为 true, 则渲染新的一帧, 否则渲染旧的一帧
+
+    self.ROOM = {
+        Node = nil,
+        ORIG = Transform(),
+    }
 end
