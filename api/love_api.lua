@@ -84,7 +84,7 @@ function love.Font:getHeight()
 end
 
 ---@return number
-function love.Font:getWidth()
+function love.Font:getWidth(text)
 end
 
 ---@param filename string
