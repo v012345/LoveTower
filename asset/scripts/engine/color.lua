@@ -170,5 +170,5 @@ Color.BACKGROUND = {
 
 
 Color.HAND_LEVELS[0] = Color.RED
-Color.UI_CHIPS = copy_table(Color.BLUE)
-Color.UI_MULT = copy_table(Color.RED)
+Color.UI_CHIPS = Color.BLUE
+Color.UI_MULT = Color.RED
