@@ -289,13 +289,14 @@ function DynaText:draw()
 
     prep_draw(self, 1)
     do
-        love.graphics.translate(self.strings[self.focused_string].W_offset + self.text_offset.x * self.font.FONTSCALE / Tile.instance.TILESIZE, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / Tile.instance.TILESIZE)
-        if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / Tile.instance.TILESIZE, 0) end
+        local tile_size = Tile.instance.TILESIZE
+        love.graphics.translate(self.strings[self.focused_string].W_offset + self.text_offset.x * self.font.FONTSCALE / tile_size, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / tile_size)
+        if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / tile_size, 0) end
         self.ARGS.draw_shadow_norm = self.ARGS.draw_shadow_norm or {}
         local _shadow_norm = self.ARGS.draw_shadow_norm
         _shadow_norm.x, _shadow_norm.y =
-            self.shadow_parrallax.x / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / Tile.instance.TILESIZE,
-            self.shadow_parrallax.y / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / Tile.instance.TILESIZE
+            self.shadow_parrallax.x / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / tile_size,
+            self.shadow_parrallax.y / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / tile_size
 
         for k, letter in ipairs(self.strings[self.focused_string].letters) do
             local real_pop_in = self.config.min_cycle_time == 0 and 1 or letter.pop_in
@@ -303,16 +304,16 @@ function DynaText:draw()
 
             love.graphics.draw(
                 letter.letter,
-                0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / Tile.instance.TILESIZE + _shadow_norm.x,
-                0.5 * (letter.dims.y - letter.offset.y) * self.font.FONTSCALE / Tile.instance.TILESIZE + _shadow_norm.y,
+                0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / tile_size + _shadow_norm.x,
+                0.5 * (letter.dims.y - letter.offset.y) * self.font.FONTSCALE / tile_size + _shadow_norm.y,
                 letter.r or 0,
-                real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
-                real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
+                real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / tile_size,
+                real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / tile_size,
                 0.5 * letter.dims.x / (self.scale),
                 0.5 * letter.dims.y / (self.scale)
             )
             love.graphics.print("fjaihgasljfoasij")
-            love.graphics.translate(letter.dims.x * self.font.FONTSCALE / Tile.instance.TILESIZE, 0)
+            love.graphics.translate(letter.dims.x * self.font.FONTSCALE / tile_size, 0)
         end
     end
     love.graphics.pop()
