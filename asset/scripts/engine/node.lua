@@ -284,8 +284,6 @@ end
 function Node:translate_container()
     if self.container and self.container ~= self then
         local unit_tile = Tile.instance:get_pixels_per_tile()
-        print(self)
-        print(self.container)
         local t = self.container.T
         local center_x, center_y = t.w * unit_tile * 0.5, t.h * unit_tile * 0.5
         love.graphics.translate(center_x, center_y)

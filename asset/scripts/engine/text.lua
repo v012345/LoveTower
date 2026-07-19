@@ -41,7 +41,7 @@ function DynaText:init(config)
         self:pop_out(4)
     end
 
-    Moveable.init(self, Transform(config.X or 0, config.Y or 0, config.W, config.H), App.instance.ROOM)
+    Moveable.init(self, Transform(config.X or 0, config.Y or 0, config.W, config.H), Room.instance:get_root_node())
 
     self.T.r = self.config.text_rot or 0
 
