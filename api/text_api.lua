@@ -57,11 +57,13 @@
 
 
 ---@class DynaTextString
----@field letters string
+---@field letters DynaTextLetter[]
 ---@field string string
 ---@field W_offset number
 ---@field H_offset number
 
+---@class DynaTextLetter
+---@field letter love.Text
 
 ---@param config? DynaTextConfig
 function DynaText(config) end

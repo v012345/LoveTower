@@ -3,6 +3,9 @@
 ---@class love
 love = love or {}
 
+---@class love.Text
+love.Text = love.Text or {}
+
 ---@class love.graphics
 love.graphics = love.graphics or {}
 
