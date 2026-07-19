@@ -7,6 +7,7 @@
 ---@field bump_amount number
 ---@field font FontConfig
 ---@field colours Color[]
+---@field strings DynaTextString[]
 
 ---@class DynaTextConfig
 ---@field X number
@@ -42,6 +43,14 @@
 ---@field FONTSCALE number
 ---@field squish number
 ---@field DESCSCALE number
+
+
+---@class DynaTextString
+---@field letters string
+---@field string string
+---@field W_offset number
+---@field H_offset number
+
 
 ---@param config? DynaTextConfig
 function DynaText(config) end
