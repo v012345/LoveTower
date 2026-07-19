@@ -298,9 +298,8 @@ function DynaText:draw()
         if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / tile_size, 0) end
         self.ARGS.draw_shadow_norm = self.ARGS.draw_shadow_norm or {}
         local _shadow_norm = self.ARGS.draw_shadow_norm
-        _shadow_norm.x, _shadow_norm.y =
-            self.shadow_parrallax.x / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / tile_size,
-            self.shadow_parrallax.y / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / tile_size
+        _shadow_norm.x = self.shadow_parrallax.x / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / tile_size
+        _shadow_norm.y = self.shadow_parrallax.y / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / tile_size
 
         for k, letter in ipairs(self.strings[self.focused_string].letters) do
             local real_pop_in = self.config.min_cycle_time == 0 and 1 or letter.pop_in
