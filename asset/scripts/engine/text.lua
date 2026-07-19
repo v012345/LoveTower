@@ -235,8 +235,8 @@ function DynaText:align_letters()
                 math.cos(95.123 * G.TIMERS.REAL * self.config.quiver.speed + k * 1233.2) -
                 math.sin(30.133421 * G.TIMERS.REAL * self.config.quiver.speed + k * 123.2))
         end
-        if self.config.float then letter.offset.y = (Settings.instance.reduced_motion and 0 or 1) * math.sqrt(self.scale) * (2 + (self.font.FONTSCALE / G.TILESIZE) * 2000 * math.sin(2.666 * G.TIMERS.REAL + 200 * k)) + 60 * (letter.scale - 1) end
-        if self.config.bump then letter.offset.y = (Settings.instance.reduced_motion and 0 or 1) * self.bump_amount * math.sqrt(self.scale) * 7 * math.max(0, (5 + self.bump_rate) * math.sin(self.bump_rate * G.TIMERS.REAL + 200 * k) - 3 - self.bump_rate) end
+        if self.config.float then letter.offset.y = (Settings.instance.reduced_motion and 0 or 1) * math.sqrt(self.scale) * (2 + (self.font.FONTSCALE / Tile.instance.TILESIZE) * 2000 * math.sin(2.666 * Timer.instance.REAL + 200 * k)) + 60 * (letter.scale - 1) end
+        if self.config.bump then letter.offset.y = (Settings.instance.reduced_motion and 0 or 1) * self.bump_amount * math.sqrt(self.scale) * 7 * math.max(0, (5 + self.bump_rate) * math.sin(self.bump_rate * Timer.instance.REAL + 200 * k) - 3 - self.bump_rate) end
     end
 end
 
