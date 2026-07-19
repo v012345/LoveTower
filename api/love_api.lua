@@ -88,6 +88,11 @@ end
 function love.Font:getWidth(text)
 end
 
+---@param font love.Font
+---@param text string
+---@return love.Text
+function love.graphics.newText(font, text) end
+
 ---@param filename string
 ---@param settings? { mipmaps: boolean, dpiscale: number }
 ---@return Image
