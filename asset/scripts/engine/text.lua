@@ -310,10 +310,15 @@ function DynaText:draw()
             0.5 * letter.dims.x / (self.scale),
             0.5 * letter.dims.y / (self.scale)
         )
+        love.graphics.print("fjaihgasljfoasij")
         love.graphics.translate(letter.dims.x * self.font.FONTSCALE / Tile.instance.TILESIZE, 0)
     end
     love.graphics.pop()
 
     add_to_drawhash(self)
     self:draw_boundingrect()
+end
+
+function DynaText:__tostring()
+    return "DynaText:" .. self.ID
 end
