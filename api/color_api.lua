@@ -11,9 +11,9 @@
 function Color(r, g, b, a) end
 
 ---@class RGBA : number[]
----@field r number
----@field g number
----@field b number
----@field a number
+---@param r number|table|string
+---@param g? number
+---@param b? number
+---@param a? number
 ---@return RGBA
 function RGBA(r, g, b, a) end
