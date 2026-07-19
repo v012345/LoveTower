@@ -3,7 +3,7 @@
 ---@class love
 love = love or {}
 
----@class love.Text
+---@class love.Text:love.Drawable
 love.Text = love.Text or {}
 
 ---@class love.graphics
@@ -61,19 +61,19 @@ function love.filesystem.createDirectory(path) end
 ---@return string path
 function love.filesystem.getSaveDirectory() end
 
----@class Image
-Image = {}
+---@class love.Image:love.Drawable
+love.Image = love.Image or {}
 
 ---@return number width
 ---@return number height
-function Image:getDimensions() end
+function love.Image:getDimensions() end
 
 ---@return number width
-function Image:getWidth()
+function love.Image:getWidth()
 end
 
 ---@return number height
-function Image:getHeight()
+function love.Image:getHeight()
 end
 
 ---@class love.Font
@@ -95,7 +95,7 @@ function love.graphics.newText(font, text) end
 
 ---@param filename string
 ---@param settings? { mipmaps: boolean, dpiscale: number }
----@return Image
+---@return love.Image
 function love.graphics.newImage(filename, settings)
 end
 
@@ -120,7 +120,7 @@ end
 function love.graphics.setColor(r, g, b, a)
 end
 
----@param drawable  Image
+---@param drawable  love.Drawable
 ---@param x         number
 ---@param y         number
 ---@param rotation? number
@@ -428,7 +428,7 @@ function love.window.updateMode(width, height, settings) end
 
 ---@class SpriteAtlas
 ---@field name string
----@field image Image
+---@field image love.Image
 ---@field px number
 ---@field py number
 
@@ -442,3 +442,8 @@ function love.window.updateMode(width, height, settings) end
 ---@field dir      number     方向
 ---@field offset   Coordinate 偏移
 ---@field colour   table      颜色
+
+
+
+
+---@class love.Drawable
