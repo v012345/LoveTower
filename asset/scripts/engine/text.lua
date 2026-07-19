@@ -134,10 +134,12 @@ function DynaText:update_text(first_pass)
         end
 
         if self.strings[k].W > self.config.W then
-            self.config.W = self.strings[k].W; self.strings[k].W_offset = 0
+            self.config.W = self.strings[k].W
+            self.strings[k].W_offset = 0
         end
         if self.strings[k].H > self.config.H then
-            self.config.H = self.strings[k].H; self.strings[k].H_offset = 0
+            self.config.H = self.strings[k].H
+            self.strings[k].H_offset = 0
         end
     end
 
