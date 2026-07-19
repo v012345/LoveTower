@@ -15,7 +15,7 @@
 ---@field W number
 ---@field H number
 ---@field scale number
----@field string string[]
+---@field string string[]|DynaTextConfigString[]
 ---@field maxw number
 ---@field colours Color[]
 ---@field float boolean
@@ -33,6 +33,16 @@
 ---@field reset_pop_in boolean
 
 
+
+
+---@class DynaTextConfigString
+---@field ref_table table
+---@field ref_value string
+---@field prefix string
+---@field suffix string
+---@field scale number
+---@field outer_colour Color
+---@field colour Color
 
 
 ---@class FontConfig
