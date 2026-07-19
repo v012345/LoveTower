@@ -118,7 +118,7 @@ function Font:init()
         end
     end
     for _, v in pairs(Language.instance.LANGUAGES) do
-        v.font = self.FONTS[v.font]
+        v.font = self.FONTS[v.font_id]
     end
 end
 
