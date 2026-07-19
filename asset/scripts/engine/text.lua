@@ -301,7 +301,6 @@ function DynaText:draw()
         for k, letter in ipairs(self.strings[self.focused_string].letters) do
             local real_pop_in = self.config.min_cycle_time == 0 and 1 or letter.pop_in
             love.graphics.setColor(letter.prefix or letter.suffix or letter.colour or self.colours[k % #self.colours + 1])
-
             love.graphics.draw(
                 letter.letter,
                 0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / tile_size + _shadow_norm.x,
