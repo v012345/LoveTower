@@ -30,6 +30,10 @@ function RGBA:init(r, g, b, a)
         self.b = b or 0
         self.a = a or 255
     end
+    self[1] = self.r
+    self[2] = self.g
+    self[3] = self.b
+    self[4] = self.a
 end
 
 function RGBA:get_r()
