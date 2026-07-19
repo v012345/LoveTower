@@ -1,4 +1,4 @@
----@class DynaText
+---@class (partial) DynaText: Moveable
 DynaText = Moveable:extend()
 
 ---@param config DynaTextConfig

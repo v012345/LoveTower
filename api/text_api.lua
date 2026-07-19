@@ -1,4 +1,4 @@
----@class DynaText : Moveable
+---@class (partial) DynaText:Moveable
 ---@field config DynaTextConfig
 ---@field shadow boolean
 ---@field scale number
