@@ -72,8 +72,8 @@
 ---@field offset Vec2
 ---@field dims Vec2
 ---@field pop_in number
----@field prefix string
----@field suffix string
+---@field prefix Color
+---@field suffix Color
 ---@field colour Color
 
 ---@param config? DynaTextConfig
