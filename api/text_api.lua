@@ -64,7 +64,7 @@
 ---@field H_offset number
 ---@field W number
 ---@field H number
----@field r number 
+
 
 ---@class DynaTextLetter
 ---@field letter love.Text
@@ -76,6 +76,7 @@
 ---@field prefix Color
 ---@field suffix Color
 ---@field colour Color
+---@field r number 
 
 ---@param config? DynaTextConfig
 function DynaText(config) end
