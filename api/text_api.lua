@@ -1,7 +1,7 @@
 ---@class (partial) DynaText:Moveable
 ---@field config DynaTextConfig
 ---@field shadow boolean 是否显示阴影
----@field scale number
+---@field scale number 整体缩放比例, 如果设置了 maxw 且 W > maxw, 则此缩放比例会根据 maxw 自动计算
 ---@field pop_in_rate number
 ---@field bump_rate number
 ---@field bump_amount number
@@ -62,7 +62,7 @@
 ---@field string string
 ---@field W_offset number
 ---@field H_offset number
----@field W number 每个字符的宽度的总和
+---@field W number letters 中的字符串在经过 update_text 后, 计算出的最大宽度
 ---@field H number
 
 
