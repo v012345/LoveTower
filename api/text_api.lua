@@ -40,7 +40,7 @@
 ---@field ref_value string 引用值
 ---@field prefix string
 ---@field suffix string
----@field scale number
+---@field scale number 此字符串的自己的缩放比例
 ---@field outer_colour Color
 ---@field colour Color
 ---@field string string 如果 ref_table[ref_value] 不存在, 则使用此 string
@@ -76,7 +76,7 @@
 ---@field prefix Color
 ---@field suffix Color
 ---@field colour Color
----@field r number 
+---@field r number
 
 ---@param config? DynaTextConfig
 function DynaText(config) end
