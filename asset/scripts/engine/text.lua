@@ -78,7 +78,7 @@ function DynaText:update_text(first_pass)
             local new_string = v
             local outer_colour = nil
             local inner_colour = nil
-            local part_scale = 1 -- 此字符串的自己的缩放比例
+            local part_scale = 1 -- 此字符串的自己的缩放比例, 来自己 DynaTextConfigString 的 scale 属性
             if type(v) == 'table' and (v.ref_table or v.string) then
                 new_string = (v.prefix or '') .. tostring(v.ref_table and v.ref_table[v.ref_value] or v.string) .. (v.suffix or '')
                 part_a = #(v.prefix or '')
