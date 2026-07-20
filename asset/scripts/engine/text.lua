@@ -110,15 +110,16 @@ function DynaText:update_text(first_pass)
                 local current_letter = 1
                 self.strings[k].letters = {} --EMPTY(self.strings[k].letters)
                 local tile_scale = Tile.instance.TILESCALE
+                local font_scale = self.font.FONTSCALE
 
                 for _, c in utf8.chars(v) do
                     local old_letter = old_letters and old_letters[current_letter] or nil
                     local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = old_letter and old_letter.scale or part_scale }
                     self.strings[k].letters[current_letter] = let_tab
-                    local tx = self.font.FONT:getWidth(c) * self.scale * part_scale * tile_scale * self.font.FONTSCALE + 2.7 * (self.config.spacing or 0) * tile_scale * self.font.FONTSCALE
-                    local ty = self.font.FONT:getHeight() * self.scale * part_scale * tile_scale * self.font.FONTSCALE * self.font.TEXT_HEIGHT_SCALE
+                    local tx = self.font.FONT:getWidth(c) * self.scale * part_scale * tile_scale * font_scale + 2.7 * (self.config.spacing or 0) * tile_scale * font_scale
+                    local ty = self.font.FONT:getHeight() * self.scale * part_scale * tile_scale * font_scale * self.font.TEXT_HEIGHT_SCALE
                     let_tab.offset = old_letter and old_letter.offset or { x = 0, y = 0 }
-                    let_tab.dims = { x = tx / (self.font.FONTSCALE * tile_scale), y = ty / (self.font.FONTSCALE * tile_scale) }
+                    let_tab.dims = { x = tx / (font_scale * tile_scale), y = ty / (font_scale * tile_scale) }
                     let_tab.pop_in = first_pass and (old_letter and old_letter.pop_in or (self.config.pop_in and 0 or 1)) or 1
                     let_tab.prefix = current_letter <= part_a and outer_colour or nil
                     let_tab.suffix = current_letter > part_b and outer_colour or nil
