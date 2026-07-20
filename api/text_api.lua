@@ -12,7 +12,7 @@
 ---@class DynaTextConfig
 ---@field X number
 ---@field Y number
----@field W number
+---@field W number string 中的字符串在经过 update_text 后, 计算出的最大宽度
 ---@field H number
 ---@field scale number
 ---@field string string[]|DynaTextConfigString[]
@@ -62,7 +62,7 @@
 ---@field string string
 ---@field W_offset number
 ---@field H_offset number
----@field W number letters 中的字符串在经过 update_text 后, 计算出的最大宽度
+---@field W number letters 中的字符串在经过 update_text 后, 计算出的宽度
 ---@field H number
 
 
