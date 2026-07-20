@@ -62,7 +62,7 @@
 ---@field string string
 ---@field W_offset number
 ---@field H_offset number
----@field W number
+---@field W number 每个字符的宽度的总和
 ---@field H number
 
 
