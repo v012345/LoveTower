@@ -64,8 +64,8 @@
 ---@field string string
 ---@field W_offset number
 ---@field H_offset number
----@field W number letters 中的字符串在经过 update_text 后, 计算出的宽度
----@field H number
+---@field W number letters 中的字符串在经过 update_text 后, 计算出的以 Tile 为单位的宽度
+---@field H number letters 中的字符串在经过 update_text 后, 计算出的以 Tile 为单位的高度
 
 
 ---@class DynaTextLetter
