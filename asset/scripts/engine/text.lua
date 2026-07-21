@@ -103,12 +103,20 @@ function DynaText:init_string()
 
         for _, c in utf8.chars(new_string) do
             local letters = {}
-            local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = part_scale }
-            let_tab.dims = {
-                x = self.font.FONT:getWidth(c) * self.scale * part_scale + 2.7 * self.config.spacing,
-                y = self.font.FONT:getHeight() * self.scale * part_scale * self.font.TEXT_HEIGHT_SCALE
+            ---@type DynaTextLetter
+            local let_tab = {
+                letter = love.graphics.newText(self.font.FONT, c),
+                char = c,
+                scale = part_scale,
+                r = 0,
+                offset = { x = 0, y = 0 },
+                dims = {
+                    x = self.font.FONT:getWidth(c) * self.scale * part_scale + 2.7 * self.config.spacing,
+                    y = self.font.FONT:getHeight() * self.scale * part_scale * self.font.TEXT_HEIGHT_SCALE
+                },
+                pop_in = 1
             }
-            let_tab.offset = { x = 0, y = 0 }
+
             let_tab.prefix = current_letter <= part_a and outer_colour or nil
             let_tab.suffix = current_letter > part_b and outer_colour or nil
             let_tab.colour = inner_colour or nil
@@ -119,7 +127,7 @@ function DynaText:init_string()
             current_letter = current_letter + 1
         end
 
-  
+
 
 
 
@@ -136,13 +144,12 @@ function DynaText:init_string()
         end
     end
 
-    
+
     if self.config.maxw and self.config.W > self.config.maxw then
         self.scale = self.scale * (self.config.maxw / self.config.W)
         for k, v in ipairs(self.strings) do
-            
-        end
 
+        end
     end
 
     self.T.w = self.config.W
