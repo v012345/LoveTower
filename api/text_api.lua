@@ -16,7 +16,7 @@
 ---@field H number
 ---@field scale number
 ---@field string string[]|DynaTextConfigString[]
----@field maxw number
+---@field maxw? number 如果设置了, 则当字符串的宽度大于 maxw 时, 会自动缩放字符串, 以适应到 maxw 的宽度
 ---@field colours Color[]
 ---@field float boolean
 ---@field shadow boolean 是否显示阴影

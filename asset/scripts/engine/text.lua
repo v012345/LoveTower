@@ -33,11 +33,6 @@ function DynaText:init(config)
     self.focused_string = 1
 
     self:init_string()
-    if self.config.maxw and self.config.W > self.config.maxw then
-        self.start_pop_in = self.config.pop_in
-        self.scale = self.scale * (self.config.maxw / self.config.W)
-        self:init_string()
-    end
 
     if #self.strings > 1 then
         self.pop_delay = self.config.pop_delay or 1.5
@@ -126,6 +121,10 @@ function DynaText:init_string()
 
         self.strings[k].W = tempW
         self.strings[k].H = tempH
+
+        if self.config.maxw and self.strings[k].W > self.config.maxw then
+            self.scale = self.scale * (self.config.maxw / self.strings[k].W)
+        end
 
         if self.strings[k].W > self.config.W then
             self.config.W = self.strings[k].W
