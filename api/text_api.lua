@@ -32,6 +32,7 @@
 ---@field pop_delay number
 ---@field text_rot number
 ---@field reset_pop_in boolean
+---@field spacing number 字符间距
 
 
 
