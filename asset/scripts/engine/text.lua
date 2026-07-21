@@ -111,15 +111,15 @@ function DynaText:init_string()
                 r = 0,
                 offset = { x = 0, y = 0 },
                 dims = {
-                    x = self.font.FONT:getWidth(c) * self.scale * part_scale + 2.7 * self.config.spacing,
-                    y = self.font.FONT:getHeight() * self.scale * part_scale * self.font.TEXT_HEIGHT_SCALE
+                    x = (self.font.FONT:getWidth(c) * part_scale + 2.7 * self.config.spacing) * self.scale,
+                    y = self.font.FONT:getHeight() * part_scale * self.font.TEXT_HEIGHT_SCALE * self.scale
                 },
-                pop_in = 1
+                pop_in = 1,
+                prefix = current_letter <= part_a and outer_colour or nil,
+                suffix = current_letter > part_b and outer_colour or nil,
+                inner_colour or nil
             }
 
-            let_tab.prefix = current_letter <= part_a and outer_colour or nil
-            let_tab.suffix = current_letter > part_b and outer_colour or nil
-            let_tab.colour = inner_colour or nil
             tempW = tempW + let_tab.dims.x * font_scale / Tile.instance.TILESIZE
             tempH = math.max(let_tab.dims.y * font_scale / Tile.instance.TILESIZE, tempH)
             letters[current_letter] = let_tab
@@ -146,10 +146,12 @@ function DynaText:init_string()
 
 
     if self.config.maxw and self.config.W > self.config.maxw then
-        self.scale = self.scale * (self.config.maxw / self.config.W)
+        local old_scale = self.scale
+        local new_scale = self.scale * (self.config.maxw / self.config.W)
         for k, v in ipairs(self.strings) do
-
+            v.letters.dims.x = new_scale
         end
+        self.scale = new_scale
     end
 
     self.T.w = self.config.W
