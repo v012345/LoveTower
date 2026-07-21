@@ -119,12 +119,13 @@ function DynaText:init_string()
             current_letter = current_letter + 1
         end
 
+  
+
+
+
+
         self.strings[k].W = tempW
         self.strings[k].H = tempH
-
-        if self.config.maxw and self.strings[k].W > self.config.maxw then
-            self.scale = self.scale * (self.config.maxw / self.strings[k].W)
-        end
 
         if self.strings[k].W > self.config.W then
             self.config.W = self.strings[k].W
@@ -134,6 +135,10 @@ function DynaText:init_string()
         end
     end
 
+    
+    if self.config.maxw and self.config.W > self.config.maxw then
+        self.scale = self.scale * (self.config.maxw / self.config.W)
+    end
 
     self.T.w = self.config.W
     self.T.h = self.config.H
