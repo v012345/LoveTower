@@ -73,12 +73,12 @@ function DynaText:init_string()
     self.config.W = 0
     self.config.H = 0
     for k, v in ipairs(self.config.string) do
-        local part_a = 0 -- 前缀的索引
+        local part_a = 0       -- 前缀的索引
         local part_b = 1000000 -- 后缀的索引
-        local new_string = v
+        local new_string = nil 
         local outer_colour = nil
         local inner_colour = nil
-        local part_scale = 1     -- 此字符串的自己的缩放比例, 来自己 DynaTextConfigString 的 scale 属性
+        local part_scale = 1 -- 此字符串的自己的缩放比例, 来自己 DynaTextConfigString 的 scale 属性
         -- 如果 v 是一个表, 就把 v 解出来, 转为一个字符串
         if type(v) == 'table' and (v.ref_table or v.string) then
             new_string = v.prefix .. tostring(v.ref_table and v.ref_table[v.ref_value] or v.string) .. v.suffix
@@ -87,7 +87,8 @@ function DynaText:init_string()
             part_scale = v.scale
             outer_colour = v.outer_colour or nil
             inner_colour = v.colour or nil
-            v = new_string
+        else
+            new_string = v --[[@as string]]
         end
 
         self.strings[k] = self.strings[k] or {}
@@ -100,17 +101,17 @@ function DynaText:init_string()
             self.config.pop_in = self.config.pop_in or 0
             self.created_time = Timer.instance.REAL
         end
-        self.strings[k].string = v
+        self.strings[k].string = new_string
         local old_letters = self.strings[k].letters
         local tempW = 0
         local tempH = 0
-        local current_letter = 1         -- 当前字符的索引
-        self.strings[k].letters = {}     --EMPTY(self.strings[k].letters)
+        local current_letter = 1     -- 当前字符的索引
+        self.strings[k].letters = {} --EMPTY(self.strings[k].letters)
         local tile_scale = Tile.instance.TILESCALE
         local font_scale = self.font.FONTSCALE
         local letter_scale = tile_scale * font_scale
 
-        for _, c in utf8.chars(v) do
+        for _, c in utf8.chars(new_string) do
             local old_letter = old_letters and old_letters[current_letter] or nil
             local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = old_letter and old_letter.scale or part_scale }
             self.strings[k].letters[current_letter] = let_tab
