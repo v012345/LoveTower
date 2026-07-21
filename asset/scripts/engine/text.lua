@@ -79,14 +79,12 @@ function DynaText:init_string()
         local inner_colour = nil
         local part_scale = 1     -- 此字符串的自己的缩放比例, 来自己 DynaTextConfigString 的 scale 属性
         if type(v) == 'table' and (v.ref_table or v.string) then
-            new_string = (v.prefix or '') .. tostring(v.ref_table and v.ref_table[v.ref_value] or v.string) .. (v.suffix or '')
-            part_a = #(v.prefix or '')
-            part_b = #new_string - #(v.suffix or '')
-            if v.scale then part_scale = v.scale end
-
+            new_string = v.prefix .. tostring(v.ref_table and v.ref_table[v.ref_value] or v.string) .. v.suffix
+            part_a = #v.prefix
+            part_b = #new_string - #v.suffix
+            part_scale = v.scale
             outer_colour = v.outer_colour or nil
             inner_colour = v.colour or nil
-
             v = new_string
         end
 

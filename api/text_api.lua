@@ -41,7 +41,7 @@
 ---@field prefix string
 ---@field suffix string
 ---@field scale number 此字符串的自己的缩放比例
----@field outer_colour Color
+---@field outer_colour Color 
 ---@field colour Color
 ---@field string string 如果 ref_table[ref_value] 不存在, 则使用此 string
 
