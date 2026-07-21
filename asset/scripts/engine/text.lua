@@ -114,11 +114,9 @@ function DynaText:init_string()
                 y = self.font.FONT:getHeight() * self.scale * part_scale * self.font.TEXT_HEIGHT_SCALE
             }
             let_tab.offset = { x = 0, y = 0 }
-            let_tab.pop_in = self.config.pop_in and 0 or 1
             let_tab.prefix = current_letter <= part_a and outer_colour or nil
             let_tab.suffix = current_letter > part_b and outer_colour or nil
             let_tab.colour = inner_colour or nil
-            if k > 1 then let_tab.pop_in = 0 end
             tempW = tempW + let_tab.dims.x * font_scale / Tile.instance.TILESIZE
             tempH = math.max(let_tab.dims.y * font_scale / Tile.instance.TILESIZE, tempH)
             letters[current_letter] = let_tab
@@ -137,16 +135,9 @@ function DynaText:init_string()
         end
     end
 
-    if (self.T.w ~= self.config.W or self.T.h ~= self.config.H) and self.reset_pop_in then
-        self.ui_object_updated = true
-        self.non_recalc = self.config.non_recalc
-    end
+
     self.T.w = self.config.W
     self.T.h = self.config.H
-
-
-    self.reset_pop_in = false
-    self.start_pop_in = false
 
     for k, v in ipairs(self.strings) do
         v.W_offset = 0.5 * (self.config.W - v.W)
