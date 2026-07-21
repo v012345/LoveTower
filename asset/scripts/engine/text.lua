@@ -139,12 +139,26 @@ function DynaText:init_string()
 
         if self.strings[k].W > self.config.W then
             self.config.W = self.strings[k].W
-            self.strings[k].W_offset = 0
         end
         if self.strings[k].H > self.config.H then
             self.config.H = self.strings[k].H
-            self.strings[k].H_offset = 0
         end
+    end
+    if self.T then
+        if (self.T.w ~= self.config.W or self.T.h ~= self.config.H) and self.reset_pop_in then
+            self.ui_object_updated = true
+            self.non_recalc = self.config.non_recalc
+        end
+        self.T.w = self.config.W
+        self.T.h = self.config.H
+    end
+
+    self.reset_pop_in = false
+    self.start_pop_in = false
+
+    for k, v in ipairs(self.strings) do
+        v.W_offset = 0.5 * (self.config.W - v.W)
+        v.H_offset = 0.5 * (self.config.H - v.H + (self.config.offset_y or 0))
     end
 end
 
