@@ -22,6 +22,7 @@
 ---@field shadow boolean 是否显示阴影
 ---@field silent boolean
 ---@field pop_in number
+---@field pop_out number
 ---@field pop_in_rate number
 ---@field bump_rate number
 ---@field bump_amount number
