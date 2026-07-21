@@ -100,15 +100,6 @@ function DynaText:init_string()
             W_offset = 0,
             H_offset = 0,
         }
-        if self.start_pop_in then self.reset_pop_in = true end
-        self.reset_pop_in = self.reset_pop_in or self.config.reset_pop_in
-        if not self.reset_pop_in then
-            self.config.pop_out = nil
-            self.config.pop_in = nil
-        else
-            self.config.pop_in = self.config.pop_in or 0
-            self.created_time = Timer.instance.REAL
-        end
         self.strings[k].string = new_string
         local tempW = 0
         local tempH = 0
