@@ -115,7 +115,7 @@ function DynaText:update_text(first_pass)
 
                 for _, c in utf8.chars(v) do
                     local old_letter = old_letters and old_letters[current_letter] or nil
-                    local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = part_scale }
+                    local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = old_letter and old_letter.scale or part_scale }
                     self.strings[k].letters[current_letter] = let_tab
                     local tx = self.font.FONT:getWidth(c) * self.scale * part_scale * letter_scale + 2.7 * (self.config.spacing or 0) * letter_scale
                     local ty = self.font.FONT:getHeight() * self.scale * part_scale * letter_scale * self.font.TEXT_HEIGHT_SCALE
