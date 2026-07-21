@@ -75,7 +75,7 @@ function DynaText:init_string()
     for k, v in ipairs(self.config.string) do
         local part_a = 0       -- 前缀的索引
         local part_b = 1000000 -- 后缀的索引
-        local new_string = nil 
+        local new_string = nil
         local outer_colour = nil
         local inner_colour = nil
         local part_scale = 1 -- 此字符串的自己的缩放比例, 来自己 DynaTextConfigString 的 scale 属性
@@ -111,7 +111,7 @@ function DynaText:init_string()
         self.strings[k].string = new_string
         local tempW = 0
         local tempH = 0
-        local current_letter = 1     -- 当前字符的索引
+        local current_letter = 1 -- 当前字符的索引
         local tile_scale = Tile.instance.TILESCALE
         local font_scale = self.font.FONTSCALE
         local letter_scale = tile_scale * font_scale
@@ -119,8 +119,8 @@ function DynaText:init_string()
         for _, c in utf8.chars(new_string) do
             local letters = {}
             local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = part_scale }
-            local tx = self.font.FONT:getWidth(c) * self.scale * part_scale * letter_scale + 2.7 * (self.config.spacing or 0) * letter_scale
-            local ty = self.font.FONT:getHeight() * self.scale * part_scale * letter_scale * self.font.TEXT_HEIGHT_SCALE
+            local tx = (self.font.FONT:getWidth(c) * self.scale * part_scale + 2.7 * self.config.spacing) * letter_scale
+            local ty = self.font.FONT:getHeight() * self.scale * part_scale * self.font.TEXT_HEIGHT_SCALE * letter_scale
             let_tab.offset = { x = 0, y = 0 }
             let_tab.dims = { x = tx / letter_scale, y = ty / letter_scale }
             let_tab.pop_in = self.config.pop_in and 0 or 1
