@@ -73,65 +73,63 @@ function DynaText:init_string()
     self.config.W = 0
     self.config.H = 0
     for k, v in ipairs(self.config.string) do
-        if (type(v) == 'table' and v.ref_table) then
-            local part_a, part_b = 0, 1000000
-            local new_string = v
-            local outer_colour = nil
-            local inner_colour = nil
-            local part_scale = 1 -- 此字符串的自己的缩放比例, 来自己 DynaTextConfigString 的 scale 属性
-            if type(v) == 'table' and (v.ref_table or v.string) then
-                new_string = (v.prefix or '') .. tostring(v.ref_table and v.ref_table[v.ref_value] or v.string) .. (v.suffix or '')
-                part_a = #(v.prefix or '')
-                part_b = #new_string - #(v.suffix or '')
-                if v.scale then part_scale = v.scale end
+        local part_a, part_b = 0, 1000000
+        local new_string = v
+        local outer_colour = nil
+        local inner_colour = nil
+        local part_scale = 1     -- 此字符串的自己的缩放比例, 来自己 DynaTextConfigString 的 scale 属性
+        if type(v) == 'table' and (v.ref_table or v.string) then
+            new_string = (v.prefix or '') .. tostring(v.ref_table and v.ref_table[v.ref_value] or v.string) .. (v.suffix or '')
+            part_a = #(v.prefix or '')
+            part_b = #new_string - #(v.suffix or '')
+            if v.scale then part_scale = v.scale end
 
-                outer_colour = v.outer_colour or nil
-                inner_colour = v.colour or nil
+            outer_colour = v.outer_colour or nil
+            inner_colour = v.colour or nil
 
-                v = new_string
-            end
-
-            self.strings[k] = self.strings[k] or {}
-            if self.start_pop_in then self.reset_pop_in = true end
-            self.reset_pop_in = self.reset_pop_in or self.config.reset_pop_in
-            if not self.reset_pop_in then
-                self.config.pop_out = nil
-                self.config.pop_in = nil
-            else
-                self.config.pop_in = self.config.pop_in or 0
-                self.created_time = Timer.instance.REAL
-            end
-            self.strings[k].string = v
-            local old_letters = self.strings[k].letters
-            local tempW = 0
-            local tempH = 0
-            local current_letter = 1         -- 当前字符的索引
-            self.strings[k].letters = {}     --EMPTY(self.strings[k].letters)
-            local tile_scale = Tile.instance.TILESCALE
-            local font_scale = self.font.FONTSCALE
-            local letter_scale = tile_scale * font_scale
-
-            for _, c in utf8.chars(v) do
-                local old_letter = old_letters and old_letters[current_letter] or nil
-                local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = old_letter and old_letter.scale or part_scale }
-                self.strings[k].letters[current_letter] = let_tab
-                local tx = self.font.FONT:getWidth(c) * self.scale * part_scale * letter_scale + 2.7 * (self.config.spacing or 0) * letter_scale
-                local ty = self.font.FONT:getHeight() * self.scale * part_scale * letter_scale * self.font.TEXT_HEIGHT_SCALE
-                let_tab.offset = old_letter and old_letter.offset or { x = 0, y = 0 }
-                let_tab.dims = { x = tx / letter_scale, y = ty / letter_scale }
-                let_tab.pop_in = first_pass and (old_letter and old_letter.pop_in or (self.config.pop_in and 0 or 1)) or 1
-                let_tab.prefix = current_letter <= part_a and outer_colour or nil
-                let_tab.suffix = current_letter > part_b and outer_colour or nil
-                let_tab.colour = inner_colour or nil
-                if k > 1 then let_tab.pop_in = 0 end
-                tempW = tempW + tx / (Tile.instance.TILESIZE * tile_scale)
-                tempH = math.max(ty / (Tile.instance.TILESIZE * tile_scale), tempH)
-                current_letter = current_letter + 1
-            end
-
-            self.strings[k].W = tempW
-            self.strings[k].H = tempH
+            v = new_string
         end
+
+        self.strings[k] = self.strings[k] or {}
+        if self.start_pop_in then self.reset_pop_in = true end
+        self.reset_pop_in = self.reset_pop_in or self.config.reset_pop_in
+        if not self.reset_pop_in then
+            self.config.pop_out = nil
+            self.config.pop_in = nil
+        else
+            self.config.pop_in = self.config.pop_in or 0
+            self.created_time = Timer.instance.REAL
+        end
+        self.strings[k].string = v
+        local old_letters = self.strings[k].letters
+        local tempW = 0
+        local tempH = 0
+        local current_letter = 1         -- 当前字符的索引
+        self.strings[k].letters = {}     --EMPTY(self.strings[k].letters)
+        local tile_scale = Tile.instance.TILESCALE
+        local font_scale = self.font.FONTSCALE
+        local letter_scale = tile_scale * font_scale
+
+        for _, c in utf8.chars(v) do
+            local old_letter = old_letters and old_letters[current_letter] or nil
+            local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = old_letter and old_letter.scale or part_scale }
+            self.strings[k].letters[current_letter] = let_tab
+            local tx = self.font.FONT:getWidth(c) * self.scale * part_scale * letter_scale + 2.7 * (self.config.spacing or 0) * letter_scale
+            local ty = self.font.FONT:getHeight() * self.scale * part_scale * letter_scale * self.font.TEXT_HEIGHT_SCALE
+            let_tab.offset = old_letter and old_letter.offset or { x = 0, y = 0 }
+            let_tab.dims = { x = tx / letter_scale, y = ty / letter_scale }
+            let_tab.pop_in = first_pass and (old_letter and old_letter.pop_in or (self.config.pop_in and 0 or 1)) or 1
+            let_tab.prefix = current_letter <= part_a and outer_colour or nil
+            let_tab.suffix = current_letter > part_b and outer_colour or nil
+            let_tab.colour = inner_colour or nil
+            if k > 1 then let_tab.pop_in = 0 end
+            tempW = tempW + tx / (Tile.instance.TILESIZE * tile_scale)
+            tempH = math.max(ty / (Tile.instance.TILESIZE * tile_scale), tempH)
+            current_letter = current_letter + 1
+        end
+
+        self.strings[k].W = tempW
+        self.strings[k].H = tempH
 
         if self.strings[k].W > self.config.W then
             self.config.W = self.strings[k].W
