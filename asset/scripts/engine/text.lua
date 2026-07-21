@@ -68,6 +68,12 @@ function DynaText:update(dt)
     self:align_letters()
 end
 
+--- update_text 的 first_pass 为 true 使用这个函数来初始化字符串, 目的是分享 update_text 的耦合关系
+function DynaText:init_string()
+    self.config.W = 0
+    self.config.H = 0
+end
+
 function DynaText:update_text(first_pass)
     self.config.W = 0
     self.config.H = 0
