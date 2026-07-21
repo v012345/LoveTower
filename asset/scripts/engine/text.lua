@@ -73,11 +73,13 @@ function DynaText:init_string()
     self.config.W = 0
     self.config.H = 0
     for k, v in ipairs(self.config.string) do
-        local part_a, part_b = 0, 1000000
+        local part_a = 0 -- 前缀的索引
+        local part_b = 1000000 -- 后缀的索引
         local new_string = v
         local outer_colour = nil
         local inner_colour = nil
         local part_scale = 1     -- 此字符串的自己的缩放比例, 来自己 DynaTextConfigString 的 scale 属性
+        -- 如果 v 是一个表, 就把 v 解出来, 转为一个字符串
         if type(v) == 'table' and (v.ref_table or v.string) then
             new_string = v.prefix .. tostring(v.ref_table and v.ref_table[v.ref_value] or v.string) .. v.suffix
             part_a = #v.prefix
