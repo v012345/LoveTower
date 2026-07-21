@@ -107,7 +107,7 @@ function DynaText:update_text(first_pass)
                 local old_letters = self.strings[k].letters
                 local tempW = 0
                 local tempH = 0
-                local current_letter = 1
+                local current_letter = 1 -- 当前字符的索引
                 self.strings[k].letters = {} --EMPTY(self.strings[k].letters)
                 local tile_scale = Tile.instance.TILESCALE
                 local font_scale = self.font.FONTSCALE
@@ -115,7 +115,7 @@ function DynaText:update_text(first_pass)
 
                 for _, c in utf8.chars(v) do
                     local old_letter = old_letters and old_letters[current_letter] or nil
-                    local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = old_letter and old_letter.scale or part_scale }
+                    local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = part_scale }
                     self.strings[k].letters[current_letter] = let_tab
                     local tx = self.font.FONT:getWidth(c) * self.scale * part_scale * letter_scale + 2.7 * (self.config.spacing or 0) * letter_scale
                     local ty = self.font.FONT:getHeight() * self.scale * part_scale * letter_scale * self.font.TEXT_HEIGHT_SCALE
