@@ -126,6 +126,7 @@ function DynaText:init_string()
 
         self.strings[k].W = tempW
         self.strings[k].H = tempH
+        -- self.config.W 和 self.config.H 是所有字符串中最大的宽度和高度
 
         if self.strings[k].W > self.config.W then
             self.config.W = self.strings[k].W
