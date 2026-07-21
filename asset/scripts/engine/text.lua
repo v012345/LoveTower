@@ -112,27 +112,26 @@ function DynaText:init_string()
         local tempW = 0
         local tempH = 0
         local current_letter = 1 -- 当前字符的索引
-        local tile_scale = Tile.instance.TILESCALE
         local font_scale = self.font.FONTSCALE
-        local letter_scale = tile_scale * font_scale
 
         for _, c in utf8.chars(new_string) do
             local letters = {}
             local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = part_scale }
-            local tx = (self.font.FONT:getWidth(c) * self.scale * part_scale + 2.7 * self.config.spacing) * letter_scale
-            local ty = self.font.FONT:getHeight() * self.scale * part_scale * self.font.TEXT_HEIGHT_SCALE * letter_scale
+            let_tab.dims = {
+                x = self.font.FONT:getWidth(c) * self.scale * part_scale + 2.7 * self.config.spacing,
+                y = self.font.FONT:getHeight() * self.scale * part_scale * self.font.TEXT_HEIGHT_SCALE
+            }
             let_tab.offset = { x = 0, y = 0 }
-            let_tab.dims = { x = tx / letter_scale, y = ty / letter_scale }
             let_tab.pop_in = self.config.pop_in and 0 or 1
             let_tab.prefix = current_letter <= part_a and outer_colour or nil
             let_tab.suffix = current_letter > part_b and outer_colour or nil
             let_tab.colour = inner_colour or nil
             if k > 1 then let_tab.pop_in = 0 end
-            tempW = tempW + tx / (Tile.instance.TILESIZE * tile_scale)
-            tempH = math.max(ty / (Tile.instance.TILESIZE * tile_scale), tempH)
-            current_letter = current_letter + 1
+            tempW = tempW + let_tab.dims.x * font_scale / Tile.instance.TILESIZE
+            tempH = math.max(let_tab.dims.y * font_scale / Tile.instance.TILESIZE, tempH)
             letters[current_letter] = let_tab
             self.strings[k].letters = letters
+            current_letter = current_letter + 1
         end
 
         self.strings[k].W = tempW
