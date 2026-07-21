@@ -5,6 +5,7 @@ DynaText = Moveable:extend()
 ---@private 初始化在 __call 中被调用
 ---@param config DynaTextConfig
 function DynaText:init(config)
+    Moveable.init(self, Transform(), Room.instance:get_root_node())
     config = config or {}
     self.config = config
     self.shadow = config.shadow
@@ -31,11 +32,11 @@ function DynaText:init(config)
     self.strings = {}
     self.focused_string = 1
 
-    self:update_text(true)
+    self:init_string()
     if self.config.maxw and self.config.W > self.config.maxw then
         self.start_pop_in = self.config.pop_in
         self.scale = self.scale * (self.config.maxw / self.config.W)
-        self:update_text(true)
+        self:init_string()
     end
 
     if #self.strings > 1 then
@@ -43,7 +44,7 @@ function DynaText:init(config)
         self:pop_out(4)
     end
 
-    Moveable.init(self, Transform(config.X or 0, config.Y or 0, config.W, config.H), Room.instance:get_root_node())
+
 
     self.T.r = self.config.text_rot or 0
 
@@ -144,14 +145,14 @@ function DynaText:init_string()
             self.config.H = self.strings[k].H
         end
     end
-    if self.T then
-        if (self.T.w ~= self.config.W or self.T.h ~= self.config.H) and self.reset_pop_in then
-            self.ui_object_updated = true
-            self.non_recalc = self.config.non_recalc
-        end
-        self.T.w = self.config.W
-        self.T.h = self.config.H
+
+    if (self.T.w ~= self.config.W or self.T.h ~= self.config.H) and self.reset_pop_in then
+        self.ui_object_updated = true
+        self.non_recalc = self.config.non_recalc
     end
+    self.T.w = self.config.W
+    self.T.h = self.config.H
+
 
     self.reset_pop_in = false
     self.start_pop_in = false
