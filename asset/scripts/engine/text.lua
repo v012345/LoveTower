@@ -139,6 +139,10 @@ function DynaText:init_string()
     
     if self.config.maxw and self.config.W > self.config.maxw then
         self.scale = self.scale * (self.config.maxw / self.config.W)
+        for k, v in ipairs(self.strings) do
+            
+        end
+
     end
 
     self.T.w = self.config.W
