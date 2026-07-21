@@ -91,7 +91,14 @@ function DynaText:init_string()
             new_string = v --[[@as string]]
         end
 
-        self.strings[k] = self.strings[k] or {}
+        self.strings[k] = {
+            string = new_string,
+            letters = {},
+            W = 0,
+            H = 0,
+            W_offset = 0,
+            H_offset = 0,
+        }
         if self.start_pop_in then self.reset_pop_in = true end
         self.reset_pop_in = self.reset_pop_in or self.config.reset_pop_in
         if not self.reset_pop_in then
@@ -102,24 +109,21 @@ function DynaText:init_string()
             self.created_time = Timer.instance.REAL
         end
         self.strings[k].string = new_string
-        local old_letters = self.strings[k].letters
         local tempW = 0
         local tempH = 0
         local current_letter = 1     -- 当前字符的索引
-        self.strings[k].letters = {} --EMPTY(self.strings[k].letters)
         local tile_scale = Tile.instance.TILESCALE
         local font_scale = self.font.FONTSCALE
         local letter_scale = tile_scale * font_scale
 
         for _, c in utf8.chars(new_string) do
-            local old_letter = old_letters and old_letters[current_letter] or nil
-            local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = old_letter and old_letter.scale or part_scale }
-            self.strings[k].letters[current_letter] = let_tab
+            local letters = {}
+            local let_tab = { letter = love.graphics.newText(self.font.FONT, c), char = c, scale = part_scale }
             local tx = self.font.FONT:getWidth(c) * self.scale * part_scale * letter_scale + 2.7 * (self.config.spacing or 0) * letter_scale
             local ty = self.font.FONT:getHeight() * self.scale * part_scale * letter_scale * self.font.TEXT_HEIGHT_SCALE
-            let_tab.offset = old_letter and old_letter.offset or { x = 0, y = 0 }
+            let_tab.offset = { x = 0, y = 0 }
             let_tab.dims = { x = tx / letter_scale, y = ty / letter_scale }
-            let_tab.pop_in = first_pass and (old_letter and old_letter.pop_in or (self.config.pop_in and 0 or 1)) or 1
+            let_tab.pop_in = self.config.pop_in and 0 or 1
             let_tab.prefix = current_letter <= part_a and outer_colour or nil
             let_tab.suffix = current_letter > part_b and outer_colour or nil
             let_tab.colour = inner_colour or nil
@@ -127,6 +131,8 @@ function DynaText:init_string()
             tempW = tempW + tx / (Tile.instance.TILESIZE * tile_scale)
             tempH = math.max(ty / (Tile.instance.TILESIZE * tile_scale), tempH)
             current_letter = current_letter + 1
+            letters[current_letter] = let_tab
+            self.strings[k].letters = letters
         end
 
         self.strings[k].W = tempW
