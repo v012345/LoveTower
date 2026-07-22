@@ -149,7 +149,9 @@ function DynaText:init_string()
         local old_scale = self.scale
         local new_scale = self.scale * (self.config.maxw / self.config.W)
         for k, v in ipairs(self.strings) do
-            v.letters.dims.x = new_scale
+            for _, letter in ipairs(v.letters) do
+                letter.dims.x = letter.dims.x * new_scale / old_scale
+            end
         end
         self.scale = new_scale
     end
