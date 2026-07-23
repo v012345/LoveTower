@@ -316,6 +316,7 @@ function love.graphics.polygon(mode, ...) end
 ---@field h_popup UIBox 悬浮弹窗
 ---@field d_popup UIBox 拖拽弹窗
 ---@field alert   UIBox 警告弹窗
+---@field particle_effect Particles 粒子效果
 Children = {}
 
 ---@class UIDdefinition
