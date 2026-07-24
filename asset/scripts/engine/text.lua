@@ -317,6 +317,7 @@ function DynaText:draw()
 
     prep_draw(self, 1)
     do
+        
         local tile_size = Tile.instance.TILESIZE
         love.graphics.translate(self.strings[self.focused_string].W_offset + self.text_offset.x * self.font.FONTSCALE / tile_size, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / tile_size)
         if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / tile_size, 0) end
