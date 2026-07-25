@@ -213,7 +213,7 @@ function DynaText:align_letters()
         end
         self.config.pop_in = 0.1
         self.config.pop_out = nil
-        self.created_time = G.TIMERS.REAL
+        self.created_time = Timer.instance.REAL
     end
     self.string = self.strings[self.focused_string].string
     for k, letter in ipairs(self.strings[self.focused_string].letters) do
