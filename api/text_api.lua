@@ -8,6 +8,7 @@
 ---@field font FontConfig
 ---@field colours Color[]
 ---@field strings DynaTextString[] 用来存储 Config.string 处理后的结果
+---@field pop_cycle boolean
 
 ---@class DynaTextConfig
 ---@field X number
