@@ -34,6 +34,7 @@
 ---@field text_rot number
 ---@field reset_pop_in boolean
 ---@field spacing number 字符间距
+---@field random_element boolean 这个完全就是为了`错印小丑`准备的
 
 
 
