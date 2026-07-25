@@ -8,6 +8,7 @@ function DynaText:init(config)
     Moveable.init(self, Transform(), Room.instance:get_root_node())
     config = config or {}
     self.config = config
+    self.config.spacing = self.config.spacing or 0
     self.shadow = config.shadow
     self.scale = config.scale or 1
     self.pop_in_rate = config.pop_in_rate or 3
