@@ -9,6 +9,7 @@
 ---@field colours Color[]
 ---@field strings DynaTextString[] 用来存储 Config.string 处理后的结果
 ---@field pop_cycle boolean
+---@field focused_string number 当前显示的字符串索引, 默认为 1
 
 ---@class DynaTextConfig
 ---@field X number
