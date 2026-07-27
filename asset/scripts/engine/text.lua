@@ -180,10 +180,6 @@ function DynaText:update_text(first_pass)
     self.reset_pop_in = false
     self.start_pop_in = false
 
-    for k, v in ipairs(self.strings) do
-        v.W_offset = 0.5 * (self.config.W - v.W)
-        v.H_offset = 0.5 * (self.config.H - v.H + (self.config.offset_y or 0))
-    end
 end
 
 function DynaText:pop_out(pop_out_timer)
