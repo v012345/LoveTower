@@ -46,7 +46,7 @@
 ---@field prefix string
 ---@field suffix string
 ---@field scale number 此字符串的自己的缩放比例
----@field outer_colour Color 
+---@field outer_colour Color
 ---@field colour Color
 ---@field string string 如果 ref_table[ref_value] 不存在, 则使用此 string
 
@@ -65,8 +65,8 @@
 ---@class DynaTextString
 ---@field letters DynaTextLetter[]
 ---@field string string
----@field W_offset number
----@field H_offset number
+---@field W_offset number 让字符串在水平方向上居中的偏移量
+---@field H_offset number 让字符串在垂直方向上居中的偏移量
 ---@field W number letters 中的字符串在经过 update_text 后, 计算出的以 Tile 为单位的字符串的宽度
 ---@field H number letters 中的字符串在经过 update_text 后, 计算出的以 Tile 为单位的字符串的高度
 
@@ -80,7 +80,7 @@
 ---@field pop_in number
 ---@field prefix Color|nil 如果当前字符是前缀字符, 则此颜色会应用到当前字符
 ---@field suffix Color|nil 如果当前字符是后缀字符, 则此颜色会应用到当前字符
----@field colour Color|nil 
+---@field colour Color|nil
 ---@field r number
 
 ---@param config? DynaTextConfig
