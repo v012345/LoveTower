@@ -14,7 +14,7 @@
 ---@class DynaTextConfig
 ---@field X number
 ---@field Y number
----@field W number string 中的字符串在经过 update_text 后, 计算出的最大宽度
+---@field W number string 中的字符串在经过 init_string 后, 计算出的最大宽度
 ---@field H number
 ---@field scale number
 ---@field string string[]|DynaTextConfigString[] 要显示的字符串

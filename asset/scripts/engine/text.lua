@@ -7,34 +7,16 @@ DynaText = Moveable:extend()
 function DynaText:init(config)
     Moveable.init(self, Transform(), Room.instance:get_root_node())
     config = config or {}
-    self.config = config
-    self.config.spacing = self.config.spacing or 0
-    self.shadow = config.shadow
-    self.scale = config.scale or 1
-    self.pop_in_rate = config.pop_in_rate or 3
-    self.bump_rate = config.bump_rate or 2.666
-    self.bump_amount = config.bump_amount or 1
-    self.font = config.font or Language.instance.LANG.font
-    config.string = config.string or { 'HELLO WORLD' }
-    self.string = config.string
+    self.config = self:parse_config(config)
     self.text_offset = {
         x = self.font.TEXT_OFFSET.x * self.scale + (self.config.x_offset or 0),
         y = self.font.TEXT_OFFSET.y * self.scale + (self.config.y_offset or 0),
     }
-    self.colours = config.colours or { Color.RED }
+
     self.created_time = Timer.instance.REAL
-    self.silent = (config.silent)
-
     self.start_pop_in = self.config.pop_in
-
-    self.config.W = 0
-    self.config.H = 0
-
     self.strings = {}
     self.focused_string = 1
-
-    self:init_string()
-
     if #self.strings > 1 then
         self.pop_delay = self.config.pop_delay or 1.5
         self:pop_out(4)
@@ -66,10 +48,23 @@ function DynaText:update(dt)
 end
 
 --- update_text 的 first_pass 为 true 使用这个函数来初始化字符串, 目的是分享 update_text 的耦合关系
-function DynaText:init_string()
+---@param config DynaTextConfig
+---@return DynaTextConfig
+function DynaText:parse_config(config)
+    self.config = config
+    self.config.spacing = self.config.spacing or 0
+    self.shadow = config.shadow
+    self.scale = config.scale or 1
+    self.pop_in_rate = config.pop_in_rate or 3
+    self.bump_rate = config.bump_rate or 2.666
+    self.bump_amount = config.bump_amount or 1
+    self.font = config.font or Language.instance.LANG.font
+    config.string = config.string or { 'HELLO WORLD' }
+    self.string = config.string
     self.config.W = 0
     self.config.H = 0
-
+    self.colours = config.colours or { Color.RED }
+    self.silent = (config.silent)
     for k, v in ipairs(self.config.string) do
         local part_a = 0       -- 前缀的索引
         local part_b = 1000000 -- 后缀的索引
@@ -165,6 +160,7 @@ function DynaText:init_string()
         v.W_offset = 0.5 * (self.config.W - v.W)
         v.H_offset = 0.5 * (self.config.H - v.H + (self.config.offset_y or 0))
     end
+    return self.config
 end
 
 function DynaText:update_text(first_pass)
