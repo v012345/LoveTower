@@ -164,3 +164,18 @@ function point_rotate(_T, angle)
     _T.x = _ox * _cos - _oy * _sin
     _T.y = _ox * _sin + _oy * _cos
 end
+
+---@param o any
+---@return string
+function dump(o)
+    if type(o) == 'table' then
+        local s = '{ '
+        for k, v in pairs(o) do
+            if type(k) ~= 'number' then k = '"' .. k .. '"' end
+            s = s .. '[' .. k .. '] = ' .. dump(v) .. ','
+        end
+        return s .. '} '
+    else
+        return tostring(o)
+    end
+end

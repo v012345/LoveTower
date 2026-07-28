@@ -8,6 +8,7 @@
         "prep_draw",
         "darken",
         "adjust_alpha",
-        "get_chosen_triangle_from_rect"
+        "get_chosen_triangle_from_rect",
+        "dump"
     ]
 }
