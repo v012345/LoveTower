@@ -15,7 +15,7 @@ function DynaText:init(config)
 
     self.created_time = Timer.instance.REAL
     self.start_pop_in = self.config.pop_in
-    self.strings = {}
+
     self.focused_string = 1
     if #self.strings > 1 then
         self.pop_delay = self.config.pop_delay or 1.5
@@ -51,6 +51,7 @@ end
 ---@param config DynaTextConfig
 ---@return DynaTextConfig
 function DynaText:parse_config(config)
+    self.strings = {}
     self.config = config
     self.config.spacing = self.config.spacing or 0
     self.shadow = config.shadow
