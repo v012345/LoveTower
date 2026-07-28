@@ -2,7 +2,7 @@ package.cpath = package.cpath .. ";c:/Users/NightOwl/.vscode/extensions/tangzx.e
 local dbg = require("emmy_core")
 dbg.tcpListen("localhost", 9966)
 
-
+love.timer.sleep(0.1) -- 等待调试器连接
 
 
 

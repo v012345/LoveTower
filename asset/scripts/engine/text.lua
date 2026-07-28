@@ -69,6 +69,7 @@ end
 function DynaText:init_string()
     self.config.W = 0
     self.config.H = 0
+
     for k, v in ipairs(self.config.string) do
         local part_a = 0       -- 前缀的索引
         local part_b = 1000000 -- 后缀的索引
@@ -320,19 +321,9 @@ function DynaText:draw()
         local _shadow_norm = self.ARGS.draw_shadow_norm
         _shadow_norm.x = self.shadow_parrallax.x / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / tile_size
         _shadow_norm.y = self.shadow_parrallax.y / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / tile_size
-        print(dump(self.strings[self.focused_string].letters))
         for k, letter in ipairs(self.strings[self.focused_string].letters) do
-            print(k, letter)
             local real_pop_in = self.config.min_cycle_time == 0 and 1 or letter.pop_in
             love.graphics.setColor(letter.prefix or letter.suffix or letter.colour or self.colours[k % #self.colours + 1])
-            print(letter.letter,
-                0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / tile_size + _shadow_norm.x,
-                0.5 * (letter.dims.y - letter.offset.y) * self.font.FONTSCALE / tile_size + _shadow_norm.y,
-                letter.r or 0,
-                real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / tile_size,
-                real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / tile_size,
-                0.5 * letter.dims.x / (self.scale),
-                0.5 * letter.dims.y / (self.scale))
             love.graphics.draw(
                 letter.letter,
                 0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / tile_size + _shadow_norm.x,

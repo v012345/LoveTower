@@ -17,7 +17,7 @@
 ---@field W number string 中的字符串在经过 update_text 后, 计算出的最大宽度
 ---@field H number
 ---@field scale number
----@field string string[]|DynaTextConfigString[]
+---@field string string[]|DynaTextConfigString[] 要显示的字符串
 ---@field maxw? number 如果设置了, 则当字符串的宽度大于 maxw 时, 会自动缩放字符串, 以适应到 maxw 的宽度
 ---@field colours Color[]
 ---@field float boolean
