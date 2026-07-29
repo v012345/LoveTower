@@ -9,8 +9,8 @@ function DynaText:init(config)
     config = config or {}
     self.config = self:parse_config(config)
     self.text_offset = {
-        x = self.font.TEXT_OFFSET.x * self.scale + (self.config.x_offset or 0),
-        y = self.font.TEXT_OFFSET.y * self.scale + (self.config.y_offset or 0),
+        x = self.font.TEXT_OFFSET.x * self.config.scale + (self.config.x_offset or 0),
+        y = self.font.TEXT_OFFSET.y * self.config.scale + (self.config.y_offset or 0),
     }
 
     self.created_time = Timer.instance.REAL
@@ -54,7 +54,6 @@ function DynaText:parse_config(config)
     self.strings = {}
     self.config = config
     self.config.spacing = self.config.spacing or 0
-    self.scale = config.scale or 1
     self.pop_in_rate = config.pop_in_rate or 3
     self.bump_rate = config.bump_rate or 2.666
     self.bump_amount = config.bump_amount or 1
@@ -108,8 +107,8 @@ function DynaText:parse_config(config)
                 r = 0,
                 offset = { x = 0, y = 0 },
                 dims = {
-                    x = (self.font.FONT:getWidth(c) * part_scale + 2.7 * self.config.spacing) * self.scale,
-                    y = self.font.FONT:getHeight() * part_scale * self.font.TEXT_HEIGHT_SCALE * self.scale
+                    x = (self.font.FONT:getWidth(c) * part_scale + 2.7 * self.config.spacing) * self.config.scale,
+                    y = self.font.FONT:getHeight() * part_scale * self.font.TEXT_HEIGHT_SCALE * self.config.scale
                 },
                 pop_in = 1,
                 prefix = current_letter <= part_a and outer_colour or nil,
@@ -143,14 +142,14 @@ function DynaText:parse_config(config)
 
 
     if self.config.maxw and self.config.W > self.config.maxw then
-        local old_scale = self.scale
-        local new_scale = self.scale * (self.config.maxw / self.config.W)
+        local old_scale = self.config.scale
+        local new_scale = self.config.scale * (self.config.maxw / self.config.W)
         for k, v in ipairs(self.strings) do
             for _, letter in ipairs(v.letters) do
                 letter.dims.x = letter.dims.x * new_scale / old_scale
             end
         end
-        self.scale = new_scale
+        self.config.scale = new_scale
     end
 
     self.T.w = self.config.W
@@ -295,13 +294,13 @@ function DynaText:draw()
             local real_pop_in = self.config.min_cycle_time == 0 and 1 or letter.pop_in
             love.graphics.draw(
                 letter.letter,
-                0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / Tile.instance.TILESIZE - self.shadow_parrallax.x * self.scale / (Tile.instance.TILESIZE),
-                0.5 * (letter.dims.y) * self.font.FONTSCALE / Tile.instance.TILESIZE - self.shadow_parrallax.y * self.scale / (Tile.instance.TILESIZE),
+                0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / Tile.instance.TILESIZE - self.shadow_parrallax.x * self.config.scale / (Tile.instance.TILESIZE),
+                0.5 * (letter.dims.y) * self.font.FONTSCALE / Tile.instance.TILESIZE - self.shadow_parrallax.y * self.config.scale / (Tile.instance.TILESIZE),
                 letter.r or 0,
-                real_pop_in * self.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
-                real_pop_in * self.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
-                0.5 * letter.dims.x / self.scale,
-                0.5 * letter.dims.y / self.scale
+                real_pop_in * self.config.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
+                real_pop_in * self.config.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
+                0.5 * letter.dims.x / self.config.scale,
+                0.5 * letter.dims.y / self.config.scale
             )
             love.graphics.translate(letter.dims.x * self.font.FONTSCALE / Tile.instance.TILESIZE, 0)
         end
@@ -325,10 +324,10 @@ function DynaText:draw()
                 0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / tile_size + _shadow_norm.x,
                 0.5 * (letter.dims.y - letter.offset.y) * self.font.FONTSCALE / tile_size + _shadow_norm.y,
                 letter.r or 0,
-                real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / tile_size,
-                real_pop_in * letter.scale * self.scale * self.font.FONTSCALE / tile_size,
-                0.5 * letter.dims.x / (self.scale),
-                0.5 * letter.dims.y / (self.scale)
+                real_pop_in * letter.scale * self.config.scale * self.font.FONTSCALE / tile_size,
+                real_pop_in * letter.scale * self.config.scale * self.font.FONTSCALE / tile_size,
+                0.5 * letter.dims.x / (self.config.scale),
+                0.5 * letter.dims.y / (self.config.scale)
             )
             love.graphics.translate(letter.dims.x * self.font.FONTSCALE / tile_size, 0)
         end
