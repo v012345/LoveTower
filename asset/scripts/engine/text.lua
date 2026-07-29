@@ -54,7 +54,6 @@ function DynaText:parse_config(config)
     self.strings = {}
     self.config = config
     self.config.spacing = self.config.spacing or 0
-    self.shadow = config.shadow
     self.scale = config.scale or 1
     self.pop_in_rate = config.pop_in_rate or 3
     self.bump_rate = config.bump_rate or 2.666
@@ -283,7 +282,7 @@ end
 function DynaText:draw()
     if self.children.particle_effect then self.children.particle_effect:draw() end
 
-    if self.shadow then
+    if self.config.shadow then
         prep_draw(self, 1)
         love.graphics.translate(self.strings[self.focused_string].W_offset + self.text_offset.x * self.font.FONTSCALE / Tile.instance.TILESIZE, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / Tile.instance.TILESIZE)
         if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / Tile.instance.TILESIZE, 0) end
