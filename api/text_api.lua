@@ -1,15 +1,7 @@
+---@meta
+
 ---@class (partial) DynaText:Moveable
----@field config DynaTextConfig
----@field shadow boolean 是否显示阴影
----@field scale number 整体缩放比例, 如果设置了 maxw 且 W > maxw, 则此缩放比例会根据 maxw 自动计算
----@field pop_in_rate number
----@field bump_rate number
----@field bump_amount number
----@field font FontConfig
----@field colours Color[]
----@field strings DynaTextString[] 用来存储 Config.string 处理后的结果
----@field pop_cycle boolean
----@field focused_string number 当前显示的字符串索引, 默认为 1
+---@field config TextConfig
 
 ---@class DynaTextConfig
 ---@field X number
@@ -85,3 +77,34 @@
 
 ---@param config? DynaTextConfig
 function DynaText(config) end
+
+---可以理解为一个状态机
+---@class TextConfigData
+---@field shadow boolean
+---@field scale number
+---@field pop_in_rate number
+---@field bump_rate number
+---@field bump_amount number
+---@field font FontConfig
+---@field string string[] 待定, 最终需要被处理成 DynaTextString[]
+---@field text_offset Vec2
+---@field colours Color[]
+---@field created_time number
+---@field silent boolean
+---@field pop_in boolean
+---@field W number
+---@field H number
+---@field focused_string number
+---@field maxw number
+---@field pop_out_time number
+---@field pop_out boolean
+---@field reset_pop_in boolean
+---@field pop_cycle boolean
+---@field rotate number
+---@field quiver table
+---@field pulse table
+
+---comment
+---@param config TextConfigData
+---@return TextConfig
+function TextConfig(config) end

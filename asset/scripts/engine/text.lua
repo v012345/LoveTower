@@ -3,11 +3,11 @@ DynaText = Moveable:extend()
 
 
 ---@private 初始化在 __call 中被调用
----@param config DynaTextConfig
+---@param config TextConfigData
 function DynaText:init(config)
     Moveable.init(self, Transform(), Room.instance:get_root_node())
     config = config or {}
-    self.config = self:parse_config(config)
+    self.config = TextConfig(config)
     self.text_offset = {
         x = self.font.TEXT_OFFSET.x * self.config.scale + (self.config.x_offset or 0),
         y = self.font.TEXT_OFFSET.y * self.config.scale + (self.config.y_offset or 0),

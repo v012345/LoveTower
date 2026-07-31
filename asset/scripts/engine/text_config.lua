@@ -1,6 +1,7 @@
 ---@class (partial) TextConfig: Object
 TextConfig = Object:extend()
 
+---@param config TextConfigData
 function TextConfig:init(config)
 
 end
