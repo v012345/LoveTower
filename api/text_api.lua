@@ -3,7 +3,7 @@
 ---@class (partial) DynaText:Moveable
 ---@field config TextConfig
 
----@class DynaTextConfig
+---@class TextConfig
 ---@field X number
 ---@field Y number
 ---@field W number string 中的字符串在经过 init_string 后, 计算出的最大宽度
