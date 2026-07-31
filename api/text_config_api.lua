@@ -1,0 +1,8 @@
+---@class TextConfigData
+---@field shadow boolean
+---@field scale number
+---@field pop_in_rate number
+---@field bump_rate number
+---@field bump_amount number
+---@field font FontConfig
+---@

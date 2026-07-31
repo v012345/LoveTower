@@ -1,0 +1,2 @@
+xxxConfig 就是对象
+xxxConfigData 就是生成对象用的数据
