@@ -75,11 +75,6 @@ function TextConfig:init(config)
             current_letter = current_letter + 1
         end
 
-
-
-
-
-
         self.strings[k].W = tempW
         self.strings[k].H = tempH
         -- self.config.W 和 self.config.H 是所有字符串中最大的宽度和高度

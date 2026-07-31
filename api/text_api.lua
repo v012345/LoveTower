@@ -103,6 +103,7 @@ function DynaText(config) end
 ---@field rotate number
 ---@field quiver table
 ---@field pulse table
+---@field spacing number
 
 ---comment
 ---@param config TextConfigData
