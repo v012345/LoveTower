@@ -78,8 +78,8 @@ function DynaText(config) end
 ---@field created_time number
 ---@field silent boolean
 ---@field pop_in boolean
----@field W number
----@field H number
+---@field W? number 内部计算, 不需要给出
+---@field H? number 内部计算, 不需要给出
 ---@field focused_string number
 ---@field maxw number
 ---@field pop_out_time number

@@ -12,8 +12,8 @@ function TextConfig:init(config)
     config.font = config.font or Language.instance.LANG.font
     config.string = config.string or { 'HELLO WORLD' }
     self.string = config.string
-    self.config.W = 0
-    self.config.H = 0
+    config.W = 0
+    config.H = 0
     self.colours = config.colours or { Color.RED }
     self.silent = (config.silent)
     for k, v in ipairs(self.config.string) do
