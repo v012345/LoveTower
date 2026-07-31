@@ -68,9 +68,9 @@ function DynaText(config) end
 ---@field spacing? number 字符间距, 默认值为 0
 ---@field pop_in_rate? number 弹入速度, 默认值为 3
 ---@field bump_rate? number 震动速度, 默认值为 2.666
+---@field bump_amount? number 震动幅度, 默认值为 1
 ---@field shadow boolean
 ---@field scale number
----@field bump_amount number
 ---@field font FontConfig
 ---@field string string[] 待定, 最终需要被处理成 DynaTextString[]
 ---@field text_offset Vec2
