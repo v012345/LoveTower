@@ -3,8 +3,8 @@ TextConfig = Object:extend()
 
 ---@param config TextConfigData
 function TextConfig:init(config)
+    self.data = config
     self.strings = {}
-    self.config = config
     self.config.spacing = self.config.spacing or 0
     self.pop_in_rate = config.pop_in_rate or 3
     self.bump_rate = config.bump_rate or 2.666

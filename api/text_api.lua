@@ -4,6 +4,7 @@
 ---@field config TextConfig
 
 ---@class TextConfig
+---@field data TextConfigData
 ---@field X number
 ---@field Y number
 ---@field W number string 中的字符串在经过 init_string 后, 计算出的最大宽度
