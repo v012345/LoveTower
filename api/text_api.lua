@@ -4,24 +4,8 @@
 ---@field config TextConfig
 
 ---@class TextConfig
----@field data TextConfigData
----@field X number
----@field Y number
----@field W number string 中的字符串在经过 init_string 后, 计算出的最大宽度
----@field H number
----@field scale number
----@field string string[]|DynaTextConfigString[] 要显示的字符串
----@field maxw? number 如果设置了, 则当字符串的宽度大于 maxw 时, 会自动缩放字符串, 以适应到 maxw 的宽度
----@field colours Color[]
----@field float boolean
----@field shadow boolean 是否显示阴影
----@field silent boolean
----@field pop_in number
----@field pop_out number
----@field pop_in_rate number
----@field bump_rate number
----@field bump_amount number
----@field font FontConfig
+---@field private data TextConfigData
+---@field strings DynaTextString[]
 ---@field x_offset number
 ---@field y_offset number
 ---@field pop_delay number
@@ -76,7 +60,7 @@
 ---@field colour Color|nil
 ---@field r number
 
----@param config? DynaTextConfig
+---@param config? TextConfigData
 function DynaText(config) end
 
 ---可以理解为一个状态机
@@ -104,7 +88,7 @@ function DynaText(config) end
 ---@field rotate number
 ---@field quiver table
 ---@field pulse table
----@field spacing number
+---@field spacing? number 字符间距, 默认值为 0
 
 ---comment
 ---@param config TextConfigData

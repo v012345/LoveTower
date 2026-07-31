@@ -5,7 +5,7 @@ TextConfig = Object:extend()
 function TextConfig:init(config)
     self.data = config
     self.strings = {}
-    self.config.spacing = self.config.spacing or 0
+    self.data.spacing = config.spacing or 0
     self.pop_in_rate = config.pop_in_rate or 3
     self.bump_rate = config.bump_rate or 2.666
     self.bump_amount = config.bump_amount or 1
