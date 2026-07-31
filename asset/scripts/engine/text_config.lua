@@ -5,11 +5,11 @@ TextConfig = Object:extend()
 function TextConfig:init(config)
     self.data = config
     self.strings = {}
-    self.data.spacing = config.spacing or 0
-    self.pop_in_rate = config.pop_in_rate or 3
-    self.bump_rate = config.bump_rate or 2.666
-    self.bump_amount = config.bump_amount or 1
-    self.font = config.font or Language.instance.LANG.font
+    config.spacing = config.spacing or 0
+    config.pop_in_rate = config.pop_in_rate or 3
+    config.bump_rate = config.bump_rate or 2.666
+    config.bump_amount = config.bump_amount or 1
+    config.font = config.font or Language.instance.LANG.font
     config.string = config.string or { 'HELLO WORLD' }
     self.string = config.string
     self.config.W = 0

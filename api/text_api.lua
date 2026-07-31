@@ -69,9 +69,9 @@ function DynaText(config) end
 ---@field pop_in_rate? number 弹入速度, 默认值为 3
 ---@field bump_rate? number 震动速度, 默认值为 2.666
 ---@field bump_amount? number 震动幅度, 默认值为 1
+---@field font? love.Font 字体, 默认值为 Language.instance.LANG.font
 ---@field shadow boolean
 ---@field scale number
----@field font FontConfig
 ---@field string string[] 待定, 最终需要被处理成 DynaTextString[]
 ---@field text_offset Vec2
 ---@field colours Color[]
