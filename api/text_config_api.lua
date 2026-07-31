@@ -1,3 +1,4 @@
+---可以理解为一个状态机
 ---@class TextConfigData
 ---@field shadow boolean
 ---@field scale number
@@ -5,4 +6,21 @@
 ---@field bump_rate number
 ---@field bump_amount number
 ---@field font FontConfig
+---@field string string[] 待定, 最终需要被处理成 DynaTextString[]
+---@field text_offset Vec2
+---@field colours Color[]
+---@field created_time number
+---@field silent boolean
+---@field pop_in boolean
+---@field W number
+---@field H number
+---@field focused_string number
+---@field maxw number
+---@field pop_out_time number
+---@field pop_out boolean
+---@field reset_pop_in boolean
+---@field pop_cycle boolean
+---@field rotate number
+---@field quiver table
+---@field pulse table
 ---@
