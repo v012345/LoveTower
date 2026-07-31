@@ -23,4 +23,3 @@
 ---@field rotate number
 ---@field quiver table
 ---@field pulse table
----@
