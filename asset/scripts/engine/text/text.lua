@@ -27,7 +27,6 @@ end
 
 function DynaText:update(dt)
     self:update_text()
-    self:align_letters()
 end
 
 function DynaText:update_text(first_pass)
@@ -45,106 +44,7 @@ function DynaText:update_text(first_pass)
     self.start_pop_in = false
 end
 
-function DynaText:pop_out(pop_out_timer)
-    self.config.pop_out = pop_out_timer or 1
-    self.pop_out_time = Timer.instance.REAL + (self.pop_delay or 0)
-end
 
-function DynaText:pop_in(pop_in_timer)
-    self.reset_pop_in = true
-    self.config.pop_out = nil
-    self.config.pop_in = pop_in_timer or 0
-    self.created_time = Timer.instance.REAL
-
-    for k, letter in ipairs(self.strings[self.focused_string].letters) do
-        letter.pop_in = 0
-    end
-
-    self:update_text()
-end
-
-function DynaText:align_letters()
-    if self.pop_cycle then
-        self.focused_string = (self.config.random_element and math.random(1, #self.strings)) or self.focused_string == #self.strings and 1 or self.focused_string + 1
-        self.pop_cycle = false
-        for k, letter in ipairs(self.strings[self.focused_string].letters) do
-            letter.pop_in = 0
-        end
-        self.config.pop_in = 0.1
-        self.config.pop_out = nil
-        self.created_time = Timer.instance.REAL
-    end
-    self.string = self.strings[self.focused_string].string
-    for k, letter in ipairs(self.strings[self.focused_string].letters) do
-        if self.config.pop_out then
-            letter.pop_in = math.min(1, math.max((self.config.min_cycle_time or 1) - (Timer.instance.REAL - self.pop_out_time) * self.config.pop_out / (self.config.min_cycle_time or 1), 0))
-            letter.pop_in = letter.pop_in * letter.pop_in
-            if k == #self.strings[self.focused_string].letters and letter.pop_in <= 0 and #self.strings > 1 then self.pop_cycle = true end
-        elseif self.config.pop_in then
-            local prev_pop_in = letter.pop_in
-            letter.pop_in = math.min(1, math.max((Timer.instance.REAL - self.config.pop_in - self.created_time) * #self.string * self.pop_in_rate - k + 1, self.config.min_cycle_time == 0 and 1 or 0))
-            letter.pop_in = letter.pop_in * letter.pop_in
-            if prev_pop_in <= 0 and letter.pop_in > 0 and not self.silent and
-                (#self.string < 10 or k % 2 == 0) then
-                if self.T.x > App.instance.ROOM.T.w + 2 or
-                    self.T.y > App.instance.ROOM.T.h + 2 or
-                    self.T.x < -2 or
-                    self.T.y < -2 then else
-                    play_sound('paper1', 0.45 + 0.05 * math.random() + (0.3 / #self.string) * k + (self.config.pitch_shift or 0))
-                end
-            end
-            if k == #self.strings[self.focused_string].letters and letter.pop_in >= 1 then
-                if #self.strings > 1 then
-                    self.pop_delay = (Timer.instance.REAL - self.config.pop_in - self.created_time + (self.config.pop_delay or 1.5))
-                    self:pop_out(4)
-                else
-                    self.config.pop_in = nil
-                end
-            end
-        end
-        letter.r = 0
-        letter.scale = 1
-        if self.config.rotate then letter.r = (self.config.rotate == 2 and -1 or 1) * (0.2 * (- #self.strings[self.focused_string].letters / 2 - 0.5 + k) / (#self.strings[self.focused_string].letters) + (G.SETTINGS.reduced_motion and 0 or 1) * 0.02 * math.sin(2 * G.TIMERS.REAL + k)) end
-        if self.config.pulse then
-            letter.scale = letter.scale + (G.SETTINGS.reduced_motion and 0 or 1) * (1 / self.config.pulse.width) * self.config.pulse.amount * (math.max(
-                math.min((self.config.pulse.start - G.TIMERS.REAL) * self.config.pulse.speed + k + self.config.pulse.width,
-                    (G.TIMERS.REAL - self.config.pulse.start) * self.config.pulse.speed - k + self.config.pulse.width + 2),
-                0))
-            letter.r = letter.r + (G.SETTINGS.reduced_motion and 0 or 1) * (letter.scale - 1) * (0.02 * (- #self.strings[self.focused_string].letters / 2 - 0.5 + k))
-            if self.config.pulse.start > G.TIMERS.REAL + 2 * self.config.pulse.speed * #self.strings[self.focused_string].letters then
-                self.config.pulse = nil
-            end
-        end
-        if self.config.quiver then
-            letter.scale = letter.scale + (G.SETTINGS.reduced_motion and 0 or 1) * (0.1 * self.config.quiver.amount)
-            letter.r = letter.r + (G.SETTINGS.reduced_motion and 0 or 1) * 0.3 * self.config.quiver.amount * (
-                math.sin(41.12342 * G.TIMERS.REAL * self.config.quiver.speed + k * 1223.2) +
-                math.cos(63.21231 * G.TIMERS.REAL * self.config.quiver.speed + k * 1112.2) * math.sin(36.1231 * G.TIMERS.REAL * self.config.quiver.speed) +
-                math.cos(95.123 * G.TIMERS.REAL * self.config.quiver.speed + k * 1233.2) -
-                math.sin(30.133421 * G.TIMERS.REAL * self.config.quiver.speed + k * 123.2))
-        end
-        if self.config.float then letter.offset.y = (Settings.instance.reduced_motion and 0 or 1) * math.sqrt(self.scale) * (2 + (self.font.FONTSCALE / Tile.instance.TILESIZE) * 2000 * math.sin(2.666 * Timer.instance.REAL + 200 * k)) + 60 * (letter.scale - 1) end
-        if self.config.bump then letter.offset.y = (Settings.instance.reduced_motion and 0 or 1) * self.bump_amount * math.sqrt(self.scale) * 7 * math.max(0, (5 + self.bump_rate) * math.sin(self.bump_rate * Timer.instance.REAL + 200 * k) - 3 - self.bump_rate) end
-    end
-end
-
-function DynaText:set_quiver(amt)
-    self.config.quiver = {
-        speed = 0.5,
-        amount = amt or 0.7,
-        silent = false
-    }
-end
-
-function DynaText:pulse(amt)
-    self.config.pulse = {
-        speed = 40,
-        width = 2.5,
-        start = Timer.instance.REAL,
-        amount = amt or 0.2,
-        silent = false
-    }
-end
 
 function DynaText:draw()
     if self.children.particle_effect then self.children.particle_effect:draw() end
