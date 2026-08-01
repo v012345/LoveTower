@@ -10,10 +10,17 @@ LetterConfig = Object:extend()
 ---@param data LetterConfigData
 function LetterConfig:init(data)
     self.data = data
+    self.offset = Vec2()
+    self.dims = Vec2()
 end
 
 function LetterConfig:__tostring()
-
+    return string.format([[LetterConfig:
+    char: %s
+    scale: %s
+    colour: %s
+    offset: %s
+    dims: %s]], self.data.char, self.data.scale, self.data.colour, self.offset)
 end
 
 function StringConfig:init(config)

@@ -78,6 +78,7 @@
 
 
 ---@class LetterConfigData
+---@field char string
 ---@field scale number
 ---@field spacing number
 ---@field font FontConfig
