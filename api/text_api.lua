@@ -5,7 +5,7 @@
 
 ---@class DynaTextConfig
 ---@field private data DynaTextConfigData
----@field strings StringConfig[]
+---@field string_configs StringConfig[]
 ---@field x_offset number
 ---@field y_offset number
 ---@field pop_delay number
@@ -24,7 +24,7 @@
 ---@field font? FontConfig 字体, 默认值为 Language.instance.LANG.font
 ---@field shadow boolean
 ---@field scale number
----@field strings StringConfig[]
+---@field string_config_datas StringConfigData[]
 ---@field text_offset Vec2
 ---@field colours Color[]
 ---@field created_time number
