@@ -76,7 +76,7 @@ function DynaTextConfig:init(config)
                 pop_in = 1,
                 prefix = current_letter <= part_a and outer_colour or nil,
                 suffix = current_letter > part_b and outer_colour or nil,
-                inner_colour or nil
+                colour = inner_colour or nil
             }
 
             tempW = tempW + let_tab.dims.x * font_scale / Tile.instance.TILESIZE
