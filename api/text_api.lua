@@ -23,13 +23,13 @@
 
 ---可以理解为一个状态机
 ---@class DynaTextConfigData
----@field spacing? number 字符间距, 默认值为 0
+---@field shadow? boolean
+---@field scale? number 缩放比例, 默认值为 1
 ---@field pop_in_rate? number 弹入速度, 默认值为 3
 ---@field bump_rate? number 震动速度, 默认值为 2.666
 ---@field bump_amount? number 震动幅度, 默认值为 1
----@field font? FontConfig 字体, 默认值为 Language.instance.LANG.font
----@field shadow boolean
----@field scale number
+---@field font_config? FontConfig 字体, 默认值为 Language.instance.LANG.font
+---@field spacing? number 字符间距, 默认值为 0
 ---@field string_config_datas StringConfigData[]
 ---@field text_offset Vec2
 ---@field colours Color[]

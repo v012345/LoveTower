@@ -4,6 +4,14 @@ DynaTextConfig = Object:extend()
 ---@param data DynaTextConfigData
 function DynaTextConfig:init(data)
     self.data = data
+    data.shadow = data.shadow or false
+    data.scale = data.scale or 1
+    data.pop_in_rate = data.pop_in_rate or 3
+    data.bump_rate = data.bump_rate or 2.666
+    data.bump_amount = data.bump_amount or 1
+    data.font_config = data.font_config or Language.instance.LANG.font
+
+
     self.string_configs = {}
     for k, v in ipairs(data.string_config_datas) do
         self.string_configs[k] = StringConfig(v)
