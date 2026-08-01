@@ -8,25 +8,6 @@ function DynaText:init(data)
     Moveable.init(self, Transform(), Room.instance:get_root_node())
     self.data = data
     self.config = DynaTextConfig(data.dyna_text_config_data)
-    self.T.w = self.config.W
-    self.T.h = self.config.H
-    self.text_offset = {
-        x = self.font.TEXT_OFFSET.x * self.config.scale + (self.config.x_offset or 0),
-        y = self.font.TEXT_OFFSET.y * self.config.scale + (self.config.y_offset or 0),
-    }
-
-    self.created_time = Timer.instance.REAL
-    self.start_pop_in = self.config.pop_in
-
-    self.focused_string = 1
-    if #self.strings > 1 then
-        self.pop_delay = self.config.pop_delay or 1.5
-        self:pop_out(4)
-    end
-
-
-
-    self.T.r = self.config.text_rot or 0
 
     self.states.hover.can = false
     self.states.click.can = false
