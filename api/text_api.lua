@@ -53,13 +53,15 @@
 ---@field H_offset number
 
 ---@class StringConfigData
+---@field font_config FontConfig
 ---@field prefix string
 ---@field suffix string
----@field scale number
----@field outer_colour? Color
----@field colour? Color
 ---@field ref_table table
 ---@field ref_value any
+---@field scale number
+---@field colour Color
+---@field pop_in number
+---@field spacing number
 
 
 

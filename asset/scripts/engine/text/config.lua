@@ -14,16 +14,21 @@ end
 ---@class (partial) StringConfig: Object
 StringConfig = Object:extend()
 
----@param config StringConfigData
-function StringConfig:init(config)
-    self.data = config
-    config.prefix = config.prefix or ''
-    config.suffix = config.suffix or ''
-    config.scale = config.scale or 1
-    config.outer_colour = config.outer_colour or nil
-    config.colour = config.colour or nil
-    config.ref_table = config.ref_table or {}
-    config.ref_value = config.ref_value or nil
+---@param data StringConfigData
+function StringConfig:init(data)
+    self.data = data
+    self.string = data.prefix .. data.ref_table[data.ref_value] .. data.suffix
+    self.letters = {}
+    for i, c in utf8.chars(self.string) do
+        self.letters[i] = LetterConfig({
+            font_config = data.font_config,
+            char = c,
+            scale = data.scale,
+            colour = data.colour,
+            spacing = data.spacing,
+            pop_in = data.pop_in,
+        })
+    end
 end
 
 ---@class (partial) LetterConfig: Object
