@@ -19,8 +19,7 @@ function LetterConfig:__tostring()
     char: %s
     scale: %s
     colour: %s
-    offset: %s
-    dims: %s]], self.data.char, self.data.scale, self.data.colour, self.offset)
+    offset: %s]], self.data.char, self.data.scale, self.data.colour, self.offset)
 end
 
 function StringConfig:init(config)

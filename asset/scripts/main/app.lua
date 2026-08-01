@@ -20,7 +20,6 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
 end
 
 function App:init_game_object()
-
 end
 
 function App:update(dt)
@@ -54,7 +53,6 @@ function App:draw()
     love.graphics.setShader()
     love.graphics.clear(0, 0, 0, 1)
 
-
     do -- Draw the room
         for k, v in pairs(self.I.NODE) do
             if not v.parent then
@@ -82,10 +80,6 @@ function App:draw()
         end
     end
 
-
-
-
-
     love.graphics.pop()
 
     love.graphics.setCanvas(self.AA_CANVAS)
@@ -98,7 +92,7 @@ function App:draw()
     love.graphics.setShader()
 end
 
----在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
+--- 在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
 function App:start_up()
     -- do return end
     boot_timer("start", "settings", 0.1)
@@ -132,11 +126,16 @@ function App:start_up()
     --         scale = 0.75
     --     })
     -- love.resize(love.graphics.getWidth(), love.graphics.getHeight())
-
+    print(LetterConfig({
+            font_config = Language.instance.LANG.font,
+            char = "a",
+            scale = 1,
+            colour = Color.RED,
+            spacing = 0
+        }))
 end
 
 function App:set_language()
-
 end
 
 --- 目前默认是Windowed模式，1000x650分辨率, 使用第一个显示器, 之后要读用户设置文件中的设置
@@ -148,11 +147,20 @@ function App:init_window()
     Window.instance:set_transform_wh(room_size.w, room_size.h)
     local real_size = Window.instance:get_real_size()
     --- 设置窗口大小, 会影响 love.graphics.getWidth(), love.graphics.getHeight()
-    love.window.updateMode(real_size.w, real_size.h, { fullscreen = false, fullscreentype = nil, vsync = 1, resizable = true, display = 1, highdpi = false })
+    love.window.updateMode(
+        real_size.w, real_size.h,
+        {
+            fullscreen = false,
+            fullscreentype = nil,
+            vsync = 1,
+            resizable = true,
+            display = 1,
+            highdpi = false
+        }
+    )
 end
 
 function App:apply_window_changes()
-
 end
 
 function App:save_settings()
@@ -172,8 +180,9 @@ function App:main_menu()
     local img = Sprite(Transform(-30, -13, room.T.w + 60, room.T.h + 22), asset_atli["ui_1"], { x = 2, y = 0 })
     UIBox(
         Transform(0, 0, 2, 2),
-        UIBox_button({ label = { "Background" }, button = "DT_toggle_background", minw = 1.7, minh = 0.4, scale = 0.35 }),
-        { align = "cl", minw = 5, minh = 1 }
+        UIBox_button(
+            { label = { "Background" }, button = "DT_toggle_background", minw = 1.7, minh = 0.4, scale = 0.35 }
+        ), { align = "cl", minw = 5, minh = 1 }
     )
 
     --- 创建主菜单场景

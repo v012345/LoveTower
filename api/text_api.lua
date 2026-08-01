@@ -81,9 +81,8 @@
 ---@field char string
 ---@field scale number
 ---@field spacing number
----@field font FontConfig
+---@field font_config FontConfig
 ---@field colour Color
----@field letter_config LetterConfig
 
 
 
