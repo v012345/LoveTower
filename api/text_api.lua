@@ -98,7 +98,7 @@ function DynaText(config) end
 ---@field outer_colour? Color
 ---@field colour? Color
 ---@field ref_table table
----@field ref_value string
+---@field ref_value any
 
 ---comment
 ---@param config DynaTextConfigData
