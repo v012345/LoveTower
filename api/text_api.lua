@@ -79,9 +79,7 @@
 ---@field offset Vec2
 ---@field dims Vec2
 ---@field pop_in number
----@field prefix Color|nil 如果当前字符是前缀字符, 则此颜色会应用到当前字符
----@field suffix Color|nil 如果当前字符是后缀字符, 则此颜色会应用到当前字符
----@field colour Color|nil
+---@field colour Color
 ---@field r number
 
 
