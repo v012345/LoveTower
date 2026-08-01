@@ -91,12 +91,22 @@ function DynaTextConfig:init(config)
             tempH = math.max(let_tab.dims.y * font_scale / Tile.instance.TILESIZE, tempH)
             letters[current_letter] = let_tab
             current_letter = current_letter + 1
-            
+            local colour = inner_colour
+            if i <= part_a then
+                colour = outer_colour
+            end
+            if i > part_b then
+                colour = outer_colour
+            end
+
             letters[i] = LetterConfig({
                 font_config = config.font,
+                char = c,
+                scale = part_scale,
+                colour = colour
             })
         end
-        
+
         self.strings[k].letters = letters
         self.strings[k].W = tempW
         self.strings[k].H = tempH
