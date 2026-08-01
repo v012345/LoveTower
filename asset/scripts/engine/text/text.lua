@@ -6,7 +6,6 @@ DynaText = Moveable:extend()
 ---@param config DynaTextConfigData
 function DynaText:init(config)
     Moveable.init(self, Transform(), Room.instance:get_root_node())
-    config = config or {}
     self.config = DynaTextConfig(config)
     self.T.w = self.config.W
     self.T.h = self.config.H
