@@ -82,7 +82,6 @@
 ---@field font FontConfig
 ---@field colour Color
 
----@class LetterConfig
 
 
 ---@class FontConfig
