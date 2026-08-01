@@ -1,6 +1,20 @@
 ---@class (partial) DynaTextConfig: Object
 DynaTextConfig = Object:extend()
 
+---@type StringConfigData
+local default_string_config_data = {
+    font_config = Language.instance.LANG.font,
+    prefix = "",
+    suffix = "",
+    ref_table = { [""] = "HELLO WORLD" },
+    ref_value = "",
+    scale = 1,
+    colour = Color.RED,
+    spacing = 0,
+    pop_in = 0
+}
+
+
 ---@param data DynaTextConfigData
 function DynaTextConfig:init(data)
     self.data = data
@@ -10,19 +24,7 @@ function DynaTextConfig:init(data)
     data.bump_rate = data.bump_rate or 2.666
     data.bump_amount = data.bump_amount or 1
     data.font_config = data.font_config or Language.instance.LANG.font
-    data.string_config_datas = data.string_config_datas or {
-        {
-            font_config = data.font_config,
-            prefix = "",
-            suffix = "",
-            ref_table = { [""] = "HELLO WORLD" },
-            ref_value = "",
-            scale = data.scale,
-            colour = Color.RED,
-            spacing = data.spacing,
-            pop_in = 0
-        }
-    }
+    data.string_config_datas = data.string_config_datas or default_string_config_data
 
     self.string_configs = {}
     for k, v in ipairs(data.string_config_datas) do
