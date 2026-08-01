@@ -24,6 +24,7 @@ function LetterConfig:__tostring()
     offset: %s]], self.data.char, self.data.scale, self.data.colour, self.offset)
 end
 
+---@param config StringConfigData
 function StringConfig:init(config)
     self.data = config
     config.prefix = config.prefix or ''

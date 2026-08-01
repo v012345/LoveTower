@@ -24,7 +24,7 @@
 ---@field font? FontConfig 字体, 默认值为 Language.instance.LANG.font
 ---@field shadow boolean
 ---@field scale number
----@field strings StringConfigData[]
+---@field strings StringConfig[]
 ---@field text_offset Vec2
 ---@field colours Color[]
 ---@field created_time number
