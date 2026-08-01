@@ -47,7 +47,7 @@
 ---@class StringConfig
 ---@field W number
 ---@field H number
----@field letters DynaTextLetter[]
+---@field letters LetterConfig[]
 ---@field string string
 ---@field W_offset number
 ---@field H_offset number
