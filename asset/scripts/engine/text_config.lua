@@ -1,8 +1,8 @@
----@class (partial) TextConfig: Object
-TextConfig = Object:extend()
+---@class (partial) DynaTextConfig: Object
+DynaTextConfig = Object:extend()
 
----@param config TextConfigData
-function TextConfig:init(config)
+---@param config DynaTextConfigData
+function DynaTextConfig:init(config)
     self.data = config
     self.strings = {}
     config.spacing = config.spacing or 0

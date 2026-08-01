@@ -102,6 +102,6 @@ function DynaText(config) end
 ---@field ref_value? string
 
 ---comment
----@param config TextConfigData
----@return TextConfig
-function TextConfig(config) end
+---@param config DynaTextConfigData
+---@return DynaTextConfig
+function DynaTextConfig(config) end
