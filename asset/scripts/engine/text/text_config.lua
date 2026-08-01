@@ -69,7 +69,7 @@ function DynaTextConfig:init(config)
         local font_scale = self.font.FONTSCALE
 
         local letters = {}
-        for _, c in utf8.chars(new_string) do
+        for i, c in utf8.chars(new_string) do
             ---@type DynaTextLetter
             local let_tab = {
                 letter = love.graphics.newText(self.font.FONT, c),
@@ -90,14 +90,14 @@ function DynaTextConfig:init(config)
             tempW = tempW + let_tab.dims.x * font_scale / Tile.instance.TILESIZE
             tempH = math.max(let_tab.dims.y * font_scale / Tile.instance.TILESIZE, tempH)
             letters[current_letter] = let_tab
-            self.strings[k].letters = letters
             current_letter = current_letter + 1
-
             
-
-
+            letters[i] = LetterConfig({
+                font_config = config.font,
+            })
         end
-
+        
+        self.strings[k].letters = letters
         self.strings[k].W = tempW
         self.strings[k].H = tempH
         -- self.config.W 和 self.config.H 是所有字符串中最大的宽度和高度

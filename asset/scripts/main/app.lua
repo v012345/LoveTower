@@ -132,6 +132,7 @@ function App:start_up()
     --         scale = 0.75
     --     })
     -- love.resize(love.graphics.getWidth(), love.graphics.getHeight())
+
 end
 
 function App:set_language()

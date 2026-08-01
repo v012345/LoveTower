@@ -8,5 +8,5 @@
 ---@field beta? boolean
 ---@field button? string
 ---@field warning? string[]
----@field font? love.Font
+---@field font? FontConfig
 ---@field omit? boolean
