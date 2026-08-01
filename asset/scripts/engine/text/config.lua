@@ -26,7 +26,7 @@ function DynaTextConfig:init(data)
     for k, v in ipairs(data.string_config_datas) do
         self.string_configs[k] = StringConfig(v)
     end
-    return self.data
+    return self
 end
 
 ---@class (partial) StringConfig: Object
