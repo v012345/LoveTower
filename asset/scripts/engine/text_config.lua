@@ -11,12 +11,11 @@ function TextConfig:init(config)
     config.bump_amount = config.bump_amount or 1
     config.font = config.font or Language.instance.LANG.font
     config.string = config.string or { 'HELLO WORLD' }
-    self.string = config.string
+    config.colours = config.colours or { Color.RED }
+    config.silent = config.silent or false
     config.W = 0
     config.H = 0
-    self.colours = config.colours or { Color.RED }
-    self.silent = (config.silent)
-    for k, v in ipairs(self.config.string) do
+    for k, v in ipairs(config.string) do
         local part_a = 0       -- 前缀的索引
         local part_b = 1000000 -- 后缀的索引
         local new_string = nil
