@@ -10,7 +10,7 @@ function TextConfig:init(config)
     config.bump_rate = config.bump_rate or 2.666
     config.bump_amount = config.bump_amount or 1
     config.font = config.font or Language.instance.LANG.font
-    config.string = config.string or { 'HELLO WORLD' }
+    config.string = config.string or {}
     config.colours = config.colours or { Color.RED }
     config.silent = config.silent or false
     config.W = 0

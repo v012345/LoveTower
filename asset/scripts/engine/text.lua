@@ -3,7 +3,7 @@ DynaText = Moveable:extend()
 
 
 ---@private 初始化在 __call 中被调用
----@param config TextConfigData
+---@param config DynaTextConfig
 function DynaText:init(config)
     Moveable.init(self, Transform(), Room.instance:get_root_node())
     config = config or {}

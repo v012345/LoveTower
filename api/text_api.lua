@@ -3,8 +3,8 @@
 ---@class (partial) DynaText:Moveable
 ---@field config TextConfig
 
----@class TextConfig
----@field private data TextConfigData
+---@class DynaTextConfig
+---@field private data DynaTextConfigData
 ---@field strings DynaTextString[]
 ---@field x_offset number
 ---@field y_offset number
@@ -60,11 +60,11 @@
 ---@field colour Color|nil
 ---@field r number
 
----@param config? TextConfigData
+---@param config? DynaTextConfigData
 function DynaText(config) end
 
 ---可以理解为一个状态机
----@class TextConfigData
+---@class DynaTextConfigData
 ---@field spacing? number 字符间距, 默认值为 0
 ---@field pop_in_rate? number 弹入速度, 默认值为 3
 ---@field bump_rate? number 震动速度, 默认值为 2.666
@@ -72,7 +72,7 @@ function DynaText(config) end
 ---@field font? love.Font 字体, 默认值为 Language.instance.LANG.font
 ---@field shadow boolean
 ---@field scale number
----@field string string[] 待定, 最终需要被处理成 DynaTextString[]
+---@field string StringConfigData[]
 ---@field text_offset Vec2
 ---@field colours Color[]
 ---@field created_time number
@@ -89,6 +89,17 @@ function DynaText(config) end
 ---@field rotate number
 ---@field quiver table
 ---@field pulse table
+---@field ref_table table 引用表
+
+---@class StringConfigData
+---@field string? string
+---@field prefix string
+---@field suffix string
+---@field scale number
+---@field outer_colour? Color
+---@field colour? Color
+---@field ref_table? table
+---@field ref_value? string
 
 ---comment
 ---@param config TextConfigData
