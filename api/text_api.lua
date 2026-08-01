@@ -64,6 +64,7 @@
 
 
 ---@class LetterConfig
+---@field data LetterConfigData
 ---@field letter love.Text
 ---@field char string
 ---@field scale number

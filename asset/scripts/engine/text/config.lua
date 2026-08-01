@@ -7,8 +7,12 @@ StringConfig = Object:extend()
 ---@class (partial) LetterConfig: Object
 LetterConfig = Object:extend()
 
----@param config LetterConfigData
-function LetterConfig:init(config)
+---@param data LetterConfigData
+function LetterConfig:init(data)
+    self.data = data
+end
+
+function LetterConfig:__tostring()
 
 end
 
