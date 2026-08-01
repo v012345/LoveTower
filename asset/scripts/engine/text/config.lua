@@ -47,6 +47,7 @@ function StringConfig:init(data)
             pop_in = data.pop_in,
         })
     end
+    return self
 end
 
 ---@class (partial) LetterConfig: Object
@@ -59,6 +60,7 @@ function LetterConfig:init(data)
     self.letter = love.graphics.newText(FONT, self.data.char)
     self.offset = Vec2()
     self.dims = Vec2()
+    return self
 end
 
 function LetterConfig:__tostring()
