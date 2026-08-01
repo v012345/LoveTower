@@ -3,6 +3,11 @@
 ---@class (partial) DynaText:Moveable
 ---@field config DynaTextConfig
 
+---@class DynaTextData
+---@field dyna_text_config DynaTextConfigData
+---@field X number
+---@field Y number
+
 ---@class DynaTextConfig
 ---@field private data DynaTextConfigData
 ---@field string_configs StringConfig[]
@@ -99,19 +104,18 @@
 ---@field DESCSCALE number
 ---@field FONT love.Font
 
-
----comment
----@param config LetterConfigData
----@return LetterConfig
-function LetterConfig(config) end
-
----@param config? DynaTextConfigData
+---@param config? DynaTextData
 function DynaText(config) end
 
 ---comment
 ---@param config DynaTextConfigData
 ---@return DynaTextConfig
 function DynaTextConfig(config) end
+
+---comment
+---@param config LetterConfigData
+---@return LetterConfig
+function LetterConfig(config) end
 
 ---comment
 ---@param config StringConfigData
