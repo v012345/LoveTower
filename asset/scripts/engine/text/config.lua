@@ -10,6 +10,8 @@ LetterConfig = Object:extend()
 ---@param data LetterConfigData
 function LetterConfig:init(data)
     self.data = data
+    local FONT = self.data.font_config.FONT
+    self.letter = love.graphics.newText(FONT, self.data.char)
     self.offset = Vec2()
     self.dims = Vec2()
 end

@@ -83,6 +83,7 @@
 ---@field spacing number
 ---@field font_config FontConfig
 ---@field colour Color
+---@field pop_in number
 
 
 
