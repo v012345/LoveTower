@@ -72,7 +72,7 @@ function DynaText(config) end
 ---@field font? love.Font 字体, 默认值为 Language.instance.LANG.font
 ---@field shadow boolean
 ---@field scale number
----@field string StringConfigData[]
+---@field strings StringConfigData[]
 ---@field text_offset Vec2
 ---@field colours Color[]
 ---@field created_time number
@@ -92,14 +92,13 @@ function DynaText(config) end
 ---@field ref_table table 引用表
 
 ---@class StringConfigData
----@field string? string
 ---@field prefix string
 ---@field suffix string
 ---@field scale number
 ---@field outer_colour? Color
 ---@field colour? Color
----@field ref_table? table
----@field ref_value? string
+---@field ref_table table
+---@field ref_value string
 
 ---comment
 ---@param config DynaTextConfigData

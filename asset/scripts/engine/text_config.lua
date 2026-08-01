@@ -10,12 +10,12 @@ function DynaTextConfig:init(config)
     config.bump_rate = config.bump_rate or 2.666
     config.bump_amount = config.bump_amount or 1
     config.font = config.font or Language.instance.LANG.font
-    config.string = config.string or {}
+    config.strings = config.strings or {}
     config.colours = config.colours or { Color.RED }
     config.silent = config.silent or false
     config.W = 0
     config.H = 0
-    for k, v in ipairs(config.string) do
+    for k, v in ipairs(config.strings) do
         local part_a = 0       -- 前缀的索引
         local part_b = 1000000 -- 后缀的索引
         local new_string = nil
@@ -23,16 +23,14 @@ function DynaTextConfig:init(config)
         local inner_colour = nil
         local part_scale = 1 -- 此字符串的自己的缩放比例, 来自己 DynaTextConfigString 的 scale 属性
         -- 如果 v 是一个表, 就把 v 解出来, 转为一个字符串
-        if type(v) == 'table' and (v.ref_table or v.string) then
-            new_string = v.prefix .. tostring(v.ref_table and v.ref_table[v.ref_value] or v.string) .. v.suffix
-            part_a = #v.prefix
-            part_b = #new_string - #v.suffix
-            part_scale = v.scale
-            outer_colour = v.outer_colour or nil
-            inner_colour = v.colour or nil
-        else
-            new_string = v --[[@as string]]
-        end
+
+        new_string = v.prefix .. tostring(v.ref_table[v.ref_value]) .. v.suffix
+        part_a = #v.prefix
+        part_b = #new_string - #v.suffix
+        part_scale = v.scale
+        outer_colour = v.outer_colour or nil
+        inner_colour = v.colour or nil
+
 
         self.strings[k] = {
             string = new_string,
