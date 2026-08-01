@@ -120,17 +120,17 @@ function App:start_up()
     boot_timer('prep stage', 'splash prep', 1)
 
     boot_timer('splash prep', 'end', 1)
-    self:splash_screen()
-    self.test = DynaText()
-    DynaText(
-        {
-            string = { "shared stage" },
-            colours = { Color.RED },
-            shadow = true,
-            float = true,
-            maxw = 2.5,
-            scale = 0.75
-        })
+    -- self:splash_screen()
+    -- self.test = DynaText()
+    -- DynaText(
+    --     {
+    --         string = { "shared stage" },
+    --         colours = { Color.RED },
+    --         shadow = true,
+    --         float = true,
+    --         maxw = 2.5,
+    --         scale = 0.75
+    --     })
     -- love.resize(love.graphics.getWidth(), love.graphics.getHeight())
 end
 

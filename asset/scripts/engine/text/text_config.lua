@@ -68,8 +68,8 @@ function DynaTextConfig:init(config)
         local current_letter = 1 -- 当前字符的索引
         local font_scale = self.font.FONTSCALE
 
+        local letters = {}
         for _, c in utf8.chars(new_string) do
-            local letters = {}
             ---@type DynaTextLetter
             local let_tab = {
                 letter = love.graphics.newText(self.font.FONT, c),
@@ -92,6 +92,10 @@ function DynaTextConfig:init(config)
             letters[current_letter] = let_tab
             self.strings[k].letters = letters
             current_letter = current_letter + 1
+
+            
+
+
         end
 
         self.strings[k].W = tempW
