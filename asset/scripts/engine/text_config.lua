@@ -4,6 +4,14 @@ DynaTextConfig = Object:extend()
 ---@class (partial) StringConfig: Object
 StringConfig = Object:extend()
 
+---@class (partial) LetterConfig: Object
+LetterConfig = Object:extend()
+
+---@param config LetterConfigData
+function LetterConfig:init(config)
+
+end
+
 function StringConfig:init(config)
     self.data = config
     config.prefix = config.prefix or ''
