@@ -4,7 +4,7 @@
 ---@field config DynaTextConfig
 
 ---@class DynaTextData
----@field dyna_text_config DynaTextConfigData
+---@field dyna_text_config_data DynaTextConfigData
 ---@field X number
 ---@field Y number
 
