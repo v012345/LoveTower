@@ -10,7 +10,19 @@ function DynaTextConfig:init(data)
     data.bump_rate = data.bump_rate or 2.666
     data.bump_amount = data.bump_amount or 1
     data.font_config = data.font_config or Language.instance.LANG.font
-
+    data.string_config_datas = data.string_config_datas or {
+        {
+            font_config = data.font_config,
+            prefix = "",
+            suffix = "",
+            ref_table = { [""] = "HELLO WORLD" },
+            ref_value = "",
+            scale = data.scale,
+            colour = Color.RED,
+            spacing = data.spacing,
+            pop_in = 0
+        }
+    }
 
     self.string_configs = {}
     for k, v in ipairs(data.string_config_datas) do
