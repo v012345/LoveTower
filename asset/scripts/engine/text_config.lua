@@ -1,6 +1,20 @@
 ---@class (partial) DynaTextConfig: Object
 DynaTextConfig = Object:extend()
 
+---@class (partial) StringConfig: Object
+StringConfig = Object:extend()
+
+function StringConfig:init(config)
+    self.data = config
+    config.prefix = config.prefix or ''
+    config.suffix = config.suffix or ''
+    config.scale = config.scale or 1
+    config.outer_colour = config.outer_colour or nil
+    config.colour = config.colour or nil
+    config.ref_table = config.ref_table or {}
+    config.ref_value = config.ref_value or nil
+end
+
 ---@param config DynaTextConfigData
 function DynaTextConfig:init(config)
     self.data = config

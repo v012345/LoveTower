@@ -91,6 +91,15 @@ function DynaText(config) end
 ---@field pulse table
 ---@field ref_table table 引用表
 
+
+---@class StringConfig
+---@field W number
+---@field H number
+---@field letters DynaTextLetter[]
+---@field string string
+---@field W_offset number
+---@field H_offset number
+
 ---@class StringConfigData
 ---@field prefix string
 ---@field suffix string
@@ -104,3 +113,8 @@ function DynaText(config) end
 ---@param config DynaTextConfigData
 ---@return DynaTextConfig
 function DynaTextConfig(config) end
+
+---comment
+---@param config StringConfigData
+---@return StringConfig
+function StringConfig(config) end
