@@ -1,6 +1,6 @@
 ---@meta
 
----@class (partial) DynaText:Moveable
+---@class (partial) DynaText: Moveable
 ---@field config DynaTextConfig
 ---@field data DynaTextData
 

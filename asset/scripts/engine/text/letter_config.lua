@@ -4,8 +4,18 @@ LetterConfig = Object:extend()
 ---@param data LetterConfigData
 function LetterConfig:init(data)
     self.data = data
+    data.scale = data.scale or 1
     local FONT = self.data.font_config.FONT
     self.letter = love.graphics.newText(FONT, self.data.char)
+    print(data.char, FONT:getWidth(data.char), FONT:getHeight())
+
+    local tile_scale = Tile.instance:get_scale()
+    local font_scale = self.data.font_config.FONTSCALE
+    local letter_width = FONT:getWidth(data.char)
+    local scale = data.scale
+
+
+
     self.offset = Vec2()
     self.dims = Vec2()
     return self

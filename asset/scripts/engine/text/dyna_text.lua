@@ -1,5 +1,5 @@
----@class (partial) DynaText: Node
-DynaText = Node:extend()
+---@class (partial) DynaText: Moveable
+DynaText = Moveable:extend()
 
 
 ---@private 初始化在 __call 中被调用
