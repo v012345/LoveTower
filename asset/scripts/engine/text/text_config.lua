@@ -43,6 +43,10 @@ function DynaTextConfig:get_text_offset()
     return self.text_offset
 end
 
+function DynaTextConfig:get_font_config()
+    return self.data.font_config
+end
+
 ---@class (partial) StringConfig: Object
 StringConfig = Object:extend()
 
