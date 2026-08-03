@@ -45,34 +45,6 @@ function DynaText:update_text(first_pass)
 end
 
 function DynaText:draw()
-    if self.children.particle_effect then self.children.particle_effect:draw() end
-
-    if self.config:has_shadow() then
-        prep_draw(self, 1)
-        love.graphics.translate(self.strings[self.focused_string].W_offset + self.text_offset.x * self.font.FONTSCALE / Tile.instance.TILESIZE, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / Tile.instance.TILESIZE)
-        if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / Tile.instance.TILESIZE, 0) end
-        if self.config.shadow_colour then
-            love.graphics.setColor(self.config.shadow_colour)
-        else
-            love.graphics.setColor(0, 0, 0, 0.3 * self.colours[1][4])
-        end
-        for k, letter in ipairs(self.strings[self.focused_string].letters) do
-            local real_pop_in = self.config.min_cycle_time == 0 and 1 or letter.pop_in
-            love.graphics.draw(
-                letter.letter,
-                0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / Tile.instance.TILESIZE - self.shadow_parrallax.x * self.config.scale / (Tile.instance.TILESIZE),
-                0.5 * (letter.dims.y) * self.font.FONTSCALE / Tile.instance.TILESIZE - self.shadow_parrallax.y * self.config.scale / (Tile.instance.TILESIZE),
-                letter.r or 0,
-                real_pop_in * self.config.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
-                real_pop_in * self.config.scale * self.font.FONTSCALE / Tile.instance.TILESIZE,
-                0.5 * letter.dims.x / self.config.scale,
-                0.5 * letter.dims.y / self.config.scale
-            )
-            love.graphics.translate(letter.dims.x * self.font.FONTSCALE / Tile.instance.TILESIZE, 0)
-        end
-        love.graphics.pop()
-    end
-
     prep_draw(self, 1)
     do
         local tile_size = Tile.instance.TILESIZE
