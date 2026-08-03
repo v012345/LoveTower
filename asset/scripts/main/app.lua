@@ -116,23 +116,27 @@ function App:start_up()
     boot_timer('splash prep', 'end', 1)
     -- self:splash_screen()
     -- self.test = DynaText()
-    -- DynaText(
-    --     {
-    --         string = { "shared stage" },
-    --         colours = { Color.RED },
-    --         shadow = true,
-    --         float = true,
-    --         maxw = 2.5,
-    --         scale = 0.75
-    --     })
+    DynaText(
+        {
+            dyna_text_config_data = {
+                string = { "shared stage" },
+                colours = { Color.RED },
+                shadow = true,
+                float = true,
+                maxw = 2.5,
+                scale = 0.75
+            },
+            X = 0,
+            Y = 0,
+        })
     -- love.resize(love.graphics.getWidth(), love.graphics.getHeight())
-    print(LetterConfig({
-            font_config = Language.instance.LANG.font,
-            char = "a",
-            scale = 1,
-            colour = Color.RED,
-            spacing = 0
-        }))
+    -- print(LetterConfig({
+    --     font_config = Language.instance.LANG.font,
+    --     char = "a",
+    --     scale = 1,
+    --     colour = Color.RED,
+    --     spacing = 0
+    -- }))
 end
 
 function App:set_language()

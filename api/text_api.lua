@@ -42,9 +42,9 @@
 ---@field pop_out boolean
 ---@field reset_pop_in boolean
 ---@field pop_cycle boolean
----@field rotate number
----@field quiver table
----@field pulse table
+---@field rotate? number
+---@field quiver? table
+---@field pulse? table
 ---@field ref_table table 引用表
 ---@field x_offset? number 偏移量, 默认值为 0
 ---@field y_offset? number 偏移量, 默认值为 0
@@ -103,7 +103,7 @@
 ---@field DESCSCALE number
 ---@field FONT love.Font
 
----@param config? DynaTextData
+---@param config DynaTextData
 function DynaText(config) end
 
 ---comment
