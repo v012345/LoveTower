@@ -23,7 +23,7 @@ function DynaTextConfig:init(data)
         spacing = data.spacing,
         pop_in = data.pop_in
     } }
-    data.text_offset = Vec2(
+    self.text_offset = Vec2(
         data.font_config.TEXT_OFFSET.x * data.scale + data.x_offset,
         data.font_config.TEXT_OFFSET.y * data.scale + data.y_offset
     )
@@ -37,6 +37,10 @@ end
 
 function DynaTextConfig:has_shadow()
     return self.data.shadow
+end
+
+function DynaTextConfig:get_text_offset()
+    return self.text_offset
 end
 
 ---@class (partial) StringConfig: Object

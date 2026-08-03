@@ -18,7 +18,7 @@
 ---@field reset_pop_in boolean
 ---@field spacing number 字符间距
 ---@field random_element boolean 这个完全就是为了`错印小丑`准备的
-
+---@field text_offset Vec2 文本偏移量
 
 ---可以理解为一个状态机
 ---@class DynaTextConfigData
@@ -30,7 +30,6 @@
 ---@field font_config? FontConfig 字体, 默认值为 Language.instance.LANG.font
 ---@field spacing? number 字符间距, 默认值为 0
 ---@field string_config_datas StringConfigData[]
----@field text_offset Vec2
 ---@field colours Color[]
 ---@field created_time number
 ---@field silent boolean
