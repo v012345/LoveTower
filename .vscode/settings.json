@@ -10,5 +10,6 @@
         "adjust_alpha",
         "get_chosen_triangle_from_rect",
         "dump"
-    ]
+    ],
+    "editor.gotoLocation.multipleDefinitions": "goto"
 }
