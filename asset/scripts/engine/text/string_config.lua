@@ -16,5 +16,7 @@ function StringConfig:init(data)
             pop_in = data.pop_in,
         })
     end
+    self.W_offset = 0
+    self.H_offset = 0
     return self
 end

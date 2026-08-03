@@ -52,7 +52,7 @@ function DynaText:draw()
         local text_offset = self.config:get_text_offset()
         local font_scale = self.config:get_font_config().FONTSCALE
         love.graphics.translate(cur_string.W_offset + text_offset.x * font_scale / tile_size, cur_string.H_offset + text_offset.y * font_scale / tile_size)
-        love.graphics.translate(self.config.spacing * font_scale / tile_size, 0)
+        love.graphics.translate(self.config:get_spacing() * font_scale / tile_size, 0)
 
         for k, letter in ipairs(cur_string.letters) do
             local real_pop_in = letter.pop_in
