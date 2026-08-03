@@ -1,5 +1,3 @@
-
-
 ---@class (partial) LetterConfig: Object
 LetterConfig = Object:extend()
 
@@ -19,4 +17,16 @@ function LetterConfig:__tostring()
     scale: %s
     colour: %s
     offset: %s]], self.data.char, self.data.scale, self.data.colour, self.offset)
+end
+
+function LetterConfig:get_colour()
+    return self.data.colour
+end
+
+function LetterConfig:get_scale()
+    return self.data.scale
+end
+
+function LetterConfig:get_offset()
+    return self.offset
 end
