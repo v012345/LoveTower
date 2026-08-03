@@ -32,3 +32,7 @@ end
 function LetterConfig:get_offset()
     return self.offset
 end
+
+function LetterConfig:get_letter()
+    return self.letter
+end

@@ -60,7 +60,7 @@ function DynaText:draw()
             local real_pop_in = letter.pop_in
             love.graphics.setColor(letter:get_colour())
             love.graphics.draw(
-                letter.letter,
+                letter:get_letter(),
                 0.5 * (letter.dims.x - letter.offset.x) * font_scale / tile_size,
                 0.5 * (letter.dims.y - letter.offset.y) * font_scale / tile_size,
                 letter.r or 0,
