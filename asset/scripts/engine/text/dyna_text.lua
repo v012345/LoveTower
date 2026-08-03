@@ -31,14 +31,14 @@ end
 
 function DynaText:update_text(first_pass)
     first_pass = false
-    if self.T then
-        if (self.T.w ~= self.config.W or self.T.h ~= self.config.H) and (not first_pass or self.reset_pop_in) then
-            self.ui_object_updated = true
-            self.non_recalc = self.config.non_recalc
-        end
-        self.T.w = self.config.W
-        self.T.h = self.config.H
-    end
+    -- if self.T then
+    --     if (self.T.w ~= self.config.W or self.T.h ~= self.config.H) and (not first_pass or self.reset_pop_in) then
+    --         self.ui_object_updated = true
+    --         self.non_recalc = self.config.non_recalc
+    --     end
+    --     self.T.w = self.config.W
+    --     self.T.h = self.config.H
+    -- end
 
     self.reset_pop_in = false
     self.start_pop_in = false
@@ -53,24 +53,21 @@ function DynaText:draw()
         local font_scale = self.config:get_font_config().FONTSCALE
         love.graphics.translate(cur_string.W_offset + text_offset.x * font_scale / tile_size, cur_string.H_offset + text_offset.y * font_scale / tile_size)
         love.graphics.translate(self.config.spacing * font_scale / tile_size, 0)
-        self.ARGS.draw_shadow_norm = self.ARGS.draw_shadow_norm or {}
-        local _shadow_norm = self.ARGS.draw_shadow_norm
-        _shadow_norm.x = self.shadow_parrallax.x / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / tile_size
-        _shadow_norm.y = self.shadow_parrallax.y / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / tile_size
-        for k, letter in ipairs(self.strings[self.focused_string].letters) do
-            local real_pop_in = self.config.min_cycle_time == 0 and 1 or letter.pop_in
-            love.graphics.setColor(letter.prefix or letter.suffix or letter.colour or self.colours[k % #self.colours + 1])
+
+        for k, letter in ipairs(cur_string.letters) do
+            local real_pop_in = letter.pop_in
+            love.graphics.setColor(letter.colour)
             love.graphics.draw(
                 letter.letter,
-                0.5 * (letter.dims.x - letter.offset.x) * self.font.FONTSCALE / tile_size + _shadow_norm.x,
-                0.5 * (letter.dims.y - letter.offset.y) * self.font.FONTSCALE / tile_size + _shadow_norm.y,
+                0.5 * (letter.dims.x - letter.offset.x) * font_scale / tile_size,
+                0.5 * (letter.dims.y - letter.offset.y) * font_scale / tile_size,
                 letter.r or 0,
-                real_pop_in * letter.scale * self.config.scale * self.font.FONTSCALE / tile_size,
-                real_pop_in * letter.scale * self.config.scale * self.font.FONTSCALE / tile_size,
-                0.5 * letter.dims.x / (self.config.scale),
-                0.5 * letter.dims.y / (self.config.scale)
+                real_pop_in * letter.scale * self.config:get_scale() * font_scale / tile_size,
+                real_pop_in * letter.scale * self.config:get_scale() * font_scale / tile_size,
+                0.5 * letter.dims.x / (self.config:get_scale()),
+                0.5 * letter.dims.y / (self.config:get_scale())
             )
-            love.graphics.translate(letter.dims.x * self.font.FONTSCALE / tile_size, 0)
+            love.graphics.translate(letter.dims.x * font_scale / tile_size, 0)
         end
     end
     love.graphics.pop()

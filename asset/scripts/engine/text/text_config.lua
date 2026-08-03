@@ -47,6 +47,10 @@ function DynaTextConfig:get_font_config()
     return self.data.font_config
 end
 
+function DynaTextConfig:get_scale()
+    return self.data.scale
+end
+
 ---@class (partial) StringConfig: Object
 StringConfig = Object:extend()
 
