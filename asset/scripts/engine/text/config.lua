@@ -29,6 +29,10 @@ function DynaTextConfig:init(data)
     return self
 end
 
+function DynaTextConfig:has_shadow()
+    return self.data.shadow
+end
+
 ---@class (partial) StringConfig: Object
 StringConfig = Object:extend()
 

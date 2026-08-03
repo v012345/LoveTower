@@ -44,12 +44,10 @@ function DynaText:update_text(first_pass)
     self.start_pop_in = false
 end
 
-
-
 function DynaText:draw()
     if self.children.particle_effect then self.children.particle_effect:draw() end
 
-    if self.config.shadow then
+    if self.config:has_shadow() then
         prep_draw(self, 1)
         love.graphics.translate(self.strings[self.focused_string].W_offset + self.text_offset.x * self.font.FONTSCALE / Tile.instance.TILESIZE, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / Tile.instance.TILESIZE)
         if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / Tile.instance.TILESIZE, 0) end
