@@ -7,8 +7,8 @@ DynaText = Moveable:extend()
 function DynaText:init(data)
     Moveable.init(self, Transform(), Room.instance:get_root_node())
     self.data = data
+    data.focused_string = data.focused_string or 1
     self.config = DynaTextConfig(data.dyna_text_config_data)
-
     self.states.hover.can = false
     self.states.click.can = false
     self.states.collide.can = false
@@ -48,7 +48,8 @@ function DynaText:draw()
     prep_draw(self, 1)
     do
         local tile_size = Tile.instance.TILESIZE
-        love.graphics.translate(self.strings[self.focused_string].W_offset + self.text_offset.x * self.font.FONTSCALE / tile_size, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / tile_size)
+        local cur_string = self.config.string_configs[self.data.focused_string]
+        love.graphics.translate(cur_string.W_offset + self.text_offset.x * self.font.FONTSCALE / tile_size, self.strings[self.focused_string].H_offset + self.text_offset.y * self.font.FONTSCALE / tile_size)
         if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / tile_size, 0) end
         self.ARGS.draw_shadow_norm = self.ARGS.draw_shadow_norm or {}
         local _shadow_norm = self.ARGS.draw_shadow_norm

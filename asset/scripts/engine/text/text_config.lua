@@ -10,6 +10,8 @@ function DynaTextConfig:init(data)
     data.bump_rate = data.bump_rate or 2.666
     data.bump_amount = data.bump_amount or 1
     data.font_config = data.font_config or Language.instance.LANG.font
+    data.x_offset = data.x_offset or 0
+    data.y_offset = data.y_offset or 0
     data.string_config_datas = data.string_config_datas or { {
         font_config = Language.instance.LANG.font,
         prefix = "",
@@ -21,6 +23,10 @@ function DynaTextConfig:init(data)
         spacing = data.spacing,
         pop_in = data.pop_in
     } }
+    data.text_offset = Vec2(
+        data.font_config.TEXT_OFFSET.x * data.scale + data.x_offset,
+        data.font_config.TEXT_OFFSET.y * data.scale + data.y_offset
+    )
 
     self.string_configs = {}
     for k, v in ipairs(data.string_config_datas) do

@@ -6,14 +6,13 @@
 
 ---@class DynaTextData
 ---@field dyna_text_config_data DynaTextConfigData
+---@field focused_string? number 当前聚焦的字符串, 默认值为 1
 ---@field X number
 ---@field Y number
 
 ---@class DynaTextConfig
 ---@field private data DynaTextConfigData
 ---@field string_configs StringConfig[]
----@field x_offset number
----@field y_offset number
 ---@field pop_delay number
 ---@field text_rot number
 ---@field reset_pop_in boolean
@@ -48,6 +47,8 @@
 ---@field quiver table
 ---@field pulse table
 ---@field ref_table table 引用表
+---@field x_offset? number 偏移量, 默认值为 0
+---@field y_offset? number 偏移量, 默认值为 0
 
 
 ---@class StringConfig
