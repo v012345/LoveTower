@@ -19,6 +19,8 @@ function LetterConfig:__tostring()
     offset: %s]], self.data.char, self.data.scale, self.data.colour, self.offset)
 end
 
+---字母的颜色
+---@return Color
 function LetterConfig:get_colour()
     return self.data.colour
 end

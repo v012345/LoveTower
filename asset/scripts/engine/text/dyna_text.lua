@@ -1,5 +1,5 @@
----@class (partial) DynaText: Moveable
-DynaText = Moveable:extend()
+---@class (partial) DynaText: Node
+DynaText = Node:extend()
 
 
 ---@private 初始化在 __call 中被调用
@@ -45,6 +45,8 @@ function DynaText:update_text(first_pass)
 end
 
 function DynaText:draw()
+    if self.children.particle_effect then self.children.particle_effect:draw() end
+
     prep_draw(self, 1)
     do
         local tile_size = Tile.instance.TILESIZE
