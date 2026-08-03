@@ -52,7 +52,7 @@ function DynaText:draw()
         local text_offset = self.config:get_text_offset()
         local font_scale = self.config:get_font_config().FONTSCALE
         love.graphics.translate(cur_string.W_offset + text_offset.x * font_scale / tile_size, cur_string.H_offset + text_offset.y * font_scale / tile_size)
-        if self.config.spacing then love.graphics.translate(self.config.spacing * self.font.FONTSCALE / tile_size, 0) end
+        love.graphics.translate(self.config.spacing * font_scale / tile_size, 0)
         self.ARGS.draw_shadow_norm = self.ARGS.draw_shadow_norm or {}
         local _shadow_norm = self.ARGS.draw_shadow_norm
         _shadow_norm.x = self.shadow_parrallax.x / math.sqrt(self.shadow_parrallax.y * self.shadow_parrallax.y + self.shadow_parrallax.x * self.shadow_parrallax.x) * self.font.FONTSCALE / tile_size
