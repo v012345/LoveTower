@@ -1,6 +1,6 @@
 ---@meta
 
----@class FontConfig
+---@class (partial) FontConfig : Object
 
 
 
@@ -13,3 +13,7 @@
 ---@field squish number
 ---@field DESCSCALE number
 ---@field FONT love.Font
+
+
+---@return FontConfig
+function FontConfig() end
