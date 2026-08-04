@@ -22,9 +22,11 @@ function love.run()
     if love.load then love.load(love.arg.parseGameArguments(arg), arg) end
     -- We don't want the first frame's dt to include time taken by love.load.
     love.timer.step()
+
     local dt = 0
     local dt_smooth = 1 / 100
     local run_time = 0
+
     -- Main loop time.
     return function()
         run_time = love.timer.getTime()
