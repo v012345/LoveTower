@@ -9,12 +9,12 @@ function DynaTextConfig:init(data)
     data.pop_in_rate = data.pop_in_rate or 3
     data.bump_rate = data.bump_rate or 2.666
     data.bump_amount = data.bump_amount or 1
-    data.font_config = data.font_config or Language.instance.LANG.font
+    data.font_config = data.font_config or LanguageCfg:get_default_cfg_item()
     data.x_offset = data.x_offset or 0
     data.y_offset = data.y_offset or 0
     data.spacing = data.spacing or 0
     data.string_config_datas = data.string_config_datas or { {
-        font_config = Language.instance.LANG.font,
+        font_config = LanguageCfg:get_default_cfg_item(),
         prefix = "",
         suffix = "",
         ref_table = { [""] = "HELLO WORLD" },

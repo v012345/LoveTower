@@ -30,5 +30,9 @@ function LanguageConfig:get_cfg_item(id)
     return self.cfg_items[id]
 end
 
+function LanguageConfig:get_default_cfg_item()
+    return self.cfg_items['en-us']
+end
+
 ---@type LanguageConfig
 LanguageCfg = LanguageConfig()

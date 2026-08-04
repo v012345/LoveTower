@@ -27,7 +27,7 @@
 ---@field pop_in_rate? number 弹入速度, 默认值为 3
 ---@field bump_rate? number 震动速度, 默认值为 2.666
 ---@field bump_amount? number 震动幅度, 默认值为 1
----@field font_config? FontConfig 字体, 默认值为 Language.instance.LANG.font
+---@field font_config? FontConfigItem 字体, 默认值为 Language.instance.LANG.font
 ---@field spacing? number 字符间距, 默认值为 0
 ---@field string_config_datas StringConfigData[]
 ---@field colours Color[]
