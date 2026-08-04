@@ -8,10 +8,10 @@ love.timer.sleep(0.1) -- 等待调试器连接
 
 
 require "bit"
+require "asset.scripts.libs"
 require "asset.scripts.base"
 require "asset.scripts.core"
 require "asset.scripts.table"
-require "asset.scripts.libs"
 require "asset.scripts.enum"
 require "asset.scripts.engine"
 require "asset.scripts.functions.misc_functions"
