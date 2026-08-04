@@ -36,9 +36,15 @@ function TableParser:parse_csv(csv_data)
         __index = function(self, key)
 
         end,
+        __pairs = function(self)
+     
+        end,
     }
     local row_meta_table = {
         __index = function(self, key)
+
+        end,
+        __pairs = function(self)
 
         end,
     }
@@ -54,10 +60,12 @@ function TableParser:parse_csv(csv_data)
             elseif value_type == "number" then
                 row_table[attir_row[j]] = tonumber(row[j])
             elseif value_type == "bool" or value_type == "boolean" then
-                row_table[attir_row[j]] = string.lower(row[j])
+                row_table[attir_row[j]] = self:exec_lua_string(string.lower(row[j]))
             elseif value_type == "table" then
                 -- 不处理
             elseif value_type == "vec2" then
+                local lua_table = self:exec_lua_string(row[j])
+                row_table[attir_row[j]] = Vec2(lua_table[1], lua_table[2])
             else
                 error("Unknown value type: " .. value_type)
             end
@@ -66,7 +74,12 @@ function TableParser:parse_csv(csv_data)
 end
 
 ---@private
-function TableParser:parse_value()
+function TableParser:exec_lua_string(lua_string)
+    local func, err = load("return " .. lua_string)
+    if not func then
+        error(err)
+    end
+    return func()
 end
 
 TableParser.instance = TableParser()
