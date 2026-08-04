@@ -1,6 +1,6 @@
 ﻿Id,font 表 id,"渲染大小倍数, 与 tile_size相乘使用",,,,"test1
 test2",
-Id,font,label,key,button,warning,beta,omit
+Id,font_id,label,key,button,warning,beta,omit
 string,string,string,string,string,string[],bool,number
 unique,,,,,,,
 en-us,1,English,en-us,Language Feedback,"{
