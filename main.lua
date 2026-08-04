@@ -16,7 +16,7 @@ require "asset.scripts.config"
 require "asset.scripts.engine"
 require "asset.scripts.functions.misc_functions"
 require "asset.scripts.functions.UI_definitions"
-require "asset.scripts.main"
+require "asset.scripts.game"
 
 function love.run()
     if love.load then love.load(love.arg.parseGameArguments(arg), arg) end
