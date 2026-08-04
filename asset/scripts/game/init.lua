@@ -1,3 +1,4 @@
-require "asset.scripts.main.card"
-require "asset.scripts.main.card_area"
-require "asset.scripts.main.app"
+require "asset.scripts.game.card"
+require "asset.scripts.game.card_area"
+require "asset.scripts.game.settings"
+require "asset.scripts.game.app"
