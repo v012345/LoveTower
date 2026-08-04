@@ -1,8 +1,9 @@
 ---@class (partial) DynaTextConfig: Object
 DynaTextConfig = Object:extend()
 
----@param data DynaTextConfigData
+---@param data? DynaTextConfigData
 function DynaTextConfig:init(data)
+    data = data or {}
     self.data = data
     data.shadow = data.shadow or false
     data.scale = data.scale or 1
