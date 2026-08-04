@@ -1,5 +1,5 @@
----@class Settings:Object
-Settings = Object:extend()
+---@class (partial) Settings:Object
+local Settings = Object:extend()
 
 function Settings:init()
     self.COMP = {
@@ -20,7 +20,7 @@ function Settings:init()
     self.language = 'en-us'
     self.screenshake = true
     self.run_stake_stickers = false
-    self.rumble = self.F_RUMBLE
+    self.rumble = PlatformCfg:get_cfg().F_RUMBLE
     self.play_button_pos = 2
     self.GAMESPEED = 1
     self.paused = false
@@ -57,5 +57,4 @@ function Settings:init()
     }
 end
 
----@type Settings
-Settings.instance = Settings()
+return Settings

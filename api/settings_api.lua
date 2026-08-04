@@ -1,0 +1,1 @@
+---@class (partial) Settings:Object
