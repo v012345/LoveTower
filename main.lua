@@ -63,15 +63,15 @@ end
 
 ---@param ... any
 function love.load(...)
-    App.instance:start_up()
+    App:start_up()
 end
 
 function love.update(dt)
-    App.instance:update(dt)
+    App:update(dt)
 end
 
 function love.draw()
-    App.instance:draw()
+    App:draw()
 end
 
 function love.keypressed(key)
@@ -101,6 +101,7 @@ end
 ---@param w number
 ---@param h number
 function love.resize(w, h)
+    print("love.resize", w, h)
     assert(h > 0 and w > 0, "Window size must be greater than 0, but got " .. w .. "x" .. h)
     -- 不允许窗口变成竖屏, 因为会出现上下弹出
     --Dont allow the screen to be too square, since pop in occurs above and below screen
@@ -119,7 +120,7 @@ function love.resize(w, h)
     end
 
 
-    App.instance.CANV_SCALE = 1
+    App.CANV_SCALE = 1
 
     local room = Room.instance:get_root_node()
     if room then
@@ -141,6 +142,6 @@ function love.resize(w, h)
     end
 
     Window.instance:set_real_size(w, h)
-    App.instance.CANVAS = love.graphics.newCanvas(w * App.instance.CANV_SCALE, h * App.instance.CANV_SCALE, { type = '2d', readable = true })
-    App.instance.CANVAS:setFilter('linear', 'linear')
+    App.CANVAS = love.graphics.newCanvas(w * App.instance.CANV_SCALE, h * App.instance.CANV_SCALE, { type = '2d', readable = true })
+    App.CANVAS:setFilter('linear', 'linear')
 end

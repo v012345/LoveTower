@@ -1,28 +1,8 @@
----@class App: Object
----@field CANVAS Canvas
----@field ROOM {Node: Node, ORIG: {x: number, y: number, r: number}}   房间, 就是游戏的主场景, 一切节点的根节点
----@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
----@field I NodeList
----@field under_overlay boolean 是否显示底层覆盖?????? 不知道是什么东西
----@field TILESCALE number 地图缩放比例
----@field TILESIZE number 地图单元格大小
----@field STAGE_OBJECT_INTERRUPT boolean 不知道具体作用是什么
----@field STAGE_OBJECTS Node[][] 场景中使用到的所有 Node , 当 STAGE 改变时, 可以通过这里删除所有 Node
----@field fbf boolean frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧, 和 new_frame 配合使用
----@field new_frame boolean 是否是新的一帧, 如果为 true, 则渲染新的一帧, 否则渲染旧的一帧, 和 fbf 配合使用
----@field MOVEABLES Moveable[] 所有 Moveable 的列表, 包括 Moveable 的子类
----@field STAGE STAGES 当前场景
----@field STATE STATES 当前状态
----@field ROOM_PADDING_W number 房间左右边距, 以地图单元格为单位
----@field ROOM_PADDING_H number 房间上下边距, 以地图单元格为单位
----@field TILE_W number 地图单元格宽度, 以像素为单位
----@field TILE_H number 地图单元格高度, 以像素为单位
----@field WINDOW WINDOW 窗口变换和真实大小
-App = Object:extend()
-
-
+---@class (partial) App: Object
+local App = Object:extend()
 
 function App:init()
+    do return end
     self.ID = 0 -- ID 生成器
     self.DEBUG = true
     self.under_overlay = false
@@ -126,7 +106,7 @@ function App:init_game_object()
 end
 
 function App:update(dt)
-    -- do return end
+    do return end
     self.FRAMES.MOVE = self.FRAMES.MOVE + 1
     Timer.instance:update_real_time(dt)
     if not self.fbf or self.new_frame then
@@ -148,7 +128,7 @@ function App:update(dt)
 end
 
 function App:draw()
-    -- do return end
+    do return end
     love.graphics.setCanvas({ self.CANVAS })
     love.graphics.push()
     love.graphics.scale(1)
@@ -197,7 +177,7 @@ end
 
 --- 在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
 function App:start_up()
-    -- do return end
+    do return end
     boot_timer("start", "settings", 0.1)
     self:init_window()
     boot_timer('settings', 'window init', 0.2)
@@ -303,6 +283,5 @@ function App:generate_id()
     return self.ID
 end
 
----@class App
-App.instance = App()
-
+---@type App
+_G["App"] = App()
