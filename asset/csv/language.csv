@@ -1,0 +1,82 @@
+﻿Id,font 表 id,"渲染大小倍数, 与 tile_size相乘使用",,,,"test1
+test2",
+Id,font,label,key,button,warning,beta,omit
+string,string,string,string,string,string[],bool,number
+unique,,,,,,,
+en-us,1,English,en-us,Language Feedback,"{
+                    'This language is still in Beta. To help us',
+                    'improve it, please click on the feedback button.',
+                    'Click again to confirm'
+                }",FALSE,FALSE
+de,1,Deutsch,de,Feedback zur Übersetzung,"{
+                    'Diese Übersetzung ist noch im Beta-Stadium. Willst du uns helfen,',
+                    'sie zu verbessern? Dann klicke bitte auf die Feedback-Taste.',
+                    ""Zum Bestätigen erneut klicken""
+                }",FALSE,FALSE
+es_419,1,Español (México),es_419,Sugerencias de idioma,"{
+                    'Este idioma todavía está en Beta. Pulsa el botón',
+                    'de sugerencias para ayudarnos a mejorarlo.',
+                    ""Haz clic de nuevo para confirmar""
+                }",FALSE,FALSE
+es_ES,1,Español (España),es_ES,Sugerencias de idioma,"{
+                    'Este idioma todavía está en Beta. Pulsa el botón',
+                    'de sugerencias para ayudarnos a mejorarlo.',
+                    ""Haz clic de nuevo para confirmar""
+                }",FALSE,FALSE
+fr,1,Français,fr,Partager votre avis,"{
+                    'La traduction française est encore en version bêta. ',
+                    'Veuillez cliquer sur le bouton pour nous donner votre avis.',
+                    ""Cliquez à nouveau pour confirmer""
+                }",FALSE,FALSE
+id,1,Bahasa Indonesia,id,Umpan Balik Bahasa,"{
+                    'Bahasa ini masih dalam tahap Beta. Untuk membantu',
+                    'kami meningkatkannya, silakan klik tombol umpan balik.',
+                    ""Klik lagi untuk mengonfirmasi""
+                }",TRUE,FALSE
+it,1,Italiano,it,Feedback traduzione,"{
+                    'Questa traduzione è ancora in Beta. Per',
+                    'aiutarci a migliorarla, clicca il tasto feedback',
+                    ""Fai clic di nuovo per confermare""
+                }",FALSE,FALSE
+ja,5,日本語,ja,提案する,"{
+                    'この翻訳は現在ベータ版です。提案があった場合、',
+                    'ボタンをクリックしてください。',
+                    ""もう一度クリックして確認""
+                }",FALSE,FALSE
+ko,4,한국어,ko,번역 피드백,"{
+                    '이 언어는 아직 베타 단계에 있습니다. ',
+                    '번역을 도와주시려면 피드백 버튼을 눌러주세요.',
+                    ""다시 클릭해서 확인하세요""
+                }",FALSE,FALSE
+nl,1,Nederlands,nl,Taal suggesties,"{
+                    'Deze taal is nog in de Beta fase. Help ons het te ',
+                    'verbeteren door op de suggestie knop te klikken.',
+                    ""Klik opnieuw om te bevestigen""
+                }",FALSE,FALSE
+pl,1,Polski,pl,Wyślij uwagi do tłumaczenia," {
+                    'Polska wersja językowa jest w fazie Beta. By pomóc nam poprawić',
+                    ' jakość tłumaczenia, kliknij przycisk i podziel się swoją opinią i uwagami.',
+                    ""Kliknij ponownie, aby potwierdzić""
+                }",FALSE,FALSE
+pt_BR,1,Português,pt_BR,Feedback de Tradução," {
+                    'Esta tradução ainda está em Beta. Se quiser nos ajudar',
+                    'a melhorá-la, clique no botão de feedback por favor',
+                    ""Clique novamente para confirmar""
+                }",FALSE,FALSE
+ru,6,Русский,ru,Отзыв о языке,"{
+                    'Этот язык все еще находится в Бета-версии. Чтобы помочь',
+                    'нам его улучшить, пожалуйста, нажмите на кнопку обратной связи.',
+                    ""Щелкните снова, чтобы подтвердить""
+                }",TRUE,FALSE
+zh_CN,2,简体中文,zh_CN,意见反馈,"{
+                    '这个语言目前尚为Beta版本。 请帮助我们改善翻译品质，',
+                    '点击”意见反馈” 来提供你的意见。',
+                    ""再次点击确认""
+                }",FALSE,FALSE
+zh_TW,3,繁體中文,zh_TW,意見回饋,"{
+                    '這個語言目前尚為Beta版本。請幫助我們改善翻譯品質，',
+                    '點擊”意見回饋” 來提供你的意見。',
+                    ""再按一下即可確認""
+                }",FALSE,FALSE
+all1,8,English,all,,{},FALSE,TRUE
+all2,9,English,all,,{},FALSE,TRUE
