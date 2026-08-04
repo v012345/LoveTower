@@ -15,7 +15,7 @@ end
 ---@private
 ---@param csv_data string 原始csv数据
 function TableParser:parse_csv(csv_data)
-    
+   
 end
 
 TableParser.instance = TableParser()

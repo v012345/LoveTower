@@ -1,4 +1,5 @@
-﻿Id,字体文件,"渲染大小倍数, 与 tile_size相乘使用",,,,,
+﻿Id,字体文件,"渲染大小倍数, 与 tile_size相乘使用",,,,"test1
+test2",
 Id,file,render_scale,TEXT_HEIGHT_SCALE,TEXT_OFFSET,FONTSCALE,squish,DESCSCALE
 string,string,number,number,vec2,number,number,number
 unique,,,,,,,
