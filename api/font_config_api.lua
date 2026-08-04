@@ -5,6 +5,7 @@
 
 
 ---@class FontConfigItem
+---@field Id string
 ---@field file string
 ---@field render_scale number
 ---@field TEXT_HEIGHT_SCALE number
@@ -15,5 +16,3 @@
 ---@field FONT love.Font
 
 
----@return FontConfig
-function FontConfig() end
