@@ -3,23 +3,14 @@
 local PlatformConfig = Object:extend()
 
 function PlatformConfig:init()
-    self.cfg = TableParser.instance:parse("platform")["1"]
+    local os = love.system.getOS()
+    local platform_table = TableParser.instance:parse("platform")
+    self.cfg = platform_table[os] or platform_table['Windows']
 end
 
-function PlatformConfig:get_tile_size()
-    return self.cfg.TILESIZE
-end
-
-function PlatformConfig:get_tile_scale()
-    return self.cfg.TILESCALE
-end
-
-function PlatformConfig:get_tile_width()
-    return self.cfg.TILE_W
-end
-
-function PlatformConfig:get_tile_height()
-    return self.cfg.TILE_H
+---@return PlatformConfigItem
+function PlatformConfig:get_cfg()
+    return self.cfg
 end
 
 ---@type PlatformConfig
