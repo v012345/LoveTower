@@ -1,0 +1,33 @@
+---@class PlatformConfigItem
+---@field Id string
+---@field F_QUIT_BUTTON boolean Include the main menu 'Quit' button
+---@field F_SKIP_TUTORIAL boolean Completely skip the tutorial on fresh save
+---@field F_BASIC_CREDITS boolean Remove references to Daniel Linssens itch.io
+---@field F_EXTERNAL_LINKS boolean Remove all references to any external links (mainly for console)
+---@field F_ENABLE_PERF_OVERLAY boolean Disable debugging tool for performance of each frame
+---@field F_NO_SAVING boolean Disables all 'run' saving
+---@field F_MUTE boolean Force mute all sounds
+---@field F_SOUND_THREAD boolean Have sound in a separate thread entirely - if not sounds will run on main thread
+---@field F_VIDEO_SETTINGS boolean Let the player change their video settings
+---@field F_CTA boolean Call to Action video for the Demo - keep this as false
+---@field F_VERBOSE boolean Extra debug information on screen and in the console
+---@field F_HTTP_SCORES boolean Include HTTP scores to fetch/set high scores
+---@field F_RUMBLE number Add rumble to the primary controller - adjust this for amount of rumble
+---@field F_CRASH_REPORTS boolean Send Crash reports over the internet
+---@field F_NO_ERROR_HAND boolean Hard crash without error message screen
+---@field F_SWAP_AB_PIPS boolean Swapping button pips for A and B buttons (mainly for switch)
+---@field F_SWAP_AB_BUTTONS boolean Swapping button function for A and B buttons (mainly for switch)
+---@field F_SWAP_XY_BUTTONS boolean Swapping button function for X and Y buttons (mainly for switch)
+---@field F_NO_ACHIEVEMENTS boolean Disable achievements
+---@field F_DISP_USERNAME boolean If a username is required to be displayed in the main menu, set this value to that name
+---@field F_ENGLISH_ONLY boolean Disable language selection - only in english
+---@field F_GUIDE boolean Replace back/select button with 'guide' button
+---@field F_JAN_CTA boolean Call to action for Jan demo
+---@field F_HIDE_BG boolean Hiding the game objects when paused
+---@field F_TROPHIES boolean use 'trophy' terminology instead of 'achievemnt'
+---@field F_PS4_PLAYSTATION_GLYPHS boolean use PS4 glyphs instead of PS5 glyphs for PS controllers
+---@field F_LOCAL_CLIPBOARD boolean
+---@field F_SAVE_TIMER number
+---@field F_MOBILE_UI boolean
+---@field F_HIDE_BETA_LANGS boolean
+---@field F_DISCORD boolean
