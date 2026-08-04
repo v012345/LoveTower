@@ -15,7 +15,11 @@ end
 ---@private
 ---@param csv_data string 原始csv数据
 function TableParser:parse_csv(csv_data)
-   
+    local chars = {}
+    for char in utf8.chars(csv_data) do
+        chars[#chars + 1] = char
+    end
+    print(#chars)
 end
 
 TableParser.instance = TableParser()
