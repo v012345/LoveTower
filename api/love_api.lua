@@ -37,6 +37,11 @@ function love.quit() end
 love.filesystem = love.filesystem or {}
 
 ---@param path string
+---@param size? number
+---@return string data
+function love.filesystem.read(path, size) end
+
+---@param path string
 ---@return boolean success
 function love.filesystem.remove(path) end
 
