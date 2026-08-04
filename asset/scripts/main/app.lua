@@ -114,8 +114,8 @@ function App:start_up()
     boot_timer('prep stage', 'splash prep', 1)
 
     boot_timer('splash prep', 'end', 1)
-    TableParser.instance:parse("font")
-    
+
+    print(TableParser.instance:parse("font"))
     -- self:splash_screen()
     -- self.test = DynaText()
     DynaText(

@@ -27,6 +27,9 @@ local function make_readonly(data, desc)
         __pairs = function()
             return raw_pairs(data)
         end,
+        __tostring = function()
+            return dump(data)
+        end
     })
 end
 
