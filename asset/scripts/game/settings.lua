@@ -64,7 +64,17 @@ function Settings:init()
         crt = 70,
         bloom = 1
     }
-    self.QUEUED_CHANGE = {}
+    self.QUEUED_CHANGE = {
+        screenres = {}
+    }
+end
+
+function Settings:reset_queued_change()
+    self.QUEUED_CHANGE.screenmode = nil
+    self.QUEUED_CHANGE.selected_display = nil
+    self.QUEUED_CHANGE.screenres.w = nil
+    self.QUEUED_CHANGE.screenres.h = nil
+    self.QUEUED_CHANGE.vsync = nil
 end
 
 return Settings
