@@ -3,6 +3,8 @@ local App = Object:extend()
 local Settings = require "asset.scripts.game.settings"
 function App:init()
     local settings = get_compressed('settings.jkr')
+    compress_and_save('settings.jkr', { 123, "asd" })
+    local settings = get_compressed('settings.jkr')
     print(settings)
     do return end
     self.ID = 0 -- ID 生成器

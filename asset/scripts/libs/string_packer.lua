@@ -65,6 +65,10 @@ function get_compressed(_file)
     end
 end
 
+---把数据压缩并保存到文件, 文件位置由 love2d 管理, 如果是一个 table 数据, 会自动调用 STR_PACK 把 table 转换为字符串
+---@param _file string 文件名, 文件位置由 love2d 管理
+---@param _data any 数据, 如果是一个 table 数据, 会自动调用 STR_PACK 把 table 转换为字符串
+---@return nil
 function compress_and_save(_file, _data)
     local save_string = type(_data) == 'table' and STR_PACK(_data) or _data
     save_string = love.data.compress('string', 'deflate', save_string, 1)
