@@ -1,4 +1,5 @@
 {
+    "Lua.runtime.version": "LuaJIT",
     "Lua.diagnostics.globals": [
         "generate_id",
         "point_translate",
@@ -9,7 +10,9 @@
         "darken",
         "adjust_alpha",
         "get_chosen_triangle_from_rect",
-        "dump"
+        "dump",
+        "compress_and_save",
+        "get_compressed"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto"
 }
