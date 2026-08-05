@@ -64,6 +64,7 @@ function Settings:init()
         crt = 70,
         bloom = 1
     }
+    self.QUEUED_CHANGE = {}
 end
 
 return Settings
