@@ -264,6 +264,10 @@ love.data = love.data or {}
 ---@return string compressed_string
 function love.data.compress(container, format, rawstring, level) end
 
+---@param container string
+---@param format string
+---@param data string
+---@return string decompressed_string
 function love.data.decompress(container, format, data) end
 
 ---@class love.system
