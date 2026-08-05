@@ -282,7 +282,7 @@ function App:apply_window_changes(_initial)
     self.SETTINGS.WINDOW.selected_display = self.SETTINGS.QUEUED_CHANGE.selected_display or self.SETTINGS.WINDOW.selected_display
 
     --Set the screen resolution
-    self.SETTINGS.WINDOW.DISPLAYS[G.SETTINGS.WINDOW.selected_display].screen_res = {
+    self.SETTINGS.WINDOW.DISPLAYS[self.SETTINGS.WINDOW.selected_display].screen_res = {
         w = (G.SETTINGS.QUEUED_CHANGE and G.SETTINGS.QUEUED_CHANGE.screenres and G.SETTINGS.QUEUED_CHANGE.screenres.w) or (G.SETTINGS.screen_res and G.SETTINGS.screen_res.w) or love.graphics.getWidth(),
         h = (G.SETTINGS.QUEUED_CHANGE and G.SETTINGS.QUEUED_CHANGE.screenres and G.SETTINGS.QUEUED_CHANGE.screenres.h) or (G.SETTINGS.screen_res and G.SETTINGS.screen_res.h) or love.graphics.getHeight()
     }

@@ -46,7 +46,7 @@ function Settings:init()
         DISPLAYS = {
             {
                 name = '[NONE]',
-                screen_res = { w = 1000, h = 650 },
+                screen_res = Size(1000, 650),
             }
         }
     }
