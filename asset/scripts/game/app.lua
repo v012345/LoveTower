@@ -295,10 +295,10 @@ function App:apply_window_changes(_initial)
     local window_height = screenmode == 'Windowed' and love.graphics.getHeight() * 0.8 or display.screen_res.h
     love.window.updateMode(window_width, window_height, {
         fullscreen = screenmode ~= 'Windowed',
-        fullscreentype = (G.SETTINGS.WINDOW.screenmode == 'Borderless' and 'desktop') or (G.SETTINGS.WINDOW.screenmode == 'Fullscreen' and 'exclusive') or nil,
-        vsync = G.SETTINGS.WINDOW.vsync,
+        fullscreentype = (screenmode == 'Borderless' and 'desktop') or (screenmode == 'Fullscreen' and 'exclusive'),
+        vsync = self.SETTINGS.WINDOW.vsync,
         resizable = true,
-        display = G.SETTINGS.WINDOW.selected_display,
+        display = self.SETTINGS.WINDOW.selected_display,
         highdpi = (love.system.getOS() == 'OS X')
     })
     self.SETTINGS:reset_queued_change()
