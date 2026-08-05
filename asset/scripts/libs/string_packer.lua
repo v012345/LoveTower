@@ -50,6 +50,9 @@ function STR_UNPACK(str)
     return assert(loadstring(str))()
 end
 
+---从文件中获取压缩后的数据, 并解压缩, 如果文件以 return 开关, 则认为是 lua 代码, 会自动调用 loadstring 执行
+---@param _file string 文件名, 文件位置由 love2d 管理
+---@return string|nil
 function get_compressed(_file)
     local file_data = love.filesystem.getInfo(_file)
     if file_data ~= nil then
