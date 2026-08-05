@@ -11,4 +11,4 @@
 
 
 ---@class QueuedChange
----@field screenmode? string 窗口模式
+---@field screenmode? "Windowed" | "Fullscreen" | "Borderless" 窗口模式
