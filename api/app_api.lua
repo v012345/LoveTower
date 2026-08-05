@@ -1,4 +1,6 @@
 ---@class (partial) App: Object
+---@field SETTINGS Settings 设置
+---@field window Window 窗口
 ---@field CANVAS Canvas
 ---@field ROOM {Node: Node, ORIG: {x: number, y: number, r: number}}   房间, 就是游戏的主场景, 一切节点的根节点
 ---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
@@ -17,4 +19,3 @@
 ---@field ROOM_PADDING_H number 房间上下边距, 以地图单元格为单位
 ---@field TILE_W number 地图单元格宽度, 以像素为单位
 ---@field TILE_H number 地图单元格高度, 以像素为单位
----@field WINDOW WINDOW 窗口变换和真实大小
