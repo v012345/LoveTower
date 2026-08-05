@@ -4,7 +4,7 @@
 
 
 ---@class WindowSetting
----@field screenmode string 窗口模式
+---@field screenmode "Windowed" | "Fullscreen" | "Borderless" 窗口模式
 ---@field selected_display number 选择的显示器
 ---@field screen_res Size 屏幕分辨率
 ---@field vsync number VSync值

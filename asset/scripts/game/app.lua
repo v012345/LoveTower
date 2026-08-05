@@ -276,7 +276,7 @@ end
 ---@param _initial boolean 是否是初始化
 function App:apply_window_changes(_initial)
     --Set the screenmode setting from Windowed, Fullscreen or Borderless
-    G.SETTINGS.WINDOW.screenmode = (G.SETTINGS.QUEUED_CHANGE and G.SETTINGS.QUEUED_CHANGE.screenmode) or G.SETTINGS.WINDOW.screenmode or 'Windowed'
+    self.SETTINGS.WINDOW.screenmode = self.SETTINGS.QUEUED_CHANGE.screenmode or self.SETTINGS.WINDOW.screenmode
 
     --Set the monitor the window should be rendered to
     G.SETTINGS.WINDOW.selected_display = (G.SETTINGS.QUEUED_CHANGE and G.SETTINGS.QUEUED_CHANGE.selected_display) or G.SETTINGS.WINDOW.selected_display or 1
