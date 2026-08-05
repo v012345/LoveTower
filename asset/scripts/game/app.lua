@@ -1,7 +1,9 @@
 ---@class (partial) App: Object
 local App = Object:extend()
-
+local Settings = require "asset.scripts.game.settings"
 function App:init()
+    local settings = get_compressed('settings.jkr')
+    print(settings)
     do return end
     self.ID = 0 -- ID 生成器
     self.DEBUG = true
@@ -9,23 +11,7 @@ function App:init()
 
     self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
     self.CANVAS:setFilter('linear', 'linear')
-    self.SETTINGS = {
-        reduced_motion = false, --- 是否减少动画效果, 如果为 true, 则减少动画效果
-        paused = false,
-        QUEUED_CHANGE = {},
-        WINDOW = {
-            screenmode = 'Windowed',
-            vsync = 1,
-            selected_display = 1,
-            display_names = { '[NONE]' },
-            DISPLAYS = {
-                {
-                    name = '[NONE]',
-                    screen_res = { w = 1000, h = 650 },
-                }
-            },
-        }
-    }
+    self.SETTINGS = Settings()
     --- 设计大小
     --- 窗口大小为 1606*941, 设计大小为 1460*840
     --- 宽高比为 1.74
