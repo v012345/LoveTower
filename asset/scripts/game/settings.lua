@@ -39,7 +39,7 @@ function Settings:init()
         game_sounds_volume = 100,
     }
     self.WINDOW = {
-        screenmode = 'Borderless',
+        screenmode = 'Windowed',
         selected_display = 1,
         vsync = 1,
         display_names = { '[NONE]' },

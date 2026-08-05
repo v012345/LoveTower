@@ -166,9 +166,9 @@ end
 
 --- 在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
 function App:start_up()
-    do return end
     boot_timer("start", "settings", 0.1)
     self:init_window()
+    do return end
     boot_timer('settings', 'window init', 0.2)
 
     boot_timer('window init', 'savemanager', 0.3)
@@ -275,6 +275,7 @@ end
 ---These changes are all defined in the G.SETTINGS.QUEUED_CHANGE table. Any unchanged settings use the previous value
 ---@param _initial boolean 是否是初始化
 function App:apply_window_changes(_initial)
+    print("apply_window_changes")
     --Set the screenmode setting from Windowed, Fullscreen or Borderless
     self.SETTINGS.WINDOW.screenmode = self.SETTINGS.QUEUED_CHANGE.screenmode or self.SETTINGS.WINDOW.screenmode
 
@@ -304,8 +305,10 @@ function App:apply_window_changes(_initial)
     self.SETTINGS:reset_queued_change()
     if not _initial then
         love.resize(love.graphics.getWidth(), love.graphics.getHeight())
-        G:save_settings()
+        -- G:save_settings()
     end
+    do return end
+    -- 这里还用不上, 之后再说
     if G.OVERLAY_MENU then
         local tab_but = G.OVERLAY_MENU:get_UIE_by_ID('tab_but_Video')
         G.FUNCS.change_tab(tab_but)
