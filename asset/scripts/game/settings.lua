@@ -40,8 +40,8 @@ function Settings:init()
     }
     self.WINDOW = {
         screenmode = 'Borderless',
-        vsync = 1,
         selected_display = 1,
+        vsync = 1,
         display_names = { '[NONE]' },
         DISPLAYS = {
             {

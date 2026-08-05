@@ -279,7 +279,7 @@ function App:apply_window_changes(_initial)
     self.SETTINGS.WINDOW.screenmode = self.SETTINGS.QUEUED_CHANGE.screenmode or self.SETTINGS.WINDOW.screenmode
 
     --Set the monitor the window should be rendered to
-    G.SETTINGS.WINDOW.selected_display = (G.SETTINGS.QUEUED_CHANGE and G.SETTINGS.QUEUED_CHANGE.selected_display) or G.SETTINGS.WINDOW.selected_display or 1
+    self.SETTINGS.WINDOW.selected_display = self.SETTINGS.QUEUED_CHANGE.selected_display or self.SETTINGS.WINDOW.selected_display
 
     --Set the screen resolution
     G.SETTINGS.WINDOW.DISPLAYS[G.SETTINGS.WINDOW.selected_display].screen_res = {

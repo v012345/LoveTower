@@ -12,3 +12,4 @@
 
 ---@class QueuedChange
 ---@field screenmode? "Windowed" | "Fullscreen" | "Borderless" 窗口模式
+---@field selected_display? number 选择的显示器
