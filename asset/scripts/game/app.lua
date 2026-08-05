@@ -6,6 +6,7 @@ function App:init()
     compress_and_save('settings.jkr', { 123, "asd" })
     local settings = get_compressed('settings.jkr')
     print(settings)
+    self.SETTINGS = Settings()
     do return end
     self.ID = 0 -- ID 生成器
     self.DEBUG = true
@@ -13,7 +14,6 @@ function App:init()
 
     self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
     self.CANVAS:setFilter('linear', 'linear')
-    self.SETTINGS = Settings()
     --- 设计大小
     --- 窗口大小为 1606*941, 设计大小为 1460*840
     --- 宽高比为 1.74
