@@ -289,20 +289,20 @@ function App:apply_window_changes(_initial)
 
     --Set the vsync value, 0 is off 1 is on
     self.SETTINGS.WINDOW.vsync = self.SETTINGS.QUEUED_CHANGE.vsync or self.SETTINGS.WINDOW.vsync
-
-    love.window.updateMode(
-        (G.SETTINGS.QUEUED_CHANGE and G.SETTINGS.QUEUED_CHANGE.screenmode == 'Windowed') and love.graphics.getWidth() * 0.8 or G.SETTINGS.WINDOW.DISPLAYS[G.SETTINGS.WINDOW.selected_display].screen_res.w,
-        (G.SETTINGS.QUEUED_CHANGE and G.SETTINGS.QUEUED_CHANGE.screenmode == 'Windowed') and love.graphics.getHeight() * 0.8 or G.SETTINGS.WINDOW.DISPLAYS[G.SETTINGS.WINDOW.selected_display].screen_res.h,
-        {
-            fullscreen = G.SETTINGS.WINDOW.screenmode ~= 'Windowed',
-            fullscreentype = (G.SETTINGS.WINDOW.screenmode == 'Borderless' and 'desktop') or (G.SETTINGS.WINDOW.screenmode == 'Fullscreen' and 'exclusive') or nil,
-            vsync = G.SETTINGS.WINDOW.vsync,
-            resizable = true,
-            display = G.SETTINGS.WINDOW.selected_display,
-            highdpi = (love.system.getOS() == 'OS X')
-        })
-    G.SETTINGS.QUEUED_CHANGE = {}
-    if _initial ~= true then
+    local screenmode = self.SETTINGS.WINDOW.screenmode
+    local display = self.SETTINGS.WINDOW.DISPLAYS[self.SETTINGS.WINDOW.selected_display]
+    local window_width = screenmode == 'Windowed' and love.graphics.getWidth() * 0.8 or display.screen_res.w
+    local window_height = screenmode == 'Windowed' and love.graphics.getHeight() * 0.8 or display.screen_res.h
+    love.window.updateMode(window_width, window_height, {
+        fullscreen = screenmode ~= 'Windowed',
+        fullscreentype = (G.SETTINGS.WINDOW.screenmode == 'Borderless' and 'desktop') or (G.SETTINGS.WINDOW.screenmode == 'Fullscreen' and 'exclusive') or nil,
+        vsync = G.SETTINGS.WINDOW.vsync,
+        resizable = true,
+        display = G.SETTINGS.WINDOW.selected_display,
+        highdpi = (love.system.getOS() == 'OS X')
+    })
+    self.SETTINGS:reset_queued_change()
+    if not _initial then
         love.resize(love.graphics.getWidth(), love.graphics.getHeight())
         G:save_settings()
     end
