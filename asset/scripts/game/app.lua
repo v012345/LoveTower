@@ -288,7 +288,7 @@ function App:apply_window_changes(_initial)
     }
 
     --Set the vsync value, 0 is off 1 is on
-    G.SETTINGS.WINDOW.vsync = (G.SETTINGS.QUEUED_CHANGE and G.SETTINGS.QUEUED_CHANGE.vsync) or G.SETTINGS.WINDOW.vsync or 1
+    self.SETTINGS.WINDOW.vsync = self.SETTINGS.QUEUED_CHANGE.vsync or self.SETTINGS.WINDOW.vsync
 
     love.window.updateMode(
         (G.SETTINGS.QUEUED_CHANGE and G.SETTINGS.QUEUED_CHANGE.screenmode == 'Windowed') and love.graphics.getWidth() * 0.8 or G.SETTINGS.WINDOW.DISPLAYS[G.SETTINGS.WINDOW.selected_display].screen_res.w,
