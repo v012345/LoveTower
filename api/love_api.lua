@@ -257,6 +257,11 @@ function love.event.pump() end
 ---@class love.data
 love.data = love.data or {}
 
+---@param container string
+---@param format string
+---@param rawstring string
+---@param level number
+---@return string compressed_string
 function love.data.compress(container, format, rawstring, level) end
 
 function love.data.decompress(container, format, data) end
