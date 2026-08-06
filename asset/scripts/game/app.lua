@@ -91,13 +91,13 @@ function App:start_up()
     -- Input handler/controller for game objects
     self.CONTROLLER = Controller()
     boot_timer('settings', 'window init', 0.2)
-    
+
     boot_timer('window init', 'savemanager', 0.3)
-    
+
     boot_timer('savemanager', 'shaders', 0.4)
-    
+
     boot_timer('shaders', 'controllers', 0.7)
-    
+
     boot_timer('controllers', 'localization', 0.8)
     self:init_item_prototypes()
     do return end
@@ -113,6 +113,7 @@ end
 function App:init_item_prototypes()
     self.P_SEALS = SealCfg:get_seals()
     self.P_TAGS = TagCfg:get_tags()
+
 end
 
 ---@param new_stage    STAGES
