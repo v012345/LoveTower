@@ -1,5 +1,5 @@
 ---@class Controller
-Controller = Object:extend()
+local Controller = Object:extend()
 
 
 --The controller contains all engine logic for how human input interacts with any game objects.
@@ -27,6 +27,4 @@ end
 function Controller:update(dt)
 end
 
----@type Controller
-Controller.instance = Controller()
 return Controller
