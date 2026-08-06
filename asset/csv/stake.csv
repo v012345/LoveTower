@@ -1,0 +1,12 @@
+﻿Id,,,,,,
+Id,pos,set,name,unlocked,order,stake_level
+string,vec2,string,string,bool,number,number
+unique,,,,,,
+stake_white,"{0,0}",Stake,White Chip,TRUE,1,1
+stake_red,"{1,0}",Stake,Red Chip,FALSE,2,2
+stake_green,"{2,0}",Stake,Green Chip,FALSE,3,3
+stake_black,"{4,0}",Stake,Black Chip,FALSE,4,4
+stake_blue,"{3,0}",Stake,Blue Chip,FALSE,5,5
+stake_purple,"{0,1}",Stake,Purple Chip,FALSE,6,6
+stake_orange,"{1,1}",Stake,Orange Chip,FALSE,7,7
+stake_gold,"{2,1}",Stake,Gold Chip,FALSE,8,8
