@@ -1,4 +1,4 @@
----@class Controller
+---@class (partial) Controller: Object
 local Controller = Object:extend()
 
 

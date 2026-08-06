@@ -2,6 +2,7 @@
 local App = Object:extend()
 local Settings = require "asset.scripts.game.settings"
 local Window = require "asset.scripts.game.window"
+local Controller = require "asset.scripts.game.controller"
 function App:init()
     local settings = get_compressed('settings.jkr')
     compress_and_save('settings.jkr', { 123, "asd" })
@@ -71,6 +72,57 @@ function App:init()
         Node = nil,
         ORIG = Transform(),
     }
+end
+
+--- 在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
+function App:start_up()
+    boot_timer("start", "settings", 0.1)
+    self:init_window()
+    -- Input handler/controller for game objects
+    self.CONTROLLER = Controller()
+    do return end
+    boot_timer('settings', 'window init', 0.2)
+
+    boot_timer('window init', 'savemanager', 0.3)
+
+    boot_timer('savemanager', 'shaders', 0.4)
+
+    boot_timer('shaders', 'controllers', 0.7)
+
+    boot_timer('controllers', 'localization', 0.8)
+
+    boot_timer('protos', 'shared sprites', 0.9)
+
+    boot_timer('shared sprites', 'prep stage', 0.95)
+
+    boot_timer('prep stage', 'splash prep', 1)
+
+    boot_timer('splash prep', 'end', 1)
+
+    print(TableParser.instance:parse("font"))
+    -- self:splash_screen()
+    -- self.test = DynaText()
+    DynaText(
+        {
+            dyna_text_config_data = {
+                string = { "shared stage" },
+                colours = { Color.RED },
+                shadow = true,
+                float = true,
+                maxw = 2.5,
+                scale = 0.75
+            },
+            X = 0,
+            Y = 0,
+        })
+    -- love.resize(love.graphics.getWidth(), love.graphics.getHeight())
+    -- print(LetterConfig({
+    --     font_config = Language.instance.LANG.font,
+    --     char = "a",
+    --     scale = 1,
+    --     colour = Color.RED,
+    --     spacing = 0
+    -- }))
 end
 
 ---@param new_stage    STAGES
@@ -162,55 +214,6 @@ function App:draw()
 
     love.graphics.setCanvas()
     love.graphics.setShader()
-end
-
---- 在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
-function App:start_up()
-    boot_timer("start", "settings", 0.1)
-    self:init_window()
-    do return end
-    boot_timer('settings', 'window init', 0.2)
-
-    boot_timer('window init', 'savemanager', 0.3)
-
-    boot_timer('savemanager', 'shaders', 0.4)
-
-    boot_timer('shaders', 'controllers', 0.7)
-
-    boot_timer('controllers', 'localization', 0.8)
-
-    boot_timer('protos', 'shared sprites', 0.9)
-
-    boot_timer('shared sprites', 'prep stage', 0.95)
-
-    boot_timer('prep stage', 'splash prep', 1)
-
-    boot_timer('splash prep', 'end', 1)
-
-    print(TableParser.instance:parse("font"))
-    -- self:splash_screen()
-    -- self.test = DynaText()
-    DynaText(
-        {
-            dyna_text_config_data = {
-                string = { "shared stage" },
-                colours = { Color.RED },
-                shadow = true,
-                float = true,
-                maxw = 2.5,
-                scale = 0.75
-            },
-            X = 0,
-            Y = 0,
-        })
-    -- love.resize(love.graphics.getWidth(), love.graphics.getHeight())
-    -- print(LetterConfig({
-    --     font_config = Language.instance.LANG.font,
-    --     char = "a",
-    --     scale = 1,
-    --     colour = Color.RED,
-    --     spacing = 0
-    -- }))
 end
 
 function App:set_language()

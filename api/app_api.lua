@@ -1,4 +1,5 @@
 ---@class (partial) App: Object
+---@field CONTROLLER Controller 控制器
 ---@field SETTINGS Settings 设置
 ---@field window Window 窗口
 ---@field CANVAS Canvas
