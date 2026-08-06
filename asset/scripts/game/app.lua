@@ -120,6 +120,8 @@ function App:init_item_prototypes()
     --- 之后也要进入配置表
     self.b_undiscovered = { name = 'Undiscovered', debuff_text = 'Defeat this blind to discover', pos = { x = 0, y = 30 } }
     self.P_CARDS = CardCfg:get_cards()
+    self.P_LOCKS = LockCfg:get_locks()
+
 
     print("init_item_prototypes")
 end

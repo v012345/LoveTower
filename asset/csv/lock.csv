@@ -1,0 +1,13 @@
+﻿Id,,,,,,,
+Id,set,max,pos,config,unlocked,name,cost_mult
+string,string,number,vec2,table,bool,string,number
+unique,,,,,,,
+v_locked,Voucher,1,"{8,3}",{},FALSE,Locked,1
+c_locked,Tarot,1,"{4,2}",{},FALSE,Locked,1
+j_undiscovered,Joker,1,"{9,9}",{},FALSE,Locked,1
+t_undiscovered,Tarot,1,"{6,2}",{},FALSE,Locked,1
+p_undiscovered,Planet,1,"{7,2}",{},FALSE,Locked,1
+s_undiscovered,Spectral,1,"{5,2}",{},FALSE,Locked,1
+v_undiscovered,Voucher,1,"{8,2}",{},FALSE,Locked,1
+booster_undiscovered,Booster,1,"{0,5}",{},FALSE,Locked,1
+j_locked,Joker,1,"{8,9}",{},FALSE,Locked,1
