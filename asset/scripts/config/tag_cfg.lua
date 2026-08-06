@@ -2,15 +2,16 @@
 local TagConfig = Object:extend()
 
 function TagConfig:init()
-    self.tag = TableParser.instance:parse("tag")
+    local tag_rows = TableParser.instance:parse("tag")
     self.tag_config = TableParser.instance:parse("tag_config")
-    for _, tag in pairs(self.tag) do
-        -- print(tag.Id)
-        tag.config = self.tag_config[tag.Id]
+
+    self.tag = {}
+    for id, row in pairs(tag_rows) do
+        -- 可写外壳: 读不到的字段回退到只读配置行, 运行时字段写在外壳上, 不污染配置表
+        self.tag[id] = setmetatable({
+            config = self.tag_config[id],
+        }, { __index = row })
     end
-    print()
-    print()
-    print()
 end
 
 ---@type TagConfig
