@@ -1,0 +1,8 @@
+﻿Id,,,,,,
+Id,order,discovered,set,,,
+string,number,bool,string,,,
+unique,,,,,,
+Gold,1,FALSE,Seal,,,
+Red,2,FALSE,Seal,,,
+Blue,3,FALSE,Seal,,,
+Purple,4,FALSE,Seal,,,

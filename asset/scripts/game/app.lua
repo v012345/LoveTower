@@ -100,7 +100,7 @@ function App:start_up()
     boot_timer('shaders', 'controllers', 0.7)
 
     boot_timer('controllers', 'localization', 0.8)
-
+    self:init_item_prototypes()
     boot_timer('protos', 'shared sprites', 0.9)
 
     boot_timer('shared sprites', 'prep stage', 0.95)
@@ -110,12 +110,16 @@ function App:start_up()
     boot_timer('splash prep', 'end', 1)
 end
 
+function App:init_item_prototypes()
+end
+
 ---@param new_stage    STAGES
 ---@param new_state    STATES
 ---@param new_game_obj boolean
 function App:prep_stage(new_stage, new_state, new_game_obj)
     self.CONTROLLER:reset_locks()
-    
+    if new_game_obj then self.GAME = self:init_game_object() end
+
     self.STAGE = new_stage
     self.STATE = new_state
     self.STATE_COMPLETE = false
