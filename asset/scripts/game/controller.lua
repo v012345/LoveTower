@@ -24,6 +24,12 @@ function Controller:init()
     self.is_cursor_down = false
 end
 
+function Controller:reset_locks()
+    for k, _ in pairs(self.locks) do
+        self.locks[k] = nil
+    end
+end
+
 function Controller:update(dt)
 end
 

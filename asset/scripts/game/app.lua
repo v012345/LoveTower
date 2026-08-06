@@ -114,6 +114,8 @@ end
 ---@param new_state    STATES
 ---@param new_game_obj boolean
 function App:prep_stage(new_stage, new_state, new_game_obj)
+    self.CONTROLLER:reset_locks()
+    
     self.STAGE = new_stage
     self.STATE = new_state
     self.STATE_COMPLETE = false
