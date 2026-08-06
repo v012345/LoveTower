@@ -4,10 +4,20 @@ local Settings = require "asset.scripts.game.settings"
 local Window = require "asset.scripts.game.window"
 local Controller = require "asset.scripts.game.controller"
 function App:init()
-    local settings = get_compressed('settings.jkr')
-    compress_and_save('settings.jkr', { 123, "asd" })
-    local settings = get_compressed('settings.jkr')
-    print(settings)
+    self.feature_flags = PlatformCfg:get_cfg()
+    self.SEED = os.time()
+    self.TIMERS = {
+        TOTAL = 0,
+        REAL = 0,
+        REAL_SHADER = 0,
+        UPTIME = 0,
+        BACKGROUND = 0
+    }
+    self.FRAMES = {
+        DRAW = 0,
+        MOVE = 0
+    }
+    self.exp_times = { xy = 0, scale = 0, r = 0 }
     self.SETTINGS = Settings()
     do return end
     self.ID = 0 -- ID 生成器
