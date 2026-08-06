@@ -115,7 +115,7 @@ function App:init_item_prototypes()
     self.P_TAGS = TagCfg:get_tags()
     --- 之后也要进入配置表
     self.tag_undiscovered = { name = 'Not Discovered', order = 1, config = { type = '' }, pos = { x = 3, y = 4 } }
-    self.P_STAKES = {}
+    self.P_STAKES = StakeCfg:get_stakes()
 end
 
 ---@param new_stage    STAGES
