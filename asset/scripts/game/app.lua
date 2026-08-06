@@ -220,24 +220,6 @@ end
 function App:init_window()
     self.window = Window()
     self:apply_window_changes(true)
-    -- local room_size = Room.instance:get_real_size()
-    -- local tile_size = Tile.instance:get_pixels_per_tile()
-
-    -- Window.instance:init_size(room_size.w * tile_size, room_size.h * tile_size)
-    -- Window.instance:set_transform_wh(room_size.w, room_size.h)
-    -- local real_size = Window.instance:get_real_size()
-    -- --- 设置窗口大小, 会影响 love.graphics.getWidth(), love.graphics.getHeight()
-    -- love.window.updateMode(
-    --     real_size.w, real_size.h,
-    --     {
-    --         fullscreen = false,
-    --         fullscreentype = nil,
-    --         vsync = 1,
-    --         resizable = true,
-    --         display = 1,
-    --         highdpi = false
-    --     }
-    -- )
 end
 
 function App:save_settings()
