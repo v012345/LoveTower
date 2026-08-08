@@ -5,7 +5,7 @@ function PokerConfig:init()
     self.cards = TableParser.instance:parse("poker")
 end
 
-function PokerConfig:get_cards()
+function PokerConfig:get_pokers()
     return self.cards
 end
 
