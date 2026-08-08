@@ -4,8 +4,17 @@ local CardConfig = Object:extend()
 function CardConfig:init()
     local jokers = TableParser.instance:parse("joker")
     local booster_packs = TableParser.instance:parse("booster_pack")
+    local editions = TableParser.instance:parse("edition")
     self.card_config = TableParser.instance:parse("card_config")
     self.unlock_condition = TableParser.instance:parse("unlock_condition")
+
+    self.editions = {}
+    for id, row in pairs(editions) do
+        self.editions[id] = setmetatable({
+            config = self.card_config[id],
+            discovered = row.discovered,
+        }, { __index = row })
+    end
 
     self.booster_packs = {}
     for id, row in pairs(booster_packs) do
