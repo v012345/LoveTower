@@ -1,0 +1,22 @@
+﻿Id,,,,,,,,,,
+Id,config,consumeable,cost,discovered,effect,hidden,name,order,pos,set
+string,string,bool,number,bool,string,bool,string,number,vec2,string
+unique,,,,,,,,,,
+c_immolate,c_immolate,TRUE,4,FALSE,,FALSE,Immolate,10,"{9,4}",Spectral
+c_ankh,c_ankh,TRUE,4,FALSE,,FALSE,Ankh,11,"{0,5}",Spectral
+c_deja_vu,c_deja_vu,TRUE,4,FALSE,,FALSE,Deja Vu,12,"{1,5}",Spectral
+c_familiar,c_familiar,TRUE,4,FALSE,,FALSE,Familiar,1,"{0,4}",Spectral
+c_hex,c_hex,TRUE,4,FALSE,,FALSE,Hex,13,"{2,5}",Spectral
+c_grim,c_grim,TRUE,4,FALSE,,FALSE,Grim,2,"{1,4}",Spectral
+c_trance,c_trance,TRUE,4,FALSE,,FALSE,Trance,14,"{3,5}",Spectral
+c_medium,c_medium,TRUE,4,FALSE,,FALSE,Medium,15,"{4,5}",Spectral
+c_cryptid,c_cryptid,TRUE,4,FALSE,,FALSE,Cryptid,16,"{5,5}",Spectral
+c_soul,c_soul,TRUE,4,FALSE,Unlocker,TRUE,The Soul,17,"{2,2}",Spectral
+c_incantation,c_incantation,TRUE,4,FALSE,,FALSE,Incantation,3,"{2,4}",Spectral
+c_talisman,c_talisman,TRUE,4,FALSE,,FALSE,Talisman,4,"{3,4}",Spectral
+c_aura,c_aura,TRUE,4,FALSE,,FALSE,Aura,5,"{4,4}",Spectral
+c_wraith,c_wraith,TRUE,4,FALSE,,FALSE,Wraith,6,"{5,4}",Spectral
+c_sigil,c_sigil,TRUE,4,FALSE,,FALSE,Sigil,7,"{6,4}",Spectral
+c_ouija,c_ouija,TRUE,4,FALSE,,FALSE,Ouija,8,"{7,4}",Spectral
+c_ectoplasm,c_ectoplasm,TRUE,4,FALSE,,FALSE,Ectoplasm,9,"{8,4}",Spectral
+c_black_hole,c_black_hole,TRUE,4,FALSE,,TRUE,Black Hole,18,"{9,3}",Spectral

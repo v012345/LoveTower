@@ -5,8 +5,18 @@ function CardConfig:init()
     local jokers = TableParser.instance:parse("joker")
     local booster_packs = TableParser.instance:parse("booster_pack")
     local editions = TableParser.instance:parse("edition")
+    local spectral = TableParser.instance:parse("spectral")
     self.card_config = TableParser.instance:parse("card_config")
     self.unlock_condition = TableParser.instance:parse("unlock_condition")
+
+    self.spectral = {}
+    for id, row in pairs(spectral) do
+        self.spectral[id] = setmetatable({
+            config = self.card_config[id],
+            discovered = row.discovered,
+            hidden = row.hidden,
+        }, { __index = row })
+    end
 
     self.editions = {}
     for id, row in pairs(editions) do
