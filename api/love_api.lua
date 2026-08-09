@@ -7,6 +7,11 @@
 ---@class love
 love = love or {}
 
+---@class Source
+Source = {}
+
+---@enum SourceType
+
 --#region love.thread
 
 ---An object which can be used to send and receive data between different threads.
