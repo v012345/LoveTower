@@ -4,11 +4,6 @@ local Settings = require "asset.scripts.game.settings"
 local Window = require "asset.scripts.game.window"
 local Controller = require "asset.scripts.game.controller"
 function App:init()
-    local sound_files = love.filesystem.getDirectoryItems("asset/resources/sounds")
-    for _, filename in pairs(sound_files) do
-        print(_, filename)
-    end
-    do return end
     self.feature_flags = PlatformCfg:get_cfg()
     self.SEED = os.time()
     self.TIMERS = {
