@@ -1,4 +1,4 @@
-print("sound_manager.lua")
+--- 基本上与 main.lua 的环境隔离
 require "love.audio"
 require "love.sound"
 require "love.system"
