@@ -14,7 +14,9 @@ function CardConfig:init()
         cost_mult = 1.0,
         config = {}
     }
-
+    self.soul = { pos = { x = 0, y = 1 } }
+    self.undiscovered_joker = { pos = { x = 5, y = 3 } }
+    self.undiscovered_tarot = { pos = { x = 6, y = 3 } }
 
     self.card_config = TableParser.instance:parse("card_config")
     self.unlock_condition = TableParser.instance:parse("unlock_condition")
