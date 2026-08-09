@@ -100,7 +100,7 @@ function App:start_up()
         }
         self.SOUND_MANAGER.thread:start(1)
         -- print("start sound manager")
-        print("\27[32mstart sound manager\27[0m") -- 绿色
+        Log:info("start sound manager")
 
         local sound_loaded, prev_file = false, 'none'
         -- while not sound_loaded and false do
@@ -108,7 +108,7 @@ function App:start_up()
             -- Monitor the channel for any new requests
             -- local request = self.SOUND_MANAGER.load_channel:pop() -- Value from channel
             local request = self.SOUND_MANAGER.load_channel:demand() -- Value from channel
-            print("request", request)
+            Log:info("request", request)
             if request then
                 -- If the request is for an update to the music track, handle it here
                 if request == 'finished' then
