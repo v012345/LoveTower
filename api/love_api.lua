@@ -1,5 +1,9 @@
 ---@meta
 
+---The Variant type is not a real lua type, but instead indicates what lua values LÖVE can store internally. It is used in love.thread and love.event. Indeed, as it is a "virtual" type, it has no specific representation in lua, and no methods.\
+---A Variant can be a table, a boolean, a string, a number or LÖVE Objects.
+---@class Variant
+
 ---@class love
 love = love or {}
 
@@ -7,6 +11,11 @@ love = love or {}
 
 ---An object which can be used to send and receive data between different threads.
 ---@class Channel
+Channel = {}
+
+---Send a message to the thread Channel.
+---@param value Variant
+function Channel:push(value) end
 
 ---@class love.thread
 love.thread = love.thread or {}
@@ -17,6 +26,9 @@ love.thread = love.thread or {}
 function love.thread.getChannel(name) end
 
 --#endregion
+
+
+
 
 
 ---@class love.Text:love.Drawable
