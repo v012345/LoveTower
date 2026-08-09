@@ -31,6 +31,11 @@ function Thread:start(arg1, arg2, ...) end
 ---@class Channel
 Channel = {}
 
+---Retrieves the value of a Channel message and removes it from the message queue.
+---It returns nil if there are no messages in the queue.
+---@return Variant value The contents of the message.
+function Channel:pop() end
+
 ---Send a message to the thread Channel.
 ---@param value Variant
 ---@return number Id Identifier which can be supplied to Channel:hasRead
