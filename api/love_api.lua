@@ -3,6 +3,22 @@
 ---@class love
 love = love or {}
 
+--#region love.thread
+
+---An object which can be used to send and receive data between different threads.
+---@class Channel
+
+---@class love.thread
+love.thread = love.thread or {}
+
+---Creates or retrieves a named thread channel.
+---@param name string
+---@return Channel
+function love.thread.getChannel(name) end
+
+--#endregion
+
+
 ---@class love.Text:love.Drawable
 love.Text = love.Text or {}
 
