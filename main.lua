@@ -78,20 +78,20 @@ function love.draw()
 end
 
 function love.keypressed(key)
-    print(key)
+    -- print(key)
 end
 
 function love.keyreleased(key)
-    print(key)
+    -- print(key)
 end
 
 function love.mousepressed(x, y, button, touch)
-    print(x, y, button, touch)
+    -- print(x, y, button, touch)
     -- print(Timer.instance.TOTAL)
 end
 
 function love.mousereleased(x, y, button)
-    print(x, y, button)
+    -- print(x, y, button)
 end
 
 function love.mousemoved(x, y, dx, dy, istouch)
@@ -104,7 +104,7 @@ end
 ---@param w number
 ---@param h number
 function love.resize(w, h)
-    print("love.resize", w, h)
+    -- print("love.resize", w, h)
     assert(h > 0 and w > 0, "Window size must be greater than 0, but got " .. w .. "x" .. h)
     -- 不允许窗口变成竖屏, 因为会出现上下弹出
     --Dont allow the screen to be too square, since pop in occurs above and below screen

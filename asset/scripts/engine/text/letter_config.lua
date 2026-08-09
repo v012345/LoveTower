@@ -7,7 +7,7 @@ function LetterConfig:init(data)
     data.scale = data.scale or 1
     local FONT = self.data.font_config.FONT
     self.letter = love.graphics.newText(FONT, self.data.char)
-    print(data.char, FONT:getWidth(data.char), FONT:getHeight())
+    -- print(data.char, FONT:getWidth(data.char), FONT:getHeight())
 
     local tile_scale = Tile.instance:get_scale()
     local font_scale = self.data.font_config.FONTSCALE
