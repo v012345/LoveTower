@@ -267,7 +267,7 @@ function love.graphics.polygon(mode, ...) end
 --- Creates and sets a new LoveFont.
 ---@param filename string
 ---@param size     number
----@return LoveFont
+---@return love.Font
 function love.graphics.setNewFont(filename, size) end
 
 --- Sets the width of lines.
