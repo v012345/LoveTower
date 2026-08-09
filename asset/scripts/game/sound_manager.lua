@@ -17,21 +17,19 @@ local sound_files = love.filesystem.getDirectoryItems("asset/resources/sounds")
 
 for _, filename in ipairs(sound_files) do
     local extension = string.sub(filename, -4)
-    for i = 1, 1 do
-        if extension == '.ogg' then
-            LOAD_CHANNEL:push('audio file - ' .. filename)
-            local sound_code = string.sub(filename, 1, -5)
-            local s = {
-                sound = love.audio.newSource("asset/resources/sounds/" .. filename, string.find(sound_code, 'music') and "stream" or 'static'),
-                filepath = "asset/resources/sounds/" .. filename
-            }
-            SOURCES[sound_code] = {}
-            table.insert(SOURCES[sound_code], s)
-            s.sound_code = sound_code
-            s.sound:setVolume(0)
-            love.audio.play(s.sound)
-            s.sound:stop()
-        end
+    if extension == '.ogg' then
+        LOAD_CHANNEL:push('audio file - ' .. filename)
+        local sound_code = string.sub(filename, 1, -5)
+        local s = {
+            sound = love.audio.newSource("asset/resources/sounds/" .. filename, string.find(sound_code, 'music') and "stream" or 'static'),
+            filepath = "asset/resources/sounds/" .. filename
+        }
+        SOURCES[sound_code] = {}
+        table.insert(SOURCES[sound_code], s)
+        s.sound_code = sound_code
+        s.sound:setVolume(0)
+        love.audio.play(s.sound)
+        s.sound:stop()
     end
 end
 
