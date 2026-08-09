@@ -28,12 +28,22 @@ function love.thread.getChannel(name) end
 
 --#endregion
 
+--#region love.audio
+---@class love.audio
+love.audio = love.audio or {}
 
 
+function love.audio.newSource(source) end
+
+function love.audio.play(source) end
+
+--#endregion
 
 
 ---@class love.Text:love.Drawable
 love.Text = love.Text or {}
+
+--#region love.graphics
 
 ---@class love.graphics
 love.graphics = love.graphics or {}
@@ -57,6 +67,163 @@ function love.graphics.setShader() end
 ---@param b  number
 ---@param a? number
 function love.graphics.clear(r, g, b, a) end
+
+---@param font love.Font
+---@param text string
+---@return love.Text
+function love.graphics.newText(font, text) end
+
+---@param filename string
+---@param settings? { mipmaps: boolean, dpiscale: number }
+---@return love.Image
+function love.graphics.newImage(filename, settings)
+end
+
+--- Displays the results of drawing operations on the screen.
+--- This function is used when writing your own love.run function. It presents all the results of your drawing operations on the screen. See the example in love.run for a typical use of this function.
+---@return nil
+function love.graphics.present() end
+
+---@param filename string
+---@param size     number
+---@return love.Font
+function love.graphics.newFont(filename, size) end
+
+---@param font love.Font
+function love.graphics.setFont(font)
+end
+
+---@param r  number | table
+---@param g? number
+---@param b? number
+---@param a? number
+function love.graphics.setColor(r, g, b, a)
+end
+
+---@param drawable  love.Drawable
+---@param x         number
+---@param y         number
+---@param rotation? number
+---@param scaleX?   number
+---@param scaleY?   number
+---@param offsetX?  number
+---@param offsetY?  number
+---@param shearX?   number
+---@param shearY?   number
+function love.graphics.draw(drawable, x, y, rotation, scaleX, scaleY, offsetX, offsetY, shearX, shearY)
+end
+
+---@param text      string
+---@param x         number
+---@param y         number
+---@param rotation? number
+---@param scaleX?   number
+---@param scaleY?   number
+---@param offsetX?  number
+---@param offsetY?  number
+---@param shearX?   number
+---@param shearY?   number
+function love.graphics.print(text, x, y, rotation, scaleX, scaleY, offsetX, offsetY, shearX, shearY)
+end
+
+--- Gets the width in pixels of the window.
+---@return number width
+function love.graphics.getWidth() end
+
+--- Gets the height in pixels of the window.
+---@return number height
+function love.graphics.getHeight() end
+
+---@param r  number
+---@param g  number
+---@param b  number
+---@param a? number
+function love.graphics.setBackgroundColor(r, g, b, a) end
+
+---@return number width
+---@return number height
+function love.graphics.getDimensions() end
+
+--- You can continue passing point positions to draw a polyline.
+---@param x1 number
+---@param y1 number
+---@param x2 number
+---@param y2 number
+function love.graphics.line(x1, y1, x2, y2, ...) end
+
+---@param mode   string "fill" | "line"
+---@param x      number
+---@param y      number
+---@param radius number
+function love.graphics.circle(mode, x, y, radius) end
+
+---@param mode      string "fill" | "line"
+---@param x         number
+---@param y         number
+---@param width     number
+---@param height    number
+---@param rx?       number The x-axis radius of each round corner. Cannot be greater than half the rectangle's width.
+---@param ry?       number The y-axis radius of each round corner. Cannot be greater than half the rectangle's height.
+---@param segments? number The number of segments used for drawing the round corners. A default amount will be chosen if no number is given.
+function love.graphics.rectangle(mode, x, y, width, height, rx, ry, segments) end
+
+---@param text   string
+---@param x      number
+---@param y      number
+---@param limit  number 换行宽度
+---@param align? string "left" | "center" | "right"
+function love.graphics.printf(text, x, y, limit, align) end
+
+--- Gets whether the graphics module is able to be used. If it is not active, love.graphics function and method calls will not work correctly and may cause the program to crash.
+--- The graphics module is inactive if a window is not open, or if the app is in the background on iOS. Typically the app's execution will be automatically paused by the system, in the latter case.
+---@return boolean isActive
+function love.graphics.isActive() end
+
+---@param width   number
+---@param height  number
+---@param options table | nil
+---@return Canvas
+function love.graphics.newCanvas(width, height, options) end
+
+---@param canvas Canvas | table | nil
+---@return nil
+function love.graphics.setCanvas(canvas) end
+
+--- 移动当前坐标系
+---@param dx number
+---@param dy number
+---@return nil
+function love.graphics.translate(dx, dy) end
+
+---@param angle number
+---@return nil
+function love.graphics.rotate(angle) end
+
+---@param sx  number The scaling in the direction of the x-axis
+---@param sy? number The scaling in the direction of the y-axis. If omitted, it defaults to same as parameter sx.
+---@return nil
+function love.graphics.scale(sx, sy) end
+
+---Draws a polygon.
+---Following the mode argument, this function can accept multiple numeric arguments or a single table of numeric arguments. In either case the arguments are interpreted as alternating x and y coordinates of the polygon's vertices.
+---@param mode "fill"|"line"
+---@param ... number|table
+---@return nil
+function love.graphics.polygon(mode, ...) end
+
+--- Creates and sets a new LoveFont.
+---@param filename string
+---@param size     number
+---@return LoveFont
+function love.graphics.setNewFont(filename, size) end
+
+--- Sets the width of lines.
+---@param width number
+---@return nil
+function love.graphics.setLineWidth(width) end
+
+--#endregion
+
 
 love.handlers = love.handlers or {}
 
@@ -131,87 +298,9 @@ end
 function love.Font:getWidth(text)
 end
 
----@param font love.Font
----@param text string
----@return love.Text
-function love.graphics.newText(font, text) end
-
----@param filename string
----@param settings? { mipmaps: boolean, dpiscale: number }
----@return love.Image
-function love.graphics.newImage(filename, settings)
-end
-
---- Displays the results of drawing operations on the screen.
---- This function is used when writing your own love.run function. It presents all the results of your drawing operations on the screen. See the example in love.run for a typical use of this function.
----@return nil
-function love.graphics.present() end
-
----@param filename string
----@param size     number
----@return love.Font
-function love.graphics.newFont(filename, size) end
-
----@param font love.Font
-function love.graphics.setFont(font)
-end
-
----@param r  number | table
----@param g? number
----@param b? number
----@param a? number
-function love.graphics.setColor(r, g, b, a)
-end
-
----@param drawable  love.Drawable
----@param x         number
----@param y         number
----@param rotation? number
----@param scaleX?   number
----@param scaleY?   number
----@param offsetX?  number
----@param offsetY?  number
----@param shearX?   number
----@param shearY?   number
-function love.graphics.draw(drawable, x, y, rotation, scaleX, scaleY, offsetX, offsetY, shearX, shearY)
-end
-
----@param text      string
----@param x         number
----@param y         number
----@param rotation? number
----@param scaleX?   number
----@param scaleY?   number
----@param offsetX?  number
----@param offsetY?  number
----@param shearX?   number
----@param shearY?   number
-function love.graphics.print(text, x, y, rotation, scaleX, scaleY, offsetX, offsetY, shearX, shearY)
-end
-
---- Gets the width in pixels of the window.
----@return number width
-function love.graphics.getWidth() end
-
---- Gets the height in pixels of the window.
----@return number height
-function love.graphics.getHeight() end
-
----@param r  number
----@param g  number
----@param b  number
----@param a? number
-function love.graphics.setBackgroundColor(r, g, b, a)
-end
-
 ---@class love.arg
 love.arg = love.arg or {}
 function love.arg.parseGameArguments(arg) end
-
----@return number width
----@return number height
-function love.graphics.getDimensions()
-end
 
 ---@return number FPS
 function love.timer.getFPS() end
@@ -227,41 +316,6 @@ love.mouse = love.mouse or {}
 ---@return number x
 ---@return number y
 function love.mouse.getPosition() end
-
---- You can continue passing point positions to draw a polyline.
----@param x1 number
----@param y1 number
----@param x2 number
----@param y2 number
-function love.graphics.line(x1, y1, x2, y2, ...) end
-
----@param mode   string "fill" | "line"
----@param x      number
----@param y      number
----@param radius number
-function love.graphics.circle(mode, x, y, radius) end
-
----@param mode      string "fill" | "line"
----@param x         number
----@param y         number
----@param width     number
----@param height    number
----@param rx?       number The x-axis radius of each round corner. Cannot be greater than half the rectangle's width.
----@param ry?       number The y-axis radius of each round corner. Cannot be greater than half the rectangle's height.
----@param segments? number The number of segments used for drawing the round corners. A default amount will be chosen if no number is given.
-function love.graphics.rectangle(mode, x, y, width, height, rx, ry, segments) end
-
----@param text   string
----@param x      number
----@param y      number
----@param limit  number 换行宽度
----@param align? string "left" | "center" | "right"
-function love.graphics.printf(text, x, y, limit, align) end
-
---- Gets whether the graphics module is able to be used. If it is not active, love.graphics function and method calls will not work correctly and may cause the program to crash.
---- The graphics module is inactive if a window is not open, or if the app is in the background on iOS. Typically the app's execution will be automatically paused by the system, in the latter case.
----@return boolean isActive
-function love.graphics.isActive() end
 
 ---@class love.event
 love.event = love.event or {}
@@ -314,16 +368,6 @@ love.system = love.system or {}
 ---@return string os
 function love.system.getOS() end
 
----@param width   number
----@param height  number
----@param options table | nil
----@return Canvas
-function love.graphics.newCanvas(width, height, options) end
-
----@param canvas Canvas | table | nil
----@return nil
-function love.graphics.setCanvas(canvas) end
-
 ---@class Canvas
 Canvas = {}
 ---@param filter    string "nearest" | "linear"
@@ -341,27 +385,7 @@ function Canvas:setFilter(filter, filtermag) end
 ---@field release_on { can: boolean, is: boolean }
 NodeStates = {}
 
---- 移动当前坐标系
----@param dx number
----@param dy number
----@return nil
-function love.graphics.translate(dx, dy) end
 
----@param angle number
----@return nil
-function love.graphics.rotate(angle) end
-
----@param sx  number The scaling in the direction of the x-axis
----@param sy? number The scaling in the direction of the y-axis. If omitted, it defaults to same as parameter sx.
----@return nil
-function love.graphics.scale(sx, sy) end
-
----Draws a polygon.
----Following the mode argument, this function can accept multiple numeric arguments or a single table of numeric arguments. In either case the arguments are interpreted as alternating x and y coordinates of the polygon's vertices.
----@param mode "fill"|"line"
----@param ... number|table
----@return nil
-function love.graphics.polygon(mode, ...) end
 
 --- 包括 `悬浮弹窗` `拖拽弹窗` `警告弹窗`
 ---@class Children
@@ -404,12 +428,6 @@ EventStatus = {}
 ---@return Event
 function Event(config) end
 
---- Creates and sets a new LoveFont.
----@param filename string
----@param size     number
----@return LoveFont
-function love.graphics.setNewFont(filename, size) end
-
 ---@class love.window
 love.window = love.window or {}
 
@@ -418,11 +436,6 @@ love.window = love.window or {}
 ---@return number height
 ---@return table flags
 function love.window.getMode() end
-
---- Sets the width of lines.
----@param width number
----@return nil
-function love.graphics.setLineWidth(width) end
 
 ---@class NodeList
 ---@field NODE     Node[]
