@@ -114,7 +114,7 @@ function App:start_up()
                 if request == 'finished' then
                     sound_loaded = true
                 else
-                    boot_timer(request, prev_file)
+                    boot_timer(request, prev_file, 0.22)
                     prev_file = request
                 end
             end
