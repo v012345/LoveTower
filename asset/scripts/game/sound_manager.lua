@@ -2,7 +2,7 @@
 require "love.audio"
 require "love.sound"
 require "love.system"
-
+require "asset.scripts.libs.log"
 if (love.system.getOS() == 'OS X') and (jit.arch == 'arm64' or jit.arch == 'arm') then jit.off() end
 
 --vars needed for sound manager thread
@@ -14,7 +14,8 @@ DISABLE_SFX = false
 --create all sounds from resources and play one each to load into mem
 SOURCES = {}
 local sound_files = love.filesystem.getDirectoryItems("asset/resources/sounds")
-
+Log:ok("start loading audio files")
+LOAD_CHANNEL:push("start loading audio files")
 for _, filename in ipairs(sound_files) do
     local extension = string.sub(filename, -4)
     if extension == '.ogg' then

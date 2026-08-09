@@ -118,7 +118,7 @@ function App:start_up()
                     prev_file = request
                 end
             end
-            -- love.timer.sleep(0.001)
+            love.timer.sleep(1)
         end
 
         boot_timer('soundmanager2', 'savemanager', 0.22)
