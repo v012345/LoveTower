@@ -9,6 +9,10 @@ love = love or {}
 
 
 ---@enum SourceType
+SourceType = {
+    static = "static",
+    stream = "stream",
+}
 
 --#region love.thread
 
