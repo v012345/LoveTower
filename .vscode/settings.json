@@ -12,7 +12,8 @@
         "get_chosen_triangle_from_rect",
         "dump",
         "compress_and_save",
-        "get_compressed"
+        "get_compressed",
+        "boot_timer"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto"
 }

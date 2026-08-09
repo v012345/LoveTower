@@ -104,7 +104,8 @@ function App:start_up()
         -- while not sound_loaded and false do
         while not sound_loaded do
             -- Monitor the channel for any new requests
-            local request = self.SOUND_MANAGER.load_channel:pop() -- Value from channel
+            -- local request = self.SOUND_MANAGER.load_channel:pop() -- Value from channel
+            local request = self.SOUND_MANAGER.load_channel:demand() -- Value from channel
             if request then
                 -- If the request is for an update to the music track, handle it here
                 if request == 'finished' then
@@ -114,7 +115,7 @@ function App:start_up()
                     prev_file = request
                 end
             end
-            love.timer.sleep(0.001)
+            -- love.timer.sleep(0.001)
         end
 
         boot_timer('soundmanager2', 'savemanager', 0.22)
