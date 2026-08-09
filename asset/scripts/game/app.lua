@@ -99,7 +99,8 @@ function App:start_up()
             load_channel = love.thread.getChannel('load_channel')
         }
         self.SOUND_MANAGER.thread:start(1)
-        print("start sound manager")
+        -- print("start sound manager")
+        print("\27[32mstart sound manager\27[0m") -- 绿色
 
         local sound_loaded, prev_file = false, 'none'
         -- while not sound_loaded and false do
