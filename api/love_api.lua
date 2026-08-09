@@ -43,7 +43,11 @@ love.audio = love.audio or {}
 ---@return Source source
 function love.audio.newSource(filename, type) end
 
-function love.audio.play(source) end
+---comment
+---@param source Source The first Source to play.
+---@param ... Source Additional Sources to play.
+---@return boolean success Whether the Sources were able to successfully start playing.
+function love.audio.play(source, ...) end
 
 --#endregion
 
