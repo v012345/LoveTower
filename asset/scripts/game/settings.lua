@@ -3,7 +3,7 @@ local Settings = Object:extend()
 
 function Settings:init()
     self.data = {
-        settings = {
+        {
             version = GameCfg:get_version(),
             COMP = {
                 name = '',
@@ -67,13 +67,14 @@ end
 
 function Settings:load_settings()
     local settings = get_compressed('settings.jkr')
-    local settings_ver = nil
     --- 加载保存的设置
     if settings then
         local settings_file = STR_UNPACK(settings)
+        for k, v in pairs(settings_file) do
+            self.data[k] = v
+        end
     end
-
-    -- ,paused = false
+    self.data.paused = false
 end
 
 function Settings:reset_queued_change()
