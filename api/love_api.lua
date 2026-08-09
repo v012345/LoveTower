@@ -41,6 +41,10 @@ Source = {}
 ---@return nil
 function Source:setVolume(volume) end
 
+---Stops a Source.
+---@return nil
+function Source:stop() end
+
 ---@class love.audio
 love.audio = love.audio or {}
 
