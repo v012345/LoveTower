@@ -36,6 +36,11 @@ Channel = {}
 ---@return number Id Identifier which can be supplied to Channel:hasRead
 function Channel:push(value) end
 
+---Retrieves the value of a Channel message and removes it from the message queue.
+---It waits until a message is in the queue then returns the message value.
+---@return Variant value The contents of the message.
+function Channel:demand() end
+
 ---@class love.thread
 love.thread = love.thread or {}
 
