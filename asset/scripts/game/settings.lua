@@ -3,12 +3,7 @@ local Settings = Object:extend()
 
 function Settings:init()
     local version = GameCfg:get_version()
-    local settings = get_compressed('settings.jkr')
-    local settings_ver = nil
-    if settings then
-        local settings_file = STR_UNPACK(settings)
-        print(settings_file)
-    end
+
     self.version = version
     self.paused = false
     self.COMP = {
@@ -67,6 +62,12 @@ function Settings:init()
     self.QUEUED_CHANGE = {
         screenres = {}
     }
+    local settings = get_compressed('settings.jkr')
+    local settings_ver = nil
+    if settings then
+        local settings_file = STR_UNPACK(settings)
+        
+    end
 end
 
 function Settings:reset_queued_change()
