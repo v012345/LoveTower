@@ -7,8 +7,7 @@
 ---@class love
 love = love or {}
 
----@class Source
-Source = {}
+
 
 ---@enum SourceType
 
@@ -34,6 +33,15 @@ function love.thread.getChannel(name) end
 --#endregion
 
 --#region love.audio
+
+---@class Source
+Source = {}
+
+---Sets the current volume of the Source.
+---@param volume number
+---@return nil
+function Source:setVolume(volume) end
+
 ---@class love.audio
 love.audio = love.audio or {}
 
