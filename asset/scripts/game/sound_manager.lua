@@ -22,8 +22,8 @@ for _, filename in ipairs(sound_files) do
             LOAD_CHANNEL:push('audio file - ' .. filename)
             local sound_code = string.sub(filename, 1, -5)
             local s = {
-                sound = love.audio.newSource("resources/sounds/" .. filename, string.find(sound_code, 'music') and "stream" or 'static'),
-                filepath = "resources/sounds/" .. filename
+                sound = love.audio.newSource("asset/resources/sounds/" .. filename, string.find(sound_code, 'music') and "stream" or 'static'),
+                filepath = "asset/resources/sounds/" .. filename
             }
             SOURCES[sound_code] = {}
             table.insert(SOURCES[sound_code], s)
@@ -55,7 +55,7 @@ function PLAY_SOUND(args)
     end
 
     local should_stream = (string.find(args.sound_code, 'music') or string.find(args.sound_code, 'ambient'))
-    local s = { sound = love.audio.newSource("resources/sounds/" .. args.sound_code .. '.ogg', should_stream and "stream" or 'static') }
+    local s = { sound = love.audio.newSource("asset/resources/sounds/" .. args.sound_code .. '.ogg', should_stream and "stream" or 'static') }
     table.insert(SOURCES[args.sound_code], s)
     s.sound_code = args.sound_code
     s.original_pitch = args.per or 1
