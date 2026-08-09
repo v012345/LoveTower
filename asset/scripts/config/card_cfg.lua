@@ -8,8 +8,17 @@ function CardConfig:init()
     local spectral = TableParser.instance:parse("spectral")
     local backs = TableParser.instance:parse("back")
     local vouchers = TableParser.instance:parse("voucher")
+    local tarots = TableParser.instance:parse("tarot")
     self.card_config = TableParser.instance:parse("card_config")
     self.unlock_condition = TableParser.instance:parse("unlock_condition")
+
+    self.tarots = {}
+    for id, row in pairs(tarots) do
+        self.tarots[id] = setmetatable({
+            config = self.card_config[id],
+            discovered = row.discovered,
+        }, { __index = row })
+    end
 
     self.vouchers = {}
     for id, row in pairs(vouchers) do
