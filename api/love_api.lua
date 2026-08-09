@@ -297,6 +297,7 @@ function love.filesystem.getSaveDirectory() end
 
 --#endregion
 
+--#region love.image
 
 ---@class love.Image:love.Drawable
 love.Image = love.Image or {}
@@ -306,12 +307,13 @@ love.Image = love.Image or {}
 function love.Image:getDimensions() end
 
 ---@return number width
-function love.Image:getWidth()
-end
+function love.Image:getWidth() end
 
 ---@return number height
-function love.Image:getHeight()
-end
+function love.Image:getHeight() end
+
+--#endregion
+
 
 ---@class love.Font
 love.Font = {}
