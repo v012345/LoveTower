@@ -20,8 +20,9 @@ for _, filename in ipairs(sound_files) do
     if extension == '.ogg' then
         LOAD_CHANNEL:push('audio file - ' .. filename)
         local sound_code = string.sub(filename, 1, -5)
+        local source_type = string.find(sound_code, 'music') and SourceType.stream or SourceType.static
         local s = {
-            sound = love.audio.newSource("asset/resources/sounds/" .. filename, string.find(sound_code, 'music') and "stream" or 'static'),
+            sound = love.audio.newSource("asset/resources/sounds/" .. filename, source_type),
             filepath = "asset/resources/sounds/" .. filename
         }
         SOURCES[sound_code] = {}
