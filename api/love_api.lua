@@ -32,8 +32,11 @@ function love.thread.getChannel(name) end
 ---@class love.audio
 love.audio = love.audio or {}
 
-
-function love.audio.newSource(source) end
+---Creates a new Source from a filepath, File, Decoder or SoundData. Sources created from SoundData are always static
+---@param filename string
+---@param type SourceType
+---@return Source source
+function love.audio.newSource(filename, type) end
 
 function love.audio.play(source) end
 
