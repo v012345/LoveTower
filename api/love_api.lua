@@ -15,6 +15,7 @@ Channel = {}
 
 ---Send a message to the thread Channel.
 ---@param value Variant
+---@return number Id Identifier which can be supplied to Channel:hasRead
 function Channel:push(value) end
 
 ---@class love.thread
