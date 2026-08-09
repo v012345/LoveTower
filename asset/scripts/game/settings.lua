@@ -62,11 +62,13 @@ function Settings:init()
     self.QUEUED_CHANGE = {
         screenres = {}
     }
+end
+
+function Settings:load_settings()
     local settings = get_compressed('settings.jkr')
     local settings_ver = nil
     if settings then
         local settings_file = STR_UNPACK(settings)
-        
     end
 end
 
