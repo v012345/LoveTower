@@ -3,64 +3,62 @@ local Settings = Object:extend()
 
 function Settings:init()
     self.data = {
-        {
-            version = GameCfg:get_version(),
-            COMP = {
-                name = '',
-                prev_name = '',
-                submission_name = nil,
-                score = 0,
-            },
-            DEMO = {
-                total_uptime = 0,
-                timed_CTA_shown = false,
-                win_CTA_shown = false,
-                quit_CTA_shown = false
-            },
-            ACHIEVEMENTS_EARNED = {},
-            crashreports = false,
-            colourblind_option = false,
-            language = 'en-us',
-            screenshake = true,
-            run_stake_stickers = false,
-            rumble = PlatformCfg:get_cfg().F_RUMBLE,
-            play_button_pos = 2,
-            GAMESPEED = 1,
-            paused = false,
-            SOUND = {
-                volume = 50,
-                music_volume = 100,
-                game_sounds_volume = 100,
-            },
-            WINDOW = {
-                screenmode = 'Windowed',
-                selected_display = 1,
-                vsync = 1,
-                display_names = { '[NONE]' },
-                DISPLAYS = {
-                    {
-                        name = '[NONE]',
-                        screen_res = Size(1000, 650),
-                    }
+        version = GameCfg:get_version(),
+        COMP = {
+            name = '',
+            prev_name = '',
+            submission_name = nil,
+            score = 0,
+        },
+        DEMO = {
+            total_uptime = 0,
+            timed_CTA_shown = false,
+            win_CTA_shown = false,
+            quit_CTA_shown = false
+        },
+        ACHIEVEMENTS_EARNED = {},
+        crashreports = false,
+        colourblind_option = false,
+        language = 'en-us',
+        screenshake = true,
+        run_stake_stickers = false,
+        rumble = PlatformCfg:get_cfg().F_RUMBLE,
+        play_button_pos = 2,
+        GAMESPEED = 1,
+        paused = false,
+        SOUND = {
+            volume = 50,
+            music_volume = 100,
+            game_sounds_volume = 100,
+        },
+        WINDOW = {
+            screenmode = 'Windowed',
+            selected_display = 1,
+            vsync = 1,
+            display_names = { '[NONE]' },
+            DISPLAYS = {
+                {
+                    name = '[NONE]',
+                    screen_res = Size(1000, 650),
                 }
-            },
-            CUSTOM_DECK = {
-                Collabs = {
-                    Spades = 'default',
-                    Hearts = 'default',
-                    Clubs = 'default',
-                    Diamonds = 'default',
-                }
-            },
-            GRAPHICS = {
-                texture_scaling = 2,
-                shadows = 'On',
-                crt = 70,
-                bloom = 1
-            },
-            QUEUED_CHANGE = {
-                screenres = {}
             }
+        },
+        CUSTOM_DECK = {
+            Collabs = {
+                Spades = 'default',
+                Hearts = 'default',
+                Clubs = 'default',
+                Diamonds = 'default',
+            }
+        },
+        GRAPHICS = {
+            texture_scaling = 2,
+            shadows = 'On',
+            crt = 70,
+            bloom = 1
+        },
+        QUEUED_CHANGE = {
+            screenres = {}
         }
     }
 end
@@ -71,7 +69,7 @@ function Settings:load_settings()
     if settings then
         local settings_file = STR_UNPACK(settings)
         for k, v in pairs(settings_file) do
-            self.data[k] = v
+            -- self.data[k] = v
         end
     end
     self.data.paused = false

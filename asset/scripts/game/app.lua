@@ -303,30 +303,31 @@ end
 ---@param _initial boolean 是否是初始化
 function App:apply_window_changes(_initial)
     print("apply_window_changes")
+    local settings = self.SETTINGS.data
     --Set the screenmode setting from Windowed, Fullscreen or Borderless
-    self.SETTINGS.WINDOW.screenmode = self.SETTINGS.QUEUED_CHANGE.screenmode or self.SETTINGS.WINDOW.screenmode
+    settings.WINDOW.screenmode = settings.QUEUED_CHANGE.screenmode or settings.WINDOW.screenmode
 
     --Set the monitor the window should be rendered to
-    self.SETTINGS.WINDOW.selected_display = self.SETTINGS.QUEUED_CHANGE.selected_display or self.SETTINGS.WINDOW.selected_display
+    settings.WINDOW.selected_display = settings.QUEUED_CHANGE.selected_display or settings.WINDOW.selected_display
 
     --Set the screen resolution
-    self.SETTINGS.WINDOW.DISPLAYS[self.SETTINGS.WINDOW.selected_display].screen_res = {
-        w = self.SETTINGS.QUEUED_CHANGE.screenres.w or love.graphics.getWidth(),
-        h = self.SETTINGS.QUEUED_CHANGE.screenres.h or love.graphics.getHeight()
+    settings.WINDOW.DISPLAYS[settings.WINDOW.selected_display].screen_res = {
+        w = settings.QUEUED_CHANGE.screenres.w or love.graphics.getWidth(),
+        h = settings.QUEUED_CHANGE.screenres.h or love.graphics.getHeight()
     }
 
     --Set the vsync value, 0 is off 1 is on
-    self.SETTINGS.WINDOW.vsync = self.SETTINGS.QUEUED_CHANGE.vsync or self.SETTINGS.WINDOW.vsync
-    local screenmode = self.SETTINGS.WINDOW.screenmode
-    local display = self.SETTINGS.WINDOW.DISPLAYS[self.SETTINGS.WINDOW.selected_display]
+    settings.WINDOW.vsync = settings.QUEUED_CHANGE.vsync or settings.WINDOW.vsync
+    local screenmode = settings.WINDOW.screenmode
+    local display = settings.WINDOW.DISPLAYS[settings.WINDOW.selected_display]
     local window_width = screenmode == 'Windowed' and love.graphics.getWidth() * 0.8 or display.screen_res.w
     local window_height = screenmode == 'Windowed' and love.graphics.getHeight() * 0.8 or display.screen_res.h
     love.window.updateMode(window_width, window_height, {
         fullscreen = screenmode ~= 'Windowed',
         fullscreentype = (screenmode == 'Borderless' and 'desktop') or (screenmode == 'Fullscreen' and 'exclusive') or nil,
-        vsync = self.SETTINGS.WINDOW.vsync,
+        vsync = settings.WINDOW.vsync,
         resizable = true,
-        display = self.SETTINGS.WINDOW.selected_display,
+        display = settings.WINDOW.selected_display,
         highdpi = (love.system.getOS() == 'OS X')
     })
     self.SETTINGS:reset_queued_change()
