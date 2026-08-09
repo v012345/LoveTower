@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "love2d",
+            "request": "launch",
+            "name": "Debug Love2D",
+            "projectRoot": "${workspaceFolder}",
+            "lovePath": "lovec"
+        }
+    ]
+}

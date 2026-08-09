@@ -1,6 +1,13 @@
 -- require "temp.temp"
 
-
+-- 调试器注入：仅在通过 Cursor 的 Love2D 调试插件启动时生效
+local debugger_path = os.getenv("LOVE_DEBUGGER")
+if debugger_path then
+    local f = assert(io.open(debugger_path, "r"))
+    local src = f:read("*a")
+    f:close()
+    assert(loadstring(src, "@debugger.lua"))()
+end
 
 require "bit"
 require "asset.scripts.libs"
