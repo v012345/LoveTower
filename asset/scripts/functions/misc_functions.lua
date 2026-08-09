@@ -1,6 +1,6 @@
 local font = love.graphics.setNewFont("asset/resources/fonts/YQ_FH.ttf", 20)
 function boot_timer(cur_step, next_step, progress)
-    print("boot_timer", cur_step, next_step, progress)
+    -- print("boot_timer", cur_step, next_step, progress)
     progress = progress or 0
     love.graphics.setFont(font)
     local realw, realh = love.window.getMode()
