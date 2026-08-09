@@ -13,8 +13,15 @@ function CardConfig:init()
     local vouchers = TableParser.instance:parse("voucher")
     local tarots = TableParser.instance:parse("tarot")
     local enhanced = TableParser.instance:parse("enhanced")
+    local planets = TableParser.instance:parse("planet")
 
-
+    self.planets = {}
+    for id, row in pairs(planets) do
+        self.planets[id] = setmetatable({
+            config = self.card_config[id],
+            discovered = row.discovered,
+        }, { __index = row })
+    end
 
     self.enhanced = {}
     for id, row in pairs(enhanced) do
