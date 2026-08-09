@@ -1,0 +1,36 @@
+﻿Id,,,,,,,,,,,
+Id,available,config,cost,discovered,name,order,pos,requires,set,unlock_condition,unlocked
+string,bool,string,number,bool,string,number,vec2,string[],string,string,bool
+unique,,,,,,,,,,,
+v_blank,TRUE,v_blank,10,FALSE,Blank,23,"{7,0}",{},Voucher,,TRUE
+v_recyclomancy,TRUE,v_recyclomancy,10,FALSE,Recyclomancy,16,"{6,1}",{'v_wasteful'},Voucher,v_recyclomancy,FALSE
+v_crystal_ball,TRUE,v_crystal_ball,10,FALSE,Crystal Ball,9,"{2,2}",{},Voucher,,TRUE
+v_tarot_tycoon,TRUE,v_tarot_tycoon,10,FALSE,Tarot Tycoon,18,"{1,1}",{'v_tarot_merchant'},Voucher,v_tarot_tycoon,FALSE
+v_magic_trick,TRUE,v_magic_trick,10,FALSE,Magic Trick,25,"{4,2}",{},Voucher,,TRUE
+v_telescope,TRUE,v_telescope,10,FALSE,Telescope,11,"{3,2}",{},Voucher,,TRUE
+v_hieroglyph,TRUE,v_hieroglyph,10,FALSE,Hieroglyph,27,"{5,2}",{},Voucher,,TRUE
+v_planet_tycoon,TRUE,v_planet_tycoon,10,FALSE,Planet Tycoon,20,"{2,1}",{'v_planet_merchant'},Voucher,v_planet_tycoon,FALSE
+v_directors_cut,TRUE,v_directors_cut,10,FALSE,Director's Cut,29,"{6,2}",{},Voucher,,TRUE
+v_overstock_norm,TRUE,v_overstock_norm,10,FALSE,Overstock,1,"{0,0}",{},Voucher,,TRUE
+v_paint_brush,TRUE,v_paint_brush,10,FALSE,Paint Brush,31,"{7,2}",{},Voucher,,TRUE
+v_palette,TRUE,v_palette,10,FALSE,Palette,32,"{7,3}",{'v_paint_brush'},Voucher,v_palette,FALSE
+v_overstock_plus,TRUE,v_overstock_plus,10,FALSE,Overstock Plus,2,"{0,1}",{'v_overstock_norm'},Voucher,v_overstock_plus,FALSE
+v_antimatter,TRUE,v_antimatter,10,FALSE,Antimatter,24,"{7,1}",{'v_blank'},Voucher,v_antimatter,FALSE
+v_grabber,TRUE,v_grabber,10,FALSE,Grabber,13,"{5,0}",{},Voucher,,TRUE
+v_liquidation,TRUE,v_liquidation,10,FALSE,Liquidation,4,"{3,1}",{'v_clearance_sale'},Voucher,v_liquidation,FALSE
+v_illusion,TRUE,v_illusion,10,FALSE,Illusion,26,"{4,3}",{'v_magic_trick'},Voucher,v_illusion,FALSE
+v_retcon,TRUE,v_retcon,10,FALSE,Retcon,30,"{6,3}",{'v_directors_cut'},Voucher,v_retcon,FALSE
+v_glow_up,TRUE,v_glow_up,10,FALSE,Glow Up,6,"{4,1}",{'v_hone'},Voucher,v_glow_up,FALSE
+v_petroglyph,TRUE,v_petroglyph,10,FALSE,Petroglyph,28,"{5,3}",{'v_hieroglyph'},Voucher,v_petroglyph,FALSE
+v_money_tree,TRUE,v_money_tree,10,FALSE,Money Tree,22,"{1,3}",{'v_seed_money'},Voucher,v_money_tree,FALSE
+v_reroll_glut,TRUE,v_reroll_glut,10,FALSE,Reroll Glut,8,"{0,3}",{'v_reroll_surplus'},Voucher,v_reroll_glut,FALSE
+v_reroll_surplus,TRUE,v_reroll_surplus,10,FALSE,Reroll Surplus,7,"{0,2}",{},Voucher,,TRUE
+v_wasteful,TRUE,v_wasteful,10,FALSE,Wasteful,15,"{6,0}",{},Voucher,,TRUE
+v_omen_globe,TRUE,v_omen_globe,10,FALSE,Omen Globe,10,"{2,3}",{'v_crystal_ball'},Voucher,v_omen_globe,FALSE
+v_tarot_merchant,TRUE,v_tarot_merchant,10,FALSE,Tarot Merchant,17,"{1,0}",{},Voucher,,TRUE
+v_hone,TRUE,v_hone,10,FALSE,Hone,5,"{4,0}",{},Voucher,,TRUE
+v_observatory,TRUE,v_observatory,10,FALSE,Observatory,12,"{3,3}",{'v_telescope'},Voucher,v_observatory,FALSE
+v_planet_merchant,TRUE,v_planet_merchant,10,FALSE,Planet Merchant,19,"{2,0}",{},Voucher,,TRUE
+v_clearance_sale,TRUE,v_clearance_sale,10,FALSE,Clearance Sale,3,"{3,0}",{},Voucher,,TRUE
+v_nacho_tong,TRUE,v_nacho_tong,10,FALSE,Nacho Tong,14,"{5,1}",{'v_grabber'},Voucher,v_nacho_tong,FALSE
+v_seed_money,TRUE,v_seed_money,10,FALSE,Seed Money,21,"{1,2}",{},Voucher,,TRUE
