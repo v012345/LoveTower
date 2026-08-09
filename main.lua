@@ -1,10 +1,4 @@
 -- require "temp.temp"
-package.cpath = package.cpath .. ";c:/Users/NightOwl/.vscode/extensions/tangzx.emmylua-0.9.40-win32-x64/debugger/emmy/windows/x64/?.dll"
-local dbg = require("emmy_core")
-dbg.tcpListen("localhost", 9966)
-
-love.timer.sleep(0.1) -- 等待调试器连接
-
 
 
 
