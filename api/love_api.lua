@@ -16,6 +16,10 @@ SourceType = {
 
 --#region love.thread
 
+---A Thread is a chunk of code that can run in parallel with other threads. Data can be sent between different threads with Channel objects.
+---@class Thread
+Thread = {}
+
 ---An object which can be used to send and receive data between different threads.
 ---@class Channel
 Channel = {}
@@ -32,6 +36,11 @@ love.thread = love.thread or {}
 ---@param name string
 ---@return Channel
 function love.thread.getChannel(name) end
+
+---Creates a new Thread from a filename, string or FileData object containing Lua code.
+---@param filename string The name of the Lua file to use as the source.
+---@return Thread thread A new Thread that has yet to be started.
+function love.thread.newThread(filename) end
 
 --#endregion
 
