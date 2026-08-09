@@ -1,0 +1,26 @@
+﻿Id,,,,,,,,,,
+Id,config,consumeable,cost,cost_mult,discovered,effect,name,order,pos,set
+string,string,bool,number,number,bool,string,string,number,vec2,string
+unique,,,,,,,,,,
+c_chariot,c_chariot,TRUE,3,1,FALSE,Enhance,The Chariot,8,"{7,0}",Tarot
+c_justice,c_justice,TRUE,3,1,FALSE,Enhance,Justice,9,"{8,0}",Tarot
+c_hermit,c_hermit,TRUE,3,1,FALSE,Dollar Doubler,The Hermit,10,"{9,0}",Tarot
+c_wheel_of_fortune,c_wheel_of_fortune,TRUE,3,1,FALSE,Round Bonus,The Wheel of Fortune,11,"{0,1}",Tarot
+c_fool,c_fool,TRUE,3,1,FALSE,Disable Blind Effect,The Fool,1,"{0,0}",Tarot
+c_strength,c_strength,TRUE,3,1,FALSE,Round Bonus,Strength,12,"{1,1}",Tarot
+c_hanged_man,c_hanged_man,TRUE,3,1,FALSE,Card Removal,The Hanged Man,13,"{2,1}",Tarot
+c_death,c_death,TRUE,3,1,FALSE,Card Conversion,Death,14,"{3,1}",Tarot
+c_high_priestess,c_high_priestess,TRUE,3,1,FALSE,Round Bonus,The High Priestess,3,"{2,0}",Tarot
+c_magician,c_magician,TRUE,3,1,FALSE,Enhance,The Magician,2,"{1,0}",Tarot
+c_world,c_world,TRUE,3,1,FALSE,Suit Conversion,The World,22,"{1,2}",Tarot
+c_judgement,c_judgement,TRUE,3,1,FALSE,Random Joker,Judgement,21,"{0,2}",Tarot
+c_empress,c_empress,TRUE,3,1,FALSE,Enhance,The Empress,4,"{3,0}",Tarot
+c_sun,c_sun,TRUE,3,1,FALSE,Suit Conversion,The Sun,20,"{9,1}",Tarot
+c_moon,c_moon,TRUE,3,1,FALSE,Suit Conversion,The Moon,19,"{8,1}",Tarot
+c_devil,c_devil,TRUE,3,1,FALSE,Enhance,The Devil,16,"{5,1}",Tarot
+c_temperance,c_temperance,TRUE,3,1,FALSE,Joker Payout,Temperance,15,"{4,1}",Tarot
+c_tower,c_tower,TRUE,3,1,FALSE,Enhance,The Tower,17,"{6,1}",Tarot
+c_heirophant,c_heirophant,TRUE,3,1,FALSE,Enhance,The Hierophant,6,"{5,0}",Tarot
+c_star,c_star,TRUE,3,1,FALSE,Suit Conversion,The Star,18,"{7,1}",Tarot
+c_emperor,c_emperor,TRUE,3,1,FALSE,Round Bonus,The Emperor,5,"{4,0}",Tarot
+c_lovers,c_lovers,TRUE,3,1,FALSE,Enhance,The Lovers,7,"{6,0}",Tarot
