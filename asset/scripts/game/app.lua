@@ -110,6 +110,11 @@ function App:start_up()
     boot_timer('splash prep', 'end', 1)
 end
 
+--- 打开保存进度开关, 在 update 中保存
+function App:save_progress()
+
+end
+
 function App:init_item_prototypes()
     self.P_SEALS = SealCfg:get_seals()
     self.P_TAGS = TagCfg:get_tags()
