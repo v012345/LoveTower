@@ -78,7 +78,7 @@ function Settings:load_settings()
 end
 
 function Settings:reset_queued_change()
-    local queued_change = self.data.settings.QUEUED_CHANGE
+    local queued_change = self.data.QUEUED_CHANGE
     queued_change.screenmode = nil
     queued_change.selected_display = nil
     queued_change.screenres.w = nil

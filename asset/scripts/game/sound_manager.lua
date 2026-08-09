@@ -1,3 +1,4 @@
+print("sound_manager.lua")
 require "love.audio"
 require "love.sound"
 require "love.system"

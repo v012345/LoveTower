@@ -89,6 +89,38 @@ function App:start_up()
     self.SETTINGS:load_settings()
     boot_timer("start", "settings", 0.1)
     self:init_window()
+
+    if self.feature_flags.F_SOUND_THREAD then
+        boot_timer('window init', 'soundmanager2')
+        -- call the sound manager to prepare the thread to play sounds
+        self.SOUND_MANAGER = {
+            thread = love.thread.newThread('asset/scripts/game/sound_manager.lua'),
+            channel = love.thread.getChannel('sound_request'),
+            load_channel = love.thread.getChannel('load_channel')
+        }
+        self.SOUND_MANAGER.thread:start(1)
+
+        -- local sound_loaded, prev_file = false, 'none'
+        -- while not sound_loaded and false do
+        --     -- Monitor the channel for any new requests
+        --     local request = self.SOUND_MANAGER.load_channel:pop() -- Value from channel
+        --     if request then
+        --         -- If the request is for an update to the music track, handle it here
+        --         if request == 'finished' then
+        --             sound_loaded = true
+        --         else
+        --             boot_timer(request, prev_file)
+        --             prev_file = request
+        --         end
+        --     end
+        --     love.timer.sleep(0.001)
+        -- end
+
+        boot_timer('soundmanager2', 'savemanager', 0.22)
+    end
+
+
+
     -- Input handler/controller for game objects
     self.CONTROLLER = Controller()
     boot_timer('settings', 'window init', 0.2)
