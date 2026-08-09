@@ -20,6 +20,13 @@ SourceType = {
 ---@class Thread
 Thread = {}
 
+---Starts a Thread.
+---@param arg1 Variant A string, number, boolean, LÖVE object, or simple table.
+---@param arg2 Variant A string, number, boolean, LÖVE object, or simple table.
+---@param ... Variant You can continue passing values to the thread.
+---@return nil
+function Thread:start(arg1, arg2, ...) end
+
 ---An object which can be used to send and receive data between different threads.
 ---@class Channel
 Channel = {}
