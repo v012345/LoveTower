@@ -2,7 +2,7 @@
     "name": "cursor-love2d-debug",
     "displayName": "Love2D Debugger",
     "description": "Debug Love2D (LuaJIT) games in Cursor with breakpoints, stepping and variable inspection",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "publisher": "nightowl",
     "engines": {
         "vscode": "^1.80.0"

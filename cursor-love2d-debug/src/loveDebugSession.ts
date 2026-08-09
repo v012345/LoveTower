@@ -23,6 +23,8 @@ interface LaunchArgs extends DebugProtocol.LaunchRequestArguments {
     stopOnEntry?: boolean;
 }
 
+const ADAPTER_VERSION = '0.2.0';
+
 interface GameFrame {
     name: string;
     source: string;
@@ -203,6 +205,9 @@ export class LoveDebugSession extends LoggingDebugSession {
                 return;
             }
             this.conn = socket;
+            this.sendEvent(
+                new OutputEvent('[love2d-debug] game connected to adapter\n', 'console')
+            );
             socket.setNoDelay(true);
             socket.on('data', (d) => this.onGameData(d));
             socket.on('close', () => {
@@ -220,6 +225,12 @@ export class LoveDebugSession extends LoggingDebugSession {
         });
 
         this.server.listen(port, '127.0.0.1', () => {
+            this.sendEvent(
+                new OutputEvent(
+                    `[love2d-debug] adapter v${ADAPTER_VERSION} listening on port ${port}\n`,
+                    'console'
+                )
+            );
             this.game = spawn(lovePath, [args.projectRoot, ...(args.args ?? [])], {
                 cwd: args.projectRoot,
                 env: {
