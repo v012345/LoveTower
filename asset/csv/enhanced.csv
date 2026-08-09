@@ -1,0 +1,12 @@
+﻿Id,,,,,,,,
+Id,config,effect,label,max,name,order,pos,set
+string,string,string,string,number,string,number,vec2,string
+unique,,,,,,,,
+m_gold,m_gold,Gold Card,Gold Card,500,Gold Card,8,"{6,0}",Enhanced
+m_glass,m_glass,Glass Card,Glass Card,500,Glass Card,5,"{5,1}",Enhanced
+m_stone,m_stone,Stone Card,Stone Card,500,Stone Card,7,"{5,0}",Enhanced
+m_wild,m_wild,Wild Card,Wild Card,500,Wild Card,4,"{3,1}",Enhanced
+m_steel,m_steel,Steel Card,Steel Card,500,Steel Card,6,"{6,1}",Enhanced
+m_bonus,m_bonus,Bonus Card,Bonus Card,500,Bonus,2,"{1,1}",Enhanced
+m_lucky,m_lucky,Lucky Card,Lucky Card,500,Lucky Card,9,"{4,1}",Enhanced
+m_mult,m_mult,Mult Card,Mult Card,500,Mult,3,"{2,1}",Enhanced

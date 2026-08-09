@@ -2,6 +2,9 @@
 local CardConfig = Object:extend()
 
 function CardConfig:init()
+    self.card_config = TableParser.instance:parse("card_config")
+    self.unlock_condition = TableParser.instance:parse("unlock_condition")
+
     local jokers = TableParser.instance:parse("joker")
     local booster_packs = TableParser.instance:parse("booster_pack")
     local editions = TableParser.instance:parse("edition")
@@ -9,8 +12,16 @@ function CardConfig:init()
     local backs = TableParser.instance:parse("back")
     local vouchers = TableParser.instance:parse("voucher")
     local tarots = TableParser.instance:parse("tarot")
-    self.card_config = TableParser.instance:parse("card_config")
-    self.unlock_condition = TableParser.instance:parse("unlock_condition")
+    local enhanced = TableParser.instance:parse("enhanced")
+
+
+
+    self.enhanced = {}
+    for id, row in pairs(enhanced) do
+        self.enhanced[id] = setmetatable({
+            config = self.card_config[id],
+        }, { __index = row })
+    end
 
     self.tarots = {}
     for id, row in pairs(tarots) do
