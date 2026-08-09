@@ -2,6 +2,20 @@
 local CardConfig = Object:extend()
 
 function CardConfig:init()
+    self.c_base = {
+        max = 500,
+        freq = 1,
+        line = 'base',
+        name = "Default Base",
+        pos = { x = 1, y = 0 },
+        set = "Default",
+        label = 'Base Card',
+        effect = "Base",
+        cost_mult = 1.0,
+        config = {}
+    }
+
+
     self.card_config = TableParser.instance:parse("card_config")
     self.unlock_condition = TableParser.instance:parse("unlock_condition")
 
