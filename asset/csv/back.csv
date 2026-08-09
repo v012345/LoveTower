@@ -1,0 +1,20 @@
+﻿Id,,,,,,,,,,
+Id,config,discovered,name,omit,order,pos,set,stake,unlock_condition,unlocked
+string,string,bool,string,bool,number,vec2,string,number,string,bool
+unique,,,,,,,,,,
+b_challenge,b_challenge,FALSE,Challenge Deck,TRUE,16,"{0,4}",Back,1,,TRUE
+b_painted,b_painted,FALSE,Painted Deck,FALSE,12,"{4,3}",Back,1,b_painted,FALSE
+b_yellow,b_yellow,FALSE,Yellow Deck,FALSE,3,"{1,2}",Back,1,b_yellow,FALSE
+b_erratic,b_erratic,FALSE,Erratic Deck,FALSE,15,"{2,3}",Back,1,b_erratic,FALSE
+b_green,b_green,FALSE,Green Deck,FALSE,4,"{2,2}",Back,1,b_green,FALSE
+b_ghost,b_ghost,FALSE,Ghost Deck,FALSE,8,"{6,2}",Back,1,b_ghost,FALSE
+b_plasma,b_plasma,FALSE,Plasma Deck,FALSE,14,"{4,2}",Back,1,b_plasma,FALSE
+b_anaglyph,b_anaglyph,FALSE,Anaglyph Deck,FALSE,13,"{2,4}",Back,1,b_anaglyph,FALSE
+b_abandoned,b_abandoned,FALSE,Abandoned Deck,FALSE,9,"{3,3}",Back,1,b_abandoned,FALSE
+b_black,b_black,FALSE,Black Deck,FALSE,5,"{3,2}",Back,1,b_black,FALSE
+b_red,b_red,TRUE,Red Deck,FALSE,1,"{0,0}",Back,1,,TRUE
+b_checkered,b_checkered,FALSE,Checkered Deck,FALSE,10,"{1,3}",Back,1,b_checkered,FALSE
+b_magic,b_magic,FALSE,Magic Deck,FALSE,6,"{0,3}",Back,1,b_magic,FALSE
+b_zodiac,b_zodiac,FALSE,Zodiac Deck,FALSE,11,"{3,4}",Back,1,b_zodiac,FALSE
+b_blue,b_blue,FALSE,Blue Deck,FALSE,2,"{0,2}",Back,1,b_blue,FALSE
+b_nebula,b_nebula,FALSE,Nebula Deck,FALSE,7,"{3,0}",Back,1,b_nebula,FALSE
