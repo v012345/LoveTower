@@ -62,8 +62,14 @@ love.handlers = love.handlers or {}
 
 function love.quit() end
 
+--#region love.filesystem
+
 ---@class love.filesystem
 love.filesystem = love.filesystem or {}
+
+---@param dir string
+---@return string[] files
+function love.filesystem.getDirectoryItems(dir) end
 
 ---@param path string
 ---@param size? number
@@ -94,6 +100,9 @@ function love.filesystem.createDirectory(path) end
 
 ---@return string path
 function love.filesystem.getSaveDirectory() end
+
+--#endregion
+
 
 ---@class love.Image:love.Drawable
 love.Image = love.Image or {}

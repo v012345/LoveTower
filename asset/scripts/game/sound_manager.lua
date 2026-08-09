@@ -12,7 +12,7 @@ DISABLE_SFX = false
 
 --create all sounds from resources and play one each to load into mem
 SOURCES = {}
-local sound_files = love.filesystem.getDirectoryItems("resources/sounds")
+local sound_files = love.filesystem.getDirectoryItems("asset/resources/sounds")
 
 for _, filename in ipairs(sound_files) do
     local extension = string.sub(filename, -4)
