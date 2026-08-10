@@ -1,3 +1,4 @@
+---@diagnostic disable: different-requires
 require "love.system"
 
 if (love.system.getOS() == 'OS X') and (jit.arch == 'arm64' or jit.arch == 'arm') then jit.off() end
