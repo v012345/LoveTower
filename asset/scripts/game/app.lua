@@ -6,6 +6,8 @@ local Controller = require "asset.scripts.game.controller"
 function App:init()
     --Feature Flags, 用于控制是否启用某些功能
     self.feature_flags = PlatformCfg:get_cfg()
+
+
     self.SEED = os.time()
     self.TIMERS = {
         TOTAL = 0,
@@ -18,9 +20,57 @@ function App:init()
         DRAW = 0,
         MOVE = 0
     }
+
+
     self.exp_times = { xy = 0, scale = 0, r = 0 }
     --SETTINGS 设置管理器
     self.SETTINGS = Settings()
+
+    -- 联名花色配置
+    self.COLLABS = {
+        pos = { Jack = { x = 0, y = 0 }, Queen = { x = 1, y = 0 }, King = { x = 2, y = 0 } },
+        options = {
+            Spades = {
+                'default',
+                'collab_TW',
+                'collab_CYP',
+                'collab_SK',
+                'collab_DS',
+                'collab_AC',
+                'collab_STP',
+            },
+            Hearts = {
+                'default',
+                'collab_AU',
+                'collab_TBoI',
+                'collab_CL',
+                'collab_D2',
+                'collab_CR',
+                'collab_BUG',
+            },
+            Clubs = {
+                'default',
+                'collab_VS',
+                'collab_STS',
+                'collab_PC',
+                'collab_WF',
+                'collab_FO',
+                'collab_DBD'
+            },
+            Diamonds = {
+                'default',
+                'collab_DTD',
+                'collab_SV',
+                'collab_EG',
+                'collab_XR',
+                'collab_C7',
+                'collab_R'
+            }
+        },
+    }
+
+
+
     do return end
     self.ID = 0 -- ID 生成器
     self.DEBUG = true
