@@ -4,6 +4,7 @@ local Settings = require "asset.scripts.game.settings"
 local Window = require "asset.scripts.game.window"
 local Controller = require "asset.scripts.game.controller"
 function App:init()
+    --Feature Flags, 用于控制是否启用某些功能
     self.feature_flags = PlatformCfg:get_cfg()
     self.SEED = os.time()
     self.TIMERS = {
@@ -18,6 +19,7 @@ function App:init()
         MOVE = 0
     }
     self.exp_times = { xy = 0, scale = 0, r = 0 }
+    --SETTINGS 设置管理器
     self.SETTINGS = Settings()
     do return end
     self.ID = 0 -- ID 生成器
