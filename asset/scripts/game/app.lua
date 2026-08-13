@@ -233,9 +233,9 @@ function App:init_item_prototypes()
     -- print("init_item_prototypes")
 end
 
----@param new_stage    STAGES
----@param new_state    STATES
----@param new_game_obj boolean
+---@param new_stage STAGES 新的阶段
+---@param new_state STATES 新的状态
+---@param new_game_obj boolean 是否是新的一局游戏
 function App:prep_stage(new_stage, new_state, new_game_obj)
     self.CONTROLLER:reset_locks()
     if new_game_obj then self.GAME = self:init_game_object() end
@@ -255,6 +255,10 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
 end
 
 function App:init_game_object()
+    local bosses_used = {}
+    for k, v in pairs(self.P_BLINDS) do
+        if v.boss then bosses_used[k] = 0 end
+    end
 end
 
 function App:update(dt)
@@ -346,6 +350,7 @@ function App:splash_screen()
         self:main_menu()
     else
         Log:info("splash screen")
+        self:prep_stage(STAGES.MAIN_MENU, STATES.SPLASH, true)
     end
 end
 
