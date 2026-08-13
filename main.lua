@@ -10,6 +10,13 @@ if debugger_path then
     assert(loadstring(src, "@debugger.lua"))()
 end
 
+xpcall(function()
+    require "tools.lua_table_to_csv"
+end, function(err)
+    print(err)
+end)
+
+
 require "bit"
 require "asset.scripts.libs"
 require "asset.scripts.base"
