@@ -69,6 +69,12 @@ function App:init()
         },
     }
 
+    self.PROFILES = {
+        {},
+        {},
+        {},
+    }
+
 
 
     do return end
