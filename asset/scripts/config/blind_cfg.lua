@@ -1,6 +1,3 @@
----@class (partial) BlindConfig : Object
----@field blinds table<string, Blind> 盲注
-
 ---@class Blind
 ---@field Id string ID
 ---@field defeated boolean 是否已击败
@@ -15,6 +12,8 @@
 ---@field boss_colour string Boss颜色
 ---@field boss table Boss
 
+---@class (partial) BlindConfig : Object
+---@field blinds table<string, Blind> 盲注
 local BlindConfig = Object:extend()
 
 function BlindConfig:init()
