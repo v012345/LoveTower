@@ -9,8 +9,9 @@
 ---@field pos Vec2 位置
 ---@field dollars number 美元
 ---@field order number 顺序
+---@field is_boss boolean 是否是is_boss
 ---@field boss_colour string Boss颜色
----@field boss table Boss
+---@field boss {showdown:boolean,min:number,max:number} Boss
 
 ---@class (partial) BlindConfig : Object
 ---@field blinds table<string, Blind> 盲注
