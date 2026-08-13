@@ -59,8 +59,13 @@ function Settings:init()
         },
         QUEUED_CHANGE = {
             screenres = {}
-        }
+        },
+        skip_splash = false
     }
+end
+
+function Settings:is_skip_splash()
+    return self.data.skip_splash
 end
 
 function Settings:load_settings()

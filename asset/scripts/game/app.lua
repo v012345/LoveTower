@@ -203,7 +203,6 @@ function App:start_up()
 
     boot_timer('controllers', 'localization', 0.8)
     self:init_item_prototypes()
-    do return end
     boot_timer('protos', 'shared sprites', 0.9)
 
     boot_timer('shared sprites', 'prep stage', 0.95)
@@ -341,8 +340,13 @@ function App:save_settings()
 end
 
 function App:splash_screen()
-    -- 直接跳转到主菜单
-    self:main_menu()
+    --If the skip splash screen option is set, immediately go to the main menu here
+    if self.SETTINGS:is_skip_splash() then
+        -- 直接跳转到主菜单
+        self:main_menu()
+    else
+        Log:info("splash screen")
+    end
 end
 
 function App:main_menu()
