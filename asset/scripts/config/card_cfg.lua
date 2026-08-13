@@ -114,5 +114,9 @@ end
 --     return self.tags
 -- end
 
+function CardConfig:get_backs()
+    return self.backs
+end
+
 ---@type CardConfig
 CardCfg = CardConfig()

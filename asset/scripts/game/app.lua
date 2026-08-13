@@ -134,6 +134,13 @@ function App:init()
         Node = nil,
         ORIG = Transform(),
     }
+
+
+    self.PROGRESS = {
+        joker_stickers = { tally = 0, of = 0 },
+        deck_stakes = { tally = 0, of = 0 },
+        challenges = { tally = 0, of = 0 },
+    }
 end
 
 --- 在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
@@ -398,6 +405,10 @@ function App:apply_window_changes(_initial)
         local tab_but = G.OVERLAY_MENU:get_UIE_by_ID('tab_but_Video')
         G.FUNCS.change_tab(tab_but)
     end
+end
+
+function App:set_profile_progress()
+
 end
 
 ---@type App
