@@ -65,6 +65,10 @@ function Settings:init()
     }
 end
 
+function Settings:get_language()
+    return self.data.language
+end
+
 ---切换到演示模式
 function Settings:switch_to_demo()
     local demo = self.data.DEMO
