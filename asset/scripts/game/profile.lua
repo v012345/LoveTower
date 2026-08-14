@@ -3,6 +3,7 @@ local Profile = Object:extend()
 
 
 function Profile:init()
+    self.data = {}
     for i = 1, 3, 1 do
         self.data[i] = self:create_empty_profile() -- 初始化三个玩家的数据
     end
@@ -16,7 +17,7 @@ function Profile:load(no)
     --Load the settings file
     local info = get_compressed(no .. "/profile.jkr")
 
-    if not info then
+    if info then
         --加载本地文件
         local data = STR_UNPACK(info)
         --这里应该做差异对比, 不应该直接覆盖

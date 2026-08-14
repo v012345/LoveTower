@@ -157,7 +157,7 @@ function App:start_up()
     local used_no = self.PROFILES:load(self.SETTINGS:get_profile_no())
     self.SETTINGS:set_profile_no(used_no)
 
-
+    self:set_language()
     self:init_item_prototypes()
     boot_timer('protos', 'shared sprites', 0.9)
 
