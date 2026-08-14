@@ -6,7 +6,7 @@ Sprite = Moveable:extend()
 ---@param T Transform
 ---@param new_sprite_atlas AtlasConfigItem
 ---@param sprite_pos any
- function Sprite:init(T, new_sprite_atlas, sprite_pos)
+function Sprite:init(T, new_sprite_atlas, sprite_pos)
     Moveable.init(self, T, Room.instance:get_root_node())
     self.CT = self.VT
     self.atlas = new_sprite_atlas
