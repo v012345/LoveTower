@@ -9,7 +9,7 @@ end
 ---@param cb? function 声音加载进度回调
 function SoundManager:boot(cb)
     self.SOUND_MANAGER = {
-        thread = love.thread.newThread('asset/scripts/game/sound_manager.lua'),
+        thread = love.thread.newThread('asset/scripts/game/threads/sound.lua'),
         channel = love.thread.getChannel('sound_request'),
         load_channel = love.thread.getChannel('load_channel')
     }
