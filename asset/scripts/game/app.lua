@@ -127,10 +127,6 @@ function App:start_up()
 
 
 
-
-
-    -- Input handler/controller for game objects
-    self.CONTROLLER = Controller()
     boot_timer('settings', 'window init', 0.2)
 
     self.SAVE_MANAGER:boot()
@@ -153,6 +149,8 @@ function App:start_up()
 
     boot_timer('shaders', 'controllers', 0.7)
 
+    -- Input handler/controller for game objects
+    self.CONTROLLER = Controller()
     boot_timer('controllers', 'localization', 0.8)
     self:init_item_prototypes()
     boot_timer('protos', 'shared sprites', 0.9)
