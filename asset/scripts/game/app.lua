@@ -173,7 +173,7 @@ function App:start_up()
             -- Monitor the channel for any new requests
             -- local request = self.SOUND_MANAGER.load_channel:pop() -- Value from channel
             local request = self.SOUND_MANAGER.load_channel:demand() -- Value from channel
-            Log:info("request", request)
+            -- Log:info("request", request)
             if request then
                 -- If the request is for an update to the music track, handle it here
                 if request == 'finished' then
