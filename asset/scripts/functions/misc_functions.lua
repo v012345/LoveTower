@@ -119,7 +119,7 @@ end
 ---@param obj Moveable
 function add_to_drawhash(obj)
     if obj then
-        App.instance.DRAW_HASH[#App.instance.DRAW_HASH + 1] = obj
+        App.DRAW_HASH[#App.DRAW_HASH + 1] = obj
     end
 end
 

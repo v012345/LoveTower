@@ -21,7 +21,7 @@ function DynaText:init(data)
     }
 
     if getmetatable(self) == DynaText then
-        table.insert(App.instance.I.MOVEABLE, self)
+        table.insert(App.I.MOVEABLE, self)
     end
 end
 

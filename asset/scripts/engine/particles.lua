@@ -61,12 +61,12 @@ function Particles:init(T, container, config)
     end
 
     if getmetatable(self) == Particles then
-        table.insert(App.instance.I.MOVEABLE, self)
+        table.insert(App.I.MOVEABLE, self)
     end
 end
 
 function Particles:update(dt)
-    if App.instance.SETTINGS.paused and not self.created_on_pause then
+    if App.SETTINGS.paused and not self.created_on_pause then
         self.last_real_time = self.timer_type()
         return
     end
@@ -105,10 +105,10 @@ end
 
 ---对于 Moveable 实例来说, 游戏的主循环会先调用 move(dt) 方法, 然后调用 update(dt) 方法
 function Particles:move(dt)
-    if App.instance.SETTINGS.paused and not self.created_on_pause then return end
+    if App.SETTINGS.paused and not self.created_on_pause then return end
 
     Moveable.move(self, dt)
-    if self.timer_type ~= Timer.real_timer then dt = dt * App.instance.SETTINGS.speed_factor end
+    if self.timer_type ~= Timer.real_timer then dt = dt * App.SETTINGS.speed_factor end
     for i = #self.particles, 1, -1 do
         local p = self.particles[i]
         p.draw = true

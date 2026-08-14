@@ -1,4 +1,4 @@
----目前看来直接实例化 Node 的只有一个, 就是 App.instance.ROOM
+---目前看来直接实例化 Node 的只有一个, 就是 App.ROOM
 
 ---@class Node: Object
 ---@field T Transform The transform of the node | Transform: 位置/大小/旋转 {x, y, w, h, r, scale}  (逻辑坐标)
@@ -67,13 +67,13 @@ function Node:init(T, container)
 
     --Add this object to the appropriate instance table only if the metatable matches with NODE
     if getmetatable(self) == Node then
-        table.insert(App.instance.I.NODE, self)
+        table.insert(App.I.NODE, self)
     end
 
     --Unless node was created during a stage transition (when G.STAGE_OBJECT_INTERRUPT is true), add all nodes to their appropriate
     --stage object table so they can be easily deleted on stage transition
-    if not App.instance.STAGE_OBJECT_INTERRUPT then
-        table.insert(App.instance.STAGE_OBJECTS[App.instance.STAGE], self)
+    if not App.STAGE_OBJECT_INTERRUPT then
+        table.insert(App.STAGE_OBJECTS[App.STAGE], self)
     end
 
     self.created_on_pause = Settings.instance.paused
@@ -97,9 +97,9 @@ end
 
 --Draw a bounding rectangle representing the transform of this node. Used in debugging.
 function Node:draw_boundingrect()
-    self.under_overlay = App.instance.under_overlay
+    self.under_overlay = App.under_overlay
 
-    if App.instance.DEBUG then
+    if App.DEBUG then
         love.graphics.push()
         do
             local s = Tile.instance:get_scale()
@@ -147,7 +147,7 @@ function Node:collides_with_point(point)
         local _t = self.ARGS.collides_with_point_translation
         local _r = self.ARGS.collides_with_point_rotation
 
-        local _b = self.states.hover.is and App.instance.COLLISION_BUFFER or 0
+        local _b = self.states.hover.is and App.COLLISION_BUFFER or 0
 
         _p.x, _p.y = point.x, point.y
 
@@ -297,7 +297,7 @@ end
 --When this Node needs to be deleted, removes self from any tables it may have been added to to destroy any weak references\
 --Also calls the remove method of all children to have them do the same
 function Node:remove()
-    local I = App.instance.I
+    local I = App.I
     for k, v in pairs(I.POPUP) do
         if v == self then
             table.remove(I.POPUP, k)
@@ -310,9 +310,9 @@ function Node:remove()
             break;
         end
     end
-    for k, v in pairs(App.instance.STAGE_OBJECTS[App.instance.STAGE]) do
+    for k, v in pairs(App.STAGE_OBJECTS[App.STAGE]) do
         if v == self then
-            table.remove(App.instance.STAGE_OBJECTS[App.instance.STAGE], k)
+            table.remove(App.STAGE_OBJECTS[App.STAGE], k)
             break;
         end
     end

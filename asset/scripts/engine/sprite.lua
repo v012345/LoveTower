@@ -17,7 +17,7 @@ function Sprite:init(T, new_sprite_atlas, sprite_pos)
     self:set_sprite_pos(sprite_pos)
 
     if getmetatable(self) == Sprite then
-        table.insert(App.instance.I.SPRITE, self)
+        table.insert(App.I.SPRITE, self)
     end
 end
 

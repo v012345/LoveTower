@@ -8,7 +8,7 @@ function UIBox:init(T, definition, config)
     self.UIRoot = UIElement(nil, self, UIT.T, definition.config)
     self:align_to_major()
     if getmetatable(self) == UIBox then
-        table.insert(App.instance.I.UIBOX, self)
+        table.insert(App.I.UIBOX, self)
     end
 end
 

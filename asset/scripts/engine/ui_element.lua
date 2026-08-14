@@ -92,14 +92,14 @@ function UIElement:draw_self()
             self.ARGS.text_parallax = self.ARGS.text_parallax or {}
             self.ARGS.text_parallax.sx = -self.shadow_parrallax.x * 0.5 / (self.config.scale * self.config.lang.font.FONTSCALE)
             self.ARGS.text_parallax.sy = -self.shadow_parrallax.y * 0.5 / (self.config.scale * self.config.lang.font.FONTSCALE)
-            if (self.config.button_UIE and button_active) or (not self.config.button_UIE and self.config.shadow and App.instance.SETTINGS.GRAPHICS.shadows == 'On') then
+            if (self.config.button_UIE and button_active) or (not self.config.button_UIE and self.config.shadow and App.SETTINGS.GRAPHICS.shadows == 'On') then
                 prep_draw(self, 0.97)
                 do
                     if self.config.vert then
                         love.graphics.translate(0, self.VT.h)
                         love.graphics.rotate(-math.pi / 2)
                     end
-                    if (self.config.shadow or (self.config.button_UIE and button_active)) and App.instance.SETTINGS.GRAPHICS.shadows == 'On' then
+                    if (self.config.shadow or (self.config.button_UIE and button_active)) and App.SETTINGS.GRAPHICS.shadows == 'On' then
                         love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour:get_a())
                         love.graphics.draw(
                             self.config.text_drawable,
@@ -136,7 +136,7 @@ function UIElement:draw_self()
             prep_draw(self, 1)
             do
                 love.graphics.scale(1 / (Tile.instance.TILESIZE))
-                if self.config.shadow and App.instance.SETTINGS.GRAPHICS.shadows == 'On' then
+                if self.config.shadow and App.SETTINGS.GRAPHICS.shadows == 'On' then
                     love.graphics.scale(0.98)
                     if self.config.shadow_colour then
                         love.graphics.setColor(self.config.shadow_colour)
@@ -247,7 +247,7 @@ function UIElement:draw_self()
     if self.config.chosen then
         prep_draw(self, 0.98)
         love.graphics.scale(1 / (Tile.instance.TILESIZE))
-        if self.config.shadow and App.instance.SETTINGS.GRAPHICS.shadows == 'On' then
+        if self.config.shadow and App.SETTINGS.GRAPHICS.shadows == 'On' then
             love.graphics.setColor(0, 0, 0, 0.3 * self.config.colour:get_a())
             love.graphics.polygon("fill", get_chosen_triangle_from_rect(self.layered_parallax.x - self.shadow_parrallax.x * parallax_dist * 0.5, self.layered_parallax.y - self.shadow_parrallax.y * parallax_dist * 0.5, self.VT.w * Tile.instance.TILESIZE, self.VT.h * Tile.instance.TILESIZE, self.config.chosen == 'vert'))
         end

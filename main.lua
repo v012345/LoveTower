@@ -154,6 +154,6 @@ function love.resize(w, h)
     end
 
     Window.instance:set_real_size(w, h)
-    App.CANVAS = love.graphics.newCanvas(w * App.instance.CANV_SCALE, h * App.instance.CANV_SCALE, { type = '2d', readable = true })
+    App.CANVAS = love.graphics.newCanvas(w * App.CANV_SCALE, h * App.CANV_SCALE, { type = '2d', readable = true })
     App.CANVAS:setFilter('linear', 'linear')
 end

@@ -61,9 +61,9 @@ function Moveable:init(T, container)
 
     self:calculate_parrallax()
 
-    table.insert(App.instance.MOVEABLES, self)
+    table.insert(App.MOVEABLES, self)
     if getmetatable(self) == Moveable then
-        table.insert(App.instance.I.MOVEABLE, self)
+        table.insert(App.I.MOVEABLE, self)
     end
 end
 
@@ -239,7 +239,7 @@ function Moveable:drag(offset)
 end
 
 function Moveable:juice_up(amount, rot_amt)
-    if App.instance.SETTINGS.reduced_motion then return end
+    if App.SETTINGS.reduced_motion then return end
     amount = amount or 0.4
     local timer = Timer.instance:get_real_timer()
     local start_time = timer()
@@ -269,10 +269,10 @@ function Moveable:move_juice(dt)
 end
 
 function Moveable:move(dt)
-    if self.FRAME.MOVE >= App.instance.FRAMES.MOVE then return end
+    if self.FRAME.MOVE >= App.FRAMES.MOVE then return end
     self.FRAME.MAJOR = nil
-    self.FRAME.MOVE = App.instance.FRAMES.MOVE
-    if not self.created_on_pause and App.instance.SETTINGS.paused then return end
+    self.FRAME.MOVE = App.FRAMES.MOVE
+    if not self.created_on_pause and App.SETTINGS.paused then return end
 
     --WHY ON EARTH DOES THIS LINE MAKE IT RUN 2X AS FAST???
     -------------------------------------------------------
@@ -286,7 +286,7 @@ function Moveable:move(dt)
     if self.role:is_glued() then
         if major then self:glue_to_major(major) end
     elseif self.role:is_minor() and major then
-        if major.FRAME.MOVE < App.instance.FRAMES.MOVE then
+        if major.FRAME.MOVE < App.FRAMES.MOVE then
             major:move(dt)
         end
         self.STATIONARY = major.STATIONARY
@@ -501,7 +501,7 @@ end
 ---@param rotate? number
 ---@param offset? table
 function Moveable:prep_draw(scale, rotate, offset)
-    -- love.graphics.scale(App.instance.TILESCALE * App.instance.TILESIZE)
+    -- love.graphics.scale(App.TILESCALE * App.TILESIZE)
     offset = offset or Coordinate(0, 0)
     love.graphics.setColor(Color.RED)
     love.graphics.rectangle('fill', 0, 0, 20, 20)
@@ -522,7 +522,7 @@ function Moveable:get_major()
     local condition_2 = self.role:get_xy_bond() ~= BondType.Weak and self.role:get_r_bond() ~= BondType.Weak
     if condition_1 and condition_2 then
         --First, does the major already have their offset precalculated for this frame?
-        if not self.FRAME.MAJOR or App.instance.REFRESH_FRAME_MAJOR_CACHE > 0 then
+        if not self.FRAME.MAJOR or App.REFRESH_FRAME_MAJOR_CACHE > 0 then
             local major = self.role:get_major():get_major()
             self.FRAME.MAJOR = MoveableRole(major:get_major(), nil, nil, Vec2(major.offset.x + self.role.offset.x + self.layered_parallax.x, major.offset.y + self.role.offset.y + self.layered_parallax.y))
         end
@@ -536,15 +536,15 @@ end
 ---从App.instance.MOVEABLES和App.instance.I.MOVEABLE中移除self
 --然后调用Node的remove方法
 function Moveable:remove()
-    for k, v in pairs(App.instance.MOVEABLES) do
+    for k, v in pairs(App.MOVEABLES) do
         if v == self then
-            table.remove(App.instance.MOVEABLES, k)
+            table.remove(App.MOVEABLES, k)
             break;
         end
     end
-    for k, v in pairs(App.instance.I.MOVEABLE) do
+    for k, v in pairs(App.I.MOVEABLE) do
         if v == self then
-            table.remove(App.instance.I.MOVEABLE, k)
+            table.remove(App.I.MOVEABLE, k)
             break;
         end
     end
