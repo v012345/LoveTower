@@ -1,5 +1,3 @@
-require "asset.scripts.engine.timer"
-
 ---@class Event : Object
 Event = Object:extend()
 
