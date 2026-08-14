@@ -1,9 +1,9 @@
 ---@class Color
-Color = setmetatable({}, { __call = function(...) return RGBA(...) end })
+local Color = setmetatable({}, { __call = function(...) return RGBA(...) end })
 
 
 ---@class RGBA
-RGBA = Object:extend()
+local RGBA = Object:extend()
 
 ---@param r number|table|string
 ---@param g number|nil
@@ -174,3 +174,5 @@ Color.BACKGROUND = {
 Color.HAND_LEVELS[0] = Color.RED
 Color.UI_CHIPS = Color.BLUE
 Color.UI_MULT = Color.RED
+
+return Color
