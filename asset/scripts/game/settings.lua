@@ -84,6 +84,10 @@ function Settings:get_profile_no()
     return self.data.profile
 end
 
+function Settings:set_profile_no(no)
+    self.data.profile = no
+end
+
 function Settings:load_settings()
     local settings = get_compressed('settings.jkr')
     --- 加载保存的设置
