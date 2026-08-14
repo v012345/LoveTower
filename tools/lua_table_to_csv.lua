@@ -14,8 +14,23 @@ local function lua_array_to_string(t)
     for i, _ in ipairs(t) do
         index = i
     end
+
     assert(index == len, "lua_array_to_string: table is not a array")
+
+    local elements = {}
+    for i, v in ipairs(t) do
+        elements[i] = tostring(v)
+    end
+
+    return table.concat(elements, ",")
 end
 
-function LuaTableToCSV.to_csv(table, file_path)
+function LuaTableToCSV.to_csv(t, file_path)
+    local file = io.open(file_path, "w")
+    if not file then
+        error("LuaTableToCSV.to_csv: failed to open file: " .. file_path)
+    end
+
+    file:write(lua_array_to_string(t))
+    file:close()
 end
