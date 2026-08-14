@@ -27,47 +27,7 @@ function App:init()
     self.SETTINGS = Settings()
 
     -- 联名花色配置
-    self.COLLABS = {
-        pos = { Jack = { x = 0, y = 0 }, Queen = { x = 1, y = 0 }, King = { x = 2, y = 0 } },
-        options = {
-            Spades = {
-                'default',
-                'collab_TW',
-                'collab_CYP',
-                'collab_SK',
-                'collab_DS',
-                'collab_AC',
-                'collab_STP',
-            },
-            Hearts = {
-                'default',
-                'collab_AU',
-                'collab_TBoI',
-                'collab_CL',
-                'collab_D2',
-                'collab_CR',
-                'collab_BUG',
-            },
-            Clubs = {
-                'default',
-                'collab_VS',
-                'collab_STS',
-                'collab_PC',
-                'collab_WF',
-                'collab_FO',
-                'collab_DBD'
-            },
-            Diamonds = {
-                'default',
-                'collab_DTD',
-                'collab_SV',
-                'collab_EG',
-                'collab_XR',
-                'collab_C7',
-                'collab_R'
-            }
-        },
-    }
+    self.COLLABS = GameCfg:get_collabs()
 
     self.PROFILES = {
         {},
