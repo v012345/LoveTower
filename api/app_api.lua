@@ -27,4 +27,4 @@
 ---@field SAVE_MANAGER SaveManager 存档管理器
 ---@field HTTP_MANAGER HttpManager 网络管理器
 ---@field SHADERS table<string, Shader> 所有着色器
----@field LANG any 当前使用的语言对象
+---@field LANG LanguageConfigItem 当前使用的语言对象
