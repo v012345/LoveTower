@@ -1,0 +1,5 @@
+﻿注释行,,,,
+Id,Clubs,Diamonds,Hearts,Spades
+string,string[],string[],string[],string[]
+unique,,,,
+1,"{'default','collab_VS','collab_STS','collab_PC','collab_WF','collab_FO','collab_DBD'}","{'default','collab_DTD','collab_SV','collab_EG','collab_XR','collab_C7','collab_R'}","{'default','collab_AU','collab_TBoI','collab_CL','collab_D2','collab_CR','collab_BUG'}","{'default','collab_TW','collab_CYP','collab_SK','collab_DS','collab_AC','collab_STP'}"
