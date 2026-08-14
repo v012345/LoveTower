@@ -577,12 +577,6 @@ function love.window.updateMode(width, height, settings) end
 ---@field orig_size  Size      窗口原始大小
 ---@field orig_scale number    窗口原始缩放
 
----@class SpriteAtlas
----@field name string
----@field image love.Image
----@field px number
----@field py number
-
 ---@class Particle
 ---@field draw     boolean    是否绘制
 ---@field age      number     已存活时间

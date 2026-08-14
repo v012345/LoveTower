@@ -11,6 +11,10 @@ function GameConfig:init()
     }
 end
 
+function GameConfig:get_card_size()
+    return self.cfg.CARD_W, self.cfg.CARD_H
+end
+
 function GameConfig:get_cfg()
     return self.cfg
 end

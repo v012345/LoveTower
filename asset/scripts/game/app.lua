@@ -154,12 +154,19 @@ function App:start_up()
     love.joystick.loadGamepadMappings("asset/resources/gamecontrollerdb.txt")
     boot_timer('controllers', 'localization', 0.8)
 
+
+
     local used_no = self.PROFILES:load(self.SETTINGS:get_profile_no())
     self.SETTINGS:set_profile_no(used_no)
     self:set_render_settings()
     self:set_language()
     self:init_item_prototypes()
     boot_timer('protos', 'shared sprites', 0.9)
+
+    --For globally shared sprites
+    local card_w, card_h = GameCfg:get_card_size()
+    local T = Transform(0, 0, card_w, card_h)
+    self.shared_debuff = Sprite(T, self.ASSET_ATLAS["centers"], { x = 4, y = 0 })
 
     boot_timer('shared sprites', 'prep stage', 0.95)
 
