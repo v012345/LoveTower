@@ -319,7 +319,7 @@ local function atli_cfg_to_csv()
             if row[key] then
                 line[#line + 1] = row[key]
             else
-                line[#line + 1] = ""
+                line[#line + 1] = "0"
             end
         end
         data[#data + 1] = line
@@ -331,7 +331,7 @@ local function atli_cfg_to_csv()
             if row[key] then
                 line[#line + 1] = lua_obj_to_csv_string(row[key])
             else
-                line[#line + 1] = ""
+                line[#line + 1] = "0"
             end
         end
         data[#data + 1] = line
