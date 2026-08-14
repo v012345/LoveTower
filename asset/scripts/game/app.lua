@@ -161,6 +161,10 @@ function App:start_up()
     self:init_item_prototypes()
     boot_timer('protos', 'shared sprites', 0.9)
 
+    --For globally shared sprites
+    -- local T = Transform(0, 0, t CARD_W, self.CARD_H)
+    -- self.shared_debuff = Sprite(T, self.ASSET_ATLAS["centers"], { x = 4, y = 0 })
+
     boot_timer('shared sprites', 'prep stage', 0.95)
 
     boot_timer('prep stage', 'splash prep', 0.99)
