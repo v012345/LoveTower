@@ -7,6 +7,8 @@ local Timer = require "asset.scripts.game.timer"
 local Metrics = require "asset.scripts.game.metrics"
 local Profile = require "asset.scripts.game.profile"
 local Color = require "asset.scripts.game.color"
+local SoundManager = require "asset.scripts.game.sound_manager"
+
 
 ---在这里不要做耗时的操作
 function App:init()
@@ -98,6 +100,7 @@ function App:init()
         challenges = { tally = 0, of = 0 },
     }
     self.C = Color
+    self.SOUND_MANAGER = SoundManager()
 end
 
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
@@ -110,34 +113,7 @@ function App:start_up()
     if FeatureCfg:is_sound_thread_enabled() then
         boot_timer('window init', 'soundmanager2')
         -- call the sound manager to prepare the thread to play sounds
-        self.SOUND_MANAGER = {
-            thread = love.thread.newThread('asset/scripts/game/sound_manager.lua'),
-            channel = love.thread.getChannel('sound_request'),
-            load_channel = love.thread.getChannel('load_channel')
-        }
-        self.SOUND_MANAGER.thread:start(1)
-        -- print("start sound manager")
-        Log:info("start sound manager")
-
-        local sound_loaded, prev_file = false, 'none'
-        -- while not sound_loaded and false do
-        while not sound_loaded do
-            -- Monitor the channel for any new requests
-            -- local request = self.SOUND_MANAGER.load_channel:pop() -- Value from channel
-            local request = self.SOUND_MANAGER.load_channel:demand() -- Value from channel
-            -- Log:info("request", request)
-            if request then
-                -- If the request is for an update to the music track, handle it here
-                if request == 'finished' then
-                    sound_loaded = true
-                else
-                    boot_timer(request, prev_file, 0.22)
-                    prev_file = request
-                end
-            end
-            -- love.timer.sleep(0.001)
-        end
-
+        self.SOUND_MANAGER:boot()
         boot_timer('soundmanager2', 'savemanager', 0.22)
     end
 

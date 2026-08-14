@@ -23,3 +23,4 @@
 ---@field TILE_W number 地图单元格宽度, 以像素为单位
 ---@field TILE_H number 地图单元格高度, 以像素为单位
 ---@field PROFILES Profile 所有玩家的数据(最多三个玩家)
+---@field SOUND_MANAGER SoundManager 声音管理器

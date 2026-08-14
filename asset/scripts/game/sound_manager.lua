@@ -29,7 +29,7 @@ function SoundManager:boot(cb)
             if request == 'finished' then
                 sound_loaded = true
             else
-                cb and cb()
+                if cb then cb() end
                 prev_file = request
             end
         end
