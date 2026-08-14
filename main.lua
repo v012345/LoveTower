@@ -28,6 +28,11 @@ require "asset.scripts.functions.misc_functions"
 require "asset.scripts.functions.UI_definitions"
 require "asset.scripts.game"
 
+local seed = os.time()
+math.randomseed(seed)
+love.filesystem.write("seed.md", tostring(seed))
+
+
 function love.run()
     if love.load then love.load(love.arg.parseGameArguments(arg), arg) end
     -- We don't want the first frame's dt to include time taken by love.load.

@@ -7,8 +7,6 @@ function App:init()
     --Feature Flags, 用于控制是否启用某些功能
     self.feature_flags = PlatformCfg:get_cfg()
 
-
-    self.SEED = os.time()
     self.TIMERS = {
         TOTAL = 0,
         REAL = 0,
