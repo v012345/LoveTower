@@ -154,7 +154,7 @@ function App:start_up()
     love.joystick.loadGamepadMappings("asset/resources/gamecontrollerdb.txt")
     boot_timer('controllers', 'localization', 0.8)
 
-    self.PROFILES:load(1)
+    self.PROFILES:load(self.SETTINGS:get_profile_no())
 
 
     self:init_item_prototypes()
