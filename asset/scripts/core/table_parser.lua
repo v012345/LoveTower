@@ -204,7 +204,7 @@ function TableParser:parse_value(raw, value_type, where)
             return false
         end
         error(where .. " 不是合法布尔值: " .. raw)
-    elseif value_type == "table" or value_type == "string[]" or value_type == "code" then
+    elseif value_type == "table" or value_type == "string[]" or value_type == "code" or value_type == "number[]" then
         return self:exec_lua_string(raw)
     elseif value_type == "vec2" then
         local lua_table = self:exec_lua_string(raw)
