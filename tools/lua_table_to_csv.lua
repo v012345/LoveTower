@@ -33,6 +33,11 @@ local function extract_table_keys(t)
     for k, _ in pairs(t) do
         keys[#keys + 1] = k
     end
+
+    for _, key in ipairs(keys) do
+        assert(type(key) == "string", "extract_table_keys: key is not a string")
+    end
+
     table.sort(keys)
     return keys
 end
