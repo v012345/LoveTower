@@ -7,13 +7,20 @@
 ---@field py number
 ---@field px number
 ---@field frames number
+---@field image love.Image
 
 ---@class (partial) AtlasConfig : Object
 ---@field cfg table<string, AtlasConfigItem>
 local AtlasConfig = Object:extend()
 
 function AtlasConfig:init()
-    self.cfg = TableParser.instance:parse("atlas")
+    local atlas_rows = TableParser.instance:parse("atlas")
+    self.cfg = {}
+    for id, row in pairs(atlas_rows) do
+        self.cfg[id] = setmetatable({
+            image = nil,
+        }, { __index = row })
+    end
 end
 
 function AtlasConfig:get_cfg()

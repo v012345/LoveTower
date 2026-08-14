@@ -442,6 +442,17 @@ function App:set_render_settings()
     local filter = ts == 1 and 'nearest' or 'linear'
     love.graphics.setDefaultFilter(filter, filter, 1)
     love.graphics.setLineStyle("rough")
+    self.ANIMATION_ATLAS = {}
+    self.ASSET_ATLAS = {}
+    local atli = AtlasCfg:get_cfg()
+    for _, atlas in pairs(atli) do
+        if atlas.is_animation then
+            self.ANIMATION_ATLAS[atlas.Id] = atlas
+        else
+            self.ASSET_ATLAS[atlas.Id] = atlas
+        end
+        atlas.image = love.graphics.newImage(atlas.path[ts], { mipmaps = true, dpiscale = atlas.dpiscale[ts] })
+    end
 end
 
 function App:set_language()
