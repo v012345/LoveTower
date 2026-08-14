@@ -437,6 +437,7 @@ function App:draw()
 end
 
 function App:set_render_settings()
+    
 
 end
 

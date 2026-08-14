@@ -65,6 +65,11 @@ function Settings:init()
     }
 end
 
+---@return integer texture_scaling
+function Settings:get_texture_scaling()
+    return self.data.GRAPHICS.texture_scaling
+end
+
 function Settings:get_language()
     return self.data.language
 end
