@@ -1,2 +1,28 @@
 ---@class (partial) App: Object
-
+---@field METRICS Metrics 玩家成就记录
+---@field CONTROLLER Controller 控制器
+---@field SETTINGS Settings 设置
+---@field TIMERS Timer 计时器
+---@field window Window 窗口
+---@field CANVAS Canvas
+---@field ROOM {Node: Node, ORIG: {x: number, y: number, r: number}}   房间, 就是游戏的主场景, 一切节点的根节点
+---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
+---@field I NodeList
+---@field under_overlay boolean 是否显示底层覆盖?????? 不知道是什么东西
+---@field TILESCALE number 地图缩放比例
+---@field TILESIZE number 地图单元格大小
+---@field STAGE_OBJECT_INTERRUPT boolean 不知道具体作用是什么
+---@field STAGE_OBJECTS Node[][] 场景中使用到的所有 Node , 当 STAGE 改变时, 可以通过这里删除所有 Node
+---@field fbf boolean frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧, 和 new_frame 配合使用
+---@field new_frame boolean 是否是新的一帧, 如果为 true, 则渲染新的一帧, 否则渲染旧的一帧, 和 fbf 配合使用
+---@field MOVEABLES Moveable[] 所有 Moveable 的列表, 包括 Moveable 的子类
+---@field STAGE STAGES 当前场景
+---@field STATE STATES 当前状态
+---@field ROOM_PADDING_W number 房间左右边距, 以地图单元格为单位
+---@field ROOM_PADDING_H number 房间上下边距, 以地图单元格为单位
+---@field TILE_W number 地图单元格宽度, 以像素为单位
+---@field TILE_H number 地图单元格高度, 以像素为单位
+---@field PROFILES Profile 所有玩家的数据(最多三个玩家)
+---@field SOUND_MANAGER SoundManager 声音管理器
+---@field SAVE_MANAGER SaveManager 存档管理器
+---@field HTTP_MANAGER HttpManager 网络管理器

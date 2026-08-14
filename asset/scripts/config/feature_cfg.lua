@@ -23,5 +23,9 @@ function FeatureConfig:is_sound_thread_enabled()
     return self.cfg.F_SOUND_THREAD
 end
 
+function FeatureConfig:is_http_scores_enabled()
+    return self.cfg.F_HTTP_SCORES or true
+end
+
 ---@type FeatureConfig
 FeatureCfg = FeatureConfig()

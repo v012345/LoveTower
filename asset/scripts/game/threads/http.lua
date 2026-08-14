@@ -1,6 +1,7 @@
 require "love.system"
 
 HTTPS = require('https')
+print("start http manager", HTTPS)
 local httpencode = function(str)
     str = str .. ''
     local char_to_hex = function(c)
