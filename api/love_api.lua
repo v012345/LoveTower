@@ -119,6 +119,11 @@ Shader = {}
 ---@return Shader shader
 function love.graphics.newShader(code) end
 
+---@param min "linear"| "nearest"  Filter mode used when scaling the image down.
+---@param mag "linear"| "nearest"  Filter mode used when scaling the image up.
+---@param anisotropy number  (1) Maximum amount of Anisotropic Filtering used.
+function love.graphics.setDefaultFilter(min, mag, anisotropy) end
+
 ---@param pixelcode string  The pixel shader code, or a filename pointing to a file with the code.
 ---@param vertexcode string The vertex shader code, or a filename pointing to a file with the code.
 ---@return Shader shader
@@ -152,8 +157,10 @@ function love.graphics.newText(font, text) end
 ---@param filename string
 ---@param settings? { mipmaps: boolean, dpiscale: number }
 ---@return love.Image
-function love.graphics.newImage(filename, settings)
-end
+function love.graphics.newImage(filename, settings) end
+
+---@param style "smooth" | "rough"
+function love.graphics.setLineStyle(style) end
 
 --- Displays the results of drawing operations on the screen.
 --- This function is used when writing your own love.run function. It presents all the results of your drawing operations on the screen. See the example in love.run for a typical use of this function.
