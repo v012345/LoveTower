@@ -69,3 +69,5 @@ collab_STP_1,0,collab_STP_1,"{'asset/resources/textures/1x/collabs/collab_STP_1.
 collab_STP_2,0,collab_STP_2,"{'asset/resources/textures/1x/collabs/collab_STP_2.png','asset/resources/textures/2x/collabs/collab_STP_2.png'}",71,95,"{1,2}",FALSE
 playstack_logo,0,playstack_logo,"{'asset/resources/textures/1x/playstack-logo.png','asset/resources/textures/1x/playstack-logo.png'}",1417,1417,"{1,1}",FALSE
 localthunk_logo,0,localthunk_logo,"{'asset/resources/textures/1x/localthunk-logo.png','asset/resources/textures/1x/localthunk-logo.png'}",1390,560,"{1,1}",FALSE
+Planet,0,Planet,"{'asset/resources/textures/1x/Tarots.png','asset/resources/textures/2x/Tarots.png'}",71,95,"{1,2}",FALSE
+Spectral,0,Spectral,"{'asset/resources/textures/1x/Tarots.png','asset/resources/textures/2x/Tarots.png'}",71,95,"{1,2}",FALSE

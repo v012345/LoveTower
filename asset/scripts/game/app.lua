@@ -453,6 +453,9 @@ function App:set_render_settings()
         end
         atlas.image = love.graphics.newImage(atlas.path[ts], { mipmaps = true, dpiscale = atlas.dpiscale[ts] })
     end
+    for _, v in pairs(self.I.SPRITE) do
+        v:reset()
+    end
 end
 
 function App:set_language()
