@@ -101,6 +101,18 @@ love.Text = love.Text or {}
 ---@class love.graphics
 love.graphics = love.graphics or {}
 
+---@class Shader
+Shader = {}
+
+---@param code string The pixel shader or vertex shader code, or a filename pointing to a file with the code.
+---@return Shader shader
+function love.graphics.newShader(code) end
+
+---@param pixelcode string  The pixel shader code, or a filename pointing to a file with the code.
+---@param vertexcode string The vertex shader code, or a filename pointing to a file with the code.
+---@return Shader shader
+function love.graphics.newShader(pixelcode, vertexcode) end
+
 --- Copies and pushes the current coordinate transformation to the transformation stack.
 --- This function is always used to prepare for a corresponding pop operation later. It stores the current coordinate transformation state into the transformation stack and keeps it active. Later changes to the transformation can be undone by using the pop operation, which returns the coordinate transform to the state it was in before calling push.
 ---@return nil
