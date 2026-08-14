@@ -25,6 +25,15 @@ local function lua_array_to_string(t)
     return table.concat(elements, ",")
 end
 
+local function extract_table_keys(t)
+    local keys = {}
+    for k, _ in pairs(t) do
+        keys[#keys + 1] = k
+    end
+    table.sort(keys)
+    return keys
+end
+
 function LuaTableToCSV.to_csv(t, file_path)
     local file = io.open(file_path, "w")
     if not file then
