@@ -25,27 +25,31 @@ end
 
 ---@param s string
 ---@return string
-local function lua_string_to_csv_string(s)
-    local need_quote = false
+local function lua_obj_to_csv_string(s)
+    if type(s) == "string" then
+        local need_quote = false
 
-    -- 1. 转义 "
-    if s:find('"', 1, true) then
-        s = s:gsub('"', '""')
-        need_quote = true
-    end
-
-    -- 2. 检查其它需要引用的字符
-    if not need_quote then
-        if s:find(",", 1, true) or s:find("\n", 1, true) or s:find("\r", 1, true) then
+        -- 1. 转义 "
+        if s:find('"', 1, true) then
+            s = s:gsub('"', '""')
             need_quote = true
         end
-    end
 
-    -- 3. 包裹
-    if need_quote then
-        s = '"' .. s .. '"'
+        -- 2. 检查其它需要引用的字符
+        if not need_quote then
+            if s:find(",", 1, true) or s:find("\n", 1, true) or s:find("\r", 1, true) then
+                need_quote = true
+            end
+        end
+
+        -- 3. 包裹
+        if need_quote then
+            s = '"' .. s .. '"'
+        end
+        return s
+    else
+        return tostring(s)
     end
-    return s
 end
 
 
@@ -84,7 +88,7 @@ local function write_to_csv(t, file_path)
     for i, row in ipairs(t) do
         local line = {}
         for j, cell in ipairs(row) do
-            line[#line + 1] = lua_string_to_csv_string(cell)
+            line[#line + 1] = lua_obj_to_csv_string(cell)
             line[#line + 1] = ","
         end
         line[#line] = nil
@@ -268,9 +272,8 @@ local function atli_cfg_to_csv()
         keys[#keys + 1] = key
     end
     table.sort(keys)
-    for _, key in ipairs(keys) do
-        print(key)
-    end
+
+
     local comment = { "注释行" }
     local header = { "Id" }
     local data_type = { "string" }
@@ -281,6 +284,22 @@ local function atli_cfg_to_csv()
     data[#data + 1] = header
     data[#data + 1] = data_type
     data[#data + 1] = { "unique" }
+
+    for j, key in ipairs(keys) do
+        local i = j + 1
+        if key == "name" then
+            data_type[i] = "string"
+        elseif key == "frames" then
+            data_type[i] = "number"
+        elseif key == "path" then
+            data_type[i] = "string[]"
+        elseif key == "px" then
+            data_type[i] = "number"
+        elseif key == "py" then
+            data_type[i] = "number"
+        end
+        header[i] = key
+    end
 
     for _, row in ipairs(animation_atli) do
         local line = { row.name }
@@ -310,7 +329,7 @@ local function atli_cfg_to_csv()
         local line = { row.name }
         for _, key in ipairs(keys) do
             if row[key] then
-                line[#line + 1] = row[key]
+                line[#line + 1] = lua_obj_to_csv_string(row[key])
             else
                 line[#line + 1] = ""
             end
