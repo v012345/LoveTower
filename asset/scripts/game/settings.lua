@@ -52,7 +52,7 @@ function Settings:init()
             }
         },
         GRAPHICS = {
-            texture_scaling = 2,
+            texture_scaling = 2, -- 只有 1 和 2 两个选项
             shadows = 'On',
             crt = 70,
             bloom = 1
