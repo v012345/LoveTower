@@ -156,4 +156,4 @@ local function collabs_cfg_to_csv()
     data[#data + 1] = line
     write_to_csv(data, "collabs_temp.csv")
 end
-collabs_cfg_to_csv()
+-- collabs_cfg_to_csv()
