@@ -26,3 +26,4 @@
 ---@field SOUND_MANAGER SoundManager 声音管理器
 ---@field SAVE_MANAGER SaveManager 存档管理器
 ---@field HTTP_MANAGER HttpManager 网络管理器
+---@field SHADERS table<string, Shader> 所有着色器
