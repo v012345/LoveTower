@@ -14,6 +14,17 @@ SourceType = {
     stream = "stream",
 }
 
+--#region love.joystick
+---@class love.joystick
+love.joystick = love.joystick or {}
+
+---Loads a gamepad mappings string from a file.
+---@param filename string The filename to load the mappings string from.
+---@return nil
+function love.joystick.loadGamepadMappings(filename) end
+
+--#endregion
+
 --#region love.thread
 
 ---A Thread is a chunk of code that can run in parallel with other threads. Data can be sent between different threads with Channel objects.

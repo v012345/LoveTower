@@ -151,6 +151,7 @@ function App:start_up()
 
     -- Input handler/controller for game objects
     self.CONTROLLER = Controller()
+    love.joystick.loadGamepadMappings("asset/resources/gamecontrollerdb.txt")
     boot_timer('controllers', 'localization', 0.8)
     self:init_item_prototypes()
     boot_timer('protos', 'shared sprites', 0.9)
