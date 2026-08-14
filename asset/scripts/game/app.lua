@@ -36,8 +36,6 @@ function App:init()
     }
 
 
-
-    do return end
     self.ID = 0 -- ID 生成器
     self.DEBUG = true
     self.under_overlay = false

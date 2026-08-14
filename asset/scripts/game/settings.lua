@@ -89,4 +89,8 @@ function Settings:reset_queued_change()
     queued_change.vsync = nil
 end
 
+function Settings:is_paused()
+    return self.data.paused
+end
+
 return Settings

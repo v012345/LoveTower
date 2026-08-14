@@ -76,7 +76,7 @@ function Node:init(T, container)
         table.insert(App.STAGE_OBJECTS[App.STAGE], self)
     end
 
-    self.created_on_pause = Settings.instance.paused
+    self.created_on_pause = App.SETTINGS:is_paused()
 end
 
 --Draws self, then adds self the the draw hash, then draws all children
