@@ -64,6 +64,15 @@ function Settings:init()
     }
 end
 
+---切换到演示模式
+function Settings:switch_to_demo()
+    local demo = self.data.DEMO
+    demo.total_uptime = 0
+    demo.timed_CTA_shown = true
+    demo.win_CTA_shown = true
+    demo.quit_CTA_shown = true
+end
+
 function Settings:is_skip_splash()
     return self.data.skip_splash
 end
