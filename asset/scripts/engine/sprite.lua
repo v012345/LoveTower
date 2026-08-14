@@ -22,7 +22,7 @@ function Sprite:init(T, new_sprite_atlas, sprite_pos)
 end
 
 function Sprite:reset()
-    self.atlas = G.ASSET_ATLAS[self.atlas.name]
+    self.atlas = App.ASSET_ATLAS[self.atlas.name]
     self:set_sprite_pos(self.sprite_pos)
 end
 
