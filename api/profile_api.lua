@@ -1,4 +1,8 @@
----@class ProfileInfo
+---@class (partial) Profile: Object
+---@field data ProfileItem[] 所有玩家的数据(最多三个玩家)
+
+
+---@class ProfileItem
 ---@field MEMORY {deck: string, stake: number} 记忆, 用于存储玩家的游戏数据
 ---@field stake number 当前赌注
 ---@field high_scores {hand: {label: string, amt: number}, furthest_round: {label: string, amt: number}, furthest_ante: {label: string, amt: number}, most_money: {label: string, amt: number}, boss_streak: {label: string, amt: number}, collection: {label: string, amt: number, tot: number}, win_streak: {label: string, amt: number}, current_streak: {label: string, amt: number}, poker_hand: {label: string, amt: number}} 最高得分
