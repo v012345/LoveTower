@@ -273,6 +273,8 @@ local function atli_cfg_to_csv()
     end
     table.sort(keys)
 
+    keys[#keys + 1] = "dpiscale"
+    keys[#keys + 1] = "is_animation"
 
     local comment = { "注释行" }
     local header = { "Id" }
@@ -297,6 +299,10 @@ local function atli_cfg_to_csv()
             data_type[i] = "number"
         elseif key == "py" then
             data_type[i] = "number"
+        elseif key == "dpiscale" then
+            data_type[i] = "number[]"
+        elseif key == "is_animation" then
+            data_type[i] = "boolean"
         end
         header[i] = key
     end
@@ -304,20 +310,37 @@ local function atli_cfg_to_csv()
     for _, row in ipairs(animation_atli) do
         local line = { row.name }
         for _, key in ipairs(keys) do
-            if row[key] then
+            if row[key] and key ~= "path" then
                 line[#line + 1] = row[key]
+            elseif key == "path" then
+                local path1 = row[key]
+                local path2 = string.gsub(row[key], "/1x/", "/2x/")
+                line[#line + 1] = lua_array_to_string({ path1, path2 })
+            elseif key == "dpiscale" then
+                line[#line + 1] = "{1,2}"
+            elseif key == "is_animation" then
+                line[#line + 1] = "true"
             else
                 line[#line + 1] = ""
             end
         end
+
         data[#data + 1] = line
     end
 
     for _, row in ipairs(asset_atli) do
         local line = { row.name }
         for _, key in ipairs(keys) do
-            if row[key] then
+            if row[key] and key ~= "path" then
                 line[#line + 1] = row[key]
+            elseif key == "path" then
+                local path1 = row[key]
+                local path2 = string.gsub(row[key], "/1x/", "/2x/")
+                line[#line + 1] = lua_array_to_string({ path1, path2 })
+            elseif key == "dpiscale" then
+                line[#line + 1] = "{1,2}"
+            elseif key == "is_animation" then
+                line[#line + 1] = "false"
             else
                 line[#line + 1] = "0"
             end
@@ -328,8 +351,15 @@ local function atli_cfg_to_csv()
     for _, row in ipairs(asset_images) do
         local line = { row.name }
         for _, key in ipairs(keys) do
-            if row[key] then
+            if row[key] and key ~= "path" then
                 line[#line + 1] = lua_obj_to_csv_string(row[key])
+            elseif key == "path" then
+                local path1 = row[key]
+                line[#line + 1] = lua_array_to_string({ path1, path1 })
+            elseif key == "dpiscale" then
+                line[#line + 1] = "{1,1}"
+            elseif key == "is_animation" then
+                line[#line + 1] = "false"
             else
                 line[#line + 1] = "0"
             end
