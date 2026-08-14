@@ -5,6 +5,7 @@ local Window = require "asset.scripts.game.window"
 local Controller = require "asset.scripts.game.controller"
 local Timer = require "asset.scripts.game.timer"
 local Metrics = require "asset.scripts.game.metrics"
+local Profile = require "asset.scripts.game.profile"
 function App:init()
     --Feature Flags, 用于控制是否启用某些功能
     self.feature_flags = PlatformCfg:get_cfg()
@@ -24,11 +25,7 @@ function App:init()
     self.METRICS = Metrics()
 
     --玩家数据(最多支持保持三个玩家)
-    self.PROFILES = {
-        {},
-        {},
-        {},
-    }
+    self.PROFILES = Profile()
 
 
     self.ID = 0 -- ID 生成器
