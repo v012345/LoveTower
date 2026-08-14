@@ -22,7 +22,7 @@ function Settings:init()
         language = 'en-us',
         screenshake = true,
         run_stake_stickers = false,
-        rumble = PlatformCfg:get_cfg().F_RUMBLE,
+        rumble = FeatureCfg:get_cfg().F_RUMBLE,
         play_button_pos = 2,
         GAMESPEED = 1,
         paused = false,
