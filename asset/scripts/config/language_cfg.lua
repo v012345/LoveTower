@@ -38,60 +38,61 @@ end
 ---@param id string
 ---@return boolean
 function LanguageConfig:is_have_language(id)
-    return love.filesystem.getInfo('localization/' .. id .. '.lua') ~= nil
+    return love.filesystem.getInfo('asset/localization/' .. id .. '.lua') ~= nil
 end
 
-function LanguageConfig:load_localization()
-    self.localization = {}
-    G.localization.misc.v_dictionary_parsed = {}
-    for k, v in pairs(G.localization.misc.v_dictionary) do
+function LanguageConfig:load_localization(language)
+    assert(self:is_have_language(language), "Language " .. language .. " not found")
+    local localization = assert(loadstring(love.filesystem.read('asset/localization/' .. language .. '.lua')))()
+    localization.misc.v_dictionary_parsed = {}
+    for k, v in pairs(localization.misc.v_dictionary) do
         if type(v) == 'table' then
-            G.localization.misc.v_dictionary_parsed[k] = { multi_line = true }
+            localization.misc.v_dictionary_parsed[k] = { multi_line = true }
             for kk, vv in ipairs(v) do
-                G.localization.misc.v_dictionary_parsed[k][kk] = loc_parse_string(vv)
+                localization.misc.v_dictionary_parsed[k][kk] = self:loc_parse_string(vv)
             end
         else
-            G.localization.misc.v_dictionary_parsed[k] = loc_parse_string(v)
+            localization.misc.v_dictionary_parsed[k] = self:loc_parse_string(v)
         end
     end
-    G.localization.misc.v_text_parsed = {}
-    for k, v in pairs(G.localization.misc.v_text) do
-        G.localization.misc.v_text_parsed[k] = {}
+    localization.misc.v_text_parsed = {}
+    for k, v in pairs(localization.misc.v_text) do
+        localization.misc.v_text_parsed[k] = {}
         for kk, vv in ipairs(v) do
-            G.localization.misc.v_text_parsed[k][kk] = loc_parse_string(vv)
+            localization.misc.v_text_parsed[k][kk] = self:loc_parse_string(vv)
         end
     end
-    G.localization.tutorial_parsed = {}
-    for k, v in pairs(G.localization.misc.tutorial) do
-        G.localization.tutorial_parsed[k] = { multi_line = true }
+    localization.tutorial_parsed = {}
+    for k, v in pairs(localization.misc.tutorial) do
+        localization.tutorial_parsed[k] = { multi_line = true }
         for kk, vv in ipairs(v) do
-            G.localization.tutorial_parsed[k][kk] = loc_parse_string(vv)
+            localization.tutorial_parsed[k][kk] = self:loc_parse_string(vv)
         end
     end
-    G.localization.quips_parsed = {}
-    for k, v in pairs(G.localization.misc.quips or {}) do
-        G.localization.quips_parsed[k] = { multi_line = true }
+    localization.quips_parsed = {}
+    for k, v in pairs(localization.misc.quips or {}) do
+        localization.quips_parsed[k] = { multi_line = true }
         for kk, vv in ipairs(v) do
-            G.localization.quips_parsed[k][kk] = loc_parse_string(vv)
+            localization.quips_parsed[k][kk] = self:loc_parse_string(vv)
         end
     end
-    for g_k, group in pairs(G.localization) do
+    for g_k, group in pairs(localization) do
         if g_k == 'descriptions' then
             for _, set in pairs(group) do
                 for _, center in pairs(set) do
                     center.text_parsed = {}
                     if not center.text then else
                         for _, line in ipairs(center.text) do
-                            center.text_parsed[#center.text_parsed + 1] = loc_parse_string(line)
+                            center.text_parsed[#center.text_parsed + 1] = self:loc_parse_string(line)
                         end
                         center.name_parsed = {}
                         for _, line in ipairs(type(center.name) == 'table' and center.name or { center.name }) do
-                            center.name_parsed[#center.name_parsed + 1] = loc_parse_string(line)
+                            center.name_parsed[#center.name_parsed + 1] = self:loc_parse_string(line)
                         end
                         if center.unlock then
                             center.unlock_parsed = {}
                             for _, line in ipairs(center.unlock) do
-                                center.unlock_parsed[#center.unlock_parsed + 1] = loc_parse_string(line)
+                                center.unlock_parsed[#center.unlock_parsed + 1] = self:loc_parse_string(line)
                             end
                         end
                     end
@@ -99,6 +100,7 @@ function LanguageConfig:load_localization()
             end
         end
     end
+    return localization
 end
 
 ---@private

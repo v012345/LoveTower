@@ -438,6 +438,7 @@ end
 
 function App:set_language()
     self.LANG = LanguageCfg:get_cfg_item(self.SETTINGS:get_language())
+    self.localization = LanguageCfg:load_localization(self.SETTINGS:get_language())
 end
 
 --- 目前默认是Windowed模式，1000x650分辨率, 使用第一个显示器, 之后要读用户设置文件中的设置
