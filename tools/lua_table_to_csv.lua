@@ -25,6 +25,9 @@ local function lua_array_to_string(t)
     return table.concat(elements, ",")
 end
 
+
+---@param t table
+---@return string[]
 local function extract_table_keys(t)
     local keys = {}
     for k, _ in pairs(t) do
