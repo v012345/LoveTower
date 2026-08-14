@@ -6,6 +6,8 @@ local Controller = require "asset.scripts.game.controller"
 local Timer = require "asset.scripts.game.timer"
 local Metrics = require "asset.scripts.game.metrics"
 local Profile = require "asset.scripts.game.profile"
+
+---在这里不要做耗时的操作
 function App:init()
     --Feature Flags, 用于控制是否启用某些功能
     self.feature_flags = PlatformCfg:get_cfg()
@@ -99,7 +101,8 @@ function App:init()
     }
 end
 
---- 在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
+---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
+---在这里做耗时的操作
 function App:start_up()
     self.SETTINGS:load_settings()
     boot_timer("start", "settings", 0.1)

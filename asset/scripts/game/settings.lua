@@ -74,7 +74,7 @@ function Settings:load_settings()
     if settings then
         local settings_file = STR_UNPACK(settings)
         for k, v in pairs(settings_file) do
-            -- self.data[k] = v
+            self.data[k] = v
         end
     end
     self.data.paused = false
