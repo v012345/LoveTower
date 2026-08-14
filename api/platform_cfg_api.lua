@@ -1,4 +1,4 @@
----@class PlatformConfigItem
+---@class FeatureConfigItem
 ---@field Id string
 ---@field F_QUIT_BUTTON boolean Include the main menu 'Quit' button
 ---@field F_SKIP_TUTORIAL boolean Completely skip the tutorial on fresh save

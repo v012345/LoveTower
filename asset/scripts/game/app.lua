@@ -10,9 +10,6 @@ local Color = require "asset.scripts.game.color"
 
 ---在这里不要做耗时的操作
 function App:init()
-    --Feature Flags, 用于控制是否启用某些功能
-    self.feature_flags = PlatformCfg:get_cfg()
-
     --计时器
     self.TIMERS = Timer()
     self.FRAMES = self.TIMERS:get_frames()
@@ -110,7 +107,7 @@ function App:start_up()
     boot_timer("start", "settings", 0.1)
     self:init_window()
 
-    if self.feature_flags.F_SOUND_THREAD then
+    if FeatureCfg:is_sound_thread_enabled() then
         boot_timer('window init', 'soundmanager2')
         -- call the sound manager to prepare the thread to play sounds
         self.SOUND_MANAGER = {
@@ -142,6 +139,10 @@ function App:start_up()
         end
 
         boot_timer('soundmanager2', 'savemanager', 0.22)
+    end
+
+    if FeatureCfg:is_cta_enabled() then
+        self.SETTINGS:switch_to_demo()
     end
 
 
