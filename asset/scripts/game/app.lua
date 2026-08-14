@@ -279,7 +279,7 @@ function App:init_game_object()
         win_ante = 8,
         stake = 1,
         modifiers = {},
-        starting_params = get_starting_params(),
+        starting_params = GameCfg:get_starting_params(),
         banned_keys = {},
         round = 0,
         probabilities = {

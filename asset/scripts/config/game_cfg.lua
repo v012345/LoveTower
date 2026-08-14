@@ -30,5 +30,20 @@ function GameConfig:get_version()
     return self.cfg.VERSION
 end
 
+function GameConfig:get_starting_params()
+    return {
+        dollars = 4,
+        hand_size = 8,
+        discards = 3,
+        hands = 4,
+        reroll_cost = 5,
+        joker_slots = 5,
+        ante_scaling = 1,
+        consumable_slots = 2,
+        no_faces = false,
+        erratic_suits_and_ranks = false,
+    }
+end
+
 ---@type GameConfig
 GameCfg = GameConfig()
