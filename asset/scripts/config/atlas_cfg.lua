@@ -16,5 +16,9 @@ function AtlasConfig:init()
     self.cfg = TableParser.instance:parse("atlas")
 end
 
+function AtlasConfig:get_cfg()
+    return self.cfg
+end
+
 ---@type AtlasConfig
 AtlasCfg = AtlasConfig()
