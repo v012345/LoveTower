@@ -1,5 +1,3 @@
-require "asset.scripts.functions.misc_functions"
-
 ---@class Color
 Color = setmetatable({}, { __call = function(...) return RGBA(...) end })
 
