@@ -38,7 +38,7 @@ end
 ---@param id string
 ---@return boolean
 function LanguageConfig:is_have_language(id)
-    return self.cfg_items[id] ~= nil
+    return love.filesystem.getInfo('localization/' .. id .. '.lua') ~= nil
 end
 
 function LanguageConfig:load_localization()
