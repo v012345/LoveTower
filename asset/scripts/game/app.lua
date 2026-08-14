@@ -437,8 +437,11 @@ function App:draw()
 end
 
 function App:set_render_settings()
-    
-
+    local ts = self.SETTINGS:get_texture_scaling()
+    --Set fiter to linear interpolation and nearest, best for pixel art
+    local filter = ts == 1 and 'nearest' or 'linear'
+    love.graphics.setDefaultFilter(filter, filter, 1)
+    love.graphics.setLineStyle("rough")
 end
 
 function App:set_language()
