@@ -19,6 +19,7 @@ function Profile:load(no)
     if not info then
         --加载本地文件
         local data = STR_UNPACK(info)
+        --这里应该做差异对比, 不应该直接覆盖
         for k, v in pairs(data) do
             profile[k] = v
         end
