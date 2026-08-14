@@ -1,6 +1,8 @@
 ---@class (partial) App: Object
+---@field METRICS Metrics 玩家成就记录
 ---@field CONTROLLER Controller 控制器
 ---@field SETTINGS Settings 设置
+---@field TIMERS Timer 计时器
 ---@field window Window 窗口
 ---@field CANVAS Canvas
 ---@field ROOM {Node: Node, ORIG: {x: number, y: number, r: number}}   房间, 就是游戏的主场景, 一切节点的根节点

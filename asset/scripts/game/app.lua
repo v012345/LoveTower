@@ -3,30 +3,27 @@ local App = Object:extend()
 local Settings = require "asset.scripts.game.settings"
 local Window = require "asset.scripts.game.window"
 local Controller = require "asset.scripts.game.controller"
+local Timer = require "asset.scripts.game.timer"
+local Metrics = require "asset.scripts.game.metrics"
 function App:init()
     --Feature Flags, 用于控制是否启用某些功能
     self.feature_flags = PlatformCfg:get_cfg()
 
-    self.TIMERS = {
-        TOTAL = 0,
-        REAL = 0,
-        REAL_SHADER = 0,
-        UPTIME = 0,
-        BACKGROUND = 0
-    }
-    self.FRAMES = {
-        DRAW = 0,
-        MOVE = 0
-    }
+    --计时器
+    self.TIMERS = Timer()
+    self.FRAMES = self.TIMERS:get_frames()
+    self.exp_times = self.TIMERS:get_exp_times()
 
-
-    self.exp_times = { xy = 0, scale = 0, r = 0 }
     --SETTINGS 设置管理器
     self.SETTINGS = Settings()
 
     -- 联名花色配置
     self.COLLABS = GameCfg:get_collabs()
 
+    --玩家成就记录
+    self.METRICS = Metrics()
+
+    --玩家数据(最多支持保持三个玩家)
     self.PROFILES = {
         {},
         {},
