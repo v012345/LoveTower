@@ -6,6 +6,7 @@ local Controller = require "asset.scripts.game.controller"
 local Timer = require "asset.scripts.game.timer"
 local Metrics = require "asset.scripts.game.metrics"
 local Profile = require "asset.scripts.game.profile"
+local Color = require "asset.scripts.game.color"
 
 ---在这里不要做耗时的操作
 function App:init()
@@ -99,6 +100,7 @@ function App:init()
         deck_stakes = { tally = 0, of = 0 },
         challenges = { tally = 0, of = 0 },
     }
+    self.C = Color
 end
 
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
