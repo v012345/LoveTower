@@ -60,7 +60,8 @@ function Settings:init()
         QUEUED_CHANGE = {
             screenres = {}
         },
-        skip_splash = false
+        skip_splash = false,
+        profile = 1,
     }
 end
 
@@ -75,6 +76,12 @@ end
 
 function Settings:is_skip_splash()
     return self.data.skip_splash
+end
+
+---返回当前使用的玩家存档编号
+---@return number No. The profile number, 1, 2 or 3.
+function Settings:get_profile_no()
+    return self.data.profile
 end
 
 function Settings:load_settings()

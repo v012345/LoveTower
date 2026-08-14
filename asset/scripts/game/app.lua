@@ -153,12 +153,16 @@ function App:start_up()
     self.CONTROLLER = Controller()
     love.joystick.loadGamepadMappings("asset/resources/gamecontrollerdb.txt")
     boot_timer('controllers', 'localization', 0.8)
+
+    self.PROFILES:load(1)
+
+
     self:init_item_prototypes()
     boot_timer('protos', 'shared sprites', 0.9)
 
     boot_timer('shared sprites', 'prep stage', 0.95)
 
-    boot_timer('prep stage', 'splash prep', 1)
+    boot_timer('prep stage', 'splash prep', 0.99)
     self:splash_screen()
     boot_timer('splash prep', 'end', 1)
 end
