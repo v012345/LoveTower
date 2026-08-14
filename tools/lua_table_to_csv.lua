@@ -1,3 +1,7 @@
+require "love.filesystem"
+
+print(love.filesystem.getSaveDirectory())
+
 local LuaTableToCSV = {}
 
 local function lua_table_to_string(t)
@@ -43,11 +47,46 @@ local function extract_table_keys(t)
 end
 
 function LuaTableToCSV.to_csv(t, file_path)
-    local file = io.open(file_path, "w")
-    if not file then
-        error("LuaTableToCSV.to_csv: failed to open file: " .. file_path)
-    end
 
-    file:write(lua_array_to_string(t))
-    file:close()
 end
+
+local t = {
+    Spades = {
+        'default',
+        'collab_TW',
+        'collab_CYP',
+        'collab_SK',
+        'collab_DS',
+        'collab_AC',
+        'collab_STP',
+    },
+    Hearts = {
+        'default',
+        'collab_AU',
+        'collab_TBoI',
+        'collab_CL',
+        'collab_D2',
+        'collab_CR',
+        'collab_BUG',
+    },
+    Clubs = {
+        'default',
+        'collab_VS',
+        'collab_STS',
+        'collab_PC',
+        'collab_WF',
+        'collab_FO',
+        'collab_DBD'
+    },
+    Diamonds = {
+        'default',
+        'collab_DTD',
+        'collab_SV',
+        'collab_EG',
+        'collab_XR',
+        'collab_C7',
+        'collab_R'
+    }
+}
+
+LuaTableToCSV.to_csv(t, "test.csv")
