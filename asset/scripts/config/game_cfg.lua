@@ -4,6 +4,11 @@ local GameConfig = Object:extend()
 
 function GameConfig:init()
     self.cfg = TableParser.instance:parse("game")["1"]
+    local collabs = TableParser.instance:parse("collabs")["1"]
+    self.collabs = {
+        pos = { Jack = { x = 0, y = 0 }, Queen = { x = 1, y = 0 }, King = { x = 2, y = 0 } },
+        options = collabs
+    }
 end
 
 function GameConfig:get_cfg()
@@ -43,6 +48,10 @@ function GameConfig:get_starting_params()
         no_faces = false,
         erratic_suits_and_ranks = false,
     }
+end
+
+function GameConfig:get_collabs()
+    return self.collabs
 end
 
 ---@type GameConfig
