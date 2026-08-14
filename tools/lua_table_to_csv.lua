@@ -281,6 +281,43 @@ local function atli_cfg_to_csv()
     data[#data + 1] = header
     data[#data + 1] = data_type
     data[#data + 1] = { "unique" }
+
+    for _, row in ipairs(animation_atli) do
+        local line = { row.name }
+        for _, key in ipairs(keys) do
+            if row[key] then
+                line[#line + 1] = row[key]
+            else
+                line[#line + 1] = ""
+            end
+        end
+        data[#data + 1] = line
+    end
+
+    for _, row in ipairs(asset_atli) do
+        local line = { row.name }
+        for _, key in ipairs(keys) do
+            if row[key] then
+                line[#line + 1] = row[key]
+            else
+                line[#line + 1] = ""
+            end
+        end
+        data[#data + 1] = line
+    end
+
+    for _, row in ipairs(asset_images) do
+        local line = { row.name }
+        for _, key in ipairs(keys) do
+            if row[key] then
+                line[#line + 1] = row[key]
+            else
+                line[#line + 1] = ""
+            end
+        end
+        data[#data + 1] = line
+    end
+    write_to_csv(data, "atli_temp.csv")
 end
 
 atli_cfg_to_csv()
