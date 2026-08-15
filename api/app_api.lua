@@ -20,11 +20,10 @@
 ---@field STATE STATES 当前状态
 ---@field ROOM_PADDING_W number 房间左右边距, 以地图单元格为单位
 ---@field ROOM_PADDING_H number 房间上下边距, 以地图单元格为单位
----@field TILE_W number 地图单元格宽度, 以像素为单位
----@field TILE_H number 地图单元格高度, 以像素为单位
 ---@field PROFILES Profile 所有玩家的数据(最多三个玩家)
 ---@field SOUND_MANAGER SoundManager 声音管理器
 ---@field SAVE_MANAGER SaveManager 存档管理器
 ---@field HTTP_MANAGER HttpManager 网络管理器
 ---@field SHADERS table<string, Shader> 所有着色器
 ---@field LANG LanguageConfigItem 当前使用的语言对象
+---@field Tile Tile 地图单元格

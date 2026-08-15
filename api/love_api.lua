@@ -467,8 +467,8 @@ function love.system.getOS() end
 
 ---@class Canvas
 Canvas = {}
----@param filter    string "nearest" | "linear"
----@param filtermag string "nearest" | "linear"
+---@param filter "nearest" | "linear"
+---@param filtermag "nearest" | "linear"
 ---@return nil
 function Canvas:setFilter(filter, filtermag) end
 
