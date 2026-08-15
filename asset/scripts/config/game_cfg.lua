@@ -1,42 +1,42 @@
 ---@class (partial) GameConfig : Object
----@field cfg GameConfigItem
+---@field game_cfg GameConfigItem 游戏配置
+---@field render_cfg RenderConfigItem 渲染配置
+---@field collabs_cfg CollabsConfigItem 联名花色配置
 local GameConfig = Object:extend()
 
 function GameConfig:init()
-    self.cfg = TableParser.instance:parse("game")["1"]
+    self.game_cfg = TableParser.instance:parse("game")["1"]
+    self.render_cfg = TableParser.instance:parse("render")["1"]
+    ---@type table<string, string[]>
     local collabs = TableParser.instance:parse("collabs")["1"]
-    self.collabs = {
+    self.collabs_cfg = {
         pos = { Jack = { x = 0, y = 0 }, Queen = { x = 1, y = 0 }, King = { x = 2, y = 0 } },
         options = collabs
     }
 end
 
 function GameConfig:get_card_size()
-    return self.cfg.CARD_W, self.cfg.CARD_H
-end
-
-function GameConfig:get_cfg()
-    return self.cfg
+    return self.render_cfg.CARD_W, self.render_cfg.CARD_H
 end
 
 function GameConfig:get_tile_size()
-    return self.cfg.TILESIZE
+    return self.render_cfg.TILESIZE
 end
 
 function GameConfig:get_tile_scale()
-    return self.cfg.TILESCALE
+    return self.render_cfg.TILESCALE
 end
 
 function GameConfig:get_tile_width()
-    return self.cfg.TILE_W
+    return self.render_cfg.TILE_W
 end
 
 function GameConfig:get_tile_height()
-    return self.cfg.TILE_H
+    return self.render_cfg.TILE_H
 end
 
 function GameConfig:get_version()
-    return self.cfg.VERSION
+    return self.game_cfg.VERSION
 end
 
 function GameConfig:get_starting_params()
@@ -55,7 +55,7 @@ function GameConfig:get_starting_params()
 end
 
 function GameConfig:get_collabs()
-    return self.collabs
+    return self.collabs_cfg
 end
 
 ---@type GameConfig
