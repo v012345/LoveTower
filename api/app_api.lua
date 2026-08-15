@@ -27,3 +27,4 @@
 ---@field SHADERS table<string, Shader> 所有着色器
 ---@field LANG LanguageConfigItem 当前使用的语言对象
 ---@field Tile Tile 地图单元格
+---@field Features FeatureConfig 特性配置

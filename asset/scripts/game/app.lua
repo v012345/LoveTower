@@ -14,6 +14,7 @@ local Tile = require "asset.scripts.game.tile"
 
 ---在这里不要做耗时的操作
 function App:init()
+    self.Features = FeatureCfg
     --计时器
     self.TIMERS = Timer()
     self.FRAMES = self.TIMERS:get_frames()
@@ -30,6 +31,19 @@ function App:init()
 
     --玩家数据(最多支持保持三个玩家)
     self.PROFILES = Profile()
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
     self.ID = 0 -- ID 生成器
