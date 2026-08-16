@@ -43,7 +43,7 @@ function App:init()
 
 
 
-    
+
 
 
     self.ID = 0 -- ID 生成器
@@ -129,14 +129,14 @@ function App:start_up()
     boot_timer("start", "settings", 0.1)
     self:init_window()
 
-    if FeatureCfg:is_sound_thread_enabled() then
+    if self.Features:is_sound_thread_enabled() then
         boot_timer('window init', 'soundmanager2')
         -- call the sound manager to prepare the thread to play sounds
         self.SOUND_MANAGER:boot()
         boot_timer('soundmanager2', 'savemanager', 0.22)
     end
 
-    if FeatureCfg:is_cta_enabled() then
+    if self.Features:is_cta_enabled() then
         self.SETTINGS:switch_to_demo()
     end
 
