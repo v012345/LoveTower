@@ -11,7 +11,6 @@ require "asset.scripts.engine.alignment"
 -- 依赖其他模块的模块
 require "asset.scripts.engine.utils"
 require "asset.scripts.engine.config"
-require "asset.scripts.engine.room"
 require "asset.scripts.engine.node"
 require "asset.scripts.engine.moveable_role"
 require "asset.scripts.engine.moveable"

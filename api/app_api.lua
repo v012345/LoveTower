@@ -18,8 +18,6 @@
 ---@field MOVEABLES Moveable[] 所有 Moveable 的列表, 包括 Moveable 的子类
 ---@field STAGE STAGES 当前场景
 ---@field STATE STATES 当前状态
----@field ROOM_PADDING_W number 房间左右边距, 以地图单元格为单位
----@field ROOM_PADDING_H number 房间上下边距, 以地图单元格为单位
 ---@field PROFILES Profile 所有玩家的数据(最多三个玩家)
 ---@field SOUND_MANAGER SoundManager 声音管理器
 ---@field SAVE_MANAGER SaveManager 存档管理器

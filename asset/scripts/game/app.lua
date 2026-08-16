@@ -52,12 +52,6 @@ function App:init()
 
     self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
     self.CANVAS:setFilter('linear', 'linear')
-    --- 设计大小
-    --- 窗口大小为 1606*941, 设计大小为 1460*840
-    --- 宽高比为 1.74
-    self.ROOM_PADDING_H = 0.7
-    self.ROOM_PADDING_W = 1
-
 
     self.WINDOW = {
         TRANS = Transform(0, 0, 0, 0),
@@ -217,8 +211,7 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.STATE = new_state
     self.STATE_COMPLETE = false
     self.SETTINGS:set_paused(false)
-    -- 窗口大小是 self.TILE_W + 2 * self.ROOM_PADDING_W 和 self.TILE_H + 2 * self.ROOM_PADDING_H
-    -- ROOM 大小是 self.TILE_W 和 self.TILE_H, 正好嵌入 Padding 矩形里
+    self.ROOM = Node(Transform(0, 0, 0, 0))
 
     local transform = Room.instance:get_transform()
     local root_node = Node(transform)
