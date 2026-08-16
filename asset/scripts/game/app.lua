@@ -506,7 +506,7 @@ function App:splash_screen()
 end
 
 function App:main_menu()
-    self:prep_stage(STAGES.MAIN_MENU, STATES.SPLASH, true)
+    self:prep_stage(STAGES.MAIN_MENU, STATES.MENU, true)
 
     --- 创建主菜单场景
     -- local room = Room.instance:get_root_node()
