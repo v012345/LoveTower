@@ -146,7 +146,7 @@ function App:start_up()
 
     self.SAVE_MANAGER:boot()
     boot_timer('window init', 'savemanager', 0.3)
-    if FeatureCfg:is_http_scores_enabled() then
+    if self.Features:is_http_scores_enabled() then
         self.HTTP_MANAGER:boot()
     end
     boot_timer('savemanager', 'shaders', 0.4)

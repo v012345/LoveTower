@@ -128,15 +128,15 @@ function love.resize(w, h)
     local curr_ratio = w / h
     local orig_size = App.window:get_orig_size()
     local orig_ratio = App.window:get_orig_ratio()
-    local orig_tile_scale = Tile.instance:get_init_scale()
+    local orig_tile_scale = App.Tile:get_init_scale()
 
 
     if curr_ratio < orig_ratio then
         -- 相对变窄了
-        Tile.instance:set_scale(orig_tile_scale * w / orig_size.w)
+        App.Tile:set_scale(orig_tile_scale * w / orig_size.w)
     else
         -- 相对变宽了
-        Tile.instance:set_scale(orig_tile_scale * h / orig_size.h)
+        App.Tile:set_scale(orig_tile_scale * h / orig_size.h)
     end
 
 
@@ -144,7 +144,7 @@ function love.resize(w, h)
 
     local room = Room.instance:get_root_node()
     if room then
-        local pixels_per_tile = Tile.instance:get_pixels_per_tile()
+        local pixels_per_tile = App.Tile:get_pixels_per_tile()
         local room_transform = Room.instance:get_transform()
         if curr_ratio < orig_ratio then
             room.T.x = room_transform.x
