@@ -122,4 +122,10 @@ function Settings:is_paused()
     return self.data.paused
 end
 
+---设置暂停状态
+---@param paused boolean 是否暂停
+function Settings:set_paused(paused)
+    self.data.paused = paused
+end
+
 return Settings

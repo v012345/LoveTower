@@ -104,11 +104,6 @@ function App:init()
     self.fbf = false       -- frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧
     self.new_frame = false -- 是否是新的一帧, 如果为 true, 则渲染新的一帧, 否则渲染旧的一帧
 
-    self.ROOM = {
-        Node = nil,
-        ORIG = Transform(),
-    }
-
 
     self.PROGRESS = {
         joker_stickers = { tally = 0, of = 0 },
@@ -221,7 +216,7 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.STAGE = new_stage
     self.STATE = new_state
     self.STATE_COMPLETE = false
-    self.SETTINGS.paused = false
+    self.SETTINGS:set_paused(false)
     -- 窗口大小是 self.TILE_W + 2 * self.ROOM_PADDING_W 和 self.TILE_H + 2 * self.ROOM_PADDING_H
     -- ROOM 大小是 self.TILE_W 和 self.TILE_H, 正好嵌入 Padding 矩形里
 
