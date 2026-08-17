@@ -498,6 +498,7 @@ function App:splash_screen()
         Log:info("splash screen")
         --准备好场景了
         self:prep_stage(STAGES.MAIN_MENU, STATES.SPLASH, true)
+        self.E_MANAGER:add_event(Event())
     end
 end
 

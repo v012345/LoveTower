@@ -1,4 +1,4 @@
----@class Event : Object
+---@class (partial) Event : Object
 Event = Object:extend()
 
 ---@param config EventConfig|nil
