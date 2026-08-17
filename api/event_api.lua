@@ -23,3 +23,14 @@ EventConfig = {}
 EventStatus = {}
 
 ---@class (partial) Event : Object
+---@field trigger EventTrigger 触发器函数
+---@field blocking boolean
+---@field blockable boolean
+---@field func function
+---@field timer function 使用的定时器函数
+---@field time number
+---@field complete boolean 是否完成
+---@field private start_timer boolean 是否开始计时
+---@field delay number
+---@field no_delete boolean
+---@field created_on_pause boolean

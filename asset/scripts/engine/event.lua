@@ -1,7 +1,7 @@
 ---@class (partial) Event : Object
 Event = Object:extend()
 
----@enum EventTrigger
+---@enum EventTrigger 触发器函数
 EventTrigger = {
     immediate = Event.immediate,
     condition = Event.condition,
@@ -13,14 +13,16 @@ EventTrigger = {
 ---@private 由 Object 的 __call 方法调用, 不对外
 ---@param config EventConfig
 function Event:init(config)
-    config = config or {}
-    self.trigger = config.trigger or .immediate
-    self.func = config.func or function() return true end
-    self.timer = config.timer or Timer.instance:get_total_timer()
-    self.time = self:timer()
+    self.trigger = config.trigger or EventTrigger.immediate
     self.blocking = config.blocking
     self.blockable = config.blockable
     self.complete = false
+
+
+
+    self.func = config.func or function() return true end
+    self.timer = config.timer or Timer.instance:get_total_timer()
+    self.time = self:timer()
     self.start_timer = config.start_timer or false
     self.delay = config.delay or 0
     self.no_delete = config.no_delete
@@ -122,11 +124,9 @@ function Event:ease(status)
     end
 end
 
-
-
 ---创建一个事件对象
----@param config EventConfig
+---@param config? EventConfig
 ---@return Event
 function Event:new(config)
-    return Event(config)
+    return Event(config or {})
 end
