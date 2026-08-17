@@ -35,18 +35,18 @@ function Node:init(T, container)
 
     --The states for this Node and all derived nodes. This is how we control the visibility and interactibility of any object
     --All nodes do not collide by default. This reduces the size of n for the O(n^2) collision detection
-    self.states = {
-        visible = true,
-        collide = { can = false, is = false },
-        focus = { can = false, is = false },
-        hover = { can = true, is = false },
-        click = { can = true, is = false },
-        drag = { can = true, is = false },
-        release_on = { can = true, is = false }
-    }
+    self.states = create_node_states()
 
 
-    self.container = container
+    --If we provide a container, all nodes within that container are translated with that container as the reference frame.
+    --For example, if G.ROOM is set at x = 5 and y = 5, and we create a new game object at 0, 0, it will actually be drawn at
+    --5, 5. This allows us to control things like screen shake, room positioning, rotation, padding, etc. without needing to modify
+    --every game object that we need to draw
+    self.container = container or App.ROOM
+
+    --The list of children give Node a treelike structure. This can be used for things like drawing, deterministice movement and parallax
+    --calculations when child nodes rely on updated information from parents, and inherited attributes like button click functions
+
     if not self.children then
         self.children = {}
     end
