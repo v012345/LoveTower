@@ -116,7 +116,7 @@ function prep_draw(moveable, scale, rotate, offset)
     love.graphics.scale(moveable.VT.scale * scale)
 end
 
----@param obj Moveable
+---@param obj Node
 function add_to_drawhash(obj)
     if obj then
         App.DRAW_HASH[#App.DRAW_HASH + 1] = obj
