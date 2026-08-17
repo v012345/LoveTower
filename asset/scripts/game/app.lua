@@ -386,6 +386,7 @@ end
 function App:update(dt)
     nuGC(nil, nil, true)
     self.FRAMES.MOVE = self.FRAMES.MOVE + 1
+    self:timer_checkpoint('start->discovery', 'update')
     do return end
     Timer.instance:update_real_time(dt)
     if not self.fbf or self.new_frame then
@@ -675,6 +676,9 @@ function App:main_menu()
     --- 创建主菜单场景
 end
 
+---@param label string
+---@param type string
+---@param reset? boolean
 function App:timer_checkpoint(label, type, reset)
     self.PREV_GARB = self.PREV_GARB or 0
     if not self.Features:is_perf_overlay_enabled() then return end
