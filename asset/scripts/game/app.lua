@@ -312,8 +312,7 @@ function App:draw()
             love.graphics.pop()
         end
     end
-
-    do -- Draw the room
+    if not self.debug_UI_toggle then
         for k, v in pairs(self.I.NODE) do
             if not v.parent then
                 love.graphics.push()
@@ -330,15 +329,25 @@ function App:draw()
                 love.graphics.pop()
             end
         end
-        for k, v in pairs(self.I.UIBOX) do
-            if not v.parent then
-                love.graphics.push()
-                v:translate_container()
-                v:draw()
-                love.graphics.pop()
-            end
+        if self.SPLASH_LOGO then
+            love.graphics.push()
+            self.SPLASH_LOGO:translate_container()
+            self.SPLASH_LOGO:draw()
+            love.graphics.pop()
         end
     end
+
+
+    -- for k, v in pairs(self.I.UIBOX) do
+    --     if not v.parent then
+    --         love.graphics.push()
+    --         v:translate_container()
+    --         v:draw()
+    --         love.graphics.pop()
+    --     end
+    -- end
+
+
 
     love.graphics.pop()
 
