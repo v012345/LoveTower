@@ -563,7 +563,7 @@ function App:main_menu()
     --- 创建主菜单场景
 end
 
----@param label string
+---@param label? string
 ---@param type string
 ---@param reset? boolean
 function App:timer_checkpoint(label, type, reset)
