@@ -15,7 +15,8 @@
         "get_compressed",
         "boot_timer",
         "create_node_states",
-        "nuGC"
+        "nuGC",
+        "reset_drawhash"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto"
 }

@@ -123,6 +123,12 @@ function add_to_drawhash(obj)
     end
 end
 
+function reset_drawhash()
+    for k in ipairs(App.DRAW_HASH) do
+        App.DRAW_HASH[k] = nil
+    end
+end
+
 function copy_table(O)
     local O_type = type(O)
     local copy
