@@ -496,6 +496,7 @@ function App:splash_screen()
         self:main_menu()
     else
         Log:info("splash screen")
+        --准备好场景了
         self:prep_stage(STAGES.MAIN_MENU, STATES.SPLASH, true)
     end
 end
