@@ -302,6 +302,17 @@ function App:draw()
     love.graphics.setShader()
     love.graphics.clear(0, 0, 0, 1)
 
+    if self.SPLASH_BACK then
+        if self.debug_background_toggle then
+            love.graphics.clear({ 0, 1, 0, 1 })
+        else
+            love.graphics.push()
+            self.SPLASH_BACK:translate_container()
+            self.SPLASH_BACK:draw()
+            love.graphics.pop()
+        end
+    end
+
     do -- Draw the room
         for k, v in pairs(self.I.NODE) do
             if not v.parent then

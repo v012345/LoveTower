@@ -35,3 +35,4 @@
 ---@field ARGS any 记录一些参数, 之后要解耦出来
 ---@field SPLASH_BACK Sprite 启动画面背景
 ---@field SPLASH_FRONT Sprite 启动画面前景
+---@field debug_background_toggle boolean 是否显示调试背景

@@ -161,6 +161,9 @@ function love.graphics.setShader() end
 ---@param a? number
 function love.graphics.clear(r, g, b, a) end
 
+---@param color table {r: number, g: number, b: number, a: number}
+function love.graphics.clear(color) end
+
 ---@param font love.Font
 ---@param text string
 ---@return love.Text
@@ -471,8 +474,6 @@ Canvas = {}
 ---@param filtermag "nearest" | "linear"
 ---@return nil
 function Canvas:setFilter(filter, filtermag) end
-
-
 
 ---@class UIDdefinition
 ---@field n      UIT
