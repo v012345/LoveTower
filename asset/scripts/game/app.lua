@@ -51,6 +51,7 @@ function App:init()
 
 
     self.DEBUG = true
+    self.VIBRATION = 0
     self.under_overlay = false
 
     self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
@@ -394,47 +395,47 @@ function App:splash_screen()
                 self.SPLASH_BACK:define_draw_steps({ {
                     shader = 'splash',
                     send = {
-                        { name = 'time',        ref_table = G.TIMERS,                        ref_value = 'REAL' },
+                        { name = 'time',        ref_table = self.TIMERS,                     ref_value = 'REAL' },
                         { name = 'vort_speed',  val = 1 },
-                        { name = 'colour_1',    ref_table = G.C,                             ref_value = 'BLUE' },
-                        { name = 'colour_2',    ref_table = G.C,                             ref_value = 'WHITE' },
+                        { name = 'colour_1',    ref_table = self.C,                          ref_value = 'BLUE' },
+                        { name = 'colour_2',    ref_table = self.C,                          ref_value = 'WHITE' },
                         { name = 'mid_flash',   val = 0 },
                         { name = 'vort_offset', val = (2 * 90.15315131 * os.time()) % 100000 },
                     }
                 } })
-                G.SPLASH_BACK:set_alignment({
-                    major = G.ROOM_ATTACH,
+                self.SPLASH_BACK:set_alignment({
+                    major = self.ROOM_ATTACH,
                     type = 'cm',
                     offset = { x = 0, y = 0 }
                 })
-                G.SPLASH_FRONT = Sprite(0, -20, G.ROOM.T.w * 2, G.ROOM.T.h * 4, G.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
-                G.SPLASH_FRONT:define_draw_steps({ {
+                self.SPLASH_FRONT = Sprite(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4, self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
+                self.SPLASH_FRONT:define_draw_steps({ {
                     shader = 'flash',
                     send = {
-                        { name = 'time',      ref_table = G.TIMERS, ref_value = 'REAL' },
+                        { name = 'time',      ref_table = self.TIMERS, ref_value = 'REAL' },
                         { name = 'mid_flash', val = 1 }
                     }
                 } })
-                G.SPLASH_FRONT:set_alignment({
-                    major = G.ROOM_ATTACH,
+                self.SPLASH_FRONT:set_alignment({
+                    major = self.ROOM_ATTACH,
                     type = 'cm',
                     offset = { x = 0, y = 0 }
                 })
 
                 --spawn in splash card
                 local SC = nil
-                G.E_MANAGER:add_event(Event({
+                self.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 0.2,
                     func = (function()
                         local SC_scale = 1.2
-                        SC = Card(G.ROOM.T.w / 2 - SC_scale * G.CARD_W / 2, 10. + G.ROOM.T.h / 2 - SC_scale * G.CARD_H / 2, SC_scale * G.CARD_W, SC_scale * G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])
-                        SC.T.y = G.ROOM.T.h / 2 - SC_scale * G.CARD_H / 2
+                        SC = Card(self.ROOM.T.w / 2 - SC_scale * G.CARD_W / 2, 10. + self.ROOM.T.h / 2 - SC_scale * G.CARD_H / 2, SC_scale * G.CARD_W, SC_scale * G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])
+                        SC.T.y = self.ROOM.T.h / 2 - SC_scale * G.CARD_H / 2
                         SC.ambient_tilt = 1
                         SC.states.drag.can = false
                         SC.states.hover.can = false
                         SC.no_ui = true
-                        G.VIBRATION = G.VIBRATION + 2
+                        self.VIBRATION = self.VIBRATION + 2
                         play_sound('whoosh1', 0.7, 0.2)
                         play_sound('introPad1', 0.704, 0.6)
                         return true;
