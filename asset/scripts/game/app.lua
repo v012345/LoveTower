@@ -86,6 +86,7 @@ function App:init()
     self.DRAW_HASH = {}
     self.MOVEABLES = {}
 
+    self.ARGS = {}
     --- 就是当前类的实例
     self.I = {
         NODE = {},
@@ -419,19 +420,19 @@ function App:update(dt)
 
 
         self.TIMERS:update_game_time(dt)
-        EventManager.instance:update(Timer.instance.real_dt)
-        Smooth.instance:update(Timer.instance.real_dt)
+        self.E_MANAGER:update(self.real_dt)
+        -- Smooth.instance:update(Timer.instance.real_dt)
         for k, v in pairs(self.MOVEABLES) do
             if v.FRAME.MOVE < self.FRAMES.MOVE then
                 v:move(Smooth.instance.move_dt)
             end
         end
         for k, v in pairs(self.MOVEABLES) do
-            v:update(dt * Timer.instance.SPEEDFACTOR)
+            -- v:update(dt * Timer.instance.SPEEDFACTOR)
             v.states.collide.is = false
         end
     end
-    Controller.instance:update(Timer.instance.real_dt)
+    -- Controller.instance:update(Timer.instance.real_dt)
 end
 
 function App:draw()
