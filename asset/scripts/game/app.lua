@@ -443,11 +443,11 @@ function App:splash_screen()
                 }))
 
                 --dissolve fool card and start to fade in the vortex
-                G.E_MANAGER:add_event(Event({
+                self.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 1.8,
                     func = (function() --|||||||||||
-                        SC:start_dissolve({ G.C.WHITE, G.C.WHITE }, true, 12, true)
+                        SC:start_dissolve({ self.C.WHITE, self.C.WHITE }, true, 12, true)
                         play_sound('magic_crumple', 1, 0.5)
                         play_sound('splash_buildup', 1, 0.7)
                         return true;
