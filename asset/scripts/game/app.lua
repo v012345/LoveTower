@@ -399,7 +399,7 @@ function App:update(dt)
     self.TIMERS:update_real_time(dt)
     if not self.fbf or self.new_frame then
         self.new_frame = false
-        Timer.instance:update_game_time(dt)
+        self.TIMERS:update_game_time(dt)
         EventManager.instance:update(Timer.instance.real_dt)
         Smooth.instance:update(Timer.instance.real_dt)
         for k, v in pairs(self.MOVEABLES) do

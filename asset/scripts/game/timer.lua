@@ -46,13 +46,11 @@ function Timer:get_total_timer()
     end
 end
 
-function Timer.real_timer()
-    return Timer.instance.REAL
-end
-
 ---@return fun(): number
 function Timer:get_real_timer()
-    return Timer.real_timer
+    return function()
+        return self.REAL
+    end
 end
 
 ---@return fun(): number
