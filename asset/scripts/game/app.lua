@@ -673,6 +673,11 @@ function App:modulate_sound(dt)
     -- 先不实现, 默认不调制声音
 end
 
+---设置提示, 类似新点系统
+function App:set_alerts()
+    -- 先不实现, 默认不设置提示
+end
+
 function App:main_menu()
     self:prep_stage(STAGES.MAIN_MENU, STATES.MENU, true)
 
