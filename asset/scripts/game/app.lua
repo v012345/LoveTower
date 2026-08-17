@@ -489,7 +489,7 @@ function App:splash_screen()
                 self.TIMERS.TOTAL = 0
                 self.TIMERS.REAL = 0
                 --Prep the splash screen shaders for both the background(colour swirl) and the foreground(white flash), starting at black
-                self.SPLASH_BACK = Sprite(-30, -13, self.ROOM.T.w + 60, self.ROOM.T.h + 22, self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
+                self.SPLASH_BACK = Sprite(Transform(-30, -13, self.ROOM.T.w + 60, self.ROOM.T.h + 22), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
                 self.SPLASH_BACK:define_draw_steps({ {
                     shader = 'splash',
                     send = {
@@ -504,9 +504,9 @@ function App:splash_screen()
                 self.SPLASH_BACK:set_alignment({
                     major = self.ROOM_ATTACH,
                     type = 'cm',
-                    offset = { x = 0, y = 0 }
+                    offset = Coordinate(0, 0)
                 })
-                self.SPLASH_FRONT = Sprite(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4, self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
+                self.SPLASH_FRONT = Sprite(Transform(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
                 self.SPLASH_FRONT:define_draw_steps({ {
                     shader = 'flash',
                     send = {
@@ -517,7 +517,7 @@ function App:splash_screen()
                 self.SPLASH_FRONT:set_alignment({
                     major = self.ROOM_ATTACH,
                     type = 'cm',
-                    offset = { x = 0, y = 0 }
+                    offset = Coordinate(0, 0)
                 })
 
                 --spawn in splash card
