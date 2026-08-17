@@ -46,13 +46,7 @@ function Node:init(T, container)
 
     --The list of children give Node a treelike structure. This can be used for things like drawing, deterministice movement and parallax
     --calculations when child nodes rely on updated information from parents, and inherited attributes like button click functions
-
-    if not self.children then
-        self.children = {}
-    end
-
-
-    self.CALCING = false
+    self.children = self.children or {}
 
     --Add this object to the appropriate instance table only if the metatable matches with NODE
     if getmetatable(self) == Node then

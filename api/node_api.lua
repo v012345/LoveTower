@@ -27,3 +27,11 @@
 ---@field click      { can: boolean, is: boolean }
 ---@field drag       { can: boolean, is: boolean }
 ---@field release_on { can: boolean, is: boolean }
+
+
+--- 包括 `悬浮弹窗` `拖拽弹窗` `警告弹窗`
+---@class Children
+---@field h_popup? UIBox 悬浮弹窗
+---@field d_popup? UIBox 拖拽弹窗
+---@field alert?   UIBox 警告弹窗
+---@field particle_effect? Particles 粒子效果
