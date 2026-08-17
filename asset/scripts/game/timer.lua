@@ -23,6 +23,10 @@ function Timer:init()
     self.exp_times = { xy = 0, scale = 0, r = 0 }
 end
 
+function Timer:update_background_time(dt)
+    self.BACKGROUND = self.BACKGROUND + dt
+end
+
 function Timer:get_exp_times()
     return self.exp_times
 end
@@ -33,6 +37,10 @@ end
 
 function Timer:get_real_time()
     return self.REAL
+end
+
+function Timer:update_time(dt)
+    self.UPTIME = self.UPTIME + dt
 end
 
 function Timer:update_real_time(dt)

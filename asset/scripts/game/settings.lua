@@ -83,6 +83,11 @@ function Settings:switch_to_demo()
     demo.quit_CTA_shown = true
 end
 
+function Settings:update_demo_total_time(dt)
+    local demo = self.data.DEMO
+    demo.total_uptime = demo.total_uptime + dt
+end
+
 function Settings:is_skip_splash()
     return self.data.skip_splash
 end

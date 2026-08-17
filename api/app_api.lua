@@ -28,3 +28,5 @@
 ---@field Tile Tile 地图单元格
 ---@field Features FeatureConfig 特性配置
 ---@field E_MANAGER EventManager 事件管理器
+---@field real_dt number 真实的 dt
+---@field ARGS any 记录一些参数, 之后要解耦出来

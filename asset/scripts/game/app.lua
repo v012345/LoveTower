@@ -397,11 +397,12 @@ function App:update(dt)
     --Smooth out the dts to avoid any big jumps
 
     self.TIMERS:update_real_time(dt)
-    if self.SETTINGS:is_reduced_motion() then
-        self.TIMERS:set_real_shader_time(300)
-    else
-        self.TIMERS:set_real_shader_time(self.TIMERS:get_real_time())
-    end
+    self.TIMERS:set_real_shader_time(self.SETTINGS:is_reduced_motion() and 300 or self.TIMERS:get_real_time())
+    self.TIMERS:update_time(dt)
+    self.SETTINGS:update_demo_total_time(dt)
+    self.TIMERS:update_background_time(dt * (self.ARGS.spin and self.ARGS.spin.amount or 0))
+    self.real_dt = dt
+    if self.real_dt > 0.05 then Log:warn('LONG DT @ ' .. math.floor(self.TIMERS.REAL) .. ': ' .. self.real_dt) end
 
     self:set_alerts()
     self:timer_checkpoint('alerts', 'update')
