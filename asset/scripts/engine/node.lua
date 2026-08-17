@@ -1,5 +1,4 @@
 ---目前看来直接实例化 Node 的只有一个, 就是 App.ROOM
-
 ---@class (partial) Node: Object
 Node = Object:extend()
 
