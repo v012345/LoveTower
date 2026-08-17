@@ -92,7 +92,7 @@ function Node:draw_boundingrect()
     if App.DEBUG then
         love.graphics.push()
         do
-            local s = Tile.instance:get_scale()
+            local s = App.window:get_tile_scale()
             local T = self:get_bounding_transform()
             local x, y, w, h, r = T.x * s, T.y * s, T.w * s, T.h * s, T.r
             love.graphics.scale(s)

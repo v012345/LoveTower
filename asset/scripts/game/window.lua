@@ -76,6 +76,10 @@ function Window:get_orig_scale()
     return self.window_prev.orig_scale
 end
 
+function Window:get_tile_scale()
+    return self.TILESCALE
+end
+
 function Window:set_tile_scale(scale)
     self.TILESCALE = scale
 end
