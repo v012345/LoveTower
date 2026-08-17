@@ -31,9 +31,9 @@ function EventManager:init()
         time_done = false,
         pause_skip = false
     }
-    self.queue_timer = Timer.instance.REAL
+    self.queue_timer = App.TIMERS.REAL
     self.queue_dt = 1 / 60
-    self.queue_last_processed = Timer.instance.REAL
+    self.queue_last_processed = App.TIMERS.REAL
 end
 
 ---@return EventStatus

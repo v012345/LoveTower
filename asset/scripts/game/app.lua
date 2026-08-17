@@ -179,7 +179,7 @@ function App:start_up()
     boot_timer('shared sprites', 'prep stage', 0.95)
     --For the visible cursor
     self.STAGE_OBJECT_INTERRUPT = true
-    self.CURSOR = Sprite(0, 0, 0.3, 0.3, self.ASSET_ATLAS['gamepad_ui'], { x = 18, y = 0 })
+    self.CURSOR = Sprite(Transform(0, 0, 0.3, 0.3), self.ASSET_ATLAS['gamepad_ui'], { x = 18, y = 0 }, self.ROOM)
     self.CURSOR.states.collide.can = false
     self.STAGE_OBJECT_INTERRUPT = false
 

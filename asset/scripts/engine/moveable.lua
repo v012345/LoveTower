@@ -474,7 +474,7 @@ end
 
 --- 离房间中心越远，阴影偏移越大
 function Moveable:calculate_parrallax()
-    local room = Room.instance:get_root_node()
+    local room = App.ROOM
     if room then
         self.shadow_parrallax.x = (self.T.x + self.T.w / 2 - room.T.w / 2) / (room.T.w / 2) * 1.5
     end
