@@ -110,9 +110,7 @@ function App:init()
         challenges = { tally = 0, of = 0 },
     }
     self.C = Color
-    self.SOUND_MANAGER = SoundManager()
-    self.SAVE_MANAGER = SaveManager()
-    self.HTTP_MANAGER = HttpManager()
+
     self.Tile = Tile()
 end
 
@@ -125,6 +123,7 @@ function App:start_up()
 
     if self.Features:is_sound_thread_enabled() then
         boot_timer('window init', 'soundmanager2')
+        self.SOUND_MANAGER = SoundManager()
         -- call the sound manager to prepare the thread to play sounds
         self.SOUND_MANAGER:boot()
         boot_timer('soundmanager2', 'savemanager', 0.22)
@@ -136,10 +135,12 @@ function App:start_up()
 
 
 
-    boot_timer('settings', 'window init', 0.2)
 
+    boot_timer('settings', 'window init', 0.2)
+    self.SAVE_MANAGER = SaveManager()
     self.SAVE_MANAGER:boot()
     boot_timer('window init', 'savemanager', 0.3)
+    self.HTTP_MANAGER = HttpManager()
     if self.Features:is_http_scores_enabled() then
         self.HTTP_MANAGER:boot()
     end
