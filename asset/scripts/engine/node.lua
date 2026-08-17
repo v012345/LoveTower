@@ -2,13 +2,12 @@
 ---@class (partial) Node: Object
 Node = Object:extend()
 
-
 ---Node represent any game object that needs to have some transform available in the game itself.\
 ---Everything that you see in the game is a Node, and some invisible things like the G.ROOM are also\
 ---represented here.
 ---**T** The transform ititializer, with keys of x|1, y|2, w|3, h|4, r|5
 ---**container** optional container for this Node, defaults to G.ROOM
----@param T Transform,
+---@param T Transform
 ---@param container Node
 function Node:init(T, container)
     --From args, set the values of self transform

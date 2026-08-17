@@ -50,7 +50,6 @@ function App:init()
 
 
 
-    self.ID = 0 -- ID 生成器
     self.DEBUG = true
     self.under_overlay = false
 
@@ -516,12 +515,6 @@ function App:main_menu()
     -- )
 
     --- 创建主菜单场景
-end
-
----@return number
-function App:generate_id()
-    self.ID = self.ID + 1
-    return self.ID
 end
 
 ---@type App
