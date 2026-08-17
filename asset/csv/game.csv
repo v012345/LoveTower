@@ -1,5 +1,5 @@
-﻿Id,
-Id,VERSION
-string,string
-unique,
-1,1.0.1o-FULL
+﻿Id,,和音效相关的
+Id,VERSION,pitch_mod
+string,string,number
+unique,,
+1,1.0.1o-FULL,1

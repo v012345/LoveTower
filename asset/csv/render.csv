@@ -1,5 +1,5 @@
-﻿Id,字体文件,"渲染大小倍数, 与 tile_size相乘使用",,,,
-Id,TILESIZE,TILESCALE,TILE_W,TILE_H,CARD_W,CARD_H
-string,number,number,number,number,code,code
-unique,,,,,,
-1,20,3.65,20,11.5,2.4*35/41,2.4*47/41
+﻿Id,字体文件,"渲染大小倍数, 与 tile_size相乘使用",,,,,,0.2 * CARD_H,
+Id,TILESIZE,TILESCALE,TILE_W,TILE_H,CARD_W,CARD_H,DRAW_HASH_BUFF,HIGHLIGHT_H,COLLISION_BUFFER
+string,number,number,number,number,code,code,number,code,number
+unique,,,,,,,,,
+1,20,3.65,20,11.5,2.4*35/41,2.4*47/41,2,0.2 * (2.4*47/41),0.05
