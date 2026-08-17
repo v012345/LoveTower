@@ -143,7 +143,7 @@ function love.resize(w, h)
     local room = App.ROOM
     if room then
         local pixels_per_tile = App.window:get_pixels_per_tile()
-        local room_transform = Room.instance:get_transform()
+        local room_transform = App.ROOM.T
         if curr_ratio < orig_ratio then
             room.T.x = room_transform.x
             room.T.y = (h / (pixels_per_tile) - room_transform.h) / 2
