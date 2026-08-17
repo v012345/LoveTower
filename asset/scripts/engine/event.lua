@@ -10,7 +10,7 @@ EventTrigger = {
     ease = Event.ease,
 }
 
-
+---@private 由 Object 的 __call 方法调用, 不对外
 ---@param config EventConfig
 function Event:init(config)
     config = config or {}
