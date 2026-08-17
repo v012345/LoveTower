@@ -4,6 +4,7 @@
 
 ---@class GameConfigItem
 ---@field VERSION string 游戏版本
+---@field PITCH_MOD number 音高修正
 
 
 ---@class RenderConfigItem
@@ -13,6 +14,10 @@
 ---@field TILE_H number
 ---@field CARD_W number
 ---@field CARD_H number
+---@field DRAW_HASH_BUFF number
+---@field HIGHLIGHT_H number
+---@field COLLISION_BUFFER number
+
 
 
 ---@class CollabsConfigItem

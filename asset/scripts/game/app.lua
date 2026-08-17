@@ -33,7 +33,7 @@ function App:init()
     self.PROFILES = Profile()
 
 
-
+    self.Render = GameCfg:get_render_cfg()
 
 
 
