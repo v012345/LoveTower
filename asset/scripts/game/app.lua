@@ -225,16 +225,8 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.STATE = new_state
     self.STATE_COMPLETE = false
     self.SETTINGS:set_paused(false)
-    self.ROOM = self.window:create_room()
-
-
-    Node(Transform(0, 0, 0, 0))
-
-    local transform = Room.instance:get_transform()
-    local root_node = Node(transform)
-    Room.instance:set_root_node(root_node)
+    self.ROOM, self.ROOM_ATTACH = self.window:create_room()
     love.resize(love.graphics.getWidth(), love.graphics.getHeight())
-    -- Particles(Transform(1, 1, 0, 0), nil, { timer = 0.003 })
 end
 
 function App:init_game_object()

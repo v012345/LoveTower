@@ -5,7 +5,8 @@
 ---@field TIMERS Timer 计时器
 ---@field window Window 窗口
 ---@field CANVAS Canvas
----@field ROOM {Node: Node, ORIG: {x: number, y: number, r: number}}   房间, 就是游戏的主场景, 一切节点的根节点
+---@field ROOM Node 房间, 就是游戏的主场景, 一切节点的根节点
+---@field ROOM_ATTACH Moveable
 ---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
 ---@field I NodeList
 ---@field under_overlay boolean 是否显示底层覆盖?????? 不知道是什么东西
