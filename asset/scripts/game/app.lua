@@ -34,7 +34,8 @@ function App:init()
 
 
     self.Render = GameCfg:get_render_cfg()
-
+    self.STATES = STATES
+    self.STAGES = STAGES
 
 
 
