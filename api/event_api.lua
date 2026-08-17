@@ -22,9 +22,4 @@ EventConfig = {}
 ---@field pause_skip boolean
 EventStatus = {}
 
---- comment
----@param config EventConfig | nil
----@return Event
-function Event(config) end
-
 ---@class (partial) Event : Object

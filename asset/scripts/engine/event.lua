@@ -1,10 +1,20 @@
 ---@class (partial) Event : Object
 Event = Object:extend()
 
+---@enum EventTrigger
+EventTrigger = {
+    immediate = Event.immediate,
+    condition = Event.condition,
+    after = Event.after,
+    before = Event.before,
+    ease = Event.ease,
+}
+
+
 ---@param config EventConfig
 function Event:init(config)
     config = config or {}
-    self.trigger = config.trigger or EventTrigger.immediate
+    self.trigger = config.trigger or .immediate
     self.func = config.func or function() return true end
     self.timer = config.timer or Timer.instance:get_total_timer()
     self.time = self:timer()
@@ -112,11 +122,11 @@ function Event:ease(status)
     end
 end
 
----@enum EventTrigger
-EventTrigger = {
-    immediate = Event.immediate,
-    condition = Event.condition,
-    after = Event.after,
-    before = Event.before,
-    ease = Event.ease,
-}
+
+
+---创建一个事件对象
+---@param config EventConfig
+---@return Event
+function Event:new(config)
+    return Event(config)
+end
