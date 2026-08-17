@@ -21,26 +21,32 @@ function Event:init(config)
     self.func = config.func or function() return true end
     self.delay = config.delay or 0
     self.no_delete = config.no_delete
-    self.created_on_pause = config.pause_force or G.SETTINGS.paused
+    self.created_on_pause = config.pause_force or App.SETTINGS:is_paused()
+    self.timer = config.timer or (self.created_on_pause and App.TIMERS:get_real_timer()) or App.TIMERS:get_total_timer()
+
+    -- 这两个要特殊处理一个
+    if self.trigger == EventTrigger.ease then
+        self.ease_params = {
+            type = config.ease or 'lerp',
+            ref_table = config.ref_table,
+            ref_value = config.ref_value,
+            start_val = config.start_val,
+            end_val = config.ease_to,
+            start_time = nil,
+            end_time = nil,
+        }
+        self.func = config.func or function(t) return t end
+    elseif self.trigger == EventTrigger.condition then
+        self.condition_params = {
+            ref_table = config.ref_table,
+            ref_value = config.ref_value,
+            stop_val = config.stop_val,
+        }
+        self.func = config.func or function() return self.condition.ref_table[self.condition.ref_value] == self.condition.stop_val end
+    end
 
 
-
-    self.timer = config.timer or Timer.instance:get_total_timer()
     self.time = self:timer()
-    self.ease_params = {
-        type = config.ease or 'lerp',
-        ref_table = config.ref_table,
-        ref_value = config.ref_value,
-        start_val = config.start_val,
-        end_val = config.ease_to,
-        start_time = nil,
-        end_time = nil,
-    }
-    self.condition_params = {
-        ref_table = config.ref_table,
-        ref_value = config.ref_value,
-        stop_val = config.stop_val,
-    }
 end
 
 ---如果 time_done 和 completed 都为 true，则认为事件已经完成, 会从队列中移除

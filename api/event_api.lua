@@ -13,20 +13,21 @@
 ---@field ref_value?   string
 ---@field ease_to?     any
 ---@field stop_val?    any
-EventConfig = {}
+---@field pause_force? boolean
+
 
 ---@class EventStatus
 ---@field blocking   boolean
 ---@field completed  boolean
 ---@field time_done  boolean
 ---@field pause_skip boolean
-EventStatus = {}
+
 
 ---@class (partial) Event : Object
 ---@field trigger EventTrigger 触发器函数
 ---@field blocking boolean
 ---@field blockable boolean
----@field func function 
+---@field func function
 ---@field timer function 使用的定时器函数
 ---@field time number
 ---@field complete boolean 是否完成
@@ -34,3 +35,20 @@ EventStatus = {}
 ---@field delay number
 ---@field no_delete boolean
 ---@field created_on_pause boolean
+---@field ease_params? EaseParams
+---@field condition_params? ConditionParams
+
+
+---@class EaseParams
+---@field type string
+---@field ref_table table
+---@field ref_value string
+---@field start_val any
+---@field end_val any
+---@field start_time number
+---@field end_time number
+
+---@class ConditionParams
+---@field ref_table table
+---@field ref_value string
+---@field stop_val any
