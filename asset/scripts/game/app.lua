@@ -110,7 +110,6 @@ function App:init()
         challenges = { tally = 0, of = 0 },
     }
     self.C = Color
-
 end
 
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
@@ -491,7 +490,7 @@ end
 --- 目前默认是Windowed模式，1000x650分辨率, 使用第一个显示器, 之后要读用户设置文件中的设置
 function App:init_window()
     self.window = Window()
-    self:apply_window_changes(true)
+    self.window:apply_window_changes(true)
 end
 
 function App:save_settings()
@@ -529,51 +528,6 @@ end
 function App:generate_id()
     self.ID = self.ID + 1
     return self.ID
-end
-
----Applies all window changes, including updates to the screenmode, selected display, resolution and vsync.\
----These changes are all defined in the G.SETTINGS.QUEUED_CHANGE table. Any unchanged settings use the previous value
----@param _initial boolean 是否是初始化
-function App:apply_window_changes(_initial)
-    -- print("apply_window_changes")
-    local settings = self.SETTINGS.data
-    --Set the screenmode setting from Windowed, Fullscreen or Borderless
-    settings.WINDOW.screenmode = settings.QUEUED_CHANGE.screenmode or settings.WINDOW.screenmode
-
-    --Set the monitor the window should be rendered to
-    settings.WINDOW.selected_display = settings.QUEUED_CHANGE.selected_display or settings.WINDOW.selected_display
-
-    --Set the screen resolution
-    settings.WINDOW.DISPLAYS[settings.WINDOW.selected_display].screen_res = {
-        w = settings.QUEUED_CHANGE.screenres.w or love.graphics.getWidth(),
-        h = settings.QUEUED_CHANGE.screenres.h or love.graphics.getHeight()
-    }
-
-    --Set the vsync value, 0 is off 1 is on
-    settings.WINDOW.vsync = settings.QUEUED_CHANGE.vsync or settings.WINDOW.vsync
-    local screenmode = settings.WINDOW.screenmode
-    local display = settings.WINDOW.DISPLAYS[settings.WINDOW.selected_display]
-    local window_width = screenmode == 'Windowed' and love.graphics.getWidth() * 0.8 or display.screen_res.w
-    local window_height = screenmode == 'Windowed' and love.graphics.getHeight() * 0.8 or display.screen_res.h
-    love.window.updateMode(window_width, window_height, {
-        fullscreen = screenmode ~= 'Windowed',
-        fullscreentype = (screenmode == 'Borderless' and 'desktop') or (screenmode == 'Fullscreen' and 'exclusive') or nil,
-        vsync = settings.WINDOW.vsync,
-        resizable = true,
-        display = settings.WINDOW.selected_display,
-        highdpi = (love.system.getOS() == 'OS X')
-    })
-    self.SETTINGS:reset_queued_change()
-    if not _initial then
-        love.resize(love.graphics.getWidth(), love.graphics.getHeight())
-        -- G:save_settings()
-    end
-    do return end
-    -- 这里还用不上, 之后再说
-    if G.OVERLAY_MENU then
-        local tab_but = G.OVERLAY_MENU:get_UIE_by_ID('tab_but_Video')
-        G.FUNCS.change_tab(tab_but)
-    end
 end
 
 ---@type App

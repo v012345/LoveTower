@@ -1,4 +1,5 @@
 ---@class Window: Object
+---@field app App
 ---@field TRANS Transform 窗口变换
 ---@field real_size Size 窗口实际大小
 ---@field orig_size Size 窗口原始大小
@@ -8,7 +9,9 @@
 ---@field ROOM_PADDING_H number 房间上下边距, 以地图单元格为单位
 local Window = Object:extend()
 
-function Window:init()
+---@param app App
+function Window:init(app)
+    self.app = app
     local tile_width = GameCfg:get_tile_width()
     local tile_height = GameCfg:get_tile_height()
     local tile_scale = GameCfg:get_tile_scale()
@@ -72,6 +75,51 @@ function Window:set_transform_wh(w, h)
 end
 
 function Window:update()
+end
+
+---Applies all window changes, including updates to the screenmode, selected display, resolution and vsync.\
+---These changes are all defined in the G.SETTINGS.QUEUED_CHANGE table. Any unchanged settings use the previous value
+---@param _initial boolean 是否是初始化
+function Window:apply_window_changes(_initial)
+    -- print("apply_window_changes")
+    local settings = self.app.SETTINGS.data
+    --Set the screenmode setting from Windowed, Fullscreen or Borderless
+    settings.WINDOW.screenmode = settings.QUEUED_CHANGE.screenmode or settings.WINDOW.screenmode
+
+    --Set the monitor the window should be rendered to
+    settings.WINDOW.selected_display = settings.QUEUED_CHANGE.selected_display or settings.WINDOW.selected_display
+
+    --Set the screen resolution
+    settings.WINDOW.DISPLAYS[settings.WINDOW.selected_display].screen_res = {
+        w = settings.QUEUED_CHANGE.screenres.w or love.graphics.getWidth(),
+        h = settings.QUEUED_CHANGE.screenres.h or love.graphics.getHeight()
+    }
+
+    --Set the vsync value, 0 is off 1 is on
+    settings.WINDOW.vsync = settings.QUEUED_CHANGE.vsync or settings.WINDOW.vsync
+    local screenmode = settings.WINDOW.screenmode
+    local display = settings.WINDOW.DISPLAYS[settings.WINDOW.selected_display]
+    local window_width = screenmode == 'Windowed' and love.graphics.getWidth() * 0.8 or display.screen_res.w
+    local window_height = screenmode == 'Windowed' and love.graphics.getHeight() * 0.8 or display.screen_res.h
+    love.window.updateMode(window_width, window_height, {
+        fullscreen = screenmode ~= 'Windowed',
+        fullscreentype = (screenmode == 'Borderless' and 'desktop') or (screenmode == 'Fullscreen' and 'exclusive') or nil,
+        vsync = settings.WINDOW.vsync,
+        resizable = true,
+        display = settings.WINDOW.selected_display,
+        highdpi = (love.system.getOS() == 'OS X')
+    })
+    self.app.SETTINGS:reset_queued_change()
+    if not _initial then
+        love.resize(love.graphics.getWidth(), love.graphics.getHeight())
+        -- G:save_settings()
+    end
+    do return end
+    -- 这里还用不上, 之后再说
+    if self.app.OVERLAY_MENU then
+        local tab_but = self.app.OVERLAY_MENU:get_UIE_by_ID('tab_but_Video')
+        self.app.FUNCS.change_tab(tab_but)
+    end
 end
 
 return Window
