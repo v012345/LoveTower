@@ -92,11 +92,12 @@ function App:init()
     self.I = {
         NODE = {},
         MOVEABLE = {},
-        UIBOX = {},
         SPRITE = {},
+        UIBOX = {},
+        POPUP = {},
         CARD = {},
         CARDAREA = {},
-        POPUP = {},
+        ALERT = {}
     }
 
 
@@ -408,6 +409,33 @@ function App:draw()
                         end
                     end
                 end
+            end
+
+            if self.OVERLAY_MENU or not self.Features:is_hide_bg() then
+                if self.OVERLAY_MENU and self.OVERLAY_MENU ~= self.CONTROLLER.dragging.target then
+                    love.graphics.push()
+                    self.OVERLAY_MENU:translate_container()
+                    self.OVERLAY_MENU:draw()
+                    love.graphics.pop()
+                end
+            end
+
+            if self.debug_tools then
+                if self.debug_tools ~= self.CONTROLLER.dragging.target then
+                    love.graphics.push()
+                    self.debug_tools:translate_container()
+                    self.debug_tools:draw()
+                    love.graphics.pop()
+                end
+            end
+
+            self.ALERT_ON_SCREEN = false
+            for k, v in pairs(self.I.ALERT) do
+                love.graphics.push()
+                v:translate_container()
+                v:draw()
+                self.ALERT_ON_SCREEN = true
+                love.graphics.pop()
             end
         end
     end

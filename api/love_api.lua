@@ -491,15 +491,6 @@ love.window = love.window or {}
 ---@return table flags
 function love.window.getMode() end
 
----@class NodeList
----@field NODE     Node[]
----@field MOVEABLE Moveable[]
----@field UIBOX    UIBox[]
----@field SPRITE   Sprite[]
----@field CARD     Card[]
----@field CARDAREA CardArea[]
----@field POPUP    Node[]
-NodeList = {}
 
 ---@param x? number
 ---@param y? number

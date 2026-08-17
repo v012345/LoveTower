@@ -43,3 +43,15 @@
 ---@field debug_background_toggle boolean 是否显示调试背景
 ---@field debug_UI_toggle boolean 是否显示调试 UI
 ---@field debug_splash_size_toggle boolean 是否显示调试启动画面大小
+
+
+---@alias NodeList {
+---NODE: Node[],
+---MOVEABLE: Moveable[],
+---UIBOX: UIBox[],
+---SPRITE: Sprite[],
+---CARD: Card[],
+---CARDAREA: CardArea[],
+---POPUP: Node[],
+---ALERT: Node[],
+---}
