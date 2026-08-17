@@ -472,17 +472,6 @@ Canvas = {}
 ---@return nil
 function Canvas:setFilter(filter, filtermag) end
 
----@class NodeStates
----@field visible    boolean                       节点是否可见
----@field collide    { can: boolean, is: boolean }
----@field focus      { can: boolean, is: boolean }
----@field hover      { can: boolean, is: boolean }
----@field click      { can: boolean, is: boolean }
----@field drag       { can: boolean, is: boolean }
----@field release_on { can: boolean, is: boolean }
-NodeStates = {}
-
-
 
 --- 包括 `悬浮弹窗` `拖拽弹窗` `警告弹窗`
 ---@class Children

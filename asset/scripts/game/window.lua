@@ -43,6 +43,8 @@ end
 function Window:create_room()
     self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
     self.ROOM.jiggle = 0
+    self.ROOM.states.drag.can = false
+    self.ROOM:set_container(self.ROOM)
     return self.ROOM
 end
 
