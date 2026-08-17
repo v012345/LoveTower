@@ -10,8 +10,13 @@ Node = Object:extend()
 ---@param T Transform
 ---@param container Node
 function Node:init(T, container)
-    --From args, set the values of self transform
-    self.ID = generate_id()
+    --Store all argument and return tables here for reuse, because Lua likes to generate garbage
+    self.ARGS = self.ARGS or {}
+    self.RETS = {}
+
+    --Config table used for any metadata about this node
+    self.config = self.config or {}
+
     self.T = T:clone()
     self.CT = self.T
     self.parent = nil
@@ -20,15 +25,13 @@ function Node:init(T, container)
     self.click_offset = Coordinate()
     self.hover_offset = Coordinate()
 
+    self.ID = generate_id()
+
     self.FRAME = {
         DRAW = -1,
         MOVE = -1
     }
-    --Store all argument and return tables here for reuse, because Lua likes to generate garbage
-    self.ARGS = self.ARGS or {}
-    self.RETS = {}
 
-    self.config = self.config or {}
     self.container = container
     if not self.children then
         self.children = {}
