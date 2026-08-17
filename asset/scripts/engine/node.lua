@@ -30,15 +30,8 @@ function Node:init(T, container)
 
     self.ID = generate_id()
 
-    self.FRAME = {
-        DRAW = -1,
-        MOVE = -1
-    }
-
-    self.container = container
-    if not self.children then
-        self.children = {}
-    end
+    --Frame tracker to aid in not doing too many extra calculations
+    self.FRAME = { DRAW = -1, MOVE = -1 }
 
     --The states for this Node and all derived nodes. This is how we control the visibility and interactibility of any object
     --All nodes do not collide by default. This reduces the size of n for the O(n^2) collision detection
@@ -51,6 +44,14 @@ function Node:init(T, container)
         drag = { can = true, is = false },
         release_on = { can = true, is = false }
     }
+
+
+    self.container = container
+    if not self.children then
+        self.children = {}
+    end
+
+
     self.CALCING = false
 
     --Add this object to the appropriate instance table only if the metatable matches with NODE

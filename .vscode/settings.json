@@ -13,7 +13,8 @@
         "dump",
         "compress_and_save",
         "get_compressed",
-        "boot_timer"
+        "boot_timer",
+        "create_node_states"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto"
 }
