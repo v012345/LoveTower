@@ -42,7 +42,7 @@ function Event:init(config)
             ref_value = config.ref_value,
             stop_val = config.stop_val,
         }
-        self.func = config.func or function() return self.condition.ref_table[self.condition.ref_value] == self.condition.stop_val end
+        self.func = config.func or function() return self.condition_params.ref_table[self.condition_params.ref_value] == self.condition_params.stop_val end
     end
 
 
