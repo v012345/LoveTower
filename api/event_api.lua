@@ -14,6 +14,7 @@
 ---@field ease_to?     any
 ---@field stop_val?    any
 ---@field pause_force? boolean
+---@field ease? 'lerp' | 'elastic' | 'quad' 缓动类型
 
 
 ---@class EventStatus
@@ -40,7 +41,7 @@
 
 
 ---@class EaseParams
----@field type string
+---@field type 'lerp' | 'elastic' | 'quad' 缓动类型
 ---@field ref_table table
 ---@field ref_value string
 ---@field start_val any

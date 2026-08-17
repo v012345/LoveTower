@@ -101,28 +101,28 @@ end
 ---@param status EventStatus
 ---@return nil
 function Event:ease(status)
-    if not self.ease.start_time then
-        self.ease.start_time = self.timer()
-        self.ease.end_time = self.timer() + self.delay
-        self.ease.start_val = self.ease.ref_table[self.ease.ref_value]
+    if not self.ease_params.start_time then
+        self.ease_params.start_time = self.timer()
+        self.ease_params.end_time = self.timer() + self.delay
+        self.ease_params.start_val = self.ease_params.ref_table[self.ease_params.ref_value]
     end
     if not self.complete then
-        if self.ease.end_time >= self:timer() then
-            local percent_done = ((self.ease.end_time - self:timer()) / (self.ease.end_time - self.ease.start_time))
+        if self.ease_params.end_time >= self:timer() then
+            local percent_done = ((self.ease_params.end_time - self:timer()) / (self.ease_params.end_time - self.ease_params.start_time))
 
-            if self.ease.type == 'lerp' then
-                self.ease.ref_table[self.ease.ref_value] = self.func(percent_done * self.ease.start_val + (1 - percent_done) * self.ease.end_val)
+            if self.ease_params.type == 'lerp' then
+                self.ease_params.ref_table[self.ease_params.ref_value] = self.func(percent_done * self.ease_params.start_val + (1 - percent_done) * self.ease_params.end_val)
             end
-            if self.ease.type == 'elastic' then
+            if self.ease_params.type == 'elastic' then
                 percent_done = -math.pow(2, 10 * percent_done - 10) * math.sin((percent_done * 10 - 10.75) * 2 * math.pi / 3);
-                self.ease.ref_table[self.ease.ref_value] = self.func(percent_done * self.ease.start_val + (1 - percent_done) * self.ease.end_val)
+                self.ease_params.ref_table[self.ease_params.ref_value] = self.func(percent_done * self.ease_params.start_val + (1 - percent_done) * self.ease_params.end_val)
             end
-            if self.ease.type == 'quad' then
+            if self.ease_params.type == 'quad' then
                 percent_done = percent_done * percent_done;
-                self.ease.ref_table[self.ease.ref_value] = self.func(percent_done * self.ease.start_val + (1 - percent_done) * self.ease.end_val)
+                self.ease_params.ref_table[self.ease_params.ref_value] = self.func(percent_done * self.ease_params.start_val + (1 - percent_done) * self.ease_params.end_val)
             end
         else
-            self.ease.ref_table[self.ease.ref_value] = self.func(self.ease.end_val)
+            self.ease_params.ref_table[self.ease_params.ref_value] = self.func(self.ease_params.end_val)
             self.complete = true
             status.completed = true
             status.time_done = true
