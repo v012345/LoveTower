@@ -133,10 +133,10 @@ function love.resize(w, h)
 
     if curr_ratio < orig_ratio then
         -- 相对变窄了
-        App.window:set_scale(orig_scale * w / orig_size.w)
+        App.window:set_tile_scale(orig_scale * w / orig_size.w)
     else
         -- 相对变宽了
-        App.window:set_scale(orig_scale * h / orig_size.h)
+        App.window:set_tile_scale(orig_scale * h / orig_size.h)
     end
 
 
