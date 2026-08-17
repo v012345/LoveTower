@@ -40,6 +40,9 @@ function Event:handle(status)
     self.complete = status.completed
 end
 
+
+
+
 ---@private
 ---@param status EventStatus
 ---@return nil

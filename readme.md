@@ -10,3 +10,4 @@ Render 相关的设置在 render.csv 里, 对它 GameCfg 去拿到
 
 
 ## 事件系统说明
+Event 在初始化里, 在 config 里指明 trigger 
