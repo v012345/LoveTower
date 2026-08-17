@@ -122,6 +122,12 @@ function Settings:is_paused()
     return self.data.paused
 end
 
+---先不实现, 默认教程已经完成
+---@return boolean
+function Settings:is_tutorial_complete()
+    return true
+end
+
 ---设置暂停状态
 ---@param paused boolean 是否暂停
 function Settings:set_paused(paused)

@@ -387,6 +387,7 @@ function App:update(dt)
     nuGC(nil, nil, true)
     self.FRAMES.MOVE = self.FRAMES.MOVE + 1
     self:timer_checkpoint('start->discovery', 'update')
+    if not self.SETTINGS:is_tutorial_complete() then self.FUNCS.tutorial_controller() end
     do return end
     Timer.instance:update_real_time(dt)
     if not self.fbf or self.new_frame then
