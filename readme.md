@@ -10,6 +10,7 @@ Render 相关的设置在 render.csv 里, 对它 GameCfg 去拿到
 
 现在这个架构很奇怪
 需要先启动 App, 然后再启动引擎
+因为引擎里 Node , Event , Timer 全都依赖 App
 
 
 ## 事件系统说明
