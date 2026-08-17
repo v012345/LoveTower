@@ -1,15 +1,6 @@
 ---@class (partial) Event : Object
 Event = Object:extend()
 
----@enum EventTrigger 触发器函数
-EventTrigger = {
-    immediate = Event.immediate,
-    condition = Event.condition,
-    after = Event.after,
-    before = Event.before,
-    ease = Event.ease,
-}
-
 ---@private 由 Object 的 __call 方法调用, 不对外
 ---@param config EventConfig
 function Event:init(config)
@@ -134,3 +125,12 @@ end
 function Event:new(config)
     return Event(config or {})
 end
+
+---@enum EventTrigger 触发器函数
+EventTrigger = {
+    immediate = Event.immediate,
+    condition = Event.condition,
+    after = Event.after,
+    before = Event.before,
+    ease = Event.ease,
+}
