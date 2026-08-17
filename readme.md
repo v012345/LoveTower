@@ -7,3 +7,6 @@ Render 相关的设置在 render.csv 里, 对它 GameCfg 去拿到
 
 
 如何才能把 Node 与 App 解耦啊
+
+
+## 事件系统说明
