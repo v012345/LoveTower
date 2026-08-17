@@ -399,6 +399,7 @@ function App:draw()
                             love.graphics.push()
                             v:translate_container()
                             v:draw()
+                            --- 这里我需要再看一下, 这个 draw_children 是什么意思
                             if v.draw_children then
                                 v:draw_self()
                                 v:draw_children()
