@@ -36,7 +36,11 @@ function App:init()
     self.Render = GameCfg:get_render_cfg()
     self.STATES = STATES
     self.STAGES = STAGES
-
+    self.STAGE_OBJECTS = { {}, {}, {} }
+    self.STAGE = self.STAGES.MAIN_MENU
+    self.STATE = self.STATES.SPLASH
+    self.TAROT_INTERRUPT = nil
+    self.STATE_COMPLETE = false
 
 
 
