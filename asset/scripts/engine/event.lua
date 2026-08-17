@@ -1,15 +1,14 @@
 ---@class (partial) Event : Object
 Event = Object:extend()
 
----@param config EventConfig|nil
----@return nil
+---@param config EventConfig
 function Event:init(config)
     config = config or {}
     self.trigger = config.trigger or Event.immediate
     self.func = config.func or function() return true end
     self.timer = config.timer or Timer.instance:get_total_timer()
     self.time = self:timer()
-    self.blocking = config.blocking or true
+    self.blocking = config.blocking
     self.blockable = config.blockable
     self.complete = false
     self.start_timer = config.start_timer or false
