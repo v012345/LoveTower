@@ -155,15 +155,27 @@ function love.resize(w, h)
             room.T.y = room_transform.y
             room.T.x = (w / (pixels_per_tile) - room_transform.w) / 2
         end
-
-        -- G.ROOM_ORIG = {
-        --     x = G.ROOM.T.x,
-        --     y = G.ROOM.T.y,
-        --     r = G.ROOM.T.r
-        -- }
     end
     App.CANV_SCALE = 1
     App.window:set_real_size(w, h)
+
+    if love.system.getOS() == 'Windows' and false then --implement later if needed
+        local render_w, render_h = love.window.getDesktopDimensions(App.SETTINGS.WINDOW.selcted_display)
+        local unscaled_dims = love.window.getFullscreenModes(App.SETTINGS.WINDOW.selcted_display)[1]
+
+        local DPI_scale = math.floor((0.5 * unscaled_dims.width / render_w + 0.5 * unscaled_dims.height / render_h) * 500 + 0.5) / 500
+
+        if DPI_scale > 1.1 then
+            App.CANV_SCALE = 1.5
+
+            App.AA_CANVAS = love.graphics.newCanvas(App.WINDOWTRANS.real_window_w * App.CANV_SCALE, App.WINDOWTRANS.real_window_h * App.CANV_SCALE, { type = '2d', readable = true })
+            App.AA_CANVAS:setFilter('linear', 'linear')
+        else
+            App.AA_CANVAS = nil
+        end
+    end
+
+
     App.CANVAS = love.graphics.newCanvas(w * App.CANV_SCALE, h * App.CANV_SCALE, { type = '2d', readable = true })
     App.CANVAS:setFilter("linear", "linear")
 end
