@@ -10,7 +10,7 @@ local Color = require "asset.scripts.game.color"
 local SoundManager = require "asset.scripts.game.sound_manager"
 local SaveManager = require "asset.scripts.game.save_manager"
 local HttpManager = require "asset.scripts.game.http_manager"
-local Tile = require "asset.scripts.game.tile"
+local EventManager = require "asset.scripts.game.event_manager"
 
 ---在这里不要做耗时的操作
 function App:init()
@@ -111,7 +111,6 @@ function App:init()
     }
     self.C = Color
 
-    self.Tile = Tile()
 end
 
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数

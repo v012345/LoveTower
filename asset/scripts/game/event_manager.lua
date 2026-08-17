@@ -13,7 +13,7 @@
 ---@field public update function
 ---@field public process_queue function
 ---@field public init function
-EventManager = Object:extend()
+local EventManager = Object:extend()
 
 
 ---@return nil
@@ -135,5 +135,4 @@ function EventManager:clear_queue(queue, exception)
     end
 end
 
----@type EventManager
-EventManager.instance = EventManager()
+return EventManager
