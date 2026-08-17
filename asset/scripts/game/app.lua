@@ -404,10 +404,12 @@ function App:update(dt)
     self.real_dt = dt
     if self.real_dt > 0.05 then Log:warn('LONG DT @ ' .. math.floor(self.TIMERS.REAL) .. ': ' .. self.real_dt) end
 
-    self:set_alerts()
-    self:timer_checkpoint('alerts', 'update')
+
     if not self.fbf or self.new_frame then
         self.new_frame = false
+        self:set_alerts()
+        self:timer_checkpoint('alerts', 'update')
+
         self.TIMERS:update_game_time(dt)
         EventManager.instance:update(Timer.instance.real_dt)
         Smooth.instance:update(Timer.instance.real_dt)
