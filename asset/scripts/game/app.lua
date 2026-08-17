@@ -356,6 +356,57 @@ function App:draw()
                     end
                 end
                 self:timer_checkpoint('uiboxes', 'draw')
+                for k, v in pairs(self.I.CARDAREA) do
+                    if not v.parent then
+                        love.graphics.push()
+                        v:translate_container()
+                        v:draw()
+                        love.graphics.pop()
+                    end
+                end
+                for k, v in pairs(self.I.CARD) do
+                    if not v.parent and v ~= self.CONTROLLER.dragging.target and v ~= self.CONTROLLER.focused.target then
+                        love.graphics.push()
+                        v:translate_container()
+                        v:draw()
+                        love.graphics.pop()
+                    end
+                end
+                for k, v in pairs(self.I.UIBOX) do
+                    if v.attention_text and v ~= self.debug_tools and v ~= self.online_leaderboard and v ~= self.achievement_notification then
+                        love.graphics.push()
+                        v:translate_container()
+                        v:draw()
+                        love.graphics.pop()
+                    end
+                end
+
+                if self.SPLASH_FRONT then
+                    love.graphics.push()
+                    self.SPLASH_FRONT:translate_container()
+                    self.SPLASH_FRONT:draw()
+                    love.graphics.pop()
+                end
+                self.under_overlay = false
+                if self.OVERLAY_TUTORIAL then
+                    love.graphics.push()
+                    self.OVERLAY_TUTORIAL:translate_container()
+                    self.OVERLAY_TUTORIAL:draw()
+                    love.graphics.pop()
+
+                    if self.OVERLAY_TUTORIAL.highlights then
+                        for k, v in ipairs(self.OVERLAY_TUTORIAL.highlights) do
+                            love.graphics.push()
+                            v:translate_container()
+                            v:draw()
+                            if v.draw_children then
+                                v:draw_self()
+                                v:draw_children()
+                            end
+                            love.graphics.pop()
+                        end
+                    end
+                end
             end
         end
     end

@@ -1,3 +1,4 @@
 ---@class (partial) UIBox: Moveable
 ---@field UIRoot UIElement
 ---@field attention_text boolean 是否是提示文本
+---@field highlights Card_Character[] 这个太恶心了, 应该再开一个类, 而不是写在这里, 这个就是小金宝, 新手教程的提示框

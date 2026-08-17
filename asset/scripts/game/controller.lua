@@ -18,6 +18,7 @@ function Controller:init()
     }
     self.clicked = { target = nil }
     self.focused = { target = nil }
+    self.dragging = { target = nil }
     self.cursor_down = { target = nil }
     self.cursor_up = { target = nil }
     self.cursor_hover = { target = nil }
