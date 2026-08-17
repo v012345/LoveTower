@@ -492,6 +492,11 @@ love.window = love.window or {}
 ---@return number height The height of the desktop.
 function love.window.getDesktopDimensions(displayindex) end
 
+---Gets a list of supported fullscreen modes.
+---@param displayindex number (1) The index of the display, if multiple monitors are available.
+---@return table modes A table of width/height pairs. (Note that this may not be in order.)
+function love.window.getFullscreenModes(displayindex) end
+
 --- Gets the display mode and properties of the window.
 ---@return number width
 ---@return number height
