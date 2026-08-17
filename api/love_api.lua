@@ -486,6 +486,12 @@ UIDdefinition = {}
 ---@class love.window
 love.window = love.window or {}
 
+---Gets the width and height of the desktop.
+---@param displayindex number The index of the display, if multiple monitors are available. First is 1.
+---@return number width The width of the desktop.
+---@return number height The height of the desktop.
+function love.window.getDesktopDimensions(displayindex) end
+
 --- Gets the display mode and properties of the window.
 ---@return number width
 ---@return number height
