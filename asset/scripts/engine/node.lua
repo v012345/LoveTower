@@ -60,6 +60,15 @@ function Node:init(T, container)
     end
 end
 
+---------------- todo ------------------
+
+
+
+
+
+
+
+
 --Draws self, then adds self the the draw hash, then draws all children
 function Node:draw()
     self:draw_boundingrect()
