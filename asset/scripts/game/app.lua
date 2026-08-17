@@ -397,6 +397,11 @@ function App:update(dt)
     --Smooth out the dts to avoid any big jumps
 
     self.TIMERS:update_real_time(dt)
+    if self.SETTINGS:is_reduced_motion() then
+        self.TIMERS:set_real_shader_time(300)
+    else
+        self.TIMERS:set_real_shader_time(self.TIMERS:get_real_time())
+    end
 
     self:set_alerts()
     self:timer_checkpoint('alerts', 'update')

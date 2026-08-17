@@ -134,4 +134,10 @@ function Settings:set_paused(paused)
     self.data.paused = paused
 end
 
+---是否减少动态效果
+---@return boolean
+function Settings:is_reduced_motion()
+    return false
+end
+
 return Settings

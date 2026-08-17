@@ -31,8 +31,16 @@ function Timer:get_frames()
     return self.FRAMES
 end
 
+function Timer:get_real_time()
+    return self.REAL
+end
+
 function Timer:update_real_time(dt)
     self.REAL = self.REAL + dt
+end
+
+function Timer:set_real_shader_time(time)
+    self.REAL_SHADER = time
 end
 
 function Timer:update_game_time(dt)
