@@ -295,6 +295,7 @@ function App:draw()
     --draw the room
     reset_drawhash()
     if self.OVERLAY_TUTORIAL and not self.OVERLAY_MENU then self.under_overlay = true end
+    self:timer_checkpoint('start->canvas', 'draw')
     love.graphics.setCanvas({ self.CANVAS })
     love.graphics.push()
     love.graphics.scale(1)
