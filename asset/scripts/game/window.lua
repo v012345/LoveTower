@@ -31,11 +31,12 @@ function Window:init(app)
         w = self.TILE_W + 2 * self.ROOM_PADDING_W,
         h = self.TILE_H + 2 * self.ROOM_PADDING_H
     }
+    local orig_w = self.WINDOWTRANS.w * tile_size * tile_scale
+    local orig_h = self.WINDOWTRANS.h * tile_size * tile_scale
     self.window_prev = {
         orig_scale = tile_scale,
-        w = self.WINDOWTRANS.w * tile_size * tile_scale,
-        h = self.WINDOWTRANS.h * tile_size * tile_scale,
-        orig_ratio = self.WINDOWTRANS.w * tile_size * tile_scale / (self.WINDOWTRANS.h * tile_size * tile_scale)
+        orig_size = Size(orig_w, orig_h),
+        orig_ratio = orig_w / orig_h
     }
 end
 
@@ -61,13 +62,13 @@ end
 ---初始宽高比例
 ---@return number
 function Window:get_orig_ratio()
-
+    return self.window_prev.orig_ratio
 end
 
 ---初始大小
 ---@return Size
 function Window:get_orig_size()
-
+    return self.window_prev.orig_size
 end
 
 ---comment
