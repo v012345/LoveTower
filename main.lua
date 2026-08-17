@@ -140,11 +140,9 @@ function love.resize(w, h)
     end
 
 
-    App.CANV_SCALE = 1
-
-    local room = Room.instance:get_root_node()
+    local room = App.ROOM
     if room then
-        local pixels_per_tile = App.Tile:get_pixels_per_tile()
+        local pixels_per_tile = App.window:get_pixels_per_tile()
         local room_transform = Room.instance:get_transform()
         if curr_ratio < orig_ratio then
             room.T.x = room_transform.x
@@ -160,7 +158,7 @@ function love.resize(w, h)
         --     r = G.ROOM.T.r
         -- }
     end
-
+    App.CANV_SCALE = 1
     App.window:set_real_size(w, h)
     App.CANVAS = love.graphics.newCanvas(w * App.CANV_SCALE, h * App.CANV_SCALE, { type = '2d', readable = true })
     App.CANVAS:setFilter("linear", "linear")

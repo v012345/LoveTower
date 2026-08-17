@@ -26,10 +26,4 @@ function Tile:set_scale(scale)
     self.TILESCALE = scale
 end
 
----每个 Tile 以像素为单位的大小, Tile 就是方形的!
----@return number
-function Tile:get_pixels_per_tile()
-    return self.TILESCALE * self.TILESIZE
-end
-
 return Tile

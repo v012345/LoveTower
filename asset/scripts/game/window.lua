@@ -96,6 +96,12 @@ function Window:set_transform_wh(w, h)
 
 end
 
+---每个 Tile 以像素为单位的大小, Tile 就是方形的!
+---@return number
+function Window:get_pixels_per_tile()
+    return self.TILESIZE * self.TILESCALE
+end
+
 function Window:update()
 end
 
