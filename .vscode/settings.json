@@ -14,7 +14,8 @@
         "compress_and_save",
         "get_compressed",
         "boot_timer",
-        "create_node_states"
+        "create_node_states",
+        "nuGC"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto"
 }

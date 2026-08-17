@@ -384,6 +384,7 @@ function App:init_game_object()
 end
 
 function App:update(dt)
+    nuGC(nil, nil, true)
     do return end
     self.FRAMES.MOVE = self.FRAMES.MOVE + 1
     Timer.instance:update_real_time(dt)
