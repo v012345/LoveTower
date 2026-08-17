@@ -32,5 +32,10 @@ function FeatureConfig:get_instance()
     return self
 end
 
+---@return boolean
+function FeatureConfig:is_perf_overlay_enabled()
+    return self.cfg.F_ENABLE_PERF_OVERLAY
+end
+
 ---@type FeatureConfig
 FeatureCfg = FeatureConfig()

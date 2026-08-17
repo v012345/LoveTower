@@ -385,8 +385,8 @@ end
 
 function App:update(dt)
     nuGC(nil, nil, true)
-    do return end
     self.FRAMES.MOVE = self.FRAMES.MOVE + 1
+    do return end
     Timer.instance:update_real_time(dt)
     if not self.fbf or self.new_frame then
         self.new_frame = false
@@ -673,6 +673,49 @@ function App:main_menu()
     -- )
 
     --- 创建主菜单场景
+end
+
+function App:timer_checkpoint(label, type, reset)
+    self.PREV_GARB = self.PREV_GARB or 0
+    if not self.Features:is_perf_overlay_enabled() then return end
+
+    G.check = G.check or {
+        draw = {
+            checkpoint_list = {},
+            checkpoints = 0,
+            last_time = 0,
+        },
+        update = {
+            checkpoint_list = {},
+            checkpoints = 0,
+            last_time = 0,
+        }
+    }
+    local cp = G.check[type]
+    if reset then
+        cp.last_time = love.timer.getTime()
+        cp.checkpoints = 0
+        return
+    end
+
+    cp.checkpoint_list[cp.checkpoints + 1] = cp.checkpoint_list[cp.checkpoints + 1] or {}
+    cp.checkpoints = cp.checkpoints + 1
+    cp.checkpoint_list[cp.checkpoints].label = label .. ': ' .. (collectgarbage("count") - G.PREV_GARB)
+    cp.checkpoint_list[cp.checkpoints].time = love.timer.getTime()
+    cp.checkpoint_list[cp.checkpoints].TTC = cp.checkpoint_list[cp.checkpoints].time - cp.last_time
+    cp.checkpoint_list[cp.checkpoints].trend = cp.checkpoint_list[cp.checkpoints].trend or {}
+    cp.checkpoint_list[cp.checkpoints].states = cp.checkpoint_list[cp.checkpoints].states or {}
+    table.insert(cp.checkpoint_list[cp.checkpoints].trend, 1, cp.checkpoint_list[cp.checkpoints].TTC)
+    table.insert(cp.checkpoint_list[cp.checkpoints].states, 1, G.STATE)
+    cp.checkpoint_list[cp.checkpoints].trend[401] = nil
+    cp.checkpoint_list[cp.checkpoints].states[401] = nil
+    cp.last_time = cp.checkpoint_list[cp.checkpoints].time
+    G.PREV_GARB = collectgarbage("count")
+    local av = 0
+    for k, v in ipairs(cp.checkpoint_list[cp.checkpoints].trend) do
+        av = av + v / #cp.checkpoint_list[cp.checkpoints].trend
+    end
+    cp.checkpoint_list[cp.checkpoints].average = av
 end
 
 ---@type App
