@@ -18,12 +18,15 @@ function Node:init(T, container)
     self.config = self.config or {}
 
     self.T = T:clone()
+    --Transform to use for collision detection
     self.CT = self.T
-    self.parent = nil
 
-
+    --Create the offset tables, used to determine things like drag offset and 3d shader effects
     self.click_offset = Coordinate()
     self.hover_offset = Coordinate()
+
+    --To keep track of all nodes created on pause. If true, this node moves normally even when the G.TIMERS.TOTAL doesn't increment
+    self.created_on_pause = App.SETTINGS:is_paused()
 
     self.ID = generate_id()
 
@@ -60,8 +63,6 @@ function Node:init(T, container)
     if not App.STAGE_OBJECT_INTERRUPT then
         table.insert(App.STAGE_OBJECTS[App.STAGE], self)
     end
-
-    self.created_on_pause = App.SETTINGS:is_paused()
 end
 
 --Draws self, then adds self the the draw hash, then draws all children
