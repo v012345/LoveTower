@@ -482,6 +482,7 @@ function Canvas:setFilter(filter, filtermag) end
 UIDdefinition = {}
 
 
+--#region love.window
 ---@class love.window
 love.window = love.window or {}
 
@@ -491,35 +492,11 @@ love.window = love.window or {}
 ---@return table flags
 function love.window.getMode() end
 
+--#endregion
 
----@param x? number
----@param y? number
----@return Coordinate
-function Coordinate(x, y) end
 
----游戏瓦片坐标
----@class Point
----@field x number
----@field y number
 
----@class bit
-bit = {}
----@param a number
----@param b number
----@return number
-function bit.lshift(a, b) end
 
----@param a number
----@param b number
----@param ... number
----@return number
-function bit.bor(a, b, ...) end
-
----@param a number
----@param b number
----@param ... number
----@return number
-function bit.band(a, b, ...) end
 
 --- Sets the display mode and properties of the window, without modifying unspecified properties.
 --- If width or height is 0, updateMode will use the width and height of the desktop.
