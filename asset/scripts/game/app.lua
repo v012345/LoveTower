@@ -409,6 +409,14 @@ function App:update(dt)
         self.new_frame = false
         self:set_alerts()
         self:timer_checkpoint('alerts', 'update')
+        local http_resp = self.HTTP_MANAGER.in_channel:pop()
+        if http_resp then
+            self.ARGS.HIGH_SCORE_RESPONSE = http_resp
+        end
+
+        --暂停游戏时, dt 为 0
+        if self.SETTINGS:is_paused() then dt = 0 end
+
 
         self.TIMERS:update_game_time(dt)
         EventManager.instance:update(Timer.instance.real_dt)
