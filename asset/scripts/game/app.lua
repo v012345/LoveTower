@@ -10,10 +10,11 @@ local Color = require "asset.scripts.game.color"
 local SoundManager = require "asset.scripts.game.sound_manager"
 local SaveManager = require "asset.scripts.game.save_manager"
 local HttpManager = require "asset.scripts.game.http_manager"
-
+local Tile = require "asset.scripts.game.tile"
 
 ---在这里不要做耗时的操作
 function App:init()
+    self.Features = FeatureCfg
     --计时器
     self.TIMERS = Timer()
     self.FRAMES = self.TIMERS:get_frames()
@@ -32,18 +33,25 @@ function App:init()
     self.PROFILES = Profile()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     self.ID = 0 -- ID 生成器
     self.DEBUG = true
     self.under_overlay = false
 
     self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
     self.CANVAS:setFilter('linear', 'linear')
-    --- 设计大小
-    --- 窗口大小为 1606*941, 设计大小为 1460*840
-    --- 宽高比为 1.74
-    self.ROOM_PADDING_H = 0.7
-    self.ROOM_PADDING_W = 1
-
 
     self.WINDOW = {
         TRANS = Transform(0, 0, 0, 0),
@@ -90,11 +98,6 @@ function App:init()
     self.fbf = false       -- frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧
     self.new_frame = false -- 是否是新的一帧, 如果为 true, 则渲染新的一帧, 否则渲染旧的一帧
 
-    self.ROOM = {
-        Node = nil,
-        ORIG = Transform(),
-    }
-
 
     self.PROGRESS = {
         joker_stickers = { tally = 0, of = 0 },
@@ -105,6 +108,7 @@ function App:init()
     self.SOUND_MANAGER = SoundManager()
     self.SAVE_MANAGER = SaveManager()
     self.HTTP_MANAGER = HttpManager()
+    self.Tile = Tile()
 end
 
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
@@ -114,14 +118,14 @@ function App:start_up()
     boot_timer("start", "settings", 0.1)
     self:init_window()
 
-    if FeatureCfg:is_sound_thread_enabled() then
+    if self.Features:is_sound_thread_enabled() then
         boot_timer('window init', 'soundmanager2')
         -- call the sound manager to prepare the thread to play sounds
         self.SOUND_MANAGER:boot()
         boot_timer('soundmanager2', 'savemanager', 0.22)
     end
 
-    if FeatureCfg:is_cta_enabled() then
+    if self.Features:is_cta_enabled() then
         self.SETTINGS:switch_to_demo()
     end
 
@@ -131,7 +135,7 @@ function App:start_up()
 
     self.SAVE_MANAGER:boot()
     boot_timer('window init', 'savemanager', 0.3)
-    if FeatureCfg:is_http_scores_enabled() then
+    if self.Features:is_http_scores_enabled() then
         self.HTTP_MANAGER:boot()
     end
     boot_timer('savemanager', 'shaders', 0.4)
@@ -154,6 +158,8 @@ function App:start_up()
     love.joystick.loadGamepadMappings("asset/resources/gamecontrollerdb.txt")
     boot_timer('controllers', 'localization', 0.8)
 
+
+
     local used_no = self.PROFILES:load(self.SETTINGS:get_profile_no())
     self.SETTINGS:set_profile_no(used_no)
     self:set_render_settings()
@@ -162,8 +168,9 @@ function App:start_up()
     boot_timer('protos', 'shared sprites', 0.9)
 
     --For globally shared sprites
-    -- local T = Transform(0, 0, t CARD_W, self.CARD_H)
-    -- self.shared_debuff = Sprite(T, self.ASSET_ATLAS["centers"], { x = 4, y = 0 })
+    local card_w, card_h = GameCfg:get_card_size()
+    local T = Transform(0, 0, card_w, card_h)
+    self.shared_debuff = Sprite(T, self.ASSET_ATLAS["centers"], { x = 4, y = 0 })
 
     boot_timer('shared sprites', 'prep stage', 0.95)
 
@@ -203,9 +210,8 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.STAGE = new_stage
     self.STATE = new_state
     self.STATE_COMPLETE = false
-    self.SETTINGS.paused = false
-    -- 窗口大小是 self.TILE_W + 2 * self.ROOM_PADDING_W 和 self.TILE_H + 2 * self.ROOM_PADDING_H
-    -- ROOM 大小是 self.TILE_W 和 self.TILE_H, 正好嵌入 Padding 矩形里
+    self.SETTINGS:set_paused(false)
+    self.ROOM = Node(Transform(0, 0, 0, 0))
 
     local transform = Room.instance:get_transform()
     local root_node = Node(transform)

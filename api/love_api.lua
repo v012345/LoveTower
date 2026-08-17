@@ -115,6 +115,18 @@ love.graphics = love.graphics or {}
 ---@class Shader
 Shader = {}
 
+---@class Quad
+Quad = {}
+
+---@param x number  The top-left position in the Texture along the x-axis.
+---@param y number  The top-left position in the Texture along the y-axis.
+---@param width number  The width of the Quad in the Texture. (Must be greater than 0.)
+---@param height number  The height of the Quad in the Texture. (Must be greater than 0.)
+---@param sw number  The reference width, the width of the Texture. (Must be greater than 0.)
+---@param sh number  The reference height, the height of the Texture. (Must be greater than 0.)
+---@return Quad quad
+function love.graphics.newQuad(x, y, width, height, sw, sh) end
+
 ---@param code string The pixel shader or vertex shader code, or a filename pointing to a file with the code.
 ---@return Shader shader
 function love.graphics.newShader(code) end
@@ -455,8 +467,8 @@ function love.system.getOS() end
 
 ---@class Canvas
 Canvas = {}
----@param filter    string "nearest" | "linear"
----@param filtermag string "nearest" | "linear"
+---@param filter "nearest" | "linear"
+---@param filtermag "nearest" | "linear"
 ---@return nil
 function Canvas:setFilter(filter, filtermag) end
 
@@ -576,12 +588,6 @@ function love.window.updateMode(width, height, settings) end
 ---@field real_size  Size      窗口真实大小
 ---@field orig_size  Size      窗口原始大小
 ---@field orig_scale number    窗口原始缩放
-
----@class SpriteAtlas
----@field name string
----@field image love.Image
----@field px number
----@field py number
 
 ---@class Particle
 ---@field draw     boolean    是否绘制

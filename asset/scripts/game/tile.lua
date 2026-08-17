@@ -1,6 +1,6 @@
 ---@class Tile: Object
 ---@field private init_scale number 初始缩放,用于窗口大小变化时, 计算新的缩放
-Tile = Object:extend()
+local Tile = Object:extend()
 
 function Tile:init()
     self.TRANS = Transform(0, 0, 0, 0)
@@ -32,5 +32,4 @@ function Tile:get_pixels_per_tile()
     return self.TILESCALE * self.TILESIZE
 end
 
----@type Tile
-Tile.instance = Tile()
+return Tile
