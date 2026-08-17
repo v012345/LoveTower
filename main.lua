@@ -128,15 +128,15 @@ function love.resize(w, h)
     local curr_ratio = w / h
     local orig_size = App.window:get_orig_size()
     local orig_ratio = App.window:get_orig_ratio()
-    local orig_tile_scale = App.Tile:get_init_scale()
+    local orig_scale = App.window:get_orig_scale()
 
 
     if curr_ratio < orig_ratio then
         -- 相对变窄了
-        App.Tile:set_scale(orig_tile_scale * w / orig_size.w)
+        App.window:set_scale(orig_scale * w / orig_size.w)
     else
         -- 相对变宽了
-        App.Tile:set_scale(orig_tile_scale * h / orig_size.h)
+        App.window:set_scale(orig_scale * h / orig_size.h)
     end
 
 

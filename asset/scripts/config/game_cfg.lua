@@ -35,9 +35,6 @@ function GameConfig:get_tile_height()
     return self.render_cfg.TILE_H
 end
 
-function GameConfig:get_render_cfg()
-    return self.render_cfg
-end
 
 function GameConfig:get_version()
     return self.game_cfg.VERSION

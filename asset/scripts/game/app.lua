@@ -33,7 +33,6 @@ function App:init()
     self.PROFILES = Profile()
 
 
-    self.Render = GameCfg:get_render_cfg()
     self.STATES = STATES
     self.STAGES = STAGES
     self.STAGE_OBJECTS = { {}, {}, {} }

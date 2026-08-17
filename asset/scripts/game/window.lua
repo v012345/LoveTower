@@ -17,8 +17,8 @@ function Window:init(app)
     self.app = app
     self.TILE_W = GameCfg:get_tile_width()
     self.TILE_H = GameCfg:get_tile_height()
-    local tile_scale = GameCfg:get_tile_scale()
-    local tile_size = GameCfg:get_tile_size()
+    self.TILESCALE = GameCfg:get_tile_scale()
+    self.TILESIZE = GameCfg:get_tile_size()
     -- Initialize the window
     --- 设计大小
     --- 窗口大小为 1606*941, 设计大小为 1460*840
@@ -31,10 +31,10 @@ function Window:init(app)
         w = self.TILE_W + 2 * self.ROOM_PADDING_W,
         h = self.TILE_H + 2 * self.ROOM_PADDING_H
     }
-    local orig_w = self.WINDOWTRANS.w * tile_size * tile_scale
-    local orig_h = self.WINDOWTRANS.h * tile_size * tile_scale
+    local orig_w = self.WINDOWTRANS.w * self.TILESIZE * self.TILESCALE
+    local orig_h = self.WINDOWTRANS.h * self.TILESIZE * self.TILESCALE
     self.window_prev = {
-        orig_scale = tile_scale,
+        orig_scale = self.TILESCALE,
         orig_size = Size(orig_w, orig_h),
         orig_ratio = orig_w / orig_h
     }
@@ -69,6 +69,11 @@ end
 ---@return Size
 function Window:get_orig_size()
     return self.window_prev.orig_size
+end
+
+---@return number
+function Window:get_orig_scale()
+    return self.window_prev.orig_scale
 end
 
 ---comment
