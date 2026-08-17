@@ -10,6 +10,8 @@
 ---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
 ---@field I NodeList
 ---@field under_overlay boolean 是否显示底层覆盖?????? 不知道是什么东西
+---@field OVERLAY_MENU UIBox 菜单
+---@field OVERLAY_TUTORIAL UIBox 教程
 ---@field TILESCALE number 地图缩放比例
 ---@field TILESIZE number 地图单元格大小
 ---@field STAGE_OBJECT_INTERRUPT boolean 不知道具体作用是什么

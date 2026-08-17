@@ -292,8 +292,9 @@ end
 
 function App:draw()
     self.FRAMES.DRAW = self.FRAMES.DRAW + 1
-    Log:info('draw: ' .. self.FRAMES.DRAW)
-    do return end
+    --draw the room
+    reset_drawhash()
+    if self.OVERLAY_TUTORIAL and not self.OVERLAY_MENU then self.under_overlay = true end
     love.graphics.setCanvas({ self.CANVAS })
     love.graphics.push()
     love.graphics.scale(1)
