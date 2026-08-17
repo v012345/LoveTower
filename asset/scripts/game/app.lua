@@ -437,6 +437,47 @@ function App:draw()
                 self.ALERT_ON_SCREEN = true
                 love.graphics.pop()
             end
+
+            if self.CONTROLLER.dragging.target and self.CONTROLLER.dragging.target ~= self.CONTROLLER.focused.target then
+                love.graphics.push()
+                self.CONTROLLER.dragging.target:translate_container()
+                self.CONTROLLER.dragging.target:draw()
+                love.graphics.pop()
+            end
+
+            if self.CONTROLLER.focused.target and getmetatable(self.CONTROLLER.focused.target) == Card and (self.CONTROLLER.focused.target.area ~= self.hand or self.CONTROLLER.focused.target == self.CONTROLLER.dragging.target) then
+                love.graphics.push()
+                self.CONTROLLER.focused.target:translate_container()
+                self.CONTROLLER.focused.target:draw()
+                love.graphics.pop()
+            end
+
+            for k, v in pairs(self.I.POPUP) do
+                love.graphics.push()
+                v:translate_container()
+                v:draw()
+                love.graphics.pop()
+            end
+
+            if self.achievement_notification then
+                love.graphics.push()
+                self.achievement_notification:translate_container()
+                self.achievement_notification:draw()
+                love.graphics.pop()
+            end
+
+            if self.screenwipe then
+                love.graphics.push()
+                self.screenwipe:translate_container()
+                self.screenwipe:draw()
+                love.graphics.pop()
+            end
+            love.graphics.push()
+            local pixels_per_tile = self.window:get_pixels_per_tile()
+            love.graphics.translate(-self.CURSOR.T.w * pixels_per_tile / 2, -self.CURSOR.T.h * pixels_per_tile / 2)
+            self.CURSOR:draw()
+            love.graphics.pop()
+            self:timer_checkpoint('rest', 'draw')
         end
     end
 
