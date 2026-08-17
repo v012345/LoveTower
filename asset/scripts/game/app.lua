@@ -388,8 +388,15 @@ function App:update(dt)
     self.FRAMES.MOVE = self.FRAMES.MOVE + 1
     self:timer_checkpoint('start->discovery', 'update')
     if not self.SETTINGS:is_tutorial_complete() then self.FUNCS.tutorial_controller() end
-    do return end
-    Timer.instance:update_real_time(dt)
+    self:timer_checkpoint('tallies', 'update')
+    self:modulate_sound(dt)
+    self:timer_checkpoint('sounds', 'update')
+    self.window:update_canvas_juice(dt)
+    self:timer_checkpoint('canvas and juice', 'update')
+
+    --Smooth out the dts to avoid any big jumps
+
+    self.TIMERS:update_real_time(dt)
     if not self.fbf or self.new_frame then
         self.new_frame = false
         Timer.instance:update_game_time(dt)
@@ -658,6 +665,12 @@ function App:splash_screen()
         --         end)
         --     }))
     end
+end
+
+---调制声音
+---@param dt number
+function App:modulate_sound(dt)
+    -- 先不实现, 默认不调制声音
 end
 
 function App:main_menu()

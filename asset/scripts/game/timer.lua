@@ -31,6 +31,10 @@ function Timer:get_frames()
     return self.FRAMES
 end
 
+function Timer:update_real_time(dt)
+    self.REAL = self.REAL + dt
+end
+
 function Timer:update_game_time(dt)
     self.TOTAL = self.TOTAL + dt * self.SPEEDFACTOR
 end

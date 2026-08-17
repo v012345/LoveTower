@@ -80,6 +80,12 @@ function Window:set_tile_scale(scale)
     self.TILESCALE = scale
 end
 
+---更新画布抖动
+---@param dt number
+function Window:update_canvas_juice(dt)
+    -- 先不实现, 默认不更新画布抖动
+end
+
 ---comment
 ---@return Size
 function Window:get_real_size()
