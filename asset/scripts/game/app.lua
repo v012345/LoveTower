@@ -291,6 +291,8 @@ function App:update(dt)
 end
 
 function App:draw()
+    self.FRAMES.DRAW = self.FRAMES.DRAW + 1
+    Log:info('draw: ' .. self.FRAMES.DRAW)
     do return end
     love.graphics.setCanvas({ self.CANVAS })
     love.graphics.push()
