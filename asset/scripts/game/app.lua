@@ -397,6 +397,9 @@ function App:update(dt)
     --Smooth out the dts to avoid any big jumps
 
     self.TIMERS:update_real_time(dt)
+
+    self:set_alerts()
+    self:timer_checkpoint('alerts', 'update')
     if not self.fbf or self.new_frame then
         self.new_frame = false
         self.TIMERS:update_game_time(dt)
