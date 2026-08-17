@@ -17,16 +17,16 @@ function Event:init(config)
     self.blocking = config.blocking
     self.blockable = config.blockable
     self.complete = false
-
-
-
+    self.start_timer = config.start_timer
     self.func = config.func or function() return true end
-    self.timer = config.timer or Timer.instance:get_total_timer()
-    self.time = self:timer()
-    self.start_timer = config.start_timer or false
     self.delay = config.delay or 0
     self.no_delete = config.no_delete
     self.created_on_pause = config.pause_force or G.SETTINGS.paused
+
+
+
+    self.timer = config.timer or Timer.instance:get_total_timer()
+    self.time = self:timer()
     self.ease_params = {
         type = config.ease or 'lerp',
         ref_table = config.ref_table,

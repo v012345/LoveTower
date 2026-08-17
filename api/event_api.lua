@@ -26,7 +26,7 @@ EventStatus = {}
 ---@field trigger EventTrigger 触发器函数
 ---@field blocking boolean
 ---@field blockable boolean
----@field func function
+---@field func function 
 ---@field timer function 使用的定时器函数
 ---@field time number
 ---@field complete boolean 是否完成
