@@ -335,6 +335,29 @@ function App:draw()
             self.SPLASH_LOGO:draw()
             love.graphics.pop()
         end
+        if self.debug_splash_size_toggle then
+            for k, v in pairs(self.I.CARDAREA) do
+                if not v.parent then
+                    love.graphics.push()
+                    v:translate_container()
+                    v:draw()
+                    love.graphics.pop()
+                end
+            end
+        else
+            if not self.OVERLAY_MENU or not self.Features:is_hide_bg() then
+                self:timer_checkpoint('primatives', 'draw')
+                for k, v in pairs(self.I.UIBOX) do
+                    if not v.attention_text and not v.parent and v ~= self.OVERLAY_MENU and v ~= self.screenwipe and v ~= self.OVERLAY_TUTORIAL and v ~= self.debug_tools and v ~= self.online_leaderboard and v ~= self.achievement_notification then
+                        love.graphics.push()
+                        v:translate_container()
+                        v:draw()
+                        love.graphics.pop()
+                    end
+                end
+                self:timer_checkpoint('uiboxes', 'draw')
+            end
+        end
     end
 
 

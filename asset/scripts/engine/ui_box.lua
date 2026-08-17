@@ -1,4 +1,4 @@
----@class UIBox
+---@class (partial) UIBox: Moveable
 UIBox = Moveable:extend()
 ---@param T Transform
 ---@param definition UIDdefinition

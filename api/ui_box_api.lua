@@ -1,2 +1,3 @@
----@class UIBox: Moveable
+---@class (partial) UIBox: Moveable
 ---@field UIRoot UIElement
+---@field attention_text boolean 是否是提示文本
