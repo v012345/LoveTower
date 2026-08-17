@@ -32,8 +32,6 @@ function Event:init(config)
             ref_value = config.ref_value,
             start_val = config.start_val,
             end_val = config.ease_to,
-            start_time = nil,
-            end_time = nil,
         }
         self.func = config.func or function(t) return t end
     elseif self.trigger == EventTrigger.condition then

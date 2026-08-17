@@ -10,8 +10,9 @@
 ---@field start_timer? boolean
 ---@field timer?       function
 ---@field ref_table?   table
----@field ref_value?   string
----@field ease_to?     any
+---@field ref_value?   any
+---@field ease_to?     number
+---@field start_val?  number
 ---@field stop_val?    any
 ---@field pause_force? boolean
 ---@field ease? 'lerp' | 'elastic' | 'quad' 缓动类型
@@ -44,10 +45,10 @@
 ---@field type 'lerp' | 'elastic' | 'quad' 缓动类型
 ---@field ref_table table
 ---@field ref_value string
----@field start_val any
----@field end_val any
----@field start_time number
----@field end_time number
+---@field start_val number
+---@field end_val number
+---@field start_time? number
+---@field end_time? number
 
 ---@class ConditionParams
 ---@field ref_table table
