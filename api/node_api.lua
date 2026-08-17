@@ -1,5 +1,24 @@
 ---@meta
 
+---@class (partial) Node: Object
+---@field T Transform The transform of the node | Transform: 位置/大小/旋转 {x, y, w, h, r, scale}  (逻辑坐标)
+---@field CT Transform 碰撞检测的transform, 与 T 相同
+---@field ID number 唯一ID
+---@field states NodeStates 节点状态
+---@field FRAME { DRAW: number, MOVE: number } 帧计数器, 用于记录绘制和移动的帧数
+---@field children Children 子节点
+---@field container Node 就是父节点, 子节点会被父节点影响
+---@field config table 当前节点的元数据
+---@field under_overlay boolean 是否在覆盖层?
+---@field click_offset Coordinate Create the offset tables, used to determine things like drag offset and 3d shader effects
+---@field hover_offset Coordinate Create the offset tables, used to determine things like drag offset and 3d shader effects
+---@field created_on_pause boolean To keep track of all nodes created on pause. If true, this node moves normally even when the G.TIMERS.TOTAL doesn't increment
+---@field ARGS table Store all argument tables here for reuse, because Lua likes to generate garbage
+---@field RETS table Store all return tables here for reuse, because Lua likes to generate garbage
+---@field CALCING boolean 是否正在计算, Moveable 的 move 方法会设置这个为 true
+---@field parent Node 父节点
+---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
+
 ---@class NodeStates
 ---@field visible    boolean                       节点是否可见
 ---@field collide    { can: boolean, is: boolean }
