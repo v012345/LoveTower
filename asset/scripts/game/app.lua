@@ -297,7 +297,7 @@ function App:draw()
     if self.OVERLAY_TUTORIAL and not self.OVERLAY_MENU then self.under_overlay = true end
     love.graphics.setCanvas({ self.CANVAS })
     love.graphics.push()
-    love.graphics.scale(1)
+    love.graphics.scale(self.CANV_SCALE)
 
     love.graphics.setShader()
     love.graphics.clear(0, 0, 0, 1)
