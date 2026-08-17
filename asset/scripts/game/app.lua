@@ -489,7 +489,7 @@ end
 
 --- 目前默认是Windowed模式，1000x650分辨率, 使用第一个显示器, 之后要读用户设置文件中的设置
 function App:init_window()
-    self.window = Window()
+    self.window = Window(self)
     self.window:apply_window_changes(true)
 end
 
