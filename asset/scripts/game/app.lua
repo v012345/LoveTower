@@ -14,7 +14,7 @@ local Tile = require "asset.scripts.game.tile"
 
 ---在这里不要做耗时的操作
 function App:init()
-    self.Features = FeatureCfg
+    self.Features = FeatureCfg:get_instance()
     --计时器
     self.TIMERS = Timer()
     self.FRAMES = self.TIMERS:get_frames()

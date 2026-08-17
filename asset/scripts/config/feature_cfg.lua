@@ -27,5 +27,10 @@ function FeatureConfig:is_http_scores_enabled()
     return self.cfg.F_HTTP_SCORES or true
 end
 
+---@return FeatureConfig
+function FeatureConfig:get_instance()
+    return self
+end
+
 ---@type FeatureConfig
 FeatureCfg = FeatureConfig()
