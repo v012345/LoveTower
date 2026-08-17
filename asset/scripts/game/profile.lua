@@ -89,4 +89,7 @@ function Profile:create_empty_profile()
     }
 end
 
+function Profile:set_profile_progress()
+end
+
 return Profile

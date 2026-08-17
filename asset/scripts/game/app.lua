@@ -179,7 +179,17 @@ function App:start_up()
     self.shared_debuff = Sprite(T, self.ASSET_ATLAS["centers"], { x = 4, y = 0 })
 
     boot_timer('shared sprites', 'prep stage', 0.95)
+    --For the visible cursor
+    self.STAGE_OBJECT_INTERRUPT = true
+    self.CURSOR = Sprite(0, 0, 0.3, 0.3, self.ASSET_ATLAS['gamepad_ui'], { x = 18, y = 0 })
+    self.CURSOR.states.collide.can = false
+    self.STAGE_OBJECT_INTERRUPT = false
 
+    --Create the event manager for the game
+    self.E_MANAGER = EventManager()
+    self.SPEEDFACTOR = 1
+
+    self.PROFILES:set_profile_progress()
     boot_timer('prep stage', 'splash prep', 0.99)
     self:splash_screen()
     boot_timer('splash prep', 'end', 1)
@@ -565,10 +575,6 @@ function App:apply_window_changes(_initial)
         local tab_but = G.OVERLAY_MENU:get_UIE_by_ID('tab_but_Video')
         G.FUNCS.change_tab(tab_but)
     end
-end
-
-function App:set_profile_progress()
-
 end
 
 ---@type App
