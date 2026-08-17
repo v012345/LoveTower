@@ -39,13 +39,17 @@ function Window:init(app)
     }
 end
 
----@return Node
+---@return Node ROOM
+---@return Moveable ROOT_ATTACH
 function Window:create_room()
     self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
     self.ROOM.jiggle = 0
     self.ROOM.states.drag.can = false
     self.ROOM:set_container(self.ROOM)
-    return self.ROOM
+    self.ROOM_ATTACH = Moveable(Transform(0, 0, self.TILE_W, self.TILE_H))
+    self.ROOM_ATTACH.states.drag.can = false
+    self.ROOM_ATTACH:set_container(self.ROOM)
+    return self.ROOM, self.ROOM_ATTACH
 end
 
 ---@param w number 窗口宽度以像素为单位
