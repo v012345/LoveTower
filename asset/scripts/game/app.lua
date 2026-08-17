@@ -225,7 +225,10 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.STATE = new_state
     self.STATE_COMPLETE = false
     self.SETTINGS:set_paused(false)
-    self.ROOM = Node(Transform(0, 0, 0, 0))
+    self.ROOM = self.window:create_room()
+
+
+    Node(Transform(0, 0, 0, 0))
 
     local transform = Room.instance:get_transform()
     local root_node = Node(transform)

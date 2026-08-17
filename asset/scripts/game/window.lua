@@ -7,13 +7,16 @@
 ---@field orig_ratio number 窗口原始宽高比例
 ---@field ROOM_PADDING_W number 房间左右边距, 以地图单元格为单位
 ---@field ROOM_PADDING_H number 房间上下边距, 以地图单元格为单位
+---@field TILE_W number 地图单元格宽度, 以像素为单位
+---@field TILE_H number 地图单元格高度, 以像素为单位
+---@field ROOM Node 房间
 local Window = Object:extend()
 
 ---@param app App
 function Window:init(app)
     self.app = app
-    local tile_width = GameCfg:get_tile_width()
-    local tile_height = GameCfg:get_tile_height()
+    self.TILE_W = GameCfg:get_tile_width()
+    self.TILE_H = GameCfg:get_tile_height()
     local tile_scale = GameCfg:get_tile_scale()
     local tile_size = GameCfg:get_tile_size()
     -- Initialize the window
@@ -25,8 +28,8 @@ function Window:init(app)
     self.WINDOWTRANS = {
         x = 0,
         y = 0,
-        w = tile_width + 2 * self.ROOM_PADDING_W,
-        h = tile_height + 2 * self.ROOM_PADDING_H
+        w = self.TILE_W + 2 * self.ROOM_PADDING_W,
+        h = self.TILE_H + 2 * self.ROOM_PADDING_H
     }
     self.window_prev = {
         orig_scale = tile_scale,
@@ -36,8 +39,11 @@ function Window:init(app)
     }
 end
 
-function Window:init_room()
-    self.ROOM = Node(Transform(0, 0, 0, 0))
+---@return Node
+function Window:create_room()
+    self.ROOM = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
+    self.ROOM.jiggle = 0
+    return self.ROOM
 end
 
 ---@param w number 窗口宽度以像素为单位
