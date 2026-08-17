@@ -4,7 +4,7 @@ Event = Object:extend()
 ---@param config EventConfig
 function Event:init(config)
     config = config or {}
-    self.trigger = config.trigger or Event.immediate
+    self.trigger = config.trigger or EventTrigger.immediate
     self.func = config.func or function() return true end
     self.timer = config.timer or Timer.instance:get_total_timer()
     self.time = self:timer()
@@ -39,9 +39,6 @@ function Event:handle(status)
     self:trigger(status)
     self.complete = status.completed
 end
-
-
-
 
 ---@private
 ---@param status EventStatus
@@ -114,3 +111,12 @@ function Event:ease(status)
         end
     end
 end
+
+---@enum EventTrigger
+EventTrigger = {
+    immediate = Event.immediate,
+    condition = Event.condition,
+    after = Event.after,
+    before = Event.before,
+    ease = Event.ease,
+}

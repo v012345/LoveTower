@@ -1,7 +1,7 @@
 ---@meta
 
 ---@class EventConfig
----@field trigger?     function
+---@field trigger?     EventTrigger
 ---@field delay?       number
 ---@field blockable?   boolean
 ---@field func?        function
