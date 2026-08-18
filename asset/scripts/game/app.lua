@@ -285,6 +285,9 @@ function App:update(dt)
         end
     end
     -- Controller.instance:update(Timer.instance.real_dt)
+    if self.FILE_HANDLER:is_need_save() then
+
+    end
 end
 
 function App:draw()

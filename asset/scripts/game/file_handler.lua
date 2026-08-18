@@ -28,4 +28,15 @@ function FileHandler:is_need_save()
     return false
 end
 
+function FileHandler:reset_status()
+    self.force = false
+    self.last_sent_stage = self.app.STAGE
+    self.last_sent_time = self.app.TIMERS.UPTIME
+    self.last_sent_pause = self.app.SETTINGS:is_paused()
+    self.settings = nil
+    self.progress = nil
+    self.metrics = nil
+    self.run = nil
+end
+
 return FileHandler
