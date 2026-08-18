@@ -1,8 +1,7 @@
----@class Sprite: Moveable
----@field atlas AtlasConfigItem
+---@class (partial) Sprite: Moveable
+---@overload fun(T: Transform, new_sprite_atlas: AtlasConfigItem, sprite_pos: any, container: Node):Sprite
 Sprite = Moveable:extend()
 
----comment
 ---@param T Transform
 ---@param new_sprite_atlas AtlasConfigItem
 ---@param sprite_pos any

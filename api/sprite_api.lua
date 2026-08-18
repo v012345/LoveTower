@@ -1,0 +1,2 @@
+---@class (partial) Sprite: Moveable
+---@field atlas AtlasConfigItem
