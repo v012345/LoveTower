@@ -45,7 +45,19 @@ function App:init()
 
 
 
-
+    self.PREV_GARB = 0
+    self.check = {
+        draw = {
+            checkpoint_list = {},
+            checkpoints = 0,
+            last_time = 0,
+        },
+        update = {
+            checkpoint_list = {},
+            checkpoints = 0,
+            last_time = 0,
+        }
+    }
 
 
 
@@ -530,7 +542,7 @@ function App:draw()
             local resolution = 60 * section_h
             local poll_w = 1
             local v_off = 100
-            for a, b in ipairs({ G.check.update, G.check.draw }) do
+            for a, b in ipairs({ self.check.update, self.check.draw }) do
                 for k, v in ipairs(b.checkpoint_list) do
                     love.graphics.setColor(0, 0, 0, 0.2)
                     love.graphics.rectangle('fill', 12, 20 + v_off, poll_w + poll_w * #v.trend, -section_h + 5)
@@ -552,6 +564,10 @@ function App:draw()
         love.graphics.pop()
     end
     self:timer_checkpoint('debug', 'draw')
+end
+
+function App:state_col(_state)
+    return (_state * 15251252.2 / 5.132) % 1, (_state * 1422.5641311 / 5.42) % 1, (_state * 1522.1523122 / 5.132) % 1, 1
 end
 
 function App:set_render_settings()
@@ -786,22 +802,10 @@ end
 ---@param type string
 ---@param reset? boolean
 function App:timer_checkpoint(label, type, reset)
-    self.PREV_GARB = self.PREV_GARB or 0
     if not self.Features:is_perf_overlay_enabled() then return end
 
-    G.check = G.check or {
-        draw = {
-            checkpoint_list = {},
-            checkpoints = 0,
-            last_time = 0,
-        },
-        update = {
-            checkpoint_list = {},
-            checkpoints = 0,
-            last_time = 0,
-        }
-    }
-    local cp = G.check[type]
+
+    local cp = self.check[type]
     if reset then
         cp.last_time = love.timer.getTime()
         cp.checkpoints = 0
@@ -810,17 +814,17 @@ function App:timer_checkpoint(label, type, reset)
 
     cp.checkpoint_list[cp.checkpoints + 1] = cp.checkpoint_list[cp.checkpoints + 1] or {}
     cp.checkpoints = cp.checkpoints + 1
-    cp.checkpoint_list[cp.checkpoints].label = label .. ': ' .. (collectgarbage("count") - G.PREV_GARB)
+    cp.checkpoint_list[cp.checkpoints].label = label .. ': ' .. (collectgarbage("count") - self.PREV_GARB)
     cp.checkpoint_list[cp.checkpoints].time = love.timer.getTime()
     cp.checkpoint_list[cp.checkpoints].TTC = cp.checkpoint_list[cp.checkpoints].time - cp.last_time
     cp.checkpoint_list[cp.checkpoints].trend = cp.checkpoint_list[cp.checkpoints].trend or {}
     cp.checkpoint_list[cp.checkpoints].states = cp.checkpoint_list[cp.checkpoints].states or {}
     table.insert(cp.checkpoint_list[cp.checkpoints].trend, 1, cp.checkpoint_list[cp.checkpoints].TTC)
-    table.insert(cp.checkpoint_list[cp.checkpoints].states, 1, G.STATE)
+    table.insert(cp.checkpoint_list[cp.checkpoints].states, 1, self.STATE)
     cp.checkpoint_list[cp.checkpoints].trend[401] = nil
     cp.checkpoint_list[cp.checkpoints].states[401] = nil
     cp.last_time = cp.checkpoint_list[cp.checkpoints].time
-    G.PREV_GARB = collectgarbage("count")
+    self.PREV_GARB = collectgarbage("count")
     local av = 0
     for k, v in ipairs(cp.checkpoint_list[cp.checkpoints].trend) do
         av = av + v / #cp.checkpoint_list[cp.checkpoints].trend

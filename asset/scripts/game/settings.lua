@@ -62,6 +62,7 @@ function Settings:init()
         },
         skip_splash = false,
         profile = 1,
+        perf_mode = true,
     }
 end
 
