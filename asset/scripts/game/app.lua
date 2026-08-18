@@ -284,7 +284,8 @@ function App:update(dt)
             v.states.collide.is = false
         end
     end
-    -- Controller.instance:update(Timer.instance.real_dt)
+
+    self.CONTROLLER:update(self.real_dt)
     if self.FILE_HANDLER:is_need_save() then
         self.FILE_HANDLER:save()
         self.FILE_HANDLER:reset_status()
