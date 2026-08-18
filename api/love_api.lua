@@ -1,5 +1,7 @@
 ---@meta
 
+---@class love.Object
+
 ---The Variant type is not a real lua type, but instead indicates what lua values LÖVE can store internally. It is used in love.thread and love.event. Indeed, as it is a "virtual" type, it has no specific representation in lua, and no methods.\
 ---A Variant can be a table, a boolean, a string, a number or LÖVE Objects.
 ---@alias Variant any
@@ -7,6 +9,9 @@
 ---@class love
 love = love or {}
 
+
+
+---@class Drawable: love.Object
 
 ---@enum SourceType
 SourceType = {
@@ -104,7 +109,7 @@ function love.audio.play(source, ...) end
 --#endregion
 
 
----@class love.Text:love.Drawable
+---@class love.Text: Drawable
 love.Text = love.Text or {}
 
 --#region love.graphics
@@ -198,7 +203,7 @@ end
 function love.graphics.setColor(r, g, b, a)
 end
 
----@param drawable  love.Drawable
+---@param drawable  Drawable
 ---@param x         number
 ---@param y         number
 ---@param rotation? number
@@ -370,7 +375,7 @@ function love.filesystem.getSaveDirectory() end
 
 --#region love.image
 
----@class love.Image:love.Drawable
+---@class love.Image: Drawable
 love.Image = love.Image or {}
 
 ---@return number width
@@ -468,19 +473,12 @@ love.system = love.system or {}
 ---@return string os
 function love.system.getOS() end
 
----@class Canvas
+---@class Canvas: Drawable
 Canvas = {}
 ---@param filter "nearest" | "linear"
 ---@param filtermag "nearest" | "linear"
 ---@return nil
 function Canvas:setFilter(filter, filtermag) end
-
----@class UIDdefinition
----@field n      UIT
----@field config UIConfig
----@field nodes? UIDdefinition[]
-UIDdefinition = {}
-
 
 --#region love.window
 ---@class love.window
@@ -535,8 +533,3 @@ function love.window.updateMode(width, height, settings) end
 ---@field dir      number     方向
 ---@field offset   Coordinate 偏移
 ---@field colour   table      颜色
-
-
-
-
----@class love.Drawable
