@@ -157,6 +157,7 @@ function love.resize(w, h)
             room.T.y = App.window.ROOM_PADDING_H
             room.T.x = (w / (pixels_per_tile) - room_transform.w) / 2
         end
+        App.window:save_room_transform()
     end
 
     App.window:set_real_size(w, h)

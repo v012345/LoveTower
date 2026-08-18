@@ -55,6 +55,14 @@ function Window:create_room()
     return self.ROOM, self.ROOM_ATTACH
 end
 
+function Window:save_room_transform()
+    self.ROOM_ORIG = {
+        x = self.ROOM.T.x,
+        y = self.ROOM.T.y,
+        r = self.ROOM.T.r
+    }
+end
+
 function Window:set_room_size(w, h)
     self.ROOM.T.w = w
     self.ROOM.T.h = h
