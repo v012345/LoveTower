@@ -29,7 +29,9 @@ function Window:init(app)
         x = 0,
         y = 0,
         w = self.TILE_W + 2 * self.ROOM_PADDING_W,
-        h = self.TILE_H + 2 * self.ROOM_PADDING_H
+        h = self.TILE_H + 2 * self.ROOM_PADDING_H,
+        real_window_w = 0,
+        real_window_h = 0
     }
     local orig_w = self.WINDOWTRANS.w * self.TILESIZE * self.TILESCALE
     local orig_h = self.WINDOWTRANS.h * self.TILESIZE * self.TILESCALE
@@ -97,7 +99,8 @@ function Window:get_real_size()
 end
 
 function Window:set_real_size(w, h)
-
+    self.WINDOWTRANS.real_window_w = w
+    self.WINDOWTRANS.real_window_h = h
 end
 
 ---@param w number 窗口宽度
