@@ -146,18 +146,21 @@ function love.resize(w, h)
 
     local room = App.ROOM
     if room then
+        App.window:set_room_size(App.window.TILE_W, App.window.TILE_H)
+
         local pixels_per_tile = App.window:get_pixels_per_tile()
         local room_transform = App.ROOM.T
         if curr_ratio < orig_ratio then
-            room.T.x = room_transform.x
+            room.T.x = App.window.ROOM_PADDING_W
             room.T.y = (h / (pixels_per_tile) - room_transform.h) / 2
         else
-            room.T.y = room_transform.y
+            room.T.y = App.window.ROOM_PADDING_H
             room.T.x = (w / (pixels_per_tile) - room_transform.w) / 2
         end
     end
-    App.CANV_SCALE = 1
+
     App.window:set_real_size(w, h)
+    App.CANV_SCALE = 1
 
     if love.system.getOS() == 'Windows' and false then --implement later if needed
         local render_w, render_h = love.window.getDesktopDimensions(App.SETTINGS.WINDOW.selected_display)

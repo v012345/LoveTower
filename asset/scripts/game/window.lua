@@ -55,6 +55,13 @@ function Window:create_room()
     return self.ROOM, self.ROOM_ATTACH
 end
 
+function Window:set_room_size(w, h)
+    self.ROOM.T.w = w
+    self.ROOM.T.h = h
+    self.ROOM_ATTACH.T.w = w
+    self.ROOM_ATTACH.T.h = h
+end
+
 ---@param w number 窗口宽度以像素为单位
 ---@param h number 窗口高度以像素为单位
 function Window:init_size(w, h)
