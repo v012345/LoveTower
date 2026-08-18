@@ -636,7 +636,7 @@ function App:splash_screen()
 
                 --dissolve fool card and start to fade in the vortex
                 self.E_MANAGER:add_event(Event({
-                    trigger = 'after',
+                    trigger = EventTrigger.after,
                     delay = 1.8,
                     func = (function() --|||||||||||
                         SC:start_dissolve({ self.C.WHITE, self.C.WHITE }, true, 12, true)
@@ -675,7 +675,7 @@ function App:splash_screen()
                 for i = 1, 200 do
                     temp_del = temp_del or 3
                     self.E_MANAGER:add_event(Event({
-                        trigger = 'after',
+                        trigger = EventTrigger.after,
                         blockable = false,
                         delay = temp_del,
                         func = (function()
@@ -711,7 +711,7 @@ function App:splash_screen()
 
                 --when faded to white, spit out the 'Fool's' cards and slowly have them settle in to place
                 self.E_MANAGER:add_event(Event({
-                    trigger = 'after',
+                    trigger = EventTrigger.after,
                     delay = 2.,
                     func = (function()
                         self.SPLASH_BACK:remove()
