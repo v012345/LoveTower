@@ -491,21 +491,20 @@ function App:draw()
     if (not self.recording_mode or self.video_control) and true then
         self.ARGS.eased_cursor_pos = self.ARGS.eased_cursor_pos or { x = self.CURSOR.T.x, y = self.CURSOR.T.y, sx = self.CONTROLLER.cursor_position.x, sy = self.CONTROLLER.cursor_position.y }
         self.screenwipe_amt = self.screenwipe_amt and (0.95 * self.screenwipe_amt + 0.05 * ((self.screenwipe and 0.4 or self.screenglitch and 0.4) or 0)) or 1
-        self.SETTINGS.GRAPHICS.crt = G.SETTINGS.GRAPHICS.crt * 0.3
-        self.SHADERS['CRT']:send('distortion_fac', { 1.0 + 0.07 * G.SETTINGS.GRAPHICS.crt / 100, 1.0 + 0.1 * G.SETTINGS.GRAPHICS.crt / 100 })
-        self.SHADERS['CRT']:send('scale_fac', { 1.0 - 0.008 * G.SETTINGS.GRAPHICS.crt / 100, 1.0 - 0.008 * G.SETTINGS.GRAPHICS.crt / 100 })
+        local crt = self.SETTINGS.data.GRAPHICS.crt * 0.3
+        self.SHADERS['CRT']:send('distortion_fac', { 1.0 + 0.07 * crt / 100, 1.0 + 0.1 * crt / 100 })
+        self.SHADERS['CRT']:send('scale_fac', { 1.0 - 0.008 * crt / 100, 1.0 - 0.008 * crt / 100 })
         self.SHADERS['CRT']:send('feather_fac', 0.01)
-        self.SHADERS['CRT']:send('bloom_fac', G.SETTINGS.GRAPHICS.bloom - 1)
-        self.SHADERS['CRT']:send('time', 400 + G.TIMERS.REAL)
-        self.SHADERS['CRT']:send('noise_fac', 0.001 * G.SETTINGS.GRAPHICS.crt / 100)
-        self.SHADERS['CRT']:send('crt_intensity', 0.16 * G.SETTINGS.GRAPHICS.crt / 100)
-        self.SHADERS['CRT']:send('glitch_intensity', 0) --0.1*G.SETTINGS.GRAPHICS.crt/100 + (G.screenwipe_amt) + 1)
-        self.SHADERS['CRT']:send('scanlines', G.CANVAS:getPixelHeight() * 0.75 / G.CANV_SCALE)
-        self.SHADERS['CRT']:send('mouse_screen_pos', G.video_control and { love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 } or { G.ARGS.eased_cursor_pos.sx, G.ARGS.eased_cursor_pos.sy })
-        self.SHADERS['CRT']:send('screen_scale', G.TILESCALE * G.TILESIZE)
+        self.SHADERS['CRT']:send('bloom_fac', self.SETTINGS.data.GRAPHICS.bloom - 1)
+        self.SHADERS['CRT']:send('time', 400 + self.TIMERS.REAL)
+        self.SHADERS['CRT']:send('noise_fac', 0.001 * crt / 100)
+        self.SHADERS['CRT']:send('crt_intensity', 0.16 * crt / 100)
+        self.SHADERS['CRT']:send('glitch_intensity', 0) --0.1*crt/100 + (G.screenwipe_amt) + 1)
+        self.SHADERS['CRT']:send('scanlines', self.CANVAS:getPixelHeight() * 0.75 / self.CANV_SCALE)
+        self.SHADERS['CRT']:send('mouse_screen_pos', self.video_control and { love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 } or { self.ARGS.eased_cursor_pos.sx, self.ARGS.eased_cursor_pos.sy })
+        self.SHADERS['CRT']:send('screen_scale', self.window:get_pixels_per_tile())
         self.SHADERS['CRT']:send('hovering', 1)
         love.graphics.setShader(self.SHADERS['CRT'])
-        self.SETTINGS.GRAPHICS.crt = self.SETTINGS.GRAPHICS.crt / 0.3
     end
 
     love.graphics.draw(self.CANVAS, 0, 0)
@@ -520,7 +519,7 @@ function App:draw()
         love.graphics.pop()
     end
     self:timer_checkpoint('canvas', 'draw')
-    if not _RELEASE_MODE and self.DEBUG and not self.video_control and G.F_VERBOSE then
+    if not _RELEASE_MODE and self.DEBUG and not self.video_control and self.F_VERBOSE and false then
         love.graphics.push()
         love.graphics.setColor(0, 1, 1, 1)
         local fps = love.timer.getFPS()
@@ -605,6 +604,9 @@ function App:splash_screen()
 
         self.E_MANAGER:add_event(Event({
             func = function()
+                do
+                    return true
+                end
                 self.TIMERS.TOTAL = 0
                 self.TIMERS.REAL = 0
                 --Prep the splash screen shaders for both the background(colour swirl) and the foreground(white flash), starting at black
