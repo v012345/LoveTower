@@ -1,8 +1,10 @@
 ---@class (partial) FileHandler: Object
----@overload fun():FileHandler
+---@overload fun(app: App):FileHandler
 local FileHandler = Object:extend()
 
-function FileHandler:init()
+---@param app App
+function FileHandler:init(app)
+    self.app = app
     self.update_queued = false
     self.force = false
     self.last_sent_stage = STAGES.NONE
