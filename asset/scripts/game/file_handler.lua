@@ -28,6 +28,10 @@ function FileHandler:is_need_save()
     return false
 end
 
+function FileHandler:save()
+
+end
+
 function FileHandler:reset_status()
     self.force = false
     self.last_sent_stage = self.app.STAGE

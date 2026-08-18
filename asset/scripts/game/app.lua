@@ -286,7 +286,8 @@ function App:update(dt)
     end
     -- Controller.instance:update(Timer.instance.real_dt)
     if self.FILE_HANDLER:is_need_save() then
-
+        self.FILE_HANDLER:save()
+        self.FILE_HANDLER:reset_status()
     end
 end
 
