@@ -27,7 +27,7 @@
 ---@field F_TROPHIES boolean use 'trophy' terminology instead of 'achievemnt'
 ---@field F_PS4_PLAYSTATION_GLYPHS boolean use PS4 glyphs instead of PS5 glyphs for PS controllers
 ---@field F_LOCAL_CLIPBOARD boolean
----@field F_SAVE_TIMER number
+---@field F_SAVE_TIMER number The interval in seconds to save the game
 ---@field F_MOBILE_UI boolean
 ---@field F_HIDE_BETA_LANGS boolean
 ---@field F_DISCORD boolean

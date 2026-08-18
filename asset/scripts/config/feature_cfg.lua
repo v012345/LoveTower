@@ -46,5 +46,9 @@ function FeatureConfig:is_verbose_enabled()
     return self.cfg.F_VERBOSE
 end
 
+function FeatureConfig:get_save_timer()
+    return self.cfg.F_SAVE_TIMER
+end
+
 ---@type FeatureConfig
 FeatureCfg = FeatureConfig()
