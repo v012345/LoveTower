@@ -42,5 +42,9 @@ function FeatureConfig:is_hide_bg()
     return self.cfg.F_HIDE_BG
 end
 
+function FeatureConfig:is_verbose_enabled()
+    return self.cfg.F_VERBOSE
+end
+
 ---@type FeatureConfig
 FeatureCfg = FeatureConfig()

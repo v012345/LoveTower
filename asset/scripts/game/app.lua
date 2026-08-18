@@ -519,13 +519,13 @@ function App:draw()
         love.graphics.pop()
     end
     self:timer_checkpoint('canvas', 'draw')
-    if not _RELEASE_MODE and self.DEBUG and not self.video_control and self.F_VERBOSE then
+    if not _RELEASE_MODE and self.DEBUG and not self.video_control and self.Features:is_verbose_enabled() then
         love.graphics.push()
         love.graphics.setColor(0, 1, 1, 1)
         local fps = love.timer.getFPS()
         love.graphics.print("Current FPS: " .. fps, 10, 10)
 
-        if G.check and G.SETTINGS.perf_mode then
+        if self.check and self.SETTINGS.data.perf_mode then
             local section_h = 30
             local resolution = 60 * section_h
             local poll_w = 1

@@ -26,6 +26,9 @@
 -- 这里还有一个, 如果这里有一些用户自己的配置, 那么需要合并到temp/Config.lua中
 -- 目前先不管, 之后再说
 
+_RELEASE_MODE = false
+_DEMO = true
+
 function love.conf(t)
     -- t.window.title = cfg.window.title
     -- t.window.width = cfg.window.width
