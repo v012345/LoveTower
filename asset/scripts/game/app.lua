@@ -12,6 +12,7 @@ local SaveManager = require "asset.scripts.game.save_manager"
 local HttpManager = require "asset.scripts.game.http_manager"
 local EventManager = require "asset.scripts.game.event_manager"
 local Performance = require "asset.scripts.game.performance"
+local FileHandler = require "asset.scripts.game.file_handler"
 
 ---在这里不要做耗时的操作
 function App:init()
@@ -105,6 +106,7 @@ function App:init()
     self.C = Color
 
     self.Performance = Performance(self)
+    self.FILE_HANDLER = FileHandler(self)
 end
 
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
@@ -283,9 +285,6 @@ function App:update(dt)
         end
     end
     -- Controller.instance:update(Timer.instance.real_dt)
-
-    
-
 end
 
 function App:draw()

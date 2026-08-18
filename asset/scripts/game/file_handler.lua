@@ -2,6 +2,7 @@
 ---@overload fun(app: App):FileHandler
 local FileHandler = Object:extend()
 
+---@private
 ---@param app App
 function FileHandler:init(app)
     self.app = app
