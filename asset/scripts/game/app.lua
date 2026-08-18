@@ -519,7 +519,7 @@ function App:draw()
         love.graphics.pop()
     end
     self:timer_checkpoint('canvas', 'draw')
-    if not _RELEASE_MODE and self.DEBUG and not self.video_control and self.F_VERBOSE and false then
+    if not _RELEASE_MODE and self.DEBUG and not self.video_control and self.F_VERBOSE then
         love.graphics.push()
         love.graphics.setColor(0, 1, 1, 1)
         local fps = love.timer.getFPS()
