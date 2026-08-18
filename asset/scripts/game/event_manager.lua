@@ -10,9 +10,7 @@
 ---@field private queue_timer number
 ---@field private reset_status function
 ---@field public clear_queue function
----@field public update function
----@field public process_queue function
----@field public init function
+---@overload fun():EventManager
 local EventManager = Object:extend()
 
 

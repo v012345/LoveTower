@@ -578,9 +578,6 @@ function App:splash_screen()
 
         self.E_MANAGER:add_event(Event({
             func = function()
-                do
-                    return true
-                end
                 self.TIMERS.TOTAL = 0
                 self.TIMERS.REAL = 0
                 --Prep the splash screen shaders for both the background(colour swirl) and the foreground(white flash), starting at black
