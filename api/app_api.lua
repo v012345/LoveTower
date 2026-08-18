@@ -44,6 +44,8 @@
 ---@field debug_background_toggle boolean 是否显示调试背景
 ---@field debug_UI_toggle boolean 是否显示调试 UI
 ---@field debug_splash_size_toggle boolean 是否显示调试启动画面大小
+---@field recording_mode boolean 是否是录制模式
+---@field video_control boolean 是否是视频控制模式
 
 
 ---@alias NodeList {

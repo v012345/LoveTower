@@ -488,11 +488,71 @@ function App:draw()
     love.graphics.setCanvas(self.AA_CANVAS)
     love.graphics.push()
     love.graphics.setColor(Color.WHITE)
+    if (not self.recording_mode or self.video_control) and true then
+        self.ARGS.eased_cursor_pos = self.ARGS.eased_cursor_pos or { x = self.CURSOR.T.x, y = self.CURSOR.T.y, sx = self.CONTROLLER.cursor_position.x, sy = self.CONTROLLER.cursor_position.y }
+        self.screenwipe_amt = G.screenwipe_amt and (0.95 * G.screenwipe_amt + 0.05 * ((self.screenwipe and 0.4 or self.screenglitch and 0.4) or 0)) or 1
+        self.SETTINGS.GRAPHICS.crt = G.SETTINGS.GRAPHICS.crt * 0.3
+        self.SHADERS['CRT']:send('distortion_fac', { 1.0 + 0.07 * G.SETTINGS.GRAPHICS.crt / 100, 1.0 + 0.1 * G.SETTINGS.GRAPHICS.crt / 100 })
+        self.SHADERS['CRT']:send('scale_fac', { 1.0 - 0.008 * G.SETTINGS.GRAPHICS.crt / 100, 1.0 - 0.008 * G.SETTINGS.GRAPHICS.crt / 100 })
+        self.SHADERS['CRT']:send('feather_fac', 0.01)
+        self.SHADERS['CRT']:send('bloom_fac', G.SETTINGS.GRAPHICS.bloom - 1)
+        self.SHADERS['CRT']:send('time', 400 + G.TIMERS.REAL)
+        self.SHADERS['CRT']:send('noise_fac', 0.001 * G.SETTINGS.GRAPHICS.crt / 100)
+        self.SHADERS['CRT']:send('crt_intensity', 0.16 * G.SETTINGS.GRAPHICS.crt / 100)
+        self.SHADERS['CRT']:send('glitch_intensity', 0) --0.1*G.SETTINGS.GRAPHICS.crt/100 + (G.screenwipe_amt) + 1)
+        self.SHADERS['CRT']:send('scanlines', G.CANVAS:getPixelHeight() * 0.75 / G.CANV_SCALE)
+        self.SHADERS['CRT']:send('mouse_screen_pos', G.video_control and { love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 } or { G.ARGS.eased_cursor_pos.sx, G.ARGS.eased_cursor_pos.sy })
+        self.SHADERS['CRT']:send('screen_scale', G.TILESCALE * G.TILESIZE)
+        self.SHADERS['CRT']:send('hovering', 1)
+        love.graphics.setShader(self.SHADERS['CRT'])
+        self.SETTINGS.GRAPHICS.crt = self.SETTINGS.GRAPHICS.crt / 0.3
+    end
+
     love.graphics.draw(self.CANVAS, 0, 0)
     love.graphics.pop()
 
     love.graphics.setCanvas()
     love.graphics.setShader()
+    if self.AA_CANVAS then
+        love.graphics.push()
+        love.graphics.scale(1 / self.CANV_SCALE)
+        love.graphics.draw(self.AA_CANVAS, 0, 0)
+        love.graphics.pop()
+    end
+    self:timer_checkpoint('canvas', 'draw')
+    if not _RELEASE_MODE and self.DEBUG and not self.video_control and G.F_VERBOSE then
+        love.graphics.push()
+        love.graphics.setColor(0, 1, 1, 1)
+        local fps = love.timer.getFPS()
+        love.graphics.print("Current FPS: " .. fps, 10, 10)
+
+        if G.check and G.SETTINGS.perf_mode then
+            local section_h = 30
+            local resolution = 60 * section_h
+            local poll_w = 1
+            local v_off = 100
+            for a, b in ipairs({ G.check.update, G.check.draw }) do
+                for k, v in ipairs(b.checkpoint_list) do
+                    love.graphics.setColor(0, 0, 0, 0.2)
+                    love.graphics.rectangle('fill', 12, 20 + v_off, poll_w + poll_w * #v.trend, -section_h + 5)
+                    for kk, vv in ipairs(v.trend) do
+                        if a == 2 then
+                            love.graphics.setColor(0.3, 0.7, 0.7, 1)
+                        else
+                            love.graphics.setColor(self:state_col(v.states[kk] or 123))
+                        end
+                        love.graphics.rectangle('fill', 10 + poll_w * kk, 20 + v_off, 5 * poll_w, -(vv) * resolution)
+                    end
+                    love.graphics.setColor(a == 2 and 0.5 or 1, a == 2 and 1 or 0.5, 1, 1)
+                    love.graphics.print(v.label .. ': ' .. (string.format("%.2f", 1000 * (v.average or 0))) .. '\n', 10, -section_h + 30 + v_off)
+                    v_off = v_off + section_h
+                end
+            end
+        end
+
+        love.graphics.pop()
+    end
+    self:timer_checkpoint('debug', 'draw')
 end
 
 function App:set_render_settings()
