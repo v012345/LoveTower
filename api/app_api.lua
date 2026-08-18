@@ -1,4 +1,4 @@
----@class (partial) App: Object
+---@class (partial) App
 ---@field METRICS Metrics 玩家成就记录
 ---@field CONTROLLER Controller 控制器
 ---@field SETTINGS Settings 设置

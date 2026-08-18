@@ -1,5 +1,3 @@
----@class (partial) App: Object
-
 function App:update(dt)
     nuGC(nil, nil, true)
     self.FRAMES.MOVE = self.FRAMES.MOVE + 1

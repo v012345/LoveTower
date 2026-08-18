@@ -1,5 +1,5 @@
----@class (partial) App: Object
-App = Object:extend()
+---@class (partial) App
+App = App or {}
 require "asset.scripts.game.app_update" -- 导入 App:update 函数
 local Settings = require "asset.scripts.game.settings"
 local Window = require "asset.scripts.game.window"
@@ -707,4 +707,4 @@ function App:main_menu()
     --- 创建主菜单场景
 end
 
-return App()
+App:init()
