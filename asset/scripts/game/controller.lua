@@ -28,6 +28,8 @@ function Controller:init()
     self.cursor_up = { target = nil }
     self.cursor_hover = { target = nil }
     self.is_cursor_down = false
+    --NOT IN GAME UNITS
+    self.cursor_position = { x = 0, y = 0 }
 end
 
 function Controller:reset_locks()

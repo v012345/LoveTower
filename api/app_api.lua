@@ -46,6 +46,7 @@
 ---@field debug_splash_size_toggle boolean 是否显示调试启动画面大小
 ---@field recording_mode boolean 是否是录制模式
 ---@field video_control boolean 是否是视频控制模式
+---@field screenglitch boolean 是否开启屏幕故障 shader 使用
 
 
 ---@alias NodeList {

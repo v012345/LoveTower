@@ -490,7 +490,7 @@ function App:draw()
     love.graphics.setColor(Color.WHITE)
     if (not self.recording_mode or self.video_control) and true then
         self.ARGS.eased_cursor_pos = self.ARGS.eased_cursor_pos or { x = self.CURSOR.T.x, y = self.CURSOR.T.y, sx = self.CONTROLLER.cursor_position.x, sy = self.CONTROLLER.cursor_position.y }
-        self.screenwipe_amt = G.screenwipe_amt and (0.95 * G.screenwipe_amt + 0.05 * ((self.screenwipe and 0.4 or self.screenglitch and 0.4) or 0)) or 1
+        self.screenwipe_amt = self.screenwipe_amt and (0.95 * self.screenwipe_amt + 0.05 * ((self.screenwipe and 0.4 or self.screenglitch and 0.4) or 0)) or 1
         self.SETTINGS.GRAPHICS.crt = G.SETTINGS.GRAPHICS.crt * 0.3
         self.SHADERS['CRT']:send('distortion_fac', { 1.0 + 0.07 * G.SETTINGS.GRAPHICS.crt / 100, 1.0 + 0.1 * G.SETTINGS.GRAPHICS.crt / 100 })
         self.SHADERS['CRT']:send('scale_fac', { 1.0 - 0.008 * G.SETTINGS.GRAPHICS.crt / 100, 1.0 - 0.008 * G.SETTINGS.GRAPHICS.crt / 100 })
