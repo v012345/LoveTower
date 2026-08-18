@@ -85,13 +85,13 @@ end
 
 function love.update(dt)
     --Perf monitoring checkpoint
-    App:timer_checkpoint(nil, 'update', true)
+    App.Performance:timer_checkpoint(nil, 'update', true)
     App:update(dt)
 end
 
 function love.draw()
     --Perf monitoring checkpoint
-    App:timer_checkpoint(nil, 'draw', true)
+    App.Performance:timer_checkpoint(nil, 'draw', true)
     App:draw()
 end
 

@@ -11,6 +11,7 @@ local SoundManager = require "asset.scripts.game.sound_manager"
 local SaveManager = require "asset.scripts.game.save_manager"
 local HttpManager = require "asset.scripts.game.http_manager"
 local EventManager = require "asset.scripts.game.event_manager"
+local Performance = require "asset.scripts.game.performance"
 
 ---在这里不要做耗时的操作
 function App:init()
@@ -40,27 +41,6 @@ function App:init()
     self.STATE = self.STATES.SPLASH
     self.TAROT_INTERRUPT = nil
     self.STATE_COMPLETE = false
-
-
-
-
-
-    self.PREV_GARB = 0
-    self.check = {
-        draw = {
-            checkpoint_list = {},
-            checkpoints = 0,
-            last_time = 0,
-        },
-        update = {
-            checkpoint_list = {},
-            checkpoints = 0,
-            last_time = 0,
-        }
-    }
-
-
-
 
     self.DEBUG = true
     self.VIBRATION = 0
@@ -123,6 +103,8 @@ function App:init()
         challenges = { tally = 0, of = 0 },
     }
     self.C = Color
+
+    self.Performance = Performance(self)
 end
 
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
@@ -255,13 +237,13 @@ end
 function App:update(dt)
     nuGC(nil, nil, true)
     self.FRAMES.MOVE = self.FRAMES.MOVE + 1
-    self:timer_checkpoint('start->discovery', 'update')
+    self.Performance:timer_checkpoint('start->discovery', 'update')
     if not self.SETTINGS:is_tutorial_complete() then self.FUNCS.tutorial_controller() end
-    self:timer_checkpoint('tallies', 'update')
+    self.Performance:timer_checkpoint('tallies', 'update')
     self:modulate_sound(dt)
-    self:timer_checkpoint('sounds', 'update')
+    self.Performance:timer_checkpoint('sounds', 'update')
     self.window:update_canvas_juice(dt)
-    self:timer_checkpoint('canvas and juice', 'update')
+    self.Performance:timer_checkpoint('canvas and juice', 'update')
 
     --Smooth out the dts to avoid any big jumps
 
@@ -277,7 +259,7 @@ function App:update(dt)
     if not self.fbf or self.new_frame then
         self.new_frame = false
         self:set_alerts()
-        self:timer_checkpoint('alerts', 'update')
+        self.Performance:timer_checkpoint('alerts', 'update')
         local http_resp = self.HTTP_MANAGER.in_channel:pop()
         if http_resp then
             self.ARGS.HIGH_SCORE_RESPONSE = http_resp
@@ -308,7 +290,7 @@ function App:draw()
     --draw the room
     reset_drawhash()
     if self.OVERLAY_TUTORIAL and not self.OVERLAY_MENU then self.under_overlay = true end
-    self:timer_checkpoint('start->canvas', 'draw')
+    self.Performance:timer_checkpoint('start->canvas', 'draw')
     love.graphics.setCanvas({ self.CANVAS })
     love.graphics.push()
     do
@@ -361,7 +343,7 @@ function App:draw()
                 end
             else
                 if not self.OVERLAY_MENU or not self.Features:is_hide_bg() then
-                    self:timer_checkpoint('primatives', 'draw')
+                    self.Performance:timer_checkpoint('primatives', 'draw')
                     for k, v in pairs(self.I.UIBOX) do
                         if not v.attention_text and not v.parent and v ~= self.OVERLAY_MENU and v ~= self.screenwipe and v ~= self.OVERLAY_TUTORIAL and v ~= self.debug_tools and v ~= self.online_leaderboard and v ~= self.achievement_notification then
                             love.graphics.push()
@@ -370,7 +352,7 @@ function App:draw()
                             love.graphics.pop()
                         end
                     end
-                    self:timer_checkpoint('uiboxes', 'draw')
+                    self.Performance:timer_checkpoint('uiboxes', 'draw')
                     for k, v in pairs(self.I.CARDAREA) do
                         if not v.parent then
                             love.graphics.push()
@@ -491,7 +473,7 @@ function App:draw()
                 love.graphics.translate(-self.CURSOR.T.w * pixels_per_tile / 2, -self.CURSOR.T.h * pixels_per_tile / 2)
                 self.CURSOR:draw()
                 love.graphics.pop()
-                self:timer_checkpoint('rest', 'draw')
+                self.Performance:timer_checkpoint('rest', 'draw')
             end
         end
     end
@@ -530,7 +512,7 @@ function App:draw()
         love.graphics.draw(self.AA_CANVAS, 0, 0)
         love.graphics.pop()
     end
-    self:timer_checkpoint('canvas', 'draw')
+    self.Performance:timer_checkpoint('canvas', 'draw')
     if not _RELEASE_MODE and self.DEBUG and not self.video_control and self.Features:is_verbose_enabled() then
         love.graphics.push()
         love.graphics.setColor(0, 1, 1, 1)
@@ -563,7 +545,7 @@ function App:draw()
 
         love.graphics.pop()
     end
-    self:timer_checkpoint('debug', 'draw')
+    self.Performance:timer_checkpoint('debug', 'draw')
 end
 
 function App:state_col(_state)
@@ -796,40 +778,6 @@ function App:main_menu()
     -- )
 
     --- 创建主菜单场景
-end
-
----@param label? string
----@param type string
----@param reset? boolean
-function App:timer_checkpoint(label, type, reset)
-    if not self.Features:is_perf_overlay_enabled() then return end
-
-
-    local cp = self.check[type]
-    if reset then
-        cp.last_time = love.timer.getTime()
-        cp.checkpoints = 0
-        return
-    end
-
-    cp.checkpoint_list[cp.checkpoints + 1] = cp.checkpoint_list[cp.checkpoints + 1] or {}
-    cp.checkpoints = cp.checkpoints + 1
-    cp.checkpoint_list[cp.checkpoints].label = label .. ': ' .. (collectgarbage("count") - self.PREV_GARB)
-    cp.checkpoint_list[cp.checkpoints].time = love.timer.getTime()
-    cp.checkpoint_list[cp.checkpoints].TTC = cp.checkpoint_list[cp.checkpoints].time - cp.last_time
-    cp.checkpoint_list[cp.checkpoints].trend = cp.checkpoint_list[cp.checkpoints].trend or {}
-    cp.checkpoint_list[cp.checkpoints].states = cp.checkpoint_list[cp.checkpoints].states or {}
-    table.insert(cp.checkpoint_list[cp.checkpoints].trend, 1, cp.checkpoint_list[cp.checkpoints].TTC)
-    table.insert(cp.checkpoint_list[cp.checkpoints].states, 1, self.STATE)
-    cp.checkpoint_list[cp.checkpoints].trend[401] = nil
-    cp.checkpoint_list[cp.checkpoints].states[401] = nil
-    cp.last_time = cp.checkpoint_list[cp.checkpoints].time
-    self.PREV_GARB = collectgarbage("count")
-    local av = 0
-    for k, v in ipairs(cp.checkpoint_list[cp.checkpoints].trend) do
-        av = av + v / #cp.checkpoint_list[cp.checkpoints].trend
-    end
-    cp.checkpoint_list[cp.checkpoints].average = av
 end
 
 ---@type App
