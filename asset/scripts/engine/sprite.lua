@@ -135,7 +135,7 @@ function Sprite:draw_self(overlay)
     end
     prep_draw(self, 1)
     love.graphics.scale(1 / (self.scale.x / self.VT.w), 1 / (self.scale.y / self.VT.h))
-    love.graphics.setColor(overlay or G.BRUTE_OVERLAY or G.C.WHITE)
+    love.graphics.setColor(overlay or App.BRUTE_OVERLAY or App.C.WHITE)
     if self.video then
         self.video_dims = self.video_dims or {
             w = self.video:getWidth(),

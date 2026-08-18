@@ -13,6 +13,10 @@
 ---@field under_overlay boolean 是否显示底层覆盖?????? 不知道是什么东西
 ---@field OVERLAY_MENU? UIBox 菜单
 ---@field OVERLAY_TUTORIAL? UIBox 教程
+---@field achievement_notification? UIBox 成就通知
+---@field online_leaderboard? UIBox 在线排行榜
+---@field debug_tools? UIBox 调试工具
+---@field screenwipe? UIBox 屏幕擦除
 ---@field TILESCALE number 地图缩放比例
 ---@field TILESIZE number 地图单元格大小
 ---@field STAGE_OBJECT_INTERRUPT boolean 不知道具体作用是什么
@@ -35,3 +39,19 @@
 ---@field ARGS any 记录一些参数, 之后要解耦出来
 ---@field SPLASH_BACK Sprite 启动画面背景
 ---@field SPLASH_FRONT Sprite 启动画面前景
+---@field SPLASH_LOGO Sprite 启动画面 logo
+---@field debug_background_toggle boolean 是否显示调试背景
+---@field debug_UI_toggle boolean 是否显示调试 UI
+---@field debug_splash_size_toggle boolean 是否显示调试启动画面大小
+
+
+---@alias NodeList {
+---NODE: Node[],
+---MOVEABLE: Moveable[],
+---UIBOX: UIBox[],
+---SPRITE: Sprite[],
+---CARD: Card[],
+---CARDAREA: CardArea[],
+---POPUP: Node[],
+---ALERT: Node[],
+---}

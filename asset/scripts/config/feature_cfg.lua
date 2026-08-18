@@ -37,5 +37,10 @@ function FeatureConfig:is_perf_overlay_enabled()
     return self.cfg.F_ENABLE_PERF_OVERLAY
 end
 
+---@return boolean
+function FeatureConfig:is_hide_bg()
+    return self.cfg.F_HIDE_BG
+end
+
 ---@type FeatureConfig
 FeatureCfg = FeatureConfig()

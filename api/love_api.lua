@@ -161,6 +161,9 @@ function love.graphics.setShader() end
 ---@param a? number
 function love.graphics.clear(r, g, b, a) end
 
+---@param color table {r: number, g: number, b: number, a: number}
+function love.graphics.clear(color) end
+
 ---@param font love.Font
 ---@param text string
 ---@return love.Text
@@ -472,8 +475,6 @@ Canvas = {}
 ---@return nil
 function Canvas:setFilter(filter, filtermag) end
 
-
-
 ---@class UIDdefinition
 ---@field n      UIT
 ---@field config UIConfig
@@ -481,8 +482,20 @@ function Canvas:setFilter(filter, filtermag) end
 UIDdefinition = {}
 
 
+--#region love.window
 ---@class love.window
 love.window = love.window or {}
+
+---Gets the width and height of the desktop.
+---@param displayindex number The index of the display, if multiple monitors are available. First is 1.
+---@return number width The width of the desktop.
+---@return number height The height of the desktop.
+function love.window.getDesktopDimensions(displayindex) end
+
+---Gets a list of supported fullscreen modes.
+---@param displayindex number (1) The index of the display, if multiple monitors are available.
+---@return table modes A table of width/height pairs. (Note that this may not be in order.)
+function love.window.getFullscreenModes(displayindex) end
 
 --- Gets the display mode and properties of the window.
 ---@return number width
@@ -490,44 +503,11 @@ love.window = love.window or {}
 ---@return table flags
 function love.window.getMode() end
 
----@class NodeList
----@field NODE     Node[]
----@field MOVEABLE Moveable[]
----@field UIBOX    UIBox[]
----@field SPRITE   Sprite[]
----@field CARD     Card[]
----@field CARDAREA CardArea[]
----@field POPUP    Node[]
-NodeList = {}
+--#endregion
 
----@param x? number
----@param y? number
----@return Coordinate
-function Coordinate(x, y) end
 
----游戏瓦片坐标
----@class Point
----@field x number
----@field y number
 
----@class bit
-bit = {}
----@param a number
----@param b number
----@return number
-function bit.lshift(a, b) end
 
----@param a number
----@param b number
----@param ... number
----@return number
-function bit.bor(a, b, ...) end
-
----@param a number
----@param b number
----@param ... number
----@return number
-function bit.band(a, b, ...) end
 
 --- Sets the display mode and properties of the window, without modifying unspecified properties.
 --- If width or height is 0, updateMode will use the width and height of the desktop.

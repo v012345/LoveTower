@@ -92,11 +92,12 @@ function App:init()
     self.I = {
         NODE = {},
         MOVEABLE = {},
-        UIBOX = {},
         SPRITE = {},
+        UIBOX = {},
+        POPUP = {},
         CARD = {},
         CARDAREA = {},
-        POPUP = {},
+        ALERT = {}
     }
 
 
@@ -298,38 +299,190 @@ function App:draw()
     self:timer_checkpoint('start->canvas', 'draw')
     love.graphics.setCanvas({ self.CANVAS })
     love.graphics.push()
-    love.graphics.scale(1)
+    do
+        love.graphics.scale(self.CANV_SCALE)
 
-    love.graphics.setShader()
-    love.graphics.clear(0, 0, 0, 1)
+        love.graphics.setShader()
+        love.graphics.clear(0, 0, 0, 1)
 
-    do -- Draw the room
-        for k, v in pairs(self.I.NODE) do
-            if not v.parent then
+        if self.SPLASH_BACK then
+            if self.debug_background_toggle then
+                love.graphics.clear({ 0, 1, 0, 1 })
+            else
                 love.graphics.push()
-                v:translate_container()
-                v:draw()
+                self.SPLASH_BACK:translate_container()
+                self.SPLASH_BACK:draw()
                 love.graphics.pop()
             end
         end
-        for k, v in pairs(self.I.MOVEABLE) do
-            if not v.parent then
+        if not self.debug_UI_toggle then
+            for k, v in pairs(self.I.NODE) do
+                if not v.parent then
+                    love.graphics.push()
+                    v:translate_container()
+                    v:draw()
+                    love.graphics.pop()
+                end
+            end
+            for k, v in pairs(self.I.MOVEABLE) do
+                if not v.parent then
+                    love.graphics.push()
+                    v:translate_container()
+                    v:draw()
+                    love.graphics.pop()
+                end
+            end
+            if self.SPLASH_LOGO then
                 love.graphics.push()
-                v:translate_container()
-                v:draw()
+                self.SPLASH_LOGO:translate_container()
+                self.SPLASH_LOGO:draw()
                 love.graphics.pop()
             end
-        end
-        for k, v in pairs(self.I.UIBOX) do
-            if not v.parent then
+            if self.debug_splash_size_toggle then
+                for k, v in pairs(self.I.CARDAREA) do
+                    if not v.parent then
+                        love.graphics.push()
+                        v:translate_container()
+                        v:draw()
+                        love.graphics.pop()
+                    end
+                end
+            else
+                if not self.OVERLAY_MENU or not self.Features:is_hide_bg() then
+                    self:timer_checkpoint('primatives', 'draw')
+                    for k, v in pairs(self.I.UIBOX) do
+                        if not v.attention_text and not v.parent and v ~= self.OVERLAY_MENU and v ~= self.screenwipe and v ~= self.OVERLAY_TUTORIAL and v ~= self.debug_tools and v ~= self.online_leaderboard and v ~= self.achievement_notification then
+                            love.graphics.push()
+                            v:translate_container()
+                            v:draw()
+                            love.graphics.pop()
+                        end
+                    end
+                    self:timer_checkpoint('uiboxes', 'draw')
+                    for k, v in pairs(self.I.CARDAREA) do
+                        if not v.parent then
+                            love.graphics.push()
+                            v:translate_container()
+                            v:draw()
+                            love.graphics.pop()
+                        end
+                    end
+                    for k, v in pairs(self.I.CARD) do
+                        if not v.parent and v ~= self.CONTROLLER.dragging.target and v ~= self.CONTROLLER.focused.target then
+                            love.graphics.push()
+                            v:translate_container()
+                            v:draw()
+                            love.graphics.pop()
+                        end
+                    end
+                    for k, v in pairs(self.I.UIBOX) do
+                        if v.attention_text and v ~= self.debug_tools and v ~= self.online_leaderboard and v ~= self.achievement_notification then
+                            love.graphics.push()
+                            v:translate_container()
+                            v:draw()
+                            love.graphics.pop()
+                        end
+                    end
+
+                    if self.SPLASH_FRONT then
+                        love.graphics.push()
+                        self.SPLASH_FRONT:translate_container()
+                        self.SPLASH_FRONT:draw()
+                        love.graphics.pop()
+                    end
+                    self.under_overlay = false
+                    if self.OVERLAY_TUTORIAL then
+                        love.graphics.push()
+                        self.OVERLAY_TUTORIAL:translate_container()
+                        self.OVERLAY_TUTORIAL:draw()
+                        love.graphics.pop()
+
+                        if self.OVERLAY_TUTORIAL.highlights then
+                            for k, v in ipairs(self.OVERLAY_TUTORIAL.highlights) do
+                                love.graphics.push()
+                                v:translate_container()
+                                v:draw()
+                                --- 这里我需要再看一下, 这个 draw_children 是什么意思
+                                if v.draw_children then
+                                    v:draw_self()
+                                    v:draw_children()
+                                end
+                                love.graphics.pop()
+                            end
+                        end
+                    end
+                end
+
+                if self.OVERLAY_MENU or not self.Features:is_hide_bg() then
+                    if self.OVERLAY_MENU and self.OVERLAY_MENU ~= self.CONTROLLER.dragging.target then
+                        love.graphics.push()
+                        self.OVERLAY_MENU:translate_container()
+                        self.OVERLAY_MENU:draw()
+                        love.graphics.pop()
+                    end
+                end
+
+                if self.debug_tools then
+                    if self.debug_tools ~= self.CONTROLLER.dragging.target then
+                        love.graphics.push()
+                        self.debug_tools:translate_container()
+                        self.debug_tools:draw()
+                        love.graphics.pop()
+                    end
+                end
+
+                self.ALERT_ON_SCREEN = false
+                for k, v in pairs(self.I.ALERT) do
+                    love.graphics.push()
+                    v:translate_container()
+                    v:draw()
+                    self.ALERT_ON_SCREEN = true
+                    love.graphics.pop()
+                end
+
+                if self.CONTROLLER.dragging.target and self.CONTROLLER.dragging.target ~= self.CONTROLLER.focused.target then
+                    love.graphics.push()
+                    self.CONTROLLER.dragging.target:translate_container()
+                    self.CONTROLLER.dragging.target:draw()
+                    love.graphics.pop()
+                end
+
+                if self.CONTROLLER.focused.target and getmetatable(self.CONTROLLER.focused.target) == Card and (self.CONTROLLER.focused.target.area ~= self.hand or self.CONTROLLER.focused.target == self.CONTROLLER.dragging.target) then
+                    love.graphics.push()
+                    self.CONTROLLER.focused.target:translate_container()
+                    self.CONTROLLER.focused.target:draw()
+                    love.graphics.pop()
+                end
+
+                for k, v in pairs(self.I.POPUP) do
+                    love.graphics.push()
+                    v:translate_container()
+                    v:draw()
+                    love.graphics.pop()
+                end
+
+                if self.achievement_notification then
+                    love.graphics.push()
+                    self.achievement_notification:translate_container()
+                    self.achievement_notification:draw()
+                    love.graphics.pop()
+                end
+
+                if self.screenwipe then
+                    love.graphics.push()
+                    self.screenwipe:translate_container()
+                    self.screenwipe:draw()
+                    love.graphics.pop()
+                end
                 love.graphics.push()
-                v:translate_container()
-                v:draw()
+                local pixels_per_tile = self.window:get_pixels_per_tile()
+                love.graphics.translate(-self.CURSOR.T.w * pixels_per_tile / 2, -self.CURSOR.T.h * pixels_per_tile / 2)
+                self.CURSOR:draw()
                 love.graphics.pop()
+                self:timer_checkpoint('rest', 'draw')
             end
         end
     end
-
     love.graphics.pop()
 
     love.graphics.setCanvas(self.AA_CANVAS)
@@ -395,7 +548,7 @@ function App:splash_screen()
                 self.TIMERS.TOTAL = 0
                 self.TIMERS.REAL = 0
                 --Prep the splash screen shaders for both the background(colour swirl) and the foreground(white flash), starting at black
-                self.SPLASH_BACK = Sprite(-30, -13, self.ROOM.T.w + 60, self.ROOM.T.h + 22, self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
+                self.SPLASH_BACK = Sprite(Transform(-30, -13, self.ROOM.T.w + 60, self.ROOM.T.h + 22), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
                 self.SPLASH_BACK:define_draw_steps({ {
                     shader = 'splash',
                     send = {
@@ -410,9 +563,9 @@ function App:splash_screen()
                 self.SPLASH_BACK:set_alignment({
                     major = self.ROOM_ATTACH,
                     type = 'cm',
-                    offset = { x = 0, y = 0 }
+                    offset = Coordinate(0, 0)
                 })
-                self.SPLASH_FRONT = Sprite(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4, self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
+                self.SPLASH_FRONT = Sprite(Transform(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
                 self.SPLASH_FRONT:define_draw_steps({ {
                     shader = 'flash',
                     send = {
@@ -423,7 +576,7 @@ function App:splash_screen()
                 self.SPLASH_FRONT:set_alignment({
                     major = self.ROOM_ATTACH,
                     type = 'cm',
-                    offset = { x = 0, y = 0 }
+                    offset = Coordinate(0, 0)
                 })
 
                 --spawn in splash card

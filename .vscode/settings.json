@@ -16,7 +16,8 @@
         "boot_timer",
         "create_node_states",
         "nuGC",
-        "reset_drawhash"
+        "reset_drawhash",
+        "utf8"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto"
 }

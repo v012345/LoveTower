@@ -92,7 +92,7 @@ function Node:draw_boundingrect()
     if App.DEBUG then
         love.graphics.push()
         do
-            local s = Tile.instance:get_scale()
+            local s = App.window:get_tile_scale()
             local T = self:get_bounding_transform()
             local x, y, w, h, r = T.x * s, T.y * s, T.w * s, T.h * s, T.r
             love.graphics.scale(s)
@@ -268,19 +268,19 @@ end
 
 ---目前不知道进来的时候原点在什么地方, 但是根据这个函数来看, 进来的时候原点应该在 container 的左上角
 ---进入之后, 先移动到 container 的中心, 然后旋转, 然后移动到 container 的左上角
----再移动到 x , y , 这里我没有看明白
+---再移动到 x , y
 ---Room 的 container 是自己, 所以不会进入这个条件
 ---Translation function used before any draw calls, translates this node according to the transform of the container node
 function Node:translate_container()
     if self.container and self.container ~= self then
-        local unit_tile = Tile.instance:get_pixels_per_tile()
+        local unit_tile = App.window:get_pixels_per_tile()
         local t = self.container.T
         local center_x, center_y = t.w * unit_tile * 0.5, t.h * unit_tile * 0.5
         love.graphics.translate(center_x, center_y)
         love.graphics.rotate(t.r)
         love.graphics.translate(-center_x, -center_y)
-        local offset_x, offset_y = t.x * unit_tile, t.y * unit_tile
-        love.graphics.translate(offset_x, offset_y)
+        local x, y = t.x * unit_tile, t.y * unit_tile
+        love.graphics.translate(x, y)
     end
 end
 
