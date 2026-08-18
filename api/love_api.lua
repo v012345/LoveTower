@@ -473,12 +473,7 @@ love.system = love.system or {}
 ---@return string os
 function love.system.getOS() end
 
----@class Canvas: Drawable
-Canvas = {}
----@param filter "nearest" | "linear"
----@param filtermag "nearest" | "linear"
----@return nil
-function Canvas:setFilter(filter, filtermag) end
+
 
 --#region love.window
 ---@class love.window
