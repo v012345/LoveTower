@@ -283,6 +283,9 @@ function App:update(dt)
         end
     end
     -- Controller.instance:update(Timer.instance.real_dt)
+
+    
+
 end
 
 function App:draw()

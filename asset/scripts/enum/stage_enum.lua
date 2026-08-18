@@ -1,5 +1,6 @@
 ---@enum STAGES
 STAGES = {
+    NONE = 0,      -- 无阶段
     MAIN_MENU = 1, -- 主菜单
     RUN = 2,       -- 游戏进行中
     SANDBOX = 3    -- 沙盒模式
