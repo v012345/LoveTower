@@ -65,7 +65,6 @@ function Event:condition(status)
 end
 
 --- After event will trigger after the delay time.
----@private
 ---@param status EventStatus
 ---@return nil
 function Event:after(status)
@@ -76,7 +75,6 @@ function Event:after(status)
 end
 
 ---立即执行 func，等 delay 后才移除（可阻塞后续事件）
----@private
 ---@param status EventStatus
 ---@return nil
 function Event:before(status)
@@ -86,7 +84,6 @@ function Event:before(status)
     end
 end
 
----@private
 ---@param status EventStatus
 ---@return nil
 function Event:ease(status)

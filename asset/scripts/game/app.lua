@@ -598,14 +598,16 @@ function App:splash_screen()
                     type = 'cm',
                     offset = Coordinate(0, 0)
                 })
-                self.SPLASH_FRONT = Sprite(Transform(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 })
-                self.SPLASH_FRONT:define_draw_steps({ {
-                    shader = 'flash',
-                    send = {
-                        { name = 'time',      ref_table = self.TIMERS, ref_value = 'REAL' },
-                        { name = 'mid_flash', val = 1 }
+                self.SPLASH_FRONT = Sprite(Transform(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 }, self.ROOM)
+                self.SPLASH_FRONT:define_draw_steps({
+                    {
+                        shader = 'flash',
+                        send = {
+                            { name = 'time',      ref_table = self.TIMERS, ref_value = 'REAL' },
+                            { name = 'mid_flash', val = 1 }
+                        }
                     }
-                } })
+                })
                 self.SPLASH_FRONT:set_alignment({
                     major = self.ROOM_ATTACH,
                     type = 'cm',
@@ -615,7 +617,7 @@ function App:splash_screen()
                 --spawn in splash card
                 local SC = nil
                 self.E_MANAGER:add_event(Event({
-                    trigger = 'after',
+                    trigger = EventTrigger.after,
                     delay = 0.2,
                     func = (function()
                         local SC_scale = 1.2
@@ -667,12 +669,12 @@ function App:splash_screen()
                     return card, card_pos
                 end
 
-                G.vortex_time = G.TIMERS.REAL
+                self.vortex_time = self.TIMERS.REAL
                 local temp_del = nil
 
                 for i = 1, 200 do
                     temp_del = temp_del or 3
-                    G.E_MANAGER:add_event(Event({
+                    self.E_MANAGER:add_event(Event({
                         trigger = 'after',
                         blockable = false,
                         delay = temp_del,
@@ -708,14 +710,14 @@ function App:splash_screen()
                 end
 
                 --when faded to white, spit out the 'Fool's' cards and slowly have them settle in to place
-                G.E_MANAGER:add_event(Event({
+                self.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 2.,
                     func = (function()
-                        G.SPLASH_BACK:remove()
-                        G.SPLASH_BACK = G.SPLASH_FRONT
-                        G.SPLASH_FRONT = nil
-                        G:main_menu('splash')
+                        self.SPLASH_BACK:remove()
+                        self.SPLASH_BACK = self.SPLASH_FRONT
+                        self.SPLASH_FRONT = nil
+                        self:main_menu('splash')
                         return true;
                     end)
                 }))
