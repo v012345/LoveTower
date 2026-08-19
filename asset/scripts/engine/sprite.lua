@@ -202,19 +202,19 @@ function Sprite:draw_from(other_obj, ms, mr, mx, my)
 end
 
 function Sprite:remove()
-    if self.video then
-        self.video:release()
-    end
-    for k, v in pairs(G.ANIMATIONS) do
-        if v == self then
-            table.remove(G.ANIMATIONS, k)
-        end
-    end
-    for k, v in pairs(G.I.SPRITE) do
-        if v == self then
-            table.remove(G.I.SPRITE, k)
-        end
-    end
+    -- if self.video then
+    --     self.video:release()
+    -- end
+    -- for k, v in pairs(G.ANIMATIONS) do
+    --     if v == self then
+    --         table.remove(G.ANIMATIONS, k)
+    --     end
+    -- end
+    -- for k, v in pairs(G.I.SPRITE) do
+    --     if v == self then
+    --         table.remove(G.I.SPRITE, k)
+    --     end
+    -- end
 
     Moveable.remove(self)
 end

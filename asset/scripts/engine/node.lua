@@ -22,8 +22,8 @@ function Node:init(T, container)
     self.CT = self.T
 
     --Create the offset tables, used to determine things like drag offset and 3d shader effects
-    self.click_offset = Coordinate()
-    self.hover_offset = Coordinate()
+    self.click_offset = Vec2()
+    self.hover_offset = Vec2()
 
     --To keep track of all nodes created on pause. If true, this node moves normally even when the G.TIMERS.TOTAL doesn't increment
     self.created_on_pause = App.SETTINGS:is_paused()
@@ -311,7 +311,7 @@ function Node:remove()
             v:remove()
         end
     end
-    local controller = Controller.instance
+    local controller = App.CONTROLLER
     if controller.clicked.target == self then
         controller.clicked.target = nil
     end

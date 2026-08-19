@@ -22,7 +22,7 @@ Moveable.exp_times = {
 ---@param container Node
 function Moveable:init(T, container)
     Node.init(self, T, container)
-    self.layered_parallax = Coordinate(0, 0)
+    self.layered_parallax = Vec2(0, 0)
     --The Visible transform is initally set to the same values as the transform T.
     --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
     --scale of any objects that need to be drawn larger or smaller
@@ -53,10 +53,10 @@ function Moveable:init(T, container)
 
     self.static_rotation = false
 
-    self.offset = Coordinate(0, 0)
+    self.offset = Vec2(0, 0)
     self.Mid = self -- 对齐参考点默认是自己
 
-    self.shadow_parrallax = Coordinate(0, -1.5)
+    self.shadow_parrallax = Vec2(0, -1.5)
     self.shadow_height = 0.2
 
     self:calculate_parrallax()
@@ -64,6 +64,9 @@ function Moveable:init(T, container)
     table.insert(App.MOVEABLES, self)
     if getmetatable(self) == Moveable then
         table.insert(App.I.MOVEABLE, self)
+    end
+    if self.ID == 5 then
+        print(5)
     end
 end
 
@@ -502,7 +505,7 @@ end
 ---@param offset? table
 function Moveable:prep_draw(scale, rotate, offset)
     -- love.graphics.scale(App.TILESCALE * App.TILESIZE)
-    offset = offset or Coordinate(0, 0)
+    offset = offset or Vec2(0, 0)
     love.graphics.setColor(Color.RED)
     love.graphics.rectangle('fill', 0, 0, 20, 20)
     local VT = self.VT

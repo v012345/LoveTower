@@ -306,7 +306,7 @@ function App:splash_screen()
                 self.SPLASH_BACK:set_alignment({
                     major = self.ROOM_ATTACH,
                     type = AlignmentType.cm,
-                    offset = Coordinate(0, 0)
+                    offset = Vec2(0, 0)
                 })
                 self.SPLASH_FRONT = Sprite(Transform(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 }, self.ROOM)
                 self.SPLASH_FRONT:define_draw_steps({
@@ -321,7 +321,7 @@ function App:splash_screen()
                 self.SPLASH_FRONT:set_alignment({
                     major = self.ROOM_ATTACH,
                     type = AlignmentType.cm,
-                    offset = Coordinate(0, 0)
+                    offset = Vec2(0, 0)
                 })
 
                 --spawn in splash card
@@ -349,9 +349,9 @@ function App:splash_screen()
                     trigger = EventTrigger.after,
                     delay = 1.8,
                     func = (function() --|||||||||||
-                        SC:start_dissolve({ self.C.WHITE, self.C.WHITE }, true, 12, true)
-                        play_sound('magic_crumple', 1, 0.5)
-                        play_sound('splash_buildup', 1, 0.7)
+                        -- SC:start_dissolve({ self.C.WHITE, self.C.WHITE }, true, 12, true)
+                        -- play_sound('magic_crumple', 1, 0.5)
+                        -- play_sound('splash_buildup', 1, 0.7)
                         return true;
                     end)
                 }))
