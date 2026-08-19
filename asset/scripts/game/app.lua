@@ -365,9 +365,10 @@ function App:splash_screen()
                         x = (18 + card_size) * math.sin(angle),
                         y = (18 + card_size) * math.cos(angle)
                     }
-                    local card = Card(card_pos.x + G.ROOM.T.w / 2 - G.CARD_W * card_size / 2,
-                        card_pos.y + G.ROOM.T.h / 2 - G.CARD_H * card_size / 2,
-                        card_size * G.CARD_W, card_size * G.CARD_H, pseudorandom_element(G.P_CARDS), G.P_CENTERS.c_base)
+                    local CARD_W, CARD_H = GameCfg:get_card_size()
+                    local card = Card(card_pos.x + App.ROOM.T.w / 2 - CARD_W * card_size / 2,
+                        card_pos.y + App.ROOM.T.h / 2 - CARD_H * card_size / 2,
+                        card_size * CARD_W, card_size * CARD_H, pseudorandom_element(App.P_CARDS), CardCfg:get_card_base())
                     if math.random() > 0.8 then
                         card.sprite_facing = 'back'; card.facing = 'back'
                     end
