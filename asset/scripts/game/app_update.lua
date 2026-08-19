@@ -35,9 +35,10 @@ function App:update(dt)
 
         self.TIMERS:update_game_time(dt)
         self.E_MANAGER:update(self.real_dt)
-        -- Smooth.instance:update(Timer.instance.real_dt)
 
-        
+
+        --move and update all other moveables
+        self.TIMERS:update_exp_times(self.real_dt)
 
 
         for k, v in pairs(self.MOVEABLES) do

@@ -36,6 +36,7 @@ function Timer:get_exp_times()
     return self.exp_times
 end
 
+---平滑过度用
 function Timer:update_exp_times(dt)
     self.exp_times.xy = math.exp(-50 * dt)
     self.exp_times.scale = math.exp(-60 * dt)

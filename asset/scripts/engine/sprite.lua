@@ -75,7 +75,7 @@ function Sprite:define_draw_steps(draw_step_definitions)
 end
 
 function Sprite:draw_shader(_shader, _shadow_height, _send, _no_tilt, other_obj, ms, mr, mx, my, custom_shader, tilt_shadow)
-    if G.SETTINGS.reduced_motion then _no_tilt = true end
+    if App.SETTINGS:is_reduced_motion() then _no_tilt = true end
     local _draw_major = self.role.draw_major or self
     if _shadow_height then
         self.VT.y = self.VT.y - _draw_major.shadow_parrallax.y * _shadow_height
