@@ -2,26 +2,6 @@
 ---@overload fun(T: Transform, new_sprite_atlas: AtlasConfigItem, sprite_pos: any, container: Node):Sprite
 Sprite = Moveable:extend()
 
----@param T Transform
----@param new_sprite_atlas AtlasConfigItem
----@param sprite_pos {x: number, y: number, v?: number}
----@param container Node
-function Sprite:init(T, new_sprite_atlas, sprite_pos, container)
-    Moveable.init(self, T, container)
-    self.CT = self.VT
-    self.atlas = new_sprite_atlas
-    self.scale = { x = self.atlas.px, y = self.atlas.py }
-    self.scale_mag = math.min(self.scale.x / T.w, self.scale.y / T.h)
-    self.zoom = true
-    self.draw_steps = {}
-
-    self:set_sprite_pos(sprite_pos)
-
-    if getmetatable(self) == Sprite then
-        table.insert(App.I.SPRITE, self)
-    end
-end
-
 function Sprite:reset()
     self.atlas = App.ASSET_ATLAS[self.atlas.name]
     self:set_sprite_pos(self.sprite_pos)
@@ -199,6 +179,27 @@ function Sprite:remove()
 end
 
 --- ok ---
+
+
+---@param T Transform
+---@param new_sprite_atlas AtlasConfigItem
+---@param sprite_pos {x: number, y: number, v?: number}
+---@param container Node
+function Sprite:init(T, new_sprite_atlas, sprite_pos, container)
+    Moveable.init(self, T, container)
+    self.CT = self.VT
+    self.atlas = new_sprite_atlas
+    self.scale = { x = self.atlas.px, y = self.atlas.py }
+    self.scale_mag = math.min(self.scale.x / T.w, self.scale.y / T.h)
+    self.zoom = true
+    self.draw_steps = {}
+
+    self:set_sprite_pos(sprite_pos)
+
+    if getmetatable(self) == Sprite then
+        table.insert(App.I.SPRITE, self)
+    end
+end
 
 ---@param draw_step_definitions DrawStep[]
 function Sprite:define_draw_steps(draw_step_definitions)
