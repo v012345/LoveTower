@@ -1,7 +1,16 @@
 ---@class Alignment
+---@overload fun(type: AlignmentType, offset: Vec2, prev_type: AlignmentType, prev_offset: Vec2, lr_clamp: boolean): Alignment
 Alignment = Object:extend()
 
+
+---@param type AlignmentType
+---@param offset Vec2
+---@param prev_type AlignmentType
+---@param prev_offset Vec2
+---@param lr_clamp boolean
 function Alignment:init(type, offset, prev_type, prev_offset, lr_clamp)
+    assert(offset:is(Vec2))
+    assert(prev_offset:is(Vec2))
     self.type = type
     self.offset = offset
     self.prev_type = prev_type
@@ -17,6 +26,9 @@ function Alignment:init(type, offset, prev_type, prev_offset, lr_clamp)
         r = false,
         i = false,
     }
+    if not self.prev_offset.is_equal then
+        print("1")
+    end
 end
 
 --- is methods ----
