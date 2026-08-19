@@ -2,22 +2,7 @@
 ---@overload fun(T: Transform, new_sprite_atlas: AtlasConfigItem, sprite_pos: any, container: Node):Sprite
 Sprite = Moveable:extend()
 
----@param sprite_pos {x: number, y: number, v?: number}
-function Sprite:set_sprite_pos(sprite_pos)
-    local v = sprite_pos.v
-    if v then --我怎么感觉这个就给随机小丑用的呢？
-        self.sprite_pos = { x = (math.random(v) - 1), y = sprite_pos.y }
-    else
-        self.sprite_pos = sprite_pos
-    end
-    self.sprite_pos_copy = { x = self.sprite_pos.x, y = self.sprite_pos.y }
 
-    local w, h = self.atlas.image:getDimensions()
-    local x = self.sprite_pos.x * self.atlas.px
-    local y = self.sprite_pos.y * self.atlas.py
-    self.sprite = love.graphics.newQuad(x, y, self.scale.x, self.scale.y, w, h)
-    self.image_dims = { w, h }
-end
 
 function Sprite:get_pos_pixel()
     self.RETS.get_pos_pixel = self.RETS.get_pos_pixel or {}
@@ -215,4 +200,21 @@ end
 function Sprite:reset()
     self.atlas = App.ASSET_ATLAS[self.atlas.name]
     self:set_sprite_pos(self.sprite_pos)
+end
+
+---@param sprite_pos {x: number, y: number, v?: number}
+function Sprite:set_sprite_pos(sprite_pos)
+    local v = sprite_pos.v
+    if v then --我怎么感觉这个就给随机小丑用的呢？
+        self.sprite_pos = { x = (math.random(v) - 1), y = sprite_pos.y }
+    else
+        self.sprite_pos = sprite_pos
+    end
+    self.sprite_pos_copy = { x = self.sprite_pos.x, y = self.sprite_pos.y }
+
+    local w, h = self.atlas.image:getDimensions()
+    local x = self.sprite_pos.x * self.atlas.px
+    local y = self.sprite_pos.y * self.atlas.py
+    self.sprite = love.graphics.newQuad(x, y, self.scale.x, self.scale.y, w, h)
+    self.image_dims = { w, h }
 end
