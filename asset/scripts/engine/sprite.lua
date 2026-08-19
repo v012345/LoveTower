@@ -2,11 +2,6 @@
 ---@overload fun(T: Transform, new_sprite_atlas: AtlasConfigItem, sprite_pos: any, container: Node):Sprite
 Sprite = Moveable:extend()
 
-function Sprite:reset()
-    self.atlas = App.ASSET_ATLAS[self.atlas.name]
-    self:set_sprite_pos(self.sprite_pos)
-end
-
 ---@param sprite_pos {x: number, y: number, v?: number}
 function Sprite:set_sprite_pos(sprite_pos)
     local v = sprite_pos.v
@@ -217,4 +212,10 @@ function Sprite:define_draw_steps(draw_step_definitions)
             my = v.my or nil
         }
     end
+end
+
+---通过 name 和 sprite_pos 重置 sprite
+function Sprite:reset()
+    self.atlas = App.ASSET_ATLAS[self.atlas.name]
+    self:set_sprite_pos(self.sprite_pos)
 end
