@@ -134,14 +134,7 @@ function Sprite:draw_self(overlay)
             self.VT.h / (self.T.h) / (self.video_dims.h / self.scale.y)
         )
     else
-        love.graphics.draw(
-            self.atlas.image,
-            self.sprite,
-            0, 0,
-            0,
-            self.VT.w / (self.T.w),
-            self.VT.h / (self.T.h)
-        )
+        love.graphics.draw(self.atlas.image, self.sprite, 0, 0, 0, self.VT.w / (self.T.w), self.VT.h / (self.T.h))
     end
     love.graphics.pop()
     add_to_drawhash(self)

@@ -160,7 +160,7 @@ function love.filesystem.getSaveDirectory() end
 
 --#region love.image
 
----@class love.Image: Drawable
+---@class love.Image: Texture
 love.Image = love.Image or {}
 
 ---@return number width

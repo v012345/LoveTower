@@ -110,13 +110,13 @@ function love.graphics.draw(drawable, x, y, rotation, scaleX, scaleY, offsetX, o
 ---@param quad Quad The Quad to draw on screen.
 ---@param x number The position to draw the object (x-axis).
 ---@param y number The position to draw the object (y-axis).
----@param r number (0) Orientation (radians).
----@param sx number (1) Scale factor (x-axis).
----@param sy number (sx) Scale factor (y-axis).
----@param ox number (0) Origin offset (x-axis).
----@param oy number (0) Origin offset (y-axis).
----@param kx number (0) Shearing factor (x-axis).
----@param ky number (0) Shearing factor (y-axis).
+---@param r? number (0) Orientation (radians).
+---@param sx? number (1) Scale factor (x-axis).
+---@param sy? number (sx) Scale factor (y-axis).
+---@param ox? number (0) Origin offset (x-axis).
+---@param oy? number (0) Origin offset (y-axis).
+---@param kx? number (0) Shearing factor (x-axis).
+---@param ky? number (0) Shearing factor (y-axis).
 function love.graphics.draw(texture, quad, x, y, r, sx, sy, ox, oy, kx, ky) end
 
 ---@param text      string
