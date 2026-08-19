@@ -194,7 +194,7 @@ function App:draw()
 
     love.graphics.setCanvas(self.AA_CANVAS)
     love.graphics.push()
-    love.graphics.setColor(Color.WHITE)
+    love.graphics.setColor(self.C.WHITE)
     if (not self.recording_mode or self.video_control) and true then
         self.ARGS.eased_cursor_pos = self.ARGS.eased_cursor_pos or { x = self.CURSOR.T.x, y = self.CURSOR.T.y, sx = self.CONTROLLER.cursor_position.x, sy = self.CONTROLLER.cursor_position.y }
         self.screenwipe_amt = self.screenwipe_amt and (0.95 * self.screenwipe_amt + 0.05 * ((self.screenwipe and 0.4 or self.screenglitch and 0.4) or 0)) or 1

@@ -79,7 +79,7 @@ end
 
 --Sets the alignment of moveable using roles
 --
----@param args {major: Moveable, bond: string, offset: table, type: string}
+---@param args {major: Moveable, bond: string, offset: table, type: AlignmentType}
 --**major** The moveable this moveable will attach to\
 --**bond** The bond type, either 'Strong' or 'Weak'. Strong instantly adjusts VT, Weak manually calculates VT changes\
 --**offset** {x , y} offset from the alignment\
@@ -409,12 +409,12 @@ end
 
 function Moveable:move_xy(dt)
     if (self.T.x ~= self.VT.x or math.abs(self.velocity.x) > 0.01) or (self.T.y ~= self.VT.y or math.abs(self.velocity.y) > 0.01) then
-        self.velocity.x = G.exp_times.xy * self.velocity.x + (1 - G.exp_times.xy) * (self.T.x - self.VT.x) * 35 * dt
-        self.velocity.y = G.exp_times.xy * self.velocity.y + (1 - G.exp_times.xy) * (self.T.y - self.VT.y) * 35 * dt
-        if self.velocity.x * self.velocity.x + self.velocity.y * self.velocity.y > G.exp_times.max_vel * G.exp_times.max_vel then
+        self.velocity.x = App.exp_times.xy * self.velocity.x + (1 - App.exp_times.xy) * (self.T.x - self.VT.x) * 35 * dt
+        self.velocity.y = App.exp_times.xy * self.velocity.y + (1 - App.exp_times.xy) * (self.T.y - self.VT.y) * 35 * dt
+        if self.velocity.x * self.velocity.x + self.velocity.y * self.velocity.y > App.exp_times.max_vel * App.exp_times.max_vel then
             local actual_vel = math.sqrt(self.velocity.x * self.velocity.x + self.velocity.y * self.velocity.y)
-            self.velocity.x = G.exp_times.max_vel * self.velocity.x / actual_vel
-            self.velocity.y = G.exp_times.max_vel * self.velocity.y / actual_vel
+            self.velocity.x = App.exp_times.max_vel * self.velocity.x / actual_vel
+            self.velocity.y = App.exp_times.max_vel * self.velocity.y / actual_vel
         end
         self.STATIONARY = false
         self.VT.x = self.VT.x + self.velocity.x

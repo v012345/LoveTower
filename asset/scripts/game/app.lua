@@ -305,7 +305,7 @@ function App:splash_screen()
                 } })
                 self.SPLASH_BACK:set_alignment({
                     major = self.ROOM_ATTACH,
-                    type = 'cm',
+                    type = AlignmentType.cm,
                     offset = Coordinate(0, 0)
                 })
                 self.SPLASH_FRONT = Sprite(Transform(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 }, self.ROOM)
@@ -320,7 +320,7 @@ function App:splash_screen()
                 })
                 self.SPLASH_FRONT:set_alignment({
                     major = self.ROOM_ATTACH,
-                    type = 'cm',
+                    type = AlignmentType.cm,
                     offset = Coordinate(0, 0)
                 })
 
