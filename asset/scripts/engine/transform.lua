@@ -1,4 +1,5 @@
----@class Transform
+---@class Transform:Object
+---@overload fun(x?: number, y?: number, w?: number, h?: number, r?: number, scale?: number): Transform
 Transform = Object:extend()
 
 ---@param x? number
