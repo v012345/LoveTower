@@ -75,6 +75,10 @@ function Settings:get_language()
     return self.data.language
 end
 
+function Settings:get_game_speed()
+    return self.data.GAMESPEED
+end
+
 ---切换到演示模式
 function Settings:switch_to_demo()
     local demo = self.data.DEMO
