@@ -330,16 +330,16 @@ function App:splash_screen()
                     trigger = EventTrigger.after,
                     delay = 0.2,
                     func = (function()
-                        local SC_scale = 1.2
-                        SC = Card(self.ROOM.T.w / 2 - SC_scale * G.CARD_W / 2, 10. + self.ROOM.T.h / 2 - SC_scale * G.CARD_H / 2, SC_scale * G.CARD_W, SC_scale * G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])
-                        SC.T.y = self.ROOM.T.h / 2 - SC_scale * G.CARD_H / 2
-                        SC.ambient_tilt = 1
-                        SC.states.drag.can = false
-                        SC.states.hover.can = false
-                        SC.no_ui = true
-                        self.VIBRATION = self.VIBRATION + 2
-                        play_sound('whoosh1', 0.7, 0.2)
-                        play_sound('introPad1', 0.704, 0.6)
+                        -- local SC_scale = 1.2
+                        -- SC = Card(self.ROOM.T.w / 2 - SC_scale * G.CARD_W / 2, 10. + self.ROOM.T.h / 2 - SC_scale * G.CARD_H / 2, SC_scale * G.CARD_W, SC_scale * G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])
+                        -- SC.T.y = self.ROOM.T.h / 2 - SC_scale * G.CARD_H / 2
+                        -- SC.ambient_tilt = 1
+                        -- SC.states.drag.can = false
+                        -- SC.states.hover.can = false
+                        -- SC.no_ui = true
+                        -- self.VIBRATION = self.VIBRATION + 2
+                        -- play_sound('whoosh1', 0.7, 0.2)
+                        -- play_sound('introPad1', 0.704, 0.6)
                         return true;
                     end)
                 }))
