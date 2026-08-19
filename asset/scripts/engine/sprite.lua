@@ -5,7 +5,6 @@ Sprite = Moveable:extend()
 
 
 function Sprite:get_pos_pixel()
-    self.RETS.get_pos_pixel = self.RETS.get_pos_pixel or {}
     self.RETS.get_pos_pixel[1] = self.sprite_pos.x
     self.RETS.get_pos_pixel[2] = self.sprite_pos.y
     self.RETS.get_pos_pixel[3] = self.atlas.px --self.scale.x
@@ -170,6 +169,7 @@ function Sprite:init(T, new_sprite_atlas, sprite_pos, container)
     self.scale_mag = math.min(self.scale.x / T.w, self.scale.y / T.h)
     self.zoom = true
     self.draw_steps = {}
+    self.RETS.get_pos_pixel = {}
 
     self:set_sprite_pos(sprite_pos)
 
