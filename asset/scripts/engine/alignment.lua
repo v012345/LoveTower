@@ -23,6 +23,9 @@ end
 
 ---@return boolean
 function Alignment:is_changed()
+    if not self.prev_offset.is_equal then
+        print("1")
+    end
     return not self.prev_offset:is_equal(self.offset) or self.prev_type ~= self.type
 end
 

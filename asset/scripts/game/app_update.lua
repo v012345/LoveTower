@@ -43,7 +43,7 @@ function App:update(dt)
 
         for k, v in pairs(self.MOVEABLES) do
             if v.FRAME.MOVE < self.FRAMES.MOVE then
-                v:move(Smooth.instance.move_dt)
+                v:move(math.min(1 / 20, dt))
             end
         end
         for k, v in pairs(self.MOVEABLES) do

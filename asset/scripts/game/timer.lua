@@ -97,4 +97,12 @@ function Timer:get_update_timer()
     end
 end
 
+--- NewX = a*OldX + (1-a)*NewX
+--- a = exp(-50 * dt)
+--- 就是 dy/dx = k(y-x), 其中 k 是常数, 的离散解
+--- 多代入几次, 可以推导出, 现在就不写了, 有点麻烦
+function Timer:approach_r(cur_r, des_r)
+    return self.exp_times.r * cur_r + (1 - self.exp_times.r) * des_r
+end
+
 return Timer

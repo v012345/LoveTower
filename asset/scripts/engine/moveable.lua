@@ -463,7 +463,7 @@ function Moveable:move_r(dt, vel)
 
     if des_r ~= self.VT.r or math.abs(self.velocity:get_r()) > 0.001 then
         self.STATIONARY = false
-        self.velocity:set_r(Smooth.instance:approach_r(self.velocity:get_r(), des_r - self.VT.r))
+        self.velocity:set_r(App.TIMERS:approach_r(self.velocity:get_r(), des_r - self.VT.r))
         self.VT.r = self.VT.r + self.velocity.r
     end
     if math.abs(self.VT.r - self.T.r) < 0.001 and math.abs(self.velocity.r) < 0.001 then
