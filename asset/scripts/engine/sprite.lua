@@ -57,6 +57,7 @@ function Sprite:get_image_dims()
     return self.image_dims
 end
 
+---@param draw_step_definitions DrawStep[]
 function Sprite:define_draw_steps(draw_step_definitions)
     self.draw_steps = EMPTY(self.draw_steps)
     for k, v in ipairs(draw_step_definitions) do

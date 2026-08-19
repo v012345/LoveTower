@@ -308,6 +308,7 @@ function App:splash_screen()
                     type = AlignmentType.cm,
                     offset = Vec2(0, 0)
                 })
+                do return true end -- 测试
                 self.SPLASH_FRONT = Sprite(Transform(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 }, self.ROOM)
                 self.SPLASH_FRONT:define_draw_steps({
                     {
