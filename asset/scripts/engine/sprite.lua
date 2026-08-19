@@ -2,20 +2,6 @@
 ---@overload fun(T: Transform, new_sprite_atlas: AtlasConfigItem, sprite_pos: any, container: Node):Sprite
 Sprite = Moveable:extend()
 
-
-
-function Sprite:get_pos_pixel()
-    self.RETS.get_pos_pixel[1] = self.sprite_pos.x
-    self.RETS.get_pos_pixel[2] = self.sprite_pos.y
-    self.RETS.get_pos_pixel[3] = self.atlas.px --self.scale.x
-    self.RETS.get_pos_pixel[4] = self.atlas.py --self.scale.y
-    return self.RETS.get_pos_pixel
-end
-
-function Sprite:get_image_dims()
-    return self.image_dims
-end
-
 function Sprite:draw_shader(_shader, _shadow_height, _send, _no_tilt, other_obj, ms, mr, mx, my, custom_shader, tilt_shadow)
     if App.SETTINGS:is_reduced_motion() then _no_tilt = true end
     local _draw_major = self.role.draw_major or self
@@ -96,24 +82,6 @@ function Sprite:draw_self(overlay)
     add_to_drawhash(self)
     self:draw_boundingrect()
     if self.shader_tab then love.graphics.setShader() end
-end
-
-function Sprite:draw(overlay)
-    if not self.states.visible then return end
-    if self.draw_steps then
-        for k, v in ipairs(self.draw_steps) do
-            self:draw_shader(v.shader, v.shadow_height, v.send, v.no_tilt, v.other_obj, v.ms, v.mr, v.mx, v.my, not not v.send)
-        end
-    else
-        self:draw_self(overlay)
-    end
-
-    add_to_drawhash(self)
-    for k, v in pairs(self.children) do
-        if k ~= 'h_popup' then v:draw() end
-    end
-    add_to_drawhash(self)
-    self:draw_boundingrect()
 end
 
 function Sprite:draw_from(other_obj, ms, mr, mx, my)
@@ -217,4 +185,34 @@ function Sprite:set_sprite_pos(sprite_pos)
     local y = self.sprite_pos.y * self.atlas.py
     self.sprite = love.graphics.newQuad(x, y, self.scale.x, self.scale.y, w, h)
     self.image_dims = { w, h }
+end
+
+function Sprite:get_pos_pixel()
+    self.RETS.get_pos_pixel[1] = self.sprite_pos.x
+    self.RETS.get_pos_pixel[2] = self.sprite_pos.y
+    self.RETS.get_pos_pixel[3] = self.atlas.px --self.scale.x
+    self.RETS.get_pos_pixel[4] = self.atlas.py --self.scale.y
+    return self.RETS.get_pos_pixel
+end
+
+function Sprite:get_image_dims()
+    return self.image_dims
+end
+
+function Sprite:draw(overlay)
+    if not self.states.visible then return end
+    if self.draw_steps then
+        for k, v in ipairs(self.draw_steps) do
+            self:draw_shader(v.shader, v.shadow_height, v.send, v.no_tilt, v.other_obj, v.ms, v.mr, v.mx, v.my, not not v.send)
+        end
+    else
+        self:draw_self(overlay)
+    end
+
+    add_to_drawhash(self)
+    for k, v in pairs(self.children) do
+        if k ~= 'h_popup' then v:draw() end
+    end
+    add_to_drawhash(self)
+    self:draw_boundingrect()
 end
