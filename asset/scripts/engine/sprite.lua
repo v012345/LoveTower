@@ -4,7 +4,7 @@ Sprite = Moveable:extend()
 
 ---@param T Transform
 ---@param new_sprite_atlas AtlasConfigItem
----@param sprite_pos any
+---@param sprite_pos {x: number, y: number, v?: number}
 ---@param container Node
 function Sprite:init(T, new_sprite_atlas, sprite_pos, container)
     Moveable.init(self, T, container)
@@ -27,11 +27,13 @@ function Sprite:reset()
     self:set_sprite_pos(self.sprite_pos)
 end
 
+---@param sprite_pos {x: number, y: number, v?: number}
 function Sprite:set_sprite_pos(sprite_pos)
-    if sprite_pos and sprite_pos.v then
-        self.sprite_pos = { x = (math.random(sprite_pos.v) - 1), y = sprite_pos.y }
+    local v = sprite_pos.v
+    if v then --我怎么感觉这个就给随机小丑用的呢？
+        self.sprite_pos = { x = (math.random(v) - 1), y = sprite_pos.y }
     else
-        self.sprite_pos = sprite_pos or { x = 0, y = 0 }
+        self.sprite_pos = sprite_pos
     end
     self.sprite_pos_copy = { x = self.sprite_pos.x, y = self.sprite_pos.y }
 
