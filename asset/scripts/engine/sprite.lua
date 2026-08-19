@@ -13,6 +13,7 @@ function Sprite:init(T, new_sprite_atlas, sprite_pos, container)
     self.scale = { x = self.atlas.px, y = self.atlas.py }
     self.scale_mag = math.min(self.scale.x / T.w, self.scale.y / T.h)
     self.zoom = true
+    self.draw_steps = {}
 
     self:set_sprite_pos(sprite_pos)
 
@@ -55,24 +56,6 @@ end
 
 function Sprite:get_image_dims()
     return self.image_dims
-end
-
----@param draw_step_definitions DrawStep[]
-function Sprite:define_draw_steps(draw_step_definitions)
-    self.draw_steps = EMPTY(self.draw_steps)
-    for k, v in ipairs(draw_step_definitions) do
-        self.draw_steps[#self.draw_steps + 1] = {
-            shader = v.shader or 'dissolve',
-            shadow_height = v.shadow_height or nil,
-            send = v.send or nil,
-            no_tilt = v.no_tilt or nil,
-            other_obj = v.other_obj or nil,
-            ms = v.ms or nil,
-            mr = v.mr or nil,
-            mx = v.mx or nil,
-            my = v.my or nil
-        }
-    end
 end
 
 function Sprite:draw_shader(_shader, _shadow_height, _send, _no_tilt, other_obj, ms, mr, mx, my, custom_shader, tilt_shadow)
@@ -218,4 +201,24 @@ function Sprite:remove()
     -- end
 
     Moveable.remove(self)
+end
+
+--- ok ---
+
+---@param draw_step_definitions DrawStep[]
+function Sprite:define_draw_steps(draw_step_definitions)
+    EMPTY(self.draw_steps)
+    for k, v in ipairs(draw_step_definitions) do
+        self.draw_steps[#self.draw_steps + 1] = {
+            shader = v.shader or 'dissolve',
+            shadow_height = v.shadow_height or nil,
+            send = v.send or nil,
+            no_tilt = v.no_tilt or nil,
+            other_obj = v.other_obj or nil,
+            ms = v.ms or nil,
+            mr = v.mr or nil,
+            mx = v.mx or nil,
+            my = v.my or nil
+        }
+    end
 end

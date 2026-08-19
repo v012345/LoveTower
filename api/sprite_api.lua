@@ -1,6 +1,6 @@
 ---@class (partial) Sprite: Moveable
 ---@field atlas AtlasConfigItem
-
+---@field draw_steps DrawStep[]
 
 ---@class DataSendToShader
 ---@field name string
