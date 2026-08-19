@@ -12,14 +12,11 @@ function Sprite:set_sprite_pos(sprite_pos)
     end
     self.sprite_pos_copy = { x = self.sprite_pos.x, y = self.sprite_pos.y }
 
-    self.sprite = love.graphics.newQuad(
-        self.sprite_pos.x * self.atlas.px,
-        self.sprite_pos.y * self.atlas.py,
-        self.scale.x,
-        self.scale.y, self.atlas.image:getDimensions())
-
-    self.image_dims = {}
-    self.image_dims[1], self.image_dims[2] = self.atlas.image:getDimensions()
+    local w, h = self.atlas.image:getDimensions()
+    local x = self.sprite_pos.x * self.atlas.px
+    local y = self.sprite_pos.y * self.atlas.py
+    self.sprite = love.graphics.newQuad(x, y, self.scale.x, self.scale.y, w, h)
+    self.image_dims = { w, h }
 end
 
 function Sprite:get_pos_pixel()

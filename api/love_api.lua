@@ -163,6 +163,7 @@ function love.filesystem.getSaveDirectory() end
 ---@class love.Image: Texture
 love.Image = love.Image or {}
 
+---返回 Image 的真实大小
 ---@return number width
 ---@return number height
 function love.Image:getDimensions() end

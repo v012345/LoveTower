@@ -1,6 +1,7 @@
 ---@class (partial) Sprite: Moveable
 ---@field atlas AtlasConfigItem
 ---@field draw_steps DrawStep[]
+---@field scale Vec2 这个 scale 居然不是缩放, 是图集中每个元素的大小
 
 ---@class DataSendToShader
 ---@field name string

@@ -4,8 +4,8 @@
 ---@field path string[]
 ---@field dpiscale number[]
 ---@field is_animation boolean
----@field py number
----@field px number
+---@field py number 图集中每个元素的高度（像素）
+---@field px number 图集中每个元素的宽度（像素）
 ---@field frames number
 ---@field image love.Image
 
