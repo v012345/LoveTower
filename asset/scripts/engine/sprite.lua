@@ -214,7 +214,7 @@ function Sprite:define_draw_steps(draw_step_definitions)
     end
 end
 
----通过 name 和 sprite_pos 重置 sprite
+---通过 name 和 sprite_pos 重新在图集中找到对应的精灵，并设置 sprite
 function Sprite:reset()
     self.atlas = App.ASSET_ATLAS[self.atlas.name]
     self:set_sprite_pos(self.sprite_pos)
