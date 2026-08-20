@@ -41,6 +41,9 @@ function App:update(dt)
         self.Performance:timer_checkpoint('e_manager', 'update')
 
 
+        self:update_state(dt)
+
+        self.Performance:timer_checkpoint('states', 'update')
         --move and update all other moveables
         self.TIMERS:update_exp_times(self.real_dt)
 
