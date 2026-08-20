@@ -44,17 +44,24 @@ function App:update(dt)
         self:update_state(dt)
 
         self.Performance:timer_checkpoint('states', 'update')
+
+        for k, v in pairs(self.ANIMATIONS) do
+            v:animate(self.real_dt * self.SPEEDFACTOR)
+        end
+        self.Performance:timer_checkpoint('animate', 'update')
+
         --move and update all other moveables
         self.TIMERS:update_exp_times(self.real_dt)
+        local move_dt = math.min(1 / 20, self.real_dt)
 
 
         for k, v in pairs(self.MOVEABLES) do
             if v.FRAME.MOVE < self.FRAMES.MOVE then
-                v:move(math.min(1 / 20, dt))
+                v:move(move_dt)
             end
         end
         for k, v in pairs(self.MOVEABLES) do
-            v:update(dt * 1)
+            v:update(dt * self.SPEEDFACTOR)
             v.states.collide.is = false
         end
         self.Performance:timer_checkpoint('update', 'update')
