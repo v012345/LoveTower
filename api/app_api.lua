@@ -47,6 +47,9 @@
 ---@field recording_mode boolean 是否是录制模式
 ---@field video_control boolean 是否是视频控制模式
 ---@field screenglitch boolean 是否开启屏幕故障 shader 使用
+---@field ACC_state STATES 加速参数的判断状态, 当状态改变时, 加速参数清零, 其实就是上一帧的状态
+---@field ACC number 加速参数
+---@field SPEEDFACTOR number 速度因子
 
 
 ---@alias NodeList {

@@ -109,6 +109,8 @@ function App:init()
 
     self.Performance = Performance(self)
     self.FILE_HANDLER = FileHandler(self)
+    self.SPEEDFACTOR = 1
+    self.ACC = 0
 end
 
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
@@ -184,7 +186,7 @@ function App:start_up()
 
     --Create the event manager for the game
     self.E_MANAGER = EventManager()
-    self.SPEEDFACTOR = 1
+
 
     self.PROFILES:set_profile_progress()
     boot_timer('prep stage', 'splash prep', 0.99)

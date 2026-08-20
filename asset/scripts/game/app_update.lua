@@ -164,12 +164,14 @@ function App:update_selecting_hand(dt) end
 function App:update_speed_factor(dt)
     if self.STATE ~= self.ACC_state then self.ACC = 0 end
     self.ACC_state = self.STATE
-    if (self.STATE == self.STATES.HAND_PLAYED) or (self.STATE == self.STATES.NEW_ROUND) then
-        self.ACC = math.min((self.ACC or 0) + dt * 0.2 * self.SETTINGS.data.GAMESPEED, 16)
+
+    if self.STATE == self.STATES.HAND_PLAYED or self.STATE == self.STATES.NEW_ROUND then
+        self.ACC = math.min(self.ACC + dt * 0.2 * self.SETTINGS.data.GAMESPEED, 16)
     else
         self.ACC = 0
     end
-    self.SPEEDFACTOR = (self.STAGE == self.STAGES.RUN and not self.SETTINGS:is_paused() and not self.screenwipe) and
-        self.SETTINGS.data.GAMESPEED or 1
+
+    local can_speed_up = self.STAGE == self.STAGES.RUN and not self.SETTINGS:is_paused() and not self.screenwipe
+    self.SPEEDFACTOR = can_speed_up and self.SETTINGS.data.GAMESPEED or 1
     self.SPEEDFACTOR = self.SPEEDFACTOR + math.max(0, math.abs(self.ACC) - 2)
 end
