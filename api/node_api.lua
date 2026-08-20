@@ -10,8 +10,8 @@
 ---@field container Node 就是父节点, 子节点会被父节点影响
 ---@field config table 当前节点的元数据
 ---@field under_overlay boolean 是否在覆盖层?
----@field click_offset Coordinate Create the offset tables, used to determine things like drag offset and 3d shader effects
----@field hover_offset Coordinate Create the offset tables, used to determine things like drag offset and 3d shader effects
+---@field click_offset Vec2 Create the offset tables, used to determine things like drag offset and 3d shader effects
+---@field hover_offset Vec2 Create the offset tables, used to determine things like drag offset and 3d shader effects
 ---@field created_on_pause boolean To keep track of all nodes created on pause. If true, this node moves normally even when the G.TIMERS.TOTAL doesn't increment
 ---@field ARGS table Store all argument tables here for reuse, because Lua likes to generate garbage
 ---@field RETS table Store all return tables here for reuse, because Lua likes to generate garbage

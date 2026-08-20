@@ -22,7 +22,7 @@ Moveable.exp_times = {
 ---@param container Node
 function Moveable:init(T, container)
     Node.init(self, T, container)
-    self.layered_parallax = Coordinate(0, 0)
+    self.layered_parallax = Vec2(0, 0)
     --The Visible transform is initally set to the same values as the transform T.
     --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
     --scale of any objects that need to be drawn larger or smaller
@@ -53,10 +53,10 @@ function Moveable:init(T, container)
 
     self.static_rotation = false
 
-    self.offset = Coordinate(0, 0)
+    self.offset = Vec2(0, 0)
     self.Mid = self -- 对齐参考点默认是自己
 
-    self.shadow_parrallax = Coordinate(0, -1.5)
+    self.shadow_parrallax = Vec2(0, -1.5)
     self.shadow_height = 0.2
 
     self:calculate_parrallax()
@@ -64,6 +64,9 @@ function Moveable:init(T, container)
     table.insert(App.MOVEABLES, self)
     if getmetatable(self) == Moveable then
         table.insert(App.I.MOVEABLE, self)
+    end
+    if self.ID == 5 then
+        print(5)
     end
 end
 
@@ -79,7 +82,7 @@ end
 
 --Sets the alignment of moveable using roles
 --
----@param args {major: Moveable, bond: string, offset: table, type: string}
+---@param args {major: Moveable, bond: string, offset: table, type: AlignmentType}
 --**major** The moveable this moveable will attach to\
 --**bond** The bond type, either 'Strong' or 'Weak'. Strong instantly adjusts VT, Weak manually calculates VT changes\
 --**offset** {x , y} offset from the alignment\
@@ -409,12 +412,12 @@ end
 
 function Moveable:move_xy(dt)
     if (self.T.x ~= self.VT.x or math.abs(self.velocity.x) > 0.01) or (self.T.y ~= self.VT.y or math.abs(self.velocity.y) > 0.01) then
-        self.velocity.x = G.exp_times.xy * self.velocity.x + (1 - G.exp_times.xy) * (self.T.x - self.VT.x) * 35 * dt
-        self.velocity.y = G.exp_times.xy * self.velocity.y + (1 - G.exp_times.xy) * (self.T.y - self.VT.y) * 35 * dt
-        if self.velocity.x * self.velocity.x + self.velocity.y * self.velocity.y > G.exp_times.max_vel * G.exp_times.max_vel then
+        self.velocity.x = App.exp_times.xy * self.velocity.x + (1 - App.exp_times.xy) * (self.T.x - self.VT.x) * 35 * dt
+        self.velocity.y = App.exp_times.xy * self.velocity.y + (1 - App.exp_times.xy) * (self.T.y - self.VT.y) * 35 * dt
+        if self.velocity.x * self.velocity.x + self.velocity.y * self.velocity.y > App.exp_times.max_vel * App.exp_times.max_vel then
             local actual_vel = math.sqrt(self.velocity.x * self.velocity.x + self.velocity.y * self.velocity.y)
-            self.velocity.x = G.exp_times.max_vel * self.velocity.x / actual_vel
-            self.velocity.y = G.exp_times.max_vel * self.velocity.y / actual_vel
+            self.velocity.x = App.exp_times.max_vel * self.velocity.x / actual_vel
+            self.velocity.y = App.exp_times.max_vel * self.velocity.y / actual_vel
         end
         self.STATIONARY = false
         self.VT.x = self.VT.x + self.velocity.x
@@ -463,7 +466,7 @@ function Moveable:move_r(dt, vel)
 
     if des_r ~= self.VT.r or math.abs(self.velocity:get_r()) > 0.001 then
         self.STATIONARY = false
-        self.velocity:set_r(Smooth.instance:approach_r(self.velocity:get_r(), des_r - self.VT.r))
+        self.velocity:set_r(App.TIMERS:approach_r(self.velocity:get_r(), des_r - self.VT.r))
         self.VT.r = self.VT.r + self.velocity.r
     end
     if math.abs(self.VT.r - self.T.r) < 0.001 and math.abs(self.velocity.r) < 0.001 then
@@ -502,7 +505,7 @@ end
 ---@param offset? table
 function Moveable:prep_draw(scale, rotate, offset)
     -- love.graphics.scale(App.TILESCALE * App.TILESIZE)
-    offset = offset or Coordinate(0, 0)
+    offset = offset or Vec2(0, 0)
     love.graphics.setColor(Color.RED)
     love.graphics.rectangle('fill', 0, 0, 20, 20)
     local VT = self.VT

@@ -1,6 +1,7 @@
 --#region love.graphics
 ---@meta
 
+---一个矩形区域，用于绘制图像
 ---@class Quad
 Quad = {}
 
@@ -103,8 +104,20 @@ end
 ---@param offsetY?  number
 ---@param shearX?   number
 ---@param shearY?   number
-function love.graphics.draw(drawable, x, y, rotation, scaleX, scaleY, offsetX, offsetY, shearX, shearY)
-end
+function love.graphics.draw(drawable, x, y, rotation, scaleX, scaleY, offsetX, offsetY, shearX, shearY) end
+
+---@param texture Texture A Texture (Image or Canvas) to texture the Quad with.
+---@param quad Quad The Quad to draw on screen.
+---@param x number The position to draw the object (x-axis).
+---@param y number The position to draw the object (y-axis).
+---@param r? number (0) Orientation (radians).
+---@param sx? number (1) Scale factor (x-axis).
+---@param sy? number (sx) Scale factor (y-axis).
+---@param ox? number (0) Origin offset (x-axis).
+---@param oy? number (0) Origin offset (y-axis).
+---@param kx? number (0) Shearing factor (x-axis).
+---@param ky? number (0) Shearing factor (y-axis).
+function love.graphics.draw(texture, quad, x, y, r, sx, sy, ox, oy, kx, ky) end
 
 ---@param text      string
 ---@param x         number

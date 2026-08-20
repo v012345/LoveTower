@@ -160,9 +160,10 @@ function love.filesystem.getSaveDirectory() end
 
 --#region love.image
 
----@class love.Image: Drawable
+---@class love.Image: Texture
 love.Image = love.Image or {}
 
+---返回 Image 的真实大小
 ---@return number width
 ---@return number height
 function love.Image:getDimensions() end
@@ -311,5 +312,5 @@ function love.window.updateMode(width, height, settings) end
 ---@field r_vel    number     旋转速度
 ---@field velocity number     速度
 ---@field dir      number     方向
----@field offset   Coordinate 偏移
+---@field offset   Vec2 偏移
 ---@field colour   table      颜色

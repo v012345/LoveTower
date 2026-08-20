@@ -1,6 +1,9 @@
----@class Vec2
+---@class Vec2: Object
+---@overload fun(x?: number, y?: number): Vec2
 Vec2 = Object:extend()
 
+---@param x? number
+---@param y? number
 function Vec2:init(x, y)
     self.x = x or 0
     self.y = y or 0

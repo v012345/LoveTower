@@ -1,4 +1,4 @@
----@class Timer:Object
+---@class (partial) Timer:Object
 ---@field TOTAL number 累计时间, 受 SPEEDFACTOR 影响
 ---@field REAL number 和 UPTIME 一样, 但是会被手动修改
 ---@field REAL_SHADER number
@@ -6,7 +6,7 @@
 ---@field BACKGROUND number
 ---@field real_dt number 真实的每帧时间, 因为游戏循环可能会被暂停, 所以需要记录真实的每帧时间
 ---@field FRAMES {DRAW: number, MOVE: number} 帧数
----@field exp_times {xy: number, scale: number, r: number} 指数时间, 用于计算动画的指数衰减
+---@field exp_times ExpTimes 指数时间, 用于计算动画的指数衰减
 local Timer = Object:extend()
 function Timer:init()
     self.TOTAL = 0
@@ -20,7 +20,12 @@ function Timer:init()
         DRAW = 0,
         MOVE = 0
     }
-    self.exp_times = { xy = 0, scale = 0, r = 0 }
+    self.exp_times = {
+        xy = 0,
+        scale = 0,
+        r = 0,
+        max_vel = 0
+    }
 end
 
 function Timer:update_background_time(dt)
@@ -29,6 +34,15 @@ end
 
 function Timer:get_exp_times()
     return self.exp_times
+end
+
+---平滑过度用
+function Timer:update_exp_times(dt)
+    self.exp_times.xy = math.exp(-50 * dt)
+    self.exp_times.scale = math.exp(-60 * dt)
+    self.exp_times.r = math.exp(-190 * dt)
+    local move_dt = math.min(1 / 20, dt)
+    self.exp_times.max_vel = 70 * move_dt
 end
 
 function Timer:get_frames()
@@ -81,6 +95,14 @@ function Timer:get_update_timer()
     return function()
         return self.UPTIME
     end
+end
+
+--- NewX = a*OldX + (1-a)*NewX
+--- a = exp(-50 * dt)
+--- 就是 dy/dx = k(y-x), 其中 k 是常数, 的离散解
+--- 多代入几次, 可以推导出, 现在就不写了, 有点麻烦
+function Timer:approach_r(cur_r, des_r)
+    return self.exp_times.r * cur_r + (1 - self.exp_times.r) * des_r
 end
 
 return Timer

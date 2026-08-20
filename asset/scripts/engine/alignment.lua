@@ -1,7 +1,15 @@
 ---@class Alignment
+---@overload fun(type: AlignmentType, offset: Vec2, prev_type: AlignmentType, prev_offset: Vec2, lr_clamp: boolean): Alignment
 Alignment = Object:extend()
 
+---@param type AlignmentType
+---@param offset Vec2
+---@param prev_type AlignmentType
+---@param prev_offset Vec2
+---@param lr_clamp boolean
 function Alignment:init(type, offset, prev_type, prev_offset, lr_clamp)
+    assert(offset:is(Vec2))
+    assert(prev_offset:is(Vec2))
     self.type = type
     self.offset = offset
     self.prev_type = prev_type
@@ -17,12 +25,18 @@ function Alignment:init(type, offset, prev_type, prev_offset, lr_clamp)
         r = false,
         i = false,
     }
+    if not self.prev_offset.is_equal then
+        print("1")
+    end
 end
 
 --- is methods ----
 
 ---@return boolean
 function Alignment:is_changed()
+    if not self.prev_offset.is_equal then
+        print("1")
+    end
     return not self.prev_offset:is_equal(self.offset) or self.prev_type ~= self.type
 end
 
@@ -179,3 +193,18 @@ function Alignment:__tostring()
     end
     return string.format("Alignment(type=%s, offset=%s, prev_type=%s, prev_offset=%s, lr_clamp=%s)", type_list, self.offset, self.prev_type, self.prev_offset, self.lr_clamp)
 end
+
+-- _G.Alignment = setmetatable({}, {
+--     __call = function(self, type, offset, prev_type, prev_offset, lr_clamp)
+--         return setmetatable({}, {
+--             __index = Alignment(type, offset, prev_type, prev_offset, lr_clamp),
+--             __newindex = function(self, k, v)
+--                 if k == "prev_offset" then
+--                     error("Attempt to modify a read-only table")
+--                     -- else
+--                     -- self.k = v
+--                 end
+--             end,
+--         })
+--     end
+-- })

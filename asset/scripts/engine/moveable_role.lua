@@ -1,6 +1,23 @@
----@class MoveableRole
+---@class MoveableRole:Object
+---@field private role_type RoleType
+---@field private offset Vec2
+---@field private major Moveable
+---@field private draw_major Moveable
+---@field private xy_bond BondType
+---@field private wh_bond BondType
+---@field private r_bond BondType
+---@field private scale_bond BondType
+---@overload fun(major: Moveable, role_type?: RoleType, draw_major: Moveable, offset?: Vec2, xy_bond?: BondType, wh_bond?: BondType, r_bond?: BondType, scale_bond?: BondType): MoveableRole
 MoveableRole = Object:extend()
 
+---@param major Moveable
+---@param role_type? RoleType
+---@param draw_major Moveable
+---@param offset? Vec2
+---@param xy_bond? BondType
+---@param wh_bond? BondType
+---@param r_bond? BondType
+---@param scale_bond? BondType
 function MoveableRole:init(major, role_type, draw_major, offset, xy_bond, wh_bond, r_bond, scale_bond)
     self.major = major
     self.role_type = role_type or RoleType.Minor          --Major dictates movement, Minor is welded to some major

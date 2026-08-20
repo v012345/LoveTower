@@ -1,4 +1,5 @@
 ---@class Color
+---@overload fun(r: number|table|string, g: number|nil, b: number|nil, a: number|nil): RGBA
 local Color = setmetatable({}, { __call = function(...) return RGBA(...) end })
 
 

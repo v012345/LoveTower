@@ -35,14 +35,19 @@ function App:update(dt)
 
         self.TIMERS:update_game_time(dt)
         self.E_MANAGER:update(self.real_dt)
-        -- Smooth.instance:update(Timer.instance.real_dt)
+
+
+        --move and update all other moveables
+        self.TIMERS:update_exp_times(self.real_dt)
+
+
         for k, v in pairs(self.MOVEABLES) do
             if v.FRAME.MOVE < self.FRAMES.MOVE then
-                v:move(Smooth.instance.move_dt)
+                v:move(math.min(1 / 20, dt))
             end
         end
         for k, v in pairs(self.MOVEABLES) do
-            -- v:update(dt * Timer.instance.SPEEDFACTOR)
+            v:update(dt * 1)
             v.states.collide.is = false
         end
         self.Performance:timer_checkpoint('update', 'update')
