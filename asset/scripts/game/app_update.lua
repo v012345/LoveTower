@@ -2,7 +2,9 @@ function App:update(dt)
     nuGC(nil, nil, true)
     self.FRAMES.MOVE = self.FRAMES.MOVE + 1
     self.Performance:timer_checkpoint('start->discovery', 'update')
+
     if not self.SETTINGS:is_tutorial_complete() then self.FUNCS.tutorial_controller() end
+
     self.Performance:timer_checkpoint('tallies', 'update')
     self:modulate_sound(dt)
     self.Performance:timer_checkpoint('sounds', 'update')
@@ -32,8 +34,9 @@ function App:update(dt)
         --暂停游戏时, dt 为 0
         if self.SETTINGS:is_paused() then dt = 0 end
 
+        self:update_speed_factor(dt)
+        self.TIMERS:update_game_time(dt * self.SPEEDFACTOR)
 
-        self.TIMERS:update_game_time(dt)
         self.E_MANAGER:update(self.real_dt)
 
 
@@ -156,3 +159,17 @@ function App:update_play_tarot(dt) end
 function App:update_shop(dt) end
 
 function App:update_selecting_hand(dt) end
+
+---出牌后, 比如算分的时间长, 需要加速一下
+function App:update_speed_factor(dt)
+    if self.STATE ~= self.ACC_state then self.ACC = 0 end
+    self.ACC_state = self.STATE
+    if (self.STATE == self.STATES.HAND_PLAYED) or (self.STATE == self.STATES.NEW_ROUND) then
+        self.ACC = math.min((self.ACC or 0) + dt * 0.2 * self.SETTINGS.data.GAMESPEED, 16)
+    else
+        self.ACC = 0
+    end
+    self.SPEEDFACTOR = (self.STAGE == self.STAGES.RUN and not self.SETTINGS:is_paused() and not self.screenwipe) and
+        self.SETTINGS.data.GAMESPEED or 1
+    self.SPEEDFACTOR = self.SPEEDFACTOR + math.max(0, math.abs(self.ACC) - 2)
+end

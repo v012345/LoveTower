@@ -14,7 +14,6 @@ function Timer:init()
     self.REAL_SHADER = 0
     self.UPTIME = 0
     self.BACKGROUND = 0
-    self.SPEEDFACTOR = 1
     self.real_dt = 0
     self.FRAMES = {
         DRAW = 0,
@@ -66,7 +65,7 @@ function Timer:set_real_shader_time(time)
 end
 
 function Timer:update_game_time(dt)
-    self.TOTAL = self.TOTAL + dt * self.SPEEDFACTOR
+    self.TOTAL = self.TOTAL + dt
 end
 
 ---@return fun(): number
