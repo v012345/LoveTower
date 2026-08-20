@@ -186,7 +186,6 @@ function App:splash_screen()
         self:prep_stage(STAGES.MAIN_MENU, STATES.SPLASH, true)
 
 
-
         self.E_MANAGER:add_event(Event({
             func = function()
                 self.TIMERS.TOTAL = 0

@@ -2,6 +2,18 @@
 ---@overload fun(T: Transform, new_sprite_atlas: AtlasConfigItem, sprite_pos: any, container: Node):Sprite
 Sprite = Moveable:extend()
 
+---
+---@param _shader any
+---@param _shadow_height any
+---@param _send DataSendToShader[]
+---@param _no_tilt any
+---@param other_obj any
+---@param ms any
+---@param mr any
+---@param mx any
+---@param my any
+---@param custom_shader any
+---@param tilt_shadow any
 function Sprite:draw_shader(_shader, _shadow_height, _send, _no_tilt, other_obj, ms, mr, mx, my, custom_shader, tilt_shadow)
     if App.SETTINGS:is_reduced_motion() then _no_tilt = true end
     local _draw_major = self.role:get_draw_major() or self

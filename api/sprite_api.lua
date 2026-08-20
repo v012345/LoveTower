@@ -6,6 +6,7 @@
 ---@class DataSendToShader
 ---@field name string
 ---@field val? any
+---@field func? function
 ---@field ref_table? table
 ---@field ref_value?string
 
