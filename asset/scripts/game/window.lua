@@ -97,6 +97,11 @@ function Window:get_tile_scale()
     return self.TILESCALE
 end
 
+---@return number
+function Window:get_tile_size()
+    return self.TILESIZE
+end
+
 function Window:set_tile_scale(scale)
     self.TILESCALE = scale
 end
