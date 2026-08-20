@@ -4,15 +4,15 @@ Sprite = Moveable:extend()
 
 ---
 ---@param _shader any
----@param _shadow_height any
+---@param _shadow_height number
 ---@param _send DataSendToShader[]
----@param _no_tilt any
+---@param _no_tilt boolean
 ---@param other_obj any
----@param ms any
----@param mr any
----@param mx any
----@param my any
----@param custom_shader any
+---@param ms number
+---@param mr number
+---@param mx number
+---@param my number
+---@param custom_shader boolean
 ---@param tilt_shadow any
 function Sprite:draw_shader(_shader, _shadow_height, _send, _no_tilt, other_obj, ms, mr, mx, my, custom_shader, tilt_shadow)
     if App.SETTINGS:is_reduced_motion() then _no_tilt = true end
