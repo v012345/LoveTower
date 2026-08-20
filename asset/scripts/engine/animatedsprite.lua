@@ -21,7 +21,7 @@ function AnimatedSprite:rescale()
 end
 
 function AnimatedSprite:reset()
-    self.atlas = G.ANIMATION_ATLAS[self.atlas.name]
+    self.atlas = App.ANIMATION_ATLAS[self.atlas.name]
     self:set_sprite_pos({ x = self.animation.x, y = self.animation.y })
 end
 
