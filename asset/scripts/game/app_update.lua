@@ -45,6 +45,7 @@ function App:update(dt)
             -- v:update(dt * Timer.instance.SPEEDFACTOR)
             v.states.collide.is = false
         end
+        self.Performance:timer_checkpoint('update', 'update')
     end
 
     self.CONTROLLER:update(self.real_dt)
@@ -53,3 +54,100 @@ function App:update(dt)
         self.FILE_HANDLER:reset_status()
     end
 end
+
+function App:update_state(dt)
+    if self.STATE == self.STATES.SELECTING_HAND then
+        if (not self.hand.cards[1]) and self.deck.cards[1] then
+            self.STATE = self.STATES.DRAW_TO_HAND
+            self.STATE_COMPLETE = false
+        else
+            self:update_selecting_hand(dt)
+        end
+    end
+
+    if self.STATE == self.STATES.SHOP then
+        self:update_shop(dt)
+    end
+
+    if self.STATE == self.STATES.PLAY_TAROT then
+        self:update_play_tarot(dt)
+    end
+
+    if self.STATE == self.STATES.HAND_PLAYED then
+        self:update_hand_played(dt)
+    end
+
+    if self.STATE == self.STATES.DRAW_TO_HAND then
+        self:update_draw_to_hand(dt)
+    end
+
+    if self.STATE == self.STATES.NEW_ROUND then
+        self:update_new_round(dt)
+    end
+
+    if self.STATE == self.STATES.BLIND_SELECT then
+        self:update_blind_select(dt)
+    end
+
+    if self.STATE == self.STATES.ROUND_EVAL then
+        self:update_round_eval(dt)
+    end
+
+    if self.STATE == self.STATES.TAROT_PACK then
+        self:update_arcana_pack(dt)
+    end
+
+    if self.STATE == self.STATES.SPECTRAL_PACK then
+        self:update_spectral_pack(dt)
+    end
+
+    if self.STATE == self.STATES.STANDARD_PACK then
+        self:update_standard_pack(dt)
+    end
+
+    if self.STATE == self.STATES.BUFFOON_PACK then
+        self:update_buffoon_pack(dt)
+    end
+
+    if self.STATE == self.STATES.PLANET_PACK then
+        self:update_celestial_pack(dt)
+    end
+
+    if self.STATE == self.STATES.GAME_OVER then
+        self:update_game_over(dt)
+    end
+
+    if self.STATE == self.STATES.MENU then
+        self:update_menu(dt)
+    end
+end
+
+function App:update_menu(dt) end
+
+function App:update_game_over(dt) end
+
+function App:update_celestial_pack(dt) end
+
+function App:update_buffoon_pack(dt) end
+
+function App:update_standard_pack(dt) end
+
+function App:update_spectral_pack(dt) end
+
+function App:update_arcana_pack(dt) end
+
+function App:update_round_eval(dt) end
+
+function App:update_blind_select(dt) end
+
+function App:update_new_round(dt) end
+
+function App:update_draw_to_hand(dt) end
+
+function App:update_hand_played(dt) end
+
+function App:update_play_tarot(dt) end
+
+function App:update_shop(dt) end
+
+function App:update_selecting_hand(dt) end
