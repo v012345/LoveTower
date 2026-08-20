@@ -36,8 +36,9 @@ function App:update(dt)
 
         self:update_speed_factor(dt)
         self.TIMERS:update_game_time(dt * self.SPEEDFACTOR)
-
+        self:update_color(dt)
         self.E_MANAGER:update(self.real_dt)
+        self.Performance:timer_checkpoint('e_manager', 'update')
 
 
         --move and update all other moveables
@@ -159,6 +160,17 @@ function App:update_play_tarot(dt) end
 function App:update_shop(dt) end
 
 function App:update_selecting_hand(dt) end
+
+---是什么东西在变色?
+function App:update_color(dt)
+    self.C.DARK_EDITION[1] = 0.6 + 0.2 * math.sin(self.TIMERS.REAL * 1.3)
+    self.C.DARK_EDITION[3] = 0.6 + 0.2 * (1 - math.sin(self.TIMERS.REAL * 1.3))
+    self.C.DARK_EDITION[2] = math.min(self.C.DARK_EDITION[3], self.C.DARK_EDITION[1])
+
+    self.C.EDITION[1] = 0.7 + 0.2 * (1 + math.sin(self.TIMERS.REAL * 1.5 + 0))
+    self.C.EDITION[3] = 0.7 + 0.2 * (1 + math.sin(self.TIMERS.REAL * 1.5 + 3))
+    self.C.EDITION[2] = 0.7 + 0.2 * (1 + math.sin(self.TIMERS.REAL * 1.5 + 6))
+end
 
 ---出牌后, 比如算分的时间长, 需要加速一下
 function App:update_speed_factor(dt)
