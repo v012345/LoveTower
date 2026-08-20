@@ -239,5 +239,5 @@ function App:draw()
         love.graphics.pop()
     end
     self.Performance:timer_checkpoint('debug', 'draw')
-    self.ROOM:draw_self_boundingrect()
+    self.ROOM_ATTACH:draw_self_boundingrect()
 end
