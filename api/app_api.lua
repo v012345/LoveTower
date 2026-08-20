@@ -50,6 +50,8 @@
 ---@field ACC_state STATES 加速参数的判断状态, 当状态改变时, 加速参数清零, 其实就是上一帧的状态
 ---@field ACC number 加速参数
 ---@field SPEEDFACTOR number 速度因子
+---@field ASSET_ATLAS table<string, AtlasConfigItem> 精灵图集
+---@field ANIMATION_ATLAS table<string, AtlasConfigItem> 动画精灵图集
 
 
 ---@alias NodeList {

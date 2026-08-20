@@ -53,7 +53,7 @@ function AnimatedSprite:set_sprite_pos(sprite_pos)
         self.animation.w,
         self.animation.h,
         self.image_dims[1], self.image_dims[2])
-    self.offset_seconds = G.TIMERS.REAL
+    self.offset_seconds = App.TIMERS.REAL
 end
 
 function AnimatedSprite:get_pos_pixel()
@@ -70,20 +70,13 @@ function AnimatedSprite:draw_self()
 
     prep_draw(self, 1)
     love.graphics.scale(1 / self.scale_mag)
-    love.graphics.setColor(G.C.WHITE)
-    love.graphics.draw(
-        self.atlas.image,
-        self.sprite,
-        0, 0,
-        0,
-        self.VT.w / (self.T.w),
-        self.VT.h / (self.T.h)
-    )
+    love.graphics.setColor(App.C.WHITE)
+    love.graphics.draw(self.atlas.image, self.sprite, 0, 0, 0, self.VT.w / self.T.w, self.VT.h / self.T.h)
     love.graphics.pop()
 end
 
 function AnimatedSprite:animate()
-    local new_frame = math.floor(G.ANIMATION_FPS * (G.TIMERS.REAL - self.offset_seconds)) % self.current_animation.frames
+    local new_frame = math.floor(App.ANIMATION_FPS * (G.TIMERS.REAL - self.offset_seconds)) % self.current_animation.frames
     if new_frame ~= self.current_animation.current then
         self.current_animation.current = new_frame
         self.frame_offset = math.floor(self.animation.w * (self.current_animation.current))
