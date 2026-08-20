@@ -81,6 +81,7 @@ function App:init()
 
     self.DRAW_HASH = {}
     self.MOVEABLES = {}
+    self.ANIMATIONS = {}
 
     self.ARGS = {}
     --- 就是当前类的实例
