@@ -1,5 +1,10 @@
 ---@meta
 
+---@class (partial) Particles: Moveable 粒子发射器
+---@field particles Particle[] 粒子
+---@field private scale number 粒子的参数缩放, 不是 Transform 的缩放
+---@field private lifespan number 产生的粒子的寿命
+
 ---@class ParticlesConfig
 ---@field fill? boolean
 ---@field padding? number
