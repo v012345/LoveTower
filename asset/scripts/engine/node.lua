@@ -345,6 +345,23 @@ function Node:fast_mid_dist(other_node)
     return dx * dx + dy * dy
 end
 
+function Node:remove_all(t)
+    for i = #t, 1, -1 do
+        local v = t[i]
+        table.remove(t, i)
+        if v and v.children then
+            remove_all(v.children)
+        end
+        if v then v:remove() end
+        v = nil
+    end
+    for _, v in pairs(t) do
+        if v.children then remove_all(v.children) end
+        v:remove()
+        v = nil
+    end
+end
+
 --Prototype for a click release function, when the cursor is released on this node
 function Node:release(dragged) end
 

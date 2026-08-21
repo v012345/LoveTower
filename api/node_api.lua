@@ -28,7 +28,7 @@
 ---@field release_on { can: boolean, is: boolean }
 
 
---- 包括 `悬浮弹窗` `拖拽弹窗` `警告弹窗`
+--- 包括 `悬浮弹窗` `拖拽弹窗` `警告弹窗`, 以及 `粒子效果`
 ---@class Children
 ---@field h_popup? UIBox 悬浮弹窗
 ---@field d_popup? UIBox 拖拽弹窗

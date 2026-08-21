@@ -161,6 +161,7 @@ function Particles:draw(alpha)
     self:draw_boundingrect()
 end
 
+---从附着的节点中移除自己
 function Particles:remove()
     local major = self.role:get_major()
     if major then
@@ -171,7 +172,7 @@ function Particles:remove()
         end
     end
 
-    remove_all(self.children)
+    self:remove_all(self.children)
 
     Moveable.remove(self)
 end
