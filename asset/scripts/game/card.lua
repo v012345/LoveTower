@@ -27,6 +27,9 @@ end
 function Card:set_ability(center, initial, delay_sprites)
 end
 
+function Card:set_sprites(_center, _front)
+end
+
 ---@param layer 'both' | 'shadow' | 'card'
 function Card:draw(layer)
     layer = layer or 'both'
