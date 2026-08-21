@@ -128,6 +128,9 @@ function Card:draw(layer)
         if self.sprite_facing == 'front' then
             print('front')
         end
+        for k, v in pairs(self.children) do
+            if k ~= 'focused_ui' and k ~= "front" and k ~= "back" and k ~= "soul_parts" and k ~= "center" and k ~= 'floating_sprite' and k ~= "shadow" and k ~= "use_button" and k ~= 'buy_button' and k ~= 'buy_and_use_button' and k ~= "debuff" and k ~= 'price' and k ~= 'particles' and k ~= 'h_popup' then v:draw() end
+        end
         add_to_drawhash(self)
         self:draw_boundingrect()
     end
