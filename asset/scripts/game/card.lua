@@ -60,11 +60,11 @@ function Card:set_sprites(_center, _front)
     if _center then
         if _center.set then
             if self.children.center then
-                self.children.center.atlas = G.ASSET_ATLAS[(_center.atlas or (_center.set == 'Joker' or _center.consumeable or _center.set == 'Voucher') and _center.set) or 'centers']
+                self.children.center.atlas = App.ASSET_ATLAS[(_center.atlas or (_center.set == 'Joker' or _center.consumeable or _center.set == 'Voucher') and _center.set) or 'centers']
                 self.children.center:set_sprite_pos(_center.pos)
             else
                 if _center.set == 'Joker' and not _center.unlocked and not self.params.bypass_discovery_center then
-                    self.children.center = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS["Joker"], G.j_locked.pos)
+                    self.children.center = Sprite(self.T, App.ASSET_ATLAS["Joker"], LockCfg:get_cfg_by_id("j_locked").pos, App.ROOM)
                 elseif self.config.center.set == 'Voucher' and not self.config.center.unlocked and not self.params.bypass_discovery_center then
                     self.children.center = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS["Voucher"], G.v_locked.pos)
                 elseif self.config.center.consumeable and self.config.center.demo then
@@ -79,7 +79,7 @@ function Card:set_sprites(_center, _front)
                         (_center.set == 'Voucher' and G.v_undiscovered.pos) or
                         (_center.set == 'Booster' and G.booster_undiscovered.pos))
                 elseif _center.set == 'Joker' or _center.consumeable or _center.set == 'Voucher' then
-                    self.children.center = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[_center.set], self.config.center.pos)
+                    self.children.center = Sprite(self.T, App.ASSET_ATLAS[_center.set], self.config.center.pos, App.ROOM)
                 else
                     self.children.center = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[_center.atlas or 'centers'], _center.pos)
                 end
@@ -108,7 +108,7 @@ function Card:set_sprites(_center, _front)
         end
 
         if not self.children.back then
-            self.children.back = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS["centers"], self.params.bypass_back or (self.playing_card and G.GAME[self.back].pos or G.P_CENTERS['b_red'].pos))
+            self.children.back = Sprite(self.T, App.ASSET_ATLAS["centers"], self.params.bypass_back or (self.playing_card and App.GAME[self.back].pos or CardCfg:get_back_by_id("b_red").pos), App.ROOM)
             self.children.back.states.hover = self.states.hover
             self.children.back.states.click = self.states.click
             self.children.back.states.drag = self.states.drag

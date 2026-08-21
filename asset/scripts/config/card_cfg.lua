@@ -118,6 +118,10 @@ function CardConfig:get_joker_by_id(id)
     return self.jokers[id]
 end
 
+function CardConfig:get_back_by_id(id)
+    return self.backs[id]
+end
+
 function CardConfig:get_backs()
     return self.backs
 end
@@ -125,6 +129,8 @@ end
 function CardConfig:get_card_base()
     return self.c_base
 end
+
+
 
 ---@type CardConfig
 CardCfg = CardConfig()
