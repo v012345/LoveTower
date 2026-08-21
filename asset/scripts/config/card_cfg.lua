@@ -114,6 +114,10 @@ end
 --     return self.tags
 -- end
 
+function CardConfig:get_joker_by_id(id)
+    return self.jokers[id]
+end
+
 function CardConfig:get_backs()
     return self.backs
 end

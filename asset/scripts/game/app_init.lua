@@ -35,7 +35,7 @@ function App:init()
     self.TAROT_INTERRUPT = nil
     self.STATE_COMPLETE = false
 
-    self.DEBUG = false
+    self.DEBUG = true
     self.VIBRATION = 0
     self.under_overlay = false
 
