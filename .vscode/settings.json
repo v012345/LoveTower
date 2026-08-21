@@ -19,5 +19,10 @@
         "reset_drawhash",
         "utf8"
     ],
-    "editor.gotoLocation.multipleDefinitions": "goto"
+    "editor.gotoLocation.multipleDefinitions": "goto",
+    "Lua.format.defaultConfig": {
+        "align_array_table": "false",
+        "align_continuous_rect_table_field": "false",
+        "align_continuous_assign_statement": "false"
+    }
 }

@@ -1,1 +1,15 @@
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.lua]
+indent_style = space
+indent_size = 4
 max_line_length = 9999
+# 关掉数组里连续 table 的字段对齐，避免 name/ref_table 被拉成大空洞
+align_array_table = false
+align_continuous_rect_table_field = false
+align_continuous_assign_statement = false

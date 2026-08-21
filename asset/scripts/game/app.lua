@@ -195,11 +195,11 @@ function App:splash_screen()
                 self.SPLASH_BACK:define_draw_steps({ {
                     shader = 'splash',
                     send = {
-                        { name = 'time',        ref_table = self.TIMERS,                     ref_value = 'REAL' },
-                        { name = 'vort_speed',  val = 1 },
-                        { name = 'colour_1',    ref_table = self.C,                          ref_value = 'BLUE' },
-                        { name = 'colour_2',    ref_table = self.C,                          ref_value = 'WHITE' },
-                        { name = 'mid_flash',   val = 0 },
+                        { name = 'time', ref_table = self.TIMERS, ref_value = 'REAL' },
+                        { name = 'vort_speed', val = 1 },
+                        { name = 'colour_1', ref_table = self.C, ref_value = 'BLUE' },
+                        { name = 'colour_2', ref_table = self.C, ref_value = 'WHITE' },
+                        { name = 'mid_flash', val = 0 },
                         { name = 'vort_offset', val = (2 * 90.15315131 * os.time()) % 100000 },
                     }
                 } })
@@ -214,7 +214,7 @@ function App:splash_screen()
                     {
                         shader = 'flash',
                         send = {
-                            { name = 'time',      ref_table = self.TIMERS, ref_value = 'REAL' },
+                            { name = 'time', ref_table = self.TIMERS, ref_value = 'REAL' },
                             { name = 'mid_flash', val = 1 }
                         }
                     }
