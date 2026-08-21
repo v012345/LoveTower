@@ -81,12 +81,11 @@ function Moveable:draw()
 end
 
 --Sets the alignment of moveable using roles
---
----@param args {major: Moveable, bond: string, offset: table, type: AlignmentType}
 --**major** The moveable this moveable will attach to\
 --**bond** The bond type, either 'Strong' or 'Weak'. Strong instantly adjusts VT, Weak manually calculates VT changes\
 --**offset** {x , y} offset from the alignment\
 --**type** the alignment type. Vertical options: c - center, t - top, b - bottom. Horizontal options: l - left, m - middle, r - right. i for inner
+---@param args AlignmentArgs
 function Moveable:set_alignment(args)
     args = args or {}
     if args.major then
@@ -100,9 +99,6 @@ function Moveable:set_alignment(args)
         })
     end
     self.alignment:update_type(args.type)
-    if args.offset and (type(args.offset) == 'table' and not (args.offset.y and args.offset.x)) or type(args.offset) ~= 'table' then
-        args.offset = nil
-    end
     self.alignment:update_offset(args.offset)
     self.alignment:set_lr_clamp(args.lr_clamp)
 end

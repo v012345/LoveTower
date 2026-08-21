@@ -162,7 +162,7 @@ function Alignment:update_type(_type)
     self.type = _type or self.type
 end
 
----@param offset Vec2
+---@param offset? Vec2
 function Alignment:update_offset(offset)
     self.offset = offset and offset:clone() or self.offset
 end

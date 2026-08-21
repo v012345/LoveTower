@@ -16,3 +16,15 @@
 ---@field VT Transform 缓动变换成使用, 引擎会自动计算到 T
 ---@field layered_parallax Vec2 分层偏移????
 ---@field parent Moveable 父节点
+
+---@alias AlignmentArgs {
+---major: Moveable, 
+---bond?: BondType, 
+---xy_bond?: BondType, 
+---wh_bond?: BondType, 
+---r_bond?: BondType, 
+---scale_bond?: BondType, 
+---offset?: Vec2, 
+---type?: AlignmentType,
+---lr_clamp?: boolean,
+---}
