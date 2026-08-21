@@ -70,11 +70,10 @@ function Particles:update(dt)
     end
 end
 
----@private
+---@private 最多添加 20 个粒子
 function Particles:generate_particles(dt)
-    -- 每帧最多添加 20 个粒子
     local added_this_frame = 0
-    while self.timer_type() > self.last_real_time + self.timer and (#self.particles < self.max or self.pulsed < self.pulse_max) and added_this_frame < 20 do
+    while self.timer_type() > self.last_real_time + self.timer and not self:is_max() and added_this_frame < 20 do
         self.last_real_time = self.last_real_time + self.timer
         local new_offset = {
             x = self.fill and (0.5 - math.random()) * self.T.w or 0,
@@ -101,6 +100,10 @@ function Particles:generate_particles(dt)
         added_this_frame = added_this_frame + 1
         if self.pulsed <= self.pulse_max then self.pulsed = self.pulsed + 1 end
     end
+end
+
+function Particles:is_max()
+    return #self.particles >= self.max and self.pulsed >= self.pulse_max
 end
 
 ---对于 Moveable 实例来说, 游戏的主循环会先调用 move(dt) 方法, 然后调用 update(dt) 方法
