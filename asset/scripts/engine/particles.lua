@@ -108,7 +108,7 @@ function Particles:move(dt)
     if App.SETTINGS.paused and not self.created_on_pause then return end
 
     Moveable.move(self, dt)
-    if self.timer_type ~= Timer.real_timer then dt = dt * App.SETTINGS.speed_factor end
+    -- if self.timer_type ~= Timer.real_timer then dt = dt * App.SETTINGS.speed_factor end
     for i = #self.particles, 1, -1 do
         local p = self.particles[i]
         p.draw = true
