@@ -496,25 +496,6 @@ function Moveable:set_role(args)
     if self.role:is_major() then self.role:set_major(nil) end
 end
 
----@param scale number
----@param rotate? number
----@param offset? table
-function Moveable:prep_draw(scale, rotate, offset)
-    -- love.graphics.scale(App.TILESCALE * App.TILESIZE)
-    offset = offset or Vec2(0, 0)
-    love.graphics.setColor(App.C.RED)
-    love.graphics.rectangle('fill', 0, 0, 20, 20)
-    local VT = self.VT
-    local layered_parallax = self.layered_parallax
-    love.graphics.translate(
-        VT.x + VT.w / 2 + offset.x + layered_parallax.x,
-        VT.y + VT.h / 2 + offset.y + layered_parallax.y
-    )
-    if VT.r ~= 0 or self.juice or rotate then love.graphics.rotate(VT.r + (rotate or 0)) end
-    love.graphics.translate(-scale * VT.w * (VT.scale) / 2, -scale * VT.h * (VT.scale) / 2)
-    love.graphics.scale(self.VT.scale * scale)
-end
-
 ---@return MoveableRole
 function Moveable:get_major()
     local condition_1 = not self.role:is_major() and self.role:get_major() ~= self

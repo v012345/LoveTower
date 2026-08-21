@@ -135,22 +135,17 @@ end
 
 function Particles:draw(alpha)
     alpha = alpha or 1
-    love.graphics.push()
-    do
-        self:prep_draw(1)
-        love.graphics.translate(self.T.w / 2, self.T.h / 2)
-        for k, v in pairs(self.particles) do
-            if v.draw then
-                love.graphics.push()
-                do
-                    love.graphics.setColor(v.colour[1], v.colour[2], v.colour[3], v.colour[4] * alpha * (1 - self.fade_alpha))
-                    love.graphics.translate(v.offset.x, v.offset.y)
-                    love.graphics.rotate(v.facing)
-                    local s = v.scale
-                    love.graphics.rectangle('fill', -s / 2, -s / 2, s, s) -- origin in the middle
-                end
-                love.graphics.pop()
-            end
+    prep_draw(self, 1)
+    love.graphics.translate(self.T.w / 2, self.T.h / 2)
+    for k, v in pairs(self.particles) do
+        if v.draw then
+            love.graphics.push()
+            love.graphics.setColor(v.colour[1], v.colour[2], v.colour[3], v.colour[4] * alpha * (1 - self.fade_alpha))
+            love.graphics.translate(v.offset.x, v.offset.y)
+            love.graphics.rotate(v.facing)
+            local s = v.scale
+            love.graphics.rectangle('fill', -s / 2, -s / 2, s, s) -- origin in the middle
+            love.graphics.pop()
         end
     end
     love.graphics.pop()
