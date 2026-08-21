@@ -4,6 +4,9 @@
 ---@field particles Particle[] 粒子
 ---@field private scale number 粒子的参数缩放, 不是 Transform 的缩放
 ---@field private lifespan number 产生的粒子的寿命
+---@field private timer number 粒子发射器每产生一个粒子 last_real_time 增加的时间
+---@field private last_real_time number 上次实际的时间
+---@field private timer_type fun(): number 时间函数, 调用返回一个时间
 
 ---@class ParticlesConfig
 ---@field fill? boolean
