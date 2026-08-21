@@ -1,10 +1,6 @@
----@class Color: table
+---@class RGBA : Object
 ---@overload fun(r: number|table|string, g: number|nil, b: number|nil, a: number|nil): RGBA
-local Color = setmetatable({}, { __call = function(...) return RGBA(...) end })
-
-
----@class RGBA
-local RGBA = Object:extend()
+RGBA = Object:extend()
 
 ---@param r number|table|string
 ---@param g number|nil
@@ -54,6 +50,9 @@ end
 function RGBA:__tostring()
     return string.format("RGBA(%s, %s, %s, %s)", self.r, self.g, self.b, self.a)
 end
+
+---@class Color: table
+local Color = {}
 
 Color.MULT = RGBA('FE5F55')
 Color.CHIPS = RGBA("009dff")
