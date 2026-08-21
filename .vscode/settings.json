@@ -17,7 +17,8 @@
         "create_node_states",
         "nuGC",
         "reset_drawhash",
-        "utf8"
+        "utf8",
+        "get_front_spriteinfo"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto",
     "Lua.format.defaultConfig": {

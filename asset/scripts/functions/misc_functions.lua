@@ -18,6 +18,19 @@ function boot_timer(cur_step, next_step, progress)
     love.graphics.present()
 end
 
+function get_front_spriteinfo(_front)
+    if _front and _front.suit and (_front.value == 'Jack' or _front.value == 'Queen' or _front.value == 'King') then
+        if App.SETTINGS.data.CUSTOM_DECK and App.SETTINGS.data.CUSTOM_DECK.Collabs[_front.suit] then
+            local _collab = App.SETTINGS.data.CUSTOM_DECK.Collabs[_front.suit]
+            if (_collab == 'default') or (not App.ASSET_ATLAS[_collab .. '_' .. (App.SETTINGS.data.colourblind_option and 2 or 1)]) then
+            else
+                return App.ASSET_ATLAS[_collab .. '_' .. (App.SETTINGS.data.colourblind_option and 2 or 1)], App.COLLABS.pos[_front.value]
+            end
+        end
+    end
+    return App.ASSET_ATLAS[_front.atlas] or App.ASSET_ATLAS["cards_" .. (App.SETTINGS.data.colourblind_option and 2 or 1)], _front.pos
+end
+
 function play_sound(sound_code, per, vol)
 end
 
