@@ -2,11 +2,11 @@
 ---@field particles Particle[] 粒子
 ---@field private scale number 粒子的参数缩放, 不是 Transform 的缩放
 ---@field private lifespan number 产生的粒子的寿命
----@overload fun(T: Transform, config?: table, container: Node): Particles
+---@overload fun(T: Transform, config?: ParticlesConfig, container: Node): Particles
 Particles = Moveable:extend()
 
 ---@param T Transform
----@param config? table
+---@param config? ParticlesConfig
 ---@param container Node
 function Particles:init(T, config, container)
     config = config or {}
@@ -17,18 +17,15 @@ function Particles:init(T, config, container)
     self.padding = config.padding or 0
 
     if config.attach then
-        self:set_alignment {
-            major = config.attach,
-            type = AlignmentType.cm,
-            bond = BondType.Strong,
-        }
-        table.insert(self.role.major.children, self)
-        self.parent = self.role.major
-        self.T.x = self.role.major.T.x + self.padding
-        self.T.y = self.role.major.T.y + self.padding
+        self:set_alignment({ major = config.attach, type = AlignmentType.cm, bond = BondType.Strong })
+        local major = self.role:get_major()
+        table.insert(major.children, self)
+        self.parent = major
+        self.T.x = major.T.x + self.padding
+        self.T.y = major.T.y + self.padding
         if self.fill then
-            self.T.w = self.role.major.T.w - self.padding
-            self.T.h = self.role.major.T.h - self.padding
+            self.T.w = major.T.w - self.padding
+            self.T.h = major.T.h - self.padding
         end
     end
 
@@ -67,7 +64,7 @@ function Particles:init(T, config, container)
 end
 
 function Particles:update(dt)
-    if App.SETTINGS.paused and not self.created_on_pause then
+    if App.SETTINGS:is_paused() and not self.created_on_pause then
         self.last_real_time = self.timer_type()
         return
     end
@@ -106,7 +103,7 @@ end
 
 ---对于 Moveable 实例来说, 游戏的主循环会先调用 move(dt) 方法, 然后调用 update(dt) 方法
 function Particles:move(dt)
-    if App.SETTINGS.paused and not self.created_on_pause then return end
+    if App.SETTINGS:is_paused() and not self.created_on_pause then return end
 
     Moveable.move(self, dt)
     -- if self.timer_type ~= Timer.real_timer then dt = dt * App.SETTINGS.speed_factor end

@@ -1,0 +1,16 @@
+---@meta
+
+---@class ParticlesConfig
+---@field fill? boolean
+---@field padding? number
+---@field attach? Moveable
+---@field timer? number
+---@field timer_type? fun(): number
+---@field lifespan? number
+---@field speed? number
+---@field max? number
+---@field pulse_max? number
+---@field vel_variation? number
+---@field scale? number
+---@field colours? Color[]
+---@field initialize? boolean

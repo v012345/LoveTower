@@ -17,14 +17,13 @@
 ---@field layered_parallax Vec2 分层偏移????
 ---@field parent Moveable 父节点
 
----@alias AlignmentArgs {
----major: Moveable, 
----bond?: BondType, 
----xy_bond?: BondType, 
----wh_bond?: BondType, 
----r_bond?: BondType, 
----scale_bond?: BondType, 
----offset?: Vec2, 
----type?: AlignmentType,
----lr_clamp?: boolean,
----}
+---@class AlignmentArgs
+---@field major Moveable
+---@field bond? BondType
+---@field xy_bond? BondType
+---@field wh_bond? BondType
+---@field r_bond? BondType
+---@field scale_bond? BondType
+---@field offset? Vec2
+---@field type? AlignmentType
+---@field lr_clamp? boolean
