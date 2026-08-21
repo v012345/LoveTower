@@ -172,7 +172,7 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
         attach = self,
         colours = self.dissolve_colours,
         fill = true
-    })
+    }, App.ROOM)
     App.E_MANAGER:add_event(Event({
         trigger = EventTrigger.after,
         blockable = false,

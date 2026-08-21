@@ -2,12 +2,13 @@
 ---@field particles Particle[] 粒子
 ---@field private scale number 粒子的参数缩放, 不是 Transform 的缩放
 ---@field private lifespan number 产生的粒子的寿命
+---@overload fun(T: Transform, config?: table, container: Node): Particles
 Particles = Moveable:extend()
 
 ---@param T Transform
----@param container? Node
 ---@param config? table
-function Particles:init(T, container, config)
+---@param container Node
+function Particles:init(T, config, container)
     config = config or {}
 
     Moveable.init(self, T, container)
