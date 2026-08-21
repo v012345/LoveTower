@@ -54,7 +54,7 @@ function Card:set_sprites(_center, _front)
             self.children.front.states.click = self.states.click
             self.children.front.states.drag = self.states.drag
             self.children.front.states.collide.can = false
-            self.children.front:set_role({ major = self, role_type = 'Glued', draw_major = self })
+            self.children.front:set_role({ major = self, role_type = RoleType.Glued, draw_major = self })
         end
     end
     if _center then
@@ -87,7 +87,7 @@ function Card:set_sprites(_center, _front)
                 self.children.center.states.click = self.states.click
                 self.children.center.states.drag = self.states.drag
                 self.children.center.states.collide.can = false
-                self.children.center:set_role({ major = self, role_type = 'Glued', draw_major = self })
+                self.children.center:set_role({ major = self, role_type = RoleType.Glued, draw_major = self })
             end
             if _center.name == 'Half Joker' and (_center.discovered or self.bypass_discovery_center) then
                 self.children.center.scale.y = self.children.center.scale.y / 1.7
@@ -113,7 +113,7 @@ function Card:set_sprites(_center, _front)
             self.children.back.states.click = self.states.click
             self.children.back.states.drag = self.states.drag
             self.children.back.states.collide.can = false
-            self.children.back:set_role({ major = self, role_type = 'Glued', draw_major = self })
+            self.children.back:set_role({ major = self, role_type = RoleType.Glued, draw_major = self })
         end
     end
 end
@@ -125,9 +125,31 @@ function Card:draw(layer)
     if not self.states.visible then return end
 
     if (layer == 'card' or layer == 'both') then
-        if self.sprite_facing == 'front' then
-            print('front')
+        -- tilt used by dissolve shader (splash ambient_tilt / hover)
+        self.tilt_var = self.tilt_var or { mx = 0, my = 0, dx = 0, dy = 0, amt = 0 }
+        local tilt_factor = 0.3
+        if self.ambient_tilt then
+            local tilt_angle = App.TIMERS.REAL * (1.56 + (self.ID / 1.14212) % 1) + self.ID / 1.35122
+            local ppt = App.window:get_pixels_per_tile()
+            self.tilt_var.mx = ((0.5 + 0.5 * self.ambient_tilt * math.cos(tilt_angle)) * self.VT.w + self.VT.x + App.ROOM.T.x) * ppt
+            self.tilt_var.my = ((0.5 + 0.5 * self.ambient_tilt * math.sin(tilt_angle)) * self.VT.h + self.VT.y + App.ROOM.T.y) * ppt
+            self.tilt_var.amt = self.ambient_tilt * (0.5 + math.cos(tilt_angle)) * tilt_factor
         end
+
+        -- center/front/back 不能走下面的通用 children 循环，原版用 shader 单独画
+        if self.sprite_facing == 'front' then
+            if self.children.center then
+                self.children.center:draw_shader('dissolve')
+            end
+            if self.children.front then
+                self.children.front:draw_shader('dissolve')
+            end
+        elseif self.sprite_facing == 'back' then
+            if self.children.back then
+                self.children.back:draw_shader('dissolve')
+            end
+        end
+
         for k, v in pairs(self.children) do
             if k ~= 'focused_ui' and k ~= "front" and k ~= "back" and k ~= "soul_parts" and k ~= "center" and k ~= 'floating_sprite' and k ~= "shadow" and k ~= "use_button" and k ~= 'buy_button' and k ~= 'buy_and_use_button' and k ~= "debuff" and k ~= 'price' and k ~= 'particles' and k ~= 'h_popup' then v:draw() end
         end
