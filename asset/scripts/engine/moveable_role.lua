@@ -54,7 +54,7 @@ end
 --- setters ----
 
 ---强制设置major
----@param major Moveable|nil
+---@param major Moveable
 function MoveableRole:set_major(major)
     self.major = major
 end
