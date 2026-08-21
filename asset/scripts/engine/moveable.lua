@@ -1,4 +1,4 @@
----@class Moveable
+---@class (partial) Moveable: Node
 Moveable = Node:extend()
 
 Moveable.exp_times = {

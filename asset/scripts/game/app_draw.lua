@@ -239,4 +239,7 @@ function App:draw()
         love.graphics.pop()
     end
     self.Performance:timer_checkpoint('debug', 'draw')
+    if self.SPLASH_BACK then
+        self.SPLASH_BACK:draw_self_boundingrect()
+    end
 end
