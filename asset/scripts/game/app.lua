@@ -208,23 +208,21 @@ function App:splash_screen()
                     type = AlignmentType.cm,
                     offset = Vec2(0, 0)
                 })
-                do return true end -- 测试
                 self.SPLASH_FRONT = Sprite(Transform(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 }, self.ROOM)
-                self.SPLASH_FRONT:define_draw_steps({
-                    {
-                        shader = 'flash',
-                        send = {
-                            { name = 'time', ref_table = self.TIMERS, ref_value = 'REAL' },
-                            { name = 'mid_flash', val = 1 }
-                        }
+                self.SPLASH_FRONT:define_draw_steps({ {
+                    shader = 'flash',
+                    send = {
+                        { name = 'time', ref_table = self.TIMERS, ref_value = 'REAL' },
+                        { name = 'mid_flash', val = 1 }
                     }
-                })
+                } })
                 self.SPLASH_FRONT:set_alignment({
                     major = self.ROOM_ATTACH,
                     type = AlignmentType.cm,
                     offset = Vec2(0, 0)
                 })
 
+                do return true end -- 测试
                 --spawn in splash card
                 local SC = nil
                 self.E_MANAGER:add_event(Event({
