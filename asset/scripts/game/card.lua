@@ -17,9 +17,27 @@ function Card:init(T, card, center, params, container)
         card = card or {},
         center = center
     }
+    self.sprite_facing = 'front'
 
     if getmetatable(self) == Card then
         table.insert(App.I.CARD, self)
     end
 end
 
+function Card:set_ability(center, initial, delay_sprites)
+end
+
+---@param layer 'both' | 'shadow' | 'card'
+function Card:draw(layer)
+    layer = layer or 'both'
+    self.hover_tilt = 1
+    if not self.states.visible then return end
+
+    if (layer == 'card' or layer == 'both') then
+        if self.sprite_facing == 'front' then
+            print('front')
+        end
+        add_to_drawhash(self)
+        self:draw_boundingrect()
+    end
+end
