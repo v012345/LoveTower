@@ -1,3 +1,4 @@
+---在对齐时, 描述 Moveable 的类型和位置等信息
 ---@class MoveableRole:Object
 ---@field private role_type RoleType
 ---@field private offset Vec2
