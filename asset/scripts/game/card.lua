@@ -157,3 +157,62 @@ function Card:draw(layer)
         self:draw_boundingrect()
     end
 end
+
+function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
+    local dissolve_time = 0.7 * (dissolve_time_fac or 1)
+    self.dissolve = 0
+    self.dissolve_colours = dissolve_colours or { App.C.BLACK, App.C.ORANGE, App.C.RED, App.C.GOLD, App.C.JOKER_GREY }
+    if not no_juice then self:juice_up() end
+    local childParts = Particles(Transform(), {
+        timer_type = 'TOTAL',
+        timer = 0.01 * dissolve_time,
+        scale = 0.1,
+        speed = 2,
+        lifespan = 0.7 * dissolve_time,
+        attach = self,
+        colours = self.dissolve_colours,
+        fill = true
+    })
+    App.E_MANAGER:add_event(Event({
+        trigger = EventTrigger.after,
+        blockable = false,
+        delay = 0.7 * dissolve_time,
+        func = (function()
+            childParts:fade(0.3 * dissolve_time)
+            return true
+        end)
+    }))
+    if not silent then
+        App.E_MANAGER:add_event(Event({
+            blockable = false,
+            func = (function()
+                play_sound('whoosh2', math.random() * 0.2 + 0.9, 0.5)
+                play_sound('crumple' .. math.random(1, 5), math.random() * 0.2 + 0.9, 0.5)
+                return true
+            end)
+        }))
+    end
+    App.E_MANAGER:add_event(Event({
+        trigger = EventTrigger.ease,
+        blockable = false,
+        ref_table = self,
+        ref_value = 'dissolve',
+        ease_to = 1,
+        delay = 1 * dissolve_time,
+        func = (function(t) return t end)
+    }))
+    App.E_MANAGER:add_event(Event({
+        trigger = EventTrigger.after,
+        blockable = false,
+        delay = 1.05 * dissolve_time,
+        func = (function()
+            self:remove()
+            return true
+        end)
+    }))
+    App.E_MANAGER:add_event(Event({
+        trigger = EventTrigger.after,
+        blockable = false,
+        delay = 1.051 * dissolve_time,
+    }))
+end

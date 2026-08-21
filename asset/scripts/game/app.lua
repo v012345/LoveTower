@@ -224,7 +224,7 @@ function App:splash_screen()
 
 
                 --spawn in splash card
-                local SC = nil
+                local SC = nil --[[@type Card]]
                 self.E_MANAGER:add_event(Event({
                     trigger = EventTrigger.after,
                     delay = 0.2,
@@ -244,18 +244,18 @@ function App:splash_screen()
                         return true;
                     end)
                 }))
-                do return true end -- 测试
                 --dissolve fool card and start to fade in the vortex
                 self.E_MANAGER:add_event(Event({
                     trigger = EventTrigger.after,
                     delay = 1.8,
                     func = (function() --|||||||||||
-                        -- SC:start_dissolve({ self.C.WHITE, self.C.WHITE }, true, 12, true)
-                        -- play_sound('magic_crumple', 1, 0.5)
-                        -- play_sound('splash_buildup', 1, 0.7)
+                        SC:start_dissolve({ self.C.WHITE, self.C.WHITE }, true, 12, true)
+                        play_sound('magic_crumple', 1, 0.5)
+                        play_sound('splash_buildup', 1, 0.7)
                         return true;
                     end)
                 }))
+                do return true end -- 测试
 
                 --create all the cards and suck them in
                 function make_splash_card(args)

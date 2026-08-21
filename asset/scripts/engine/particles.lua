@@ -38,7 +38,7 @@ function Particles:init(T, container, config)
     self.states.release_on.can = false
 
     self.timer = config.timer or 0.5
-    self.timer_type = (self.created_on_pause and Timer.instance:get_real_timer()) or config.timer_type or Timer.instance:get_real_timer()
+    self.timer_type = (self.created_on_pause and App.TIMERS:get_real_timer()) or config.timer_type or App.TIMERS:get_real_timer()
     self.last_real_time = self.timer_type() - self.timer
     self.last_drawn = 0
     self.lifespan = config.lifespan or 1
@@ -50,7 +50,7 @@ function Particles:init(T, container, config)
     self.vel_variation = config.vel_variation or 1
     self.particles = {}
     self.scale = config.scale or 1
-    self.colours = config.colours or { Color.BACKGROUND.D }
+    self.colours = config.colours or { App.C.BACKGROUND.D }
 
     if config.initialize then
         for i = 1, 60 do
