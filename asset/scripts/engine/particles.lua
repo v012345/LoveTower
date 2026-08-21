@@ -162,10 +162,11 @@ function Particles:draw(alpha)
 end
 
 function Particles:remove()
-    if self.role.major then
-        for k, v in pairs(self.role.major.children) do
+    local major = self.role:get_major()
+    if major then
+        for k, v in pairs(major.children) do
             if v == self and type(k) == 'number' then
-                table.remove(self.role.major.children, k)
+                table.remove(major.children, k)
             end
         end
     end
