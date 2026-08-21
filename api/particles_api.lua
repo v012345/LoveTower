@@ -3,7 +3,7 @@
 ---@class ParticlesConfig
 ---@field fill? boolean
 ---@field padding? number
----@field attach? Moveable
+---@field attach? Moveable 要附着到哪个 Moveable 上
 ---@field timer? number
 ---@field timer_type? fun(): number
 ---@field lifespan? number
