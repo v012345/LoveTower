@@ -65,38 +65,36 @@ end
 function Particles:update(dt)
     if App.SETTINGS:is_paused() and not self.created_on_pause then
         self.last_real_time = self.timer_type()
-        return
-    end
-    -- 每帧最多添加 20 个粒子
-    local added_this_frame = 0
-
-    --
-    while self.timer_type() > self.last_real_time + self.timer and (#self.particles < self.max or self.pulsed < self.pulse_max) and added_this_frame < 20 do
-        self.last_real_time = self.last_real_time + self.timer
-        local new_offset = {
-            x = self.fill and (0.5 - math.random()) * self.T.w or 0,
-            y = self.fill and (0.5 - math.random()) * self.T.h or 0
-        }
-        if self.fill and self.T.r < 0.1 and self.T.r > -0.1 then
-            local newer_offset = {
-                x = math.sin(self.T.r) * new_offset.y + math.cos(self.T.r) * new_offset.x,
-                y = math.sin(self.T.r) * new_offset.x + math.cos(self.T.r) * new_offset.y,
+    else
+        -- 每帧最多添加 20 个粒子
+        local added_this_frame = 0
+        while self.timer_type() > self.last_real_time + self.timer and (#self.particles < self.max or self.pulsed < self.pulse_max) and added_this_frame < 20 do
+            self.last_real_time = self.last_real_time + self.timer
+            local new_offset = {
+                x = self.fill and (0.5 - math.random()) * self.T.w or 0,
+                y = self.fill and (0.5 - math.random()) * self.T.h or 0
             }
-            new_offset = newer_offset
+            if self.fill and self.T.r < 0.1 and self.T.r > -0.1 then
+                local newer_offset = {
+                    x = math.sin(self.T.r) * new_offset.y + math.cos(self.T.r) * new_offset.x,
+                    y = math.sin(self.T.r) * new_offset.x + math.cos(self.T.r) * new_offset.y,
+                }
+                new_offset = newer_offset
+            end
+            table.insert(self.particles, {
+                draw = false,
+                facing = math.random() * 2 * math.pi,
+                age = 0,
+                r_vel = 0.2 * (0.5 - math.random()),
+                scale = 0,
+                dir = math.random() * 2 * math.pi,
+                colour = pseudorandom_element(self.colours),
+                velocity = self.speed * (self.vel_variation * math.random() + (1 - self.vel_variation)) * 0.7,
+                offset = new_offset
+            })
+            added_this_frame = added_this_frame + 1
+            if self.pulsed <= self.pulse_max then self.pulsed = self.pulsed + 1 end
         end
-        table.insert(self.particles, {
-            draw = false,
-            facing = math.random() * 2 * math.pi,
-            age = 0,
-            r_vel = 0.2 * (0.5 - math.random()),
-            scale = 0,
-            dir = math.random() * 2 * math.pi,
-            colour = pseudorandom_element(self.colours),
-            velocity = self.speed * (self.vel_variation * math.random() + (1 - self.vel_variation)) * 0.7,
-            offset = new_offset
-        })
-        added_this_frame = added_this_frame + 1
-        if self.pulsed <= self.pulse_max then self.pulsed = self.pulsed + 1 end
     end
 end
 
