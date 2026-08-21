@@ -31,6 +31,23 @@ function get_front_spriteinfo(_front)
     return App.ASSET_ATLAS[_front.atlas] or App.ASSET_ATLAS["cards_" .. (App.SETTINGS.data.colourblind_option and 2 or 1)], _front.pos
 end
 
+function remove_all(t)
+    for i = #t, 1, -1 do
+        local v = t[i]
+        table.remove(t, i)
+        if v and v.children then
+            remove_all(v.children)
+        end
+        if v then v:remove() end
+        v = nil
+    end
+    for _, v in pairs(t) do
+        if v.children then remove_all(v.children) end
+        v:remove()
+        v = nil
+    end
+end
+
 function play_sound(sound_code, per, vol)
 end
 

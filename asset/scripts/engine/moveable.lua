@@ -502,7 +502,7 @@ end
 function Moveable:prep_draw(scale, rotate, offset)
     -- love.graphics.scale(App.TILESCALE * App.TILESIZE)
     offset = offset or Vec2(0, 0)
-    love.graphics.setColor(Color.RED)
+    love.graphics.setColor(App.C.RED)
     love.graphics.rectangle('fill', 0, 0, 20, 20)
     local VT = self.VT
     local layered_parallax = self.layered_parallax

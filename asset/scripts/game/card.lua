@@ -164,7 +164,7 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
     self.dissolve_colours = dissolve_colours or { App.C.BLACK, App.C.ORANGE, App.C.RED, App.C.GOLD, App.C.JOKER_GREY }
     if not no_juice then self:juice_up() end
     local childParts = Particles(Transform(), {
-        timer_type = 'TOTAL',
+        timer_type = App.TIMERS:get_total_timer(),
         timer = 0.01 * dissolve_time,
         scale = 0.1,
         speed = 2,

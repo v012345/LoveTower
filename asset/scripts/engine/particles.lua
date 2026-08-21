@@ -19,8 +19,8 @@ function Particles:init(T, config, container)
     if config.attach then
         self:set_alignment {
             major = config.attach,
-            type = 'cm',
-            bond = 'Strong'
+            type = AlignmentType.cm,
+            bond = BondType.Strong,
         }
         table.insert(self.role.major.children, self)
         self.parent = self.role.major
@@ -127,8 +127,8 @@ function Particles:move(dt)
 end
 
 function Particles:fade(delay, to)
-    EventManager.instance:add_event(Event({
-        trigger = Event.ease,
+    App.E_MANAGER:add_event(Event({
+        trigger = EventTrigger.ease,
         timer = self.timer_type,
         blockable = false,
         blocking = false,
