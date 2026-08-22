@@ -1,0 +1,2 @@
+---@class (partial) Card: Moveable
+---@field ambient_tilt number 环境倾斜, 就是自动摇摆

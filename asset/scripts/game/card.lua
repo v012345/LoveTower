@@ -1,4 +1,4 @@
----@class Card: Moveable
+---@class (partial) Card: Moveable
 ---@overload fun(T: Transform, card: any, center: any, params: any, container: Node): Card
 Card = Moveable:extend()
 
