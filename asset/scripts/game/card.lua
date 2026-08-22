@@ -17,6 +17,16 @@ function Card:init(T, card, center, params, container)
         card = card or {},
         center = center
     }
+    self.tilt_var = { mx = 0, my = 0, dx = 0, dy = 0, amt = 0 }
+    self.ambient_tilt = 0.2
+    self.states.collide.can = true
+    self.states.hover.can = true
+    self.states.drag.can = true
+    self.states.click.can = true
+    self.playing_card = self.params.playing_card
+    App.sort_id = (App.sort_id or 0) + 1
+    self.sort_id = App.sort_id
+
     self.children = {}
     self:set_ability(center, true)
     self.sprite_facing = 'front'
