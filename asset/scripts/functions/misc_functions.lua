@@ -140,6 +140,31 @@ function prep_draw(m, scale)
     love.graphics.scale(m.VT.scale * scale)
 end
 
+--create all the cards and suck them in
+function make_splash_card(args)
+    args = args or {}
+    local angle = math.random() * 2 * 3.14
+    local card_size = (args.scale or 1.5) * (math.random() + 1)
+    local card_pos = args.card_pos or {
+        x = (18 + card_size) * math.sin(angle),
+        y = (18 + card_size) * math.cos(angle)
+    }
+    local CARD_W, CARD_H = GameCfg:get_card_size()
+    local T = Transform(card_pos.x + App.ROOM.T.w / 2 - CARD_W * card_size / 2,
+        card_pos.y + App.ROOM.T.h / 2 - CARD_H * card_size / 2,
+        card_size * CARD_W, card_size * CARD_H)
+    local card = Card(T, pseudorandom_element(App.P_CARDS), CardCfg:get_card_base(), nil, App.ROOM)
+    if math.random() > 0.8 then
+        card.sprite_facing = 'back'; card.facing = 'back'
+    end
+    card.no_shadow = true
+    card.states.hover.can = false
+    card.states.drag.can = false
+    card.vortex = true and not args.no_vortex
+    card.T.r = angle
+    return card, card_pos
+end
+
 ---@param obj Node
 function add_to_drawhash(obj)
     if obj then

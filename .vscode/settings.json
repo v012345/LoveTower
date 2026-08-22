@@ -20,7 +20,8 @@
         "utf8",
         "get_front_spriteinfo",
         "remove_all",
-        "ease_value"
+        "ease_value",
+        "make_splash_card"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto",
     "Lua.format.defaultConfig": {
