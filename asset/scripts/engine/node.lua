@@ -10,7 +10,7 @@ function Node:init(T, container)
     self.RETS = {}
     self.config = {}
     self.children = {}
-    self.T = T:clone()
+    self.T = T
     self.CT = self.T
     self.click_offset = Vec2()
     self.hover_offset = Vec2()
@@ -27,15 +27,6 @@ function Node:init(T, container)
         table.insert(App.STAGE_OBJECTS[App.STAGE], self)
     end
 end
-
----------------- todo ------------------
-
-
-
-
-
-
-
 
 --Draws self, then adds self the the draw hash, then draws all children
 function Node:draw()

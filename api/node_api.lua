@@ -19,12 +19,12 @@
 ---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
 
 ---@class NodeStates
----@field visible    boolean                       节点是否可见
----@field collide    { can: boolean, is: boolean }
----@field focus      { can: boolean, is: boolean }
----@field hover      { can: boolean, is: boolean }
----@field click      { can: boolean, is: boolean }
----@field drag       { can: boolean, is: boolean }
+---@field visible boolean 节点是否可见
+---@field collide { can: boolean, is: boolean }
+---@field focus { can: boolean, is: boolean }
+---@field hover { can: boolean, is: boolean }
+---@field click { can: boolean, is: boolean }
+---@field drag { can: boolean, is: boolean }
 ---@field release_on { can: boolean, is: boolean }
 
 
