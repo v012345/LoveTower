@@ -21,7 +21,8 @@
         "get_front_spriteinfo",
         "remove_all",
         "ease_value",
-        "make_splash_card"
+        "make_splash_card",
+        "create_frame_counter"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto",
     "Lua.format.defaultConfig": {

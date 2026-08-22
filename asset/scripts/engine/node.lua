@@ -5,18 +5,18 @@ Node = Object:extend()
 ---@param T Transform
 ---@param container Node
 function Node:init(T, container)
-    self.T = T
-    self.ARGS = {}
-    self.RETS = {}
+    self.args = {}
+    self.rets = {}
     self.config = {}
-    self.CT = self.T
     self.children = {}
-    self.ID = generate_id()
+    self.transform = T
+    self.collision_transform = T
+    self.id = generate_id()
     self.click_offset = Vec2()
     self.hover_offset = Vec2()
     self.container = container
     self.states = create_node_states()
-    self.FRAME = { DRAW = -1, MOVE = -1 }
+    self.frame = create_frame_counter()
     self.created_on_pause = App.SETTINGS:is_paused()
 
     if getmetatable(self) == Node then

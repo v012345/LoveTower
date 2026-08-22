@@ -20,3 +20,9 @@ function create_node_states()
         release_on = { can = true, is = false }
     }
 end
+
+---创建帧计数器
+---@return FrameCounter
+function create_frame_counter()
+    return { draw = -1, move = -1 }
+end
