@@ -16,7 +16,7 @@ function Node:init(T, container)
     self.hover_offset = Vec2()
     self.container = container
     self.states = create_node_states()
-    self.frame = create_frame_counter()
+    self.frames = create_frame_counter()
     self.created_on_pause = App.SETTINGS:is_paused()
 
     if getmetatable(self) == Node then
@@ -42,39 +42,12 @@ end
 
 ---@private
 function Node:get_bounding_transform()
-    return self.T
+    return self.transform
 end
 
-function Node:draw_self_boundingrect()
-    love.graphics.push()
-    do
-        local tile_scale = App.window:get_tile_scale()
-        local tile_size = App.window:get_tile_size()
-        local T = self:get_bounding_transform()
-        local x, y, w, h, r = T.x * tile_size, T.y * tile_size, T.w * tile_size, T.h * tile_size, T.r
-        love.graphics.scale(tile_scale)
-        love.graphics.translate(x + w * 0.5, y + h * 0.5)
-        love.graphics.rotate(r)
-        love.graphics.translate(-w * 0.5, -h * 0.5)
-        love.graphics.setColor(1, 1, 0, 1)
-        love.graphics.print(tostring(self), w, h, nil, 1 / tile_scale)
-        love.graphics.setLineWidth(1 + (self.states.focus.is and 1 or 0))
-        if self.states.collide.is then
-            love.graphics.setColor(0, 1, 0, 0.3)
-        else
-            love.graphics.setColor(1, 0, 0, 0.3)
-        end
-        if self.states.focus.can then
-            love.graphics.setColor(App.C.GOLD)
-            love.graphics.setLineWidth(1)
-        end
-        if self.CALCING then
-            love.graphics.setColor({ 0, 0, 1, 1 })
-            love.graphics.setLineWidth(3)
-        end
-        love.graphics.rectangle('line', 0, 0, w, h, 3)
-    end
-    love.graphics.pop()
+---@private
+function Node:is_calculating()
+    return false
 end
 
 --Draw a bounding rectangle representing the transform of this node. Used in debugging.
@@ -83,6 +56,37 @@ function Node:draw_boundingrect()
     if App.DEBUG then
         self:draw_self_boundingrect()
     end
+end
+
+function Node:draw_self_boundingrect()
+    local T = self:get_bounding_transform()
+    local s = App.window:get_tile_scale()
+    local size = App.window:get_tile_size()
+    local x, y, w, h, r = T.x * size, T.y * size, T.w * size, T.h * size, T.r
+
+    love.graphics.push()
+    love.graphics.scale(s)
+    love.graphics.translate(x + w * 0.5, y + h * 0.5)
+    love.graphics.rotate(r)
+    love.graphics.translate(-w * 0.5, -h * 0.5)
+    love.graphics.setColor(1, 1, 0, 1)
+    love.graphics.print(tostring(self), w, h, nil, 1 / s)
+    love.graphics.setLineWidth(1 + (self.states.focus.is and 1 or 0))
+    if self.states.collide.is then
+        love.graphics.setColor(0, 1, 0, 0.3)
+    else
+        love.graphics.setColor(1, 0, 0, 0.3)
+    end
+    if self.states.focus.can then
+        love.graphics.setColor(App.C.GOLD)
+        love.graphics.setLineWidth(1)
+    end
+    if self:is_calculating() then
+        love.graphics.setColor({ 0, 0, 1, 1 })
+        love.graphics.setLineWidth(3)
+    end
+    love.graphics.rectangle('line', 0, 0, w, h, 3)
+    love.graphics.pop()
 end
 
 ---Determines if this node collides with some point. Applies any container translations and rotations, then\
@@ -317,8 +321,8 @@ end
 ---@param other_node Node to measure the distance from
 ---@return number
 function Node:fast_mid_dist(other_node)
-    local dx = (other_node.T.x + 0.5 * other_node.T.w) - (self.T.x + 0.5 * self.T.w)
-    local dy = (other_node.T.y + 0.5 * other_node.T.h) - (self.T.y + 0.5 * self.T.h)
+    local dx = (other_node.transform.x + 0.5 * other_node.transform.w) - (self.transform.x + 0.5 * self.transform.w)
+    local dy = (other_node.transform.y + 0.5 * other_node.transform.h) - (self.transform.y + 0.5 * self.transform.h)
     return dx * dx + dy * dy
 end
 
@@ -335,5 +339,5 @@ function Node:animate() end
 function Node:update(dt) end
 
 function Node:__tostring()
-    return "Node" .. self.ID
+    return "N#" .. self.id
 end

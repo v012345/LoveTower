@@ -5,7 +5,7 @@
 ---@field transform Transform The transform of the node | Transform: 位置/大小/旋转 {x, y, w, h, r, scale}  (逻辑坐标)
 ---@field collision_transform Transform 碰撞检测的transform, 与 transform 相同
 ---@field states NodeStates 节点状态
----@field frame FrameCounter 帧计数器, 用于记录绘制和移动的帧数
+---@field frames FrameCounter 帧计数器, 用于记录绘制和移动的帧数
 ---@field children Children 子节点
 ---@field container Node 就是父节点, 子节点会被父节点影响
 ---@field config table 当前节点的元数据

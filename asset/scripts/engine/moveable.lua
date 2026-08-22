@@ -314,6 +314,11 @@ function Moveable:move(dt)
     self.NEW_ALIGNMENT = false
 end
 
+---@private
+function Moveable:is_calculating()
+    return self.CALCING
+end
+
 function Moveable:lr_clamp()
     if self.T.x < 0 then self.T.x = 0 end
     if self.VT.x < 0 then self.VT.x = 0 end
