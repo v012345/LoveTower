@@ -86,20 +86,29 @@ function Particles:generate_particles(dt)
             }
             new_offset = newer_offset
         end
-        table.insert(self.particles, {
-            draw = false,
-            facing = math.random() * 2 * math.pi,
-            age = 0,
-            r_vel = 0.2 * (0.5 - math.random()),
-            scale = 0,
-            dir = math.random() * 2 * math.pi,
-            colour = pseudorandom_element(self.colours),
-            velocity = self.speed * (self.vel_variation * math.random() + (1 - self.vel_variation)) * 0.7,
-            offset = new_offset
-        })
+
+        local particle = self:create_particle(new_offset)
+        table.insert(self.particles, particle)
         added_this_frame = added_this_frame + 1
         if self.pulsed <= self.pulse_max then self.pulsed = self.pulsed + 1 end
     end
+end
+
+---@private
+---@param offset Vec2
+---@return Particle
+function Particles:create_particle(offset)
+    return {
+        draw = false,
+        facing = math.random() * 2 * math.pi,
+        age = 0,
+        r_vel = 0.2 * (0.5 - math.random()),
+        scale = 0,
+        dir = math.random() * 2 * math.pi,
+        colour = pseudorandom_element(self.colours),
+        velocity = self.speed * (self.vel_variation * math.random() + (1 - self.vel_variation)) * 0.7,
+        offset = offset
+    }
 end
 
 function Particles:is_max()
