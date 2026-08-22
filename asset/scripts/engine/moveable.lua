@@ -65,9 +65,6 @@ function Moveable:init(T, container)
     if getmetatable(self) == Moveable then
         table.insert(App.I.MOVEABLE, self)
     end
-    if self.ID == 5 then
-        print(5)
-    end
 end
 
 ---@private
