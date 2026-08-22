@@ -1,16 +1,17 @@
 ---目前看来直接实例化 Node 的只有一个, 就是 App.ROOM
 ---@class (partial) Node: Object
+---@overload fun(transform: Transform, container: Node): Node
 Node = Object:extend()
 
----@param T Transform
+---@param transform Transform
 ---@param container Node
-function Node:init(T, container)
+function Node:init(transform, container)
     self.args = {}
     self.rets = {}
     self.config = {}
     self.children = {}
-    self.transform = T
-    self.collision_transform = T
+    self.transform = transform
+    self.collision_transform = transform
     self.id = generate_id()
     self.click_offset = Vec2()
     self.hover_offset = Vec2()
