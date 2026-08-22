@@ -7,6 +7,9 @@
 ---@field private timer number 产生一个粒子需要的时间
 ---@field private last_real_time number 产生上一个粒子的时间
 ---@field private timer_type fun(): number 时间函数, 调用返回一个时间
+---@field fill boolean 在粒子发射器的大小范围内产生粒子, 或在 (0, 0) 点产生粒子
+
+
 
 ---@class ParticlesConfig
 ---@field fill? boolean
