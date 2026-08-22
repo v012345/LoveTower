@@ -89,10 +89,129 @@ function Node:draw_self_boundingrect()
     love.graphics.pop()
 end
 
----Determines if this node collides with some point. Applies any container translations and rotations, then\
----applies translations and rotations specific to this node. This means the collision detection effectively\
----determines if some point intersects this node regargless of rotation.
----**x and y** The coordinates of the cursor transformed into game units
+---Sets the container of this node and all child nodes to be a new container node
+---不理解为什么 children 也要一同重新设置 container
+---@param container Node The new node that will behave as this nodes container
+function Node:set_container(container)
+    if self.children then
+        for _, v in pairs(self.children) do
+            v:set_container(container)
+        end
+    end
+    self.container = container
+end
+
+---目前不知道进来的时候原点在什么地方, 但是根据这个函数来看, 进来的时候原点应该在 container 的左上角
+---进入之后, 先移动到 container 的中心, 然后旋转, 然后移动到 container 的左上角
+---再移动到 x , y
+---Room 的 container 是自己, 所以不会进入这个条件
+---Translation function used before any draw calls, translates this node according to the transform of the container node
+function Node:translate_container()
+    if self.container and self.container ~= self then
+        local unit_tile = App.window:get_pixels_per_tile()
+        local t = self.container.T
+        local center_x, center_y = t.w * unit_tile * 0.5, t.h * unit_tile * 0.5
+        love.graphics.translate(center_x, center_y)
+        love.graphics.rotate(t.r)
+        love.graphics.translate(-center_x, -center_y)
+        local x, y = t.x * unit_tile, t.y * unit_tile
+        love.graphics.translate(x, y)
+    end
+end
+
+--When this Node needs to be deleted, removes self from any tables it may have been added to to destroy any weak references\
+--Also calls the remove method of all children to have them do the same
+function Node:remove()
+    local I = App.I
+    for k, v in pairs(I.POPUP) do
+        if v == self then
+            table.remove(I.POPUP, k)
+            break;
+        end
+    end
+    for k, v in pairs(I.NODE) do
+        if v == self then
+            table.remove(I.NODE, k)
+            break;
+        end
+    end
+    for k, v in pairs(App.STAGE_OBJECTS[App.STAGE]) do
+        if v == self then
+            table.remove(App.STAGE_OBJECTS[App.STAGE], k)
+            break;
+        end
+    end
+    if self.children then
+        for k, v in pairs(self.children) do
+            v:remove()
+        end
+    end
+    local controller = App.CONTROLLER
+    if controller.clicked.target == self then
+        controller.clicked.target = nil
+    end
+    if controller.focused.target == self then
+        controller.focused.target = nil
+    end
+    if controller.cursor_down.target == self then
+        controller.cursor_down.target = nil
+    end
+    if controller.cursor_up.target == self then
+        controller.cursor_up.target = nil
+    end
+    if controller.cursor_hover.target == self then
+        controller.cursor_hover.target = nil
+    end
+
+    self.REMOVED = true
+end
+
+function Node:remove_all(t)
+    for i = #t, 1, -1 do
+        local v = t[i]
+        table.remove(t, i)
+        if v and v.children then
+            remove_all(v.children)
+        end
+        if v then v:remove() end
+        v = nil
+    end
+    for _, v in pairs(t) do
+        if v.children then remove_all(v.children) end
+        v:remove()
+        v = nil
+    end
+end
+
+---返回两个节点中心点之间的距离的平方(快速计算)
+---returns the squared(fast) distance in game units from the center of this node to the center of another node
+---@param other_node Node to measure the distance from
+---@return number
+function Node:fast_mid_dist(other_node)
+    local dx = (other_node.transform.x + 0.5 * other_node.transform.w) - (self.transform.x + 0.5 * self.transform.w)
+    local dy = (other_node.transform.y + 0.5 * other_node.transform.h) - (self.transform.y + 0.5 * self.transform.h)
+    return dx * dx + dy * dy
+end
+
+--Prototype for a click release function, when the cursor is released on this node
+function Node:release(dragged) end
+
+--Prototype for a click function
+function Node:click() end
+
+--Prototype animation function for any frame manipulation needed
+function Node:animate() end
+
+--Prototype update function for any object specific logic that needs to occur every frame
+function Node:update(dt) end
+
+function Node:__tostring()
+    return "N#" .. self.id
+end
+
+------------ todo ------------
+
+
 ---@param point Point
 function Node:collides_with_point(point)
     --First reset the collision state to false
@@ -220,124 +339,4 @@ end
 function Node:put_focused_cursor()
     local unit_tile = Tile.instance:get_pixels_per_tile()
     return (self.T.x + self.T.w / 2 + self.container.T.x) * unit_tile, (self.T.y + self.T.h / 2 + self.container.T.y) * unit_tile
-end
-
----Sets the container of this node and all child nodes to be a new container node
----不理解为什么 children 也要一同重新设置 container
----@param container Node The new node that will behave as this nodes container
-function Node:set_container(container)
-    if self.children then
-        for _, v in pairs(self.children) do
-            v:set_container(container)
-        end
-    end
-    self.container = container
-end
-
----目前不知道进来的时候原点在什么地方, 但是根据这个函数来看, 进来的时候原点应该在 container 的左上角
----进入之后, 先移动到 container 的中心, 然后旋转, 然后移动到 container 的左上角
----再移动到 x , y
----Room 的 container 是自己, 所以不会进入这个条件
----Translation function used before any draw calls, translates this node according to the transform of the container node
-function Node:translate_container()
-    if self.container and self.container ~= self then
-        local unit_tile = App.window:get_pixels_per_tile()
-        local t = self.container.T
-        local center_x, center_y = t.w * unit_tile * 0.5, t.h * unit_tile * 0.5
-        love.graphics.translate(center_x, center_y)
-        love.graphics.rotate(t.r)
-        love.graphics.translate(-center_x, -center_y)
-        local x, y = t.x * unit_tile, t.y * unit_tile
-        love.graphics.translate(x, y)
-    end
-end
-
---When this Node needs to be deleted, removes self from any tables it may have been added to to destroy any weak references\
---Also calls the remove method of all children to have them do the same
-function Node:remove()
-    local I = App.I
-    for k, v in pairs(I.POPUP) do
-        if v == self then
-            table.remove(I.POPUP, k)
-            break;
-        end
-    end
-    for k, v in pairs(I.NODE) do
-        if v == self then
-            table.remove(I.NODE, k)
-            break;
-        end
-    end
-    for k, v in pairs(App.STAGE_OBJECTS[App.STAGE]) do
-        if v == self then
-            table.remove(App.STAGE_OBJECTS[App.STAGE], k)
-            break;
-        end
-    end
-    if self.children then
-        for k, v in pairs(self.children) do
-            v:remove()
-        end
-    end
-    local controller = App.CONTROLLER
-    if controller.clicked.target == self then
-        controller.clicked.target = nil
-    end
-    if controller.focused.target == self then
-        controller.focused.target = nil
-    end
-    if controller.cursor_down.target == self then
-        controller.cursor_down.target = nil
-    end
-    if controller.cursor_up.target == self then
-        controller.cursor_up.target = nil
-    end
-    if controller.cursor_hover.target == self then
-        controller.cursor_hover.target = nil
-    end
-
-    self.REMOVED = true
-end
-
-function Node:remove_all(t)
-    for i = #t, 1, -1 do
-        local v = t[i]
-        table.remove(t, i)
-        if v and v.children then
-            remove_all(v.children)
-        end
-        if v then v:remove() end
-        v = nil
-    end
-    for _, v in pairs(t) do
-        if v.children then remove_all(v.children) end
-        v:remove()
-        v = nil
-    end
-end
-
----返回两个节点中心点之间的距离的平方(快速计算)
----returns the squared(fast) distance in game units from the center of this node to the center of another node
----@param other_node Node to measure the distance from
----@return number
-function Node:fast_mid_dist(other_node)
-    local dx = (other_node.transform.x + 0.5 * other_node.transform.w) - (self.transform.x + 0.5 * self.transform.w)
-    local dy = (other_node.transform.y + 0.5 * other_node.transform.h) - (self.transform.y + 0.5 * self.transform.h)
-    return dx * dx + dy * dy
-end
-
---Prototype for a click release function, when the cursor is released on this node
-function Node:release(dragged) end
-
---Prototype for a click function
-function Node:click() end
-
---Prototype animation function for any frame manipulation needed
-function Node:animate() end
-
---Prototype update function for any object specific logic that needs to occur every frame
-function Node:update(dt) end
-
-function Node:__tostring()
-    return "N#" .. self.id
 end
