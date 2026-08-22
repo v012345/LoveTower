@@ -19,7 +19,8 @@
         "reset_drawhash",
         "utf8",
         "get_front_spriteinfo",
-        "remove_all"
+        "remove_all",
+        "ease_value"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto",
     "Lua.format.defaultConfig": {

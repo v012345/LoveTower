@@ -31,7 +31,6 @@ function get_front_spriteinfo(_front)
     return App.ASSET_ATLAS[_front.atlas] or App.ASSET_ATLAS["cards_" .. (App.SETTINGS.data.colourblind_option and 2 or 1)], _front.pos
 end
 
-
 function play_sound(sound_code, per, vol)
 end
 
@@ -146,6 +145,24 @@ function add_to_drawhash(obj)
     if obj then
         App.DRAW_HASH[#App.DRAW_HASH + 1] = obj
     end
+end
+
+function ease_value(ref_table, ref_value, mod, floored, timer_type, not_blockable, delay, ease_type)
+    mod = mod or 0
+
+    --Ease from current chips to the new number of chips
+    App.E_MANAGER:add_event(Event({
+        trigger = EventTrigger.ease,
+        blockable = (not_blockable == false),
+        blocking = false,
+        ref_table = ref_table,
+        ref_value = ref_value,
+        ease_to = ref_table[ref_value] + mod,
+        timer = timer_type,
+        delay = delay or 0.3,
+        type = ease_type or nil,
+        func = (function(t) if floored then return math.floor(t) else return t end end)
+    }))
 end
 
 function reset_drawhash()

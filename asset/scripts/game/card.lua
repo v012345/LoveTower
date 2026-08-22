@@ -81,7 +81,7 @@ function Card:set_sprites(_center, _front)
                 elseif _center.set == 'Joker' or _center.consumeable or _center.set == 'Voucher' then
                     self.children.center = Sprite(self.T, App.ASSET_ATLAS[_center.set], self.config.center.pos, App.ROOM)
                 else
-                    self.children.center = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[_center.atlas or 'centers'], _center.pos)
+                    self.children.center = Sprite(Transform(self.T.x, self.T.y, self.T.w, self.T.h), App.ASSET_ATLAS[_center.atlas or 'centers'], _center.pos, App.ROOM)
                 end
                 self.children.center.states.hover = self.states.hover
                 self.children.center.states.click = self.states.click

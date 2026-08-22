@@ -435,7 +435,7 @@ function Moveable:move_scale(dt)
     if des_scale ~= self.VT.scale or
         math.abs(self.velocity.scale) > 0.001 then
         self.STATIONARY = false
-        self.velocity.scale = G.exp_times.scale * self.velocity.scale + (1 - G.exp_times.scale) *
+        self.velocity.scale = App.exp_times.scale * self.velocity.scale + (1 - App.exp_times.scale) *
             (des_scale - self.VT.scale)
         self.VT.scale = self.VT.scale + self.velocity.scale
     end

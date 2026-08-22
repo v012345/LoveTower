@@ -255,7 +255,7 @@ function App:splash_screen()
                         return true;
                     end)
                 }))
-                do return true end -- 测试
+
 
                 --create all the cards and suck them in
                 function make_splash_card(args)
@@ -267,9 +267,10 @@ function App:splash_screen()
                         y = (18 + card_size) * math.cos(angle)
                     }
                     local CARD_W, CARD_H = GameCfg:get_card_size()
-                    local card = Card(card_pos.x + App.ROOM.T.w / 2 - CARD_W * card_size / 2,
+                    local T = Transform(card_pos.x + App.ROOM.T.w / 2 - CARD_W * card_size / 2,
                         card_pos.y + App.ROOM.T.h / 2 - CARD_H * card_size / 2,
-                        card_size * CARD_W, card_size * CARD_H, pseudorandom_element(App.P_CARDS), CardCfg:get_card_base())
+                        card_size * CARD_W, card_size * CARD_H)
+                    local card = Card(T, pseudorandom_element(App.P_CARDS), CardCfg:get_card_base(), nil, App.ROOM)
                     if math.random() > 0.8 then
                         card.sprite_facing = 'back'; card.facing = 'back'
                     end
@@ -298,7 +299,7 @@ function App:splash_screen()
                             ease_value(card.T, 'y', -card_pos.y, nil, nil, nil, 0.9 * speed)
                             local temp_pitch = i * 0.007 + 0.6
                             local temp_i = i
-                            G.E_MANAGER:add_event(Event({
+                            App.E_MANAGER:add_event(Event({
                                 blockable = false,
                                 func = (function()
                                     if card.T.scale <= 0 then
@@ -309,7 +310,7 @@ function App:splash_screen()
                                         if temp_i == 15 then
                                             play_sound('whoosh_long', 0.9, 0.7)
                                         end
-                                        G.VIBRATION = G.VIBRATION + 0.1
+                                        App.VIBRATION = App.VIBRATION + 0.1
                                         card:remove()
                                         return true
                                     end
