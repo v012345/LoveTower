@@ -6,10 +6,9 @@
 Particles = Moveable:extend()
 
 ---@param T Transform
----@param config? ParticlesConfig
+---@param config ParticlesConfig
 ---@param container Node
 function Particles:init(T, config, container)
-    config = config or {}
     Moveable.init(self, T, container)
 
     self.fill = config.fill
