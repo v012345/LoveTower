@@ -63,12 +63,6 @@ function App:init()
 
     self.STAGE_OBJECT_INTERRUPT = false
 
-
-    self.STAGE_OBJECTS = { {}, {}, {} }
-    -- 0: 主菜单; 1: 游戏进行中; 2: 沙盒模式
-    self.STAGE = STAGES.MAIN_MENU
-    self.STATE = STATES.SPLASH
-
     self.DRAW_HASH = {}
     self.MOVEABLES = {}
     self.ANIMATIONS = {}

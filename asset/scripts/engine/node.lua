@@ -2,59 +2,27 @@
 ---@class (partial) Node: Object
 Node = Object:extend()
 
----Node represent any game object that needs to have some transform available in the game itself.\
----Everything that you see in the game is a Node, and some invisible things like the G.ROOM are also\
----represented here.
----**T** The transform ititializer, with keys of x|1, y|2, w|3, h|4, r|5
----**container** optional container for this Node, defaults to G.ROOM
 ---@param T Transform
 ---@param container Node
 function Node:init(T, container)
-    --Store all argument and return tables here for reuse, because Lua likes to generate garbage
-    self.ARGS = self.ARGS or {}
+    self.ID = generate_id()
+    self.ARGS = {}
     self.RETS = {}
-
-    --Config table used for any metadata about this node
-    self.config = self.config or {}
-
+    self.config = {}
+    self.children = {}
     self.T = T:clone()
-    --Transform to use for collision detection
     self.CT = self.T
-
-    --Create the offset tables, used to determine things like drag offset and 3d shader effects
     self.click_offset = Vec2()
     self.hover_offset = Vec2()
-
-    --To keep track of all nodes created on pause. If true, this node moves normally even when the G.TIMERS.TOTAL doesn't increment
     self.created_on_pause = App.SETTINGS:is_paused()
-
-    self.ID = generate_id()
-
-    --Frame tracker to aid in not doing too many extra calculations
     self.FRAME = { DRAW = -1, MOVE = -1 }
-
-    --The states for this Node and all derived nodes. This is how we control the visibility and interactibility of any object
-    --All nodes do not collide by default. This reduces the size of n for the O(n^2) collision detection
     self.states = create_node_states()
-
-
-    --If we provide a container, all nodes within that container are translated with that container as the reference frame.
-    --For example, if G.ROOM is set at x = 5 and y = 5, and we create a new game object at 0, 0, it will actually be drawn at
-    --5, 5. This allows us to control things like screen shake, room positioning, rotation, padding, etc. without needing to modify
-    --every game object that we need to draw
-    self.container = container or App.ROOM
-
-    --The list of children give Node a treelike structure. This can be used for things like drawing, deterministice movement and parallax
-    --calculations when child nodes rely on updated information from parents, and inherited attributes like button click functions
-    self.children = self.children or {}
-
-    --Add this object to the appropriate instance table only if the metatable matches with NODE
+    self.container = container
     if getmetatable(self) == Node then
         table.insert(App.I.NODE, self)
     end
 
-    --Unless node was created during a stage transition (when G.STAGE_OBJECT_INTERRUPT is true), add all nodes to their appropriate
-    --stage object table so they can be easily deleted on stage transition
+    -- 这个地方我没有明白
     if not App.STAGE_OBJECT_INTERRUPT then
         table.insert(App.STAGE_OBJECTS[App.STAGE], self)
     end

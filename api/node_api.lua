@@ -12,7 +12,7 @@
 ---@field under_overlay boolean 是否在覆盖层?
 ---@field click_offset Vec2 Create the offset tables, used to determine things like drag offset and 3d shader effects
 ---@field hover_offset Vec2 Create the offset tables, used to determine things like drag offset and 3d shader effects
----@field created_on_pause boolean To keep track of all nodes created on pause. If true, this node moves normally even when the G.TIMERS.TOTAL doesn't increment
+---@field created_on_pause boolean 是否在暂停时创建, 如果 true, 这个节点在暂停时也会正常移动, 即使 App.TIMERS.TOTAL 不增加
 ---@field ARGS table Store all argument tables here for reuse, because Lua likes to generate garbage
 ---@field RETS table Store all return tables here for reuse, because Lua likes to generate garbage
 ---@field CALCING boolean 是否正在计算, Moveable 的 move 方法会设置这个为 true
