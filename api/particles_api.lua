@@ -10,9 +10,20 @@
 ---@field fill boolean 在粒子发射器的大小范围内产生粒子, 或在 (0, 0) 点产生粒子
 
 
+---@class Particle
+---@field draw     boolean    是否绘制
+---@field age      number     已存活时间
+---@field scale    number     缩放
+---@field facing   number     朝向
+---@field r_vel    number     旋转速度
+---@field velocity number     速度
+---@field dir      number     方向
+---@field offset   Vec2 偏移
+---@field colour   table      颜色
+
 
 ---@class ParticlesConfig
----@field fill? boolean
+---@field fill? boolean 在粒子发射器的大小范围内产生粒子, 或在 (0, 0) 点产生粒子
 ---@field padding? number
 ---@field attach? Moveable 要附着到哪个 Moveable 上
 ---@field timer? number
