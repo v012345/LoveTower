@@ -15,7 +15,6 @@
 ---@field created_on_pause boolean 是否在暂停时创建, 如果 true, 这个节点在暂停时也会正常移动, 即使 App.TIMERS.TOTAL 不增加
 ---@field args table Store all argument tables here for reuse, because Lua likes to generate garbage
 ---@field rets table Store all return tables here for reuse, because Lua likes to generate garbage
----@field CALCING boolean 是否正在计算, Moveable 的 move 方法会设置这个为 true
 ---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
 
 ---@class FrameCounter

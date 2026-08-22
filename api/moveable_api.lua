@@ -16,6 +16,7 @@
 ---@field VT Transform 缓动变换成使用, 引擎会自动计算到 T
 ---@field layered_parallax Vec2 分层偏移????
 ---@field parent Moveable 父节点
+---@field CALCING boolean 是否正在计算, Moveable 的 move 方法会设置这个为 true
 
 ---@class AlignmentArgs
 ---@field major Moveable
