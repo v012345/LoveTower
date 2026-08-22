@@ -1,9 +1,9 @@
 ---@class (partial) App
 App = App or {}
-require "asset.scripts.game.app_init"
-require "asset.scripts.game.app_update"        -- 导入 App:update 函数
-require "asset.scripts.game.app_draw"          -- 导入 App:draw 函数
-require "asset.scripts.game.app_splash_screen" -- 导入 App:splash_screen 函数
+require "asset.scripts.game.app_modules.app_init"
+require "asset.scripts.game.app_modules.app_update"        -- 导入 App:update 函数
+require "asset.scripts.game.app_modules.app_draw"          -- 导入 App:draw 函数
+require "asset.scripts.game.app_modules.app_splash_screen" -- 导入 App:splash_screen 函数
 local Window = require "asset.scripts.game.window"
 local Controller = require "asset.scripts.game.controller"
 local SoundManager = require "asset.scripts.game.sound_manager"
