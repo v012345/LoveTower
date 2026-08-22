@@ -5,19 +5,20 @@ Node = Object:extend()
 ---@param T Transform
 ---@param container Node
 function Node:init(T, container)
-    self.ID = generate_id()
+    self.T = T
     self.ARGS = {}
     self.RETS = {}
     self.config = {}
-    self.children = {}
-    self.T = T
     self.CT = self.T
+    self.children = {}
+    self.ID = generate_id()
     self.click_offset = Vec2()
     self.hover_offset = Vec2()
-    self.created_on_pause = App.SETTINGS:is_paused()
-    self.FRAME = { DRAW = -1, MOVE = -1 }
-    self.states = create_node_states()
     self.container = container
+    self.states = create_node_states()
+    self.FRAME = { DRAW = -1, MOVE = -1 }
+    self.created_on_pause = App.SETTINGS:is_paused()
+
     if getmetatable(self) == Node then
         table.insert(App.I.NODE, self)
     end
