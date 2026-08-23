@@ -1,6 +1,6 @@
 ---@meta
 
----@class Shader: love.object
+---@class Shader: Object
 Shader = {}
 
 ---Sends one or more values to a special (uniform) variable inside the shader. Uniform variables have to be marked using the uniform or extern keyword, e.g

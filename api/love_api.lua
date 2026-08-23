@@ -9,7 +9,7 @@ love = love or {}
 
 
 
----@class Drawable: love.object
+---@class Drawable: Object
 
 ---@enum SourceType
 SourceType = {
