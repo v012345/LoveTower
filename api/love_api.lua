@@ -1,5 +1,6 @@
 ---@meta
 
+---love.Object 是 LÖVE 的基类，所有 LÖVE 对象都继承自 love.Object。
 ---@class love.Object
 
 ---The Variant type is not a real lua type, but instead indicates what lua values LÖVE can store internally. It is used in love.thread and love.event. Indeed, as it is a "virtual" type, it has no specific representation in lua, and no methods.\
@@ -258,8 +259,6 @@ love.system = love.system or {}
 
 ---@return string os
 function love.system.getOS() end
-
-
 
 --#region love.window
 ---@class love.window
