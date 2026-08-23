@@ -116,7 +116,7 @@ end
 ---@param new_state STATES 新的状态
 ---@param new_game_obj boolean 是否是新的一局游戏
 function App:prep_stage(new_stage, new_state, new_game_obj)
-    self.CONTROLLER:reset_locks()
+    self.controller:reset_locks()
     if new_game_obj then self.GAME = self:init_game_object() end
 
     self.STAGE = new_stage
