@@ -19,3 +19,7 @@ end
 目前还有去研究 love2D 和 https 的源码编译
 
 https.dll 是直接从 小丑牌 里拿来的
+
+2026-08-23 08:11
+
+分析 controller.lua
