@@ -53,4 +53,18 @@ function Controller:set_gamepad(_gamepad)
 
 end
 
+--Some code here is from github.com/idbrii/love-gamepadguesser (MIT License)
+---@param _gamepad string
+---@return string console
+function Controller:get_console_from_gamepad(_gamepad)
+    for k, v in pairs(self.gamepad_patterns) do
+        for kk, vv in ipairs(v) do
+            if _gamepad:match(vv) then
+                return k
+            end
+        end
+    end
+    return 'Xbox'
+end
+
 return Controller
