@@ -13,7 +13,7 @@
 ---@field offset Vec2 偏移
 ---@field Mid Moveable 在水平和垂直居中对齐时, 参考的中心点, 就是以哪个 Node 当作中心点, 一般默认为自己,
 ---@field shadow_height number 阴影高度??
----@field VT Transform 缓动变换成使用, 引擎会自动计算到 T
+---@field visible_transform Transform 缓动变换成使用, 引擎会自动计算到 T
 ---@field layered_parallax Vec2 分层偏移????
 ---@field parent Moveable 父节点
 ---@field CALCING boolean 是否正在计算, Moveable 的 move 方法会设置这个为 true

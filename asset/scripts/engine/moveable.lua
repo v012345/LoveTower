@@ -26,7 +26,7 @@ function Moveable:init(T, container)
     --The Visible transform is initally set to the same values as the transform T.
     --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
     --scale of any objects that need to be drawn larger or smaller
-    self.VT = self.T:clone()
+    self.visible_transform = self.transform:clone()
 
     --To determine location of VT, we need to keep track of the velocity of VT as it approaches T for the next frame
     self.velocity = Velocity()
@@ -69,7 +69,7 @@ end
 
 ---@private
 function Moveable:get_bounding_transform()
-    return self.VT
+    return self.visible_transform
 end
 
 function Moveable:draw()
