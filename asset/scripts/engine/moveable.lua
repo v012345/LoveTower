@@ -1,4 +1,5 @@
 ---@class (partial) Moveable: Node
+---@overload fun(transform: Transform, container: Node): Moveable
 Moveable = Node:extend()
 
 Moveable.exp_times = {
@@ -18,10 +19,10 @@ Moveable.exp_times = {
 --**container** optional container for this Node, defaults to G.ROOM
 
 
----@param T Transform
+---@param transform Transform
 ---@param container Node
-function Moveable:init(T, container)
-    Node.init(self, T, container)
+function Moveable:init(transform, container)
+    Node.init(self, transform, container)
     self.layered_parallax = Vec2(0, 0)
     --The Visible transform is initally set to the same values as the transform T.
     --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
