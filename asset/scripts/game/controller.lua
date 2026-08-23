@@ -1,6 +1,8 @@
 ---@class (partial) Controller : GameObject
 local Controller = GameObject:extend()
+local module = require "asset.scripts.game.controller_modules.controller_update"
 
+Controller.update = module.update
 
 --The controller contains all engine logic for how human input interacts with any game objects.
 function Controller:init()
@@ -41,9 +43,6 @@ function Controller:reset_locks()
     for k, _ in pairs(self.locks) do
         self.locks[k] = nil
     end
-end
-
-function Controller:update(dt)
 end
 
 --Sets the gamepad to be the updated gamepad, searches for the console type and sets the art button pips accordingly
