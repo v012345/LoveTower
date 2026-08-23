@@ -63,5 +63,3 @@ function Controller:get_console_from_gamepad(_gamepad)
     end
     return 'Xbox'
 end
-
-return Controller
