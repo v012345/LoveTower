@@ -1,5 +1,5 @@
----@class Velocity
-Velocity = Object:extend()
+---@class Velocity : GameObject
+Velocity = GameObject:extend()
 
 function Velocity:init(x, y, r, scale, mag)
     self.x = x or 0

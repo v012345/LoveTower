@@ -1,4 +1,4 @@
----@class (partial) Timer:Object
+---@class (partial) Timer : GameObject
 ---@field TOTAL number 累计时间, 受 SPEEDFACTOR 影响
 ---@field REAL number 和 UPTIME 一样, 但是会被手动修改
 ---@field REAL_SHADER number
@@ -7,7 +7,7 @@
 ---@field real_dt number 真实的每帧时间, 因为游戏循环可能会被暂停, 所以需要记录真实的每帧时间
 ---@field FRAMES {DRAW: number, MOVE: number} 帧数
 ---@field exp_times ExpTimes 指数时间, 用于计算动画的指数衰减
-local Timer = Object:extend()
+local Timer = GameObject:extend()
 function Timer:init()
     self.TOTAL = 0
     self.REAL = 0

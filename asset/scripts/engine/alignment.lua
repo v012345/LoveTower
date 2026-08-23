@@ -1,6 +1,6 @@
----@class Alignment
+---@class Alignment : GameObject
 ---@overload fun(type: AlignmentType, offset: Vec2, prev_type: AlignmentType, prev_offset: Vec2, lr_clamp: boolean): Alignment
-Alignment = Object:extend()
+Alignment = GameObject:extend()
 
 ---@param type AlignmentType
 ---@param offset Vec2

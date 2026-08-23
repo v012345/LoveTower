@@ -1,5 +1,5 @@
----@class (partial) App
-App = App or {}
+---@class (partial) App : GameObject
+App = GameObject:extend()
 require "asset.scripts.game.app_modules.app_init"
 require "asset.scripts.game.app_modules.app_update"        -- 导入 App:update 函数
 require "asset.scripts.game.app_modules.app_draw"          -- 导入 App:draw 函数

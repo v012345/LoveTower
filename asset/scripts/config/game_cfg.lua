@@ -1,8 +1,8 @@
----@class (partial) GameConfig : Object
+---@class (partial) GameConfig : GameObject
 ---@field game_cfg GameConfigItem 游戏配置
 ---@field render_cfg RenderConfigItem 渲染配置
 ---@field collabs_cfg CollabsConfigItem 联名花色配置
-local GameConfig = Object:extend()
+local GameConfig = GameObject:extend()
 
 function GameConfig:init()
     self.game_cfg = TableParser.instance:parse("game")["1"]

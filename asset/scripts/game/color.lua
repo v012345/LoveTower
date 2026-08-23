@@ -1,6 +1,6 @@
----@class RGBA : Object
+---@class RGBA : GameObject
 ---@overload fun(r: number|table|string, g: number|nil, b: number|nil, a: number|nil): RGBA
-RGBA = Object:extend()
+RGBA = GameObject:extend()
 
 ---@param r number|table|string
 ---@param g number|nil

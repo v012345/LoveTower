@@ -1,7 +1,7 @@
 ---目前看来直接实例化 Node 的只有一个, 就是 App.ROOM
----@class (partial) Node: Object
+---@class (partial) Node: GameObject
 ---@overload fun(transform: Transform, container: Node): Node
-Node = Object:extend()
+Node = GameObject:extend()
 
 ---@param transform Transform
 ---@param container Node

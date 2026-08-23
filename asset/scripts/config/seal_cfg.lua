@@ -1,5 +1,5 @@
----@class (partial) SealConfig : Object
-local SealConfig = Object:extend()
+---@class (partial) SealConfig : GameObject
+local SealConfig = GameObject:extend()
 
 function SealConfig:init()
     local seal_rows = TableParser.instance:parse("seal")

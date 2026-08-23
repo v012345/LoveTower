@@ -1,6 +1,6 @@
----@class Config: Object
+---@class Config: GameObject
 ---@field asset_atli table<string, SpriteAtlas>
-Config = Object:extend()
+Config = GameObject:extend()
 
 function Config:init()
     -- local asset_atli = require "asset.scripts.config.asset_atli"

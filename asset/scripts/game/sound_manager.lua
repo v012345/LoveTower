@@ -1,5 +1,5 @@
----@class (partial) SoundManager:Object
-local SoundManager = Object:extend()
+---@class (partial) SoundManager : GameObject
+local SoundManager = GameObject:extend()
 
 function SoundManager:init()
 

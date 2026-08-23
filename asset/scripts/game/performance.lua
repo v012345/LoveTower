@@ -1,7 +1,7 @@
----@class (partial) Performance: Object
+---@class (partial) Performance : GameObject
 ---@field app App
 ---@overload fun(app: App):Performance
-local Performance = Object:extend()
+local Performance = GameObject:extend()
 
 function Performance:init(app)
     self.app = app

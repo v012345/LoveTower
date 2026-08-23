@@ -1,5 +1,5 @@
 ---在对齐时, 描述 Moveable 的类型和位置等信息
----@class MoveableRole:Object
+---@class MoveableRole:GameObject
 ---@field private role_type RoleType
 ---@field private offset Vec2
 ---@field private major Moveable
@@ -9,7 +9,7 @@
 ---@field private r_bond BondType
 ---@field private scale_bond BondType
 ---@overload fun(major: Moveable, role_type?: RoleType, draw_major: Moveable, offset?: Vec2, xy_bond?: BondType, wh_bond?: BondType, r_bond?: BondType, scale_bond?: BondType): MoveableRole
-MoveableRole = Object:extend()
+MoveableRole = GameObject:extend()
 
 ---@param major Moveable
 ---@param role_type? RoleType

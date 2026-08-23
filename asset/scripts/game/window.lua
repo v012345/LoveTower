@@ -1,4 +1,4 @@
----@class Window: Object
+---@class Window : GameObject
 ---@field app App
 ---@field TRANS Transform 窗口变换
 ---@field real_size Size 窗口实际大小
@@ -10,7 +10,7 @@
 ---@field TILE_W number 地图单元格宽度, 以像素为单位
 ---@field TILE_H number 地图单元格高度, 以像素为单位
 ---@field ROOM Node 房间
-local Window = Object:extend()
+local Window = GameObject:extend()
 
 ---@param app App
 function Window:init(app)

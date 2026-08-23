@@ -1,5 +1,5 @@
----@class (partial) HttpManager:Object
-local HttpManager = Object:extend()
+---@class (partial) HttpManager : GameObject
+local HttpManager = GameObject:extend()
 
 function HttpManager:init()
     self.thread = love.thread.newThread('asset/scripts/game/threads/http.lua')

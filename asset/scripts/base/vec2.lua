@@ -1,6 +1,6 @@
----@class Vec2: Object
+---@class Vec2: GameObject
 ---@overload fun(x?: number, y?: number): Vec2
-Vec2 = Object:extend()
+Vec2 = GameObject:extend()
 
 ---@param x? number
 ---@param y? number

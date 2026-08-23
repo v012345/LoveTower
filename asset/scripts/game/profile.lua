@@ -1,5 +1,5 @@
----@class (partial) Profile: Object
-local Profile = Object:extend()
+---@class (partial) Profile : GameObject
+local Profile = GameObject:extend()
 
 
 function Profile:init()

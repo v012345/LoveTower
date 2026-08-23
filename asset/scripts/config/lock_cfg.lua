@@ -1,5 +1,5 @@
----@class (partial) LockConfig : Object
-local LockConfig = Object:extend()
+---@class (partial) LockConfig : GameObject
+local LockConfig = GameObject:extend()
 
 function LockConfig:init()
     self.locks = TableParser.instance:parse("lock")

@@ -2,7 +2,7 @@
 
 
 
----@class EventManager : Object
+---@class EventManager : GameObject
 ---@field private queues table<string, Event[]>
 ---@field private status EventStatus
 ---@field private queue_dt number
@@ -11,7 +11,7 @@
 ---@field private reset_status function
 ---@field public clear_queue function
 ---@overload fun():EventManager
-local EventManager = Object:extend()
+local EventManager = GameObject:extend()
 
 
 ---@return nil

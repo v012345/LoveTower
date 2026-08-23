@@ -1,5 +1,5 @@
----@class (partial) SaveManager:Object
-local SaveManager = Object:extend()
+---@class (partial) SaveManager : GameObject
+local SaveManager = GameObject:extend()
 
 function SaveManager:init()
 

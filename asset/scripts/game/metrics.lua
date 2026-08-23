@@ -1,6 +1,6 @@
 ---玩家成就记录
----@class (partial) Metrics: Object
-local Metrics = Object:extend()
+---@class (partial) Metrics : GameObject
+local Metrics = GameObject:extend()
 
 
 function Metrics:init()

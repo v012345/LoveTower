@@ -1,5 +1,5 @@
----@class (partial) Controller: Object
-local Controller = Object:extend()
+---@class (partial) Controller : GameObject
+local Controller = GameObject:extend()
 
 
 --The controller contains all engine logic for how human input interacts with any game objects.

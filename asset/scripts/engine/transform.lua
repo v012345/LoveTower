@@ -1,6 +1,6 @@
----@class Transform:Object
+---@class Transform : GameObject
 ---@overload fun(x?: number, y?: number, w?: number, h?: number, r?: number, scale?: number): Transform
-Transform = Object:extend()
+Transform = GameObject:extend()
 
 ---@param x? number
 ---@param y? number

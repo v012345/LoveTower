@@ -1,5 +1,5 @@
----@class (partial) CardConfig : Object
-local CardConfig = Object:extend()
+---@class (partial) CardConfig : GameObject
+local CardConfig = GameObject:extend()
 
 function CardConfig:init()
     self.c_base = {
@@ -129,8 +129,6 @@ end
 function CardConfig:get_card_base()
     return self.c_base
 end
-
-
 
 ---@type CardConfig
 CardCfg = CardConfig()

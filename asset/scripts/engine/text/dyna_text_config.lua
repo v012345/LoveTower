@@ -1,5 +1,5 @@
----@class (partial) DynaTextConfig: Object
-DynaTextConfig = Object:extend()
+---@class (partial) DynaTextConfig: GameObject
+DynaTextConfig = GameObject:extend()
 
 ---@param data? DynaTextConfigData
 function DynaTextConfig:init(data)
