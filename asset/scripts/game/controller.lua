@@ -45,22 +45,7 @@ end
 --Some code here is from github.com/idbrii/love-gamepadguesser (MIT License)
 ---@param _gamepad Joystick
 function Controller:set_gamepad(_gamepad)
-    if self.GAMEPAD.object ~= _gamepad then
-        self.GAMEPAD.object = _gamepad
-        self.GAMEPAD.mapping = _gamepad:getGamepadMappingString() or ''
-        self.GAMEPAD.name = self.GAMEPAD.mapping:match("^%x*,(.-),") or ''
-        self.GAMEPAD.temp_console = self:get_console_from_gamepad(self.GAMEPAD.name)
-        if self.GAMEPAD_CONSOLE ~= self.GAMEPAD.temp_console then
-            self.GAMEPAD_CONSOLE = self.GAMEPAD.temp_console
-            for k, v in pairs(G.I.SPRITE) do
-                if v.atlas == G.ASSET_ATLAS["gamepad_ui"] then
-                    v.sprite_pos.y = G.CONTROLLER.GAMEPAD_CONSOLE == 'Nintendo' and 2 or G.CONTROLLER.GAMEPAD_CONSOLE == 'Playstation' and (G.F_PS4_PLAYSTATION_GLYPHS and 3 or 1) or 0
-                    v:set_sprite_pos(v.sprite_pos)
-                end
-            end
-        end
-        self.GAMEPAD.temp_console = nil
-    end
+
 end
 
 return Controller
