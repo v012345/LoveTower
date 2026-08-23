@@ -67,7 +67,7 @@ function App:update(dt)
         self.Performance:timer_checkpoint('update', 'update')
     end
 
-    self.CONTROLLER:update(self.real_dt)
+    self.controller:update(self.real_dt)
     if self.FILE_HANDLER:is_need_save() then
         self.FILE_HANDLER:save()
         self.FILE_HANDLER:reset_status()

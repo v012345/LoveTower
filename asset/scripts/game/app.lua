@@ -56,7 +56,7 @@ function App:start_up()
     boot_timer('shaders', 'controllers', 0.7)
 
     -- Input handler/controller for game objects
-    self.CONTROLLER = Controller()
+    self.controller = Controller()
     love.joystick.loadGamepadMappings("asset/resources/gamecontrollerdb.txt")
     boot_timer('controllers', 'localization', 0.8)
 

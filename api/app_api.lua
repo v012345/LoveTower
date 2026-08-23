@@ -1,6 +1,6 @@
 ---@class (partial) App
 ---@field METRICS Metrics 玩家成就记录
----@field CONTROLLER Controller 控制器
+---@field controller Controller 控制器
 ---@field SETTINGS Settings 设置
 ---@field TIMERS Timer 计时器
 ---@field window Window 窗口
