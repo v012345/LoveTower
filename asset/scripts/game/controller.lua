@@ -43,6 +43,7 @@ end
 
 --Sets the gamepad to be the updated gamepad, searches for the console type and sets the art button pips accordingly
 --Some code here is from github.com/idbrii/love-gamepadguesser (MIT License)
+---@param _gamepad love.joystick
 function Controller:set_gamepad(_gamepad)
     if self.GAMEPAD.object ~= _gamepad then
         self.GAMEPAD.object = _gamepad
