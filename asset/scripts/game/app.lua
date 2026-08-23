@@ -33,8 +33,6 @@ function App:start_up()
     end
 
 
-
-
     boot_timer('settings', 'window init', 0.2)
     self.SAVE_MANAGER = SaveManager()
     self.SAVE_MANAGER:boot()
@@ -75,7 +73,7 @@ function App:start_up()
     --For globally shared sprites
     local card_w, card_h = GameCfg:get_card_size()
     local T = Transform(0, 0, card_w, card_h)
-    self.shared_debuff = Sprite(T, self.ASSET_ATLAS["centers"], { x = 4, y = 0 })
+    -- self.shared_debuff = Sprite(T, self.ASSET_ATLAS["centers"], { x = 4, y = 0 })
 
     boot_timer('shared sprites', 'prep stage', 0.95)
     --For the visible cursor
