@@ -1,12 +1,12 @@
 -- Copy from Balatro
--- This Object implementation was taken from SNKRX (MIT license)
+-- This GameObject implementation was taken from SNKRX (MIT license)
 
----@class Object
-Object = {}
-Object.__index = Object
-function Object:init(...) end
+---@class GameObject
+GameObject = {}
+GameObject.__index = GameObject
+function GameObject:init(...) end
 
-function Object:extend()
+function GameObject:extend()
     local cls = {}
     for k, v in pairs(self) do
         if k:find("__") == 1 then
@@ -19,7 +19,7 @@ function Object:extend()
     return cls
 end
 
-function Object:implement(...)
+function GameObject:implement(...)
     for _, cls in pairs({ ... }) do
         for k, v in pairs(cls) do
             if self[k] == nil and type(v) == "function" then
@@ -29,7 +29,7 @@ function Object:implement(...)
     end
 end
 
-function Object:is(T)
+function GameObject:is(T)
     local mt = getmetatable(self)
     while mt do
         if mt == T then
@@ -42,12 +42,12 @@ end
 
 ---@generic T
 ---@return T
-function Object:__call(...)
+function GameObject:__call(...)
     local obj = setmetatable({}, self)
     obj:init(...)
     return obj
 end
 
-function Object:__tostring()
-    return "Object"
+function GameObject:__tostring()
+    return "GameObject"
 end
