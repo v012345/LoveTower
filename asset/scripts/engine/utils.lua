@@ -26,3 +26,14 @@ end
 function create_frame_counter()
     return { draw = -1, move = -1 }
 end
+
+---创建游戏手柄
+---@return GamePad
+function create_game_pad()
+    return {
+        object = nil,
+        mapping = '',
+        name = '',
+        temp_console = ''
+    }
+end
