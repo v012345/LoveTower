@@ -30,6 +30,11 @@ function Controller:init()
     self.is_cursor_down = false
     --NOT IN GAME UNITS
     self.cursor_position = { x = 0, y = 0 }
+    self.gamepad_patterns = {
+        Playstation = { "%f[%w]PS%d%f[%D]", "Sony%f[%W]", "Play[Ss]tation" },
+        Nintendo = { "Wii%f[%L]", "%f[%u]S?NES%f[%U]", "%f[%l]s?nes%f[%L]", "%f[%u]Switch%f[%L]", "Joy[- ]Cons?%f[%L]", },
+        --Keyboard = {'balatro_kbm'}
+    }
 end
 
 function Controller:reset_locks()
