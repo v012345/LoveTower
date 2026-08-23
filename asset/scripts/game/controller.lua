@@ -1,8 +1,6 @@
 ---@class (partial) Controller : GameObject
-local Controller = GameObject:extend()
-local module = require "asset.scripts.game.controller_modules.controller_update"
-
-Controller.update = module.update
+Controller = GameObject:extend()
+require "asset.scripts.game.controller_modules.controller_update"
 
 --The controller contains all engine logic for how human input interacts with any game objects.
 function Controller:init()
