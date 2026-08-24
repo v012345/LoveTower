@@ -17,23 +17,12 @@ function Window:init(app)
     local window_height = self.room_height_in_tiles + 2 * self.room_padding_height
     self.window_transform = Transform(0, 0, window_width, window_height)
     self.real_size = Size(love.graphics.getWidth(), love.graphics.getHeight())
-    self.orig_size = Size(0, 0)
-    self:take_a_snapshot_of_window()
+    self:save_orignal_config()
 end
 
 function Window:save_real_size(w, h)
     self.real_size.w = w
     self.real_size.h = h
-end
-
----保存窗口的原始大小和比例
-function Window:take_a_snapshot_of_window()
-    local orig_w = self.window_transform.w * self.pixels_per_tile
-    local orig_h = self.window_transform.h * self.pixels_per_tile
-    self.orig_scale = self.tile_scale
-    self.orig_size.w = orig_w
-    self.orig_size.h = orig_h
-    self.orig_ratio = orig_w / orig_h
 end
 
 ---@return Node ROOM
@@ -69,23 +58,6 @@ end
 ---@param h number 窗口高度以像素为单位
 function Window:init_size(w, h)
 
-end
-
----初始宽高比例
----@return number
-function Window:get_orig_ratio()
-    return self.orig_ratio
-end
-
----初始大小
----@return Size
-function Window:get_orig_size()
-    return self.orig_size
-end
-
----@return number
-function Window:get_orig_scale()
-    return self.orig_scale
 end
 
 function Window:get_tile_scale()
@@ -172,6 +144,35 @@ function Window:apply_window_changes(_initial)
         local tab_but = self.app.OVERLAY_MENU:get_UIE_by_ID('tab_but_Video')
         self.app.FUNCS.change_tab(tab_but)
     end
+end
+
+---@private 保存窗口原始的配置
+function Window:save_orignal_config()
+    self.orig_tile_scale = self.tile_scale
+    self.orig_width_in_pixels = self.window_transform.w * self.pixels_per_tile
+    self.orig_height_in_pixels = self.window_transform.h * self.pixels_per_tile
+    self.orig_width_to_height_ratio = self.orig_width_in_pixels / self.orig_height_in_pixels
+end
+
+---初始宽高比例
+---@return number
+function Window:get_orig_ratio()
+    return self.orig_width_to_height_ratio
+end
+
+---@return number width
+function Window:get_orig_width()
+    return self.orig_width_in_pixels
+end
+
+---@return number height
+function Window:get_orig_height()
+    return self.orig_height_in_pixels
+end
+
+---@return number
+function Window:get_orig_scale()
+    return self.orig_tile_scale
 end
 
 return Window

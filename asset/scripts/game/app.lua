@@ -91,6 +91,10 @@ function App:start_up()
     boot_timer('splash prep', 'end', 1)
 end
 
+function App:start_run()
+    self.HUD = UIBox()
+end
+
 --- 打开保存进度开关, 在 update 中保存
 function App:save_progress()
 

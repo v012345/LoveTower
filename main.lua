@@ -146,7 +146,7 @@ function love.resize(w, h)
 
     local room = App.window.room
     if room then
-        App.window:set_room_size(App.window.TILE_W, App.window.TILE_H)
+        
 
         local pixels_per_tile = App.window:get_pixels_per_tile()
         local room_transform = App.ROOM.T

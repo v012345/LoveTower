@@ -4,7 +4,7 @@ UIBox = Moveable:extend()
 ---@param definition UIDdefinition
 ---@param config UIConfig
 function UIBox:init(T, definition, config)
-    Moveable.init(self, T, Room.instance:get_root_node())
+    Moveable.init(self, T, App.window.room)
     self.UIRoot = UIElement(nil, self, UIT.T, definition.config)
     self:align_to_major()
     if getmetatable(self) == UIBox then
