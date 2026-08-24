@@ -14,9 +14,14 @@ function Window:init(app)
     self.room_padding_width = 1
     self.window_transform = Transform(0, 0, self.width_in_tiles + 2 * self.room_padding_width, self.height_in_tiles + 2 * self.room_padding_height)
     self.pixels_per_tile = self.tile_size * self.tile_scale
+    self.real_size = Size(0, 0)
+    self:take_a_snapshot_of_window()
+end
+
+---保存窗口的原始大小和比例
+function Window:take_a_snapshot_of_window()
     local orig_w = self.window_transform.w * self.pixels_per_tile
     local orig_h = self.window_transform.h * self.pixels_per_tile
-    self.real_size = Size(0, 0)
     self.window_prev = {
         orig_scale = self.tile_scale,
         orig_size = Size(orig_w, orig_h),

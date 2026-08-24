@@ -116,7 +116,7 @@ function love.mousemoved(x, y, dx, dy, istouch)
     -- print(x, y, dx, dy, istouch)
 end
 
----也可以手动调用 love.resize(w, h) 来调整窗口大小
+---也可以手动调用 love.resize(w, h) 来调整窗口大小\
 ---Called when the window is resized, for example if the user resizes the window, or if love.window.setMode is called with an unsupported width or height in fullscreen and the window chooses the closest appropriate size.
 ---[api reference](https://love2d.org/wiki/love.resize)
 ---@param w number
@@ -124,7 +124,7 @@ end
 function love.resize(w, h)
     -- print("love.resize", w, h)
     assert(h > 0 and w > 0, "Window size must be greater than 0, but got " .. w .. "x" .. h)
-    -- 不允许窗口变成竖屏, 因为会出现上下弹出
+    -- 不允许窗口变成竖屏, 因为会上下溢出
     --Dont allow the screen to be too square, since pop in occurs above and below screen
     if w < h then h = w end
 
@@ -144,7 +144,7 @@ function love.resize(w, h)
     end
 
 
-    local room = App.ROOM
+    local room = App.window.room
     if room then
         App.window:set_room_size(App.window.TILE_W, App.window.TILE_H)
 

@@ -7,7 +7,7 @@
 ---@field CANVAS Canvas
 ---@field CANV_SCALE number 画布缩放比例
 ---@field AA_CANVAS? Canvas 抗锯齿画布?
----@field ROOM Node 房间, 就是游戏的主场景, 一切节点的根节点
+---@field room Node 房间, 就是游戏的主场景, 一切节点的根节点, 和 window.room 是同一个对象
 ---@field ROOM_ATTACH Moveable
 ---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
 ---@field I NodeList
