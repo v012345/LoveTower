@@ -22,9 +22,11 @@ function create_node_states()
 end
 
 ---创建帧计数器
+---@param draw? number `-1` 绘制帧数
+---@param move? number `-1` 移动帧数
 ---@return FrameCounter
-function create_frame_counter()
-    return { draw = -1, move = -1 }
+function create_frame_counter(draw, move)
+    return { draw = draw or -1, move = move or -1 }
 end
 
 ---创建游戏手柄

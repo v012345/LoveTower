@@ -15,9 +15,7 @@ function Timer:init()
     self.UPTIME = 0
     self.BACKGROUND = 0
     self.real_dt = 0
-    self.frames = create_frame_counter()
-    self.frames.draw = 0
-    self.frames.move = 0
+    self.frames = create_frame_counter(0, 0)
     self.exp_times = {
         xy = 0,
         scale = 0,
