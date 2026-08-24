@@ -33,7 +33,7 @@ function App:init()
     self.stage = self.STAGES.MAIN_MENU
     self.state = self.STATES.SPLASH
     self.TAROT_INTERRUPT = nil
-    self.STATE_COMPLETE = false
+    self.state_complete = false
 
     self.DEBUG = true
     self.VIBRATION = 0

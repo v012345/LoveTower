@@ -78,7 +78,7 @@ function App:update_state(dt)
     if self.state == self.STATES.SELECTING_HAND then
         if (not self.hand.cards[1]) and self.deck.cards[1] then
             self.state = self.STATES.DRAW_TO_HAND
-            self.STATE_COMPLETE = false
+            self.state_complete = false
         else
             self:update_selecting_hand(dt)
         end

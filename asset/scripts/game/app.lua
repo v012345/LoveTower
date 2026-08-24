@@ -125,7 +125,7 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
 
     self.stage = new_stage
     self.state = new_state
-    self.STATE_COMPLETE = false
+    self.state_complete = false
     self.settings:set_paused(false)
     self.room, self.room_attach = self.window:create_room()
     love.resize(love.graphics.getWidth(), love.graphics.getHeight())
