@@ -213,9 +213,9 @@ end
 
 ---@param point Point
 function Node:collides_with_point(point)
-    --First reset the collision state to false
+    -- 没有 container , 说明不在节点树
     if self.container then
-        local T = self.CT or self.T
+        local transform = self.collision_transform or self.transform
         self.ARGS.collides_with_point_point = self.ARGS.collides_with_point_point or {}
         self.ARGS.collides_with_point_translation = self.ARGS.collides_with_point_translation or {}
         self.ARGS.collides_with_point_rotation = self.ARGS.collides_with_point_rotation or {}

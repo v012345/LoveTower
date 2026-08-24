@@ -1,3 +1,4 @@
+---@alias Point Vec2
 ---@class Vec2: GameObject
 ---@overload fun(x?: number, y?: number): Vec2
 Vec2 = GameObject:extend()
@@ -22,3 +23,5 @@ end
 function Vec2:__tostring()
     return "Vec2(" .. self.x .. ", " .. self.y .. ")"
 end
+
+

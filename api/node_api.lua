@@ -7,7 +7,7 @@
 ---@field states NodeStates 节点状态
 ---@field frames FrameCounter 帧计数器, 用于记录绘制和移动的帧数
 ---@field children Children 子节点
----@field container Node 就是父节点, 子节点会被父节点影响
+---@field container Node 就是父节点, 子节点会被父节点影响, App.room 的 container 就是 App.room
 ---@field config table 当前节点的元数据
 ---@field under_overlay boolean 是否在覆盖层?
 ---@field click_offset Vec2 Create the offset tables, used to determine things like drag offset and 3d shader effects
