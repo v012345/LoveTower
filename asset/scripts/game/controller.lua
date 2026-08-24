@@ -4,6 +4,7 @@ require "asset.scripts.game.controller_modules.controller_update"
 
 --The controller contains all engine logic for how human input interacts with any game objects.
 function Controller:init()
+
     --Each of these are calculated per frame to pass along to the corresponding nodes for input handling
     self.clicked = { target = nil, handled = true, prev_target = nil }     --The node that was clicked this frame
     self.focused = { target = nil, handled = true, prev_target = nil }     --The node that is being focused on this frame, only applies when using controller
@@ -12,6 +13,7 @@ function Controller:init()
     self.released_on = { target = nil, handled = true, prev_target = nil } --The node that the cursor 'Released' on, like letting go of LMB
 
     self.locks = {}
+    self.locked = false
 
     --Human Interface device flags, these are set per frame to ensure that correct controller updates are taking place
     self.HID = {

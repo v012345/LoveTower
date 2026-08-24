@@ -1,4 +1,6 @@
 ---@class (partial) Controller: GameObject
+---@field locked boolean
+---@field locks ControllerLock
 ---@field clicked InteractNode
 ---@field focused InteractNode
 ---@field dragging InteractNode
@@ -7,6 +9,8 @@
 ---@field game_pad GamePad
 ---@field gamepad_patterns table<string, string[]>
 
+---@class ControllerLock
+---@field wipe? boolean
 
 ---@class GamePad
 ---@field object Joystick
