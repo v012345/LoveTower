@@ -14,7 +14,7 @@ function App:splash_screen()
                 self.TIMERS.TOTAL = 0
                 self.TIMERS.REAL = 0
                 --Prep the splash screen shaders for both the background(colour swirl) and the foreground(white flash), starting at black
-                self.SPLASH_BACK = Sprite(Transform(-30, -13, self.ROOM.T.w + 60, self.ROOM.T.h + 22), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 }, self.ROOM)
+                self.SPLASH_BACK = Sprite(Transform(-30, -13, self.room.transform.w + 60, self.room.transform.h + 22), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 }, self.room)
                 self.SPLASH_BACK:define_draw_steps({ {
                     shader = 'splash',
                     send = {

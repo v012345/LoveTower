@@ -75,7 +75,7 @@ function App:draw()
                         end
                     end
                     for k, v in pairs(self.I.CARD) do
-                        if not v.parent and v ~= self.CONTROLLER.dragging.target and v ~= self.CONTROLLER.focused.target then
+                        if not v.parent and v ~= self.controller.dragging.target and v ~= self.controller.focused.target then
                             love.graphics.push()
                             v:translate_container()
                             v:draw()
@@ -121,7 +121,7 @@ function App:draw()
                 end
 
                 if self.OVERLAY_MENU or not self.Features:is_hide_bg() then
-                    if self.OVERLAY_MENU and self.OVERLAY_MENU ~= self.CONTROLLER.dragging.target then
+                    if self.OVERLAY_MENU and self.OVERLAY_MENU ~= self.controller.dragging.target then
                         love.graphics.push()
                         self.OVERLAY_MENU:translate_container()
                         self.OVERLAY_MENU:draw()
@@ -130,7 +130,7 @@ function App:draw()
                 end
 
                 if self.debug_tools then
-                    if self.debug_tools ~= self.CONTROLLER.dragging.target then
+                    if self.debug_tools ~= self.controller.dragging.target then
                         love.graphics.push()
                         self.debug_tools:translate_container()
                         self.debug_tools:draw()
@@ -147,17 +147,17 @@ function App:draw()
                     love.graphics.pop()
                 end
 
-                if self.CONTROLLER.dragging.target and self.CONTROLLER.dragging.target ~= self.CONTROLLER.focused.target then
+                if self.controller.dragging.target and self.controller.dragging.target ~= self.controller.focused.target then
                     love.graphics.push()
-                    self.CONTROLLER.dragging.target:translate_container()
-                    self.CONTROLLER.dragging.target:draw()
+                    self.controller.dragging.target:translate_container()
+                    self.controller.dragging.target:draw()
                     love.graphics.pop()
                 end
 
-                if self.CONTROLLER.focused.target and getmetatable(self.CONTROLLER.focused.target) == Card and (self.CONTROLLER.focused.target.area ~= self.hand or self.CONTROLLER.focused.target == self.CONTROLLER.dragging.target) then
+                if self.controller.focused.target and getmetatable(self.controller.focused.target) == Card and (self.controller.focused.target.area ~= self.hand or self.controller.focused.target == self.controller.dragging.target) then
                     love.graphics.push()
-                    self.CONTROLLER.focused.target:translate_container()
-                    self.CONTROLLER.focused.target:draw()
+                    self.controller.focused.target:translate_container()
+                    self.controller.focused.target:draw()
                     love.graphics.pop()
                 end
 
@@ -183,7 +183,7 @@ function App:draw()
                 end
                 love.graphics.push()
                 local pixels_per_tile = self.window:get_pixels_per_tile()
-                love.graphics.translate(-self.CURSOR.T.w * pixels_per_tile / 2, -self.CURSOR.T.h * pixels_per_tile / 2)
+                love.graphics.translate(-self.CURSOR.transform.w * pixels_per_tile / 2, -self.CURSOR.transform.h * pixels_per_tile / 2)
                 self.CURSOR:draw()
                 love.graphics.pop()
                 self.Performance:timer_checkpoint('rest', 'draw')
@@ -196,13 +196,13 @@ function App:draw()
     love.graphics.push()
     love.graphics.setColor(self.C.WHITE)
     if (not self.recording_mode or self.video_control) and true then
-        self.ARGS.eased_cursor_pos = self.ARGS.eased_cursor_pos or { x = self.CURSOR.T.x, y = self.CURSOR.T.y, sx = self.CONTROLLER.cursor_position.x, sy = self.CONTROLLER.cursor_position.y }
+        self.ARGS.eased_cursor_pos = self.ARGS.eased_cursor_pos or { x = self.CURSOR.transform.x, y = self.CURSOR.transform.y, sx = self.controller.cursor_position.x, sy = self.controller.cursor_position.y }
         self.screenwipe_amt = self.screenwipe_amt and (0.95 * self.screenwipe_amt + 0.05 * ((self.screenwipe and 0.4 or self.screenglitch and 0.4) or 0)) or 1
-        local crt = self.SETTINGS.data.GRAPHICS.crt * 0.3
+        local crt = self.settings.data.GRAPHICS.crt * 0.3
         self.SHADERS['CRT']:send('distortion_fac', { 1.0 + 0.07 * crt / 100, 1.0 + 0.1 * crt / 100 })
         self.SHADERS['CRT']:send('scale_fac', { 1.0 - 0.008 * crt / 100, 1.0 - 0.008 * crt / 100 })
         self.SHADERS['CRT']:send('feather_fac', 0.01)
-        self.SHADERS['CRT']:send('bloom_fac', self.SETTINGS.data.GRAPHICS.bloom - 1)
+        self.SHADERS['CRT']:send('bloom_fac', self.settings.data.GRAPHICS.bloom - 1)
         self.SHADERS['CRT']:send('time', 400 + self.TIMERS.REAL)
         self.SHADERS['CRT']:send('noise_fac', 0.001 * crt / 100)
         self.SHADERS['CRT']:send('crt_intensity', 0.16 * crt / 100)
@@ -232,7 +232,7 @@ function App:draw()
         local fps = love.timer.getFPS()
         love.graphics.print("Current FPS: " .. fps, 10, 10)
 
-        if self.SETTINGS.data.perf_mode then
+        if self.settings.data.perf_mode then
             self.Performance:draw()
         end
 
