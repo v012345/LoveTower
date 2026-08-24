@@ -9,13 +9,18 @@ function Window:init(app)
     self.height_in_tiles = GameCfg:get_tile_height()
     self.tile_scale = GameCfg:get_tile_scale()
     self.tile_size = GameCfg:get_tile_size()
+    self.pixels_per_tile = self.tile_size * self.tile_scale
 
     self.room_padding_height = 0.7
     self.room_padding_width = 1
     self.window_transform = Transform(0, 0, self.width_in_tiles + 2 * self.room_padding_width, self.height_in_tiles + 2 * self.room_padding_height)
-    self.pixels_per_tile = self.tile_size * self.tile_scale
-    self.real_size = Size(0, 0)
+    self.real_size = Size(love.graphics.getWidth(), love.graphics.getHeight())
     self:take_a_snapshot_of_window()
+end
+
+function Window:save_real_size(w, h)
+    self.real_size.w = w
+    self.real_size.h = h
 end
 
 ---保存窗口的原始大小和比例
@@ -89,10 +94,6 @@ function Window:get_tile_size()
     return self.TILESIZE
 end
 
-function Window:set_tile_scale(scale)
-    self.TILESCALE = scale
-end
-
 ---更新画布抖动
 ---@param dt number
 function Window:update_canvas_juice(dt)
@@ -103,11 +104,6 @@ end
 ---@return Size
 function Window:get_real_size()
 
-end
-
-function Window:set_real_size(w, h)
-    self.WINDOWTRANS.real_window_w = w
-    self.WINDOWTRANS.real_window_h = h
 end
 
 ---@param w number 窗口宽度
@@ -122,7 +118,9 @@ function Window:get_pixels_per_tile()
     return self.pixels_per_tile
 end
 
-function Window:update()
+function Window:set_tile_scale(scale)
+    self.tile_scale = scale
+    self.pixels_per_tile = self.tile_size * self.tile_scale
 end
 
 ---Applies all window changes, including updates to the screenmode, selected display, resolution and vsync.\

@@ -1,7 +1,7 @@
 ---@class (partial) Window : GameObject
 ---@field app App
 ---@field TRANS Transform 窗口变换
----@field real_size Size 窗口实际大小
+---@field real_size Size 窗口实际大小, 以像素为单位
 ---@field orig_size Size 窗口原始大小
 ---@field orig_scale number 窗口原始缩放
 ---@field orig_ratio number 窗口原始宽高比例

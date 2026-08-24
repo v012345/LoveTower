@@ -160,7 +160,7 @@ function love.resize(w, h)
         App.window:save_room_transform()
     end
 
-    App.window:set_real_size(w, h)
+    App.window:save_real_size(w, h)
     App.CANV_SCALE = 1
 
     if love.system.getOS() == 'Windows' and false then --implement later if needed
