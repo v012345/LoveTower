@@ -11,7 +11,7 @@ function App:init()
     self.Features = FeatureCfg:get_instance()
     --计时器
     self.TIMERS = Timer()
-    self.FRAMES = self.TIMERS:get_frames()
+    self.frames = self.TIMERS:get_frames()
     self.exp_times = self.TIMERS:get_exp_times()
 
     --SETTINGS 设置管理器

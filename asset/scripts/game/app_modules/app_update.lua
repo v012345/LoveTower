@@ -3,7 +3,7 @@ function App:update(dt)
     self.FRAMES.MOVE = self.FRAMES.MOVE + 1
     self.Performance:timer_checkpoint('start->discovery', 'update')
 
-    if not self.SETTINGS:is_tutorial_complete() then self.FUNCS.tutorial_controller() end
+    if not self.settings:is_tutorial_complete() then self.FUNCS.tutorial_controller() end
 
     self.Performance:timer_checkpoint('tallies', 'update')
     self:modulate_sound(dt)
@@ -14,9 +14,9 @@ function App:update(dt)
     --Smooth out the dts to avoid any big jumps
 
     self.TIMERS:update_real_time(dt)
-    self.TIMERS:set_real_shader_time(self.SETTINGS:is_reduced_motion() and 300 or self.TIMERS:get_real_time())
+    self.TIMERS:set_real_shader_time(self.settings:is_reduced_motion() and 300 or self.TIMERS:get_real_time())
     self.TIMERS:update_time(dt)
-    self.SETTINGS:update_demo_total_time(dt)
+    self.settings:update_demo_total_time(dt)
     self.TIMERS:update_background_time(dt * (self.ARGS.spin and self.ARGS.spin.amount or 0))
     self.real_dt = dt
     if self.real_dt > 0.05 then Log:warn('LONG DT @ ' .. math.floor(self.TIMERS.REAL) .. ': ' .. self.real_dt) end
@@ -32,7 +32,7 @@ function App:update(dt)
         end
 
         --暂停游戏时, dt 为 0
-        if self.SETTINGS:is_paused() then dt = 0 end
+        if self.settings:is_paused() then dt = 0 end
 
         self:update_speed_factor(dt)
         self.TIMERS:update_game_time(dt * self.SPEEDFACTOR)
@@ -56,7 +56,7 @@ function App:update(dt)
 
 
         for k, v in pairs(self.MOVEABLES) do
-            if v.FRAME.MOVE < self.FRAMES.MOVE then
+            if v.frames.move < self.frames.move then
                 v:move(move_dt)
             end
         end
@@ -188,12 +188,12 @@ function App:update_speed_factor(dt)
     self.ACC_state = self.STATE
 
     if self.STATE == self.STATES.HAND_PLAYED or self.STATE == self.STATES.NEW_ROUND then
-        self.ACC = math.min(self.ACC + dt * 0.2 * self.SETTINGS.data.GAMESPEED, 16)
+        self.ACC = math.min(self.ACC + dt * 0.2 * self.settings.data.GAMESPEED, 16)
     else
         self.ACC = 0
     end
 
-    local can_speed_up = self.STAGE == self.STAGES.RUN and not self.SETTINGS:is_paused() and not self.screenwipe
-    self.SPEEDFACTOR = can_speed_up and self.SETTINGS.data.GAMESPEED or 1
+    local can_speed_up = self.STAGE == self.STAGES.RUN and not self.settings:is_paused() and not self.screenwipe
+    self.SPEEDFACTOR = can_speed_up and self.settings.data.GAMESPEED or 1
     self.SPEEDFACTOR = self.SPEEDFACTOR + math.max(0, math.abs(self.ACC) - 2)
 end

@@ -266,9 +266,9 @@ function Moveable:move_juice(dt)
 end
 
 function Moveable:move(dt)
-    if self.FRAME.MOVE >= App.FRAMES.MOVE then return end
-    self.FRAME.MAJOR = nil
-    self.FRAME.MOVE = App.FRAMES.MOVE
+    if self.frames.move >= App.frames.move then return end
+    self.frames.major = nil
+    self.frames.move = App.frames.move
     if not self.created_on_pause and App.settings.paused then return end
 
     --WHY ON EARTH DOES THIS LINE MAKE IT RUN 2X AS FAST???
@@ -283,7 +283,7 @@ function Moveable:move(dt)
     if self.role:is_glued() then
         if major then self:glue_to_major(major) end
     elseif self.role:is_minor() and major then
-        if major.FRAME.MOVE < App.FRAMES.MOVE then
+        if major.frames.move < App.frames.move then
             major:move(dt)
         end
         self.STATIONARY = major.STATIONARY

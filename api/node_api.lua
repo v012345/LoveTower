@@ -1,6 +1,6 @@
 ---@meta
 
----@class (partial) Node: Object
+---@class (partial) Node: GameObject
 ---@field id number 唯一ID
 ---@field transform Transform The transform of the node | Transform: 位置/大小/旋转 {x, y, w, h, r, scale}  (逻辑坐标)
 ---@field collision_transform Transform 碰撞检测的transform, 与 transform 相同
