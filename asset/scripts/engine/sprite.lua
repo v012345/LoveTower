@@ -149,7 +149,7 @@ function Sprite:init(T, new_sprite_atlas, sprite_pos, container)
     self.scale_mag = math.min(self.scale.x / T.w, self.scale.y / T.h)
     self.zoom = true
     self.draw_steps = {}
-    self.RETS.get_pos_pixel = {}
+    self.rets.get_pos_pixel = {}
 
     self:set_sprite_pos(sprite_pos)
 

@@ -1,6 +1,6 @@
 function App:splash_screen()
     --If the skip splash screen option is set, immediately go to the main menu here
-    if self.SETTINGS:is_skip_splash() then
+    if self.settings:is_skip_splash() then
         -- 直接跳转到主菜单
         self:main_menu()
     else

@@ -12,5 +12,6 @@
 ---@field tile_scale number 地图单元格缩放
 ---@field tile_size number 地图单元格大小, 以像素为单位
 ---@field room Node 房间
+---@field room_attach Moveable 房间附件
 ---@field window_transform Transform 窗口变换
 ---@field pixels_per_tile number 每个地图单元格的像素大小
