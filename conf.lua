@@ -40,6 +40,7 @@ function love.conf(t)
     -- t.modules.physics = cfg.modules.physics
     t.window.title = "LoveTower"
     t.console = true
+    -- Sets the window's dimensions. If these flags are set to 0 LÖVE automatically uses the user's desktop dimensions. In mobile, the aspect ratio will be used to determine if the game runs in landscape or portrait.
     t.window.width = 0
     t.window.height = 0
     t.window.minwidth = 100
