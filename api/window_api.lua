@@ -7,7 +7,10 @@
 ---@field orig_ratio number 窗口原始宽高比例
 ---@field room_padding_width number 房间左右边距, 以地图单元格为单位
 ---@field room_padding_height number 房间上下边距, 以地图单元格为单位
----@field tile_width number 地图单元格宽度, 以像素为单位
----@field tile_height number 地图单元格高度, 以像素为单位
----@field ROOM Node 房间
+---@field width_in_tiles number 窗口宽度, 以地图单元格为单位
+---@field height_in_tiles number 窗口高度, 以地图单元格为单位
+---@field tile_scale number 地图单元格缩放
+---@field tile_size number 地图单元格大小, 以像素为单位
+---@field room Node 房间
 ---@field window_transform Transform 窗口变换
+---@field pixels_per_tile number 每个地图单元格的像素大小

@@ -5,26 +5,18 @@ local Window = GameObject:extend()
 ---@param app App
 function Window:init(app)
     self.app = app
-    self.tile_width = GameCfg:get_tile_width()
-    self.tile_height = GameCfg:get_tile_height()
-    self.TILESCALE = GameCfg:get_tile_scale()
-    self.TILESIZE = GameCfg:get_tile_size()
-    -- Initialize the window
-    --- 设计大小
-    --- 窗口大小为 1606*941, 设计大小为 1460*840
-    --- 宽高比为 1.74
+    self.width_in_tiles = GameCfg:get_tile_width()
+    self.height_in_tiles = GameCfg:get_tile_height()
+    self.tile_scale = GameCfg:get_tile_scale()
+    self.tile_size = GameCfg:get_tile_size()
+
     self.room_padding_height = 0.7
     self.room_padding_width = 1
-    self.window_transform = {
-        x = 0,
-        y = 0,
-        w = self.tile_width + 2 * self.room_padding_width,
-        h = self.tile_height + 2 * self.room_padding_height,
-        real_window_w = 0,
-        real_window_h = 0
-    }
-    local orig_w = self.window_transform.w * self.TILESIZE * self.TILESCALE
-    local orig_h = self.window_transform.h * self.TILESIZE * self.TILESCALE
+    self.window_transform = Transform(0, 0, self.tile_width + 2 * self.room_padding_width, self.tile_height + 2 * self.room_padding_height)
+    self.real_size = Size(0, 0)
+    self.pixels_per_tile = self.tile_size * self.tile_scale
+    local orig_w = self.window_transform.w * self.pixels_per_tile
+    local orig_h = self.window_transform.h * self.pixels_per_tile
     self.window_prev = {
         orig_scale = self.TILESCALE,
         orig_size = Size(orig_w, orig_h),
@@ -122,7 +114,7 @@ end
 ---每个 Tile 以像素为单位的大小, Tile 就是方形的!
 ---@return number
 function Window:get_pixels_per_tile()
-    return self.TILESIZE * self.TILESCALE
+    return self.pixels_per_tile
 end
 
 function Window:update()

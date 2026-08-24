@@ -27,10 +27,12 @@ function GameConfig:get_tile_scale()
     return self.render_cfg.TILESCALE
 end
 
+---@return number width_in_tiles 以地图单元格为单位的宽度
 function GameConfig:get_tile_width()
     return self.render_cfg.TILE_W
 end
 
+---@return number height_in_tiles 以地图单元格为单位的高度
 function GameConfig:get_tile_height()
     return self.render_cfg.TILE_H
 end
