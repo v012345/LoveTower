@@ -3,7 +3,7 @@
 ---@field controller Controller 控制器
 ---@field SETTINGS Settings 设置
 ---@field TIMERS Timer 计时器
----@field window Window 窗口
+---@field window Window 窗口实例, 保存窗口和 Room 的设置
 ---@field CANVAS Canvas
 ---@field CANV_SCALE number 画布缩放比例
 ---@field AA_CANVAS? Canvas 抗锯齿画布?

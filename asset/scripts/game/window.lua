@@ -1,15 +1,5 @@
----@class Window : GameObject
----@field app App
----@field TRANS Transform 窗口变换
----@field real_size Size 窗口实际大小
----@field orig_size Size 窗口原始大小
----@field orig_scale number 窗口原始缩放
----@field orig_ratio number 窗口原始宽高比例
----@field ROOM_PADDING_W number 房间左右边距, 以地图单元格为单位
----@field ROOM_PADDING_H number 房间上下边距, 以地图单元格为单位
----@field TILE_W number 地图单元格宽度, 以像素为单位
----@field TILE_H number 地图单元格高度, 以像素为单位
----@field ROOM Node 房间
+---@class (partial) Window : GameObject
+---@overload fun(app: App): Window
 local Window = GameObject:extend()
 
 ---@param app App
@@ -23,13 +13,13 @@ function Window:init(app)
     --- 设计大小
     --- 窗口大小为 1606*941, 设计大小为 1460*840
     --- 宽高比为 1.74
-    self.ROOM_PADDING_H = 0.7
-    self.ROOM_PADDING_W = 1
+    self.room_padding_height = 0.7
+    self.room_padding_width = 1
     self.WINDOWTRANS = {
         x = 0,
         y = 0,
-        w = self.TILE_W + 2 * self.ROOM_PADDING_W,
-        h = self.TILE_H + 2 * self.ROOM_PADDING_H,
+        w = self.TILE_W + 2 * self.room_padding_width,
+        h = self.TILE_H + 2 * self.room_padding_height,
         real_window_w = 0,
         real_window_h = 0
     }

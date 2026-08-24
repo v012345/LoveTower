@@ -1,0 +1,12 @@
+---@class (partial) Window : GameObject
+---@field app App
+---@field TRANS Transform 窗口变换
+---@field real_size Size 窗口实际大小
+---@field orig_size Size 窗口原始大小
+---@field orig_scale number 窗口原始缩放
+---@field orig_ratio number 窗口原始宽高比例
+---@field room_padding_width number 房间左右边距, 以地图单元格为单位
+---@field room_padding_height number 房间上下边距, 以地图单元格为单位
+---@field TILE_W number 地图单元格宽度, 以像素为单位
+---@field TILE_H number 地图单元格高度, 以像素为单位
+---@field ROOM Node 房间
