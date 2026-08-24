@@ -5,16 +5,19 @@ local Window = GameObject:extend()
 ---@param app App
 function Window:init(app)
     self.app = app
-    self.width_in_tiles = GameCfg:get_tile_width()
-    self.height_in_tiles = GameCfg:get_tile_height()
+    self.room_width_in_tiles = GameCfg:get_tile_width()
+    self.room_height_in_tiles = GameCfg:get_tile_height()
     self.tile_scale = GameCfg:get_tile_scale()
     self.tile_size = GameCfg:get_tile_size()
     self.pixels_per_tile = self.tile_size * self.tile_scale
 
     self.room_padding_height = 0.7
     self.room_padding_width = 1
-    self.window_transform = Transform(0, 0, self.width_in_tiles + 2 * self.room_padding_width, self.height_in_tiles + 2 * self.room_padding_height)
+    local window_width = self.room_width_in_tiles + 2 * self.room_padding_width
+    local window_height = self.room_height_in_tiles + 2 * self.room_padding_height
+    self.window_transform = Transform(0, 0, window_width, window_height)
     self.real_size = Size(love.graphics.getWidth(), love.graphics.getHeight())
+    self.orig_size = Size(0, 0)
     self:take_a_snapshot_of_window()
 end
 
@@ -27,17 +30,17 @@ end
 function Window:take_a_snapshot_of_window()
     local orig_w = self.window_transform.w * self.pixels_per_tile
     local orig_h = self.window_transform.h * self.pixels_per_tile
-    self.window_prev = {
-        orig_scale = self.tile_scale,
-        orig_size = Size(orig_w, orig_h),
-        orig_ratio = orig_w / orig_h
-    }
+    self.orig_scale = self.tile_scale
+    self.orig_size.w = orig_w
+    self.orig_size.h = orig_h
+    self.orig_ratio = orig_w / orig_h
 end
 
 ---@return Node ROOM
 ---@return Moveable ROOT_ATTACH
 function Window:create_room()
-    self.room = Node(Transform(self.ROOM_PADDING_W, self.ROOM_PADDING_H, self.TILE_W, self.TILE_H))
+    local room_transform = Transform(self.room_padding_width, self.room_padding_height, self.width_in_tiles, self.height_in_tiles)
+    self.room = Node(room_transform)
     self.room.jiggle = 0
     self.room.states.drag.can = false
     self.room:set_container(self.room)
@@ -71,18 +74,18 @@ end
 ---初始宽高比例
 ---@return number
 function Window:get_orig_ratio()
-    return self.window_prev.orig_ratio
+    return self.orig_ratio
 end
 
 ---初始大小
 ---@return Size
 function Window:get_orig_size()
-    return self.window_prev.orig_size
+    return self.orig_size
 end
 
 ---@return number
 function Window:get_orig_scale()
-    return self.window_prev.orig_scale
+    return self.orig_scale
 end
 
 function Window:get_tile_scale()
