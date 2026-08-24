@@ -89,12 +89,12 @@ function Window:get_orig_scale()
 end
 
 function Window:get_tile_scale()
-    return self.TILESCALE
+    return self.tile_scale
 end
 
 ---@return number
 function Window:get_tile_size()
-    return self.TILESIZE
+    return self.tile_size
 end
 
 ---更新画布抖动
@@ -106,7 +106,7 @@ end
 ---comment
 ---@return Size
 function Window:get_real_size()
-
+    return self.real_size
 end
 
 ---@param w number 窗口宽度
