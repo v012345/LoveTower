@@ -6,7 +6,7 @@ if (love.system.getOS() == 'OS X') and (jit.arch == 'arm64' or jit.arch == 'arm'
 require "love.timer"
 require "love.thread"
 require 'love.filesystem'
-require "asset/scripts/base/object"
+require "asset/scripts/base/game_object"
 require "asset/scripts/libs/string_packer"
 
 --vars needed for sound manager thread
