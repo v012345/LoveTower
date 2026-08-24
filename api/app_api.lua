@@ -8,7 +8,7 @@
 ---@field CANV_SCALE number 画布缩放比例
 ---@field AA_CANVAS? Canvas 抗锯齿画布?
 ---@field room Node 房间, 就是游戏的主场景, 一切节点的根节点, 和 window.room 是同一个对象
----@field ROOM_ATTACH Moveable
+---@field room_attach Moveable
 ---@field jiggle number 震动, 用于屏幕震动, 如果是 0 则不震动, 需要震动的时候加一个值, 震动过程会逐渐减小到 0
 ---@field I NodeList
 ---@field under_overlay boolean 是否显示底层覆盖?????? 不知道是什么东西
@@ -33,7 +33,6 @@
 ---@field HTTP_MANAGER HttpManager 网络管理器
 ---@field SHADERS table<string, Shader> 所有着色器
 ---@field LANG LanguageConfigItem 当前使用的语言对象
----@field Tile Tile 地图单元格
 ---@field Features FeatureConfig 特性配置
 ---@field E_MANAGER EventManager 事件管理器
 ---@field real_dt number 真实的 dt

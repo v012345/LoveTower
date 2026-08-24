@@ -130,24 +130,22 @@ function love.resize(w, h)
 
     -- 宽高比
     local curr_ratio = w / h
-    local orig_ratio = App.window:get_orig_ratio()
-    local orig_scale = App.window:get_orig_scale()
+    local is_narrower = curr_ratio < App.window:get_orig_ratio()
 
-
-    if curr_ratio < orig_ratio then
+    if is_narrower then
         -- 相对变窄了
-        App.window:set_tile_scale(orig_scale * w / App.window:get_orig_width())
+        App.window:set_tile_scale(App.window:get_orig_scale() / App.window:get_orig_width() * w)
     else
         -- 相对变宽了
-        App.window:set_tile_scale(orig_scale * h / App.window:get_orig_height())
+        App.window:set_tile_scale(App.window:get_orig_scale() / App.window:get_orig_height() * h)
     end
 
 
     local room = App.window.room
     if room then
         local pixels_per_tile = App.window:get_pixels_per_tile()
-        local room_transform = App.ROOM.T
-        if curr_ratio < orig_ratio then
+        local room_transform = App.room.transform
+        if is_narrower then
             room.T.x = App.window.ROOM_PADDING_W
             room.T.y = (h / (pixels_per_tile) - room_transform.h) / 2
         else
