@@ -134,10 +134,10 @@ function love.resize(w, h)
 
     if is_narrower then
         -- 相对变窄了
-        App.window:set_tile_scale(App.window:get_orig_scale() / App.window:get_orig_width() * w)
+        App.window:set_tile_scale(w / App.window:get_orig_width() * App.window:get_orig_tile_scale())
     else
         -- 相对变宽了
-        App.window:set_tile_scale(App.window:get_orig_scale() / App.window:get_orig_height() * h)
+        App.window:set_tile_scale(h / App.window:get_orig_height() * App.window:get_orig_tile_scale())
     end
 
 

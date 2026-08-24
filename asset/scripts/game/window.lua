@@ -171,7 +171,7 @@ function Window:get_orig_height()
 end
 
 ---@return number
-function Window:get_orig_scale()
+function Window:get_orig_tile_scale()
     return self.orig_tile_scale
 end
 
