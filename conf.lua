@@ -40,8 +40,8 @@ function love.conf(t)
     -- t.modules.physics = cfg.modules.physics
     t.window.title = "LoveTower"
     t.console = true
-    t.window.width = 500
-    t.window.height = 500
+    t.window.width = 0
+    t.window.height = 0
     t.window.minwidth = 100
     t.window.minheight = 100
 
