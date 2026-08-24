@@ -39,17 +39,17 @@ end
 
 function Window:save_room_transform()
     self.ROOM_ORIG = {
-        x = self.ROOM.T.x,
-        y = self.ROOM.T.y,
-        r = self.ROOM.T.r
+        x = self.room.transform.x,
+        y = self.room.transform.y,
+        r = self.room.transform.r
     }
 end
 
 function Window:set_room_size(w, h)
-    self.ROOM.T.w = w
-    self.ROOM.T.h = h
-    self.ROOM_ATTACH.T.w = w
-    self.ROOM_ATTACH.T.h = h
+    self.room.transform.w = w
+    self.room.transform.h = h
+    self.room_attach.transform.w = w
+    self.room_attach.transform.h = h
 end
 
 ---@param w number 窗口宽度以像素为单位
@@ -152,6 +152,10 @@ function Window:apply_window_changes(_initial)
         highdpi = (love.system.getOS() == 'OS X')
     })
     self.app.settings:reset_queued_change()
+
+
+    ---- 下面这部分代码要再研究一下 ----
+
     if not _initial then
         love.resize(love.graphics.getWidth(), love.graphics.getHeight())
         -- G:save_settings()
