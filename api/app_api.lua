@@ -1,7 +1,7 @@
 ---@class (partial) App
 ---@field METRICS Metrics 玩家成就记录
 ---@field controller Controller 控制器
----@field SETTINGS Settings 设置
+---@field settings Settings 设置
 ---@field TIMERS Timer 计时器
 ---@field window Window 窗口实例, 保存窗口和 Room 的设置
 ---@field CANVAS Canvas

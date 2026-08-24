@@ -15,7 +15,7 @@ local EventManager = require "asset.scripts.game.event_manager"
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
 ---在这里做耗时的操作
 function App:start_up()
-    self.SETTINGS:load_settings()
+    self.settings:load_settings()
     boot_timer("start", "settings", 0.1)
     self:init_window()
 
@@ -28,7 +28,7 @@ function App:start_up()
     end
 
     if self.Features:is_cta_enabled() then
-        self.SETTINGS:switch_to_demo()
+        self.settings:switch_to_demo()
     end
 
 
@@ -62,8 +62,8 @@ function App:start_up()
 
 
 
-    local used_no = self.PROFILES:load(self.SETTINGS:get_profile_no())
-    self.SETTINGS:set_profile_no(used_no)
+    local used_no = self.PROFILES:load(self.settings:get_profile_no())
+    self.settings:set_profile_no(used_no)
     self:set_render_settings()
     self:set_language()
     self:init_item_prototypes()
@@ -122,7 +122,7 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.STAGE = new_stage
     self.STATE = new_state
     self.STATE_COMPLETE = false
-    self.SETTINGS:set_paused(false)
+    self.settings:set_paused(false)
     self.ROOM, self.ROOM_ATTACH = self.window:create_room()
     love.resize(love.graphics.getWidth(), love.graphics.getHeight())
 end
@@ -138,7 +138,7 @@ function App:init_game_object()
 end
 
 function App:set_render_settings()
-    local ts = self.SETTINGS:get_texture_scaling()
+    local ts = self.settings:get_texture_scaling()
     --Set fiter to linear interpolation and nearest, best for pixel art
     local filter = ts == 1 and 'nearest' or 'linear'
     love.graphics.setDefaultFilter(filter, filter, 1)
@@ -160,8 +160,8 @@ function App:set_render_settings()
 end
 
 function App:set_language()
-    self.LANG = LanguageCfg:get_cfg_item(self.SETTINGS:get_language())
-    self.localization = LanguageCfg:load_localization(self.SETTINGS:get_language())
+    self.LANG = LanguageCfg:get_cfg_item(self.settings:get_language())
+    self.localization = LanguageCfg:load_localization(self.settings:get_language())
 end
 
 --- 目前默认是Windowed模式，1000x650分辨率, 使用第一个显示器, 之后要读用户设置文件中的设置

@@ -12,7 +12,7 @@ function Event:init(config)
     self.func = config.func or function() return true end
     self.delay = config.delay or 0
     self.no_delete = config.no_delete
-    self.created_on_pause = config.pause_force or App.SETTINGS:is_paused()
+    self.created_on_pause = config.pause_force or App.settings:is_paused()
     self.timer = config.timer or (self.created_on_pause and App.TIMERS:get_real_timer()) or App.TIMERS:get_total_timer()
 
     -- 这两个要特殊处理一个

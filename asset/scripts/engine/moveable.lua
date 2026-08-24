@@ -236,7 +236,7 @@ function Moveable:drag(offset)
 end
 
 function Moveable:juice_up(amount, rot_amt)
-    if App.SETTINGS.reduced_motion then return end
+    if App.settings.reduced_motion then return end
     amount = amount or 0.4
     local timer = Timer.instance:get_real_timer()
     local start_time = timer()
@@ -269,7 +269,7 @@ function Moveable:move(dt)
     if self.FRAME.MOVE >= App.FRAMES.MOVE then return end
     self.FRAME.MAJOR = nil
     self.FRAME.MOVE = App.FRAMES.MOVE
-    if not self.created_on_pause and App.SETTINGS.paused then return end
+    if not self.created_on_pause and App.settings.paused then return end
 
     --WHY ON EARTH DOES THIS LINE MAKE IT RUN 2X AS FAST???
     -------------------------------------------------------

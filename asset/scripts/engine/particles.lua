@@ -62,7 +62,7 @@ function Particles:init(T, config, container)
 end
 
 function Particles:update(dt)
-    if App.SETTINGS:is_paused() and not self.created_on_pause then
+    if App.settings:is_paused() and not self.created_on_pause then
         self.last_real_time = self.timer_type()
     else
         self:generate_particles(dt)
@@ -116,10 +116,10 @@ end
 
 ---对于 Moveable 实例来说, 游戏的主循环会先调用 move(dt) 方法, 然后调用 update(dt) 方法
 function Particles:move(dt)
-    if App.SETTINGS:is_paused() and not self.created_on_pause then return end
+    if App.settings:is_paused() and not self.created_on_pause then return end
 
     Moveable.move(self, dt)
-    -- if self.timer_type ~= Timer.real_timer then dt = dt * App.SETTINGS.speed_factor end
+    -- if self.timer_type ~= Timer.real_timer then dt = dt * App.settings.speed_factor end
     for i = #self.particles, 1, -1 do
         local p = self.particles[i]
         p.draw = true

@@ -18,7 +18,7 @@ function Node:init(transform, container)
     self.container = container
     self.states = create_node_states()
     self.frames = create_frame_counter()
-    self.created_on_pause = App.SETTINGS:is_paused()
+    self.created_on_pause = App.settings:is_paused()
 
     if getmetatable(self) == Node then
         table.insert(App.I.NODE, self)

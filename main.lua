@@ -164,8 +164,8 @@ function love.resize(w, h)
     App.CANV_SCALE = 1
 
     if love.system.getOS() == 'Windows' and false then --implement later if needed
-        local render_w, render_h = love.window.getDesktopDimensions(App.SETTINGS.WINDOW.selected_display)
-        local unscaled_dims = love.window.getFullscreenModes(App.SETTINGS.WINDOW.selected_display)[1]
+        local render_w, render_h = love.window.getDesktopDimensions(App.settings.WINDOW.selected_display)
+        local unscaled_dims = love.window.getFullscreenModes(App.settings.WINDOW.selected_display)[1]
 
         local DPI_scale = math.floor((0.5 * unscaled_dims.width / render_w + 0.5 * unscaled_dims.height / render_h) * 500 + 0.5) / 500
 
