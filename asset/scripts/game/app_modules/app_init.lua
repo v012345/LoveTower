@@ -15,7 +15,7 @@ function App:init()
     self.exp_times = self.TIMERS:get_exp_times()
 
     --SETTINGS 设置管理器
-    self.SETTINGS = Settings()
+    self.settings = Settings()
 
     -- 联名花色配置
     self.COLLABS = GameCfg:get_collabs()

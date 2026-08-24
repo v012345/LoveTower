@@ -124,8 +124,7 @@ end
 ---These changes are all defined in the G.SETTINGS.QUEUED_CHANGE table. Any unchanged settings use the previous value
 ---@param _initial boolean 是否是初始化
 function Window:apply_window_changes(_initial)
-    -- print("apply_window_changes")
-    local settings = self.app.SETTINGS.data
+    local settings = self.app.settings.data
     --Set the screenmode setting from Windowed, Fullscreen or Borderless
     settings.WINDOW.screenmode = settings.QUEUED_CHANGE.screenmode or settings.WINDOW.screenmode
 
@@ -152,7 +151,7 @@ function Window:apply_window_changes(_initial)
         display = settings.WINDOW.selected_display,
         highdpi = (love.system.getOS() == 'OS X')
     })
-    self.app.SETTINGS:reset_queued_change()
+    self.app.settings:reset_queued_change()
     if not _initial then
         love.resize(love.graphics.getWidth(), love.graphics.getHeight())
         -- G:save_settings()
