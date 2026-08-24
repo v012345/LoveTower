@@ -113,13 +113,13 @@ end
 ---当前 Node 的 x 的最终值
 ---@return number
 function MoveableRole:get_final_x()
-    return self.major.T.x + self.offset.x
+    return self.major.transform.x + self.offset.x
 end
 
 ---当前 Node 的 y 的最终值
 ---@return number
 function MoveableRole:get_final_y()
-    return self.major.T.y + self.offset.y
+    return self.major.transform.y + self.offset.y
 end
 
 ---- update methods ----

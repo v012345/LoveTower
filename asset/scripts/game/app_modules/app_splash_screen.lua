@@ -31,7 +31,7 @@ function App:splash_screen()
                     type = AlignmentType.cm,
                     offset = Vec2(0, 0)
                 })
-                self.SPLASH_FRONT = Sprite(Transform(0, -20, self.ROOM.T.w * 2, self.ROOM.T.h * 4), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 }, self.ROOM)
+                self.SPLASH_FRONT = Sprite(Transform(0, -20, self.room.transform.w * 2, self.room.transform.h * 4), self.ASSET_ATLAS["ui_1"], { x = 2, y = 0 }, self.room)
                 self.SPLASH_FRONT:define_draw_steps({ {
                     shader = 'flash',
                     send = {
@@ -54,9 +54,9 @@ function App:splash_screen()
                     func = (function()
                         local SC_scale = 1.2
                         local CARD_W, CARD_H = GameCfg:get_card_size()
-                        local SC_T = Transform(self.ROOM.T.w / 2 - SC_scale * CARD_W / 2, 10. + self.ROOM.T.h / 2 - SC_scale * CARD_H / 2, SC_scale * CARD_W, SC_scale * CARD_H)
-                        SC = Card(SC_T, nil, CardCfg:get_joker_by_id('j_joker'), nil, self.ROOM)
-                        SC.T.y = self.ROOM.T.h / 2 - SC_scale * CARD_H / 2
+                        local SC_T = Transform(self.room.transform.w / 2 - SC_scale * CARD_W / 2, 10. + self.room.transform.h / 2 - SC_scale * CARD_H / 2, SC_scale * CARD_W, SC_scale * CARD_H)
+                        SC = Card(SC_T, nil, CardCfg:get_joker_by_id('j_joker'), nil, self.room)
+                        SC.transform.y = self.room.transform.h / 2 - SC_scale * CARD_H / 2
                         SC.ambient_tilt = 1
                         SC.states.drag.can = false
                         SC.states.hover.can = false
@@ -92,15 +92,15 @@ function App:splash_screen()
                         func = (function()
                             local card, card_pos = self:make_splash_card({ scale = 2 - i / 300 })
                             local speed = math.max(2. - i * 0.005, 0.001)
-                            ease_value(card.T, 'scale', -card.T.scale, nil, nil, nil, 1. * speed, 'elastic')
-                            ease_value(card.T, 'x', -card_pos.x, nil, nil, nil, 0.9 * speed)
-                            ease_value(card.T, 'y', -card_pos.y, nil, nil, nil, 0.9 * speed)
+                            ease_value(card.transform, 'scale', -card.transform.scale, nil, nil, nil, 1. * speed, 'elastic')
+                            ease_value(card.transform, 'x', -card_pos.x, nil, nil, nil, 0.9 * speed)
+                            ease_value(card.transform, 'y', -card_pos.y, nil, nil, nil, 0.9 * speed)
                             local temp_pitch = i * 0.007 + 0.6
                             local temp_i = i
                             App.E_MANAGER:add_event(Event({
                                 blockable = false,
                                 func = (function()
-                                    if card.T.scale <= 0 then
+                                    if card.transform.scale <= 0 then
                                         if temp_i < 30 then
                                             play_sound('whoosh1', temp_pitch + math.random() * 0.05, 0.25 * (1 - temp_i / 50))
                                         end
@@ -148,10 +148,10 @@ function App:make_splash_card(args)
         y = (18 + card_size) * math.cos(angle)
     }
     local CARD_W, CARD_H = GameCfg:get_card_size()
-    local T = Transform(card_pos.x + App.ROOM.T.w / 2 - CARD_W * card_size / 2,
-        card_pos.y + App.ROOM.T.h / 2 - CARD_H * card_size / 2,
+    local T = Transform(card_pos.x + App.room.transform.w / 2 - CARD_W * card_size / 2,
+        card_pos.y + App.room.transform.h / 2 - CARD_H * card_size / 2,
         card_size * CARD_W, card_size * CARD_H)
-    local card = Card(T, pseudorandom_element(App.P_CARDS), CardCfg:get_card_base(), nil, App.ROOM)
+    local card = Card(T, pseudorandom_element(App.P_CARDS), CardCfg:get_card_base(), nil, App.room)
     if math.random() > 0.8 then
         card.sprite_facing = 'back'; card.facing = 'back'
     end
@@ -159,6 +159,6 @@ function App:make_splash_card(args)
     card.states.hover.can = false
     card.states.drag.can = false
     card.vortex = true and not args.no_vortex
-    card.T.r = angle
+    card.transform.r = angle
     return card, card_pos
 end

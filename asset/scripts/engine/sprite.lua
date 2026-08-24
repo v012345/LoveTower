@@ -32,16 +32,16 @@ function Sprite:draw_shader(_shader, _shadow_height, _send, _no_tilt, other_obj,
     elseif _shader == 'vortex' then
         App.SHADERS['vortex']:send('vortex_amt', App.TIMERS.REAL - (App.vortex_time or 0))
     else
-        self.ARGS.prep_shader = self.ARGS.prep_shader or {}
-        self.ARGS.prep_shader.cursor_pos = self.ARGS.prep_shader.cursor_pos or {}
-        self.ARGS.prep_shader.cursor_pos[1] = _draw_major.tilt_var and _draw_major.tilt_var.mx * App.CANV_SCALE or App.CONTROLLER.cursor_position.x * App.CANV_SCALE
-        self.ARGS.prep_shader.cursor_pos[2] = _draw_major.tilt_var and _draw_major.tilt_var.my * App.CANV_SCALE or App.CONTROLLER.cursor_position.y * App.CANV_SCALE
+        self.args.prep_shader = self.args.prep_shader or {}
+        self.args.prep_shader.cursor_pos = self.args.prep_shader.cursor_pos or {}
+        self.args.prep_shader.cursor_pos[1] = _draw_major.tilt_var and _draw_major.tilt_var.mx * App.CANV_SCALE or App.CONTROLLER.cursor_position.x * App.CANV_SCALE
+        self.args.prep_shader.cursor_pos[2] = _draw_major.tilt_var and _draw_major.tilt_var.my * App.CANV_SCALE or App.CONTROLLER.cursor_position.y * App.CANV_SCALE
 
-        App.SHADERS[_shader or 'dissolve']:send('mouse_screen_pos', self.ARGS.prep_shader.cursor_pos)
+        App.SHADERS[_shader or 'dissolve']:send('mouse_screen_pos', self.args.prep_shader.cursor_pos)
         App.SHADERS[_shader or 'dissolve']:send('screen_scale', App.window:get_pixels_per_tile() * (_draw_major.mouse_damping or 1) * App.CANV_SCALE)
         App.SHADERS[_shader or 'dissolve']:send('hovering', ((_shadow_height and not tilt_shadow) or _no_tilt) and 0 or (_draw_major.hover_tilt or 0) * (tilt_shadow or 1))
         App.SHADERS[_shader or 'dissolve']:send("dissolve", math.abs(_draw_major.dissolve or 0))
-        App.SHADERS[_shader or 'dissolve']:send("time", 123.33412 * (_draw_major.ID / 1.14212 or 12.5123152) % 3000)
+        App.SHADERS[_shader or 'dissolve']:send("time", 123.33412 * (_draw_major.id / 1.14212 or 12.5123152) % 3000)
         App.SHADERS[_shader or 'dissolve']:send("texture_details", self:get_pos_pixel())
         App.SHADERS[_shader or 'dissolve']:send("image_details", self:get_image_dims())
         App.SHADERS[_shader or 'dissolve']:send("burn_colour_1", _draw_major.dissolve_colours and _draw_major.dissolve_colours[1] or App.C.CLEAR)
@@ -61,9 +61,9 @@ function Sprite:draw_shader(_shader, _shadow_height, _send, _no_tilt, other_obj,
     love.graphics.setShader()
 
     if _shadow_height then
-        self.VT.y = self.VT.y + _draw_major.shadow_parrallax.y * _shadow_height
-        self.VT.x = self.VT.x + _draw_major.shadow_parrallax.x * _shadow_height
-        self.VT.scale = self.VT.scale / (1 - 0.2 * _shadow_height)
+        self.visible_transform.y = self.visible_transform.y + _draw_major.shadow_parrallax.y * _shadow_height
+        self.visible_transform.x = self.visible_transform.x + _draw_major.shadow_parrallax.x * _shadow_height
+        self.visible_transform.scale = self.visible_transform.scale / (1 - 0.2 * _shadow_height)
     end
 end
 
@@ -73,7 +73,7 @@ function Sprite:draw_self(overlay)
         self:set_sprite_pos(self.sprite_pos)
     end
     prep_draw(self, 1)
-    love.graphics.scale(1 / (self.scale.x / self.VT.w), 1 / (self.scale.y / self.VT.h))
+    love.graphics.scale(1 / (self.scale.x / self.visible_transform.w), 1 / (self.scale.y / self.visible_transform.h))
     love.graphics.setColor(overlay or App.BRUTE_OVERLAY or App.C.WHITE)
     if self.video then
         self.video_dims = self.video_dims or {
@@ -88,7 +88,7 @@ function Sprite:draw_self(overlay)
             self.VT.h / (self.T.h) / (self.video_dims.h / self.scale.y)
         )
     else
-        love.graphics.draw(self.atlas.image, self.sprite, 0, 0, 0, self.VT.w / (self.T.w), self.VT.h / (self.T.h))
+        love.graphics.draw(self.atlas.image, self.sprite, 0, 0, 0, self.visible_transform.w / (self.transform.w), self.visible_transform.h / (self.transform.h))
     end
     love.graphics.pop()
     add_to_drawhash(self)
@@ -200,11 +200,11 @@ function Sprite:set_sprite_pos(sprite_pos)
 end
 
 function Sprite:get_pos_pixel()
-    self.RETS.get_pos_pixel[1] = self.sprite_pos.x
-    self.RETS.get_pos_pixel[2] = self.sprite_pos.y
-    self.RETS.get_pos_pixel[3] = self.atlas.px --self.scale.x
-    self.RETS.get_pos_pixel[4] = self.atlas.py --self.scale.y
-    return self.RETS.get_pos_pixel
+    self.rets.get_pos_pixel[1] = self.sprite_pos.x
+    self.rets.get_pos_pixel[2] = self.sprite_pos.y
+    self.rets.get_pos_pixel[3] = self.atlas.px --self.scale.x
+    self.rets.get_pos_pixel[4] = self.atlas.py --self.scale.y
+    return self.rets.get_pos_pixel
 end
 
 function Sprite:get_image_dims()

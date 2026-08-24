@@ -130,17 +130,15 @@ function prep_draw(m, scale)
     assert(m:is(Moveable), "moveable must be a Moveable")
     love.graphics.push()
     love.graphics.scale(App.window:get_pixels_per_tile())
-    local x = m.VT.x + m.VT.w / 2 + m.layered_parallax.x
-    local y = m.VT.y + m.VT.h / 2 + m.layered_parallax.y
+    local x = m.visible_transform.x + m.visible_transform.w / 2 + m.layered_parallax.x
+    local y = m.visible_transform.y + m.visible_transform.h / 2 + m.layered_parallax.y
     love.graphics.translate(x, y)
-    if m.VT.r ~= 0 or m.juice then love.graphics.rotate(m.VT.r) end
-    x = -scale * m.VT.w * (m.VT.scale) / 2
-    y = -scale * m.VT.h * (m.VT.scale) / 2
+    if m.visible_transform.r ~= 0 or m.juice then love.graphics.rotate(m.visible_transform.r) end
+    x = -scale * m.visible_transform.w * (m.visible_transform.scale) / 2
+    y = -scale * m.visible_transform.h * (m.visible_transform.scale) / 2
     love.graphics.translate(x, y)
-    love.graphics.scale(m.VT.scale * scale)
+    love.graphics.scale(m.visible_transform.scale * scale)
 end
-
-
 
 ---@param obj Node
 function add_to_drawhash(obj)

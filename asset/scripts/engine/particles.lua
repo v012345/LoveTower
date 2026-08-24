@@ -19,11 +19,11 @@ function Particles:init(T, config, container)
         local major = self.role:get_major()
         table.insert(major.children, self)
         self.parent = major
-        self.T.x = major.T.x + self.padding
-        self.T.y = major.T.y + self.padding
+        self.transform.x = major.transform.x + self.padding
+        self.transform.y = major.transform.y + self.padding
         if self.fill then
-            self.T.w = major.T.w - self.padding
-            self.T.h = major.T.h - self.padding
+            self.transform.w = major.transform.w - self.padding
+            self.transform.h = major.transform.h - self.padding
         end
     end
 
@@ -75,13 +75,13 @@ function Particles:generate_particles(dt)
     while self.timer_type() > self.last_real_time + self.timer and not self:is_max() and added_this_frame < 20 do
         self.last_real_time = self.last_real_time + self.timer
         local new_offset = {
-            x = self.fill and (0.5 - math.random()) * self.T.w or 0,
-            y = self.fill and (0.5 - math.random()) * self.T.h or 0
+            x = self.fill and (0.5 - math.random()) * self.transform.w or 0,
+            y = self.fill and (0.5 - math.random()) * self.transform.h or 0
         }
-        if self.fill and self.T.r < 0.1 and self.T.r > -0.1 then
+        if self.fill and self.transform.r < 0.1 and self.transform.r > -0.1 then
             local newer_offset = {
-                x = math.sin(self.T.r) * new_offset.y + math.cos(self.T.r) * new_offset.x,
-                y = math.sin(self.T.r) * new_offset.x + math.cos(self.T.r) * new_offset.y,
+                x = math.sin(self.transform.r) * new_offset.y + math.cos(self.transform.r) * new_offset.x,
+                y = math.sin(self.transform.r) * new_offset.x + math.cos(self.transform.r) * new_offset.y,
             }
             new_offset = newer_offset
         end
@@ -152,7 +152,7 @@ end
 function Particles:draw(alpha)
     alpha = alpha or 1
     prep_draw(self, 1)
-    love.graphics.translate(self.T.w / 2, self.T.h / 2)
+    love.graphics.translate(self.transform.w / 2, self.transform.h / 2)
     for k, v in pairs(self.particles) do
         if v.draw then
             love.graphics.push()
@@ -186,5 +186,5 @@ function Particles:remove()
 end
 
 function Particles:__tostring()
-    return "Particles" .. self.ID
+    return "Particles" .. self.id
 end

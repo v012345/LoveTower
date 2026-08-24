@@ -113,14 +113,14 @@ function Moveable:align_to_major()
     if self.alignment:is_a() or self.role:is_major_nil() then return end
 
     --- 左 和 上 都是 0
-    local major_center_x = self.role:get_major().T.w / 2
-    local major_center_y = self.role:get_major().T.h / 2
-    local major_bottom_y = self.role:get_major().T.h
-    local major_right_x = self.role:get_major().T.w
+    local major_center_x = self.role:get_major().transform.w / 2
+    local major_center_y = self.role:get_major().transform.h / 2
+    local major_bottom_y = self.role:get_major().transform.h
+    local major_right_x = self.role:get_major().transform.w
     --- 首先我们要知道当前 Node 的中心点相对于当前 Node 的左上角的偏移量
     --- 这里 center_offset_x 和 center_offset_y 就是当前 Node 的中心点指向当前 Node 的左上角的向量
-    local center_offset_x = self.transform.x - (self.Mid.T.x + self.Mid.T.w / 2)
-    local center_offset_y = self.transform.y - (self.Mid.T.y + self.Mid.T.h / 2)
+    local center_offset_x = self.transform.x - (self.Mid.transform.x + self.Mid.transform.w / 2)
+    local center_offset_y = self.transform.y - (self.Mid.transform.y + self.Mid.transform.h / 2)
 
     local offset_x = self.alignment:get_offset().x
     local offset_y = self.alignment:get_offset().y
@@ -327,8 +327,8 @@ end
 ---感觉没有必要, 真的有效果吗?
 ---@param major_tab Moveable
 function Moveable:glue_to_major(major_tab)
-    self.transform = major_tab.T
-    self.visible_transform.x = major_tab.visible_transform.x + ((1 - major_tab.visible_transform.w / major_tab.T.w) * (self.transform.w / 2))
+    self.transform = major_tab.transform
+    self.visible_transform.x = major_tab.visible_transform.x + ((1 - major_tab.visible_transform.w / major_tab.transform.w) * (self.transform.w / 2))
     self.visible_transform.y = major_tab.visible_transform.y
     self.visible_transform.w = major_tab.visible_transform.w
     self.visible_transform.h = major_tab.visible_transform.h
@@ -363,8 +363,8 @@ function Moveable:move_with_major(dt)
         else
             MWM.angles.cos = math.cos(major_tab.major.visible_transform.r)
             MWM.angles.sin = math.sin(major_tab.major.visible_transform.r)
-            MWM.WH.w = -self.transform.w / 2 + major_tab.major.T.w / 2
-            MWM.WH.h = -self.transform.h / 2 + major_tab.major.T.h / 2
+            MWM.WH.w = -self.transform.w / 2 + major_tab.major.transform.w / 2
+            MWM.WH.h = -self.transform.h / 2 + major_tab.major.transform.h / 2
 
             MWM.offs.x = self.role.offset.x + major_tab.offset.x - MWM.WH.w
             MWM.offs.y = self.role.offset.y + major_tab.offset.y - MWM.WH.h
@@ -374,8 +374,8 @@ function Moveable:move_with_major(dt)
         end
     end
 
-    self.transform.x = major_tab.major.T.x + MWM.rotated_offset.x
-    self.transform.y = major_tab.major.T.y + MWM.rotated_offset.y
+    self.transform.x = major_tab.major.transform.x + MWM.rotated_offset.x
+    self.transform.y = major_tab.major.transform.y + MWM.rotated_offset.y
 
     if self.role:get_xy_bond() == BondType.Strong then
         self.visible_transform.x = major_tab.major.visible_transform.x + MWM.rotated_offset.x
@@ -391,16 +391,16 @@ function Moveable:move_with_major(dt)
     end
 
     if self.role:get_scale_bond() == BondType.Strong then
-        self.visible_transform.scale = self.transform.scale * (major_tab.major.visible_transform.scale / major_tab.major.T.scale) +
+        self.visible_transform.scale = self.transform.scale * (major_tab.major.visible_transform.scale / major_tab.major.transform.scale) +
             (self.juice and self.juice.scale or 0)
     elseif self.role:get_scale_bond() == BondType.Weak then
         self:move_scale(dt)
     end
 
     if self.role:get_wh_bond() == BondType.Strong then
-        self.visible_transform.x = self.visible_transform.x + (0.5 * (1 - major_tab.major.visible_transform.w / (major_tab.major.T.w)) * self.transform.w)
-        self.visible_transform.w = (self.transform.w) * (major_tab.major.visible_transform.w / major_tab.major.T.w)
-        self.visible_transform.h = (self.transform.h) * (major_tab.major.visible_transform.h / major_tab.major.T.h)
+        self.visible_transform.x = self.visible_transform.x + (0.5 * (1 - major_tab.major.visible_transform.w / (major_tab.major.transform.w)) * self.transform.w)
+        self.visible_transform.w = (self.transform.w) * (major_tab.major.visible_transform.w / major_tab.major.transform.w)
+        self.visible_transform.h = (self.transform.h) * (major_tab.major.visible_transform.h / major_tab.major.transform.h)
     elseif self.role:get_wh_bond() == BondType.Weak then
         self:move_wh(dt)
     end
@@ -477,7 +477,7 @@ end
 function Moveable:calculate_parrallax()
     local room = App.ROOM
     if room then
-        self.shadow_parrallax.x = (self.transform.x + self.transform.w / 2 - room.T.w / 2) / (room.T.w / 2) * 1.5
+        self.shadow_parrallax.x = (self.transform.x + self.transform.w / 2 - room.transform.w / 2) / (room.transform.w / 2) * 1.5
     end
 end
 
@@ -510,8 +510,8 @@ function Moveable:get_major()
         end
         return self.FRAME.MAJOR
     else
-        self.ARGS.get_major = self.ARGS.get_major or MoveableRole(self)
-        return self.ARGS.get_major
+        self.args.get_major = self.args.get_major or MoveableRole(self)
+        return self.args.get_major
     end
 end
 

@@ -89,9 +89,9 @@ function Card:set_sprites(_center, _front)
                         (_center.set == 'Voucher' and G.v_undiscovered.pos) or
                         (_center.set == 'Booster' and G.booster_undiscovered.pos))
                 elseif _center.set == 'Joker' or _center.consumeable or _center.set == 'Voucher' then
-                    self.children.center = Sprite(self.T, App.ASSET_ATLAS[_center.set], self.config.center.pos, App.ROOM)
+                    self.children.center = Sprite(self.transform, App.ASSET_ATLAS[_center.set], self.config.center.pos, App.room)
                 else
-                    self.children.center = Sprite(Transform(self.T.x, self.T.y, self.T.w, self.T.h), App.ASSET_ATLAS[_center.atlas or 'centers'], _center.pos, App.ROOM)
+                    self.children.center = Sprite(Transform(self.transform.x, self.transform.y, self.transform.w, self.transform.h), App.ASSET_ATLAS[_center.atlas or 'centers'], _center.pos, App.ROOM)
                 end
                 self.children.center.states.hover = self.states.hover
                 self.children.center.states.click = self.states.click
@@ -118,7 +118,7 @@ function Card:set_sprites(_center, _front)
         end
 
         if not self.children.back then
-            self.children.back = Sprite(self.T, App.ASSET_ATLAS["centers"], self.params.bypass_back or (self.playing_card and App.GAME[self.back].pos or CardCfg:get_back_by_id("b_red").pos), App.ROOM)
+            self.children.back = Sprite(self.transform, App.ASSET_ATLAS["centers"], self.params.bypass_back or (self.playing_card and App.GAME[self.back].pos or CardCfg:get_back_by_id("b_red").pos), App.ROOM)
             self.children.back.states.hover = self.states.hover
             self.children.back.states.click = self.states.click
             self.children.back.states.drag = self.states.drag
@@ -139,10 +139,10 @@ function Card:draw(layer)
         self.tilt_var = self.tilt_var or { mx = 0, my = 0, dx = 0, dy = 0, amt = 0 }
         local tilt_factor = 0.3
         if self.ambient_tilt then
-            local tilt_angle = App.TIMERS.REAL * (1.56 + (self.ID / 1.14212) % 1) + self.ID / 1.35122
+            local tilt_angle = App.TIMERS.REAL * (1.56 + (self.id / 1.14212) % 1) + self.id / 1.35122
             local ppt = App.window:get_pixels_per_tile()
-            self.tilt_var.mx = ((0.5 + 0.5 * self.ambient_tilt * math.cos(tilt_angle)) * self.VT.w + self.VT.x + App.ROOM.T.x) * ppt
-            self.tilt_var.my = ((0.5 + 0.5 * self.ambient_tilt * math.sin(tilt_angle)) * self.VT.h + self.VT.y + App.ROOM.T.y) * ppt
+            self.tilt_var.mx = ((0.5 + 0.5 * self.ambient_tilt * math.cos(tilt_angle)) * self.visible_transform.w + self.visible_transform.x + App.room.transform.x) * ppt
+            self.tilt_var.my = ((0.5 + 0.5 * self.ambient_tilt * math.sin(tilt_angle)) * self.visible_transform.h + self.visible_transform.y + App.room.transform.y) * ppt
             self.tilt_var.amt = self.ambient_tilt * (0.5 + math.cos(tilt_angle)) * tilt_factor
         end
 

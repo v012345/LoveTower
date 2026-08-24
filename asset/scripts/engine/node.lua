@@ -145,7 +145,7 @@ function Node:remove()
             v:remove()
         end
     end
-    local controller = App.CONTROLLER
+    local controller = App.controller
     if controller.clicked.target == self then
         controller.clicked.target = nil
     end
