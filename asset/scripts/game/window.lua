@@ -39,12 +39,12 @@ end
 ---@return Node ROOM
 ---@return Moveable ROOT_ATTACH
 function Window:create_room()
-    local room_transform = Transform(self.room_padding_width, self.room_padding_height, self.width_in_tiles, self.height_in_tiles)
-    self.room = Node(room_transform)
+    local room_transform = Transform(self.room_padding_width, self.room_padding_height, self.room_width_in_tiles, self.room_height_in_tiles)
+    self.room = Node(room_transform, self.room) -- 这里 self.room 还是 nil, 在下面的 set_container 中设置
     self.room.jiggle = 0
     self.room.states.drag.can = false
     self.room:set_container(self.room)
-    self.room_attach = Moveable(Transform(0, 0, self.TILE_W, self.TILE_H))
+    self.room_attach = Moveable(Transform(0, 0, self.room_width_in_tiles, self.room_height_in_tiles), self.room)
     self.room_attach.states.drag.can = false
     self.room_attach:set_container(self.room)
     return self.room, self.room_attach

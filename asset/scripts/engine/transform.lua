@@ -1,3 +1,4 @@
+---这个东西的单位好像是 Tile 啊, 不是像素
 ---@class Transform : GameObject
 ---@overload fun(x?: number, y?: number, w?: number, h?: number, r?: number, scale?: number): Transform
 Transform = GameObject:extend()
