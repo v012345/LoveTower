@@ -12,13 +12,13 @@ function Window:init(app)
 
     self.room_padding_height = 0.7
     self.room_padding_width = 1
-    self.window_transform = Transform(0, 0, self.tile_width + 2 * self.room_padding_width, self.tile_height + 2 * self.room_padding_height)
-    self.real_size = Size(0, 0)
+    self.window_transform = Transform(0, 0, self.width_in_tiles + 2 * self.room_padding_width, self.height_in_tiles + 2 * self.room_padding_height)
     self.pixels_per_tile = self.tile_size * self.tile_scale
     local orig_w = self.window_transform.w * self.pixels_per_tile
     local orig_h = self.window_transform.h * self.pixels_per_tile
+    self.real_size = Size(0, 0)
     self.window_prev = {
-        orig_scale = self.TILESCALE,
+        orig_scale = self.tile_scale,
         orig_size = Size(orig_w, orig_h),
         orig_ratio = orig_w / orig_h
     }

@@ -42,13 +42,6 @@ function App:init()
     self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
     self.CANVAS:setFilter('linear', 'linear')
 
-    self.WINDOW = {
-        TRANS = Transform(0, 0, 0, 0),
-        real_size = Size(0, 0),
-        orig_size = Size(0, 0),
-        orig_scale = self.TILESCALE,
-    }
-
 
     --- 碰撞缓冲区, 在缓冲什么?
     self.COLLISION_BUFFER = 0.05
