@@ -6,8 +6,9 @@
 ---@field private orig_height_in_pixels number 窗口原始的高度, 就是初始化时的高度,以像素为单位
 ---@field private orig_tile_scale number 窗口原始的缩放, 就是初始化时的缩放
 ---@field private orig_width_to_height_ratio number 窗口原始的宽高比例, 就是初始化时的宽高比例
----@field room_padding_width number 房间左右边距, 以地图单元格为单位
----@field room_padding_height number 房间上下边距, 以地图单元格为单位
+---@field private room_padding_width number 房间左右边距, 以地图单元格为单位
+---@field private room_padding_height number 房间上下边距, 以地图单元格为单位
+---@field private room_transform_snapshot Transform 房间变换快照, 用于恢复房间变换
 ---@field room_width_in_tiles number room 宽度, 以地图单元格为单位
 ---@field room_height_in_tiles number room 高度, 以地图单元格为单位
 ---@field tile_scale number 地图单元格缩放

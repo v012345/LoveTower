@@ -146,11 +146,11 @@ function love.resize(w, h)
         local pixels_per_tile = App.window:get_pixels_per_tile()
         local room_transform = App.room.transform
         if is_narrower then
-            room.T.x = App.window.ROOM_PADDING_W
-            room.T.y = (h / (pixels_per_tile) - room_transform.h) / 2
+            room.transform.x = App.window:get_room_padding_width()
+            room.transform.y = (h / pixels_per_tile - room_transform.h) / 2
         else
-            room.T.y = App.window.ROOM_PADDING_H
-            room.T.x = (w / (pixels_per_tile) - room_transform.w) / 2
+            room.transform.y = App.window:get_room_padding_height()
+            room.transform.x = (w / pixels_per_tile - room_transform.w) / 2
         end
         App.window:save_room_transform()
     end

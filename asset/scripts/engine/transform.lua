@@ -18,6 +18,15 @@ function Transform:init(x, y, w, h, r, scale)
     self.scale = scale or 1
 end
 
+function Transform:copy(transform)
+    self.x = transform.x
+    self.y = transform.y
+    self.w = transform.w
+    self.h = transform.h
+    self.r = transform.r
+    self.scale = transform.scale
+end
+
 function Transform:clone()
     return Transform(self.x, self.y, self.w, self.h, self.r, self.scale)
 end

@@ -36,15 +36,13 @@ function Window:create_room()
     self.room_attach = Moveable(Transform(0, 0, self.room_width_in_tiles, self.room_height_in_tiles), self.room)
     self.room_attach.states.drag.can = false
     self.room_attach:set_container(self.room)
+    self.room_transform_snapshot = room_transform:clone()
     return self.room, self.room_attach
 end
 
-function Window:save_room_transform()
-    self.ROOM_ORIG = {
-        x = self.room.transform.x,
-        y = self.room.transform.y,
-        r = self.room.transform.r
-    }
+---@public 保存房间变换快照, 用于恢复房间变换
+function Window:take_room_transform_snapshot()
+    self.room_transform_snapshot:copy(self.room.transform)
 end
 
 function Window:set_room_size(w, h)
@@ -144,6 +142,16 @@ function Window:apply_window_changes(_initial)
         local tab_but = self.app.OVERLAY_MENU:get_UIE_by_ID('tab_but_Video')
         self.app.FUNCS.change_tab(tab_but)
     end
+end
+
+---@return number padding_width
+function Window:get_room_padding_width()
+    return self.room_padding_width
+end
+
+---@return number padding_height
+function Window:get_room_padding_height()
+    return self.room_padding_height
 end
 
 ---@private 保存窗口原始的配置
