@@ -11,7 +11,7 @@
 ---@field room_width_in_tiles number room 宽度, 以地图单元格为单位
 ---@field room_height_in_tiles number room 高度, 以地图单元格为单位
 ---@field tile_scale number 地图单元格缩放
----@field tile_size number 地图单元格大小, 以像素为单位
+---@field private tile_size number 地图单元格大小, 以像素为单位
 ---@field room Node 房间, room 与 window 的关系是 window 比 room 大一圈 padding
 ---@field room_attach Moveable 房间附件
 ---@field window_transform Transform 窗口变换
