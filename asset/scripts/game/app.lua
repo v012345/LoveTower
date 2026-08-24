@@ -19,7 +19,7 @@ function App:start_up()
     boot_timer("start", "settings", 0.1)
     self:init_window()
 
-    if self.Features:is_sound_thread_enabled() then
+    if self.features:is_sound_thread_enabled() then
         boot_timer('window init', 'soundmanager2')
         self.SOUND_MANAGER = SoundManager()
         -- call the sound manager to prepare the thread to play sounds
@@ -27,7 +27,7 @@ function App:start_up()
         boot_timer('soundmanager2', 'savemanager', 0.22)
     end
 
-    if self.Features:is_cta_enabled() then
+    if self.features:is_cta_enabled() then
         self.settings:switch_to_demo()
     end
 
@@ -37,7 +37,7 @@ function App:start_up()
     self.SAVE_MANAGER:boot()
     boot_timer('window init', 'savemanager', 0.3)
     self.HTTP_MANAGER = HttpManager()
-    if self.Features:is_http_scores_enabled() then
+    if self.features:is_http_scores_enabled() then
         self.HTTP_MANAGER:boot()
     end
     boot_timer('savemanager', 'shaders', 0.4)

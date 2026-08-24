@@ -33,7 +33,7 @@
 ---@field HTTP_MANAGER HttpManager 网络管理器
 ---@field SHADERS table<string, Shader> 所有着色器
 ---@field LANG LanguageConfigItem 当前使用的语言对象
----@field Features FeatureConfig 特性配置
+---@field features FeatureConfig 特性配置
 ---@field E_MANAGER EventManager 事件管理器
 ---@field real_dt number 真实的 dt
 ---@field ARGS any 记录一些参数, 之后要解耦出来

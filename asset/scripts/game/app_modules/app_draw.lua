@@ -120,7 +120,7 @@ function App:draw()
                     end
                 end
 
-                if self.OVERLAY_MENU or not self.Features:is_hide_bg() then
+                if self.OVERLAY_MENU or not self.features:is_hide_bg() then
                     if self.OVERLAY_MENU and self.OVERLAY_MENU ~= self.controller.dragging.target then
                         love.graphics.push()
                         self.OVERLAY_MENU:translate_container()
@@ -226,7 +226,7 @@ function App:draw()
         love.graphics.pop()
     end
     self.Performance:timer_checkpoint('canvas', 'draw')
-    if not _RELEASE_MODE and self.DEBUG and not self.video_control and self.Features:is_verbose_enabled() then
+    if not _RELEASE_MODE and self.DEBUG and not self.video_control and self.features:is_verbose_enabled() then
         love.graphics.push()
         love.graphics.setColor(0, 1, 1, 1)
         local fps = love.timer.getFPS()

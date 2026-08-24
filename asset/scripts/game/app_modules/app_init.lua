@@ -8,7 +8,7 @@ local FileHandler = require "asset.scripts.game.file_handler"
 
 ---在这里不要做耗时的操作
 function App:init()
-    self.Features = FeatureCfg:get_instance()
+    self.features = FeatureCfg:get_instance()
     --计时器
     self.TIMERS = Timer()
     self.frames = self.TIMERS:get_frames()
