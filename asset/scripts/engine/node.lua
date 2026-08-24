@@ -26,7 +26,7 @@ function Node:init(transform, container)
 
     -- 这个地方我没有明白
     if not App.STAGE_OBJECT_INTERRUPT then
-        table.insert(App.STAGE_OBJECTS[App.STAGE], self)
+        table.insert(App.STAGE_OBJECTS[App.stage], self)
     end
 end
 
@@ -134,9 +134,9 @@ function Node:remove()
             break;
         end
     end
-    for k, v in pairs(App.STAGE_OBJECTS[App.STAGE]) do
+    for k, v in pairs(App.STAGE_OBJECTS[App.stage]) do
         if v == self then
-            table.remove(App.STAGE_OBJECTS[App.STAGE], k)
+            table.remove(App.STAGE_OBJECTS[App.stage], k)
             break;
         end
     end

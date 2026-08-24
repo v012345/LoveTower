@@ -18,7 +18,7 @@ function FileHandler:is_need_save()
     if self.update_queued then
         if self.force then return true end
 
-        if self.last_sent_stage ~= self.app.STAGE then return true end
+        if self.last_sent_stage ~= self.app.stage then return true end
 
         if (self.last_sent_pause ~= self.app.SETTINGS:is_paused()) and self.run then return true end
 
@@ -34,7 +34,7 @@ end
 
 function FileHandler:reset_status()
     self.force = false
-    self.last_sent_stage = self.app.STAGE
+    self.last_sent_stage = self.app.stage
     self.last_sent_time = self.app.TIMERS.UPTIME
     self.last_sent_pause = self.app.SETTINGS:is_paused()
     self.settings = nil

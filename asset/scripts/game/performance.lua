@@ -40,7 +40,7 @@ function Performance:timer_checkpoint(label, type, reset)
         cp.checkpoint_list[cp.checkpoints].trend = cp.checkpoint_list[cp.checkpoints].trend or {}
         cp.checkpoint_list[cp.checkpoints].states = cp.checkpoint_list[cp.checkpoints].states or {}
         table.insert(cp.checkpoint_list[cp.checkpoints].trend, 1, cp.checkpoint_list[cp.checkpoints].TTC)
-        table.insert(cp.checkpoint_list[cp.checkpoints].states, 1, self.app.STATE)
+        table.insert(cp.checkpoint_list[cp.checkpoints].states, 1, self.app.state)
         cp.checkpoint_list[cp.checkpoints].trend[401] = nil
         cp.checkpoint_list[cp.checkpoints].states[401] = nil
         cp.last_time = cp.checkpoint_list[cp.checkpoints].time

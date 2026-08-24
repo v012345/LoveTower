@@ -123,8 +123,8 @@ function App:prep_stage(new_stage, new_state, new_game_obj)
     self.controller:reset_locks()
     if new_game_obj then self.GAME = self:init_game_object() end
 
-    self.STAGE = new_stage
-    self.STATE = new_state
+    self.stage = new_stage
+    self.state = new_state
     self.STATE_COMPLETE = false
     self.settings:set_paused(false)
     self.room, self.room_attach = self.window:create_room()

@@ -21,12 +21,12 @@
 ---@field TILESCALE number 地图缩放比例
 ---@field TILESIZE number 地图单元格大小
 ---@field STAGE_OBJECT_INTERRUPT boolean 不知道具体作用是什么
----@field STAGE_OBJECTS Node[][] 场景中使用到的所有 Node , 当 STAGE 改变时, 可以通过这里删除所有 Node
+---@field STAGE_OBJECTS Node[][] 场景中使用到的所有 Node , 当 stage 改变时, 可以通过这里删除所有 Node
 ---@field fbf boolean frame by frame 模式, 如果为 true, 则每帧都渲染, 否则每秒渲染 60 帧, 和 new_frame 配合使用
 ---@field new_frame boolean 是否是新的一帧, 如果为 true, 则渲染新的一帧, 否则渲染旧的一帧, 和 fbf 配合使用
 ---@field MOVEABLES Moveable[] 所有 Moveable 的列表, 包括 Moveable 的子类
----@field STAGE STAGES 当前场景
----@field STATE STATES 当前状态
+---@field stage STAGES 当前场景
+---@field state STATES 当前状态
 ---@field PROFILES Profile 所有玩家的数据(最多三个玩家)
 ---@field SOUND_MANAGER SoundManager 声音管理器
 ---@field save_manager SaveManager 存档管理器

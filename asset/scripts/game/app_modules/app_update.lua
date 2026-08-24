@@ -75,68 +75,68 @@ function App:update(dt)
 end
 
 function App:update_state(dt)
-    if self.STATE == self.STATES.SELECTING_HAND then
+    if self.state == self.STATES.SELECTING_HAND then
         if (not self.hand.cards[1]) and self.deck.cards[1] then
-            self.STATE = self.STATES.DRAW_TO_HAND
+            self.state = self.STATES.DRAW_TO_HAND
             self.STATE_COMPLETE = false
         else
             self:update_selecting_hand(dt)
         end
     end
 
-    if self.STATE == self.STATES.SHOP then
+    if self.state == self.STATES.SHOP then
         self:update_shop(dt)
     end
 
-    if self.STATE == self.STATES.PLAY_TAROT then
+    if self.state == self.STATES.PLAY_TAROT then
         self:update_play_tarot(dt)
     end
 
-    if self.STATE == self.STATES.HAND_PLAYED then
+    if self.state == self.STATES.HAND_PLAYED then
         self:update_hand_played(dt)
     end
 
-    if self.STATE == self.STATES.DRAW_TO_HAND then
+    if self.state == self.STATES.DRAW_TO_HAND then
         self:update_draw_to_hand(dt)
     end
 
-    if self.STATE == self.STATES.NEW_ROUND then
+    if self.state == self.STATES.NEW_ROUND then
         self:update_new_round(dt)
     end
 
-    if self.STATE == self.STATES.BLIND_SELECT then
+    if self.state == self.STATES.BLIND_SELECT then
         self:update_blind_select(dt)
     end
 
-    if self.STATE == self.STATES.ROUND_EVAL then
+    if self.state == self.STATES.ROUND_EVAL then
         self:update_round_eval(dt)
     end
 
-    if self.STATE == self.STATES.TAROT_PACK then
+    if self.state == self.STATES.TAROT_PACK then
         self:update_arcana_pack(dt)
     end
 
-    if self.STATE == self.STATES.SPECTRAL_PACK then
+    if self.state == self.STATES.SPECTRAL_PACK then
         self:update_spectral_pack(dt)
     end
 
-    if self.STATE == self.STATES.STANDARD_PACK then
+    if self.state == self.STATES.STANDARD_PACK then
         self:update_standard_pack(dt)
     end
 
-    if self.STATE == self.STATES.BUFFOON_PACK then
+    if self.state == self.STATES.BUFFOON_PACK then
         self:update_buffoon_pack(dt)
     end
 
-    if self.STATE == self.STATES.PLANET_PACK then
+    if self.state == self.STATES.PLANET_PACK then
         self:update_celestial_pack(dt)
     end
 
-    if self.STATE == self.STATES.GAME_OVER then
+    if self.state == self.STATES.GAME_OVER then
         self:update_game_over(dt)
     end
 
-    if self.STATE == self.STATES.MENU then
+    if self.state == self.STATES.MENU then
         self:update_menu(dt)
     end
 end
@@ -184,16 +184,16 @@ end
 
 ---出牌后, 比如算分的时间长, 需要加速一下
 function App:update_speed_factor(dt)
-    if self.STATE ~= self.ACC_state then self.ACC = 0 end
-    self.ACC_state = self.STATE
+    if self.state ~= self.ACC_state then self.ACC = 0 end
+    self.ACC_state = self.state
 
-    if self.STATE == self.STATES.HAND_PLAYED or self.STATE == self.STATES.NEW_ROUND then
+    if self.state == self.STATES.HAND_PLAYED or self.state == self.STATES.NEW_ROUND then
         self.ACC = math.min(self.ACC + dt * 0.2 * self.settings.data.GAMESPEED, 16)
     else
         self.ACC = 0
     end
 
-    local can_speed_up = self.STAGE == self.STAGES.RUN and not self.settings:is_paused() and not self.screenwipe
+    local can_speed_up = self.stage == self.STAGES.RUN and not self.settings:is_paused() and not self.screenwipe
     self.SPEEDFACTOR = can_speed_up and self.settings.data.GAMESPEED or 1
     self.SPEEDFACTOR = self.SPEEDFACTOR + math.max(0, math.abs(self.ACC) - 2)
 end
