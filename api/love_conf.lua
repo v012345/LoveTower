@@ -1,8 +1,5 @@
 ---@meta
 
----@param love_conf_table LoveConfTable 配置表
-function love.conf(love_conf_table) end
-
 ---@class LoveConfTable
 ---@field window WindowConfig 窗口配置
 

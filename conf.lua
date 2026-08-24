@@ -29,6 +29,7 @@
 _RELEASE_MODE = false
 _DEMO = true
 
+---@param t LoveConfTable 配置表
 function love.conf(t)
     -- t.window.title = cfg.window.title
     -- t.window.width = cfg.window.width
