@@ -29,12 +29,12 @@
 ---@field STATE STATES 当前状态
 ---@field PROFILES Profile 所有玩家的数据(最多三个玩家)
 ---@field SOUND_MANAGER SoundManager 声音管理器
----@field SAVE_MANAGER SaveManager 存档管理器
----@field HTTP_MANAGER HttpManager 网络管理器
+---@field save_manager SaveManager 存档管理器
+---@field http_manager HttpManager 网络管理器
 ---@field SHADERS table<string, Shader> 所有着色器
 ---@field LANG LanguageConfigItem 当前使用的语言对象
 ---@field features FeatureConfig 特性配置
----@field E_MANAGER EventManager 事件管理器
+---@field event_manager EventManager 事件管理器
 ---@field real_dt number 真实的 dt
 ---@field ARGS any 记录一些参数, 之后要解耦出来
 ---@field SPLASH_BACK Sprite 启动画面背景

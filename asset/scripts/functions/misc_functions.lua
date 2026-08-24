@@ -151,7 +151,7 @@ function ease_value(ref_table, ref_value, mod, floored, timer_type, not_blockabl
     mod = mod or 0
 
     --Ease from current chips to the new number of chips
-    App.E_MANAGER:add_event(Event({
+    App.event_manager:add_event(Event({
         trigger = EventTrigger.ease,
         blockable = (not_blockable == false),
         blocking = false,

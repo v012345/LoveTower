@@ -9,7 +9,7 @@ function App:splash_screen()
         self:prep_stage(STAGES.MAIN_MENU, STATES.SPLASH, true)
 
 
-        self.E_MANAGER:add_event(Event({
+        self.event_manager:add_event(Event({
             func = function()
                 self.TIMERS.TOTAL = 0
                 self.TIMERS.REAL = 0
@@ -48,7 +48,7 @@ function App:splash_screen()
 
                 --spawn in splash card
                 local SC = nil --[[@type Card]]
-                self.E_MANAGER:add_event(Event({
+                self.event_manager:add_event(Event({
                     trigger = EventTrigger.after,
                     delay = 0.2,
                     func = (function()
@@ -68,7 +68,7 @@ function App:splash_screen()
                     end)
                 }))
                 --dissolve fool card and start to fade in the vortex
-                self.E_MANAGER:add_event(Event({
+                self.event_manager:add_event(Event({
                     trigger = EventTrigger.after,
                     delay = 1.8,
                     func = (function() --|||||||||||
@@ -85,7 +85,7 @@ function App:splash_screen()
 
                 for i = 1, 200 do
                     temp_del = temp_del or 3
-                    self.E_MANAGER:add_event(Event({
+                    self.event_manager:add_event(Event({
                         trigger = EventTrigger.after,
                         blockable = false,
                         delay = temp_del,
@@ -97,7 +97,7 @@ function App:splash_screen()
                             ease_value(card.transform, 'y', -card_pos.y, nil, nil, nil, 0.9 * speed)
                             local temp_pitch = i * 0.007 + 0.6
                             local temp_i = i
-                            App.E_MANAGER:add_event(Event({
+                            App.event_manager:add_event(Event({
                                 blockable = false,
                                 func = (function()
                                     if card.transform.scale <= 0 then
@@ -121,7 +121,7 @@ function App:splash_screen()
                 end
 
                 --when faded to white, spit out the 'Fool's' cards and slowly have them settle in to place
-                self.E_MANAGER:add_event(Event({
+                self.event_manager:add_event(Event({
                     trigger = EventTrigger.after,
                     delay = 2.,
                     func = (function()

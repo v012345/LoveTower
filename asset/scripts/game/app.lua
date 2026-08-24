@@ -33,12 +33,12 @@ function App:start_up()
 
 
     boot_timer('settings', 'window init', 0.2)
-    self.SAVE_MANAGER = SaveManager()
-    self.SAVE_MANAGER:boot()
+    self.save_manager = SaveManager()
+    self.save_manager:boot()
     boot_timer('window init', 'savemanager', 0.3)
-    self.HTTP_MANAGER = HttpManager()
+    self.http_manager = HttpManager()
     if self.features:is_http_scores_enabled() then
-        self.HTTP_MANAGER:boot()
+        self.http_manager:boot()
     end
     boot_timer('savemanager', 'shaders', 0.4)
 
@@ -82,7 +82,7 @@ function App:start_up()
     self.STAGE_OBJECT_INTERRUPT = false
 
     --Create the event manager for the game
-    self.E_MANAGER = EventManager()
+    self.event_manager = EventManager()
 
 
     self.PROFILES:set_profile_progress()

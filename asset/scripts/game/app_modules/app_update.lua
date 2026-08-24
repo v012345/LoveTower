@@ -26,7 +26,7 @@ function App:update(dt)
         self.new_frame = false
         self:set_alerts()
         self.Performance:timer_checkpoint('alerts', 'update')
-        local http_resp = self.HTTP_MANAGER.in_channel:pop()
+        local http_resp = self.http_manager.in_channel:pop()
         if http_resp then
             self.ARGS.HIGH_SCORE_RESPONSE = http_resp
         end
@@ -37,7 +37,7 @@ function App:update(dt)
         self:update_speed_factor(dt)
         self.TIMERS:update_game_time(dt * self.SPEEDFACTOR)
         self:update_color(dt)
-        self.E_MANAGER:update(self.real_dt)
+        self.event_manager:update(self.real_dt)
         self.Performance:timer_checkpoint('e_manager', 'update')
 
 

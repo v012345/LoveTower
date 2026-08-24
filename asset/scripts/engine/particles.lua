@@ -137,7 +137,7 @@ function Particles:move(dt)
 end
 
 function Particles:fade(delay, to)
-    App.E_MANAGER:add_event(Event({
+    App.event_manager:add_event(Event({
         trigger = EventTrigger.ease,
         timer = self.timer_type,
         blockable = false,

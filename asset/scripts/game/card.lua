@@ -39,7 +39,7 @@ end
 ---设置卡牌的能力
 function Card:set_ability(center, initial, delay_sprites)
     if delay_sprites then
-        App.E_MANAGER:add_event(Event({
+        App.event_manager:add_event(Event({
             func = function()
                 if not self.REMOVED then
                     self:set_sprites(center)
@@ -183,7 +183,7 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
         colours = self.dissolve_colours,
         fill = true
     }, App.ROOM)
-    App.E_MANAGER:add_event(Event({
+    App.event_manager:add_event(Event({
         trigger = EventTrigger.after,
         blockable = false,
         delay = 0.7 * dissolve_time,
@@ -193,7 +193,7 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
         end)
     }))
     if not silent then
-        App.E_MANAGER:add_event(Event({
+        App.event_manager:add_event(Event({
             blockable = false,
             func = (function()
                 play_sound('whoosh2', math.random() * 0.2 + 0.9, 0.5)
@@ -202,7 +202,7 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
             end)
         }))
     end
-    App.E_MANAGER:add_event(Event({
+    App.event_manager:add_event(Event({
         trigger = EventTrigger.ease,
         blockable = false,
         ref_table = self,
@@ -211,7 +211,7 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
         delay = 1 * dissolve_time,
         func = (function(t) return t end)
     }))
-    App.E_MANAGER:add_event(Event({
+    App.event_manager:add_event(Event({
         trigger = EventTrigger.after,
         blockable = false,
         delay = 1.05 * dissolve_time,
@@ -220,7 +220,7 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
             return true
         end)
     }))
-    App.E_MANAGER:add_event(Event({
+    App.event_manager:add_event(Event({
         trigger = EventTrigger.after,
         blockable = false,
         delay = 1.051 * dissolve_time,
