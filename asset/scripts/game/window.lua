@@ -5,8 +5,8 @@ local Window = GameObject:extend()
 ---@param app App
 function Window:init(app)
     self.app = app
-    self.TILE_W = GameCfg:get_tile_width()
-    self.TILE_H = GameCfg:get_tile_height()
+    self.tile_width = GameCfg:get_tile_width()
+    self.tile_height = GameCfg:get_tile_height()
     self.TILESCALE = GameCfg:get_tile_scale()
     self.TILESIZE = GameCfg:get_tile_size()
     -- Initialize the window
@@ -15,16 +15,16 @@ function Window:init(app)
     --- 宽高比为 1.74
     self.room_padding_height = 0.7
     self.room_padding_width = 1
-    self.WINDOWTRANS = {
+    self.window_transform = {
         x = 0,
         y = 0,
-        w = self.TILE_W + 2 * self.room_padding_width,
-        h = self.TILE_H + 2 * self.room_padding_height,
+        w = self.tile_width + 2 * self.room_padding_width,
+        h = self.tile_height + 2 * self.room_padding_height,
         real_window_w = 0,
         real_window_h = 0
     }
-    local orig_w = self.WINDOWTRANS.w * self.TILESIZE * self.TILESCALE
-    local orig_h = self.WINDOWTRANS.h * self.TILESIZE * self.TILESCALE
+    local orig_w = self.window_transform.w * self.TILESIZE * self.TILESCALE
+    local orig_h = self.window_transform.h * self.TILESIZE * self.TILESCALE
     self.window_prev = {
         orig_scale = self.TILESCALE,
         orig_size = Size(orig_w, orig_h),
