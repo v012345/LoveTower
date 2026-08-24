@@ -11,9 +11,9 @@ Moveable.exp_times = {
 
 --Moveable represents any game object that has the ability to move about the gamespace.\
 --All Moveables have a T (transform) that describes their desired transform in game units, as\
---well as a VT (Visible Transform) that eases to T over time. This allows for simplified movement where\
+--well as a visible_transform (Visible Transform) that eases to T over time. This allows for simplified movement where\
 --we only need to set T.x, T.y, etc. to their final position and the engine will ensure the Moveable\
---VT eases to that final location, regargless of any events or timing.
+--visible_transform eases to that final location, regargless of any events or timing.
 --
 --**T** The transform ititializer, with keys of x|1, y|2, w|3, h|4, r|5\
 --**container** optional container for this Node, defaults to G.ROOM
@@ -25,26 +25,26 @@ function Moveable:init(transform, container)
     Node.init(self, transform, container)
     self.layered_parallax = Vec2(0, 0)
     --The Visible transform is initally set to the same values as the transform T.
-    --Note that the VT has an extra 'scale' factor, this is used to manipulate the center-adjusted
+    --Note that the visible_transform has an extra 'scale' factor, this is used to manipulate the center-adjusted
     --scale of any objects that need to be drawn larger or smaller
     self.visible_transform = self.transform:clone()
 
-    --To determine location of VT, we need to keep track of the velocity of VT as it approaches T for the next frame
+    --To determine location of visible_transform, we need to keep track of the velocity of visible_transform as it approaches T for the next frame
     self.velocity = Velocity()
 
     --For more robust drawing, attaching, movement and fewer redundant movement calculations, Moveables each have a 'role'
     --that describes a heirarchy of move() calls. Any Moveables with 'Major' role type behave normally, essentially recalculating their
-    --VT every frame to ensure smooth movement. Moveables can be set to 'Minor' role and attached to some 'Major' moveable
-    --to weld the Minor moveable to the Major moveable. This makes the dependent moveable set their T and VT to be equal to
-    --the corresponding 'Major' T and VT, plus some defined offset.
-    --For finer control over what parts of T and VT are inherited, xy_bond, wh_bond, and r_bond can be set to one of
+    --visible_transform every frame to ensure smooth movement. Moveables can be set to 'Minor' role and attached to some 'Major' moveable
+    --to weld the Minor moveable to the Major moveable. This makes the dependent moveable set their T and visible_transform to be equal to
+    --the corresponding 'Major' T and visible_transform, plus some defined offset.
+    --For finer control over what parts of T and visible_transform are inherited, xy_bond, wh_bond, and r_bond can be set to one of
     --'Strong' or 'Weak'. Strong simply copies the values, Weak allows the 'Minor' moveable to calculate their own.
     self.role = MoveableRole(nil, RoleType.Major, self, Vec2(), BondType.Strong, BondType.Strong, BondType.Strong, BondType.Strong)
     self.alignment = Alignment(AlignmentType.a, Vec2(), AlignmentType.none, Vec2(), false)
 
 
-    --the pinch table is used to modify the VT.w and VT.h compared to T.w and T.h. If either x or y pinch is
-    --set to true, the VT width and or height will ease to 0. If pinch is false, they ease to T.w or T.h
+    --the pinch table is used to modify the visible_transform.w and visible_transform.h compared to T.w and T.h. If either x or y pinch is
+    --set to true, the visible_transform width and or height will ease to 0. If pinch is false, they ease to T.w or T.h
     self.pinch = { x = false, y = false }
 
     --Keep track of the last time this Moveable was moved via :move(dt). When it is successfully moved, set to equal
@@ -80,7 +80,7 @@ end
 
 --Sets the alignment of moveable using roles
 --**major** The moveable this moveable will attach to\
---**bond** The bond type, either 'Strong' or 'Weak'. Strong instantly adjusts VT, Weak manually calculates VT changes\
+--**bond** The bond type, either 'Strong' or 'Weak'. Strong instantly adjusts visible_transform, Weak manually calculates visible_transform changes\
 --**offset** {x , y} offset from the alignment\
 --**type** the alignment type. Vertical options: c - center, t - top, b - bottom. Horizontal options: l - left, m - middle, r - right. i for inner
 ---@param args AlignmentArgs
@@ -119,8 +119,8 @@ function Moveable:align_to_major()
     local major_right_x = self.role:get_major().T.w
     --- 首先我们要知道当前 Node 的中心点相对于当前 Node 的左上角的偏移量
     --- 这里 center_offset_x 和 center_offset_y 就是当前 Node 的中心点指向当前 Node 的左上角的向量
-    local center_offset_x = self.T.x - (self.Mid.T.x + self.Mid.T.w / 2)
-    local center_offset_y = self.T.y - (self.Mid.T.y + self.Mid.T.h / 2)
+    local center_offset_x = self.transform.x - (self.Mid.T.x + self.Mid.T.w / 2)
+    local center_offset_y = self.transform.y - (self.Mid.T.y + self.Mid.T.h / 2)
 
     local offset_x = self.alignment:get_offset().x
     local offset_y = self.alignment:get_offset().y
@@ -138,7 +138,7 @@ function Moveable:align_to_major()
     --- 底部对齐
     if self.alignment:is_b() then
         if self.alignment:is_i() then
-            self.role:set_offset_y(major_bottom_y + offset_y - self.T.h)
+            self.role:set_offset_y(major_bottom_y + offset_y - self.transform.h)
         else
             self.role:set_offset_y(major_bottom_y + offset_y)
         end
@@ -146,7 +146,7 @@ function Moveable:align_to_major()
 
     if self.alignment:is_r() then
         if self.alignment:is_i() then
-            self.role:set_offset_x(major_right_x + offset_x - self.T.w)
+            self.role:set_offset_x(major_right_x + offset_x - self.transform.w)
         else
             self.role:set_offset_x(major_right_x + offset_x)
         end
@@ -156,7 +156,7 @@ function Moveable:align_to_major()
         if self.alignment:is_i() then
             self.role:set_offset_y(offset_y)
         else
-            self.role:set_offset_y(offset_y - self.T.h)
+            self.role:set_offset_y(offset_y - self.transform.h)
         end
     end
 
@@ -164,42 +164,42 @@ function Moveable:align_to_major()
         if self.alignment:is_i() then
             self.role:set_offset_x(offset_x)
         else
-            self.role:set_offset_x(offset_x - self.T.w)
+            self.role:set_offset_x(offset_x - self.transform.w)
         end
     end
 
 
-    self.T.x = self.role:get_final_x()
-    self.T.y = self.role:get_final_y()
+    self.transform.x = self.role:get_final_x()
+    self.transform.y = self.role:get_final_y()
 
     self.alignment:set_prev_offset(self.alignment:get_offset())
 end
 
 function Moveable:hard_set_T(X, Y, W, H)
-    self.T.x = X
-    self.T.y = Y
-    self.T.w = W
-    self.T.h = H
+    self.transform.x = X
+    self.transform.y = Y
+    self.transform.w = W
+    self.transform.h = H
 
     self.velocity.x = 0
     self.velocity.y = 0
     self.velocity.r = 0
     self.velocity.scale = 0
 
-    self.VT.x = X
-    self.VT.y = Y
-    self.VT.w = W
-    self.VT.h = H
-    self.VT.r = self.T.r
-    self.VT.scale = self.T.scale
+    self.visible_transform.x = X
+    self.visible_transform.y = Y
+    self.visible_transform.w = W
+    self.visible_transform.h = H
+    self.visible_transform.r = self.transform.r
+    self.visible_transform.scale = self.transform.scale
     self:calculate_parrallax()
 end
 
 function Moveable:hard_set_VT()
-    self.VT.x = self.T.x
-    self.VT.y = self.T.y
-    self.VT.w = self.T.w
-    self.VT.h = self.T.h
+    self.visible_transform.x = self.transform.x
+    self.visible_transform.y = self.transform.y
+    self.visible_transform.w = self.transform.w
+    self.visible_transform.h = self.transform.h
 end
 
 function Moveable:drag(offset)
@@ -223,8 +223,8 @@ function Moveable:drag(offset)
             offset = self.click_offset
         end
 
-        self.T.x = _p.x - offset.x
-        self.T.y = _p.y - offset.y
+        self.transform.x = _p.x - offset.x
+        self.transform.y = _p.y - offset.y
         self.NEW_ALIGNMENT = true
         for k, v in pairs(self.children) do
             v:drag(offset)
@@ -243,7 +243,7 @@ function Moveable:juice_up(amount, rot_amt)
     local end_time = start_time + 0.4
     rot_amt = rot_amt or pseudorandom_element({ 0.6 * amount, -0.6 * amount }) or 0
     self.juice = Juice(0, amount, 0, rot_amt, start_time, end_time)
-    self.VT.scale = 1 - 0.6 * amount
+    self.visible_transform.scale = 1 - 0.6 * amount
 end
 
 function Moveable:move_juice(dt)
@@ -318,23 +318,22 @@ function Moveable:is_calculating()
 end
 
 function Moveable:lr_clamp()
-    if self.T.x < 0 then self.T.x = 0 end
-    if self.VT.x < 0 then self.VT.x = 0 end
-    if (self.T.x + self.T.w) > G.ROOM.T.w then self.T.x = G.ROOM.T.w - self.T.w end
-    if (self.VT.x + self.VT.w) > G.ROOM.T.w then self.VT.x = G.ROOM.T.w - self.VT.w end
+    if self.transform.x < 0 then self.transform.x = 0 end
+    if self.visible_transform.x < 0 then self.visible_transform.x = 0 end
+    if (self.transform.x + self.transform.w) > App.room.transform.w then self.transform.x = App.room.transform.w - self.transform.w end
+    if (self.visible_transform.x + self.visible_transform.w) > App.room.transform.w then self.visible_transform.x = App.room.transform.w - self.visible_transform.w end
 end
 
 ---感觉没有必要, 真的有效果吗?
 ---@param major_tab Moveable
 function Moveable:glue_to_major(major_tab)
-    self.T = major_tab.T --[[@as Transform]]
-
-    self.VT.x = major_tab.VT.x + ((1 - major_tab.VT.w / major_tab.T.w) * (self.T.w / 2))
-    self.VT.y = major_tab.VT.y
-    self.VT.w = major_tab.VT.w
-    self.VT.h = major_tab.VT.h
-    self.VT.r = major_tab.VT.r
-    self.VT.scale = major_tab.VT.scale
+    self.transform = major_tab.T
+    self.visible_transform.x = major_tab.visible_transform.x + ((1 - major_tab.visible_transform.w / major_tab.T.w) * (self.transform.w / 2))
+    self.visible_transform.y = major_tab.visible_transform.y
+    self.visible_transform.w = major_tab.visible_transform.w
+    self.visible_transform.h = major_tab.visible_transform.h
+    self.visible_transform.r = major_tab.visible_transform.r
+    self.visible_transform.scale = major_tab.visible_transform.scale
 
     self.pinch = major_tab.pinch
     self.shadow_parrallax = major_tab.shadow_parrallax
@@ -358,14 +357,14 @@ function Moveable:move_with_major(dt)
         MWM.rotated_offset.x = self.role.offset.x + major_tab.offset.x
         MWM.rotated_offset.y = self.role.offset.y + major_tab.offset.y
     else
-        if major_tab.major.VT.r < 0.0001 and major_tab.major.VT.r > -0.0001 then
+        if major_tab.major.visible_transform.r < 0.0001 and major_tab.major.visible_transform.r > -0.0001 then
             MWM.rotated_offset.x = self.role.offset.x + major_tab.offset.x
             MWM.rotated_offset.y = self.role.offset.y + major_tab.offset.y
         else
-            MWM.angles.cos = math.cos(major_tab.major.VT.r)
-            MWM.angles.sin = math.sin(major_tab.major.VT.r)
-            MWM.WH.w = -self.T.w / 2 + major_tab.major.T.w / 2
-            MWM.WH.h = -self.T.h / 2 + major_tab.major.T.h / 2
+            MWM.angles.cos = math.cos(major_tab.major.visible_transform.r)
+            MWM.angles.sin = math.sin(major_tab.major.visible_transform.r)
+            MWM.WH.w = -self.transform.w / 2 + major_tab.major.T.w / 2
+            MWM.WH.h = -self.transform.h / 2 + major_tab.major.T.h / 2
 
             MWM.offs.x = self.role.offset.x + major_tab.offset.x - MWM.WH.w
             MWM.offs.y = self.role.offset.y + major_tab.offset.y - MWM.WH.h
@@ -375,33 +374,33 @@ function Moveable:move_with_major(dt)
         end
     end
 
-    self.T.x = major_tab.major.T.x + MWM.rotated_offset.x
-    self.T.y = major_tab.major.T.y + MWM.rotated_offset.y
+    self.transform.x = major_tab.major.T.x + MWM.rotated_offset.x
+    self.transform.y = major_tab.major.T.y + MWM.rotated_offset.y
 
     if self.role:get_xy_bond() == BondType.Strong then
-        self.VT.x = major_tab.major.VT.x + MWM.rotated_offset.x
-        self.VT.y = major_tab.major.VT.y + MWM.rotated_offset.y
+        self.visible_transform.x = major_tab.major.visible_transform.x + MWM.rotated_offset.x
+        self.visible_transform.y = major_tab.major.visible_transform.y + MWM.rotated_offset.y
     elseif self.role:get_xy_bond() == BondType.Weak then
         self:move_xy(dt)
     end
 
     if self.role:get_r_bond() == BondType.Strong then
-        self.VT.r = self.T.r + major_tab.major.VT.r + (self.juice and self.juice.r or 0)
+        self.visible_transform.r = self.transform.r + major_tab.major.visible_transform.r + (self.juice and self.juice.r or 0)
     elseif self.role:get_r_bond() == BondType.Weak then
         self:move_r(dt, self.velocity)
     end
 
     if self.role:get_scale_bond() == BondType.Strong then
-        self.VT.scale = self.T.scale * (major_tab.major.VT.scale / major_tab.major.T.scale) +
+        self.visible_transform.scale = self.transform.scale * (major_tab.major.visible_transform.scale / major_tab.major.T.scale) +
             (self.juice and self.juice.scale or 0)
     elseif self.role:get_scale_bond() == BondType.Weak then
         self:move_scale(dt)
     end
 
     if self.role:get_wh_bond() == BondType.Strong then
-        self.VT.x = self.VT.x + (0.5 * (1 - major_tab.major.VT.w / (major_tab.major.T.w)) * self.T.w)
-        self.VT.w = (self.T.w) * (major_tab.major.VT.w / major_tab.major.T.w)
-        self.VT.h = (self.T.h) * (major_tab.major.VT.h / major_tab.major.T.h)
+        self.visible_transform.x = self.visible_transform.x + (0.5 * (1 - major_tab.major.visible_transform.w / (major_tab.major.T.w)) * self.transform.w)
+        self.visible_transform.w = (self.transform.w) * (major_tab.major.visible_transform.w / major_tab.major.T.w)
+        self.visible_transform.h = (self.transform.h) * (major_tab.major.visible_transform.h / major_tab.major.T.h)
     elseif self.role:get_wh_bond() == BondType.Weak then
         self:move_wh(dt)
     end
@@ -410,50 +409,50 @@ function Moveable:move_with_major(dt)
 end
 
 function Moveable:move_xy(dt)
-    if (self.T.x ~= self.VT.x or math.abs(self.velocity.x) > 0.01) or (self.T.y ~= self.VT.y or math.abs(self.velocity.y) > 0.01) then
-        self.velocity.x = App.exp_times.xy * self.velocity.x + (1 - App.exp_times.xy) * (self.T.x - self.VT.x) * 35 * dt
-        self.velocity.y = App.exp_times.xy * self.velocity.y + (1 - App.exp_times.xy) * (self.T.y - self.VT.y) * 35 * dt
+    if (self.transform.x ~= self.visible_transform.x or math.abs(self.velocity.x) > 0.01) or (self.transform.y ~= self.visible_transform.y or math.abs(self.velocity.y) > 0.01) then
+        self.velocity.x = App.exp_times.xy * self.velocity.x + (1 - App.exp_times.xy) * (self.transform.x - self.visible_transform.x) * 35 * dt
+        self.velocity.y = App.exp_times.xy * self.velocity.y + (1 - App.exp_times.xy) * (self.transform.y - self.visible_transform.y) * 35 * dt
         if self.velocity.x * self.velocity.x + self.velocity.y * self.velocity.y > App.exp_times.max_vel * App.exp_times.max_vel then
             local actual_vel = math.sqrt(self.velocity.x * self.velocity.x + self.velocity.y * self.velocity.y)
             self.velocity.x = App.exp_times.max_vel * self.velocity.x / actual_vel
             self.velocity.y = App.exp_times.max_vel * self.velocity.y / actual_vel
         end
         self.STATIONARY = false
-        self.VT.x = self.VT.x + self.velocity.x
-        self.VT.y = self.VT.y + self.velocity.y
-        if math.abs(self.VT.x - self.T.x) < 0.01 and math.abs(self.velocity.x) < 0.01 then
-            self.VT.x = self.T.x; self.velocity.x = 0
+        self.visible_transform.x = self.visible_transform.x + self.velocity.x
+        self.visible_transform.y = self.visible_transform.y + self.velocity.y
+        if math.abs(self.visible_transform.x - self.transform.x) < 0.01 and math.abs(self.velocity.x) < 0.01 then
+            self.visible_transform.x = self.transform.x; self.velocity.x = 0
         end
-        if math.abs(self.VT.y - self.T.y) < 0.01 and math.abs(self.velocity.y) < 0.01 then
-            self.VT.y = self.T.y; self.velocity.y = 0
+        if math.abs(self.visible_transform.y - self.transform.y) < 0.01 and math.abs(self.velocity.y) < 0.01 then
+            self.visible_transform.y = self.transform.y; self.velocity.y = 0
         end
     end
 end
 
 function Moveable:move_scale(dt)
-    local des_scale = self.T.scale +
+    local des_scale = self.transform.scale +
         (self.zoom and ((self.states.drag.is and 0.1 or 0) + (self.states.hover.is and 0.05 or 0)) or 0) +
         (self.juice and self.juice.scale or 0)
 
-    if des_scale ~= self.VT.scale or
+    if des_scale ~= self.visible_transform.scale or
         math.abs(self.velocity.scale) > 0.001 then
         self.STATIONARY = false
         self.velocity.scale = App.exp_times.scale * self.velocity.scale + (1 - App.exp_times.scale) *
-            (des_scale - self.VT.scale)
-        self.VT.scale = self.VT.scale + self.velocity.scale
+            (des_scale - self.visible_transform.scale)
+        self.visible_transform.scale = self.visible_transform.scale + self.velocity.scale
     end
 end
 
 function Moveable:move_wh(dt)
-    if (self.T.w ~= self.VT.w and not self.pinch.x) or
-        (self.T.h ~= self.VT.h and not self.pinch.y) or
-        (self.VT.w > 0 and self.pinch.x) or
-        (self.VT.h > 0 and self.pinch.y) then
+    if (self.transform.w ~= self.visible_transform.w and not self.pinch.x) or
+        (self.transform.h ~= self.visible_transform.h and not self.pinch.y) or
+        (self.visible_transform.w > 0 and self.pinch.x) or
+        (self.visible_transform.h > 0 and self.pinch.y) then
         self.STATIONARY = false
-        self.VT.w = self.VT.w + (8 * dt) * (self.pinch.x and -1 or 1) * self.T.w
-        self.VT.h = self.VT.h + (8 * dt) * (self.pinch.y and -1 or 1) * self.T.h
-        self.VT.w = math.max(math.min(self.VT.w, self.T.w), 0)
-        self.VT.h = math.max(math.min(self.VT.h, self.T.h), 0)
+        self.visible_transform.w = self.visible_transform.w + (8 * dt) * (self.pinch.x and -1 or 1) * self.transform.w
+        self.visible_transform.h = self.visible_transform.h + (8 * dt) * (self.pinch.y and -1 or 1) * self.transform.h
+        self.visible_transform.w = math.max(math.min(self.visible_transform.w, self.transform.w), 0)
+        self.visible_transform.h = math.max(math.min(self.visible_transform.h, self.transform.h), 0)
     end
 end
 
@@ -461,15 +460,15 @@ end
 ---@param dt number
 ---@param vel Velocity
 function Moveable:move_r(dt, vel)
-    local des_r = self.T.r + 0.015 * vel.x / dt + (self.juice and self.juice.r * 2 or 0)
+    local des_r = self.transform.r + 0.015 * vel.x / dt + (self.juice and self.juice.r * 2 or 0)
 
-    if des_r ~= self.VT.r or math.abs(self.velocity:get_r()) > 0.001 then
+    if des_r ~= self.visible_transform.r or math.abs(self.velocity:get_r()) > 0.001 then
         self.STATIONARY = false
-        self.velocity:set_r(App.TIMERS:approach_r(self.velocity:get_r(), des_r - self.VT.r))
-        self.VT.r = self.VT.r + self.velocity.r
+        self.velocity:set_r(App.TIMERS:approach_r(self.velocity:get_r(), des_r - self.visible_transform.r))
+        self.visible_transform.r = self.visible_transform.r + self.velocity.r
     end
-    if math.abs(self.VT.r - self.T.r) < 0.001 and math.abs(self.velocity.r) < 0.001 then
-        self.VT.r = self.T.r
+    if math.abs(self.visible_transform.r - self.transform.r) < 0.001 and math.abs(self.velocity.r) < 0.001 then
+        self.visible_transform.r = self.transform.r
         self.velocity.r = 0
     end
 end
@@ -478,7 +477,7 @@ end
 function Moveable:calculate_parrallax()
     local room = App.ROOM
     if room then
-        self.shadow_parrallax.x = (self.T.x + self.T.w / 2 - room.T.w / 2) / (room.T.w / 2) * 1.5
+        self.shadow_parrallax.x = (self.transform.x + self.transform.w / 2 - room.T.w / 2) / (room.T.w / 2) * 1.5
     end
 end
 
@@ -535,5 +534,5 @@ function Moveable:remove()
 end
 
 function Moveable:__tostring()
-    return "Moveable" .. (self.ID)
+    return "Moveable" .. (self.id)
 end
