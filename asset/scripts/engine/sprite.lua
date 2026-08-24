@@ -34,11 +34,11 @@ function Sprite:draw_shader(_shader, _shadow_height, _send, _no_tilt, other_obj,
     else
         self.args.prep_shader = self.args.prep_shader or {}
         self.args.prep_shader.cursor_pos = self.args.prep_shader.cursor_pos or {}
-        self.args.prep_shader.cursor_pos[1] = _draw_major.tilt_var and _draw_major.tilt_var.mx * App.CANV_SCALE or App.CONTROLLER.cursor_position.x * App.CANV_SCALE
-        self.args.prep_shader.cursor_pos[2] = _draw_major.tilt_var and _draw_major.tilt_var.my * App.CANV_SCALE or App.CONTROLLER.cursor_position.y * App.CANV_SCALE
+        self.args.prep_shader.cursor_pos[1] = _draw_major.tilt_var and _draw_major.tilt_var.mx * App.canvas_scale or App.CONTROLLER.cursor_position.x * App.canvas_scale
+        self.args.prep_shader.cursor_pos[2] = _draw_major.tilt_var and _draw_major.tilt_var.my * App.canvas_scale or App.CONTROLLER.cursor_position.y * App.canvas_scale
 
         App.SHADERS[_shader or 'dissolve']:send('mouse_screen_pos', self.args.prep_shader.cursor_pos)
-        App.SHADERS[_shader or 'dissolve']:send('screen_scale', App.window:get_pixels_per_tile() * (_draw_major.mouse_damping or 1) * App.CANV_SCALE)
+        App.SHADERS[_shader or 'dissolve']:send('screen_scale', App.window:get_pixels_per_tile() * (_draw_major.mouse_damping or 1) * App.canvas_scale)
         App.SHADERS[_shader or 'dissolve']:send('hovering', ((_shadow_height and not tilt_shadow) or _no_tilt) and 0 or (_draw_major.hover_tilt or 0) * (tilt_shadow or 1))
         App.SHADERS[_shader or 'dissolve']:send("dissolve", math.abs(_draw_major.dissolve or 0))
         App.SHADERS[_shader or 'dissolve']:send("time", 123.33412 * (_draw_major.id / 1.14212 or 12.5123152) % 3000)

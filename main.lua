@@ -156,7 +156,7 @@ function love.resize(w, h)
     end
 
     App.window:save_real_size(w, h)
-    App.CANV_SCALE = 1
+    App.canvas_scale = 1
 
     if love.system.getOS() == 'Windows' and false then --implement later if needed
         local render_w, render_h = love.window.getDesktopDimensions(App.settings.WINDOW.selected_display)
@@ -165,8 +165,8 @@ function love.resize(w, h)
         local DPI_scale = math.floor((0.5 * unscaled_dims.width / render_w + 0.5 * unscaled_dims.height / render_h) * 500 + 0.5) / 500
 
         if DPI_scale > 1.1 then
-            App.CANV_SCALE = 1.5
-            App.AA_CANVAS = love.graphics.newCanvas(App.window.WINDOWTRANS.real_window_w * App.CANV_SCALE, App.window.WINDOWTRANS.real_window_h * App.CANV_SCALE, { type = '2d', readable = true })
+            App.canvas_scale = 1.5
+            App.AA_CANVAS = love.graphics.newCanvas(App.window.WINDOWTRANS.real_window_w * App.canvas_scale, App.window.WINDOWTRANS.real_window_h * App.canvas_scale, { type = '2d', readable = true })
             App.AA_CANVAS:setFilter('linear', 'linear')
         else
             App.AA_CANVAS = nil
@@ -174,6 +174,6 @@ function love.resize(w, h)
     end
 
 
-    App.CANVAS = love.graphics.newCanvas(w * App.CANV_SCALE, h * App.CANV_SCALE, { type = '2d', readable = true })
-    App.CANVAS:setFilter("linear", "linear")
+    App.canvas = love.graphics.newCanvas(w * App.canvas_scale, h * App.canvas_scale, { type = '2d', readable = true })
+    App.canvas:setFilter("linear", "linear")
 end

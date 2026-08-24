@@ -4,10 +4,10 @@ function App:draw()
     reset_drawhash()
     if self.OVERLAY_TUTORIAL and not self.OVERLAY_MENU then self.under_overlay = true end
     self.Performance:timer_checkpoint('start->canvas', 'draw')
-    love.graphics.setCanvas({ self.CANVAS })
+    love.graphics.setCanvas({ self.canvas })
     love.graphics.push()
     do
-        love.graphics.scale(self.CANV_SCALE)
+        love.graphics.scale(self.canvas_scale)
 
         love.graphics.setShader()
         love.graphics.clear(0, 0, 0, 1)
@@ -207,21 +207,21 @@ function App:draw()
         self.SHADERS['CRT']:send('noise_fac', 0.001 * crt / 100)
         self.SHADERS['CRT']:send('crt_intensity', 0.16 * crt / 100)
         self.SHADERS['CRT']:send('glitch_intensity', 0) --0.1*crt/100 + (G.screenwipe_amt) + 1)
-        self.SHADERS['CRT']:send('scanlines', self.CANVAS:getPixelHeight() * 0.75 / self.CANV_SCALE)
+        self.SHADERS['CRT']:send('scanlines', self.canvas:getPixelHeight() * 0.75 / self.canvas_scale)
         self.SHADERS['CRT']:send('mouse_screen_pos', self.video_control and { love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 } or { self.ARGS.eased_cursor_pos.sx, self.ARGS.eased_cursor_pos.sy })
         self.SHADERS['CRT']:send('screen_scale', self.window:get_pixels_per_tile())
         self.SHADERS['CRT']:send('hovering', 1)
         love.graphics.setShader(self.SHADERS['CRT'])
     end
 
-    love.graphics.draw(self.CANVAS, 0, 0)
+    love.graphics.draw(self.canvas, 0, 0)
     love.graphics.pop()
 
     love.graphics.setCanvas()
     love.graphics.setShader()
     if self.AA_CANVAS then
         love.graphics.push()
-        love.graphics.scale(1 / self.CANV_SCALE)
+        love.graphics.scale(1 / self.canvas_scale)
         love.graphics.draw(self.AA_CANVAS, 0, 0)
         love.graphics.pop()
     end

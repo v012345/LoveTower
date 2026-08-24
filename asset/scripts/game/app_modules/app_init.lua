@@ -39,8 +39,8 @@ function App:init()
     self.VIBRATION = 0
     self.under_overlay = false
 
-    self.CANVAS = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
-    self.CANVAS:setFilter('linear', 'linear')
+    self.canvas = love.graphics.newCanvas(500, 500, { type = '2d', readable = true })
+    self.canvas:setFilter('linear', 'linear')
 
 
     --- 碰撞缓冲区, 在缓冲什么?

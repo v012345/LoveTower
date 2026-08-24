@@ -4,8 +4,8 @@
 ---@field settings Settings 设置
 ---@field TIMERS Timer 计时器
 ---@field window Window 窗口实例, 保存窗口和 Room 的设置
----@field CANVAS Canvas
----@field CANV_SCALE number 画布缩放比例
+---@field canvas Canvas
+---@field canvas_scale number 画布缩放比例
 ---@field AA_CANVAS? Canvas 抗锯齿画布?
 ---@field room Node 房间, 就是游戏的主场景, 一切节点的根节点, 和 window.room 是同一个对象
 ---@field room_attach Moveable
