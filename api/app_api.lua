@@ -31,7 +31,7 @@
 ---@field SOUND_MANAGER SoundManager 声音管理器
 ---@field save_manager SaveManager 存档管理器
 ---@field http_manager HttpManager 网络管理器
----@field SHADERS table<string, Shader> 所有着色器
+---@field shaders table<string, Shader> 所有着色器
 ---@field LANG LanguageConfigItem 当前使用的语言对象
 ---@field features FeatureConfig 特性配置
 ---@field event_manager EventManager 事件管理器

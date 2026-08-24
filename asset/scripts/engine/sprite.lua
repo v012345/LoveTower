@@ -26,31 +26,31 @@ function Sprite:draw_shader(_shader, _shadow_height, _send, _no_tilt, other_obj,
     if custom_shader then
         if _send then
             for k, v in ipairs(_send) do
-                App.SHADERS[_shader]:send(v.name, v.val or (v.func and v.func()) or v.ref_table[v.ref_value])
+                App.shaders[_shader]:send(v.name, v.val or (v.func and v.func()) or v.ref_table[v.ref_value])
             end
         end
     elseif _shader == 'vortex' then
-        App.SHADERS['vortex']:send('vortex_amt', App.TIMERS.REAL - (App.vortex_time or 0))
+        App.shaders['vortex']:send('vortex_amt', App.TIMERS.REAL - (App.vortex_time or 0))
     else
         self.args.prep_shader = self.args.prep_shader or {}
         self.args.prep_shader.cursor_pos = self.args.prep_shader.cursor_pos or {}
         self.args.prep_shader.cursor_pos[1] = _draw_major.tilt_var and _draw_major.tilt_var.mx * App.canvas_scale or App.CONTROLLER.cursor_position.x * App.canvas_scale
         self.args.prep_shader.cursor_pos[2] = _draw_major.tilt_var and _draw_major.tilt_var.my * App.canvas_scale or App.CONTROLLER.cursor_position.y * App.canvas_scale
 
-        App.SHADERS[_shader or 'dissolve']:send('mouse_screen_pos', self.args.prep_shader.cursor_pos)
-        App.SHADERS[_shader or 'dissolve']:send('screen_scale', App.window:get_pixels_per_tile() * (_draw_major.mouse_damping or 1) * App.canvas_scale)
-        App.SHADERS[_shader or 'dissolve']:send('hovering', ((_shadow_height and not tilt_shadow) or _no_tilt) and 0 or (_draw_major.hover_tilt or 0) * (tilt_shadow or 1))
-        App.SHADERS[_shader or 'dissolve']:send("dissolve", math.abs(_draw_major.dissolve or 0))
-        App.SHADERS[_shader or 'dissolve']:send("time", 123.33412 * (_draw_major.id / 1.14212 or 12.5123152) % 3000)
-        App.SHADERS[_shader or 'dissolve']:send("texture_details", self:get_pos_pixel())
-        App.SHADERS[_shader or 'dissolve']:send("image_details", self:get_image_dims())
-        App.SHADERS[_shader or 'dissolve']:send("burn_colour_1", _draw_major.dissolve_colours and _draw_major.dissolve_colours[1] or App.C.CLEAR)
-        App.SHADERS[_shader or 'dissolve']:send("burn_colour_2", _draw_major.dissolve_colours and _draw_major.dissolve_colours[2] or App.C.CLEAR)
-        App.SHADERS[_shader or 'dissolve']:send("shadow", (not not _shadow_height))
-        if _send then App.SHADERS[_shader or 'dissolve']:send(_shader, _send) end
+        App.shaders[_shader or 'dissolve']:send('mouse_screen_pos', self.args.prep_shader.cursor_pos)
+        App.shaders[_shader or 'dissolve']:send('screen_scale', App.window:get_pixels_per_tile() * (_draw_major.mouse_damping or 1) * App.canvas_scale)
+        App.shaders[_shader or 'dissolve']:send('hovering', ((_shadow_height and not tilt_shadow) or _no_tilt) and 0 or (_draw_major.hover_tilt or 0) * (tilt_shadow or 1))
+        App.shaders[_shader or 'dissolve']:send("dissolve", math.abs(_draw_major.dissolve or 0))
+        App.shaders[_shader or 'dissolve']:send("time", 123.33412 * (_draw_major.id / 1.14212 or 12.5123152) % 3000)
+        App.shaders[_shader or 'dissolve']:send("texture_details", self:get_pos_pixel())
+        App.shaders[_shader or 'dissolve']:send("image_details", self:get_image_dims())
+        App.shaders[_shader or 'dissolve']:send("burn_colour_1", _draw_major.dissolve_colours and _draw_major.dissolve_colours[1] or App.C.CLEAR)
+        App.shaders[_shader or 'dissolve']:send("burn_colour_2", _draw_major.dissolve_colours and _draw_major.dissolve_colours[2] or App.C.CLEAR)
+        App.shaders[_shader or 'dissolve']:send("shadow", (not not _shadow_height))
+        if _send then App.shaders[_shader or 'dissolve']:send(_shader, _send) end
     end
 
-    love.graphics.setShader(App.SHADERS[_shader or 'dissolve'], App.SHADERS[_shader or 'dissolve'])
+    love.graphics.setShader(App.shaders[_shader or 'dissolve'], App.shaders[_shader or 'dissolve'])
 
     if other_obj then
         self:draw_from(other_obj, ms, mr, mx, my)

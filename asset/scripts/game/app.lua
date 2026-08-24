@@ -43,13 +43,13 @@ function App:start_up()
     boot_timer('savemanager', 'shaders', 0.4)
 
     --Load all shaders from resources
-    self.SHADERS = {}
+    self.shaders = {}
     local shader_files = love.filesystem.getDirectoryItems("asset/resources/shaders")
     for k, filename in ipairs(shader_files) do
         local extension = string.sub(filename, -3)
         if extension == '.fs' then
             local shader_name = string.sub(filename, 1, -4)
-            self.SHADERS[shader_name] = love.graphics.newShader("asset/resources/shaders/" .. filename)
+            self.shaders[shader_name] = love.graphics.newShader("asset/resources/shaders/" .. filename)
         end
     end
 
