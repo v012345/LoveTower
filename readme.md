@@ -14,4 +14,24 @@ Render 相关的设置在 render.csv 里, 对它 GameCfg 去拿到
 
 
 ## 事件系统说明
-Event 在初始化里, 在 config 里指明 trigger 
+Event 在初始化里, 在 config 里指明 trigger
+
+
+
+## 推荐的类名
+
+| 中文 | 推荐类名 | 主要职责 |
+| --- | --- | --- |
+| 同步器 | Synchronizer | 同步数据或状态 |
+| 初始化器 | Initializer | 初始化对象或系统 |
+| 生成器 | Generator | 生成对象或数据 |
+| 更新器 | Updater | 更新数据或状态 |
+| 处理器 | Processor | 执行数据处理逻辑 |
+| 控制器 | Controller | 控制对象的行为 |
+| 管理器 | Manager | 管理多个对象或资源 |
+| 调度器 | Scheduler | 安排任务执行顺序 |
+| 分发器 | Dispatcher | 分发事件或任务 |
+| 构建器 | Builder | 分步骤构建复杂对象 |
+| 验证器 | Validator | 验证数据或状态 |
+| 解析器 | Parser | 解析数据 |
+| 执行器 | Executor | 执行指定任务 |
