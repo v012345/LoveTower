@@ -6,7 +6,7 @@
             "request": "launch",
             "name": "Debug Love2D",
             "projectRoot": "${workspaceFolder}",
-            "lovePath": "/Users/260613a/Desktop/work/love.app/Contents/MacOS/love-https"
+            "lovePath": "lovec"
         }
     ]
 }
