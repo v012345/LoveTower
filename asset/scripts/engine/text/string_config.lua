@@ -1,5 +1,5 @@
----@class (partial) StringConfig: GameObject
-StringConfig = GameObject:extend()
+---@class (partial) StringConfig: Component
+StringConfig = Component:extend()
 
 ---@param data StringConfigData
 function StringConfig:init(data)

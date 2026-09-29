@@ -1,7 +1,7 @@
----@class (partial) TableParser: GameObject
+---@class (partial) TableParser: Component
 ---@field instance TableParser
 ---@field private cache table<string, table> 已解析的配置表缓存, 表名 -> 配置表
-TableParser = GameObject:extend()
+TableParser = Component:extend()
 
 -- LÖVE 自带的 LuaJIT 没有开启 Lua 5.2 兼容, 原生 pairs() 不识别 __pairs 元方法,
 -- 这里包装一层: 元表里有 __pairs 就用它, 否则回退到原生 pairs

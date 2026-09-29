@@ -1,5 +1,5 @@
----@class (partial) TagConfig : GameObject
-local TagConfig = GameObject:extend()
+---@class (partial) TagConfig : Component
+local TagConfig = Component:extend()
 
 function TagConfig:init()
     local tag_rows = TableParser.instance:parse("tag")

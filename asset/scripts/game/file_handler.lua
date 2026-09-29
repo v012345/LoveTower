@@ -1,6 +1,6 @@
----@class (partial) FileHandler : GameObject
+---@class (partial) FileHandler : Component
 ---@overload fun(app: App):FileHandler
-local FileHandler = GameObject:extend()
+local FileHandler = Component:extend()
 
 ---@private
 ---@param app App

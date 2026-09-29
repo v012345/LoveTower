@@ -1,6 +1,6 @@
----@class (partial) Window : GameObject
+---@class (partial) Window : Component
 ---@overload fun(app: App): Window
-local Window = GameObject:extend()
+local Window = Component:extend()
 
 ---@param app App
 function Window:init(app)

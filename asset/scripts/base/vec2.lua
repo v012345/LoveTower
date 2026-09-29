@@ -1,7 +1,7 @@
 ---@alias Point Vec2
----@class Vec2: GameObject
+---@class Vec2: Component
 ---@overload fun(x?: number, y?: number): Vec2
-Vec2 = GameObject:extend()
+Vec2 = Component:extend()
 
 ---@param x? number
 ---@param y? number

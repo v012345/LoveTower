@@ -1,6 +1,6 @@
----@class (partial) FeatureConfig : GameObject
+---@class (partial) FeatureConfig : Component
 ---@field cfg FeatureConfigItem
-local FeatureConfig = GameObject:extend()
+local FeatureConfig = Component:extend()
 
 function FeatureConfig:init()
     local os = love.system.getOS()

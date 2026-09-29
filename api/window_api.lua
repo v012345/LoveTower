@@ -1,4 +1,4 @@
----@class (partial) Window : GameObject
+---@class (partial) Window : Component
 ---@field app App
 ---@field TRANS Transform 窗口变换
 ---@field real_size Size 窗口实际大小, 以像素为单位

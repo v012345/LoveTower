@@ -1,7 +1,7 @@
----@class (partial) FontConfig : GameObject
+---@class (partial) FontConfig : Component
 ---@field ids string[]
 ---@field cfg_items FontConfigItem[]
-local FontConfig = GameObject:extend()
+local FontConfig = Component:extend()
 
 function FontConfig:init()
     self.ids = {}

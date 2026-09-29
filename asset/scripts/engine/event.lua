@@ -1,5 +1,5 @@
----@class (partial) Event : GameObject
-Event = GameObject:extend()
+---@class (partial) Event : Component
+Event = Component:extend()
 
 ---@private 由 Object 的 __call 方法调用, 不对外
 ---@param config EventConfig

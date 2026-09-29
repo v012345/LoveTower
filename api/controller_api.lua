@@ -1,4 +1,4 @@
----@class (partial) Controller: GameObject
+---@class (partial) Controller: Component
 ---@field locked boolean
 ---@field locks ControllerLock
 ---@field clicked InteractNode

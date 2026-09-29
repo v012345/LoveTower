@@ -1,4 +1,4 @@
----@class (partial) Controller : GameObject
+---@class (partial) Controller : Component
 
 function Controller:update(dt)
     self.locks.wipe = not not App.screenwipe

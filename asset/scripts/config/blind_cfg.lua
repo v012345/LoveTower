@@ -13,9 +13,9 @@
 ---@field boss_colour string Boss颜色
 ---@field boss {showdown:boolean,min:number,max:number} Boss
 
----@class (partial) BlindConfig : GameObject
+---@class (partial) BlindConfig : Component
 ---@field blinds table<string, Blind> 盲注
-local BlindConfig = GameObject:extend()
+local BlindConfig = Component:extend()
 
 function BlindConfig:init()
     local blind_rows = TableParser.instance:parse("blind")

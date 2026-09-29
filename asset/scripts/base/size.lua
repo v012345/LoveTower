@@ -1,8 +1,8 @@
 ---尺寸
----@class Size : GameObject
+---@class Size : Component
 ---@field w number
 ---@field h number
-Size = GameObject:extend()
+Size = Component:extend()
 
 ---@param w? number
 ---@param h? number

@@ -1,5 +1,5 @@
----@class (partial) LanguageConfig:GameObject
-local LanguageConfig = GameObject:extend()
+---@class (partial) LanguageConfig:Component
+local LanguageConfig = Component:extend()
 
 function LanguageConfig:init()
     self.ids = {}

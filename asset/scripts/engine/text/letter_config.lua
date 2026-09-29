@@ -1,5 +1,5 @@
----@class (partial) LetterConfig: GameObject
-LetterConfig = GameObject:extend()
+---@class (partial) LetterConfig: Component
+LetterConfig = Component:extend()
 
 ---@param data LetterConfigData
 function LetterConfig:init(data)

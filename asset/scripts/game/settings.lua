@@ -1,5 +1,5 @@
----@class (partial) Settings : GameObject
-local Settings = GameObject:extend()
+---@class (partial) Settings : Component
+local Settings = Component:extend()
 
 function Settings:init()
     self.data = {
