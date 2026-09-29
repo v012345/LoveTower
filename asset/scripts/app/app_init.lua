@@ -1,14 +1,16 @@
-local Settings = require "asset.scripts.game.settings"
-local Timer = require "asset.scripts.game.timer"
-local Metrics = require "asset.scripts.game.metrics"
-local Profile = require "asset.scripts.game.profile"
-local Color = require "asset.scripts.game.color"
-local Performance = require "asset.scripts.game.performance"
-local FileHandler = require "asset.scripts.game.file_handler"
+-- local Settings = require "asset.scripts.game.settings"
+-- local Timer = require "asset.scripts.game.timer"
+-- local Metrics = require "asset.scripts.game.metrics"
+-- local Profile = require "asset.scripts.game.profile"
+-- local Color = require "asset.scripts.game.color"
+-- local Performance = require "asset.scripts.game.performance"
+-- local FileHandler = require "asset.scripts.game.file_handler"
 
 ---在这里不要做耗时的操作
 ---这里只做变量初始化, 不生成对象
 function App:init()
+    print("App:init 什么也没有做")
+    do return end
     self.features = FeatureCfg:get_instance()
     --计时器
     self.TIMERS = Timer()

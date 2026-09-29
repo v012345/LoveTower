@@ -1,8 +1,8 @@
 function App:load_system()
-    self.event_system = EventManager()
-    self.get_event_system = function()
-        return self.event_system
-    end
+    -- self.event_system = EventManager()
+    -- self.get_event_system = function()
+    --     return self.event_system
+    -- end
 end
 
 function App:get_event_system()
