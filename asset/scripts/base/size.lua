@@ -1,15 +1,22 @@
 ---尺寸
----@class Size : BaseClass
+---@class Size @overload fun(w?: number, h?: number): Size
 ---@field w number
 ---@field h number
-Size = BaseClass:extend()
+---@operator call: Size
+Size = Size or {}
+Size.__index = Size
 
----@param w? number
----@param h? number
-function Size:init(w, h)
-    self.w = w or 0
-    self.h = h or 0
-end
+setmetatable(Size, {
+    __call = function(_, w, h)
+        local obj = setmetatable({}, Size)
+        obj.w = w or 0
+        obj.h = h or 0
+        return obj
+    end,
+    __tostring = function(self)
+        return "Size(" .. self.w .. ", " .. self.h .. ")"
+    end,
+})
 
 function Size:clone()
     return Size(self.w, self.h)
