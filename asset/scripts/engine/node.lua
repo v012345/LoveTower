@@ -1,7 +1,7 @@
 ---目前看来直接实例化 Node 的只有一个, 就是 App.ROOM
----@class (partial) Node: Component
+---@class (partial) Node: BaseClass
 ---@overload fun(transform: Transform, container: Node): Node
-Node = Component:extend()
+Node = BaseClass:extend()
 
 ---@param transform Transform
 ---@param container Node

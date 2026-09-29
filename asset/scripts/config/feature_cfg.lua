@@ -1,6 +1,6 @@
----@class (partial) FeatureConfig : Component
+---@class (partial) FeatureConfig : BaseClass
 ---@field cfg FeatureConfigItem
-local FeatureConfig = Component:extend()
+local FeatureConfig = BaseClass:extend()
 
 function FeatureConfig:init()
     local os = love.system.getOS()

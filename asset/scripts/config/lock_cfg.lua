@@ -1,5 +1,5 @@
----@class (partial) LockConfig : Component
-local LockConfig = Component:extend()
+---@class (partial) LockConfig : BaseClass
+local LockConfig = BaseClass:extend()
 
 function LockConfig:init()
     self.locks = TableParser.instance:parse("lock")

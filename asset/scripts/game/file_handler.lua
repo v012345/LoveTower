@@ -1,6 +1,6 @@
----@class (partial) FileHandler : Component
+---@class (partial) FileHandler : BaseClass
 ---@overload fun(app: App):FileHandler
-local FileHandler = Component:extend()
+local FileHandler = BaseClass:extend()
 
 ---@private
 ---@param app App

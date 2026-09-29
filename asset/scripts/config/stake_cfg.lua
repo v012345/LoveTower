@@ -1,5 +1,5 @@
----@class (partial) StakeConfig : Component
-local StakeConfig = Component:extend()
+---@class (partial) StakeConfig : BaseClass
+local StakeConfig = BaseClass:extend()
 
 function StakeConfig:init()
     local stake_rows = TableParser.instance:parse("stake")

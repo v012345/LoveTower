@@ -2,7 +2,7 @@
 
 
 
----@class EventManager : Component
+---@class EventManager : BaseClass
 ---@field private queues table<string, Event[]>
 ---@field private status EventStatus
 ---@field private queue_dt number
@@ -11,7 +11,7 @@
 ---@field private reset_status function
 ---@field public clear_queue function
 ---@overload fun():EventManager
-local EventManager = Component:extend()
+local EventManager = BaseClass:extend()
 
 
 ---@return nil

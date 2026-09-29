@@ -1,5 +1,5 @@
----@class (partial) Controller : Component
-Controller = Component:extend()
+---@class (partial) Controller : BaseClass
+Controller = BaseClass:extend()
 require "asset.scripts.game.controller_modules.controller_update"
 
 --The controller contains all engine logic for how human input interacts with any game objects.

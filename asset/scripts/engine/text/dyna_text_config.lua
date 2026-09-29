@@ -1,5 +1,5 @@
----@class (partial) DynaTextConfig: Component
-DynaTextConfig = Component:extend()
+---@class (partial) DynaTextConfig: BaseClass
+DynaTextConfig = BaseClass:extend()
 
 ---@param data? DynaTextConfigData
 function DynaTextConfig:init(data)

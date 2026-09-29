@@ -1,5 +1,5 @@
----@class (partial) PokerConfig : Component
-local PokerConfig = Component:extend()
+---@class (partial) PokerConfig : BaseClass
+local PokerConfig = BaseClass:extend()
 
 function PokerConfig:init()
     self.cards = TableParser.instance:parse("poker")

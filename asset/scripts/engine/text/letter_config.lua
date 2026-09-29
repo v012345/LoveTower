@@ -1,5 +1,5 @@
----@class (partial) LetterConfig: Component
-LetterConfig = Component:extend()
+---@class (partial) LetterConfig: BaseClass
+LetterConfig = BaseClass:extend()
 
 ---@param data LetterConfigData
 function LetterConfig:init(data)

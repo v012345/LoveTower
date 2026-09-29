@@ -1,5 +1,5 @@
----@class (partial) TagConfig : Component
-local TagConfig = Component:extend()
+---@class (partial) TagConfig : BaseClass
+local TagConfig = BaseClass:extend()
 
 function TagConfig:init()
     local tag_rows = TableParser.instance:parse("tag")

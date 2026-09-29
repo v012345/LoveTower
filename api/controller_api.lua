@@ -1,4 +1,4 @@
----@class (partial) Controller: Component
+---@class (partial) Controller: BaseClass
 ---@field locked boolean
 ---@field locks ControllerLock
 ---@field clicked InteractNode

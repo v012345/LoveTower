@@ -1,7 +1,7 @@
----@class (partial) FontConfig : Component
+---@class (partial) FontConfig : BaseClass
 ---@field ids string[]
 ---@field cfg_items FontConfigItem[]
-local FontConfig = Component:extend()
+local FontConfig = BaseClass:extend()
 
 function FontConfig:init()
     self.ids = {}

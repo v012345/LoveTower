@@ -1,5 +1,5 @@
----@class (partial) SoundManager : Component
-local SoundManager = Component:extend()
+---@class (partial) SoundManager : BaseClass
+local SoundManager = BaseClass:extend()
 
 function SoundManager:init()
 

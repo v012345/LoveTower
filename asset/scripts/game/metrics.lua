@@ -1,6 +1,6 @@
 ---玩家成就记录
----@class (partial) Metrics : Component
-local Metrics = Component:extend()
+---@class (partial) Metrics : BaseClass
+local Metrics = BaseClass:extend()
 
 
 function Metrics:init()

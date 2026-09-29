@@ -1,5 +1,5 @@
----@class (partial) CardConfig : Component
-local CardConfig = Component:extend()
+---@class (partial) CardConfig : BaseClass
+local CardConfig = BaseClass:extend()
 
 function CardConfig:init()
     self.c_base = {

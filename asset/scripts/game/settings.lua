@@ -1,5 +1,5 @@
----@class (partial) Settings : Component
-local Settings = Component:extend()
+---@class (partial) Settings : BaseClass
+local Settings = BaseClass:extend()
 
 function Settings:init()
     self.data = {

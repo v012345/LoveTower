@@ -1,6 +1,6 @@
----@class (partial) Window : Component
+---@class (partial) Window : BaseClass
 ---@overload fun(app: App): Window
-local Window = Component:extend()
+local Window = BaseClass:extend()
 
 ---@param app App
 function Window:init(app)

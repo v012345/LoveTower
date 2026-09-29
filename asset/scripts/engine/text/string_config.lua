@@ -1,5 +1,5 @@
----@class (partial) StringConfig: Component
-StringConfig = Component:extend()
+---@class (partial) StringConfig: BaseClass
+StringConfig = BaseClass:extend()
 
 ---@param data StringConfigData
 function StringConfig:init(data)

@@ -1,5 +1,5 @@
----@class (partial) LanguageConfig:Component
-local LanguageConfig = Component:extend()
+---@class (partial) LanguageConfig:BaseClass
+local LanguageConfig = BaseClass:extend()
 
 function LanguageConfig:init()
     self.ids = {}

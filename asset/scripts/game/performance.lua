@@ -1,7 +1,7 @@
----@class (partial) Performance : Component
+---@class (partial) Performance : BaseClass
 ---@field app App
 ---@overload fun(app: App):Performance
-local Performance = Component:extend()
+local Performance = BaseClass:extend()
 
 function Performance:init(app)
     self.app = app

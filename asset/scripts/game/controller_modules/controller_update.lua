@@ -1,4 +1,4 @@
----@class (partial) Controller : Component
+---@class (partial) Controller : BaseClass
 
 function Controller:update(dt)
     self.locks.wipe = not not App.screenwipe

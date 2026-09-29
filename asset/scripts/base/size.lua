@@ -1,8 +1,8 @@
 ---尺寸
----@class Size : Component
+---@class Size : BaseClass
 ---@field w number
 ---@field h number
-Size = Component:extend()
+Size = BaseClass:extend()
 
 ---@param w? number
 ---@param h? number

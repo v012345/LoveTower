@@ -1,6 +1,6 @@
----@class RGBA : Component
+---@class RGBA : BaseClass
 ---@overload fun(r: number|table|string, g: number|nil, b: number|nil, a: number|nil): RGBA
-RGBA = Component:extend()
+RGBA = BaseClass:extend()
 
 ---@param r number|table|string
 ---@param g number|nil

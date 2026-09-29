@@ -1,5 +1,5 @@
----@class (partial) SealConfig : Component
-local SealConfig = Component:extend()
+---@class (partial) SealConfig : BaseClass
+local SealConfig = BaseClass:extend()
 
 function SealConfig:init()
     local seal_rows = TableParser.instance:parse("seal")

@@ -1,5 +1,5 @@
----@class (partial) Profile : Component
-local Profile = Component:extend()
+---@class (partial) Profile : BaseClass
+local Profile = BaseClass:extend()
 
 
 function Profile:init()

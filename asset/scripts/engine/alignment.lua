@@ -1,6 +1,6 @@
----@class Alignment : Component
+---@class Alignment : BaseClass
 ---@overload fun(type: AlignmentType, offset: Vec2, prev_type: AlignmentType, prev_offset: Vec2, lr_clamp: boolean): Alignment
-Alignment = Component:extend()
+Alignment = BaseClass:extend()
 
 ---@param type AlignmentType
 ---@param offset Vec2

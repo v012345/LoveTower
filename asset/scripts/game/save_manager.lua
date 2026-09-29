@@ -1,5 +1,5 @@
----@class (partial) SaveManager : Component
-local SaveManager = Component:extend()
+---@class (partial) SaveManager : BaseClass
+local SaveManager = BaseClass:extend()
 
 function SaveManager:init()
 

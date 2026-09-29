@@ -9,9 +9,9 @@
 ---@field frames number
 ---@field image love.Image
 
----@class (partial) AtlasConfig : Component
+---@class (partial) AtlasConfig : BaseClass
 ---@field cfg table<string, AtlasConfigItem>
-local AtlasConfig = Component:extend()
+local AtlasConfig = BaseClass:extend()
 
 function AtlasConfig:init()
     local atlas_rows = TableParser.instance:parse("atlas")

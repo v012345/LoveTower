@@ -1,11 +1,11 @@
----@class Velocity : Component
+---@class Velocity : BaseClass
 ---@field x number 速度x
 ---@field y number 速度y
 ---@field r number 速度r
 ---@field scale number 速度scale
 ---@field mag number 速度mag
 ---@overload fun(x?: number, y?: number, r?: number, scale?: number, mag?: number): Velocity
-Velocity = Component:extend()
+Velocity = BaseClass:extend()
 
 function Velocity:init(x, y, r, scale, mag)
     self.x = x or 0

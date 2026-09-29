@@ -1,7 +1,7 @@
 ---这个东西的 x , y , w , h 的单位好像是 Tile 啊, 不是像素
----@class Transform : Component
+---@class Transform : BaseClass
 ---@overload fun(x?: number, y?: number, w?: number, h?: number, r?: number, scale?: number): Transform
-Transform = Component:extend()
+Transform = BaseClass:extend()
 
 ---@param x? number
 ---@param y? number
