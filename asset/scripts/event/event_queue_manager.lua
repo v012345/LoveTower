@@ -1,8 +1,5 @@
 --- 说明:
-
-
-
----@class EventManager : BaseClass
+---@class EventQueueManager : BaseClass
 ---@field private queues table<string, Event[]>
 ---@field private status EventStatus
 ---@field private queue_dt number
@@ -10,12 +7,12 @@
 ---@field private queue_timer number
 ---@field private reset_status function
 ---@field public clear_queue function
----@overload fun():EventManager
-local EventManager = BaseClass:extend()
+---@overload fun():EventQueueManager
+local EventQueueManager = BaseClass:extend()
 
 
 ---@return nil
-function EventManager:init()
+function EventQueueManager:init()
     self.queues = {
         unlock = {},
         base = {},
@@ -35,7 +32,7 @@ function EventManager:init()
 end
 
 ---@return EventStatus
-function EventManager:reset_status()
+function EventQueueManager:reset_status()
     self.status.blocking = false
     self.status.completed = false
     self.status.time_done = false
@@ -47,7 +44,7 @@ end
 ---@param event Event
 ---@param queue? "unlock" | "base" | "tutorial" | "achievement" | "other"
 ---@param front? boolean
-function EventManager:add_event(event, queue, front)
+function EventQueueManager:add_event(event, queue, front)
     queue = queue or 'base'
     if event:is(Event) then
         if front then
@@ -62,7 +59,7 @@ end
 ---@public
 ---@param dt number
 ---@return nil
-function EventManager:update(dt)
+function EventQueueManager:update(dt)
     self.queue_timer = self.queue_timer + dt
     local next_process_time = self.queue_last_processed + self.queue_dt
     if self.queue_timer >= next_process_time then
@@ -74,7 +71,7 @@ end
 ---可以手动调用, 来强制处理队列
 ---@public
 ---@return nil
-function EventManager:process_queue()
+function EventQueueManager:process_queue()
     for _, queue in pairs(self.queues) do
         local blocked = false
         local i = 1
@@ -95,7 +92,7 @@ function EventManager:process_queue()
     end
 end
 
-function EventManager:clear_queue(queue, exception)
+function EventQueueManager:clear_queue(queue, exception)
     if not queue then
         --clear all queues
         for k, v in pairs(self.queues) do
@@ -133,4 +130,4 @@ function EventManager:clear_queue(queue, exception)
     end
 end
 
-return EventManager
+return EventQueueManager

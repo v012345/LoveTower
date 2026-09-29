@@ -10,7 +10,7 @@ require "asset.scripts.app.app_load_event_system"
 -- local SoundManager = require "asset.scripts.game.sound_manager"
 -- local SaveManager = require "asset.scripts.game.save_manager"
 -- local HttpManager = require "asset.scripts.game.http_manager"
--- local EventManager = require "asset.scripts.game.event_manager"
+-- local EventQueueManager = require "asset.scripts.game.event_manager"
 
 
 
@@ -85,7 +85,7 @@ function App:start_up()
     self.STAGE_OBJECT_INTERRUPT = false
 
     --Create the event manager for the game
-    self.event_manager = EventManager()
+    self.event_manager = EventQueueManager()
 
 
     self.PROFILES:set_profile_progress()
@@ -215,7 +215,8 @@ function App:load(...)
     self:init()
     self:load_base() -- 加载基础类
     self:load_engine() -- 加载引擎
-    self:load_event_system(nil) -- 加载事件系统
+    local EventQueueManager = require "asset.scripts.event.event_queue_manager"
+    self:load_event_queue_system(EventQueueManager()) -- 加载事件系统
     -- self:load_system() -- 加载系统
 end
 

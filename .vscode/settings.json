@@ -24,7 +24,7 @@
         "make_splash_card",
         "create_frame_counter",
         "create_game_pad",
-        "EventManager"
+        "EventQueueManager"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto",
     "Lua.format.defaultConfig": {

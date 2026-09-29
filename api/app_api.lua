@@ -34,7 +34,7 @@
 ---@field shaders table<string, Shader> 所有着色器
 ---@field LANG LanguageConfigItem 当前使用的语言对象
 ---@field features FeatureConfig 特性配置
----@field event_manager EventManager 事件管理器
+---@field event_manager EventQueueManager 事件管理器
 ---@field real_dt number 真实的 dt
 ---@field ARGS any 记录一些参数, 之后要解耦出来
 ---@field SPLASH_BACK Sprite 启动画面背景
