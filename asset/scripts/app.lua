@@ -210,6 +210,8 @@ end
 ---@param ... any
 function App:load(...)
     self:init()
+    self:load_base() -- 加载基础类
+    self:load_engine() -- 加载引擎
     self:load_system(EventManager())
 end
 
