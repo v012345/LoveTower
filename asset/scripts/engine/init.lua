@@ -3,7 +3,7 @@ require "asset.scripts.base.transform"
 require "asset.scripts.engine.alignment"
 
 -- 事件模块
-require "asset.scripts.engine.event"
+require "asset.scripts.event.event"
 
 -- 依赖其他模块的模块
 require "asset.scripts.engine.utils"
