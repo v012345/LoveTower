@@ -205,6 +205,25 @@ function App:main_menu()
     --- 创建主菜单场景
 end
 
+
+
+---@param ... any
+function App:load(...) end
+
+function App:update(dt) end
+
+function App:draw() end
+
+function App:keypressed(key) end
+
+function App:keyreleased(key) end
+
+function App:mousepressed(x, y, button, touch) end
+
+function App:mousereleased(x, y, button) end
+
+function App:mousemoved(x, y, dx, dy, istouch) end
+
 function App:resize(w, h)
     print("App:resize", w, h)
     do return end
@@ -263,20 +282,3 @@ function App:resize(w, h)
     App.canvas = love.graphics.newCanvas(w * App.canvas_scale, h * App.canvas_scale, { type = '2d', readable = true })
     App.canvas:setFilter("linear", "linear")
 end
-
----@param ... any
-function App:load(...) end
-
-function App:update(dt) end
-
-function App:draw() end
-
-function App:keypressed(key) end
-
-function App:keyreleased(key) end
-
-function App:mousepressed(x, y, button, touch) end
-
-function App:mousereleased(x, y, button) end
-
-function App:mousemoved(x, y, dx, dy, istouch) end
