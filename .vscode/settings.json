@@ -23,7 +23,8 @@
         "ease_value",
         "make_splash_card",
         "create_frame_counter",
-        "create_game_pad"
+        "create_game_pad",
+        "EventManager"
     ],
     "editor.gotoLocation.multipleDefinitions": "goto",
     "Lua.format.defaultConfig": {

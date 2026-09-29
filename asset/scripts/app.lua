@@ -1,5 +1,5 @@
 App = App or {}
--- require "asset.scripts.game.app_modules.app_init"
+require "asset.scripts.app.app_init"
 -- require "asset.scripts.game.app_modules.app_update"        -- 导入 App:update 函数
 -- require "asset.scripts.game.app_modules.app_draw"          -- 导入 App:draw 函数
 -- require "asset.scripts.game.app_modules.app_splash_screen" -- 导入 App:splash_screen 函数
@@ -208,7 +208,10 @@ end
 
 
 ---@param ... any
-function App:load(...) end
+function App:load(...)
+    self:init()
+    self:load_system(EventManager())
+end
 
 function App:update(dt) end
 

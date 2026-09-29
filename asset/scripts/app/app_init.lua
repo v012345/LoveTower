@@ -7,6 +7,7 @@ local Performance = require "asset.scripts.game.performance"
 local FileHandler = require "asset.scripts.game.file_handler"
 
 ---在这里不要做耗时的操作
+---这里只做变量初始化, 不生成对象
 function App:init()
     self.features = FeatureCfg:get_instance()
     --计时器
