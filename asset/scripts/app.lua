@@ -1,20 +1,20 @@
----@class (partial) App : GameObject
-App = GameObject:extend()
-require "asset.scripts.game.app_modules.app_init"
-require "asset.scripts.game.app_modules.app_update"        -- 导入 App:update 函数
-require "asset.scripts.game.app_modules.app_draw"          -- 导入 App:draw 函数
-require "asset.scripts.game.app_modules.app_splash_screen" -- 导入 App:splash_screen 函数
-local Window = require "asset.scripts.game.window"
-local SoundManager = require "asset.scripts.game.sound_manager"
-local SaveManager = require "asset.scripts.game.save_manager"
-local HttpManager = require "asset.scripts.game.http_manager"
-local EventManager = require "asset.scripts.game.event_manager"
+App = App or {}
+-- require "asset.scripts.game.app_modules.app_init"
+-- require "asset.scripts.game.app_modules.app_update"        -- 导入 App:update 函数
+-- require "asset.scripts.game.app_modules.app_draw"          -- 导入 App:draw 函数
+-- require "asset.scripts.game.app_modules.app_splash_screen" -- 导入 App:splash_screen 函数
+-- local Window = require "asset.scripts.game.window"
+-- local SoundManager = require "asset.scripts.game.sound_manager"
+-- local SaveManager = require "asset.scripts.game.save_manager"
+-- local HttpManager = require "asset.scripts.game.http_manager"
+-- local EventManager = require "asset.scripts.game.event_manager"
 
 
 
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
 ---在这里做耗时的操作
 function App:start_up()
+    do return end
     self.settings:load_settings()
     boot_timer("start", "settings", 0.1)
     self:init_window()
@@ -205,4 +205,78 @@ function App:main_menu()
     --- 创建主菜单场景
 end
 
-App:init()
+function App:resize(w, h)
+    print("App:resize", w, h)
+    do return end
+    -- print("love.resize", w, h)
+    assert(h > 0 and w > 0, "Window size must be greater than 0, but got " .. w .. "x" .. h)
+    -- 不允许窗口变成竖屏, 因为会上下溢出
+    --Dont allow the screen to be too square, since pop in occurs above and below screen
+    if w < h then h = w end
+
+    -- 宽高比
+    local curr_ratio = w / h
+    local is_narrower = curr_ratio < App.window:get_orig_ratio()
+
+    if is_narrower then
+        -- 相对变窄了
+        App.window:set_tile_scale(w / App.window:get_orig_width() * App.window:get_orig_tile_scale())
+    else
+        -- 相对变宽了
+        App.window:set_tile_scale(h / App.window:get_orig_height() * App.window:get_orig_tile_scale())
+    end
+
+
+    local room = App.window.room
+    if room then
+        local pixels_per_tile = App.window:get_pixels_per_tile()
+        local room_transform = App.room.transform
+        if is_narrower then
+            room.transform.x = App.window:get_room_padding_width()
+            room.transform.y = (h / pixels_per_tile - room_transform.h) / 2
+        else
+            room.transform.y = App.window:get_room_padding_height()
+            room.transform.x = (w / pixels_per_tile - room_transform.w) / 2
+        end
+        App.window:take_room_transform_snapshot()
+    end
+
+    App.window:save_real_size(w, h)
+    App.canvas_scale = 1
+
+    if love.system.getOS() == 'Windows' and false then --implement later if needed
+        local render_w, render_h = love.window.getDesktopDimensions(App.settings.WINDOW.selected_display)
+        local unscaled_dims = love.window.getFullscreenModes(App.settings.WINDOW.selected_display)[1]
+
+        local DPI_scale = math.floor((0.5 * unscaled_dims.width / render_w + 0.5 * unscaled_dims.height / render_h) * 500 + 0.5) / 500
+
+        if DPI_scale > 1.1 then
+            App.canvas_scale = 1.5
+            App.AA_CANVAS = love.graphics.newCanvas(App.window.WINDOWTRANS.real_window_w * App.canvas_scale, App.window.WINDOWTRANS.real_window_h * App.canvas_scale, { type = '2d', readable = true })
+            App.AA_CANVAS:setFilter('linear', 'linear')
+        else
+            App.AA_CANVAS = nil
+        end
+    end
+
+
+    App.canvas = love.graphics.newCanvas(w * App.canvas_scale, h * App.canvas_scale, { type = '2d', readable = true })
+    App.canvas:setFilter("linear", "linear")
+end
+
+---@param ... any
+function App:load(...) end
+
+function App:update(dt) end
+
+function App:draw() end
+
+function App:keypressed(key) end
+
+function App:keyreleased(key) end
+
+function App:mousepressed(x, y, button, touch) end
+
+function App:mousereleased(x, y, button) end
+
+function App:mousemoved(x, y, dx, dy, istouch) end

@@ -16,22 +16,11 @@ end, function(err)
     print(err)
 end)
 
-
-require "bit"
-require "asset.scripts.libs"
-require "asset.scripts.base"
-require "asset.scripts.core"
-require "asset.scripts.enum"
-require "asset.scripts.config"
-require "asset.scripts.engine"
-require "asset.scripts.functions.misc_functions"
-require "asset.scripts.functions.UI_definitions"
-require "asset.scripts.game"
-
 local seed = os.time()
 math.randomseed(seed)
 love.filesystem.write("seed.md", tostring(seed))
 
+require "asset.scripts.app"
 
 function love.run()
     if love.load then love.load(love.arg.parseGameArguments(arg), arg) end
@@ -79,101 +68,25 @@ function love.run()
 end
 
 ---@param ... any
-function love.load(...)
-    App:start_up()
-end
+function love.load(...) App:load(...) end
 
-function love.update(dt)
-    --Perf monitoring checkpoint
-    App.Performance:timer_checkpoint(nil, 'update', true)
-    App:update(dt)
-end
+function love.update(dt) App:update(dt) end
 
-function love.draw()
-    --Perf monitoring checkpoint
-    App.Performance:timer_checkpoint(nil, 'draw', true)
-    App:draw()
-end
+function love.draw() App:draw() end
 
-function love.keypressed(key)
-    -- print(key)
-end
+function love.keypressed(key) App:keypressed(key) end
 
-function love.keyreleased(key)
-    -- print(key)
-end
+function love.keyreleased(key) App:keyreleased(key) end
 
-function love.mousepressed(x, y, button, touch)
-    -- print(x, y, button, touch)
-    -- print(Timer.instance.TOTAL)
-end
+function love.mousepressed(x, y, button, touch) App:mousepressed(x, y, button, touch) end
 
-function love.mousereleased(x, y, button)
-    -- print(x, y, button)
-end
+function love.mousereleased(x, y, button) App:mousereleased(x, y, button) end
 
-function love.mousemoved(x, y, dx, dy, istouch)
-    -- print(x, y, dx, dy, istouch)
-end
+function love.mousemoved(x, y, dx, dy, istouch) App:mousemoved(x, y, dx, dy, istouch) end
 
 ---也可以手动调用 love.resize(w, h) 来调整窗口大小\
 ---Called when the window is resized, for example if the user resizes the window, or if love.window.setMode is called with an unsupported width or height in fullscreen and the window chooses the closest appropriate size.
 ---[api reference](https://love2d.org/wiki/love.resize)
 ---@param w number
 ---@param h number
-function love.resize(w, h)
-    -- print("love.resize", w, h)
-    assert(h > 0 and w > 0, "Window size must be greater than 0, but got " .. w .. "x" .. h)
-    -- 不允许窗口变成竖屏, 因为会上下溢出
-    --Dont allow the screen to be too square, since pop in occurs above and below screen
-    if w < h then h = w end
-
-    -- 宽高比
-    local curr_ratio = w / h
-    local is_narrower = curr_ratio < App.window:get_orig_ratio()
-
-    if is_narrower then
-        -- 相对变窄了
-        App.window:set_tile_scale(w / App.window:get_orig_width() * App.window:get_orig_tile_scale())
-    else
-        -- 相对变宽了
-        App.window:set_tile_scale(h / App.window:get_orig_height() * App.window:get_orig_tile_scale())
-    end
-
-
-    local room = App.window.room
-    if room then
-        local pixels_per_tile = App.window:get_pixels_per_tile()
-        local room_transform = App.room.transform
-        if is_narrower then
-            room.transform.x = App.window:get_room_padding_width()
-            room.transform.y = (h / pixels_per_tile - room_transform.h) / 2
-        else
-            room.transform.y = App.window:get_room_padding_height()
-            room.transform.x = (w / pixels_per_tile - room_transform.w) / 2
-        end
-        App.window:take_room_transform_snapshot()
-    end
-
-    App.window:save_real_size(w, h)
-    App.canvas_scale = 1
-
-    if love.system.getOS() == 'Windows' and false then --implement later if needed
-        local render_w, render_h = love.window.getDesktopDimensions(App.settings.WINDOW.selected_display)
-        local unscaled_dims = love.window.getFullscreenModes(App.settings.WINDOW.selected_display)[1]
-
-        local DPI_scale = math.floor((0.5 * unscaled_dims.width / render_w + 0.5 * unscaled_dims.height / render_h) * 500 + 0.5) / 500
-
-        if DPI_scale > 1.1 then
-            App.canvas_scale = 1.5
-            App.AA_CANVAS = love.graphics.newCanvas(App.window.WINDOWTRANS.real_window_w * App.canvas_scale, App.window.WINDOWTRANS.real_window_h * App.canvas_scale, { type = '2d', readable = true })
-            App.AA_CANVAS:setFilter('linear', 'linear')
-        else
-            App.AA_CANVAS = nil
-        end
-    end
-
-
-    App.canvas = love.graphics.newCanvas(w * App.canvas_scale, h * App.canvas_scale, { type = '2d', readable = true })
-    App.canvas:setFilter("linear", "linear")
-end
+function love.resize(w, h) App:resize(w, h) end
