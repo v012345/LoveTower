@@ -1,5 +1,6 @@
 -- Copy from Balatro
 -- This GameObject implementation was taken from SNKRX (MIT license)
+-- 叫 GameObject 是因为 love2d 里有 object 类 , 重名了
 
 ---@class GameObject
 GameObject = {}
