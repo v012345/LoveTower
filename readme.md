@@ -35,3 +35,12 @@ Event 在初始化里, 在 config 里指明 trigger
 | 验证器 | Validator | 验证数据或状态 |
 | 解析器 | Parser | 解析数据 |
 | 执行器 | Executor | 执行指定任务 |
+
+## app
+全局变量 , 唯一单例 , 
+
+## game
+游戏代码逻辑
+
+## ui
+ui 代码
