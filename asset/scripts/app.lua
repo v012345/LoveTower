@@ -209,7 +209,7 @@ function App:load(...)
     ---------------- 下面是表现层代码 ----------------
     require "asset.scripts.app.app_load_window_system"
     local WindowManager = require "asset.scripts.client.window.window_manager"
-    self:load_window_system(WindowManager(self))
+    self:init_window_manager(WindowManager())
 end
 
 function App:update(dt) end

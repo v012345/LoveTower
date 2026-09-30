@@ -1,8 +1,9 @@
 ---@class (partial) App
 ---@field window_manager WindowManager
-function App:load_window_system(window_manager)
+function App:init_window_manager(window_manager)
     ---@type WindowManager
     self.window_manager = window_manager
+    self.window_manager.on_window_resize = function(w, h) self:on_window_resize(w, h) end
 end
 
 ---@return WindowManager
