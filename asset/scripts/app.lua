@@ -1,8 +1,4 @@
 App = App or {}
-require "asset.scripts.app.app_init"
-require "asset.scripts.app.app_load_base"
-require "asset.scripts.app.app_load_engine"
-require "asset.scripts.app.app_load_event_system"
 -- require "asset.scripts.game.app_modules.app_update"        -- 导入 App:update 函数
 -- require "asset.scripts.game.app_modules.app_draw"          -- 导入 App:draw 函数
 -- require "asset.scripts.game.app_modules.app_splash_screen" -- 导入 App:splash_screen 函数
@@ -208,15 +204,17 @@ function App:main_menu()
     --- 创建主菜单场景
 end
 
-
-
 ---@param ... any
 function App:load(...)
+    require "asset.scripts.app.app_init"
+    require "asset.scripts.app.app_load_base"
+    require "asset.scripts.app.app_load_engine"
+    require "asset.scripts.app.app_load_event_queue_system"
     self:init()
-    self:load_base() -- 加载基础类
-    self:load_engine() -- 加载引擎
+    self:load_base()                                  -- 加载基础类
+    self:load_engine()                                -- 加载引擎
     local EventQueueManager = require "asset.scripts.event.event_queue_manager"
-    self:load_event_queue_system(EventQueueManager()) -- 加载事件系统
+    self:load_event_queue_system(nil) -- 加载事件系统
     -- self:load_system() -- 加载系统
 end
 
