@@ -206,7 +206,7 @@ function App:load(...)
     require "asset.scripts.app.app_load_event_queue_system"
     self:load_event_queue_system(nil) -- 加载事件系统
     -- self:load_system() -- 加载系统
-    ---------------- 下面是表现层代码 ----------------
+    ---------------- 下面是客户端功能 ----------------
     require "asset.scripts.client.app.app_load_window_system"
     local WindowManager = require "asset.scripts.client.window.window_manager"
     self:init_window_manager(WindowManager())
