@@ -18,4 +18,8 @@ function SceneManager:draw()
     self.root_node:draw()
 end
 
+function SceneManager:get_ui_node()
+    return self.ui_node
+end
+
 return SceneManager

@@ -1,10 +1,10 @@
 ---@class Sprite: Component
----@overload fun(name: string): Sprite
+---@overload fun(): Sprite
 Sprite = BaseClass:extend()
 
 
 function Sprite:init()
-
+    self.name = "SpriteComponent"
 end
 
 function Sprite:draw()

@@ -216,11 +216,11 @@ function App:load(...)
 end
 
 function App:update(dt)
-    self.scene_manager and self.scene_manager:update(dt)
+    if self.scene_manager then self.scene_manager:update(dt) end
 end
-    
+
 function App:draw()
-    self.scene_manager and self.scene_manager:draw()
+    if self.scene_manager then self.scene_manager:draw() end
 end
 
 function App:keypressed(key)
@@ -247,6 +247,12 @@ function App:keypressed(key)
         config.screenmode = "Borderless" -- "Windowed" "Fullscreen" "Borderless"
         config.selected_display = 1      -- 哪个显示器
         self:get_window_manager():apply_window_changes(config)
+    elseif key == "4" then
+        local ui_node = self:get_scene_manager():get_ui_node()
+        local node = Node("test")
+        local sprite = Sprite()
+        node:add_component(sprite)
+        ui_node:add_child(node)
     end
 end
 

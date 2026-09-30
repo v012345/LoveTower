@@ -13,6 +13,7 @@ function Node:init(name)
     self.children = {}
     self.parent = nil
     self.active = true
+    self.components = {}
 end
 
 --Draws self, then adds self the the draw hash, then draws all children
@@ -75,6 +76,10 @@ function Node:remove_from_parent()
         self.parent:remove_child(self)
     end
     self.parent = nil
+end
+
+function Node:add_component(component)
+    self.components[component.name] = component
 end
 
 function Node:set_active(active)
