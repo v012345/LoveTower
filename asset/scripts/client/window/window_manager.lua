@@ -3,10 +3,18 @@
 local WindowManager = BaseClass:extend()
 
 function WindowManager:init()
+    self.width = -1
+    self.height = -1
     ---也可以手动调用 love.resize(w, h) 来调整窗口大小\
     ---Called when the window is resized, for example if the user resizes the window, or if love.window.setMode is called with an unsupported width or height in fullscreen and the window chooses the closest appropriate size.
     ---[api reference](https://love2d.org/wiki/love.resize)
-    love.resize = function(w, h) self.on_window_resize(w, h) end
+    love.resize = function(w, h)
+        if self.width ~= w or self.height ~= h then
+            self.width = w
+            self.height = h
+            self.on_window_resize(w, h)
+        end
+    end
 end
 
 ---Applies all window changes, including updates to the screenmode, selected display, resolution and vsync.\
@@ -30,6 +38,6 @@ function WindowManager:apply_window_changes(config)
     })
 end
 
-function WindowManager:on_window_resize(w, h) end
+function WindowManager.on_window_resize(w, h) end
 
 return WindowManager
