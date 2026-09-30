@@ -3,7 +3,7 @@
 ---@field name string 节点名称
 ---@field children Node[] 子节点
 ---@field parent Node 父节点
----@field components table<string, Component> 组件
+---@field components table<any, Component> 组件
 ---@overload fun(name: string): Node
 Node = BaseClass:extend()
 

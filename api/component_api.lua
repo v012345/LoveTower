@@ -1,5 +1,5 @@
 ---@class Component
 ---@field node Node 节点
----@field name string 组件名称
+---@field name any 组件名称
 ---@field update function
 ---@field draw function 

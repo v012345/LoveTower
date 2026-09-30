@@ -5,7 +5,7 @@ Sprite = BaseClass:extend()
 
 
 function Sprite:init()
-    self.name = "SpriteComponent"
+    self.name = Sprite
     self.sprite_frame = nil
     self.node = nil
     -- asset/resources/textures/1x/Jokers.png
