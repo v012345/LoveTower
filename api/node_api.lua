@@ -6,7 +6,6 @@
 ---@field collision_transform Transform 碰撞检测的transform, 与 transform 相同
 ---@field states NodeStates 节点状态
 ---@field frames FrameCounter 帧计数器, 用于记录绘制和移动的帧数
----@field children Children 子节点
 ---@field container Node 就是父节点, 子节点会被父节点影响, App.room 的 container 就是 App.room
 ---@field config table 当前节点的元数据
 ---@field under_overlay boolean 是否在覆盖层?
