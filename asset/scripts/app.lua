@@ -207,13 +207,13 @@ end
 ---@param ... any
 function App:load(...)
     require "asset.scripts.app.app_init"
-    require "asset.scripts.app.app_load_base"
-    require "asset.scripts.app.app_load_engine"
-    require "asset.scripts.app.app_load_event_queue_system"
     self:init()
-    self:load_base()                                  -- 加载基础类
-    self:load_engine()                                -- 加载引擎
+    require "asset.scripts.app.app_load_base"
+    self:load_base()   -- 加载基础类
+    require "asset.scripts.app.app_load_engine"
+    self:load_engine() -- 加载引擎
     local EventQueueManager = require "asset.scripts.event.event_queue_manager"
+    require "asset.scripts.app.app_load_event_queue_system"
     self:load_event_queue_system(nil) -- 加载事件系统
     -- self:load_system() -- 加载系统
 end
