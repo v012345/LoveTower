@@ -3,6 +3,7 @@
 ---@field name string 节点名称
 ---@field children Node[] 子节点
 ---@field parent Node 父节点
+---@field components table<string, Component> 组件
 ---@overload fun(name: string): Node
 Node = BaseClass:extend()
 
@@ -26,7 +27,9 @@ end
 
 ---@private
 function Node:draw_self()
-    -- todo
+    for _, c in pairs(self.components) do
+        c:draw()
+    end
 end
 
 function Node:update(dt)
@@ -40,7 +43,9 @@ end
 
 ---@private
 function Node:update_self(dt)
-    -- todo
+        for _, c in pairs(self.components) do
+            c:update(dt)
+        end
 end
 
 function Node:add_child(child)
