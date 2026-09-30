@@ -11,13 +11,16 @@ function Node:init(name)
     self.name = name
     self.children = {}
     self.parent = nil
+    self.active = true
 end
 
 --Draws self, then adds self the the draw hash, then draws all children
 function Node:draw()
-    self:draw_self()
-    for i, v in ipairs(self.children) do
-        v:draw()
+    if self.active then
+        self:draw_self()
+        for i, v in ipairs(self.children) do
+            v:draw()
+        end
     end
 end
 
@@ -27,9 +30,11 @@ function Node:draw_self()
 end
 
 function Node:update(dt)
-    self:update_self(dt)
-    for i, v in ipairs(self.children) do
-        v:update(dt)
+    if self.active then
+        self:update_self(dt)
+        for i, v in ipairs(self.children) do
+            v:update(dt)
+        end
     end
 end
 
@@ -65,4 +70,8 @@ function Node:remove_from_parent()
         self.parent:remove_child(self)
     end
     self.parent = nil
+end
+
+function Node:set_active(active)
+    self.active = active
 end
