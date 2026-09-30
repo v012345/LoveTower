@@ -249,11 +249,10 @@ function App:keypressed(key)
         self:get_window_manager():apply_window_changes(config)
     elseif key == "4" then
         local ui_node = self:get_scene_manager():get_ui_node()
-        local node = Node("test")
-        local sprite = Sprite()
+
+        local sprite = Sprite("test")
         sprite:set_sprite_frame(love.graphics.newImage("asset/resources/textures/1x/Jokers.png"))
-        node:add_component(sprite)
-        ui_node:add_child(node)
+        ui_node:add_child(sprite)
     end
 end
 

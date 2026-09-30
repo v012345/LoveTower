@@ -1,4 +1,4 @@
----@class Component
+---@class (partial) Component : BaseClass
 ---@field node Node 节点
 ---@field name any 组件名称
 ---@field update function

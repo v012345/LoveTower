@@ -59,9 +59,15 @@ function Node:update_self(dt)
     end
 end
 
+---@param child Node|Component
 function Node:add_child(child)
-    table.insert(self.children, child)
-    child.parent = self
+    if child:is(Node) then
+        table.insert(self.children, child)
+        child.parent = self
+    else
+        table.insert(self.children, child.node)
+        child.node.parent = self
+    end
 end
 
 function Node:remove_child(child)

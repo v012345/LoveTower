@@ -1,13 +1,16 @@
 ---@class Sprite: Component
 ---@field sprite_frame love.Image
----@overload fun(): Sprite
+---@overload fun(name: string): Sprite
 Sprite = BaseClass:extend()
 
-
-function Sprite:init()
+---@param name string
+function Sprite:init(name)
     self.name = Sprite
     self.sprite_frame = nil
-    self.node = nil
+    self.node = Node(name)
+    local transform = UITransform()
+    self.node:add_component(transform)
+    self.node:add_component(self)
     -- asset/resources/textures/1x/Jokers.png
 end
 

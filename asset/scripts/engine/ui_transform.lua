@@ -23,3 +23,9 @@ end
 function UITransform:get_anchor()
     return self.anchor
 end
+
+function UITransform:update(dt)
+end
+
+function UITransform:draw()
+end
