@@ -1,4 +1,4 @@
----@class (partial) App 
+---@class (partial) App
 App = App or {}
 ---在 init 之后被调用, 调用位置是 main.lua 中的 love.run -> love.load 函数
 ---在这里做耗时的操作
@@ -209,12 +209,19 @@ function App:load(...)
     ---------------- 下面是客户端功能 ----------------
     require "asset.scripts.client.app.app_load_window_system"
     local WindowManager = require "asset.scripts.client.window.window_manager"
-    self:init_window_manager(WindowManager())
+    self:install_window_manager(WindowManager())
+    require "asset.scripts.client.app.app_load_scene_system"
+    local SceneManager = require "asset.scripts.client.scene.scene_manager"
+    self:install_scene_manager(SceneManager())
 end
 
-function App:update(dt) end
-
-function App:draw() end
+function App:update(dt)
+    self.scene_manager and self.scene_manager:update(dt)
+end
+    
+function App:draw()
+    self.scene_manager and self.scene_manager:draw()
+end
 
 function App:keypressed(key)
     -- print("keypressed", key)
