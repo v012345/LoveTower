@@ -251,6 +251,7 @@ function App:keypressed(key)
         local ui_node = self:get_scene_manager():get_ui_node()
         local node = Node("test")
         local sprite = Sprite()
+        sprite:set_sprite_frame(love.graphics.newImage("asset/resources/textures/1x/Jokers.png"))
         node:add_component(sprite)
         ui_node:add_child(node)
     end
