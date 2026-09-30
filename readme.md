@@ -1,3 +1,8 @@
+1. 先实现窗口的可变化
+
+
+
+
 xxxConfig 就是对象
 xxxConfigData 就是生成对象用的数据
 

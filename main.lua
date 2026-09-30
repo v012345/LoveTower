@@ -83,10 +83,3 @@ function love.mousepressed(x, y, button, touch) App:mousepressed(x, y, button, t
 function love.mousereleased(x, y, button) App:mousereleased(x, y, button) end
 
 function love.mousemoved(x, y, dx, dy, istouch) App:mousemoved(x, y, dx, dy, istouch) end
-
----也可以手动调用 love.resize(w, h) 来调整窗口大小\
----Called when the window is resized, for example if the user resizes the window, or if love.window.setMode is called with an unsupported width or height in fullscreen and the window chooses the closest appropriate size.
----[api reference](https://love2d.org/wiki/love.resize)
----@param w number
----@param h number
-function love.resize(w, h) App:resize(w, h) end
