@@ -14,6 +14,16 @@ function Node:init(name)
     self.parent = nil
     self.active = true
     self.components = {}
+    self.position = { x = 0, y = 0 }
+end
+
+function Node:set_position(x, y)
+    if x then self.position.x = x end
+    if y then self.position.y = y end
+end
+
+function Node:get_position()
+    return self.position
 end
 
 --Draws self, then adds self the the draw hash, then draws all children
@@ -44,9 +54,9 @@ end
 
 ---@private
 function Node:update_self(dt)
-        for _, c in pairs(self.components) do
-            c:update(dt)
-        end
+    for _, c in pairs(self.components) do
+        c:update(dt)
+    end
 end
 
 function Node:add_child(child)
@@ -78,8 +88,10 @@ function Node:remove_from_parent()
     self.parent = nil
 end
 
+---@param component Component
 function Node:add_component(component)
     self.components[component.name] = component
+    component.node = self
 end
 
 function Node:set_active(active)
